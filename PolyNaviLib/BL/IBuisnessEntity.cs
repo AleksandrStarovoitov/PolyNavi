@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 
+using SQLite;
+
 namespace PolyNaviLib.BL
 {
-	public class Schedule
+	public interface IBuisnessEntity
 	{
+		int ID { get; set; }
 	}
 }

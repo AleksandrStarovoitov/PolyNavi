@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PolyNaviLib.BL
 {
-    public class Day
-    {
-    }
+	public class Day
+	{
+	}
 }

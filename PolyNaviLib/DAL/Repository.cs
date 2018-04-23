@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PolyNaviLib.DAL
 {
-    public class Repository
-    {
-    }
+	public class Repository
+	{
+	}
 }

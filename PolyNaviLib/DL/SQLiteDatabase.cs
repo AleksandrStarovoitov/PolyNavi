@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PolyNaviLib.DL
 {
-    public class SQLiteDatabase
-    {
-    }
+	public class SQLiteDatabase
+	{
+	}
 }
