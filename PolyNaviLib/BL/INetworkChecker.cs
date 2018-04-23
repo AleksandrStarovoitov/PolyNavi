@@ -4,7 +4,8 @@ using System.Text;
 
 namespace PolyNaviLib.BL
 {
-	public class Week : BuisnessEntity
-	{
-	}
+    public interface INetworkChecker
+    {
+		bool Check();
+    }
 }

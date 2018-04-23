@@ -7,4 +7,6 @@ namespace PolyNaviLib.DL
 	public class SQLiteDatabase
 	{
 	}
+
+
 }

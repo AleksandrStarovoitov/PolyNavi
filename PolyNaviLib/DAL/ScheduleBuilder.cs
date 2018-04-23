@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace PolyNaviLib.BL
+namespace PolyNaviLib.DAL
 {
-	public class Week : BuisnessEntity
-	{
-	}
+    public class ScheduleBuilder
+    {
+    }
 }

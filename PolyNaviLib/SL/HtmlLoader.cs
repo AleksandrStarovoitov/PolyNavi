@@ -6,5 +6,6 @@ namespace PolyNaviLib.SL
 {
 	public class HtmlLoader
 	{
+		//загрузка
 	}
 }
