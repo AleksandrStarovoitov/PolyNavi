@@ -6,5 +6,6 @@ namespace PolyNaviLib.BL
 {
 	public class Week : BuisnessEntity
 	{
+		public List<Day> Days { get; set; } //Дни
 	}
 }
