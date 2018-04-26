@@ -10,13 +10,13 @@ namespace PolyNaviLib.BL
 	{
 		Repository repository;
 		
-		public enum weeks
+		public enum Weeks
 		{
 			current, //Текущая неделя
 			next     //Следующая неделя
 		}
 
-		public enum days
+		public enum Days
 		{
 			monday,
 			tuesday,
@@ -35,7 +35,7 @@ namespace PolyNaviLib.BL
 		}
 
 		//Получить неделю
-		public Week GetWeek(weeks w)
+		public Week GetWeek(Weeks w)
 		{
 			Schedule schedule = Repository.GetSchedule();
 
@@ -43,7 +43,7 @@ namespace PolyNaviLib.BL
 		}
 
 		//Получить день
-		public Day GetDay(weeks w, days d)
+		public Day GetDay(Weeks w, Days d)
 		{
 			Schedule schedule = Repository.GetSchedule();
 
@@ -52,7 +52,7 @@ namespace PolyNaviLib.BL
 
 
 		//Получить расписание на неделю
-		public List<Lesson> GetScheduleByWeek(weeks w)
+		public List<Lesson> GetScheduleByWeek(Weeks w)
 		{
 			Schedule schedule = Repository.GetSchedule();
 
@@ -72,7 +72,7 @@ namespace PolyNaviLib.BL
 		}
 
 		//Получить расписание на день определенной недели
-		public List<Lesson> GetScheduleByDay(weeks w, days d)
+		public List<Lesson> GetScheduleByDay(Weeks w, Days d)
 		{
 			Schedule schedule = Repository.GetSchedule();
 

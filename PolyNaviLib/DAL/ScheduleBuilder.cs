@@ -24,21 +24,24 @@ namespace PolyNaviLib.DAL
 			//Проход по дням
 			foreach (var day in days)
 			{
-				d = new Day();
-				d.Date = day.FirstChild.InnerText; //Добавляем дату
+				d = new Day
+				{
+					Date = day.FirstChild.InnerText //Добавляем дату
+				};
 
 				var lessons = day.LastChild.ChildNodes; //Список пар
 
 				//Проход по парам
 				foreach (var lesson in lessons)
 				{
-					l = new Lesson();
-
-					l.Building = lesson.LastChild.LastChild.FirstChild.FirstChild.FirstChild.InnerText;      //Корпус
-																											 //l.Groups = lesson; //Группы пока не уверен как правильно сделать
-					l.Room = lesson.LastChild.LastChild.FirstChild.FirstChild.LastChild.LastChild.InnerText; //Аудитория
-					l.Subject = lesson.FirstChild.LastChild.InnerText;                                       //Название пары
-					l.Time = lesson.FirstChild.FirstChild.InnerText;                                         //Время пары
+					l = new Lesson
+					{
+						Building = lesson.LastChild.LastChild.FirstChild.FirstChild.FirstChild.InnerText,      //Корпус
+																											   //l.Groups = lesson; //Группы пока не уверен как правильно сделать
+						Room = lesson.LastChild.LastChild.FirstChild.FirstChild.LastChild.LastChild.InnerText, //Аудитория
+						Subject = lesson.FirstChild.LastChild.InnerText,                                       //Название пары
+						Time = lesson.FirstChild.FirstChild.InnerText                                         //Время пары
+					};
 
 					d.Lessons.Add(l); //Добавление пары в день
 				}
