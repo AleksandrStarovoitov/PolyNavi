@@ -28,12 +28,12 @@ namespace PolyNaviLib.DL
 			return await db.Table<T>().ToListAsync();
 		}
 
-		public async Task<T> GetItem<T>(int id) where T : IBuisnessEntity, new()
+		public async Task<T> GetItemAsync<T>(int id) where T : IBuisnessEntity, new()
 		{
 			return await db.GetAsync<T>(id);
 		}
 
-		public async Task<int> SaveItem<T>(T item) where T : IBuisnessEntity, new()
+		public async Task<int> SaveItemAsync<T>(T item) where T : IBuisnessEntity, new()
 		{
 			if (item.ID == 0)
 			{
