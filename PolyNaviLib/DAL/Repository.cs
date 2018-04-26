@@ -10,7 +10,7 @@ namespace PolyNaviLib.DAL
 {
 	public class Repository
 	{
-		public static Schedule GetSchedule()
+		public Schedule GetSchedule()
 		{
 			if (false) //Есть в БД
 			{

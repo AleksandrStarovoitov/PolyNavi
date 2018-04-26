@@ -12,21 +12,21 @@ namespace PolyNaviLib.BL
 		
 		public enum Weeks
 		{
-			current, //Текущая неделя
-			next     //Следующая неделя
+			Current, //Текущая неделя
+			Next     //Следующая неделя
 		}
 
 		public enum Days
 		{
-			monday,
-			tuesday,
-			wednesday,
-			thursday,
-			friday,
-			saturday,
-			sunday	   //,
-			//current, //Может понадобится
-			//next	   //Может понадобится
+			Monday,
+			Tuesday,
+			Wednesday,
+			Thursday,
+			Friday,
+			Saturday,
+			Sunday	   //,
+			//Current, //Может понадобится
+			//Next	   //Может понадобится
 		}
 
 		public PolyManager(string dbPath, INetworkChecker checker)
@@ -37,7 +37,7 @@ namespace PolyNaviLib.BL
 		//Получить неделю
 		public Week GetWeek(Weeks w)
 		{
-			Schedule schedule = Repository.GetSchedule();
+			Schedule schedule = repository.GetSchedule();
 
 			return schedule.Weeks[(int)w];
 		}
@@ -45,7 +45,7 @@ namespace PolyNaviLib.BL
 		//Получить день
 		public Day GetDay(Weeks w, Days d)
 		{
-			Schedule schedule = Repository.GetSchedule();
+			Schedule schedule = repository.GetSchedule();
 
 			return schedule.Weeks[(int)w].Days[(int)d];
 		}
@@ -54,7 +54,7 @@ namespace PolyNaviLib.BL
 		//Получить расписание на неделю
 		public List<Lesson> GetScheduleByWeek(Weeks w)
 		{
-			Schedule schedule = Repository.GetSchedule();
+			Schedule schedule = repository.GetSchedule();
 
 			var week = schedule.Weeks[(int)w];
 
@@ -74,7 +74,7 @@ namespace PolyNaviLib.BL
 		//Получить расписание на день определенной недели
 		public List<Lesson> GetScheduleByDay(Weeks w, Days d)
 		{
-			Schedule schedule = Repository.GetSchedule();
+			Schedule schedule = repository.GetSchedule();
 
 			var day = schedule.Weeks[(int)w].Days[(int)d];
 
