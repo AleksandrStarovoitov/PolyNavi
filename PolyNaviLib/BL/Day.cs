@@ -7,6 +7,12 @@ namespace PolyNaviLib.BL
 	public class Day
 	{
 		public List<Lesson> Lessons { get; set; } //Список пар
-		public string Date { get; set; }          //Дата, день недели
+		public string Datestr { get; set; }          //Дата, день недели
+		public DateTime Date { get; set; }
+
+		public Day()
+		{
+			Lessons = new List<Lesson>();
+		}
 	}
 }
