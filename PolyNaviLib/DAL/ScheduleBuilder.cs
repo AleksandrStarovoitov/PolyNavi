@@ -28,6 +28,7 @@ namespace PolyNaviLib.DAL
 				d = new Day
 				{
 					Datestr = day.FirstChild.InnerText, //Добавляем дату
+
 					Date = DateTime.ParseExact(day.FirstChild.InnerText, "d MMM., ddd", new CultureInfo("Ru-ru"))
 				};
 
@@ -42,7 +43,8 @@ namespace PolyNaviLib.DAL
 																											   //l.Groups = lesson; //Группы пока не уверен как правильно сделать
 						Room = lesson.LastChild.LastChild.FirstChild.FirstChild.LastChild.LastChild.InnerText, //Аудитория
 						Subject = lesson.FirstChild.LastChild.InnerText,                                       //Название пары
-						//Time = lesson.FirstChild.FirstChild.InnerText,									   //Время пары
+						Timestr = lesson.FirstChild.FirstChild.InnerText,									   //Время пары
+
 						StartTime = DateTime.ParseExact(lesson.FirstChild.FirstChild.InnerText.Substring(0, 5) + " " + d.Datestr, "HH:mm d MMM., ddd", new CultureInfo("Ru-ru")),
 						EndTime = DateTime.ParseExact(lesson.FirstChild.FirstChild.InnerText.Substring(6) + " " + d.Datestr, "HH:mm d MMM., ddd", new CultureInfo("Ru-ru"))
 					};
