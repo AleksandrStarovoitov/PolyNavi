@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+  <group android:checkableBehavior="single">
+    <item
+        android:id="@+id/nav_gz_menu"
+        android:icon="@drawable/ic_city_hall_black"
+        android:title="Главное здание"
+        android:checked="true"/>
+    <item
+        android:id="@+id/nav_buildings_menu"
+        android:icon="@drawable/ic_directions_black_24dp"
+        android:title="Корпуса"/>
+    <item
+        android:id="@+id/nav_rasp_menu"
+        android:icon="@drawable/ic_date_range_black_24dp"
+        android:title="Расписание" />
+    <item
+        android:id="@+id/nav_settings_menu"
+        android:icon="@drawable/ic_settings_black_24dp"
+        android:title="Настройки"/>
+  </group>
+</menu>

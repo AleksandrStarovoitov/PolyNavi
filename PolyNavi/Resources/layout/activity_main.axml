@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:minWidth="25px"
+    android:minHeight="25px">
+    <android.support.v4.widget.DrawerLayout
+        android:orientation="vertical"
+        android:id="@+id/drawerlayout_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:fitsSystemWindows="true">
+    <!-- Layout to contain contents of main body of screen (drawer will slide over this) -->
+        <LinearLayout
+            android:id="@+id/linearlayout_main"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar_main"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:minHeight="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                android:theme="@style/MyAppTheme" />
+        <!--android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />-->
+            <FrameLayout
+                android:id="@+id/contentframe_main"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:minWidth="25px"
+                android:minHeight="25px" />
+        </LinearLayout>
+    <!-- Container for contents of drawer - use NavigationView to make configuration easier -->
+        <android.support.design.widget.NavigationView
+            android:layout_marginTop="-25dp"
+            android:fitsSystemWindows="true"
+            android:id="@+id/navview_main"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            app:menu="@menu/menu_main"
+            app:headerLayout="@layout/layout_navheader_main"
+            app:itemIconTint="@color/drawer_icon_colors"
+            app:itemTextColor="@color/drawer_colors" />
+    </android.support.v4.widget.DrawerLayout>
+</LinearLayout>
