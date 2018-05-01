@@ -60,11 +60,11 @@ namespace PolyNavi
 			navigationView.Alpha = 0.99f;
 
 			
-			//var ft = FragmentManager.BeginTransaction();
-			//ft.AddToBackStack(null);
-			////ft.Add(Resource.Id.contentframe_main, new MainFragment());
-			//ft.Add(Resource.Id.contentframe_main, new MainBuildingNavFragment());
-			//ft.Commit();
+			var ft = FragmentManager.BeginTransaction();
+			ft.AddToBackStack(null);
+			//ft.Add(Resource.Id.contentframe_main, new MainFragment());
+			ft.Add(Resource.Id.contentframe_main, new MainBuildingFragment());
+			ft.Commit();
 		}
 
 		protected override void OnPostCreate(Bundle savedInstanceState)
@@ -104,13 +104,13 @@ namespace PolyNavi
 		{
 			//Toast.MakeText(this, "closed", ToastLength.Short).Show();
 			//Set your new fragment here
-			//if (fragmentClass != null && tapped)
-			//{
-			//	fr = (Fragment)Activator.CreateInstance(fragmentClass);
-			//	FragmentManager.BeginTransaction().Replace(Resource.Id.contentframe_main, fr).Commit();
-			//	tapped = false;
-			//}
-			//MainBuildingNavView.drawerState = false;
+			if (fragmentClass != null && tapped)
+			{
+				fr = (Fragment)Activator.CreateInstance(fragmentClass);
+				FragmentManager.BeginTransaction().Replace(Resource.Id.contentframe_main, fr).Commit();
+				tapped = false;
+			}
+			MainBuildingView.drawerState = false;
 		}
 
 
@@ -123,7 +123,7 @@ namespace PolyNavi
 				case (Resource.Id.nav_gz_menu):
 					Toast.MakeText(this, "ГЗ", ToastLength.Short).Show();
 
-					//fragmentClass = typeof(MainBuildingNavFragment);
+					fragmentClass = typeof(MainBuildingFragment);
 
 					break;
 				case (Resource.Id.nav_buildings_menu):
