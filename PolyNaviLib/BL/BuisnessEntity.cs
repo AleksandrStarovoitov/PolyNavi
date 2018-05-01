@@ -6,7 +6,7 @@ using SQLite;
 
 namespace PolyNaviLib.BL
 {
-	public class BuisnessEntity : IBuisnessEntity
+	public abstract class BuisnessEntity : IBuisnessEntity
 	{
 		[PrimaryKey, AutoIncrement]
 		public int ID { get; set; } = 0;

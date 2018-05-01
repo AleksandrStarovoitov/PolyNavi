@@ -7,5 +7,10 @@ namespace PolyNaviLib.BL
 	public class Schedule
 	{
 		public List<Week> Weeks { get; set; } //Недели
+			
+		public Schedule()
+		{
+			Weeks = new List<Week>();
+		}
 	}
 }
