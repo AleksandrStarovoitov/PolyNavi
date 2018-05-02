@@ -11,8 +11,14 @@ namespace PolyNaviLib.BL
 		public string Building { get; set; } //Корпус
 		public string Room { get; set; }     //Номер аудитории
 		public string Groups { get; set; }   //Номера групп
+		public bool Last { get; set; }		//Последний в списке
 
 		public DateTime StartTime { get; set; }
 		public DateTime EndTime { get; set; }
+
+		public Lesson()
+		{
+
+		}
 	}
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 
@@ -14,7 +15,7 @@ using Android.Text;
 using Android.Views;
 using Android.Views.InputMethods;
 using Android.Widget;
-using Java.Lang;
+
 using static Android.Support.V4.Widget.DrawerLayout;
 
 namespace PolyNavi
@@ -59,13 +60,17 @@ namespace PolyNavi
 			//navigationView.Menu.Add(Menu.None, Menu.None, Menu.None, "Gelll");
 			navigationView.Alpha = 0.99f;
 
-			
+
 			var ft = FragmentManager.BeginTransaction();
 			ft.AddToBackStack(null);
-			//ft.Add(Resource.Id.contentframe_main, new MainFragment());
 			ft.Add(Resource.Id.contentframe_main, new MainBuildingFragment());
 			ft.Commit();
+
+
+
+
 		}
+
 
 		protected override void OnPostCreate(Bundle savedInstanceState)
 		{
@@ -89,7 +94,6 @@ namespace PolyNavi
 			InputMethodManager imm = (InputMethodManager)GetSystemService(InputMethodService);
 			//InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
 			imm.HideSoftInputFromWindow(drawerView.WindowToken, 0);
-			//Toast.MakeText(this, "Slide", ToastLength.Short).Show();
 		}
 		public void OnDrawerOpened(View drawerView)
 		{
@@ -132,7 +136,7 @@ namespace PolyNavi
 				case (Resource.Id.nav_rasp_menu):
 					Toast.MakeText(this, "Расписание", ToastLength.Short).Show();
 
-					//fragmentClass = typeof(ScheduleSwipeFragment);
+					fragmentClass = typeof(ScheduleFragment);
 
 					break;
 				case (Resource.Id.nav_settings_menu):

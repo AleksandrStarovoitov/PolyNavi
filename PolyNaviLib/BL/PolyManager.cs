@@ -29,6 +29,11 @@ namespace PolyNaviLib.BL
 			//Next	   //Может понадобится
 		}
 
+		public PolyManager()
+		{
+			repository = new Repository();
+		}
+
 		public PolyManager(string dbPath, INetworkChecker checker)
 		{
 			//TODO...
