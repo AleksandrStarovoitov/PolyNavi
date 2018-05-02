@@ -3397,14 +3397,41 @@ namespace PolyNavi
 			// aapt resource value: 0x7f090022
 			public const int bottom_sheet_behavior = 2131296290;
 			
+			// aapt resource value: 0x7f090034
+			public const int building_schedule_row = 2131296308;
+			
+			// aapt resource value: 0x7f090036
+			public const int buildings_nav = 2131296310;
+			
 			// aapt resource value: 0x7f090023
 			public const int character_counter_pattern = 2131296291;
+			
+			// aapt resource value: 0x7f090039
+			public const int currentweek_tab = 2131296313;
+			
+			// aapt resource value: 0x7f090030
+			public const int date_schedule_row = 2131296304;
+			
+			// aapt resource value: 0x7f09002c
+			public const int edittext_from = 2131296300;
+			
+			// aapt resource value: 0x7f09002d
+			public const int edittext_to = 2131296301;
+			
+			// aapt resource value: 0x7f090035
+			public const int mainbuilding_nav = 2131296309;
+			
+			// aapt resource value: 0x7f09002f
+			public const int navi = 2131296303;
 			
 			// aapt resource value: 0x7f09002b
 			public const int navigation_drawer_close = 2131296299;
 			
 			// aapt resource value: 0x7f09002a
 			public const int navigation_drawer_open = 2131296298;
+			
+			// aapt resource value: 0x7f09003a
+			public const int nextweek_tab = 2131296314;
 			
 			// aapt resource value: 0x7f090024
 			public const int password_toggle_content_description = 2131296292;
@@ -3421,11 +3448,29 @@ namespace PolyNavi
 			// aapt resource value: 0x7f090028
 			public const int path_password_strike_through = 2131296296;
 			
+			// aapt resource value: 0x7f09002e
+			public const int poly = 2131296302;
+			
+			// aapt resource value: 0x7f090031
+			public const int room_schedule_row = 2131296305;
+			
+			// aapt resource value: 0x7f090037
+			public const int schedule_nav = 2131296311;
+			
 			// aapt resource value: 0x7f090013
 			public const int search_menu_title = 2131296275;
 			
+			// aapt resource value: 0x7f090038
+			public const int settings_nav = 2131296312;
+			
 			// aapt resource value: 0x7f090014
 			public const int status_bar_notification_info_overflow = 2131296276;
+			
+			// aapt resource value: 0x7f090033
+			public const int subject_schedule_row = 2131296307;
+			
+			// aapt resource value: 0x7f090032
+			public const int time_schedule_row = 2131296306;
 			
 			static String()
 			{

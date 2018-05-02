@@ -112,18 +112,18 @@ namespace PolyNavi
 			switch (mItemId)
 			{
 				case (Resource.Id.nav_gz_menu):
-					Toast.MakeText(this, "ГЗ", ToastLength.Short).Show();
+					Toast.MakeText(this, GetString(Resource.String.mainbuilding_nav), ToastLength.Short).Show();
 					fragmentClass = typeof(MainBuildingFragment);
 					break;
 				case (Resource.Id.nav_buildings_menu):
-					Toast.MakeText(this, "Корпуса", ToastLength.Short).Show();
+					Toast.MakeText(this, GetString(Resource.String.buildings_nav), ToastLength.Short).Show();
 					break;
 				case (Resource.Id.nav_rasp_menu):
-					Toast.MakeText(this, "Расписание", ToastLength.Short).Show();
+					Toast.MakeText(this, GetString(Resource.String.schedule_nav), ToastLength.Short).Show();
 					fragmentClass = typeof(ScheduleFragment);
 					break;
 				case (Resource.Id.nav_settings_menu):
-					Toast.MakeText(this, "Настройки", ToastLength.Short).Show();
+					Toast.MakeText(this, GetString(Resource.String.settings_nav), ToastLength.Short).Show();
 					break;
 			}
 			Title = e.MenuItem.TitleFormatted.ToString();

@@ -16,7 +16,7 @@
       android:id="@+id/linearlayout_header_main">
     <TextView
         android:id="@+id/textview_header_poly"
-        android:text="POLY"
+        android:text="@string/poly"
         android:textAppearance="@style/Poly"
         android:fontFamily="@font/juliussansone_regular"
         android:layout_width="wrap_content"
@@ -24,7 +24,7 @@
         android:layout_marginBottom="50dp" />
     <TextView
         android:id="@+id/textview_header_navi"
-        android:text="NAVI"
+        android:text="@string/navi"
         android:textAppearance="@style/Navi"
         android:fontFamily="@font/juliussansone_regular"
         android:layout_width="wrap_content"

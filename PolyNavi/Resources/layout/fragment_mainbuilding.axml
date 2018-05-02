@@ -48,7 +48,7 @@
                 android:layout_height="match_parent"
                 android:layout_width="match_parent"
                 android:inputType="number"
-                android:hint="Откуда"
+                android:hint="@string/edittext_from"
                 android:maxLength="3" />
         </android.support.design.widget.TextInputLayout>
         <android.support.design.widget.TextInputLayout
@@ -64,7 +64,7 @@
                 android:layout_height="match_parent"
                 android:layout_width="match_parent"
                 android:imeOptions="actionGo"
-                android:hint="Куда"
+                android:hint="@string/edittext_to"
                 android:maxLength="3" />
         </android.support.design.widget.TextInputLayout>
     </RelativeLayout>

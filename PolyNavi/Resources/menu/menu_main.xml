@@ -4,19 +4,19 @@
     <item
         android:id="@+id/nav_gz_menu"
         android:icon="@drawable/ic_city_hall_black"
-        android:title="Главное здание"
+        android:title="@string/mainbuilding_nav"
         android:checked="true"/>
     <item
         android:id="@+id/nav_buildings_menu"
         android:icon="@drawable/ic_directions_black_24dp"
-        android:title="Корпуса"/>
+        android:title="@string/buildings_nav"/>
     <item
         android:id="@+id/nav_rasp_menu"
         android:icon="@drawable/ic_date_range_black_24dp"
-        android:title="Расписание" />
+        android:title="@string/schedule_nav" />
     <item
         android:id="@+id/nav_settings_menu"
         android:icon="@drawable/ic_settings_black_24dp"
-        android:title="Настройки"/>
+        android:title="@string/settings_nav"/>
   </group>
 </menu>

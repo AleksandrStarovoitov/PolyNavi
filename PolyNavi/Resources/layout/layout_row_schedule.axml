@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:id="@+id/relativelayout_row_schedule">
     <TextView
-        android:text="date"
+        android:text="@string/date_schedule_row"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textview_dayanddate_row_schedule"
@@ -14,7 +14,7 @@
         android:layout_marginTop="10dp"
         android:fontFamily="@font/roboto_light" />
     <TextView
-        android:text="room"
+        android:text="@string/room_schedule_row"
         android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:id="@+id/textview_roomnumber_row_schedule"
@@ -24,7 +24,7 @@
         android:textAppearance="@style/ScheduleRoom"
         android:fontFamily="@font/roboto_light" />
     <TextView
-        android:text="time"
+        android:text="@string/time_schedule_row"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textview_time_row_schedule"
@@ -35,7 +35,7 @@
         android:layout_below="@+id/textview_dayanddate_row_schedule"
         android:layout_toRightOf="@+id/textview_roomnumber_row_schedule" />
     <TextView
-        android:text="subject"
+        android:text="@string/subject_schedule_row"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:id="@+id/textview_subject_row_schedule"
@@ -46,7 +46,7 @@
         android:textAppearance="@style/ScheduleTimeSubject"
         android:fontFamily="@font/roboto_light" />
     <TextView
-        android:text="building"
+        android:text="@string/building_schedule_row"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:id="@+id/textview_buildingnumber_row_schedule"

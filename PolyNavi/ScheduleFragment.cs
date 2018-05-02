@@ -36,8 +36,8 @@ namespace PolyNavi
 			view = inflater.Inflate(Resource.Layout.fragment_schedule, container, false);
 
 			tabLayout = view.FindViewById<TabLayout>(Resource.Id.tablayout_schedule);
-			tabLayout.AddTab(tabLayout.NewTab().SetText("Текущая неделя"));
-			tabLayout.AddTab(tabLayout.NewTab().SetText("Следующая неделя"));
+			tabLayout.AddTab(tabLayout.NewTab().SetText(GetString(Resource.String.currentweek_tab)));
+			tabLayout.AddTab(tabLayout.NewTab().SetText(GetString(Resource.String.nextweek_tab)));
 			tabLayout.SetForegroundGravity(TabLayout.GravityFill);
 
 			adapter = new ScheduleFragmentAdapter(((AppCompatActivity)Activity).SupportFragmentManager, tabLayout.TabCount);
