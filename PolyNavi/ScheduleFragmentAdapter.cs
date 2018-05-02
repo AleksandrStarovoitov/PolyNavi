@@ -11,18 +11,17 @@ using Android.Views;
 using Android.Widget;
 using Android.Support.V4.App;
 
-
-
 namespace PolyNavi
 {
 	class ScheduleFragmentAdapter : FragmentStatePagerAdapter
 	{
-		int mNumOfTabs;
-		ScheduleWeekFragment tab1;
-		ScheduleWeekFragment tab2;
-		public ScheduleFragmentAdapter(FragmentManager fm, int NumOfTabs) : base(fm)
+		private int numOfTabs;
+		private ScheduleWeekFragment tab1;
+		private ScheduleWeekFragment tab2;
+
+		public ScheduleFragmentAdapter(FragmentManager fragmentManager, int numOfTabs) : base(fragmentManager)
 		{
-			this.mNumOfTabs = NumOfTabs;
+			this.numOfTabs = numOfTabs;
 			tab1 = new ScheduleWeekFragment();
 			tab2 = new ScheduleWeekFragment();
 		}
@@ -46,7 +45,7 @@ namespace PolyNavi
 		{
 			get
 			{
-				return mNumOfTabs;
+				return numOfTabs;
 			}
 		}
 

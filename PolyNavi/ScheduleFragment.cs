@@ -21,6 +21,11 @@ namespace PolyNavi
 	[Activity(Label = "ScheduleSwipeActivity")]
 	public class ScheduleFragment : Fragment
 	{
+		private View view;
+		private TabLayout tabLayout;
+		private ViewPager viewPager;
+		private ScheduleFragmentAdapter adapter;
+
 		public override void OnCreate(Bundle savedInstanceState)
 		{
 			base.OnCreate(savedInstanceState);
@@ -28,15 +33,16 @@ namespace PolyNavi
 
 		public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 		{
-			View v = inflater.Inflate(Resource.Layout.fragment_schedule, container, false);
+			view = inflater.Inflate(Resource.Layout.fragment_schedule, container, false);
 
-			var tabLayout = v.FindViewById<TabLayout>(Resource.Id.tablayout_schedule);
+			tabLayout = view.FindViewById<TabLayout>(Resource.Id.tablayout_schedule);
 			tabLayout.AddTab(tabLayout.NewTab().SetText("Текущая неделя"));
 			tabLayout.AddTab(tabLayout.NewTab().SetText("Следующая неделя"));
 			tabLayout.SetForegroundGravity(TabLayout.GravityFill);
 
-			var viewPager = v.FindViewById<ViewPager>(Resource.Id.viewpager_schedule);
-			var adapter = new ScheduleFragmentAdapter(((AppCompatActivity)Activity).SupportFragmentManager, tabLayout.TabCount);
+			adapter = new ScheduleFragmentAdapter(((AppCompatActivity)Activity).SupportFragmentManager, tabLayout.TabCount);
+
+			viewPager = view.FindViewById<ViewPager>(Resource.Id.viewpager_schedule);
 			viewPager.Adapter = adapter;
 			viewPager.AddOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
@@ -44,7 +50,8 @@ namespace PolyNavi
 			{
 				viewPager.CurrentItem = e.Tab.Position;
 			};
-			return v;
+
+			return view;
 		}
 
 	}

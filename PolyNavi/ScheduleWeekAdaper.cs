@@ -22,28 +22,33 @@ namespace PolyNavi
 		{
 			// Your holder should contain a member variable
 			// for any view that will be set as you render a row
-			public TextView _date;
-			public TextView _time;
-			public TextView _building;
-			public TextView _room;
-			public TextView _subject;
-			public View _divider;
+			public TextView date;
+			public TextView time;
+			public TextView building;
+			public TextView room;
+			public TextView subject;
+			public View divider;
+
 			// We also create a constructor that accepts the entire item row
 			// and does the view lookups to find each subview
 			public ViewHolder(View itemView) : base(itemView)
 			{
 				// Stores the itemView in a public final member variable that can be used
 				// to access the context from any ViewHolder instance.
-				_date = itemView.FindViewById<TextView>(Resource.Id.textview_dayanddate_row_schedule);
-				_time = itemView.FindViewById<TextView>(Resource.Id.textview_time_row_schedule);
-				_room = itemView.FindViewById<TextView>(Resource.Id.textview_roomnumber_row_schedule);
-				_building = itemView.FindViewById<TextView>(Resource.Id.textview_buildingnumber_row_schedule);
-				_subject = itemView.FindViewById<TextView>(Resource.Id.textview_subject_row_schedule);
-				_divider = itemView.FindViewById<View>(Resource.Id.divider_bottom_row_schedule);
+				date = itemView.FindViewById<TextView>(Resource.Id.textview_dayanddate_row_schedule);
+				time = itemView.FindViewById<TextView>(Resource.Id.textview_time_row_schedule);
+				room = itemView.FindViewById<TextView>(Resource.Id.textview_roomnumber_row_schedule);
+				building = itemView.FindViewById<TextView>(Resource.Id.textview_buildingnumber_row_schedule);
+				subject = itemView.FindViewById<TextView>(Resource.Id.textview_subject_row_schedule);
+				divider = itemView.FindViewById<View>(Resource.Id.divider_bottom_row_schedule);
 			}
-		} //end of vh
+		}
 
 		private List<Lesson> mLessons;
+		private Context context;
+		private LayoutInflater layoutInflater;
+		private View scheduleView;
+		private ViewHolder viewHolder;
 
 		// Pass in the contact array into the constructor
 		public ScheduleWeekAdapter(List<Lesson> lessons)
@@ -54,14 +59,14 @@ namespace PolyNavi
 		// Usually involves inflating a layout from XML and returning the holder
 		public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
 		{
-			Context context = parent.Context;
-			LayoutInflater inflater = LayoutInflater.From(context);
+			context = parent.Context;
+			layoutInflater = LayoutInflater.From(context);
 
 			// Inflate the custom layout
-			View timetableView = inflater.Inflate(Resource.Layout.layout_row_schedule, parent, false);
+			scheduleView = layoutInflater.Inflate(Resource.Layout.layout_row_schedule, parent, false);
 
 			// Return a new holder instance
-			ViewHolder viewHolder = new ViewHolder(timetableView);
+			viewHolder = new ViewHolder(scheduleView);
 			return viewHolder;
 			//!!!!!cast....
 		}
@@ -75,12 +80,12 @@ namespace PolyNavi
 			Lesson lesson = mLessons[position];
 
 			// Set item views based on your views and data model
-			TextView date = vh._date;
-			TextView time = vh._time;
-			TextView room = vh._room;
-			TextView building = vh._building;
-			TextView subject = vh._subject;
-			View divider = vh._divider;
+			TextView date = vh.date;
+			TextView time = vh.time;
+			TextView room = vh.room;
+			TextView building = vh.building;
+			TextView subject = vh.subject;
+			View divider = vh.divider;
 			
 			if (lesson.Last)
 			{

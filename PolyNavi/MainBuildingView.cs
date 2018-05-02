@@ -57,7 +57,7 @@ namespace PolyNavi
 		public override bool OnTouchEvent(MotionEvent e)
 		{
 
-			if (!MainBuildingFragment.checkFocus())
+			if (!MainBuildingFragment.CheckFocus())
 			{
 				//InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
 				imm.HideSoftInputFromWindow(WindowToken, 0);
