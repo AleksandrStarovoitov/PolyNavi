@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-</LinearLayout>
+    android:layout_height="wrap_content"
+    android:id="@+id/relativelayout_row_title_schedule">
+    <TextView
+        android:text="@string/date_schedule_row"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/textview_card_date_row_title_schedule"
+        android:textAppearance="@style/ScheduleBuilding"
+        android:fontFamily="@font/roboto_light" />
+</RelativeLayout>

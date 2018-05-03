@@ -10,16 +10,25 @@ using PolyNaviLib.BL;
 
 namespace PolyNavi
 {
+	public class TitleTag
+	{
+		public string Date { get; set; }
+	}
+
 	public class ScheduleCardRowAdapter : RecyclerView.Adapter
 	{
-		private List<Lesson> mLessons;
+		private List<Object> mLessons;
 		private Context context;
 		private LayoutInflater layoutInflater;
 		private View scheduleView;
-		private ScheduleCardRowAdapterViewHolder viewHolder;
+		private ScheduleCardRowLessonViewHolder viewHolderLesson;
+		private ScheduleCardRowTitleViewHolder viewHolderTitle;
+		private RecyclerView.ViewHolder viewHolder;
+		private const int TitleConst = 0, LessonConst = 1;
 
-		public ScheduleCardRowAdapter(List<Lesson> lessons)
+		public ScheduleCardRowAdapter(List<Object> lessons, string date)
 		{
+			lessons.Insert(0, new TitleTag() { Date = date });
 			mLessons = lessons;
 		}
 
@@ -29,53 +38,68 @@ namespace PolyNavi
 			context = parent.Context;
 			layoutInflater = LayoutInflater.From(context);
 
-			// Inflate the custom layout
-			scheduleView = layoutInflater.Inflate(Resource.Layout.layout_card_row_lesson_schedule, parent, false);
+			switch (viewType)
+			{
+				case LessonConst:
+					scheduleView = layoutInflater.Inflate(Resource.Layout.layout_card_row_lesson_schedule, parent, false);
+					viewHolder = new ScheduleCardRowLessonViewHolder(scheduleView);
+					break;
+				case TitleConst:
+					scheduleView = layoutInflater.Inflate(Resource.Layout.layout_card_row_title_schedule, parent, false);
+					viewHolder = new ScheduleCardRowTitleViewHolder(scheduleView);
+					break;
+				default:
 
-			// Return a new holder instance
-			viewHolder = new ScheduleCardRowAdapterViewHolder(scheduleView);
+					break;
+			}
 			return viewHolder;
-
 		}
 
 		// Replace the contents of a view (invoked by the layout manager)
 		public override void OnBindViewHolder(RecyclerView.ViewHolder viewHolder, int position)
 		{
-			var vh = (ScheduleCardRowAdapter.ScheduleCardRowAdapterViewHolder)viewHolder;
+			switch (viewHolder.ItemViewType)
+			{
+				case LessonConst:
+					viewHolderLesson = (ScheduleCardRowLessonViewHolder)viewHolder;
+					Lesson lesson = (Lesson)mLessons[position];
 
-			// Get the data model based on position
-			Lesson lesson = mLessons[position];
+					// Set item views based on your views and data model
+					TextView time = viewHolderLesson.time;
+					TextView room = viewHolderLesson.room;
+					TextView building = viewHolderLesson.building;
+					TextView subject = viewHolderLesson.subject;
 
-			// Set item views based on your views and data model
-			//TextView date = vh.date;
-			TextView time = vh.time;
-			TextView room = vh.room;
-			TextView building = vh.building;
-			TextView subject = vh.subject;
+					time.Text = lesson.Timestr;
+					room.Text = lesson.Room;
+					building.Text = lesson.Building;
+					subject.Text = lesson.Subject;
+					break;
 
-			//date.Text = lesson.;
-			time.Text = lesson.Timestr;
-			room.Text = lesson.Room;
-			building.Text = lesson.Building;
-			subject.Text = lesson.Subject;
+				case TitleConst:
+					viewHolderTitle = (ScheduleCardRowTitleViewHolder)viewHolder;
+					TitleTag title = (TitleTag)mLessons[position];
+				
+					TextView date = viewHolderTitle.date;
+
+					date.Text = title.Date;				
+					break;
+				default:
+					break;
+			}
 		}
 
 		public override int ItemCount => mLessons.Count;
 
-		internal class ScheduleCardRowAdapterViewHolder : RecyclerView.ViewHolder
+		internal class ScheduleCardRowLessonViewHolder : RecyclerView.ViewHolder
 		{
-			public TextView date;
 			public TextView time;
 			public TextView building;
 			public TextView room;
 			public TextView subject;
 
-			public ScheduleCardRowAdapterViewHolder(View itemView) : base(itemView)
+			public ScheduleCardRowLessonViewHolder(View itemView) : base(itemView)
 			{
-				//itemView.Click += (sender, e) => clickListener(new ScheduleCardFragmentAdapterClickEventArgs { View = itemView, Position = AdapterPosition });
-				//itemView.LongClick += (sender, e) => longClickListener(new ScheduleCardFragmentAdapterClickEventArgs { View = itemView, Position = AdapterPosition });
-
-				//date = itemView.FindViewById<TextView>(Resource.Id.textview_card_dayanddate_row_lesson_schedule);
 				time = itemView.FindViewById<TextView>(Resource.Id.textview_card_time_row_lesson_schedule);
 				room = itemView.FindViewById<TextView>(Resource.Id.textview_card_room_row_lesson_schedule);
 				building = itemView.FindViewById<TextView>(Resource.Id.textview_card_buildingnumber_row_lesson_schedule);
@@ -83,20 +107,33 @@ namespace PolyNavi
 			}
 		}
 
-		public class ScheduleCarRowAdapterClickEventArgs : EventArgs
+		internal class ScheduleCardRowTitleViewHolder : RecyclerView.ViewHolder
 		{
-			public View View { get; set; }
-			public int Position { get; set; }
+			public TextView date;
+			
+			public ScheduleCardRowTitleViewHolder(View itemView) : base(itemView)
+			{
+				date = itemView.FindViewById<TextView>(Resource.Id.textview_card_date_row_title_schedule);
+			}
+		}
+
+		public override int GetItemViewType(int position)
+		{
+			if (mLessons[position] is Lesson)
+			{
+				return LessonConst;
+			}
+			else if (mLessons[position] is TitleTag)
+			{
+				return TitleConst;
+			}
+			return -1;
 		}
 	}
 
 
-
 	class ScheduleCardFragmentAdapter : RecyclerView.Adapter
 	{
-		public event EventHandler<ScheduleCardFragmentAdapterClickEventArgs> ItemClick;
-		public event EventHandler<ScheduleCardFragmentAdapterClickEventArgs> ItemLongClick;
-
 		private List<Day> mDays;
 		private Context context;
 		private LayoutInflater layoutInflater;
@@ -121,7 +158,6 @@ namespace PolyNavi
 			// Return a new holder instance
 			viewHolder = new ScheduleCardFragmentAdapterViewHolder(scheduleView);
 			return viewHolder;
-
 		}
 
 		// Replace the contents of a view (invoked by the layout manager)
@@ -135,23 +171,13 @@ namespace PolyNavi
 			recyclerViewSchedule = viewHolder.ItemView.FindViewById<RecyclerView>(Resource.Id.recyclerview_card_schedule);
 			
 			recyclerViewSchedule.HasFixedSize = true;
-		    var adapter = new ScheduleCardRowAdapter(day.Lessons);
+
+		    var adapter = new ScheduleCardRowAdapter(new List<object>(day.Lessons), day.Datestr);
 			recyclerViewSchedule.SetAdapter(adapter);
 			recyclerViewSchedule.SetLayoutManager(new LinearLayoutManager(context));
-
-
-			// Set item views based on your views and data model
-			CardView cardView = vh.cardView;
-			
-			//cardView.
-			//building.Text = lesson.Building;
-			//subject.Text = lesson.Subject;
 		}
 
 		public override int ItemCount => mDays.Count;
-
-		void OnClick(ScheduleCardFragmentAdapterClickEventArgs args) => ItemClick?.Invoke(this, args);
-		void OnLongClick(ScheduleCardFragmentAdapterClickEventArgs args) => ItemLongClick?.Invoke(this, args);
 
 		internal class ScheduleCardFragmentAdapterViewHolder : RecyclerView.ViewHolder
 		{
@@ -161,12 +187,6 @@ namespace PolyNavi
 			{
 				cardView = itemView.FindViewById<CardView>(Resource.Id.cardview_schedule);
 			}
-		}
-
-		public class ScheduleCardFragmentAdapterClickEventArgs : EventArgs
-		{
-			public View View { get; set; }
-			public int Position { get; set; }
 		}
 	}
 }

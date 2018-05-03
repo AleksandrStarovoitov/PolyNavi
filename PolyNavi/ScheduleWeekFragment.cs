@@ -22,7 +22,6 @@ namespace PolyNavi
 {
 	public class ScheduleWeekFragment : Fragment, IOnRefreshListener
 	{
-
 		private SwipeRefreshLayout mSwipeRefreshLayout;
 		private View view;
 		private List<Day> days;
@@ -59,7 +58,7 @@ namespace PolyNavi
 		{
 			recyclerViewSchedule.SetAdapter(null);
 			mSwipeRefreshLayout.Refreshing = false;
-			LoadSheduleAndUpdateUIWithPorgressBar(Weeks.Current);
+			LoadSheduleAndUpdateUIWithPorgressBar(week);
 		}
 
 		private void LoadSheduleAndUpdateUIWithPorgressBar(Weeks week)
@@ -68,7 +67,7 @@ namespace PolyNavi
 			progress.Visibility = ViewStates.Visible;
 			Task.Run(async () =>
 			{
-				days = await MainActivity.PolyManager.GetScheduleByWeekAsync(Weeks.Current); //Next
+				days = await MainActivity.PolyManager.GetScheduleByWeekAsync(week); //Next
 				Activity.RunOnUiThread(() =>
 				{
 					progress.Visibility = ViewStates.Invisible;

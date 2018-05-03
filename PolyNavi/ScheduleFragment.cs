@@ -15,7 +15,6 @@ using Android.Support.V4.View;
 using Android.Support.Design.Widget;
 //using static Android.Support.Design.Widget.TabLayout;
 
-
 namespace PolyNavi
 {
 	[Activity(Label = "ScheduleSwipeActivity")]
