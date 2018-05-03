@@ -29,9 +29,9 @@ namespace PolyNavi
 		private RecyclerView recyclerViewSchedule;
 		private ScheduleCardFragmentAdapter adapter;
 
-		PolyManager.Weeks week;
+		Weeks week;
 
-		public ScheduleWeekFragment(PolyManager.Weeks week)
+		public ScheduleWeekFragment(Weeks week)
 		{
 			this.week = week;
 		}
@@ -59,16 +59,16 @@ namespace PolyNavi
 		{
 			recyclerViewSchedule.SetAdapter(null);
 			mSwipeRefreshLayout.Refreshing = false;
-			LoadSheduleAndUpdateUIWithPorgressBar(PolyManager.Weeks.Current);
+			LoadSheduleAndUpdateUIWithPorgressBar(Weeks.Current);
 		}
 
-		private void LoadSheduleAndUpdateUIWithPorgressBar(PolyManager.Weeks week)
+		private void LoadSheduleAndUpdateUIWithPorgressBar(Weeks week)
 		{
 			var progress = view.FindViewById<ProgressBar>(Resource.Id.progressbar_week_schedule);
 			progress.Visibility = ViewStates.Visible;
 			Task.Run(async () =>
 			{
-				days = await MainActivity.PolyManager.GetScheduleByWeekAsync(PolyManager.Weeks.Current); //Next
+				days = await MainActivity.PolyManager.GetScheduleByWeekAsync(Weeks.Current); //Next
 				Activity.RunOnUiThread(() =>
 				{
 					progress.Visibility = ViewStates.Invisible;
