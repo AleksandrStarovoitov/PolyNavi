@@ -31,9 +31,14 @@ namespace PolyNavi
 		private NavigationView navigationView;
 		private bool tapped = false;
 
+		private static string DatabaseFilename = "schedule.sqlite";
+		public static PolyNaviLib.BL.PolyManager PolyManager { get; private set; }
+
 		protected override void OnCreate(Bundle savedInstanceState)
 		{
 			base.OnCreate(savedInstanceState);
+
+			Initialize();
 			
 			SetContentView(Resource.Layout.activity_main);
 
@@ -59,6 +64,13 @@ namespace PolyNavi
 			ft.AddToBackStack(null);
 			ft.Add(Resource.Id.contentframe_main, new MainBuildingFragment());
 			ft.Commit();
+		}
+
+		private void Initialize()
+		{
+			string dirPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
+			string path = System.IO.Path.Combine(dirPath, DatabaseFilename);
+			PolyManager = new PolyNaviLib.BL.PolyManager(path, new NetworkChecker());
 		}
 
 		protected override void OnPostCreate(Bundle savedInstanceState)

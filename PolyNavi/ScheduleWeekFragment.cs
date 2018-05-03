@@ -28,12 +28,17 @@ namespace PolyNavi
 		private List<Day> days;
 		private RecyclerView recyclerViewSchedule;
 		private ScheduleCardFragmentAdapter adapter;
-		private PolyManager polyManager;
+
+		Weeks week;
+
+		public ScheduleWeekFragment(Weeks week)
+		{
+			this.week = week;
+		}
 
 		public override void OnCreate(Bundle savedInstanceState)
 		{
 			base.OnCreate(savedInstanceState);
-			polyManager = new PolyManager();
 		}
 
 		public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -45,7 +50,7 @@ namespace PolyNavi
 
 			recyclerViewSchedule = view.FindViewById<RecyclerView>(Resource.Id.recyclerview_week_schedule);
 
-			LoadSheduleAndUpdateUIWithPorgressBar(PolyManager.Weeks.Current);
+			LoadSheduleAndUpdateUIWithPorgressBar(week);
 
 			return view;
 		}
@@ -54,16 +59,16 @@ namespace PolyNavi
 		{
 			recyclerViewSchedule.SetAdapter(null);
 			mSwipeRefreshLayout.Refreshing = false;
-			LoadSheduleAndUpdateUIWithPorgressBar(PolyManager.Weeks.Current);
+			LoadSheduleAndUpdateUIWithPorgressBar(Weeks.Current);
 		}
 
-		private void LoadSheduleAndUpdateUIWithPorgressBar(PolyManager.Weeks week)
+		private void LoadSheduleAndUpdateUIWithPorgressBar(Weeks week)
 		{
 			var progress = view.FindViewById<ProgressBar>(Resource.Id.progressbar_week_schedule);
 			progress.Visibility = ViewStates.Visible;
 			Task.Run(async () =>
 			{
-				days = await polyManager.GetScheduleByWeekAsync(PolyManager.Weeks.Current); //Next
+				days = await MainActivity.PolyManager.GetScheduleByWeekAsync(Weeks.Current); //Next
 				Activity.RunOnUiThread(() =>
 				{
 					progress.Visibility = ViewStates.Invisible;

@@ -141,7 +141,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScheduleCardFragmentAdapter.cs" />
     <Compile Include="ScheduleFragmentAdapter.cs" />
-    <Compile Include="ScheduleWeekAdaper.cs" />
     <Compile Include="ScheduleFragment.cs" />
     <Compile Include="ScheduleWeekFragment.cs" />
   </ItemGroup>
