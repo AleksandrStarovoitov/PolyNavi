@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-
+using System.Threading.Tasks;
 using PolyNaviLib.DAL;
 
 namespace PolyNaviLib.BL
@@ -40,27 +40,26 @@ namespace PolyNaviLib.BL
 		}
 
 		//Получить неделю
-		public Week GetWeek(Weeks w)
+		public async Task<Week> GetWeekAsync(Weeks w)
 		{
-			Schedule schedule = repository.GetSchedule();
+			Schedule schedule = await repository.GetScheduleAsync();
 
 			return schedule.Weeks[(int)w];
 		}
 
 		//Получить день
-		public Day GetDay(Weeks w, Days d)
+		public async Task<Day> GetDayAsync(Weeks w, Days d)
 		{
-			Schedule schedule = repository.GetSchedule();
+			Schedule schedule = await repository.GetScheduleAsync();
 
 			return schedule.Weeks[(int)w].Days[(int)d];
 		}
 
 
 		//Получить расписание на неделю
-		//public List<Lesson> GetScheduleByWeek(Weeks w)
-		public List<Day> GetScheduleByWeek(Weeks w)
+		public async Task<List<Day>> GetScheduleByWeekAsync(Weeks w)
 		{
-			Schedule schedule = repository.GetSchedule();
+			Schedule schedule = await repository.GetScheduleAsync();
 
 			var week = schedule.Weeks[(int)w];
 
@@ -82,9 +81,9 @@ namespace PolyNaviLib.BL
 		}
 
 		//Получить расписание на день определенной недели
-		public List<Lesson> GetScheduleByDay(Weeks w, Days d)
+		public async Task<List<Lesson>> GetScheduleByDayAsync(Weeks w, Days d)
 		{
-			Schedule schedule = repository.GetSchedule();
+			Schedule schedule = await repository.GetScheduleAsync();
 
 			var day = schedule.Weeks[(int)w].Days[(int)d];
 

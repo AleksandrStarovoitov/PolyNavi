@@ -7,7 +7,7 @@ using System.Globalization;
 
 namespace PolyNaviLib.DAL
 {
-    public class ScheduleBuilder
+    public static class ScheduleBuilder
     {
 		//Парсинг и построение расписания
 		public static Schedule BuildSchedule(HtmlDocument htmlDoc)
