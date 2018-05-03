@@ -6,18 +6,30 @@ using PolyNaviLib.DAL;
 
 namespace PolyNaviLib.BL
 {
+	public enum Weeks
+	{
+		Current, //Текущая неделя
+		Next,     //Следующая неделя
+	}
+
+	public enum Days
+	{
+		Monday,
+		Tuesday,
+		Wednesday,
+		Thursday,
+		Friday,
+		Saturday,
+		Sunday,
+	}
+
 	public class PolyManager
 	{
 		Repository repository;
 
-		public PolyManager()
-		{
-			repository = new Repository();
-		}
-
 		public PolyManager(string dbPath, INetworkChecker checker)
 		{
-			//TODO...
+			repository = new Repository(dbPath, checker);
 		}
 
 		//Получить неделю
