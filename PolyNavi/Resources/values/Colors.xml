@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <resources>
-
   <!-- color int as #AARRGGBB (alpha, red, green, blue) -->
   <!--<color name="MyColorPrimaryDark">#00821b</color>-->
   <color name="colorPrimaryDark">#00821b</color>
@@ -9,6 +8,7 @@
 
   <color name="colorToolbarText">#B3000000</color>
   <color name="colorBlack">#000000</color>
+  <color name="colorIconsBlack">#DD000000</color>
   <color name="colorBlackWithTransparency">#99000000</color>
   <!--<item name="mymolorprimarydark" type="color">#00821b</item>-->
 </resources>

@@ -25,9 +25,10 @@ namespace PolyNavi
 
 		private SwipeRefreshLayout mSwipeRefreshLayout;
 		private View view;
-		private List<Lesson> lessons;
+		//private List<Lesson> lessons;
+		private List<Day> days;
 		private RecyclerView recyclerViewSchedule;
-		private ScheduleWeekAdapter adapter;
+		private ScheduleCardFragmentAdapter adapter;
 		private PolyManager polyManager;
 
 		public override void OnCreate(Bundle savedInstanceState)
@@ -47,10 +48,10 @@ namespace PolyNavi
 			//lessons = null;
 			//p.Visibility = ViewStates.Visible;
 
-			lessons = polyManager.GetScheduleByWeek(PolyManager.Weeks.Current);
+			days = polyManager.GetScheduleByWeek(PolyManager.Weeks.Current);
 			recyclerViewSchedule = (RecyclerView)view.FindViewById(Resource.Id.recyclerview_week_schedule);
 			recyclerViewSchedule.HasFixedSize = true;
-			adapter = new ScheduleWeekAdapter(lessons);
+			adapter = new ScheduleCardFragmentAdapter(days);
 			recyclerViewSchedule.SetAdapter(adapter);
 			recyclerViewSchedule.SetLayoutManager(new LinearLayoutManager(Activity.BaseContext));
 
@@ -76,10 +77,10 @@ namespace PolyNavi
 
 		public void OnRefresh()
 		{
-			lessons = null;
+			days = null;
 			recyclerViewSchedule.SetAdapter(null);
-			lessons = polyManager.GetScheduleByWeek(PolyManager.Weeks.Current); //Next
-			adapter = new ScheduleWeekAdapter(lessons);
+			days = polyManager.GetScheduleByWeek(PolyManager.Weeks.Current); //Next
+			adapter = new ScheduleCardFragmentAdapter(days);
 			recyclerViewSchedule.SetAdapter(adapter);
 			recyclerViewSchedule.SetLayoutManager(new LinearLayoutManager(Activity.BaseContext));
 			mSwipeRefreshLayout.Refreshing = false;

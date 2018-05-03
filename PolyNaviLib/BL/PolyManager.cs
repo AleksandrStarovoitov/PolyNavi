@@ -57,7 +57,8 @@ namespace PolyNaviLib.BL
 
 
 		//Получить расписание на неделю
-		public List<Lesson> GetScheduleByWeek(Weeks w)
+		//public List<Lesson> GetScheduleByWeek(Weeks w)
+		public List<Day> GetScheduleByWeek(Weeks w)
 		{
 			Schedule schedule = repository.GetSchedule();
 
@@ -65,15 +66,19 @@ namespace PolyNaviLib.BL
 
 			List<Lesson> lessons = new List<Lesson>();
 
+			//
+			List<Day> days = new List<Day>();
 			foreach (var d in week.Days)
 			{
-				foreach (var l in d.Lessons)
-				{
-					lessons.Add(l);
-				}
+				//foreach (var l in d.Lessons)
+				//{
+				//	lessons.Add(l);
+				//}
+				days.Add(d);
 			}
 
-			return lessons;
+			//return lessons;
+			return days;
 		}
 
 		//Получить расписание на день определенной недели
