@@ -15,6 +15,11 @@ namespace PolyNaviLib.DAL
 		private string group = @"http://ruz.spbstu.ru/search/groups?q=";
 		private string groupLink;
 
+		public Repository(string dbPath, INetworkChecker networkChecker)
+		{
+
+		}
+
 		public async Task<Schedule> GetScheduleAsync()
 		{
 			if (false) //Есть в БД
