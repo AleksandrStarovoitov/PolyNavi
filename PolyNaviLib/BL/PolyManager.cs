@@ -6,25 +6,6 @@ using PolyNaviLib.DAL;
 
 namespace PolyNaviLib.BL
 {
-	public enum Weeks
-	{
-		Current, //Текущая неделя
-		Next     //Следующая неделя
-	}
-
-	public enum Days
-	{
-		Monday,
-		Tuesday,
-		Wednesday,
-		Thursday,
-		Friday,
-		Saturday,
-		Sunday     //,
-				   //Current, //Может понадобится
-				   //Next	   //Может понадобится
-	}
-
 	public class PolyManager
 	{
 		Repository repository;
