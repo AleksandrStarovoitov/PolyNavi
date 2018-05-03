@@ -8,6 +8,7 @@ namespace PolyNaviLib.SL
 {
 	public static class HtmlLoader
 	{
+		// TODO сделать отмену загрузки страницы, при выходе с экрана расписания
 		public static async Task<HtmlDocument> LoadHtmlDocumentAsync(string addr)
 		{
 			var web = new HtmlWeb();
