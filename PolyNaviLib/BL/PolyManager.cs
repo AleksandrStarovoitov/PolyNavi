@@ -8,6 +8,7 @@ namespace PolyNaviLib.BL
 {
 	public class PolyManager
 	{
+
 		Repository repository;
 		
 		public enum Weeks
