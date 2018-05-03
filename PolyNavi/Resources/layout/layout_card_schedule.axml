@@ -4,20 +4,20 @@
     android:id="@+id/cardview_schedule"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    card_view:cardBackgroundColor="#E6E6E6"
+    card_view:cardBackgroundColor="@color/colorCardBackground"
     card_view:cardCornerRadius="2dp"
     card_view:cardElevation="2dp"
     card_view:cardMaxElevation="2dp"
     card_view:cardUseCompatPadding="true"
     card_view:cardPreventCornerOverlap="true"
-    android:layout_marginLeft="10dp"
-    android:layout_marginRight="10dp"
-    android:layout_marginBottom="4dp"
-    android:layout_marginTop="4dp">
-  <android.support.v7.widget.RecyclerView
-       android:minWidth="25px"
-       android:minHeight="25px"
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:id="@+id/recyclerview_card_schedule" />
+    android:layout_marginLeft="@dimen/cardMarginLeftRight"
+    android:layout_marginRight="@dimen/cardMarginLeftRight"
+    android:layout_marginBottom="@dimen/cardMarginBottom"
+    android:layout_marginTop="@dimen/cardMarginTop">
+    <android.support.v7.widget.RecyclerView
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/recyclerview_card_schedule" />
 </android.support.v7.widget.CardView>

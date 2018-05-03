@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+  <dimen name="cardMarginLeftRight">12dp</dimen>
+  <dimen name="cardMarginTop">5dp</dimen>
+  <dimen name="cardMarginBottom">15dp</dimen>
+  
+  <dimen name="cardTitleMarginLeft">10dp</dimen>
+  
+  <dimen name="cardTextMarginTop">5dp</dimen>
+  <dimen name="cardInnerTextMarginLeft">10dp</dimen>
+  <dimen name="cardInnerTextMarginTop">5dp</dimen>
+  <dimen name="cardOuterTextMargin">10dp</dimen>
+  <dimen name="cardOuterTextMarginLeftRight">10dp</dimen>
+</resources>

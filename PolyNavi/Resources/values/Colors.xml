@@ -1,14 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <resources>
   <!-- color int as #AARRGGBB (alpha, red, green, blue) -->
-  <!--<color name="MyColorPrimaryDark">#00821b</color>-->
-  <color name="colorPrimaryDark">#00821b</color>
-  <color name="colorPrimary">#37b34a</color>
+  <color name="colorPrimaryDark">#00821B</color>
+  <color name="colorPrimary">#37B34A</color>
   <color name="colorAccent">#FF9800</color>
 
   <color name="colorToolbarText">#B3000000</color>
   <color name="colorBlack">#000000</color>
   <color name="colorIconsBlack">#DD000000</color>
   <color name="colorBlackWithTransparency">#99000000</color>
-  <!--<item name="mymolorprimarydark" type="color">#00821b</item>-->
+
+  <color name="colorCardBackground">#E6E6E6</color>
+  
+  <color name="colorTitleScheduleText">#B4000000</color>
+  <color name="colorTitleScheduleBackground">#5EC26E</color>
 </resources>

@@ -2,12 +2,14 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/relativelayout_row_title_schedule">
+    android:id="@+id/relativelayout_row_title_schedule"
+    android:background="@color/colorTitleScheduleBackground">
     <TextView
         android:text="@string/date_schedule_row"
-        android:layout_width="80dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/cardTitleMarginLeft"
         android:id="@+id/textview_card_date_row_title_schedule"
-        android:textAppearance="@style/ScheduleBuilding"
+        android:textAppearance="@style/ScheduleTitleDate"
         android:fontFamily="@font/roboto_light" />
 </RelativeLayout>

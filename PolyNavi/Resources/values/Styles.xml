@@ -1,10 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
 <resources>
-
   <!-- Base application theme. -->
   <style name="MyAppTheme" parent="MyTheme.Base">
-
   </style>
 
   <style name="MyTheme.Base" parent="Theme.AppCompat.Light.NoActionBar">
@@ -27,7 +25,6 @@
     <item name="spinBars">true</item>
     <item name="color">@color/colorToolbarText</item>
   </style>
-
   <style name ="ToolbarTheme" parent="@style/Widget.AppCompat.Toolbar">
     <!--<item name="titleTextColor">#26000000</item>-->
     <item name="titleTextColor">@color/colorToolbarText</item>
@@ -40,30 +37,31 @@
     <item name="android:textSize">48sp</item>
     <item name="android:textColor">@color/colorBlack</item>
   </style>
-
   <style name="Navi" parent="TextAppearance.AppCompat">
     <item name="android:textSize">48sp</item>
     <item name="android:textColor">@color/colorBlackWithTransparency</item>
   </style>
 
-  <style name="ScheduleDate" parent="TextAppearance.AppCompat">
-    <item name="android:textSize">22sp</item>
-    <item name="android:textColor">@color/colorBlackWithTransparency</item>
-  </style>
-
-  <style name="ScheduleRoom" parent="TextAppearance.AppCompat">
-    <item name="android:textSize">24sp</item>
+  
+  <style name="ScheduleTime" parent="TextAppearance.AppCompat">
+    <item name="android:textSize">16sp</item>
     <item name="android:textColor">@color/colorBlack</item>
   </style>
-
-  <style name="ScheduleTimeSubject" parent="TextAppearance.AppCompat">
-    <item name="android:textSize">14sp</item>
+  <style name="ScheduleSubject" parent="TextAppearance.AppCompat">
+    <item name="android:textSize">16sp</item>
     <item name="android:textColor">@color/colorBlack</item>
   </style>
-
   <style name="ScheduleBuilding" parent="TextAppearance.AppCompat">
-    <item name="android:textSize">14sp</item>
+    <item name="android:textSize">15sp</item>
     <item name="android:textColor">@color/colorBlackWithTransparency</item>
   </style>
-
+  <style name="ScheduleRoom" parent="TextAppearance.AppCompat">
+    <item name="android:textSize">15sp</item>
+    <item name="android:textColor">@color/colorBlackWithTransparency</item>
+  </style>
+  <style name="ScheduleTitleDate" parent="TextAppearance.AppCompat">
+    <item name="android:textSize">28sp</item>
+    <item name="android:textColor">@color/colorTitleScheduleText</item>
+  </style>
+ 
 </resources>
