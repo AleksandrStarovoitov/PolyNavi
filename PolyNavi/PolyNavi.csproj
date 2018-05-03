@@ -164,14 +164,8 @@
     <AndroidResource Include="Resources\layout\fragment_week_schedule.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\layout_row_schedule.axml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
     <AndroidResource Include="Resources\font\roboto_light.ttf" />
     <AndroidResource Include="Resources\layout\layout_card_schedule.axml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\layout_card_row_schedule.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\layout_card_row_lesson_schedule.axml">
