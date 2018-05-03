@@ -15,7 +15,6 @@ namespace PolyNavi
 	{
 		private View view;
 		private EditText editTextInputFrom, editTextInputTo;
-		private TextInputLayout textInputLayoutFrom, textInputLayoutTo;
 		private FragmentTransaction fragmentTransaction;
 		private AppBarLayout appBar;
 		private FloatingActionButton fab;
@@ -62,12 +61,11 @@ namespace PolyNavi
 
 			return view;
 		}
+		
 
-		bool expanded = true, clicked = false;
 		bool fullyExpanded, fullyCollapsed;
 		private void Fab_Click(object sender, EventArgs e)
 		{
-			clicked = true;
 			if (fullyExpanded)
 			{
 				if (editTextInputFrom.Text.Length == 3 && editTextInputTo.Text.Length == 3)
@@ -95,7 +93,6 @@ namespace PolyNavi
 				//fab.LayoutParameters = fabLayoutParams;
 				//fab.SetImageResource(Resource.Drawable.ic_done_black_24dp);
 			}
-			clicked = false;
 		}
 
 		private void EditTextFromFocusChanged(object sender, View.FocusChangeEventArgs e)
