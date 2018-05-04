@@ -4,6 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using SQLite;
+using SQLiteNetExtensionsAsync.Extensions;
 
 using PolyNaviLib.BL;
 
@@ -20,34 +21,48 @@ namespace PolyNaviLib.DL
 		
 		public async Task CreateTableAsync<T>() where T : IBusinessEntity, new()
 		{
-			await db.CreateTableAsync<T>();
+			try
+			{
+				await db.CreateTableAsync<T>();
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine(ex.Message);
+				Console.WriteLine(ex.StackTrace);
+				throw;                                   //TODO убрать когда закончим
+			}
 		}
 
 		public async Task<List<T>> GetItemsAsync<T>() where T : IBusinessEntity, new()
 		{
-			return await db.Table<T>().ToListAsync();
+			return await db.GetAllWithChildrenAsync<T>(recursive: true);
+			//return await db.Table<T>().ToListAsync();
 		}
 
 		public async Task<T> GetItemAsync<T>(int id) where T : IBusinessEntity, new()
 		{
-			return await db.GetAsync<T>(id);
+			return await db.GetWithChildrenAsync<T>(id);
+			//return await db.GetAsync<T>(id);
 		}
 
-		public async Task<int> SaveItemAsync<T>(T item) where T : IBusinessEntity, new()
+		public async Task/*<int>*/ SaveItemAsync<T>(T item) where T : IBusinessEntity, new()
 		{
 			if (item.ID == 0)
 			{
-				return await db.InsertAsync(item);
+				await db.InsertWithChildrenAsync(item, recursive: true);
+				//return await db.InsertAsync(item);
 			}
 			else
 			{
-				return await db.UpdateAsync(item);
+				await db.UpdateWithChildrenAsync(item);
+				//return await db.UpdateAsync(item);
 			}
 		}
 
-		public async Task<int> DeleteItemAsync<T>(T item) where T : IBusinessEntity, new()
+		public async Task/*<int>*/ DeleteItemAsync<T>(T item) where T : IBusinessEntity, new()
 		{
-			return await db.DeleteAsync(item);
+			await db.DeleteAsync(item, recursive: true);
+			//return await db.DeleteAsync(item);
 		}
 	}
 }

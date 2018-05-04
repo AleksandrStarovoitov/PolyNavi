@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 using Android.App;
 using Android.Content;
@@ -17,6 +18,8 @@ using Android.Text;
 using Android.Views;
 using Android.Views.InputMethods;
 using Android.Widget;
+
+using PolyNaviLib.BL;
 
 using static Android.Support.V4.Widget.DrawerLayout;
 
@@ -75,9 +78,12 @@ namespace PolyNavi
 
 		private void Initialize()
 		{
-			string dirPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
-			string path = System.IO.Path.Combine(dirPath, DatabaseFilename);
-			PolyManager = new PolyNaviLib.BL.PolyManager(path, new NetworkChecker());
+			Task.Run(async () =>
+			{
+				string dirPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
+				string path = System.IO.Path.Combine(dirPath, DatabaseFilename);
+				PolyManager = await PolyManager.CreateAsync(path, new NetworkChecker());
+			});
 		}
 
 		protected override void OnPostCreate(Bundle savedInstanceState)

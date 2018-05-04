@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using SQLiteNetExtensions.Attributes;
 
 namespace PolyNaviLib.BL
 {
-	public class Lesson
+	public class Lesson : BusinessEntity
 	{
 		public string Subject { get; set; }  //Название пары
 		public string Timestr { get; set; }     //Время пары
@@ -16,6 +17,12 @@ namespace PolyNaviLib.BL
 
 		public DateTime StartTime { get; set; }
 		public DateTime EndTime { get; set; }
+
+		[ManyToOne]
+		public Day Day { get; set; }
+
+		[ForeignKey(typeof(Day))]
+		public int DayID { get; set; }
 
 		public Lesson()
 		{

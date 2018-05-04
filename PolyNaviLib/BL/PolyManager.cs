@@ -27,9 +27,20 @@ namespace PolyNaviLib.BL
 	{
 		Repository repository;
 
-		public PolyManager(string dbPath, INetworkChecker checker)
+		private PolyManager()
 		{
-			repository = new Repository(dbPath, checker);
+		}
+
+		private async Task<PolyManager> InitializeAsync(string dbPath, INetworkChecker checker)
+		{
+			repository = await Repository.CreateAsync(dbPath, checker);
+			return this;
+		}
+
+		public static Task<PolyManager> CreateAsync(string dbPath, INetworkChecker checker)
+		{
+			var manager = new PolyManager();
+			return manager.InitializeAsync(dbPath, checker);
 		}
 
 		//Получить неделю
