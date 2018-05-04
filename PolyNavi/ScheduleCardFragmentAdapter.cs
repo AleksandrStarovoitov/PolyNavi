@@ -75,7 +75,7 @@ namespace PolyNavi
 					TextView subject = viewHolderLesson.subject;
 					TextView startTime = viewHolderLesson.startTime;
 					TextView endTime = viewHolderLesson.endTime;
-
+					TextView type = viewHolderLesson.type;
 
 					//time.Text = lesson.Timestr;
 					room.Text = lesson.Room;
@@ -83,6 +83,7 @@ namespace PolyNavi
 					subject.Text = lesson.Subject;
 					startTime.Text = lesson.StartTime.ToString("HH:mm", cultureInfo);
 					endTime.Text = lesson.EndTime.ToString("HH:mm", cultureInfo);
+					type.Text = lesson.Type;
 
 					break;
 
@@ -112,6 +113,7 @@ namespace PolyNavi
 			public TextView subject;
 			public TextView startTime;
 			public TextView endTime;
+			public TextView type;
 
 			public ScheduleCardRowLessonViewHolder(View itemView) : base(itemView)
 			{
@@ -121,6 +123,7 @@ namespace PolyNavi
 				subject = itemView.FindViewById<TextView>(Resource.Id.textview_card_subject_row_lesson_schedule);
 				startTime = itemView.FindViewById<TextView>(Resource.Id.textview_card_starttime_row_lesson_schedule);
 				endTime = itemView.FindViewById<TextView>(Resource.Id.textview_card_endtime_row_lesson_schedule);
+				type = itemView.FindViewById<TextView>(Resource.Id.textview_card_type_row_lesson_schedule);
 			}
 		}
 

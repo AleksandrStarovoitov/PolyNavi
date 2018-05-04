@@ -7,6 +7,7 @@
   <dimen name="cardTitleMarginLeft">10dp</dimen>
   
   <dimen name="cardTextMarginTop">5dp</dimen>
+  <dimen name="cardTextMarginBottom">15dp</dimen>
   <dimen name="cardInnerTextMarginLeft">10dp</dimen>
   <dimen name="cardInnerTextMarginTop">5dp</dimen>
   <dimen name="cardOuterTextMargin">10dp</dimen>

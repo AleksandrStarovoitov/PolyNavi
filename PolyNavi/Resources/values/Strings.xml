@@ -18,7 +18,8 @@
     <string name="endtime_schedule_row">Время конца</string>
     <string name="subject_schedule_row">Название предмета</string>
     <string name="building_schedule_row">Корпус</string>
-
+    <string name="type_schedule_row">Тип пары</string>
+  
     <string name="mainbuilding_nav">Главное здание</string>
     <string name="buildings_nav">Корпуса</string>
     <string name="schedule_nav">Расписание</string>

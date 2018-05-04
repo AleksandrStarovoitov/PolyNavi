@@ -54,8 +54,9 @@ namespace PolyNaviLib.DAL
 						Building = lesson.LastChild.LastChild.FirstChild.FirstChild.FirstChild.InnerText,      //Корпус
 																											   //l.Groups = lesson; //Группы пока не уверен как правильно сделать
 						Room = lesson.LastChild.LastChild.FirstChild.FirstChild.LastChild.LastChild.InnerText, //Аудитория
-						Subject = lesson.FirstChild.LastChild.InnerText,                                       //Название пары
+						Subject = lesson.FirstChild.LastChild.InnerText.Replace("&quot;", "\""),               //Название пары
 						Timestr = lesson.FirstChild.FirstChild.InnerText,                                      //Время пары
+						Type = lesson.LastChild.FirstChild.InnerText										   //леции/практика
 					};
 					if (DateTime.TryParse(lesson.FirstChild.FirstChild.InnerText.Substring(0, 5), ci, DateTimeStyles.None, out dateTime)) //+ " " + d.Datestr, "HH:mm d MMM., ddd", new CultureInfo("Ru-ru"));
 					{
