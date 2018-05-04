@@ -74,7 +74,7 @@ namespace PolyNavi
 					imm.HideSoftInputFromWindow(View.WindowToken, 0);
 					fab.SetImageResource(Resource.Drawable.ic_gps_fixed_black_24dp);
 					appBar.SetExpanded(false);
-
+					
 					//fabLayoutParams.AnchorId = frameLayout.Id;
 					//fab.LayoutParameters = fabLayoutParams;
 				}

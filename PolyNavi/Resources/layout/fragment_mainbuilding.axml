@@ -48,22 +48,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/imageview_fixed"
-                
-                
                 android:layout_alignLeft="@+id/imageview_notfixed"
                 android:layout_alignRight="@+id/imageview_notfixed"
                 android:layout_alignTop="@+id/textinputlayout_to_mainbuilding"
-                android:layout_marginTop="15dp"
-                />
+                android:layout_marginTop="15dp" />
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/textinputlayout_from_mainbuilding"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
-              
                 android:layout_toRightOf="@+id/imageview_notfixed"
-               
-                android:layout_marginRight="10dp"
-                >
+                android:layout_marginRight="10dp">
                 <EditText
                     android:id="@+id/edittext_input_from"
                     android:layout_height="match_parent"
@@ -76,11 +70,9 @@
                 android:id="@+id/textinputlayout_to_mainbuilding"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
-             
                 android:layout_below="@+id/textinputlayout_from_mainbuilding"
                 android:layout_alignLeft="@+id/textinputlayout_from_mainbuilding"
-                android:layout_alignRight="@+id/textinputlayout_from_mainbuilding"
-                >
+                android:layout_alignRight="@+id/textinputlayout_from_mainbuilding">
                 <EditText
                     android:id="@+id/edittext_input_to"
                     android:inputType="number"

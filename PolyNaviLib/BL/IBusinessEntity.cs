@@ -6,7 +6,7 @@ using SQLite;
 
 namespace PolyNaviLib.BL
 {
-	public interface IBuisnessEntity
+	public interface IBusinessEntity
 	{
 		int ID { get; set; }
 	}

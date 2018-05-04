@@ -11,9 +11,11 @@
     <string name="poly">POLY</string>
     <string name="navi">NAVI</string>
 
-    <string name="date_schedule_row">Дата</string>
+    <string name="date_title_schedule_row">Дата</string>
+    <string name="dayofweek_title_schedule_row">День недели</string>
     <string name="room_schedule_row">Комната</string>
-    <string name="time_schedule_row">Время</string>
+    <string name="starttime_schedule_row">Время начала</string>
+    <string name="endtime_schedule_row">Время конца</string>
     <string name="subject_schedule_row">Название предмета</string>
     <string name="building_schedule_row">Корпус</string>
 

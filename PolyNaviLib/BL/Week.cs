@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PolyNaviLib.BL
 {
-	public class Week : BuisnessEntity
+	public class Week : BusinessEntity
 	{
 		public List<Day> Days { get; set; } //Дни
 

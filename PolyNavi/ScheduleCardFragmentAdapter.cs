@@ -7,12 +7,13 @@ using System.Collections;
 using Android.Content;
 using System.Collections.Generic;
 using PolyNaviLib.BL;
+using System.Globalization;
 
 namespace PolyNavi
 {
 	public class TitleTag
 	{
-		public string Date { get; set; }
+		public DateTime Date { get; set; }
 	}
 
 	public class ScheduleCardRowAdapter : RecyclerView.Adapter
@@ -24,9 +25,12 @@ namespace PolyNavi
 		private ScheduleCardRowLessonViewHolder viewHolderLesson;
 		private ScheduleCardRowTitleViewHolder viewHolderTitle;
 		private RecyclerView.ViewHolder viewHolder;
+		private CultureInfo cultureInfo = new CultureInfo("ru-RU");
 		private const int TitleConst = 0, LessonConst = 1;
 
-		public ScheduleCardRowAdapter(List<Object> lessons, string date)
+		//	private CultureInfo ci = new CultureInfo("ru-RU") {DateTimeFormat = new DateTimeFormatInfo() { AbbreviatedMonthNames = PolyNaviLib.DAL.ScheduleBuilder.months } };
+
+		public ScheduleCardRowAdapter(List<Object> lessons, DateTime date)
 		{
 			lessons.Insert(0, new TitleTag() { Date = date });
 			mLessons = lessons;
@@ -69,20 +73,29 @@ namespace PolyNavi
 					TextView room = viewHolderLesson.room;
 					TextView building = viewHolderLesson.building;
 					TextView subject = viewHolderLesson.subject;
+					TextView startTime = viewHolderLesson.startTime;
+					TextView endTime = viewHolderLesson.endTime;
 
-					time.Text = lesson.Timestr;
+
+					//time.Text = lesson.Timestr;
 					room.Text = lesson.Room;
 					building.Text = lesson.Building;
 					subject.Text = lesson.Subject;
+					startTime.Text = lesson.StartTime.ToString("HH:mm", cultureInfo);
+					endTime.Text = lesson.EndTime.ToString("HH:mm", cultureInfo);
+
 					break;
 
 				case TitleConst:
 					viewHolderTitle = (ScheduleCardRowTitleViewHolder)viewHolder;
 					TitleTag title = (TitleTag)mLessons[position];
-				
-					TextView date = viewHolderTitle.date;
 
-					date.Text = title.Date;				
+					TextView date = viewHolderTitle.date;
+					TextView dayOfWeek = viewHolderTitle.dayOfWeek;
+
+					date.Text = title.Date.ToString("M", cultureInfo); //"dd MMMM"
+					dayOfWeek.Text = title.Date.ToString("dddd", cultureInfo);
+					dayOfWeek.Text = dayOfWeek.Text.Substring(0, 1).ToUpper() + dayOfWeek.Text.Substring(1);
 					break;
 				default:
 					break;
@@ -97,23 +110,29 @@ namespace PolyNavi
 			public TextView building;
 			public TextView room;
 			public TextView subject;
+			public TextView startTime;
+			public TextView endTime;
 
 			public ScheduleCardRowLessonViewHolder(View itemView) : base(itemView)
 			{
-				time = itemView.FindViewById<TextView>(Resource.Id.textview_card_time_row_lesson_schedule);
+				//time = itemView.FindViewById<TextView>(Resource.Id.textview_card_time_row_lesson_schedule);
 				room = itemView.FindViewById<TextView>(Resource.Id.textview_card_room_row_lesson_schedule);
 				building = itemView.FindViewById<TextView>(Resource.Id.textview_card_buildingnumber_row_lesson_schedule);
 				subject = itemView.FindViewById<TextView>(Resource.Id.textview_card_subject_row_lesson_schedule);
+				startTime = itemView.FindViewById<TextView>(Resource.Id.textview_card_starttime_row_lesson_schedule);
+				endTime = itemView.FindViewById<TextView>(Resource.Id.textview_card_endtime_row_lesson_schedule);
 			}
 		}
 
 		internal class ScheduleCardRowTitleViewHolder : RecyclerView.ViewHolder
 		{
 			public TextView date;
+			public TextView dayOfWeek;
 			
 			public ScheduleCardRowTitleViewHolder(View itemView) : base(itemView)
 			{
 				date = itemView.FindViewById<TextView>(Resource.Id.textview_card_date_row_title_schedule);
+				dayOfWeek = itemView.FindViewById<TextView>(Resource.Id.textview_card_dayofweek_row_title_schedule);
 			}
 		}
 
@@ -172,7 +191,7 @@ namespace PolyNavi
 			
 			recyclerViewSchedule.HasFixedSize = true;
 
-		    var adapter = new ScheduleCardRowAdapter(new List<object>(day.Lessons), day.Datestr);
+		    var adapter = new ScheduleCardRowAdapter(new List<object>(day.Lessons), day.Date);
 			recyclerViewSchedule.SetAdapter(adapter);
 			recyclerViewSchedule.SetLayoutManager(new LinearLayoutManager(context));
 		}

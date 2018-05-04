@@ -12,6 +12,7 @@
 
   <color name="colorCardBackground">#E6E6E6</color>
   
-  <color name="colorTitleScheduleText">#B4000000</color>
+  <color name="colorTitleScheduleText">#96000000</color>
+  <color name="colorTitleScheduleTextDayOfWeek">#B4000000</color>
   <color name="colorTitleScheduleBackground">#5EC26E</color>
 </resources>

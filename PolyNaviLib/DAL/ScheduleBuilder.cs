@@ -7,62 +7,77 @@ using System.Globalization;
 
 namespace PolyNaviLib.DAL
 {
-    public static class ScheduleBuilder
-    {
-		//Парсинг и построение расписания
-		public static Schedule BuildSchedule(HtmlDocument htmlDoc)
+	public static class ScheduleBuilder
+	{
+		public static string[] months = { "янв.", "февр.", "мар.",
+								   "апр.", "мая", "июн.",
+								   "июл.", "авг.", "сент.",
+								   "окт.", "нояб.", "дек.", ""};
+	//Парсинг и построение расписания
+	public static Schedule BuildSchedule(HtmlDocument htmlDoc)
 		{
 			Schedule schedule = new Schedule();
 			Week w = new Week();
 			Day d;
 			Lesson l = new Lesson();
+			DateTime dateTime, err = new DateTime(2007, 1, 1);
+
+			CultureInfo ci = CultureInfo.CreateSpecificCulture("ru-RU");
+			DateTimeFormatInfo dtfi = ci.DateTimeFormat;
+			dtfi.AbbreviatedMonthNames = months;
+			dtfi.AbbreviatedMonthGenitiveNames = dtfi.AbbreviatedMonthNames;
 
 			var node = htmlDoc.DocumentNode.SelectSingleNode("//body/div/div/div/ul");
 			var days = node.ChildNodes; //Список дней
-			
-			//bool first = true; //Первая пара или нет (возможно нужно будет для отображения даты в Layout)
 
-			bool first = true, last = false;
-			//Проход по дням
 			foreach (var day in days)
 			{
 				d = new Day
 				{
 					Datestr = day.FirstChild.InnerText, //Добавляем дату
-					
-					//Date = DateTime.ParseExact(day.FirstChild.InnerText, "d MMM., ddd", new CultureInfo("Ru-ru"))
 				};
-				
-				var lessons = day.LastChild.ChildNodes; //Список пар
-				//
-				if (last)
+				if (DateTime.TryParseExact(day.FirstChild.InnerText, "d MMM, ddd", ci, DateTimeStyles.None, out dateTime))
 				{
-					l.Last = true;
-					last = false;
+					d.Date = dateTime;
 				}
-				//
+				else
+				{
+					d.Date = err;
+				}
 
-				first = true;
+				var lessons = day.LastChild.ChildNodes; //Список пар
 				//Проход по парам
 				foreach (var lesson in lessons)
-				{ 
+				{
 					l = new Lesson
 					{
 						Building = lesson.LastChild.LastChild.FirstChild.FirstChild.FirstChild.InnerText,      //Корпус
 																											   //l.Groups = lesson; //Группы пока не уверен как правильно сделать
 						Room = lesson.LastChild.LastChild.FirstChild.FirstChild.LastChild.LastChild.InnerText, //Аудитория
 						Subject = lesson.FirstChild.LastChild.InnerText,                                       //Название пары
-						Timestr = lesson.FirstChild.FirstChild.InnerText,									   //Время пары
-
-						//StartTime = DateTime.ParseExact(lesson.FirstChild.FirstChild.InnerText.Substring(0, 5) + " " + d.Datestr, "HH:mm d MMM., ddd", new CultureInfo("Ru-ru")),
-						//EndTime = DateTime.ParseExact(lesson.FirstChild.FirstChild.InnerText.Substring(6) + " " + d.Datestr, "HH:mm d MMM., ddd", new CultureInfo("Ru-ru"))
-						
+						Timestr = lesson.FirstChild.FirstChild.InnerText,                                      //Время пары
 					};
+					if (DateTime.TryParse(lesson.FirstChild.FirstChild.InnerText.Substring(0, 5), ci, DateTimeStyles.None, out dateTime)) //+ " " + d.Datestr, "HH:mm d MMM., ddd", new CultureInfo("Ru-ru"));
+					{
+						l.StartTime = dateTime;
+					}
+					else
+					{
+						l.StartTime = err;
+					}
+
+					if (DateTime.TryParse(lesson.FirstChild.FirstChild.InnerText.Substring(6), ci, DateTimeStyles.None, out dateTime))//+ " " + d.Datestr, "HH:mm d MMM., ddd", new CultureInfo("Ru-ru"));
+					{
+						l.EndTime = dateTime;
+					}
+					else
+					{
+						l.EndTime = err;
+					}
+
 
 					d.Lessons.Add(l); //Добавление пары в день
-					first = false;
 				}
-				last = true;
 				w.Days.Add(d); //Добавление дня в неделю
 			}
 			schedule.Weeks.Add(w);

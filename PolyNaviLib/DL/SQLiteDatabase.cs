@@ -18,22 +18,22 @@ namespace PolyNaviLib.DL
 			db = new SQLiteAsyncConnection(dbPath);
 		}
 		
-		public async Task CreateTableAsync<T>() where T : IBuisnessEntity, new()
+		public async Task CreateTableAsync<T>() where T : IBusinessEntity, new()
 		{
 			await db.CreateTableAsync<T>();
 		}
 
-		public async Task<List<T>> GetItemsAsync<T>() where T : IBuisnessEntity, new()
+		public async Task<List<T>> GetItemsAsync<T>() where T : IBusinessEntity, new()
 		{
 			return await db.Table<T>().ToListAsync();
 		}
 
-		public async Task<T> GetItemAsync<T>(int id) where T : IBuisnessEntity, new()
+		public async Task<T> GetItemAsync<T>(int id) where T : IBusinessEntity, new()
 		{
 			return await db.GetAsync<T>(id);
 		}
 
-		public async Task<int> SaveItemAsync<T>(T item) where T : IBuisnessEntity, new()
+		public async Task<int> SaveItemAsync<T>(T item) where T : IBusinessEntity, new()
 		{
 			if (item.ID == 0)
 			{
@@ -45,7 +45,7 @@ namespace PolyNaviLib.DL
 			}
 		}
 
-		public async Task<int> DeleteItemAsync<T>(T item) where T : IBuisnessEntity, new()
+		public async Task<int> DeleteItemAsync<T>(T item) where T : IBusinessEntity, new()
 		{
 			return await db.DeleteAsync(item);
 		}
