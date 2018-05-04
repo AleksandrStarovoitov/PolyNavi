@@ -179,10 +179,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BuildingsFragment.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="MainBuildingFragment.cs" />
     <Compile Include="MainBuildingMapFragment.cs" />
     <Compile Include="MainBuildingView.cs" />
+    <Compile Include="MapsUiExtensions.cs" />
     <Compile Include="NetworkChecker.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -219,6 +221,9 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\layout_card_row_title_schedule.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\fragment_buildings.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

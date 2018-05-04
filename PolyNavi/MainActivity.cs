@@ -135,6 +135,7 @@ namespace PolyNavi
 					break;
 				case (Resource.Id.nav_buildings_menu):
 					Toast.MakeText(this, GetString(Resource.String.buildings_nav), ToastLength.Short).Show();
+					fragmentClass = typeof(BuildingsFragment);
 					break;
 				case (Resource.Id.nav_rasp_menu):
 					Toast.MakeText(this, GetString(Resource.String.schedule_nav), ToastLength.Short).Show();
