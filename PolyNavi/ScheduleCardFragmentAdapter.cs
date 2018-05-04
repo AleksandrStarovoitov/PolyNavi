@@ -69,7 +69,6 @@ namespace PolyNavi
 					Lesson lesson = (Lesson)mLessons[position];
 
 					// Set item views based on your views and data model
-					TextView time = viewHolderLesson.time;
 					TextView room = viewHolderLesson.room;
 					TextView building = viewHolderLesson.building;
 					TextView subject = viewHolderLesson.subject;
@@ -107,7 +106,6 @@ namespace PolyNavi
 
 		internal class ScheduleCardRowLessonViewHolder : RecyclerView.ViewHolder
 		{
-			public TextView time;
 			public TextView building;
 			public TextView room;
 			public TextView subject;
@@ -117,7 +115,6 @@ namespace PolyNavi
 
 			public ScheduleCardRowLessonViewHolder(View itemView) : base(itemView)
 			{
-				//time = itemView.FindViewById<TextView>(Resource.Id.textview_card_time_row_lesson_schedule);
 				room = itemView.FindViewById<TextView>(Resource.Id.textview_card_room_row_lesson_schedule);
 				building = itemView.FindViewById<TextView>(Resource.Id.textview_card_buildingnumber_row_lesson_schedule);
 				subject = itemView.FindViewById<TextView>(Resource.Id.textview_card_subject_row_lesson_schedule);

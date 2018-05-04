@@ -8,7 +8,7 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:id="@+id/textview_card_starttime_row_lesson_schedule"
-      android:textAppearance="@style/ScheduleTime"
+      android:textAppearance="@style/ScheduleStartTime"
       android:fontFamily="@font/roboto_light"
       android:layout_marginTop="@dimen/cardOuterTextMargin"
       android:layout_marginLeft="@dimen/cardOuterTextMarginLeftRight" />
@@ -17,7 +17,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textview_card_endtime_row_lesson_schedule"
-        android:textAppearance="@style/ScheduleBuilding"
+        android:textAppearance="@style/ScheduleEndTime"
         android:fontFamily="@font/roboto_light"
         android:layout_alignLeft="@+id/textview_card_starttime_row_lesson_schedule"
         android:layout_alignRight="@+id/textview_card_starttime_row_lesson_schedule"

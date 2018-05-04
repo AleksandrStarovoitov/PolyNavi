@@ -11,6 +11,8 @@ using Android.Runtime;
 using Android.Support.Design.Widget;
 using Android.Support.V4.Widget;
 using Android.Support.V7.App;
+using Android.Support.V7.Preferences;
+//using Android.Support.V7.Preferences;
 using Android.Text;
 using Android.Views;
 using Android.Views.InputMethods;
@@ -29,14 +31,19 @@ namespace PolyNavi
 		private Fragment fragment;
 		private Android.Support.V7.Widget.Toolbar toolbar;
 		private NavigationView navigationView;
-		private bool tapped = false;
+		ISharedPreferences sharedPreferences;
 
+		private bool tapped = false;
 		private static string DatabaseFilename = "schedule.sqlite";
 		public static PolyNaviLib.BL.PolyManager PolyManager { get; private set; }
 
 		protected override void OnCreate(Bundle savedInstanceState)
 		{
 			base.OnCreate(savedInstanceState);
+
+			PreferenceManager.SetDefaultValues(this, Resource.Xml.preferences, false);
+			sharedPreferences = PreferenceManager.GetDefaultSharedPreferences(this);
+			string syncConnPref = sharedPreferences.GetString("startactivity_preference", null);
 
 			Initialize();
 			
@@ -112,8 +119,10 @@ namespace PolyNavi
 			{
 				fragment = (Fragment)Activator.CreateInstance(fragmentClass);
 				FragmentManager.BeginTransaction().Replace(Resource.Id.contentframe_main, fragment).Commit();
-				tapped = false;
+				tapped = false;				
 			}
+			
+				
 			MainBuildingView.drawerState = false;
 		}
 
@@ -136,6 +145,7 @@ namespace PolyNavi
 					break;
 				case (Resource.Id.nav_settings_menu):
 					Toast.MakeText(this, GetString(Resource.String.settings_nav), ToastLength.Short).Show();
+					fragmentClass = typeof(MyPreferenceFragment);
 					break;
 			}
 			Title = e.MenuItem.TitleFormatted.ToString();
