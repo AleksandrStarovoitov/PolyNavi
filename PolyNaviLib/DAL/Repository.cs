@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using HtmlAgilityPack;
 using PolyNaviLib.BL;
 using PolyNaviLib.SL;
-
+using PolyNaviLib.DL;
 
 namespace PolyNaviLib.DAL
 {
@@ -15,9 +15,27 @@ namespace PolyNaviLib.DAL
 		private string group = @"http://ruz.spbstu.ru/search/groups?q=";
 		private string groupLink;
 
-		public Repository(string dbPath, INetworkChecker networkChecker)
-		{
+		SQLiteDatabase database;
+		INetworkChecker checker;
 
+		private Repository()
+		{
+		}
+
+		private async Task<Repository> InitializeAsync(string dbPath, INetworkChecker networkChecker)
+		{
+			database = new SQLiteDatabase(dbPath);
+			await database.CreateTableAsync<Week>();
+			await database.CreateTableAsync<Day>();
+			await database.CreateTableAsync<Lesson>();
+			checker = networkChecker;
+			return this;
+		}
+
+		public static Task<Repository> CreateAsync(string dbPath, INetworkChecker networkChecker)
+		{
+			var repo = new Repository();
+			return repo.InitializeAsync(dbPath, networkChecker);
 		}
 
 		public async Task<Schedule> GetScheduleAsync()
