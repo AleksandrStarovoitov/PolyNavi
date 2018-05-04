@@ -32,10 +32,8 @@ namespace PolyNavi
 			switch (position)
 			{
 				case 0:
-					//ScheduleWeekFragment tab1 = new ScheduleWeekFragment();
 					return tab1;
 				case 1:
-					//ScheduleWeekFragment tab2 = new ScheduleWeekFragment();
 					return tab2;
 				default:
 					return null;

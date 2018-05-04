@@ -75,8 +75,6 @@ namespace PolyNaviLib.DAL
 					{
 						l.EndTime = err;
 					}
-
-
 					d.Lessons.Add(l); //Добавление пары в день
 				}
 				w.Days.Add(d); //Добавление дня в неделю
@@ -88,9 +86,14 @@ namespace PolyNaviLib.DAL
 
 		public static string GetScheduleLink(HtmlDocument htmlDocSearch)
 		{
-			var searchRes = htmlDocSearch.DocumentNode.SelectSingleNode("//body/div/div/div/ul/li");
+			var searchRes = htmlDocSearch.DocumentNode.SelectSingleNode("//body/div/div/div/ul");
 			var h = @"http://ruz.spbstu.ru";
-			h += searchRes.FirstChild.Attributes["href"].Value;
+			if (searchRes != null && searchRes.ChildNodes.Count == 1)
+			{
+				h += searchRes.FirstChild.FirstChild.Attributes["href"].Value;
+			}
+			//else searchRes.ChildNodes.Count != 1 //уточнить номер группы (слишком много групп в результате поиска)
+			//else searchRes == null //нет результатов (либо неверно указан номер группы, либо сайт не работает)
 			return h;
 		}
 

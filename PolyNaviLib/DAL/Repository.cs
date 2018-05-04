@@ -6,13 +6,14 @@ using HtmlAgilityPack;
 using PolyNaviLib.BL;
 using PolyNaviLib.SL;
 using PolyNaviLib.DL;
+using System.Globalization;
 
 namespace PolyNaviLib.DAL
 {
 	public class Repository
 	{
 		//Номер группы....
-		private string group = @"http://ruz.spbstu.ru/search/groups?q=";
+		private string baseLink = @"http://ruz.spbstu.ru/search/groups?q=";
 		private string groupLink;
 
 		SQLiteDatabase database;
@@ -40,21 +41,30 @@ namespace PolyNaviLib.DAL
 
 		public async Task<Schedule> GetScheduleAsync(string groupNumber)
 		{
-			if (false) //Есть в БД
+			if (false/*schedule != null*/) //Есть в БД
 			{
-
-				return new Schedule();
+				//return schedule;
 			}
 			else //Нет в БД
 			{
 				//Поиск группы
-				//HtmlDocument htmlDocSearch = HtmlLoader.LoadHtmlDocument(group + "23537/1"); //Где брать адрес?
-				HtmlDocument htmlDocSearch = await HtmlLoader.LoadHtmlDocumentAsync(group + groupNumber);
+				HtmlDocument htmlDocSearch = await HtmlLoader.LoadHtmlDocumentAsync(baseLink + groupNumber);
 				groupLink = ScheduleBuilder.GetScheduleLink(htmlDocSearch); //Получили ссылку
 
-				//HtmlDocument htmlDoc = HtmlLoader.LoadHtmlDocument(groupLink);
+				//Загрузка текущей недели
 				HtmlDocument htmlDoc = await HtmlLoader.LoadHtmlDocumentAsync(groupLink);
 				Schedule schedule = ScheduleBuilder.BuildSchedule(htmlDoc);
+
+				//Дата следующей недели
+				DateTime nextMondayDate = DateTime.Now.AddDays(1);
+				while (nextMondayDate.DayOfWeek != DayOfWeek.Monday)
+					nextMondayDate = nextMondayDate.AddDays(1);
+				string nextWeekDate = nextMondayDate.ToString("yyyy-M-d", new CultureInfo("ru-RU"));
+
+				//Загрузка следующей недели
+				HtmlDocument htmlDocNextWeek = await HtmlLoader.LoadHtmlDocumentAsync(groupLink + "?date=" + nextWeekDate);
+				Schedule scheduleNextWeek = ScheduleBuilder.BuildSchedule(htmlDocNextWeek);
+				schedule.Weeks.Add(scheduleNextWeek.Weeks[0]);
 
 				return schedule;
 			}

@@ -67,8 +67,6 @@ namespace PolyNaviLib.BL
 
 			var week = schedule.Weeks[(int)w];
 
-			List<Lesson> lessons = new List<Lesson>();
-
 			//
 			List<Day> days = new List<Day>();
 			foreach (var d in week.Days)
