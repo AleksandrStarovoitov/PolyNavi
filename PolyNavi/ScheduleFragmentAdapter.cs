@@ -22,8 +22,9 @@ namespace PolyNavi
 		public ScheduleFragmentAdapter(FragmentManager fragmentManager, int numOfTabs) : base(fragmentManager)
 		{
 			this.numOfTabs = numOfTabs;
-			tab1 = new ScheduleWeekFragment(PolyNaviLib.BL.Weeks.Current);
-			tab2 = new ScheduleWeekFragment(PolyNaviLib.BL.Weeks.Next);
+			
+			tab1 = new ScheduleWeekFragment(PolyNaviLib.BL.Weeks.Current, MainActivity.sharedPreferences.GetString("groupnumber_preference", null));
+			tab2 = new ScheduleWeekFragment(PolyNaviLib.BL.Weeks.Next, MainActivity.sharedPreferences.GetString("groupnumber_preference", null));
 		}
 
 		public override Fragment GetItem(int position)

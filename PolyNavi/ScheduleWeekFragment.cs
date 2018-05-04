@@ -27,11 +27,12 @@ namespace PolyNavi
 		private List<Day> days;
 		private RecyclerView recyclerViewSchedule;
 		private ScheduleCardFragmentAdapter adapter;
+		private string groupNumber;
+		private Weeks week;
 
-		Weeks week;
-
-		public ScheduleWeekFragment(Weeks week)
+		public ScheduleWeekFragment(Weeks week, string groupNumber)
 		{
+			this.groupNumber = groupNumber;
 			this.week = week;
 		}
 
@@ -67,7 +68,7 @@ namespace PolyNavi
 			progress.Visibility = ViewStates.Visible;
 			Task.Run(async () =>
 			{
-				days = await MainActivity.PolyManager.GetScheduleByWeekAsync(week); //Next
+				days = await MainActivity.PolyManager.GetScheduleByWeekAsync(week, groupNumber); //Next
 				Activity.RunOnUiThread(() =>
 				{
 					progress.Visibility = ViewStates.Invisible;

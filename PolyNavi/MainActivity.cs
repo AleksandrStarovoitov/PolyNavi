@@ -12,6 +12,7 @@ using Android.Runtime;
 using Android.Support.Design.Widget;
 using Android.Support.V4.Widget;
 using Android.Support.V7.App;
+using Android.Support.V7.Preferences;
 using Android.Text;
 using Android.Views;
 using Android.Views.InputMethods;
@@ -33,6 +34,8 @@ namespace PolyNavi
 		private Android.Support.V7.Widget.Toolbar toolbar;
 		private NavigationView navigationView;
 		private bool tapped = false;
+		public static ISharedPreferences sharedPreferences;
+		private string startActivity;
 
 		private const string DatabaseFilename = "schedule.sqlite";
 		public static PolyManager PolyManager { get; private set; }
@@ -40,6 +43,8 @@ namespace PolyNavi
 		protected override void OnCreate(Bundle savedInstanceState)
 		{
 			base.OnCreate(savedInstanceState);
+			sharedPreferences = PreferenceManager.GetDefaultSharedPreferences(this);
+			startActivity = sharedPreferences.GetString("startactivity_preference", null);
 
 			Initialize();
 			
@@ -63,11 +68,35 @@ namespace PolyNavi
 			navigationView.NavigationItemSelected += NavViewItemSelected;
 			navigationView.Alpha = 0.99f;
 
-			var ft = FragmentManager.BeginTransaction();
-			ft.AddToBackStack(null);
-			ft.Add(Resource.Id.contentframe_main, new MainBuildingFragment());
-			ft.Commit();
+			InstantiateFragment();
 		}
+
+		private void InstantiateFragment()
+		{
+			switch (startActivity)
+			{
+				case "mainbuilding":
+					fragmentClass = typeof(MainBuildingFragment);
+					break;
+				case "buildings":
+					fragmentClass = typeof(BuildingsFragment);
+					break;
+
+				case "schedule":
+					fragmentClass = typeof(ScheduleFragment);
+					break;
+
+				case "settings":
+					fragmentClass = typeof(MyPreferenceFragment);
+					break;
+				default:
+					fragmentClass = typeof(MainBuildingFragment);
+					break;
+			}
+			fragment = (Fragment)Activator.CreateInstance(fragmentClass);
+			FragmentManager.BeginTransaction().Replace(Resource.Id.contentframe_main, fragment).Commit();
+		}
+
 
 		private void Initialize()
 		{
@@ -116,8 +145,7 @@ namespace PolyNavi
 		{
 			if (fragmentClass != null && tapped)
 			{
-				fragment = (Fragment)Activator.CreateInstance(fragmentClass);
-				FragmentManager.BeginTransaction().Replace(Resource.Id.contentframe_main, fragment).Commit();
+				InstantiateFragment();
 				tapped = false;
 			}
 			MainBuildingView.drawerState = false;
@@ -131,19 +159,19 @@ namespace PolyNavi
 			{
 				case (Resource.Id.nav_gz_menu):
 					Toast.MakeText(this, GetString(Resource.String.mainbuilding_nav), ToastLength.Short).Show();
-					fragmentClass = typeof(MainBuildingFragment);
+					startActivity = "mainbuilding";
 					break;
 				case (Resource.Id.nav_buildings_menu):
 					Toast.MakeText(this, GetString(Resource.String.buildings_nav), ToastLength.Short).Show();
-					fragmentClass = typeof(BuildingsFragment);
+					startActivity = "buildings";
 					break;
 				case (Resource.Id.nav_rasp_menu):
 					Toast.MakeText(this, GetString(Resource.String.schedule_nav), ToastLength.Short).Show();
-					fragmentClass = typeof(ScheduleFragment);
+					startActivity = "schedule";
 					break;
 				case (Resource.Id.nav_settings_menu):
 					Toast.MakeText(this, GetString(Resource.String.settings_nav), ToastLength.Short).Show();
-					fragmentClass = typeof(MyPreferenceFragment);
+					startActivity = "settings";
 					break;
 			}
 			Title = e.MenuItem.TitleFormatted.ToString();

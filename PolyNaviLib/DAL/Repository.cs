@@ -38,7 +38,7 @@ namespace PolyNaviLib.DAL
 			return repo.InitializeAsync(dbPath, networkChecker);
 		}
 
-		public async Task<Schedule> GetScheduleAsync()
+		public async Task<Schedule> GetScheduleAsync(string groupNumber)
 		{
 			if (false) //Есть в БД
 			{
@@ -49,7 +49,7 @@ namespace PolyNaviLib.DAL
 			{
 				//Поиск группы
 				//HtmlDocument htmlDocSearch = HtmlLoader.LoadHtmlDocument(group + "23537/1"); //Где брать адрес?
-				HtmlDocument htmlDocSearch = await HtmlLoader.LoadHtmlDocumentAsync(group + "23537/1");
+				HtmlDocument htmlDocSearch = await HtmlLoader.LoadHtmlDocumentAsync(group + groupNumber);
 				groupLink = ScheduleBuilder.GetScheduleLink(htmlDocSearch); //Получили ссылку
 
 				//HtmlDocument htmlDoc = HtmlLoader.LoadHtmlDocument(groupLink);
