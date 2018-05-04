@@ -34,8 +34,8 @@ namespace PolyNavi
 		private NavigationView navigationView;
 		private bool tapped = false;
 
-		private static string DatabaseFilename = "schedule.sqlite";
-		public static PolyNaviLib.BL.PolyManager PolyManager { get; private set; }
+		private const string DatabaseFilename = "schedule.sqlite";
+		public static PolyManager PolyManager { get; private set; }
 
 		protected override void OnCreate(Bundle savedInstanceState)
 		{
