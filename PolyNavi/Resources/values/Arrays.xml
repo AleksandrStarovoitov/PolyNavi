@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+  <string-array name="pref_activity">
+    <item>@string/pref_mainbuilding_activity</item>
+    <item>@string/pref_buildings_activity</item>
+    <item>@string/pref_schedule_activity</item>
+  </string-array>
+  <string-array name="pref_activity_values" translatable="false">
+    <item>mainbuilding</item>
+    <item>buildings</item>
+    <item>schedule</item>
+  </string-array>
+</resources>

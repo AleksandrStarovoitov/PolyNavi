@@ -1,30 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">PolyNavi</string>
+  <string name="app_name">PolyNavi</string>
 
-    <string name="navigation_drawer_open">Открыть меню</string>
-    <string name="navigation_drawer_close">Закрыть меню</string>
+  <string name="navigation_drawer_open">Открыть меню</string>
+  <string name="navigation_drawer_close">Закрыть меню</string>
 
-    <string name="edittext_from">Откуда</string>
-    <string name="edittext_to">Куда</string>
+  <string name="edittext_from">Откуда</string>
+  <string name="edittext_to">Куда</string>
 
-    <string name="poly">POLY</string>
-    <string name="navi">NAVI</string>
+  <string name="poly">POLY</string>
+  <string name="navi">NAVI</string>
 
-    <string name="date_title_schedule_row">Дата</string>
-    <string name="dayofweek_title_schedule_row">День недели</string>
-    <string name="room_schedule_row">Комната</string>
-    <string name="starttime_schedule_row">Время начала</string>
-    <string name="endtime_schedule_row">Время конца</string>
-    <string name="subject_schedule_row">Название предмета</string>
-    <string name="building_schedule_row">Корпус</string>
-    <string name="type_schedule_row">Тип пары</string>
+  <string name="date_title_schedule_row">Дата</string>
+  <string name="dayofweek_title_schedule_row">День недели</string>
+  <string name="room_schedule_row">Комната</string>
+  <string name="starttime_schedule_row">Время начала</string>
+  <string name="endtime_schedule_row">Время конца</string>
+  <string name="subject_schedule_row">Название предмета</string>
+  <string name="building_schedule_row">Корпус</string>
+  <string name="type_schedule_row">Тип пары</string>
+
+  <string name="mainbuilding_nav">Главное здание</string>
+  <string name="buildings_nav">Корпуса</string>
+  <string name="schedule_nav">Расписание</string>
+  <string name="settings_nav">Настройки</string>
+
+  <string name="currentweek_tab">Текущая неделя</string>
+  <string name="nextweek_tab">Следующая неделя</string>
+
+  <string name="pref_mainbuilding_activity">Главное здание</string>
+  <string name="pref_buildings_activity">Корпуса</string>
+  <string name="pref_schedule_activity">Расписание</string>
+ 
   
-    <string name="mainbuilding_nav">Главное здание</string>
-    <string name="buildings_nav">Корпуса</string>
-    <string name="schedule_nav">Расписание</string>
-    <string name="settings_nav">Настройки</string>
-
-    <string name="currentweek_tab">Текущая неделя</string>
-    <string name="nextweek_tab">Следующая неделя</string>
+  
+  
+ 
 </resources>
