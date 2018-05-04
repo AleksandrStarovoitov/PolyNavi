@@ -143,6 +143,7 @@ namespace PolyNavi
 					break;
 				case (Resource.Id.nav_settings_menu):
 					Toast.MakeText(this, GetString(Resource.String.settings_nav), ToastLength.Short).Show();
+					fragmentClass = typeof(MyPreferenceFragment);
 					break;
 			}
 			Title = e.MenuItem.TitleFormatted.ToString();
