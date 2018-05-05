@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 using Android.App;
@@ -33,9 +34,11 @@ namespace PolyNavi
 		private Fragment fragment;
 		private Android.Support.V7.Widget.Toolbar toolbar;
 		private NavigationView navigationView;
-		private bool tapped = false;
-		public static ISharedPreferences sharedPreferences;
 		private string startActivity;
+		private int startMenuItem;
+		private bool tapped = false;
+
+		public static ISharedPreferences sharedPreferences;
 
 		private const string DatabaseFilename = "schedule.sqlite";
 		public static PolyManager PolyManager { get; private set; }
@@ -67,7 +70,7 @@ namespace PolyNavi
 			navigationView = FindViewById<NavigationView>(Resource.Id.navview_main);
 			navigationView.NavigationItemSelected += NavViewItemSelected;
 			navigationView.Alpha = 0.99f;
-
+			//Thread.Sleep(100);
 			InstantiateFragment();
 		}
 
@@ -77,23 +80,28 @@ namespace PolyNavi
 			{
 				case "mainbuilding":
 					fragmentClass = typeof(MainBuildingFragment);
+					startMenuItem = 0;
 					break;
 				case "buildings":
 					fragmentClass = typeof(BuildingsFragment);
+					startMenuItem = 1;
 					break;
-
 				case "schedule":
 					fragmentClass = typeof(ScheduleFragment);
+					startMenuItem = 2;
 					break;
-
 				case "settings":
 					fragmentClass = typeof(MyPreferenceFragment);
+					startMenuItem = 3;
 					break;
 				default:
 					fragmentClass = typeof(MainBuildingFragment);
+					startMenuItem = 0;
 					break;
 			}
 			fragment = (Fragment)Activator.CreateInstance(fragmentClass);
+			navigationView.Menu.GetItem(startMenuItem).SetChecked(true);
+			Title = navigationView.Menu.GetItem(startMenuItem).TitleFormatted.ToString();
 			FragmentManager.BeginTransaction().Replace(Resource.Id.contentframe_main, fragment).Commit();
 		}
 

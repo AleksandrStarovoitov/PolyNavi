@@ -1,67 +1,152 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
+﻿using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
-using Android.Util;
+using Android.Support.Design.Widget;
 using Android.Views;
+using Android.Views.InputMethods;
 using Android.Widget;
-
-using Mapsui.Geometries;
-using Mapsui.UI;
-using Mapsui.UI.Android;
-using Mapsui.Utilities;
-using Mapsui.Projection;
-using Mapsui.Layers;
-using Mapsui.Providers;
-using Mapsui.Styles;
-using Mapsui;
+using System;
+using static Android.Widget.TextView;
 
 namespace PolyNavi
 {
-	public class BuildingsFragment : Fragment
+	public class BuildingsFragment : Fragment, IOnEditorActionListener, AppBarLayout.IOnOffsetChangedListener
 	{
-		View view;
+		private View view;
+		private EditText editTextInputFrom, editTextInputTo;
+		private FragmentTransaction fragmentTransaction;
+		private AppBarLayout appBar;
+		private FloatingActionButton fab;
+		private RelativeLayout relativeLayout;
+		private AppBarLayout.LayoutParams relativeLayoutParams;
+		private FrameLayout frameLayout;
+		private CoordinatorLayout.LayoutParams fabLayoutParams;
 
-		MapControl mapControl;
-		Map map;
+		static bool editTextFromIsFocused, editTextToIsFocused;
+
 
 		public override void OnCreate(Bundle savedInstanceState)
 		{
 			base.OnCreate(savedInstanceState);
-
-			// Create your fragment here
 		}
 
 		public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 		{
 			view = inflater.Inflate(Resource.Layout.fragment_buildings, container, false);
 
-			mapControl = view.FindViewById<MapControl>(Resource.Id.mapControl);
-			mapControl.RotationLock = false;
-			map = mapControl.Map;
-			map.BackColor = Mapsui.Styles.Color.Black;
-			map.CRS = "EPSG:3857";
-			map.Layers.Add(OpenStreetMap.CreateTileLayer());
+			fragmentTransaction = FragmentManager.BeginTransaction();
+			fragmentTransaction.Add(Resource.Id.frame_buildings, new MapBuildingsFragment());
+			fragmentTransaction.Commit();
 
-			Point centerOfPolytech = new Point(30.371144, 60.003675).FromLonLat();
-			map.NavigateTo(centerOfPolytech);
-			map.NavigateTo(7);
-			map.Transformation = new MinimalTransformation();
+			editTextInputFrom = view.FindViewById<EditText>(Resource.Id.edittext_input_from);
+			editTextInputFrom.FocusChange += EditTextToFocusChanged;
 
-			Point leftBot = new Point(30.365751, 59.999560).FromLonLat();
-			Point rightTop = new Point(30.391848, 60.008916).FromLonLat();
-			map.PanLimits = new BoundingBox(leftBot, rightTop);
-			map.ZoomLimits = new MinMax(1, 7);
+			editTextInputTo = view.FindViewById<EditText>(Resource.Id.edittext_input_to);
+			editTextInputTo.SetOnEditorActionListener(this);
+			editTextInputTo.FocusChange += EditTextFromFocusChanged;
 
-			map.Widgets.Add(new Mapsui.Widgets.ScaleBar.ScaleBarWidget(map) { TextAlignment = Mapsui.Widgets.Alignment.Center, HorizontalAlignment = Mapsui.Widgets.HorizontalAlignment.Center, VerticalAlignment = Mapsui.Widgets.VerticalAlignment.Top });
-			map.Widgets.Add(new Mapsui.Widgets.Zoom.ZoomInOutWidget(map) { MarginX = 20, MarginY = 40 });
+			appBar = view.FindViewById<AppBarLayout>(Resource.Id.appbar_buildings);
+			appBar.AddOnOffsetChangedListener(this);
+
+			fab = view.FindViewById<FloatingActionButton>(Resource.Id.fab_buildings);
+			fab.Click += Fab_Click;
+
+
+			relativeLayout = view.FindViewById<RelativeLayout>(Resource.Id.search_frame_buildings);
+			relativeLayoutParams = (AppBarLayout.LayoutParams)relativeLayout.LayoutParameters;
+
+			frameLayout = view.FindViewById<FrameLayout>(Resource.Id.frame_buildings);
+			fabLayoutParams = (CoordinatorLayout.LayoutParams)fab.LayoutParameters;
 
 			return view;
+		}
+
+
+		bool fullyExpanded, fullyCollapsed;
+		private void Fab_Click(object sender, EventArgs e)
+		{
+			if (fullyExpanded)
+			{
+				if (editTextInputFrom.Text.Length == 3 && editTextInputTo.Text.Length == 3)
+				{
+					InputMethodManager imm = (InputMethodManager)Activity.BaseContext.GetSystemService(Context.InputMethodService);
+					imm.HideSoftInputFromWindow(View.WindowToken, 0);
+					fab.SetImageResource(Resource.Drawable.ic_gps_fixed_black_24dp);
+					appBar.SetExpanded(false);
+
+					//fabLayoutParams.AnchorId = frameLayout.Id;
+					//fab.LayoutParameters = fabLayoutParams;
+				}
+				else
+				{
+					Toast.MakeText(Activity.BaseContext, "Введите корректный номер", ToastLength.Short).Show();
+				}
+			}
+			else
+			if (fullyCollapsed)
+			{
+				fab.SetImageResource(Resource.Drawable.ic_done_black_24dp);
+				appBar.SetExpanded(true);
+
+				//fabLayoutParams.AnchorId = relativeLayout.Id;
+				//fab.LayoutParameters = fabLayoutParams;
+				//fab.SetImageResource(Resource.Drawable.ic_done_black_24dp);
+			}
+		}
+
+		private void EditTextFromFocusChanged(object sender, View.FocusChangeEventArgs e)
+		{
+			if (!e.HasFocus)
+			{
+				editTextFromIsFocused = false;
+			}
+			else
+			{
+				editTextFromIsFocused = true;
+			}
+		}
+
+		private void EditTextToFocusChanged(object sender, View.FocusChangeEventArgs e)
+		{
+			if (!e.HasFocus)
+			{
+				editTextToIsFocused = false;
+			}
+			else
+			{
+				editTextToIsFocused = true;
+			}
+		}
+
+		public static bool CheckFocus()
+		{
+			return (editTextFromIsFocused && editTextToIsFocused);
+		}
+
+		public bool OnEditorAction(TextView v, [GeneratedEnum] ImeAction actionId, KeyEvent e)
+		{
+			if (actionId == ImeAction.Go)
+			{
+				Toast.MakeText(Activity.BaseContext, "HELLO", ToastLength.Short).Show();
+				appBar.SetExpanded(false);
+			}
+			return false;
+		}
+
+		public void OnOffsetChanged(AppBarLayout appBarLayout, int verticalOffset)
+		{
+			fullyExpanded = (verticalOffset == 0);
+			fullyCollapsed = (appBar.Height + verticalOffset == 0);
+
+			if (fullyCollapsed)
+			{
+				fab.SetImageResource(Resource.Drawable.ic_gps_fixed_black_24dp);
+			}
+			else if (fullyExpanded)
+			{
+				fab.SetImageResource(Resource.Drawable.ic_done_black_24dp);
+			}
 		}
 	}
 }

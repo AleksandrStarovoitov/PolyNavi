@@ -180,6 +180,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BuildingsFragment.cs" />
+    <Compile Include="MapBuildingsFragment.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="MainBuildingFragment.cs" />
     <Compile Include="MainBuildingMapFragment.cs" />
@@ -222,6 +223,9 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\layout_card_row_title_schedule.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\fragment_map_buildings.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\fragment_buildings.axml">
