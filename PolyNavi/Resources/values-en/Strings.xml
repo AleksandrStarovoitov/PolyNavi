@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name">PolyNavi</string>
+
+  <string name="navigation_drawer_open">Open menu</string>
+  <string name="navigation_drawer_close">Close menu</string>
+
+  <string name="edittext_from">From</string>
+  <string name="edittext_to">To</string>
+
+  <string name="poly">POLY</string>
+  <string name="navi">NAVI</string>
+
+  <string name="date_title_schedule_row">Date</string>
+  <string name="dayofweek_title_schedule_row">Day of week</string>
+  <string name="room_schedule_row">Room</string>
+  <string name="starttime_schedule_row">Start time</string>
+  <string name="endtime_schedule_row">End time</string>
+  <string name="subject_schedule_row">Subject name</string>
+  <string name="building_schedule_row">Building</string>
+  <string name="type_schedule_row">Type of lesson</string>
+
+  <string name="mainbuilding_nav">Main building</string>
+  <string name="buildings_nav">Buildings</string>
+  <string name="schedule_nav">Schedule</string>
+  <string name="settings_nav">Settings</string>
+
+  <string name="currentweek_tab">Current week</string>
+  <string name="nextweek_tab">Next week</string>
+
+  <string name="pref_mainbuilding_activity">Main buildig</string>
+  <string name="pref_buildings_activity">Buildings</string>
+  <string name="pref_schedule_activity">Schedule</string>
+ 
+  
+  
+  
+ 
+</resources>

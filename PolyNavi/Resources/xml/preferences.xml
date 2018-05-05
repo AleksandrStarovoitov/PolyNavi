@@ -14,5 +14,16 @@
         android:title="Номер группы"
         android:summary="Измените номер группы"
         android:dialogTitle="Введите номер группы"/>
+    <ListPreference
+        android:key="language_preference"
+        android:title="Язык приложения"
+        android:summary="Для применения изменений необходима перезагрузка приложения"
+        android:entries="@array/pref_language"
+        android:entryValues="@array/pref_language_values"
+        android:defaultValue="default"/>
+    
   </PreferenceCategory>
+  
+  
+  
 </PreferenceScreen>

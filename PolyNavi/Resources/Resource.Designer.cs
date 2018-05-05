@@ -119,6 +119,12 @@ namespace PolyNavi
 			// aapt resource value: 0x7f0f0001
 			public const int pref_activity_values = 2131689473;
 			
+			// aapt resource value: 0x7f0f0002
+			public const int pref_language = 2131689474;
+			
+			// aapt resource value: 0x7f0f0003
+			public const int pref_language_values = 2131689475;
+			
 			static Array()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();

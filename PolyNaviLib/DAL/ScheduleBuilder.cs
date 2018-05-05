@@ -28,6 +28,12 @@ namespace PolyNaviLib.DAL
 			dtfi.AbbreviatedMonthGenitiveNames = dtfi.AbbreviatedMonthNames;
 
 			var node = htmlDoc.DocumentNode.SelectSingleNode("//body/div/div/div/ul");
+
+			//if (node == null) //Что-то пошло не так
+			//{					//Скорее всего не указан номер группы
+			//	throw			//Надо заранее обработать
+			//}
+
 			var days = node.ChildNodes; //Список дней
 
 			foreach (var day in days)
