@@ -29,6 +29,7 @@ namespace PolyNavi
 
 		protected override void OnCreate(Bundle savedInstanceState)
 		{
+			SetTheme(Resource.Style.MyAppTheme);
 			base.OnCreate(savedInstanceState);
 
 			SetContentView(Resource.Layout.new_activity_map_routing);
@@ -50,8 +51,7 @@ namespace PolyNavi
 			//SupportActionBar.SetHomeAsUpIndicator(Resource.Drawable.ic_menu);
 			Title = GetString(Resource.String.title_route_activity);
 
-
-			buildings = new List<object>(MapBuildingsFragment.BuildingsDictionary.Keys);
+			buildings = new List<object>(MainApp.BuildingsDictionary.Keys);
 			buildings[0] = new MainBuildingTag() { MainBuildingString = buildings[0].ToString() };
 
 			var listView = FindViewById<ListView>(Resource.Id.listview_buildingslist);
@@ -65,26 +65,13 @@ namespace PolyNavi
 		{
 			var obj = buildings[e.Position];
 			var temp = deselected;
-			if (obj is MainBuildingTag)
-			{
-				selected.Text = ((MainBuildingTag)obj).MainBuildingString;
-				Select(deselected);
-				Deselect(selected);
+			selected.Text = obj.ToString();
+			Select(deselected);
+			Deselect(selected);
 
-				temp = deselected;
-				deselected = selected;
-				selected = temp;
-			}
-			else
-			{
-				selected.Text = (string)obj;
-				Select(deselected);
-				Deselect(selected);
-
-				temp = deselected;
-				deselected = selected;
-				selected = temp;
-			}
+			temp = deselected;
+			deselected = selected;
+			selected = temp;
 		}
 
 		private void EditTextFrom_Click(object sender, EventArgs e)
