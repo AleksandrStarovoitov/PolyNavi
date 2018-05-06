@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -38,6 +37,7 @@ namespace PolyNavi
 		private int startMenuItem;
 		private bool tapped = false;
 
+		public static int RequestCode = 1;
 		public static ISharedPreferences sharedPreferences;
 
 		private const string DatabaseFilename = "schedule.sqlite";
