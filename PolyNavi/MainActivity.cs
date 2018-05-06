@@ -40,6 +40,7 @@ namespace PolyNavi
 		private int startMenuItem;
 		private bool tapped = false;
 
+		public static int RequestCode = 1;
 		public static ISharedPreferences sharedPreferences;
 
 		private const string DatabaseFilename = "schedule.sqlite";
