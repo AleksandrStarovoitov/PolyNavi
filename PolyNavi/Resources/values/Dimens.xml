@@ -12,4 +12,6 @@
   <dimen name="cardInnerTextMarginTop">5dp</dimen>
   <dimen name="cardOuterTextMargin">10dp</dimen>
   <dimen name="cardOuterTextMarginLeftRight">10dp</dimen>
+
+  <dimen name="icon_size">22dp</dimen>
 </resources>

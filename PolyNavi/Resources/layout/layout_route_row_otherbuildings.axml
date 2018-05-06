@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:minWidth="25px"
+    android:minHeight="25px"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/relativeLayout_route_row_otherbuildings">
+    <TextView
+        android:text="Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textview_route"
+        android:layout_marginTop="10dp"
+        android:textAppearance="@style/ScheduleTitleDate"
+        android:layout_centerHorizontal="true" />
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:id="@+id/divider_route_row_mainbuilding"
+        android:background="@android:color/darker_gray"
+        android:visibility="visible"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/textview_route" />
+</RelativeLayout>

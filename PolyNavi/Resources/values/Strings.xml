@@ -31,9 +31,12 @@
   <string name="pref_mainbuilding_activity">Главное здание</string>
   <string name="pref_buildings_activity">Корпуса</string>
   <string name="pref_schedule_activity">Расписание</string>
- 
+
+
+  <string name="edittext_from_buildings">Пункт отправления</string>
+  <string name="edittext_to_buildings">Пункт назначения</string>
   
-  
-  
- 
+
+
+
 </resources>

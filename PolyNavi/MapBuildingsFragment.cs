@@ -20,6 +20,7 @@ using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Styles;
 using Mapsui;
+using Android.Support.Design.Widget;
 
 namespace PolyNavi
 {
@@ -29,7 +30,8 @@ namespace PolyNavi
 
 		MapControl mapControl;
 		Map map;
-		
+		FloatingActionButton fab;
+
 		public override void OnCreate(Bundle savedInstanceState)
 		{
 			base.OnCreate(savedInstanceState);
@@ -65,7 +67,16 @@ namespace PolyNavi
 			map.Widgets.Add(new Mapsui.Widgets.ScaleBar.ScaleBarWidget(map) { TextAlignment = Mapsui.Widgets.Alignment.Center, HorizontalAlignment = Mapsui.Widgets.HorizontalAlignment.Center, VerticalAlignment = Mapsui.Widgets.VerticalAlignment.Top });
 			map.Widgets.Add(new Mapsui.Widgets.Zoom.ZoomInOutWidget(map) { MarginX = 20, MarginY = 40 });
 
+			fab = view.FindViewById<FloatingActionButton>(Resource.Id.new_fab_buildings);
+			fab.Click += Fab_Click;
+
 			return view;
+		}
+
+		private void Fab_Click(object sender, EventArgs e)
+		{
+			var searchActivity = new Intent(Activity, typeof(MapRouteActivity));
+			StartActivity(searchActivity);
 		}
 	}
 }

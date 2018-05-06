@@ -179,7 +179,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BuildingsFragment.cs" />
+    <Compile Include="BuildingsAdapter.cs" />
     <Compile Include="MapBuildingsFragment.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="MainBuildingFragment.cs" />
@@ -188,6 +188,7 @@
     <Compile Include="MapsUiExtensions.cs" />
     <Compile Include="NetworkChecker.cs" />
     <Compile Include="MyPreferenceFragment.cs" />
+    <Compile Include="MapRouteActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScheduleCardFragmentAdapter.cs" />
@@ -202,6 +203,7 @@
     <None Include="Resources\AboutResources.txt" />
     <None Include="Properties\AndroidManifest.xml" />
     <None Include="Assets\AboutAssets.txt" />
+    <AndroidResource Include="Resources\drawable-xhdpi\bg_mainbuilding.png" />
     <AndroidResource Include="Resources\layout\layout_navheader_main.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
@@ -229,6 +231,18 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\fragment_buildings.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\new_fragment_map_buildings.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\new_activity_map_routing.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\layout_route_row_otherbuildings.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\layout_route_row_mainbuilding.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
@@ -394,6 +408,27 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values-zh\Strings.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_route_from.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_route_to.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\bg_edittext.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\ic_edittext_from.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\ic_edittext_to.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xxhdpi\bg_mainbuilding.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-mdpi\bg_mainbuilding.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Android.Support.Annotations.26.1.0.1\build\MonoAndroid80\Xamarin.Android.Support.Annotations.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Annotations.26.1.0.1\build\MonoAndroid80\Xamarin.Android.Support.Annotations.targets')" />

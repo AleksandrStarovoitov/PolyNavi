@@ -83,7 +83,7 @@ namespace PolyNavi
 					startMenuItem = 0;
 					break;
 				case "buildings":
-					fragmentClass = typeof(BuildingsFragment);
+					fragmentClass = typeof(MapBuildingsFragment);
 					startMenuItem = 1;
 					break;
 				case "schedule":
