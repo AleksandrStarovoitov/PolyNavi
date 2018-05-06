@@ -33,6 +33,8 @@ namespace PolyNavi
 	public class MapBuildingsFragment : Fragment
 	{
 		private const string RouterDbName = "polytech_map.routerdb";
+		private const string Marker_A_Name = "ic_marker_a.png";
+		private const string Marker_B_Name = "ic_marker_b.png";
 
 		private View view;
 
@@ -83,8 +85,10 @@ namespace PolyNavi
 			mapControl.RotationLock = false;
 			map = mapControl.Map;
 			map.CRS = "EPSG:3857";
-			map.Layers.Add(new TileLayer(KnownTileSources.Create(KnownTileSource.EsriWorldTopo)));
-			map.Layers.Add(new Layer());
+			//map.Layers.Add(new TileLayer(KnownTileSources.Create(KnownTileSource.EsriWorldTopo)));\
+			map.Layers.Add(OpenStreetMap.CreateTileLayer());
+			routeLayer = new Layer();
+			map.Layers.Add(routeLayer);
 
 			Point centerOfPolytech = new Point(30.371144, 60.003675).FromLonLat();
 			map.NavigateTo(centerOfPolytech);
@@ -99,6 +103,70 @@ namespace PolyNavi
 			map.ZoomLimits = new MinMax(1, 7);
 
 			map.Widgets.Add(new Mapsui.Widgets.ScaleBar.ScaleBarWidget(map) { TextAlignment = Mapsui.Widgets.Alignment.Center, HorizontalAlignment = Mapsui.Widgets.HorizontalAlignment.Center, VerticalAlignment = Mapsui.Widgets.VerticalAlignment.Top });
+		}
+
+		private ILayer DrawRoute(Route route)
+		{
+			string layerName = "Itinero Route";
+			return new Layer(layerName)
+			{
+				Name = layerName,
+				DataSource = new MemoryProvider(GenerateLinesAndMarkers(route)),
+				Style = null,
+			};
+		}
+
+		private IEnumerable<IFeature> GenerateLinesAndMarkers(Route route)
+		{
+			LineString line = new LineString
+			{
+				Vertices = (from c in route.Shape
+							select SphericalMercator.FromLonLat(c.Longitude, c.Latitude)).ToList()
+			};
+			Feature lineFeature = new Feature()
+			{
+				Geometry = line,
+				Styles = new List<IStyle>()
+				{
+					new SymbolStyle()
+					{
+						Line = new Pen()
+						{
+							Color = Color.Blue,
+							PenStyle = PenStyle.Solid,
+							Width = 7,
+							PenStrokeCap = PenStrokeCap.Round,
+						},
+						Opacity = 0.7f,
+					}
+				},
+			};
+			Feature markerStartFeature = new Feature()
+			{
+				Geometry = route.Stops[0].Coordinate.ToWorld(),
+				Styles = new List<IStyle>()
+				{
+					new SymbolStyle()
+					{
+						BitmapId = GetBitmapIdForEmbeddedResource(Marker_A_Name),
+						SymbolScale = 0.5,
+					}
+				}
+			};
+			Feature markerFinishFeature = new Feature()
+			{
+				Geometry = route.Stops[1].Coordinate.ToWorld(),
+				Styles = new List<IStyle>()
+				{
+					new SymbolStyle()
+					{
+						BitmapId = GetBitmapIdForEmbeddedResource(Marker_B_Name),
+						SymbolScale = 0.5,
+					}
+				}
+			};
+
+			return new List<Feature> { lineFeature, markerStartFeature, markerFinishFeature, };
 		}
 
 		private int GetBitmapIdForEmbeddedResource(string resourceName)
@@ -119,9 +187,20 @@ namespace PolyNavi
 			{
 				if (resultCode == Result.Ok)
 				{
-					string[] route = data.GetStringArrayExtra("route");
-					//string start = route[0];
-					//string end = route[1];
+					string[] routeNames = data.GetStringArrayExtra("route");
+					string startName = routeNames[0];
+					string endName = routeNames[1];
+
+					Point s = MainApp.BuildingsDictionary[startName];
+					Point e = MainApp.BuildingsDictionary[endName];
+					RouterPoint start = router.Resolve(profile, (float)s.X, (float)s.Y);
+					RouterPoint end = router.Resolve(profile, (float)e.X, (float)e.Y);
+
+					Route route = router.Calculate(profile, start, end);
+
+					map.Layers.Remove(routeLayer);
+					routeLayer = DrawRoute(route);
+					map.Layers.Add(routeLayer);
 				}
 			}
 		}

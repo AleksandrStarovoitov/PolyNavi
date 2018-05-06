@@ -28,7 +28,7 @@ namespace PolyNavi
 #if DEBUG
 		Debuggable = true
 #else
-		Debugable = false
+		Debuggable = false
 #endif
 		)]
 	public class MainApp : Application
