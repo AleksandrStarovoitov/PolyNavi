@@ -1,73 +1,78 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
 <resources>
-  <!-- Base application theme. -->
-  <style name="MyAppTheme" parent="MyTheme.Base">
-  </style>
+    <style name="MyTheme.Base" parent="Theme.AppCompat.Light.NoActionBar">
+        <!--   your app branding color for the app bar -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <!--   darker variant for the status bar and contextual app bars -->
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <!--   theme UI controls like checkboxes and text fields -->
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowNoTitle">true</item>
+        <!--<item name="android:windowFullscreen">true</item>-->
+        <item name="toolbarStyle">@style/ToolbarTheme</item>
+        <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:windowTranslucentStatus">true</item>
+    </style>
 
-  <style name="MyTheme.Base" parent="Theme.AppCompat.Light.NoActionBar">
-    <!--   your app branding color for the app bar -->
-    <item name="colorPrimary">@color/colorPrimary</item>
-    <!--   darker variant for the status bar and contextual app bars -->
-    <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-    <!--   theme UI controls like checkboxes and text fields -->
-    <item name="colorAccent">@color/colorAccent</item>
-    <item name="android:windowNoTitle">true</item>
-    <!--<item name="android:windowFullscreen">true</item>-->
-    <item name="toolbarStyle">@style/ToolbarTheme</item>
-    <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
-    <item name="android:windowDrawsSystemBarBackgrounds">true</item>
-    <item name="android:windowTranslucentStatus">true</item>
-  </style>
+    <!-- Base application theme. -->
+    <style name="MyAppTheme" parent="MyTheme.Base">
 
-  
-  <style name="DrawerArrowStyle" parent="@style/Widget.AppCompat.DrawerArrowToggle">
-    <item name="spinBars">true</item>
-    <item name="color">@color/colorToolbarText</item>
-  </style>
-  <style name ="ToolbarTheme" parent="@style/Widget.AppCompat.Toolbar">
-    <!--<item name="titleTextColor">#26000000</item>-->
-    <item name="titleTextColor">@color/colorToolbarText</item>
-    <item name="subtitleTextColor">@color/colorToolbarText</item>
-    <!--<item name="android:fontFamily">@font/juliussansone</item>-->
-  </style>
+    </style>
+
+    <style name="MyAppTheme.Launcher">
+        <item name="android:windowBackground">@drawable/launch_screen</item>
+    </style>
 
 
-  <style name="Poly" parent="TextAppearance.AppCompat">
-    <item name="android:textSize">48sp</item>
-    <item name="android:textColor">@color/colorBlack</item>
-  </style>
-  <style name="Navi" parent="TextAppearance.AppCompat">
-    <item name="android:textSize">48sp</item>
-    <item name="android:textColor">@color/colorBlackWithTransparency</item>
-  </style>
+    <style name="DrawerArrowStyle" parent="@style/Widget.AppCompat.DrawerArrowToggle">
+        <item name="spinBars">true</item>
+        <item name="color">@color/colorToolbarText</item>
+    </style>
+    <style name ="ToolbarTheme" parent="@style/Widget.AppCompat.Toolbar">
+        <!--<item name="titleTextColor">#26000000</item>-->
+        <item name="titleTextColor">@color/colorToolbarText</item>
+        <item name="subtitleTextColor">@color/colorToolbarText</item>
+        <!--<item name="android:fontFamily">@font/juliussansone</item>-->
+    </style>
 
-  <style name="ScheduleEndTime" parent="TextAppearance.AppCompat">
-    <item name="android:textSize">16sp</item>
-    <item name="android:textColor">@color/colorBlackWithTransparency</item>
-  </style>
-  <style name="ScheduleStartTime" parent="TextAppearance.AppCompat">
-    <item name="android:textSize">16sp</item>
-    <item name="android:textColor">@color/colorBlack</item>
-  </style>
-  <style name="ScheduleSubject" parent="TextAppearance.AppCompat">
-    <item name="android:textSize">16sp</item>
-    <item name="android:textColor">@color/colorBlack</item>
-  </style>
-  <style name="ScheduleBuilding" parent="TextAppearance.AppCompat">
-    <item name="android:textSize">15sp</item>
-    <item name="android:textColor">@color/colorBlackWithTransparency</item>
-  </style>
-  <style name="ScheduleRoom" parent="TextAppearance.AppCompat">
-    <item name="android:textSize">15sp</item>
-    <item name="android:textColor">@color/colorBlackWithTransparency</item>
-  </style>
-  <style name="ScheduleTitleDate" parent="TextAppearance.AppCompat">
-    <item name="android:textSize">21sp</item>
-    <item name="android:textColor">@color/colorTitleScheduleText</item>
-  </style>
-  <style name="ScheduleTitleDayOfWeek" parent="TextAppearance.AppCompat">
-    <item name="android:textSize">27sp</item>
-    <item name="android:textColor">@color/colorTitleScheduleTextDayOfWeek</item>
-  </style>
+
+    <style name="Poly" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">48sp</item>
+        <item name="android:textColor">@color/colorBlack</item>
+    </style>
+    <style name="Navi" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">48sp</item>
+        <item name="android:textColor">@color/colorBlackWithTransparency</item>
+    </style>
+
+    <style name="ScheduleEndTime" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/colorBlackWithTransparency</item>
+    </style>
+    <style name="ScheduleStartTime" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/colorBlack</item>
+    </style>
+    <style name="ScheduleSubject" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/colorBlack</item>
+    </style>
+    <style name="ScheduleBuilding" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/colorBlackWithTransparency</item>
+    </style>
+    <style name="ScheduleRoom" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/colorBlackWithTransparency</item>
+    </style>
+    <style name="ScheduleTitleDate" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">21sp</item>
+        <item name="android:textColor">@color/colorTitleScheduleText</item>
+    </style>
+    <style name="ScheduleTitleDayOfWeek" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">27sp</item>
+        <item name="android:textColor">@color/colorTitleScheduleTextDayOfWeek</item>
+    </style>
 </resources>

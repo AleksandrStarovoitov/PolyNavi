@@ -19,7 +19,9 @@ using PolyNaviLib.BL;
 namespace PolyNavi
 {
 	[Application(
-		Label = "PolyNavi",
+		Label = "@string/app_name",
+		AllowBackup = true,
+		Theme = "@style/MyAppTheme.Launcher",
 #if DEBUG
 		Debuggable = true
 #else

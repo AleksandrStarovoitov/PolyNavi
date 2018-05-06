@@ -44,6 +44,7 @@ namespace PolyNavi
 
 		protected override void OnCreate(Bundle savedInstanceState)
 		{
+			SetTheme(Resource.Style.MyAppTheme);
 			base.OnCreate(savedInstanceState);
 			startActivity = MainApp.SharedPreferences.GetString("startactivity_preference", null);
 			
