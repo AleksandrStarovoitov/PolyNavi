@@ -24,7 +24,6 @@ namespace PolyNavi
 		Label = "@string/app_name",
 		AllowBackup = true,
 		Theme = "@style/MyAppTheme.Launcher",
-		HardwareAccelerated = true,
 #if DEBUG
 		Debuggable = true
 #else
