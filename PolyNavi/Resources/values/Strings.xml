@@ -35,8 +35,8 @@
 
   <string name="edittext_from_buildings">Пункт отправления</string>
   <string name="edittext_to_buildings">Пункт назначения</string>
-  
 
+  <string name="title_route_activity">Выберите корпуса</string>
 
 
 </resources>

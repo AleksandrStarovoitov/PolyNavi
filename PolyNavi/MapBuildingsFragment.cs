@@ -21,6 +21,7 @@ using Mapsui.Providers;
 using Mapsui.Styles;
 using Mapsui;
 using Android.Support.Design.Widget;
+using BruTile.Predefined;
 
 namespace PolyNavi
 {
@@ -38,7 +39,7 @@ namespace PolyNavi
 			{ "Механический корпус", new Point(60.00768, 30.37628)},
 			{ "Гидрокорпус-1", new Point(60.00565, 30.38176)},
 			{ "Гидрокорпус-2", new Point(60.00670, 30.38266)},
-			{ "Научно-исследовательский корпус (НИК)", new Point(59.99828, 30.37347)},
+			{ "НИК", new Point(59.99828, 30.37347)},
 			{ "1-й учебный корпус", new Point(60.00885, 30.37270)},
 			{ "2-й учебный корпус", new Point(60.00846, 30.37492)},
 			{ "3-й учебный корпус", new Point(60.00711, 30.38149)},
@@ -77,7 +78,10 @@ namespace PolyNavi
 		
 			//map.BackColor = Mapsui.Styles.Color.Black;
 			map.CRS = "EPSG:3857";
-			map.Layers.Add(OpenStreetMap.CreateTileLayer());
+			//map.Layers.Add(OpenStreetMap.CreateTileLayer());
+
+			map.Layers.Add(new TileLayer(KnownTileSources.Create(KnownTileSource.EsriWorldTopo)));
+			//EsriWorldTopo
 
 			Point centerOfPolytech = new Point(30.371144, 60.003675).FromLonLat();
 			map.NavigateTo(centerOfPolytech);

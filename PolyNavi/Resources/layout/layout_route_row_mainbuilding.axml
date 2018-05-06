@@ -3,28 +3,27 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/relativelayout_route_row_mainbuilng">
-  <ImageView
-      android:src="@drawable/bg_mainbuilding"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginTop="10dp"
-      android:id="@+id/imageview_route_mainbuilng"
-      android:layout_centerHorizontal="true" />
-  <TextView
-      android:text="Text"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:id="@+id/textview_route"
-      android:layout_below="@+id/imageview_route_mainbuilng"
-      android:layout_marginTop="10dp"
-      android:textAppearance="@style/ScheduleTitleDate"
-      android:layout_centerHorizontal="true"
-      android:layout_marginBottom="5dp" />
-  <View
-      android:layout_width="wrap_content"
-      android:layout_height="1dp"
-      android:id="@+id/divider_route_row_mainbuilding"
-      android:background="@android:color/darker_gray"
-      android:visibility="visible"
-      android:layout_below="@id/textview_route" />
+    <ImageView
+        android:src="@drawable/ic_city_hall_black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageview_route_mainbuilding"
+        android:layout_alignParentLeft="true"
+        android:layout_margin="15dp"/>
+    <TextView
+        android:text="Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textview_route"
+        android:layout_toRightOf="@+id/imageview_route_mainbuilding"
+        android:textAppearance="@style/ScheduleTitleDate"
+        android:layout_alignBottom="@+id/imageview_route_mainbuilding"
+        />
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:id="@+id/divider_route_row_mainbuilding"
+        android:background="@android:color/darker_gray"
+        android:visibility="visible"
+        android:layout_below="@+id/imageview_route_mainbuilding" />
 </RelativeLayout>

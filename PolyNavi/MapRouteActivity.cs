@@ -48,7 +48,7 @@ namespace PolyNavi
 			editTextFrom.AddTextChangedListener(this);
 			editTextTo.AddTextChangedListener(this);
 			//SupportActionBar.SetHomeAsUpIndicator(Resource.Drawable.ic_menu);
-
+			Title = GetString(Resource.String.title_route_activity);
 
 
 			buildings = new List<object>(MapBuildingsFragment.BuildingsDictionary.Keys);
