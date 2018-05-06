@@ -17,6 +17,7 @@ using Mapsui.Geometries;
 using Nito.AsyncEx;
 
 using PolyNaviLib.BL;
+using System.Reflection;
 
 namespace PolyNavi
 {
@@ -83,10 +84,20 @@ namespace PolyNavi
 			base.OnCreate();
 		}
 
-		private static string GetFileFullPath(string fname)
+		internal static string GetFileFullPath(string fname)
 		{
 			string dirPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
 			return Path.Combine(dirPath, fname);
+		}
+
+		/// <summary>
+		/// Возвращает поток встроенного ресурса, с указанным относительным путём
+		/// </summary>
+		/// <param name="relativePath">Путь относительно папки PolyNavi.EmbeddedResources</param>
+		internal static Stream GetEmbeddedResourceStream(string relativePath)
+		{
+			var assembly = typeof(MainApp).GetTypeInfo().Assembly;
+			return assembly.GetManifestResourceStream($"PolyNavi.EmbeddedResources.{relativePath}");
 		}
 	}
 }
