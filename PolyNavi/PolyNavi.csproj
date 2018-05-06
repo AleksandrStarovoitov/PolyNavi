@@ -194,7 +194,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Src\Adaptors\BuildingsAdapter.cs" />
+    <Compile Include="Src\Adapters\BuildingsAdapter.cs" />
     <Compile Include="Src\MainApp.cs" />
     <Compile Include="Src\Fragments\MapBuildingsFragment.cs" />
     <Compile Include="Src\Activities\MainActivity.cs" />
@@ -207,8 +207,8 @@
     <Compile Include="Src\Activities\MapRouteActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Src\Adaptors\ScheduleCardFragmentAdapter.cs" />
-    <Compile Include="Src\Adaptors\ScheduleFragmentAdapter.cs" />
+    <Compile Include="Src\Adapters\ScheduleCardFragmentAdapter.cs" />
+    <Compile Include="Src\Adapters\ScheduleFragmentAdapter.cs" />
     <Compile Include="Src\Fragments\ScheduleFragment.cs" />
     <Compile Include="Src\Fragments\ScheduleWeekFragment.cs" />
   </ItemGroup>
