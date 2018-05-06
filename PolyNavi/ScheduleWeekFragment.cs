@@ -69,7 +69,7 @@ namespace PolyNavi
 			Task.Run(async () =>
 			{
 				//days = await MainActivity.PolyManager.GetScheduleByWeekAsync(week, groupNumber); //Next
-				var manager = await MainActivity.PolyManager;
+				var manager = await MainApp.PolyManager;
 				days = await manager.GetScheduleByWeekAsync(week, groupNumber);
 				Activity.RunOnUiThread(() =>
 				{
