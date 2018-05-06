@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
+using Nito.AsyncEx;
+
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -41,15 +43,20 @@ namespace PolyNavi
 		public static ISharedPreferences sharedPreferences;
 
 		private const string DatabaseFilename = "schedule.sqlite";
-		public static PolyManager PolyManager { get; private set; }
+		//static PolyManager polyManager;
+		//public static PolyManager PolyManager => polyManager;
+		public static AsyncLazy<PolyManager> PolyManager { get; private set; } = new AsyncLazy<PolyManager>(async () =>
+		{
+			string dirPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
+			string path = System.IO.Path.Combine(dirPath, DatabaseFilename);
+			return await PolyNaviLib.BL.PolyManager.CreateAsync(path, new NetworkChecker());
+		});
 
 		protected override void OnCreate(Bundle savedInstanceState)
 		{
 			base.OnCreate(savedInstanceState);
 			sharedPreferences = PreferenceManager.GetDefaultSharedPreferences(this);
 			startActivity = sharedPreferences.GetString("startactivity_preference", null);
-
-			var initTask = Initialize();
 			
 			SetContentView(Resource.Layout.activity_main);
 
@@ -70,11 +77,6 @@ namespace PolyNavi
 			navigationView = FindViewById<NavigationView>(Resource.Id.navview_main);
 			navigationView.NavigationItemSelected += NavViewItemSelected;
 			navigationView.Alpha = 0.99f;
-			//Thread.Sleep(100);
-			if (!initTask.IsCompleted)
-			{
-				initTask.Wait();
-			}
 			InstantiateFragment();
 		}
 
@@ -110,15 +112,15 @@ namespace PolyNavi
 		}
 
 
-		private Task Initialize()
-		{
-			return Task.Run(async () =>
-			{
-				string dirPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
-				string path = System.IO.Path.Combine(dirPath, DatabaseFilename);
-				PolyManager = await PolyManager.CreateAsync(path, new NetworkChecker());
-			});
-		}
+		//private Task Initialize()
+		//{
+		//	return Task.Run(async () =>
+		//	{
+		//		string dirPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
+		//		string path = System.IO.Path.Combine(dirPath, DatabaseFilename);
+		//		PolyManager = await PolyManager.CreateAsync(path, new NetworkChecker());
+		//	});
+		//}
 
 		protected override void OnPostCreate(Bundle savedInstanceState)
 		{

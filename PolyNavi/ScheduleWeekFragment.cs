@@ -68,7 +68,9 @@ namespace PolyNavi
 			progress.Visibility = ViewStates.Visible;
 			Task.Run(async () =>
 			{
-				days = await MainActivity.PolyManager.GetScheduleByWeekAsync(week, groupNumber); //Next
+				//days = await MainActivity.PolyManager.GetScheduleByWeekAsync(week, groupNumber); //Next
+				var manager = await MainActivity.PolyManager;
+				days = await manager.GetScheduleByWeekAsync(week, groupNumber);
 				Activity.RunOnUiThread(() =>
 				{
 					progress.Visibility = ViewStates.Invisible;
