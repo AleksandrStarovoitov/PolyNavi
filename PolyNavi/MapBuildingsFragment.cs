@@ -78,5 +78,7 @@ namespace PolyNavi
 			var searchActivity = new Intent(Activity, typeof(MapRouteActivity));
 			StartActivity(searchActivity);
 		}
+
+
 	}
 }

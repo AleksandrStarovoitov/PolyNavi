@@ -230,12 +230,6 @@
     <AndroidResource Include="Resources\layout\fragment_map_buildings.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\fragment_buildings.axml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\new_fragment_map_buildings.axml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
     <AndroidResource Include="Resources\layout\new_activity_map_routing.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
