@@ -41,23 +41,11 @@ namespace PolyNavi
 		private bool tapped = false;
 
 		public static int RequestCode = 1;
-		public static ISharedPreferences sharedPreferences;
-
-		private const string DatabaseFilename = "schedule.sqlite";
-		//static PolyManager polyManager;
-		//public static PolyManager PolyManager => polyManager;
-		public static AsyncLazy<PolyManager> PolyManager { get; private set; } = new AsyncLazy<PolyManager>(async () =>
-		{
-			string dirPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
-			string path = System.IO.Path.Combine(dirPath, DatabaseFilename);
-			return await PolyNaviLib.BL.PolyManager.CreateAsync(path, new NetworkChecker());
-		});
 
 		protected override void OnCreate(Bundle savedInstanceState)
 		{
 			base.OnCreate(savedInstanceState);
-			sharedPreferences = PreferenceManager.GetDefaultSharedPreferences(this);
-			startActivity = sharedPreferences.GetString("startactivity_preference", null);
+			startActivity = MainApp.SharedPreferences.GetString("startactivity_preference", null);
 			
 			SetContentView(Resource.Layout.activity_main);
 

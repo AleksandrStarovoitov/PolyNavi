@@ -195,6 +195,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BuildingsAdapter.cs" />
+    <Compile Include="MainApp.cs" />
     <Compile Include="MapBuildingsFragment.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="MainBuildingFragment.cs" />

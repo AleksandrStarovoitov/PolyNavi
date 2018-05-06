@@ -23,8 +23,8 @@ namespace PolyNavi
 		{
 			this.numOfTabs = numOfTabs;
 			
-			tab1 = new ScheduleWeekFragment(PolyNaviLib.BL.Weeks.Current, MainActivity.sharedPreferences.GetString("groupnumber_preference", null));
-			tab2 = new ScheduleWeekFragment(PolyNaviLib.BL.Weeks.Next, MainActivity.sharedPreferences.GetString("groupnumber_preference", null));
+			tab1 = new ScheduleWeekFragment(PolyNaviLib.BL.Weeks.Current, MainApp.SharedPreferences.GetString("groupnumber_preference", null));
+			tab2 = new ScheduleWeekFragment(PolyNaviLib.BL.Weeks.Next, MainApp.SharedPreferences.GetString("groupnumber_preference", null));
 		}
 
 		public override Fragment GetItem(int position)
