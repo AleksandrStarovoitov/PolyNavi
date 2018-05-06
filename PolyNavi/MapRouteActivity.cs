@@ -49,12 +49,11 @@ namespace PolyNavi
 			editTextTo.AddTextChangedListener(this);
 			//SupportActionBar.SetHomeAsUpIndicator(Resource.Drawable.ic_menu);
 
-			buildings = new List<object>() { new MainBuildingTag() { MainBuildingString = "Главное здание" }, "Химический корпус", "Механический корпус", "Гидрокорпус - 1",
-															"Гидрокорпус - 2", "Лабораторный корпус","НОЦ РАН",
-															"1 - й учебный корпус", "2 - й учебный корпус", "3 - й учебный корпус",
-															"4 - й учебный корпус", "5 - й учебный корпус", "6 - й учебный корпус",
-															 "9 - й учебный корпус","10 - й учебный корпус", "11 - й учебный корпус",
-															"15 - й учебный корпус", "16 - й учебный корпус"  };
+
+
+			buildings = new List<object>(MapBuildingsFragment.BuildingsDictionary.Keys);
+			buildings[0] = new MainBuildingTag() { MainBuildingString = buildings[0].ToString() };
+
 			var listView = FindViewById<ListView>(Resource.Id.listview_buildingslist);
 
 			adapterBuildings = new BuildingsAdapter(this, buildings);
@@ -166,8 +165,13 @@ namespace PolyNavi
 		{
 			if (!editTextFrom.Text.Equals("") && !editTextTo.Text.Equals(""))
 			{
-				Toast.MakeText(this, "FROM: " + editTextFrom.Text + " TO: " + editTextTo.Text, ToastLength.Short).Show();
+				string[] route = { editTextFrom.Text, editTextTo.Text };
+				var intent = new Intent();
+				intent.PutExtra("route", route);
+				SetResult(Result.Ok, intent);
 				Finish();
+				//Toast.MakeText(this, "FROM: " + editTextFrom.Text + " TO: " + editTextTo.Text, ToastLength.Short).Show();
+				//Finish();
 			}
 		}
 
