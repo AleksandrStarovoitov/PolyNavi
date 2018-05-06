@@ -65,7 +65,6 @@ namespace PolyNavi
 			map.ZoomLimits = new MinMax(1, 7);
 
 			map.Widgets.Add(new Mapsui.Widgets.ScaleBar.ScaleBarWidget(map) { TextAlignment = Mapsui.Widgets.Alignment.Center, HorizontalAlignment = Mapsui.Widgets.HorizontalAlignment.Center, VerticalAlignment = Mapsui.Widgets.VerticalAlignment.Top });
-			map.Widgets.Add(new Mapsui.Widgets.Zoom.ZoomInOutWidget(map) { MarginX = 20, MarginY = 40 });
 
 			fab = view.FindViewById<FloatingActionButton>(Resource.Id.new_fab_buildings);
 			fab.Click += Fab_Click;

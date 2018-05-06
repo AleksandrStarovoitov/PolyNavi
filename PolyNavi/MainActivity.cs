@@ -49,7 +49,7 @@ namespace PolyNavi
 			sharedPreferences = PreferenceManager.GetDefaultSharedPreferences(this);
 			startActivity = sharedPreferences.GetString("startactivity_preference", null);
 
-			Initialize();
+			var initTask = Initialize();
 			
 			SetContentView(Resource.Layout.activity_main);
 
@@ -71,6 +71,10 @@ namespace PolyNavi
 			navigationView.NavigationItemSelected += NavViewItemSelected;
 			navigationView.Alpha = 0.99f;
 			//Thread.Sleep(100);
+			if (!initTask.IsCompleted)
+			{
+				initTask.Wait();
+			}
 			InstantiateFragment();
 		}
 
@@ -106,9 +110,9 @@ namespace PolyNavi
 		}
 
 
-		private void Initialize()
+		private Task Initialize()
 		{
-			Task.Run(async () =>
+			return Task.Run(async () =>
 			{
 				string dirPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
 				string path = System.IO.Path.Combine(dirPath, DatabaseFilename);
