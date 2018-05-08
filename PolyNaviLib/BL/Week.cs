@@ -17,5 +17,10 @@ namespace PolyNaviLib.BL
 		{
 			Days = new List<Day>();
 		}
+
+		public bool IsExpired()
+		{
+			return DateTime.Now.Date > Days[6].Date;
+		}
 	}
 }

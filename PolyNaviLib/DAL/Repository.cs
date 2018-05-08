@@ -19,6 +19,8 @@ namespace PolyNaviLib.DAL
 		SQLiteDatabase database;
 		INetworkChecker checker;
 
+		const int CacheWeeks = 2;
+
 		private Repository()
 		{
 		}
@@ -39,35 +41,71 @@ namespace PolyNaviLib.DAL
 			return repo.InitializeAsync(dbPath, networkChecker);
 		}
 
+		//TODO проверка сети и вывод на экран сообщения, если сети нет
 		public async Task<Schedule> GetScheduleAsync(string groupNumber)
 		{
-			if (false/*schedule != null*/) //Есть в БД
-			{
-				//return schedule;
-			}
-			else //Нет в БД
-			{
-				//Поиск группы
-				HtmlDocument htmlDocSearch = await HtmlLoader.LoadHtmlDocumentAsync(baseLink + groupNumber);
-				groupLink = ScheduleBuilder.GetScheduleLink(htmlDocSearch); //Получили ссылку
+			return await LoadScheduleFromWebAsync(groupNumber);
+			//Schedule schedule = null;
+			//if (await database.IsEmptyAsync<Week>())
+			//{
+			//	schedule = await LoadScheduleFromWebAsync(groupNumber);
+			//	foreach (var week in schedule.Weeks)
+			//	{
+			//		await database.SaveItemAsync(week);
+			//	}
+			//}
+			//else
+			//{
+			//	schedule = new Schedule();
+			//	var weeks = await database.GetOrderedItemsAsync<Week, DateTime>(x => x.Days[0].Date);
+			//	int expired = 0;
+			//	foreach (var week in weeks)
+			//	{
+			//		if (week.IsExpired())
+			//		{
+			//			await database.DeleteItemAsync(week);
+			//			++expired;
+			//		}
+			//		else
+			//		{
+			//			schedule.Weeks.Add(week);
+			//		}
+			//	}
+			//	if (expired > 0)
+			//	{
+			//		var newWeeks = await LoadWeeksFromWebAsync(DateTime.Now, expired);
+			//		foreach (var week in newWeeks)
+			//		{
+			//			database.SaveItemAsync(week);
+			//			schedule.Weeks.Add(week);
+			//		}
+			//	}
+			//}
+			//return schedule;
+		}
 
-				//Загрузка текущей недели
-				HtmlDocument htmlDoc = await HtmlLoader.LoadHtmlDocumentAsync(groupLink);
-				Schedule schedule = ScheduleBuilder.BuildSchedule(htmlDoc);
+		private async Task<Schedule> LoadScheduleFromWebAsync(string groupNumber)
+		{
+			//Поиск группы
+			HtmlDocument htmlDocSearch = await HtmlLoader.LoadHtmlDocumentAsync(baseLink + groupNumber);
+			groupLink = ScheduleBuilder.GetScheduleLink(htmlDocSearch); //Получили ссылку
 
-				//Дата следующей недели
-				DateTime nextMondayDate = DateTime.Now.AddDays(1);
-				while (nextMondayDate.DayOfWeek != DayOfWeek.Monday)
-					nextMondayDate = nextMondayDate.AddDays(1);
-				string nextWeekDate = nextMondayDate.ToString("yyyy-M-d", new CultureInfo("ru-RU"));
+			//Загрузка текущей недели
+			HtmlDocument htmlDoc = await HtmlLoader.LoadHtmlDocumentAsync(groupLink);
+			Schedule schedule = ScheduleBuilder.BuildSchedule(htmlDoc);
 
-				//Загрузка следующей недели
-				HtmlDocument htmlDocNextWeek = await HtmlLoader.LoadHtmlDocumentAsync(groupLink + "?date=" + nextWeekDate);
-				Schedule scheduleNextWeek = ScheduleBuilder.BuildSchedule(htmlDocNextWeek);
-				schedule.Weeks.Add(scheduleNextWeek.Weeks[0]);
+			//Дата следующей недели
+			DateTime nextMondayDate = DateTime.Now.AddDays(1);
+			while (nextMondayDate.DayOfWeek != DayOfWeek.Monday)
+				nextMondayDate = nextMondayDate.AddDays(1);
+			string nextWeekDate = nextMondayDate.ToString("yyyy-M-d", new CultureInfo("ru-RU"));
 
-				return schedule;
-			}
+			//Загрузка следующей недели
+			HtmlDocument htmlDocNextWeek = await HtmlLoader.LoadHtmlDocumentAsync(groupLink + "?date=" + nextWeekDate);
+			Schedule scheduleNextWeek = ScheduleBuilder.BuildSchedule(htmlDocNextWeek);
+			schedule.Weeks.Add(scheduleNextWeek.Weeks[0]);
+
+			return schedule;
 		}
 
 	}

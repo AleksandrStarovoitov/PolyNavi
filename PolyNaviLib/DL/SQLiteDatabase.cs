@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using System.Linq;
 
 using SQLite;
 using SQLiteNetExtensionsAsync.Extensions;
@@ -18,19 +19,10 @@ namespace PolyNaviLib.DL
 		{
 			db = new SQLiteAsyncConnection(dbPath);
 		}
-		
+
 		public async Task CreateTableAsync<T>() where T : IBusinessEntity, new()
 		{
-			try
-			{
-				await db.CreateTableAsync<T>();
-			}
-			catch (Exception ex)
-			{
-				Console.WriteLine(ex.Message);
-				Console.WriteLine(ex.StackTrace);
-				throw;                                   //TODO убрать когда закончим
-			}
+			await db.CreateTableAsync<T>();
 		}
 
 		public async Task DropTableAsync<T>() where T : IBusinessEntity, new()
@@ -38,10 +30,27 @@ namespace PolyNaviLib.DL
 			await db.DropTableAsync<T>();
 		}
 
+		public async Task<int> CountAsync<T>() where T : IBusinessEntity, new()
+		{
+			return await db.Table<T>().CountAsync();
+		}
+
+		public async Task<bool> IsEmptyAsync<T>() where T :IBusinessEntity, new()
+		{
+			int count = await CountAsync<T>();
+			return count == 0;
+		}
+
 		public async Task<List<T>> GetItemsAsync<T>() where T : IBusinessEntity, new()
 		{
 			return await db.GetAllWithChildrenAsync<T>(recursive: true);
 			//return await db.Table<T>().ToListAsync();
+		}
+
+		public async Task<List<T>> GetOrderedItemsAsync<T, TKey>(Func<T, TKey> keySelector) where T : IBusinessEntity, new()
+		{
+			var list = await GetItemsAsync<T>();
+			return list.OrderBy(keySelector).ToList();
 		}
 
 		public async Task<T> GetItemAsync<T>(int id) where T : IBusinessEntity, new()
