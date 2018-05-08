@@ -11,6 +11,8 @@ namespace PolyNaviLib.BL
 		[OneToMany(CascadeOperations = CascadeOperation.All)]
 		public List<Day> Days { get; set; } //Дни
 
+		public string DummyStringToWorkaroundSQliteNetBug { get; set; }
+
 		public Week()
 		{
 			Days = new List<Day>();
