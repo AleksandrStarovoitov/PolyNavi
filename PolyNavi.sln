@@ -7,9 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PolyNavi", "PolyNavi\PolyNa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PolyNaviLib", "PolyNaviLib\PolyNaviLib.csproj", "{4D3820D0-A7D3-4FDB-93B0-217FBCE25BEC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Graph", "..\..\..\Desktop\Xamarin\GraphMapper\Graph\Graph.csproj", "{03A3BA7B-1808-4A3D-B78C-A17322DE0F0A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphMapper", "GraphMapper\GraphMapper.csproj", "{5E299A98-BC5C-41E0-8069-BEEAE5E03824}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphMapper", "..\..\..\Desktop\Xamarin\GraphMapper\GraphMapper\GraphMapper.csproj", "{5E299A98-BC5C-41E0-8069-BEEAE5E03824}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Graph", "Graph\Graph.csproj", "{8C29FC95-6E5E-446F-B36E-3EB6AAAF36C3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SQLiteDatabaseTest", "SQLiteDatabaseTest\SQLiteDatabaseTest.csproj", "{5EC47359-DBB2-4A75-A2AA-0B73D22BB2F7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,14 +29,20 @@ Global
 		{4D3820D0-A7D3-4FDB-93B0-217FBCE25BEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4D3820D0-A7D3-4FDB-93B0-217FBCE25BEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4D3820D0-A7D3-4FDB-93B0-217FBCE25BEC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{03A3BA7B-1808-4A3D-B78C-A17322DE0F0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{03A3BA7B-1808-4A3D-B78C-A17322DE0F0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{03A3BA7B-1808-4A3D-B78C-A17322DE0F0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{03A3BA7B-1808-4A3D-B78C-A17322DE0F0A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5E299A98-BC5C-41E0-8069-BEEAE5E03824}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5E299A98-BC5C-41E0-8069-BEEAE5E03824}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5E299A98-BC5C-41E0-8069-BEEAE5E03824}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5E299A98-BC5C-41E0-8069-BEEAE5E03824}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C29FC95-6E5E-446F-B36E-3EB6AAAF36C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C29FC95-6E5E-446F-B36E-3EB6AAAF36C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C29FC95-6E5E-446F-B36E-3EB6AAAF36C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C29FC95-6E5E-446F-B36E-3EB6AAAF36C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5EC47359-DBB2-4A75-A2AA-0B73D22BB2F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5EC47359-DBB2-4A75-A2AA-0B73D22BB2F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5EC47359-DBB2-4A75-A2AA-0B73D22BB2F7}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{5EC47359-DBB2-4A75-A2AA-0B73D22BB2F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5EC47359-DBB2-4A75-A2AA-0B73D22BB2F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5EC47359-DBB2-4A75-A2AA-0B73D22BB2F7}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
