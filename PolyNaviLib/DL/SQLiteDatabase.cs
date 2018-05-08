@@ -33,6 +33,11 @@ namespace PolyNaviLib.DL
 			}
 		}
 
+		public async Task DropTableAsync<T>() where T : IBusinessEntity, new()
+		{
+			await db.DropTableAsync<T>();
+		}
+
 		public async Task<List<T>> GetItemsAsync<T>() where T : IBusinessEntity, new()
 		{
 			return await db.GetAllWithChildrenAsync<T>(recursive: true);
