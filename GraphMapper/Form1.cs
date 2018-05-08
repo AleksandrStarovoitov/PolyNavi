@@ -121,7 +121,7 @@ namespace GraphMapper
 					{
 						Pen pen = null;
 						Graph.Point point = new Graph.Point(x, y);
-						int roomNumber = 0;
+						string roomName = "*Unknown*";
 						bool isIntermediate = false;
 						if (e.Button == MouseButtons.Left)
 						{
@@ -130,7 +130,7 @@ namespace GraphMapper
 							{
 								return;
 							}
-							roomNumber = roomDialoge.RoomNumber;
+							roomName = roomDialoge.RoomName;
 						}
 						else if (e.Button == MouseButtons.Right)
 						{
@@ -142,6 +142,7 @@ namespace GraphMapper
 							Id = roomId++,
 							Point = new Graph.Point(x, y),
 							IsIntermediate = isIntermediate,
+							RoomName = roomName,
 						};
 
 						gr.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;

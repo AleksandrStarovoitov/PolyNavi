@@ -28,33 +28,20 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.roomNumberNumericUpDown = new System.Windows.Forms.NumericUpDown();
 			this.label1 = new System.Windows.Forms.Label();
 			this.buttonOk = new System.Windows.Forms.Button();
 			this.buttonCancel = new System.Windows.Forms.Button();
-			((System.ComponentModel.ISupportInitialize)(this.roomNumberNumericUpDown)).BeginInit();
+			this.textBox1 = new System.Windows.Forms.TextBox();
 			this.SuspendLayout();
-			// 
-			// roomNumberNumericUpDown
-			// 
-			this.roomNumberNumericUpDown.Location = new System.Drawing.Point(127, 7);
-			this.roomNumberNumericUpDown.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-			this.roomNumberNumericUpDown.Name = "roomNumberNumericUpDown";
-			this.roomNumberNumericUpDown.Size = new System.Drawing.Size(120, 22);
-			this.roomNumberNumericUpDown.TabIndex = 0;
 			// 
 			// label1
 			// 
 			this.label1.AutoSize = true;
 			this.label1.Location = new System.Drawing.Point(12, 9);
 			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(109, 17);
+			this.label1.Size = new System.Drawing.Size(150, 17);
 			this.label1.TabIndex = 1;
-			this.label1.Text = "Номер группы: ";
+			this.label1.Text = "Название аудитории:";
 			// 
 			// buttonOk
 			// 
@@ -70,7 +57,7 @@
 			// buttonCancel
 			// 
 			this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.buttonCancel.Location = new System.Drawing.Point(153, 87);
+			this.buttonCancel.Location = new System.Drawing.Point(197, 87);
 			this.buttonCancel.Name = "buttonCancel";
 			this.buttonCancel.Size = new System.Drawing.Size(75, 23);
 			this.buttonCancel.TabIndex = 3;
@@ -78,32 +65,37 @@
 			this.buttonCancel.UseVisualStyleBackColor = true;
 			this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
 			// 
+			// textBox1
+			// 
+			this.textBox1.Location = new System.Drawing.Point(168, 6);
+			this.textBox1.Name = "textBox1";
+			this.textBox1.Size = new System.Drawing.Size(100, 22);
+			this.textBox1.TabIndex = 4;
+			// 
 			// RoomDialoge
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(280, 122);
+			this.ClientSize = new System.Drawing.Size(306, 122);
+			this.Controls.Add(this.textBox1);
 			this.Controls.Add(this.buttonCancel);
 			this.Controls.Add(this.buttonOk);
 			this.Controls.Add(this.label1);
-			this.Controls.Add(this.roomNumberNumericUpDown);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.Name = "RoomDialoge";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "RoomDialoge";
-			((System.ComponentModel.ISupportInitialize)(this.roomNumberNumericUpDown)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
 		}
 
 		#endregion
-
-		private System.Windows.Forms.NumericUpDown roomNumberNumericUpDown;
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.Button buttonOk;
 		private System.Windows.Forms.Button buttonCancel;
+		private System.Windows.Forms.TextBox textBox1;
 	}
 }

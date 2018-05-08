@@ -23,7 +23,7 @@ namespace Graph
     public class GraphNode
     {
 		public int Id { get; set; } = 0;
-		public int RoomNumber { get; set; } = 0;
+		public string RoomName { get; set; } = "";
 		public List<GraphNode> Neighbours { get; set; } = new List<GraphNode>();
 		public bool IsIntermediate { get; set; } = false;
 		public bool IsStairs { get; set; } = false;

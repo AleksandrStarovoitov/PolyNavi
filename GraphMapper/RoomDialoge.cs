@@ -12,12 +12,12 @@ namespace GraphMapper
 {
 	public partial class RoomDialoge : Form
 	{
-		public int RoomNumber { get; private set; }
+		public string RoomName { get; private set; } = "*Unknown*";
 
 		public RoomDialoge()
 		{
 			InitializeComponent();
-			roomNumberNumericUpDown.KeyDown += (sender, e) =>
+			textBox1.KeyDown += (sender, e) =>
 			{
 				if (e.KeyCode == Keys.Enter)
 				{
@@ -35,7 +35,7 @@ namespace GraphMapper
 
 		private void buttonOk_Click(object sender, EventArgs e)
 		{
-			RoomNumber = (int)roomNumberNumericUpDown.Value;
+			RoomName = textBox1.Text;
 			this.Close();
 		}
 
