@@ -13,9 +13,11 @@ namespace PolyNaviLib.DAL
 								   "апр.", "мая", "июн.",
 								   "июл.", "авг.", "сент.",
 								   "окт.", "нояб.", "дек.", ""};
-	//Парсинг и построение расписания
-	public static Schedule BuildSchedule(HtmlDocument htmlDoc)
+		//Парсинг и построение расписания
+		//public static Week BuildSchedule(HtmlDocument htmlDoc)
+		public static Schedule BuildSchedule(HtmlDocument htmlDoc)
 		{
+			//Schedule schedule = new Schedule();
 			Schedule schedule = new Schedule();
 			Week w = new Week();
 			Day d;
@@ -52,7 +54,7 @@ namespace PolyNaviLib.DAL
 				}
 
 				var lessons = day.LastChild.ChildNodes; //Список пар
-				//Проход по парам
+														//Проход по парам
 				foreach (var lesson in lessons)
 				{
 					l = new Lesson
@@ -62,7 +64,7 @@ namespace PolyNaviLib.DAL
 						Room = lesson.LastChild.LastChild.FirstChild.FirstChild.LastChild.LastChild.InnerText, //Аудитория
 						Subject = lesson.FirstChild.LastChild.InnerText.Replace("&quot;", "\""),               //Название пары
 						Timestr = lesson.FirstChild.FirstChild.InnerText,                                      //Время пары
-						Type = lesson.LastChild.FirstChild.InnerText										   //леции/практика
+						Type = lesson.LastChild.FirstChild.InnerText                                           //леции/практика
 					};
 					if (DateTime.TryParse(lesson.FirstChild.FirstChild.InnerText.Substring(0, 5), ci, DateTimeStyles.None, out dateTime)) //+ " " + d.Datestr, "HH:mm d MMM., ddd", new CultureInfo("Ru-ru"));
 					{
@@ -88,6 +90,7 @@ namespace PolyNaviLib.DAL
 			schedule.Weeks.Add(w);
 
 			return schedule;
+			//return w;
 		}
 
 		public static string GetScheduleLink(HtmlDocument htmlDocSearch)
@@ -98,7 +101,7 @@ namespace PolyNaviLib.DAL
 			{
 				h += searchRes.FirstChild.FirstChild.Attributes["href"].Value;
 			}
-			//else searchRes.ChildNodes.Count != 1 //уточнить номер группы (слишком много групп в результате поиска)
+			//else searchRes.ChildNodes.Count > 1 //уточнить номер группы (слишком много групп в результате поиска)
 			//else searchRes == null //нет результатов (либо неверно указан номер группы, либо сайт не работает)
 			return h;
 		}
