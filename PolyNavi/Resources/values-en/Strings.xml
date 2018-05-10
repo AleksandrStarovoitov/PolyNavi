@@ -31,9 +31,10 @@
   <string name="pref_mainbuilding_activity">Main buildig</string>
   <string name="pref_buildings_activity">Buildings</string>
   <string name="pref_schedule_activity">Schedule</string>
- 
-  
-  
-  
+
+
+
+  <string name="no_connection_title">No network connection</string>
+  <string name="no_connection_tap">Tap to try again</string>
  
 </resources>

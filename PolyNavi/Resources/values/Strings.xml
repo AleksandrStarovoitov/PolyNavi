@@ -38,5 +38,7 @@
 
   <string name="title_route_activity">Выберите корпуса</string>
 
-
+  <string name="no_connection_title">Нет подключения к сети</string>
+  <string name="no_connection_tap">Нажмите, чтобы повторить</string>
+  
 </resources>
