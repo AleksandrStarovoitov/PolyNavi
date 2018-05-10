@@ -18,6 +18,7 @@ namespace GraphMapper
 		Pen roomPen = Pens.Red;
 		Pen interPen = Pens.Blue;
 		RoomDialoge roomDialoge = new RoomDialoge();
+		FloorNumberDialoge floorDialoge = new FloorNumberDialoge();
 		int roomId = 0;
 
 		Image drawArea = null;
@@ -172,22 +173,34 @@ namespace GraphMapper
 			}
 		}
 
-        private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                try
-                {
-                    using (var stream = File.Open(saveFileDialog1.FileName, FileMode.Create))
-                    {
-                        Graph.SaverLoader.Save(stream, focusedNode);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Save graph error: " + ex.Message);
-                }
-            }
-        }
-    }
+		private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			if (floorDialoge.ShowDialog() == DialogResult.OK)
+			{
+				SetFloorNumber(floorDialoge.FloorNumber);
+				if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+				{
+					try
+					{
+						using (var stream = File.Open(saveFileDialog1.FileName, FileMode.Create))
+						{
+							Graph.SaverLoader.Save(stream, focusedNode);
+						}
+					}
+					catch (Exception ex)
+					{
+						MessageBox.Show("Save graph error: " + ex.Message);
+					}
+				}
+			}
+		}
+
+		private void SetFloorNumber(int floorNumber)
+		{
+			foreach (var node in nodes)
+			{
+				node.FloorNumber = floorNumber;
+			}
+		}
+	}
 }

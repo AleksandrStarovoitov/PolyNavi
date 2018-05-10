@@ -16,7 +16,6 @@ namespace PolyNavi
 {
 	public class MyPreferenceFragment : PreferenceFragment
 	{
-		private ListPreference mListPreference;
 
 		public override void OnCreate(Bundle savedInstanceState)
 		{

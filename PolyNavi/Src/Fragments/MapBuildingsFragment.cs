@@ -223,8 +223,8 @@ namespace PolyNavi
 					string startName = routeNames[0];
 					string endName = routeNames[1];
 
-					Point s = MainApp.BuildingsDictionary[startName];
-					Point e = MainApp.BuildingsDictionary[endName];
+					Point s = MainApp.Instance.BuildingsDictionary[startName];
+					Point e = MainApp.Instance.BuildingsDictionary[endName];
 					RouterPoint start = router.Resolve(profile, (float)s.X, (float)s.Y);
 					RouterPoint end = router.Resolve(profile, (float)e.X, (float)e.Y);
 
