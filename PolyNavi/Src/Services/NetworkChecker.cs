@@ -16,11 +16,6 @@ using PolyNaviLib.BL;
 namespace PolyNavi
 {
 
-	//
-	//Добавить разрешение в manifest
-	//<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-	//
-
 	public class NetworkChecker : INetworkChecker
 	{
 		Context context;
