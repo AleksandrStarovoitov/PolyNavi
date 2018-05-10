@@ -9,16 +9,14 @@
         android:layout_height="wrap_content"
         android:id="@+id/imageview_route_mainbuilding"
         android:layout_alignParentLeft="true"
-        android:layout_margin="15dp"/>
+        android:layout_margin="15dp" />
     <TextView
-        android:text="Text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textview_route"
         android:layout_toRightOf="@+id/imageview_route_mainbuilding"
         android:textAppearance="@style/ScheduleTitleDate"
-        android:layout_alignBottom="@+id/imageview_route_mainbuilding"
-        />
+        android:layout_alignBottom="@+id/imageview_route_mainbuilding" />
     <View
         android:layout_width="wrap_content"
         android:layout_height="1dp"

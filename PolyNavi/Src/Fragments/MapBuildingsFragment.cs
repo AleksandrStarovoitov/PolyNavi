@@ -237,7 +237,7 @@ namespace PolyNavi
 				}
 				else
 				{
-					Toast.MakeText(Activity.BaseContext, "Выберите корпуса", ToastLength.Short).Show();
+					Toast.MakeText(Activity.BaseContext, GetString(Resource.String.title_route_activity), ToastLength.Short).Show();
 				}
 			}
 			else

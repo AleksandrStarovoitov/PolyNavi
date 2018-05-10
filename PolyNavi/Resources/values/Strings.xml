@@ -32,6 +32,7 @@
   <string name="pref_buildings_activity">Корпуса</string>
   <string name="pref_schedule_activity">Расписание</string>
 
+  <string name="enter_correct_number">Введите корректный номер</string>
 
   <string name="edittext_from_buildings">Пункт отправления</string>
   <string name="edittext_to_buildings">Пункт назначения</string>

@@ -80,7 +80,7 @@ namespace PolyNavi
 				}
 				else
 				{
-					Toast.MakeText(Activity.BaseContext, "Введите корректный номер", ToastLength.Short).Show();
+					Toast.MakeText(Activity.BaseContext, GetString(Resource.String.enter_correct_number), ToastLength.Short).Show();
 				}
 			}
 			else

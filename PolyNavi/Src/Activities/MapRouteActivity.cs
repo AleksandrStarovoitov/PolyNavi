@@ -16,7 +16,7 @@ using Android.Widget;
 
 namespace PolyNavi
 {
-	[Activity(Label = "NEWMapRouteActivity")]
+	[Activity(Label = "MapRouteActivity")]
 	public class MapRouteActivity : AppCompatActivity
 	{
 		private BuildingsAdapter adapterBuildings;
@@ -27,7 +27,7 @@ namespace PolyNavi
 			SetTheme(Resource.Style.MyAppTheme);
 			base.OnCreate(savedInstanceState);
 
-			SetContentView(Resource.Layout.new_activity_map_routing);
+			SetContentView(Resource.Layout.activity_map_routing);
 
 			var toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar_route);
 			SetSupportActionBar(toolbar);

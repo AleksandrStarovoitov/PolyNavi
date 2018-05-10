@@ -31,9 +31,13 @@
   <string name="pref_mainbuilding_activity">主楼</string>
   <string name="pref_buildings_activity">建筑</string>
   <string name="pref_schedule_activity">功课表</string>
- 
+
+  <string name="edittext_from_buildings">出发点</string>
+  <string name="edittext_to_buildings">目的地</string>
+
+  <string name="title_route_activity">选择建筑物</string>
+
+  <string name="no_connection_title">无网络连接</string>
+  <string name="no_connection_tap">点击刷新</string>
   
-  
-  
- 
 </resources>
