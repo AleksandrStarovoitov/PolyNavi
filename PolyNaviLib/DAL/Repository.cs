@@ -44,6 +44,10 @@ namespace PolyNaviLib.DAL
 		//TODO проверка сети и вывод на экран сообщения, если сети нет
 		public async Task<Schedule> GetScheduleAsync(string groupNumber)
 		{
+			if (checker.Check() == false)
+			{
+				throw new NetworkException("No internet connection");
+			}
 			return await LoadScheduleFromWebAsync(groupNumber);
 			//Schedule schedule = null;
 			//if (await database.IsEmptyAsync<Week>())

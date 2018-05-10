@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:minWidth="25px"
-    android:minHeight="25px">
+    android:minHeight="25px"
+    android:id="@+id/layout_no_connection_clickable_zone">
     <ImageView
         android:src="@drawable/baseline_signal_wifi_off_24"
         android:layout_width="wrap_content"

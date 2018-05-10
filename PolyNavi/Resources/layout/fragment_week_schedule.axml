@@ -9,23 +9,5 @@
     android:layout_width="fill_parent"
     android:minWidth="25px"
     android:minHeight="25px">
-  <ProgressBar
-      android:id="@+id/progressbar_week_schedule"
-      style="?android:attr/progressBarStyleLarge"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:indeterminate="true"
-      android:layout_centerInParent="true"
-      android:visibility="invisible" />
-  <android.support.v4.widget.SwipeRefreshLayout
-      android:id="@+id/swipetorefresh_week_schedule"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent">
-    <android.support.v7.widget.RecyclerView
-        android:minWidth="25px"
-        android:minHeight="25px"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/recyclerview_week_schedule" />
-  </android.support.v4.widget.SwipeRefreshLayout>
+    
 </RelativeLayout>
