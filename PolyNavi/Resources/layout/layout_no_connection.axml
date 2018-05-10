@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:minWidth="25px"
+    android:minHeight="25px">
+    <ImageView
+        android:src="@drawable/baseline_signal_wifi_off_24"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageview_no_connection"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="150dp" />
+    <TextView
+        android:text="Oops"
+        android:textAppearance="@style/Navi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textview_oops"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/imageview_no_connection"
+        android:layout_marginTop="15dp" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_below="@+id/textview_oops"
+        android:layout_marginTop="15dp"
+        android:layout_centerHorizontal="true">
+        <TextView
+            android:text="Tap to refresh"
+            android:textAppearance="@style/ScheduleTitleDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textview_taptorefresh"
+            android:layout_centerInParent="true" />
+        <ImageView
+            android:src="@drawable/baseline_refresh_24"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageview_no_connection"
+            android:layout_marginLeft="10dp" />
+    </LinearLayout>
+</RelativeLayout>
