@@ -5,63 +5,18 @@
     android:layout_height="match_parent"
     android:minWidth="25px"
     android:minHeight="25px"
-    android:weightSum="4"
     android:fitsSystemWindows="true">
-  <android.support.v7.widget.Toolbar
-      android:id="@+id/toolbar_route"
-      android:layout_width="match_parent"
-      android:layout_height="?attr/actionBarSize"
-      android:minHeight="?attr/actionBarSize"
-      android:background="?attr/colorPrimary"
-      android:theme="@style/MyAppTheme" />
-  <RelativeLayout
-      android:minWidth="25px"
-      android:minHeight="25px"
-      android:layout_width="match_parent"
-      android:layout_height="0dp"
-      android:id="@+id/relativelayout_route"
-      android:layout_weight="1"
-      android:background="@color/colorPrimary">
-    <EditText
-        android:id="@+id/edittext_from_buildings"
-        android:layout_height="45dp"
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_route"
         android:layout_width="match_parent"
-        android:drawableLeft="@drawable/ic_edittext_from"
-        android:drawablePadding="5dp"
-        android:hint="@string/edittext_from_buildings"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="5dp"
-        android:background="@drawable/bg_edittext"
-        android:focusable="false" />
-    <EditText
-        android:id="@+id/edittext_to_buildings"
-        android:layout_height="35dp"
-        android:layout_width="match_parent"
-        android:drawableLeft="@drawable/ic_edittext_to"
-        android:drawablePadding="5dp"
-        android:hint="@string/edittext_to_buildings"
-        android:layout_below="@+id/edittext_from_buildings"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/bg_edittext"
-        android:focusableInTouchMode="false" />
-  </RelativeLayout>
-  <!--<android.support.v7.widget.RecyclerView
+        android:layout_height="?attr/actionBarSize"
+        android:minHeight="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:theme="@style/MyAppTheme" />
+    <ListView
         android:minWidth="25px"
         android:minHeight="25px"
+        android:id="@+id/listview_buildingslist"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:id="@+id/recyclerview_buildingslist"
-        android:layout_weight="3" />-->
-  <ListView
-      android:minWidth="25px"
-      android:minHeight="25px"
-      android:id="@+id/listview_buildingslist"
-      android:layout_width="match_parent"
-      android:layout_height="0dp"
-      android:layout_weight="3" />
+        android:layout_height="match_parent"/>
 </LinearLayout>

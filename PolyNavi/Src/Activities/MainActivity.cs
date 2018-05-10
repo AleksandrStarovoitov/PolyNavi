@@ -40,8 +40,6 @@ namespace PolyNavi
 		private int startMenuItem;
 		private bool tapped = false;
 
-		public static int RequestCode = 1;
-
 		protected override void OnCreate(Bundle savedInstanceState)
 		{
 			SetTheme(Resource.Style.MyAppTheme);

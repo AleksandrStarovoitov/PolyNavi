@@ -13,6 +13,7 @@ using Android.Views;
 using Android.Widget;
 using Android.Support.Design.Widget;
 
+
 using Mapsui.Geometries;
 using Mapsui.UI;
 using Mapsui.UI.Android;
@@ -30,24 +31,29 @@ using Itinero.Profiles;
 namespace PolyNavi
 {
 	// TODO Кеширование RouterDB чтобы не загружать ее при каждой загрузке фрагмента
-	public class MapBuildingsFragment : Fragment
+	public class MapBuildingsFragment : Fragment, AppBarLayout.IOnOffsetChangedListener
 	{
 		private const string RouterDbName = "polytech_map.routerdb";
 		private const string Marker_A_Name = "ic_marker_a.png";
 		private const string Marker_B_Name = "ic_marker_b.png";
 
+		private const int RequestCodeFrom = 1;
+		private const int RequestCodeTo = 2;
+
 		private View view;
 
-		RouterDb routerDb;
-		Router router;
-		Profile profile;
+		private RouterDb routerDb;
+		private Router router;
+		private Profile profile;
 
 		private MapControl mapControl;
 		private Map map;
 		private ILayer routeLayer;
 
+		private EditText editTextInputFrom, editTextInputTo;
+		private AppBarLayout appBar;
 		private FloatingActionButton fab;
-		
+
 		public override void OnCreate(Bundle savedInstanceState)
 		{
 			base.OnCreate(savedInstanceState);
@@ -60,7 +66,7 @@ namespace PolyNavi
 			InitializeRouting();
 			InitializeMapControl();
 
-			fab = view.FindViewById<FloatingActionButton>(Resource.Id.new_fab_buildings);
+			fab = view.FindViewById<FloatingActionButton>(Resource.Id.fab_map_buildings);
 			fab.Click += Fab_Click;
 
 			return view;
@@ -103,6 +109,18 @@ namespace PolyNavi
 			map.ZoomLimits = new MinMax(1, 7);
 
 			map.Widgets.Add(new Mapsui.Widgets.ScaleBar.ScaleBarWidget(map) { TextAlignment = Mapsui.Widgets.Alignment.Center, HorizontalAlignment = Mapsui.Widgets.HorizontalAlignment.Center, VerticalAlignment = Mapsui.Widgets.VerticalAlignment.Top });
+
+			appBar = view.FindViewById<AppBarLayout>(Resource.Id.appbar_map_buildings);
+			appBar.AddOnOffsetChangedListener(this);
+
+			fab = view.FindViewById<FloatingActionButton>(Resource.Id.fab_map_buildings);
+			fab.Click += Fab_Click;
+
+			editTextInputFrom = view.FindViewById<EditText>(Resource.Id.edittext_input_from_map_builidngs);
+			editTextInputFrom.Click += EditTextInputFrom_Click; ;
+
+			editTextInputTo = view.FindViewById<EditText>(Resource.Id.edittext_input_to_map_builidngs);
+			editTextInputTo.Click += EditTextInputTo_Click; ;
 		}
 
 		private ILayer DrawRoute(Route route)
@@ -175,19 +193,33 @@ namespace PolyNavi
 			return BitmapRegistry.Instance.Register(image);
 		}
 
-		private void Fab_Click(object sender, EventArgs e)
-		{
-			var searchActivity = new Intent(Activity, typeof(MapRouteActivity));
-			StartActivityForResult(searchActivity, MainActivity.RequestCode);
-		}
-
 		public override void OnActivityResult(int requestCode, Result resultCode, Intent data)
 		{
-			if (requestCode == MainActivity.RequestCode)
+			if (resultCode == Result.Ok)
 			{
-				if (resultCode == Result.Ok)
+				switch (requestCode)
 				{
-					string[] routeNames = data.GetStringArrayExtra("route");
+					case RequestCodeFrom:
+						editTextInputFrom.Text = data.GetStringExtra("route");
+						break;
+					case RequestCodeTo:
+						editTextInputTo.Text = data.GetStringExtra("route");
+						break;
+					default:
+						Toast.MakeText(Activity.BaseContext, "Error", ToastLength.Short).Show();
+						break;
+				}
+			}
+		}
+
+		bool fullyExpanded, fullyCollapsed;
+		private void Fab_Click(object sender, EventArgs eargs)
+		{
+			if (fullyExpanded)
+			{
+				if (!editTextInputFrom.Text.Equals("") && !editTextInputTo.Text.Equals(""))
+				{
+					string[] routeNames = new string[] { editTextInputFrom.Text, editTextInputTo.Text };
 					string startName = routeNames[0];
 					string endName = routeNames[1];
 
@@ -201,7 +233,49 @@ namespace PolyNavi
 					map.Layers.Remove(routeLayer);
 					routeLayer = DrawRoute(route);
 					map.Layers.Add(routeLayer);
+					appBar.SetExpanded(false);
 				}
+				else
+				{
+					Toast.MakeText(Activity.BaseContext, "Выберите корпуса", ToastLength.Short).Show();
+				}
+			}
+			else
+			if (fullyCollapsed)
+			{
+				fab.SetImageResource(Resource.Drawable.ic_done_black_24dp);
+				appBar.SetExpanded(true);
+
+				//fabLayoutParams.AnchorId = relativeLayout.Id;
+				//fab.LayoutParameters = fabLayoutParams;
+				//fab.SetImageResource(Resource.Drawable.ic_done_black_24dp);
+			}
+		}
+
+		private void EditTextInputFrom_Click(object sender, EventArgs e)
+		{
+			var searchActivity = new Intent(Activity, typeof(MapRouteActivity));
+			StartActivityForResult(searchActivity,RequestCodeFrom);
+		}
+
+		private void EditTextInputTo_Click(object sender, EventArgs e)
+		{
+			var searchActivity = new Intent(Activity, typeof(MapRouteActivity));
+			StartActivityForResult(searchActivity, RequestCodeTo);
+		}
+
+		public void OnOffsetChanged(AppBarLayout appBarLayout, int verticalOffset)
+		{
+			fullyExpanded = (verticalOffset == 0);
+			fullyCollapsed = (appBar.Height + verticalOffset == 0);
+
+			if (fullyCollapsed)
+			{
+				fab.SetImageResource(Resource.Drawable.ic_directions_black_24dp);
+			}
+			else if (fullyExpanded)
+			{
+				fab.SetImageResource(Resource.Drawable.ic_done_black_24dp);
 			}
 		}
 	}
