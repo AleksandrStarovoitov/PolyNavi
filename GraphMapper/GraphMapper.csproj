@@ -45,6 +45,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FloorNumberDialoge.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FloorNumberDialoge.Designer.cs">
+      <DependentUpon>FloorNumberDialoge.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -59,6 +65,9 @@
     <Compile Include="RoomDialoge.Designer.cs">
       <DependentUpon>RoomDialoge.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="FloorNumberDialoge.resx">
+      <DependentUpon>FloorNumberDialoge.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
