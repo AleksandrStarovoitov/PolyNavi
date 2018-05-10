@@ -35,7 +35,9 @@ namespace PolyNavi
 	{
 		private const string DatabaseFilename = "schedule.sqlite";
 
-		public static readonly Dictionary<string, Point> BuildingsDictionary = new Dictionary<string, Point>()
+		public static MainApp Instance { get; private set; }
+
+		public Dictionary<string, Point> BuildingsDictionary { get; private set; } = new Dictionary<string, Point>()
 		{
 			{ "Главный учебный корпус", new Point(60.00718, 30.37281)},
 			{ "Химический корпус", new Point(60.00648, 30.37630)},
@@ -65,16 +67,17 @@ namespace PolyNavi
 			{ "Секретариат приемной комиссии", new Point(60.00048, 30.36805)}
 		};
 
-		public static AsyncLazy<PolyManager> PolyManager { get; private set; } = new AsyncLazy<PolyManager>(async () =>
+		public AsyncLazy<PolyManager> PolyManager { get; private set; } = new AsyncLazy<PolyManager>(async () =>
 		{
 			return await PolyNaviLib.BL.PolyManager.CreateAsync(GetFileFullPath(DatabaseFilename),
-				                                                new NetworkChecker());
+				                                                new NetworkChecker(MainApp.Instance));
 		});
 
-		public static ISharedPreferences SharedPreferences { get; private set; }
+		public ISharedPreferences SharedPreferences { get; private set; }
 
 		public MainApp(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
 		{
+			Instance = this;
 			SharedPreferences = PreferenceManager.GetDefaultSharedPreferences(this.ApplicationContext);
 		}
 
