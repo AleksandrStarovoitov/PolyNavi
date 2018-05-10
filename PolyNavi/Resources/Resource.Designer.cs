@@ -3390,14 +3390,14 @@ namespace PolyNavi
 			// aapt resource value: 0x7f0900be
 			public const int textview_header_poly = 2131296446;
 			
+			// aapt resource value: 0x7f0900c2
+			public const int textview_no_connection_tap = 2131296450;
+			
 			// aapt resource value: 0x7f0900c1
-			public const int textview_oops = 2131296449;
+			public const int textview_no_connection_title = 2131296449;
 			
 			// aapt resource value: 0x7f0900c5
 			public const int textview_route = 2131296453;
-			
-			// aapt resource value: 0x7f0900c2
-			public const int textview_taptorefresh = 2131296450;
 			
 			// aapt resource value: 0x7f0900da
 			public const int time = 2131296474;
@@ -3960,6 +3960,12 @@ namespace PolyNavi
 			
 			// aapt resource value: 0x7f0b0041
 			public const int nextweek_tab = 2131427393;
+			
+			// aapt resource value: 0x7f0b0049
+			public const int no_connection_tap = 2131427401;
+			
+			// aapt resource value: 0x7f0b0048
+			public const int no_connection_title = 2131427400;
 			
 			// aapt resource value: 0x7f0b0026
 			public const int password_toggle_content_description = 2131427366;
@@ -4567,6 +4573,9 @@ namespace PolyNavi
 			
 			// aapt resource value: 0x7f0a01a1
 			public const int Navi = 2131362209;
+			
+			// aapt resource value: 0x7f0a01a9
+			public const int NoConnectionTitle = 2131362217;
 			
 			// aapt resource value: 0x7f0a002f
 			public const int Platform_AppCompat = 2131361839;

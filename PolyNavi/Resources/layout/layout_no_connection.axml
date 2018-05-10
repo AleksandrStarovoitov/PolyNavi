@@ -13,11 +13,11 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="150dp" />
     <TextView
-        android:text="Oops"
-        android:textAppearance="@style/Navi"
+        android:text="@string/no_connection_title"
+        android:textAppearance="@style/NoConnectionTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textview_oops"
+        android:id="@+id/textview_no_connection_title"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/imageview_no_connection"
         android:layout_marginTop="15dp" />
@@ -27,21 +27,25 @@
         android:layout_height="wrap_content"
         android:minWidth="25px"
         android:minHeight="25px"
-        android:layout_below="@+id/textview_oops"
+        android:layout_below="@+id/textview_no_connection_title"
         android:layout_marginTop="15dp"
         android:layout_centerHorizontal="true">
         <TextView
-            android:text="Tap to refresh"
+            android:text="@string/no_connection_tap"
             android:textAppearance="@style/ScheduleTitleDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/textview_taptorefresh"
-            android:layout_centerInParent="true" />
+            android:id="@+id/textview_no_connection_tap"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            />
         <ImageView
             android:src="@drawable/baseline_refresh_24"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/imageview_no_connection"
-            android:layout_marginLeft="10dp" />
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="3dp"/>
     </LinearLayout>
 </RelativeLayout>

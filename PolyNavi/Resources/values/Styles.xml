@@ -76,4 +76,10 @@
         <item name="android:textSize">27sp</item>
         <item name="android:textColor">@color/colorTitleScheduleTextDayOfWeek</item>
     </style>
+
+  <style name="NoConnectionTitle" parent="TextAppearance.AppCompat">
+    <item name="android:textSize">32sp</item>
+    <item name="android:textColor">@color/colorBlack</item>
+  </style>
+  
 </resources>
