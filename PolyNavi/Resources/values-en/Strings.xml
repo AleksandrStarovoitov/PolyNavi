@@ -32,9 +32,35 @@
   <string name="pref_buildings_activity">Buildings</string>
   <string name="pref_schedule_activity">Schedule</string>
 
+  <string name="enter_correct_number">Enter correct number</string>
 
+  <string name="edittext_from_buildings">Departure point</string>
+  <string name="edittext_to_buildings">Destination point</string>
+
+  <string name="title_route_activity">Choose buildings</string>
+  <string name="title_copyright_activity">Copyright</string>
 
   <string name="no_connection_title">No network connection</string>
   <string name="no_connection_tap">Tap to try again</string>
- 
+
+  <string name="about_nav">About</string>
+  <string name="other_nav">Other</string>
+
+  <string name="about_email_title">Email developers</string>
+  <string name="about_rate_title">Rate application</string>
+  <string name="about_rate_subtitle">Open in GooglePlay</string>
+  <string name="about_bitbucket_title">Open source software</string>
+  <string name="about_bitbucket_subtitle">Browse source code</string>
+  <string name="about_donate_title">Support developers</string>
+  <string name="about_donate_subtitle">Why not?</string>
+  <string name="about_copyright_title">Copyright</string>
+
+  <string name="about_contacts_title">Contacts</string>
+  <string name="about_contacts_sasha_link">
+    <a href="https://www.vk.com/dark_sasha">Alexander Starovoytov</a>
+  </string>
+  <string name="about_contacts_kirill_link">
+    <a href="https://vk.com/pushkin_007">Kirill Bolshakov</a>
+  </string>
+  
 </resources>
