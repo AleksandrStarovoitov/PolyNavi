@@ -7,14 +7,14 @@ using System.Globalization;
 
 namespace PolyNaviLib.SL
 {
-	public static class ScheduleBuilder
+	public static class WeekBuilder
 	{
 		public static string[] months = { "янв.", "февр.", "мар.",
 		                                  "апр.", "мая", "июн.",
 		                                  "июл.", "авг.", "сент.",
 		                                  "окт.", "нояб.", "дек.", ""};
 		//Парсинг и построение расписания
-		public static Week BuildSchedule(HtmlDocument htmlDoc)
+		public static Week BuildWeek(HtmlDocument htmlDoc)
 		{
 			Week w = new Week();
 			Day d;

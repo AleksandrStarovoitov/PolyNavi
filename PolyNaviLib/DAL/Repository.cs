@@ -43,10 +43,7 @@ namespace PolyNaviLib.DAL
 
 		public async Task<List<Week>> GetScheduleAsync(string groupNumber)
 		{
-			//return await LoadScheduleFromWebAsync(groupNumber);
-			//Schedule schedule = null;
 			List<Week> weeks = new List<Week>();
-			//var items = await database.GetItemsAsync<Week>();
 			if (await database.IsEmptyAsync<Week>())
 			{
 				weeks = await LoadScheduleFromWebAsync(groupNumber);
@@ -57,7 +54,6 @@ namespace PolyNaviLib.DAL
 			}
 			else
 			{
-				//schedule = new Schedule();
 				var weeksFromDB = await database.GetOrderedItemsAsync<Week, DateTime>(x => x.Days[0].Date);
 				int expired = 0;
 				foreach (var week in weeksFromDB)
@@ -94,7 +90,7 @@ namespace PolyNaviLib.DAL
 
 			//Поиск группы
 			HtmlDocument htmlDocSearch = await HtmlLoader.LoadHtmlDocumentAsync(baseLink + groupNumber);
-			groupLink = ScheduleBuilder.GetScheduleLink(htmlDocSearch); //Получили ссылку
+			groupLink = WeekBuilder.GetScheduleLink(htmlDocSearch); //Получили ссылку
 
 			for (int i = 0; i < CacheWeeks; ++i)
 			{
@@ -103,7 +99,7 @@ namespace PolyNaviLib.DAL
 				weekDateStr = weekDate.ToString("yyyy-M-d", new CultureInfo("ru-RU"));
 
 				htmlDoc = await HtmlLoader.LoadHtmlDocumentAsync(groupLink + "?date=" + weekDateStr);
-				week = ScheduleBuilder.BuildSchedule(htmlDoc);
+				week = WeekBuilder.BuildWeek(htmlDoc);
 				weeks.Add(week);
 
 				weekDate = weekDate.AddDays(1);
@@ -129,7 +125,7 @@ namespace PolyNaviLib.DAL
 				nextWeekDate = weekDate.ToString("yyyy-M-d", new CultureInfo("ru-RU"));
 
 				htmlDocNextWeek = await HtmlLoader.LoadHtmlDocumentAsync(groupLink + "?date=" + nextWeekDate);
-				week = ScheduleBuilder.BuildSchedule(htmlDocNextWeek);
+				week = WeekBuilder.BuildWeek(htmlDocNextWeek);
 				weeks.Add(week);
 
 				weekDate = weekDate.AddDays(1);

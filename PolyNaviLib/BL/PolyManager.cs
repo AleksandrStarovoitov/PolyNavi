@@ -49,9 +49,6 @@ namespace PolyNaviLib.BL
 			List<Week> weeks = await repository.GetScheduleAsync(groupNumber);
 
 			return weeks[(int)w];
-			//Schedule schedule = await repository.GetScheduleAsync(groupNumber);
-
-			//return schedule.Weeks[(int)w];
 		}
 
 		//Получить день
@@ -60,9 +57,6 @@ namespace PolyNaviLib.BL
 			List<Week> weeks = await repository.GetScheduleAsync(groupNumber);
 
 			return weeks[(int)w].Days[(int)d];
-			//Schedule schedule = await repository.GetScheduleAsync(groupNumber);
-
-			//return schedule.Weeks[(int)w].Days[(int)d];
 		}
 
 		Nito.AsyncEx.AsyncLock mutex = new Nito.AsyncEx.AsyncLock();
@@ -76,44 +70,12 @@ namespace PolyNaviLib.BL
 			}
 
 			var week = weeks[(int)w];
-			//Schedule schedule = await repository.GetScheduleAsync(groupNumber);
-
-			//var week = schedule.Weeks[(int)w];
-
-			//
 			List<Day> days = new List<Day>();
 			foreach (var d in week.Days)
 			{
-				//foreach (var l in d.Lessons)
-				//{
-				//	lessons.Add(l);
-				//}
 				days.Add(d);
 			}
-
-			//return lessons;
 			return days;
-		}
-
-		//Получить расписание на день определенной недели
-		public async Task<List<Lesson>> GetScheduleByDayAsync(Weeks w, Days d, string groupNumber)
-		{
-			List<Week> weeks = await repository.GetScheduleAsync(groupNumber);
-
-			var day = weeks[(int)w].Days[(int)d];
-			//Schedule schedule = await repository.GetScheduleAsync(groupNumber);
-
-			//var day = schedule.Weeks[(int)w].Days[(int)d];
-
-			List<Lesson> lessons = new List<Lesson>();
-
-			// FIXME
-			foreach (var l in lessons)
-			{
-				lessons.Add(l);
-			}
-
-			return lessons;
 		}
 
 	}

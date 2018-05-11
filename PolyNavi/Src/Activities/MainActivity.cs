@@ -104,17 +104,6 @@ namespace PolyNavi
 			FragmentManager.BeginTransaction().Replace(Resource.Id.contentframe_main, fragment).Commit();
 		}
 
-
-		//private Task Initialize()
-		//{
-		//	return Task.Run(async () =>
-		//	{
-		//		string dirPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
-		//		string path = System.IO.Path.Combine(dirPath, DatabaseFilename);
-		//		PolyManager = await PolyManager.CreateAsync(path, new NetworkChecker());
-		//	});
-		//}
-
 		protected override void OnPostCreate(Bundle savedInstanceState)
 		{
 			base.OnPostCreate(savedInstanceState);
