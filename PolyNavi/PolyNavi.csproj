@@ -282,16 +282,16 @@
     <AndroidResource Include="Resources\layout\layout_no_connection.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-	<AndroidResource Include="Resources\layout\fragment_about.axml">
+    <AndroidResource Include="Resources\layout\fragment_about.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\activity_copyright.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-	<AndroidResource Include="Resources\layout\layout_week_schedule.axml">
+    <AndroidResource Include="Resources\layout\layout_week_schedule.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-	</ItemGroup>
+  </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\activity_main.axml">
       <SubType>Designer</SubType>

@@ -28,12 +28,12 @@ namespace PolyNavi
 		private RecyclerView recyclerViewSchedule;
 		private ScheduleCardFragmentAdapter adapter;
 		private string groupNumber;
-		private Weeks week;
+		private DateTime weekDate;
 
-		public ScheduleWeekFragment(Weeks week, string groupNumber)
+		public ScheduleWeekFragment(DateTime weekDate, string groupNumber)
 		{
 			this.groupNumber = groupNumber;
-			this.week = week;
+			this.weekDate = weekDate;
 		}
 
 		public override void OnCreate(Bundle savedInstanceState)
@@ -51,7 +51,7 @@ namespace PolyNavi
 
 			recyclerViewSchedule = view.FindViewById<RecyclerView>(Resource.Id.recyclerview_week_schedule);
 
-			LoadSheduleAndUpdateUIWithPorgressBar(week);
+			LoadSheduleAndUpdateUIWithPorgressBar(weekDate);
 
 			return view;
 		}
@@ -65,10 +65,10 @@ namespace PolyNavi
 			//recyclerViewSchedule = Activity.FindViewById<RecyclerView>(Resource.Id.recyclerview_week_schedule);
 			recyclerViewSchedule.SetAdapter(null);
 			mSwipeRefreshLayout.Refreshing = false;
-			LoadSheduleAndUpdateUIWithPorgressBar(week);
+			LoadSheduleAndUpdateUIWithPorgressBar(weekDate);
 		}
 
-		private void LoadSheduleAndUpdateUIWithPorgressBar(Weeks week)
+		private void LoadSheduleAndUpdateUIWithPorgressBar(DateTime weekDate)
 		{
 			var progress = view.FindViewById<ProgressBar>(Resource.Id.progressbar_week_schedule);
 			progress.Visibility = ViewStates.Visible;
@@ -77,7 +77,8 @@ namespace PolyNavi
 				var manager = await MainApp.Instance.PolyManager;
 				try
 				{
-					days = await manager.GetScheduleByWeekAsync(week, groupNumber);
+					var week = await manager.GetWeekAsync(weekDate, groupNumber);
+					days = week.Days;
 					Activity.RunOnUiThread(() =>
 					{
 						progress.Visibility = ViewStates.Invisible;
@@ -96,7 +97,7 @@ namespace PolyNavi
 						v.Click += (sender, e) =>
 						{
 							DrawContent(Resource.Id.relativelayout_week_schedule, Resource.Layout.layout_week_schedule);
-							LoadSheduleAndUpdateUIWithPorgressBar(week);
+							LoadSheduleAndUpdateUIWithPorgressBar(weekDate);
 						};
 					});
 				}

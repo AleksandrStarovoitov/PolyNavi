@@ -21,7 +21,13 @@ namespace PolyNaviLib.BL
 		public bool IsExpired()
 		{
 			//return DateTime.Now.Date > Days[6].Date;
-			return DateTime.Now.Date > Days[Days.Count - 1].Date;
+			return DateTime.Now.Date > Days.Last().Date.Date;
+		}
+
+		public bool DateEqual(DateTime rhs)
+		{
+			return rhs.Date > Days.First().Date.Date &&
+				   rhs.Date < Days.Last().Date.Date;
 		}
 	}
 }

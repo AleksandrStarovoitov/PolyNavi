@@ -49,16 +49,8 @@ namespace PolyNaviLib.DL
 
 		public async Task<List<T>> GetOrderedItemsAsync<T, TKey>(Func<T, TKey> keySelector) where T : IBusinessEntity, new()
 		{
-			try
-			{
-				var list = await GetItemsAsync<T>();
-				return list.OrderBy(keySelector).ToList();
-			}
-			catch (Exception ex)
-			{
-				int a = 0;
-				throw;
-			}
+			var list = await GetItemsAsync<T>();
+			return list.OrderBy(keySelector).ToList();
 		}
 
 		public async Task<T> GetItemAsync<T>(int id) where T : IBusinessEntity, new()
@@ -85,6 +77,18 @@ namespace PolyNaviLib.DL
 		{
 			await db.DeleteAsync(item, recursive: true);
 			//return await db.DeleteAsync(item);
+		}
+
+		public async Task DeleteItemsAsync<T>(Predicate<T> predicate) where T : IBusinessEntity, new()
+		{
+			var items = await GetItemsAsync<T>();
+			foreach (var item in items)
+			{
+				if (predicate(item))
+				{
+					await DeleteItemAsync<T>(item);
+				}
+			}
 		}
 	}
 }
