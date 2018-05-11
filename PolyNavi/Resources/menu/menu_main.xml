@@ -19,4 +19,13 @@
         android:icon="@drawable/ic_settings_black_24dp"
         android:title="@string/settings_nav"/>
   </group>
+  <item android:title="@string/other_nav">
+    <menu>
+      <group android:checkableBehavior="single">
+      <item
+        android:id="@+id/nav_about_menu"
+        android:title="@string/about_nav" />
+    </group>
+   </menu>
+  </item>
 </menu>

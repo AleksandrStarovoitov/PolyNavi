@@ -88,6 +88,11 @@ namespace PolyNavi
 					fragmentClass = typeof(MyPreferenceFragment);
 					startMenuItem = 3;
 					break;
+				case "about":
+					fragmentClass = typeof(AboutFragment);
+					startMenuItem = 4;
+					//Title = navigationView.Menu.FindItem(Resource.Id.nav_about_menu).TitleFormatted.ToString();
+					break;
 				default:
 					fragmentClass = typeof(MainBuildingFragment);
 					startMenuItem = 0;
@@ -95,7 +100,7 @@ namespace PolyNavi
 			}
 			fragment = (Fragment)Activator.CreateInstance(fragmentClass);
 			navigationView.Menu.GetItem(startMenuItem).SetChecked(true);
-			Title = navigationView.Menu.GetItem(startMenuItem).TitleFormatted.ToString();
+			Title = startMenuItem == 4? navigationView.Menu.FindItem(Resource.Id.nav_about_menu).TitleFormatted.ToString() : navigationView.Menu.GetItem(startMenuItem).TitleFormatted.ToString();
 			FragmentManager.BeginTransaction().Replace(Resource.Id.contentframe_main, fragment).Commit();
 		}
 
@@ -174,6 +179,9 @@ namespace PolyNavi
 				case (Resource.Id.nav_settings_menu):
 					Toast.MakeText(this, GetString(Resource.String.settings_nav), ToastLength.Short).Show();
 					startActivity = "settings";
+					break;
+				case (Resource.Id.nav_about_menu):
+					startActivity = "about";
 					break;
 			}
 			Title = e.MenuItem.TitleFormatted.ToString();

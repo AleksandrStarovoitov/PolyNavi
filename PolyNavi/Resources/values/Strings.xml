@@ -38,8 +38,29 @@
   <string name="edittext_to_buildings">Пункт назначения</string>
 
   <string name="title_route_activity">Выберите корпуса</string>
+  <string name="title_copyright_activity">Копирайт</string>
 
   <string name="no_connection_title">Нет подключения к сети</string>
   <string name="no_connection_tap">Нажмите, чтобы повторить</string>
-  
+
+  <string name="about_nav">О приложении</string>
+  <string name="other_nav">Прочее</string>
+
+  <string name="about_email_title">Написать разработчикам</string>
+  <string name="about_rate_title">Оценить приложение</string>
+  <string name="about_rate_subtitle">Перейти в GooglePlay</string>
+  <string name="about_bitbucket_title">Открытое программное обеспечение</string>
+  <string name="about_bitbucket_subtitle">Посмотреть исходный код</string>
+  <string name="about_donate_title">Поддержать разработчиков</string>
+  <string name="about_donate_subtitle">Мелочь, а приятно</string>
+  <string name="about_copyright_title">Копирайт</string>
+
+  <string name="about_contacts_title">Контакты</string>
+  <string name="about_contacts_sasha_link">
+    <a href="https://www.vk.com/dark_sasha">Александр Старовойтов</a>
+  </string>
+  <string name="about_contacts_kirill_link">
+    <a href="https://vk.com/pushkin_007">Кирилл Большаков</a>
+  </string>
+
 </resources>

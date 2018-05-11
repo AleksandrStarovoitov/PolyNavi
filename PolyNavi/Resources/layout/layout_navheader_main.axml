@@ -7,27 +7,27 @@
     android:theme="@style/MyAppTheme"
     android:orientation="vertical"
     android:gravity="bottom">
-  <LinearLayout
-      android:orientation="horizontal"
-      android:minWidth="25px"
-      android:minHeight="25px"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:id="@+id/linearlayout_header_main">
-    <TextView
-        android:id="@+id/textview_header_poly"
-        android:text="@string/poly"
-        android:textAppearance="@style/Poly"
-        android:fontFamily="@font/juliussansone_regular"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="50dp" />
-    <TextView
-        android:id="@+id/textview_header_navi"
-        android:text="@string/navi"
-        android:textAppearance="@style/Navi"
-        android:fontFamily="@font/juliussansone_regular"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent" />
-  </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearlayout_header_main">
+        <TextView
+            android:id="@+id/textview_header_poly"
+            android:text="@string/poly"
+            android:textAppearance="@style/Poly"
+            android:fontFamily="@font/juliussansone_regular"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="50dp" />
+        <TextView
+            android:id="@+id/textview_header_navi"
+            android:text="@string/navi"
+            android:textAppearance="@style/Navi"
+            android:fontFamily="@font/juliussansone_regular"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+    </LinearLayout>
 </RelativeLayout>
