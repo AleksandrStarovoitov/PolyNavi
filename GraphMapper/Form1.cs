@@ -29,6 +29,7 @@ namespace GraphMapper
 		bool stairsMode = false;
 
 		const int NodeRadius = 20;
+		const int CursorSpeed = 5;
 
 		public GraphMapperForm()
 		{
@@ -39,6 +40,24 @@ namespace GraphMapper
 			drawArea = pictureBox1.Image;
 			this.WindowState = FormWindowState.Maximized;
 #endif
+			this.KeyDown += (sender, e) =>
+			{
+				switch (e.KeyCode)
+				{
+					case Keys.Left:
+						Cursor.Position = new System.Drawing.Point(Cursor.Position.X - CursorSpeed, Cursor.Position.Y);
+						break;
+					case Keys.Right:
+						Cursor.Position = new System.Drawing.Point(Cursor.Position.X + CursorSpeed, Cursor.Position.Y);
+						break;
+					case Keys.Up:
+						Cursor.Position = new System.Drawing.Point(Cursor.Position.X, Cursor.Position.Y - CursorSpeed);
+						break;
+					case Keys.Down:
+						Cursor.Position = new System.Drawing.Point(Cursor.Position.X, Cursor.Position.Y + CursorSpeed);
+						break;
+				}
+			};
 			this.KeyPress += (sender, e) =>
 			{
 				if (e.KeyChar == 'z')

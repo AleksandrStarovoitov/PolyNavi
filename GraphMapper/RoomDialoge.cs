@@ -17,6 +17,7 @@ namespace GraphMapper
 		public RoomDialoge()
 		{
 			InitializeComponent();
+			this.ActiveControl = textBox1;
 			textBox1.KeyDown += (sender, e) =>
 			{
 				if (e.KeyCode == Keys.Enter)
