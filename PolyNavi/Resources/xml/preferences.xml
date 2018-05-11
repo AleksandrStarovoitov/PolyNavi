@@ -3,19 +3,19 @@
   <PreferenceCategory
       android:title="Категория 1">
     <ListPreference
-        android:key="startactivity_preference"
+        android:key="startactivity"
         android:title="Стартовый экран"
         android:dialogTitle="Выберите стартовый экран"
         android:entries="@array/pref_activity"
         android:entryValues="@array/pref_activity_values" 
         android:defaultValue="mainbuilding"/>
     <EditTextPreference
-        android:key="groupnumber_preference"
+        android:key="groupnumber"
         android:title="Номер группы"
         android:summary="Измените номер группы"
         android:dialogTitle="Введите номер группы"/>
     <ListPreference
-        android:key="language_preference"
+        android:key="language"
         android:title="Язык приложения"
         android:summary="Для применения изменений необходима перезагрузка приложения"
         android:entries="@array/pref_language"

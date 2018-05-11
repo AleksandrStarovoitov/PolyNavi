@@ -19,6 +19,7 @@ namespace PolyNaviLib.DAL
 
 		SQLiteDatabase database;
 		INetworkChecker checker;
+		ISettingsProvider settings;
 
 		const int CacheWeeks = 2;
 
@@ -26,28 +27,29 @@ namespace PolyNaviLib.DAL
 		{
 		}
 
-		private async Task<Repository> InitializeAsync(string dbPath, INetworkChecker networkChecker)
+		private async Task<Repository> InitializeAsync(string dbPath, INetworkChecker checker, ISettingsProvider settings)
 		{
 			database = new SQLiteDatabase(dbPath);
 			await database.CreateTableAsync<Week>();
 			await database.CreateTableAsync<Day>();
 			await database.CreateTableAsync<Lesson>();
-			checker = networkChecker;
-			RemoveExpiredWeeks();
+			this.checker = checker;
+			this.settings = settings;
+			await RemoveExpiredWeeksAsync();
 			return this;
 		}
 
-		public static Task<Repository> CreateAsync(string dbPath, INetworkChecker networkChecker)
+		public static Task<Repository> CreateAsync(string dbPath, INetworkChecker networkChecker, ISettingsProvider settings)
 		{
 			var repo = new Repository();
-			return repo.InitializeAsync(dbPath, networkChecker);
+			return repo.InitializeAsync(dbPath, networkChecker, settings);
 		}
 
-		public async Task<Week> GetWeekAsync(DateTime weekDate, string groupNumber)
+		public async Task<Week> GetWeekAsync(DateTime weekDate)
 		{
 			if (await database.IsEmptyAsync<Week>())
 			{
-				var week = (await LoadScheduleFromWebAsync(groupNumber)).Where(w => w.DateEqual(weekDate)).Single();
+				var week = (await LoadScheduleFromWebAsync()).Where(w => w.DateEqual(weekDate)).Single();
 				await database.SaveItemAsync(week);
 				return week;
 			}
@@ -56,7 +58,7 @@ namespace PolyNaviLib.DAL
 				var weekFromDb = (await database.GetItemsAsync<Week>()).Where(w => w.DateEqual(weekDate)).SingleOrDefault();
 				if (weekFromDb == null)
 				{
-					var newWeek = (await LoadScheduleFromWebAsync(groupNumber)).Where(w => w.DateEqual(weekDate)).Single();
+					var newWeek = (await LoadScheduleFromWebAsync()).Where(w => w.DateEqual(weekDate)).Single();
 					await database.SaveItemAsync(newWeek);
 					return newWeek;
 				}
@@ -67,9 +69,9 @@ namespace PolyNaviLib.DAL
 			}
 		}
 
-		private void RemoveExpiredWeeks()
+		private async Task RemoveExpiredWeeksAsync()
 		{
-			
+			await database.DeleteItemsAsync<Week>(w => w.IsExpired());
 		}
 
 		//public async Task<List<Week>> GetScheduleAsync(string groupNumber)
@@ -112,12 +114,13 @@ namespace PolyNaviLib.DAL
 		//	return weeks;
 		//}
 
-		private async Task<List<Week>> LoadScheduleFromWebAsync(string groupNumber)
+		private async Task<List<Week>> LoadScheduleFromWebAsync()
 		{
 			HtmlDocument htmlDoc;
 			var weeks = new List<Week>();
 			DateTime weekDate = DateTime.Now;
 			string weekDateStr;
+			string groupNumber = settings["groupnumber"].ToString();
 
 			//Поиск группы
 			HtmlDocument htmlDocSearch = await HtmlLoader.LoadHtmlDocumentAsync(baseLink + groupNumber);

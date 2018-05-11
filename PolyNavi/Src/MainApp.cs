@@ -70,7 +70,8 @@ namespace PolyNavi
 		public AsyncLazy<PolyManager> PolyManager { get; private set; } = new AsyncLazy<PolyManager>(async () =>
 		{
 			return await PolyNaviLib.BL.PolyManager.CreateAsync(GetFileFullPath(DatabaseFilename),
-				                                                new NetworkChecker(MainApp.Instance));
+			                                                    new NetworkChecker(MainApp.Instance),
+			                                                    new SettingsProvider(MainApp.Instance.SharedPreferences));
 		});
 
 		public ISharedPreferences SharedPreferences { get; private set; }
@@ -87,8 +88,8 @@ namespace PolyNavi
 		private void DebugInit()
 		{
 			var editor = SharedPreferences.Edit();
-			editor.PutString("startactivity_preference", "schedule");
-			editor.PutString("groupnumber_preference", "23537/1");
+			editor.PutString("startactivity", "schedule");
+			editor.PutString("groupnumber", "23537");
 			editor.Apply();
 		}
 

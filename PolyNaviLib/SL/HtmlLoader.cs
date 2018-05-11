@@ -12,7 +12,15 @@ namespace PolyNaviLib.SL
 		public static async Task<HtmlDocument> LoadHtmlDocumentAsync(string addr)
 		{
 			var web = new HtmlWeb();
-			return await web.LoadFromWebAsync(addr);
+			try
+			{
+				return await web.LoadFromWebAsync(addr);
+			}
+			catch (Exception ex)
+			{
+				int a = 0;
+				throw;
+			}
 		}
 
 		public static HtmlDocument LoadHtmlDocument(string addr)

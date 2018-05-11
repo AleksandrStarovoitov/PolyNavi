@@ -27,12 +27,10 @@ namespace PolyNavi
 		private List<Day> days;
 		private RecyclerView recyclerViewSchedule;
 		private ScheduleCardFragmentAdapter adapter;
-		private string groupNumber;
 		private DateTime weekDate;
 
-		public ScheduleWeekFragment(DateTime weekDate, string groupNumber)
+		public ScheduleWeekFragment(DateTime weekDate)
 		{
-			this.groupNumber = groupNumber;
 			this.weekDate = weekDate;
 		}
 
@@ -77,7 +75,7 @@ namespace PolyNavi
 				var manager = await MainApp.Instance.PolyManager;
 				try
 				{
-					var week = await manager.GetWeekAsync(weekDate, groupNumber);
+					var week = await manager.GetWeekAsync(weekDate);
 					days = week.Days;
 					Activity.RunOnUiThread(() =>
 					{

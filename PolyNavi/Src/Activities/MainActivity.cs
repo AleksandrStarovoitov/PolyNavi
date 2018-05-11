@@ -44,7 +44,7 @@ namespace PolyNavi
 		{
 			SetTheme(Resource.Style.MyAppTheme);
 			base.OnCreate(savedInstanceState);
-			startActivity = MainApp.Instance.SharedPreferences.GetString("startactivity_preference", null);
+			startActivity = MainApp.Instance.SharedPreferences.GetString("startactivity", null);
 			
 			SetContentView(Resource.Layout.activity_main);
 
