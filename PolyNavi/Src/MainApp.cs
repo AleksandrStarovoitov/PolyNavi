@@ -79,6 +79,17 @@ namespace PolyNavi
 		{
 			Instance = this;
 			SharedPreferences = PreferenceManager.GetDefaultSharedPreferences(this.ApplicationContext);
+#if DEBUG
+			DebugInit();
+#endif
+		}
+
+		private void DebugInit()
+		{
+			var editor = SharedPreferences.Edit();
+			editor.PutString("startactivity_preference", "schedule");
+			editor.PutString("groupnumber_preference", "23537/1");
+			editor.Apply();
 		}
 
 		public override void OnCreate()

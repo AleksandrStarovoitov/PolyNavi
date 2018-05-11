@@ -49,8 +49,16 @@ namespace PolyNaviLib.DL
 
 		public async Task<List<T>> GetOrderedItemsAsync<T, TKey>(Func<T, TKey> keySelector) where T : IBusinessEntity, new()
 		{
-			var list = await GetItemsAsync<T>();
-			return list.OrderBy(keySelector).ToList();
+			try
+			{
+				var list = await GetItemsAsync<T>();
+				return list.OrderBy(keySelector).ToList();
+			}
+			catch (Exception ex)
+			{
+				int a = 0;
+				throw;
+			}
 		}
 
 		public async Task<T> GetItemAsync<T>(int id) where T : IBusinessEntity, new()

@@ -14,11 +14,8 @@ namespace PolyNaviLib.SL
 		                                  "июл.", "авг.", "сент.",
 		                                  "окт.", "нояб.", "дек.", ""};
 		//Парсинг и построение расписания
-		//public static Week BuildSchedule(HtmlDocument htmlDoc)
-		public static Schedule BuildSchedule(HtmlDocument htmlDoc)
+		public static Week BuildSchedule(HtmlDocument htmlDoc)
 		{
-			//Schedule schedule = new Schedule();
-			Schedule schedule = new Schedule();
 			Week w = new Week();
 			Day d;
 			Lesson l = new Lesson();
@@ -62,10 +59,7 @@ namespace PolyNaviLib.SL
 				}
 				w.Days.Add(d); //Добавление дня в неделю
 			}
-			schedule.Weeks.Add(w);
-
-			return schedule;
-			//return w;
+			return w;
 		}
 
 		public static string GetScheduleLink(HtmlDocument htmlDocSearch)

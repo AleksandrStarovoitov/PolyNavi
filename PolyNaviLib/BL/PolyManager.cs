@@ -46,35 +46,39 @@ namespace PolyNaviLib.BL
 		//Получить неделю
 		public async Task<Week> GetWeekAsync(Weeks w, string groupNumber)
 		{
-			//List<Week> weeks = await repository.GetScheduleAsync(groupNumber);
+			List<Week> weeks = await repository.GetScheduleAsync(groupNumber);
 
-			//return weeks[(int)w];
-			Schedule schedule = await repository.GetScheduleAsync(groupNumber);
+			return weeks[(int)w];
+			//Schedule schedule = await repository.GetScheduleAsync(groupNumber);
 
-			return schedule.Weeks[(int)w];
+			//return schedule.Weeks[(int)w];
 		}
 
 		//Получить день
 		public async Task<Day> GetDayAsync(Weeks w, Days d, string groupNumber)
 		{
-			//List<Week> weeks = await repository.GetScheduleAsync(groupNumber);
+			List<Week> weeks = await repository.GetScheduleAsync(groupNumber);
 
-			//return weeks[(int)w].Days[(int)d];
-			Schedule schedule = await repository.GetScheduleAsync(groupNumber);
+			return weeks[(int)w].Days[(int)d];
+			//Schedule schedule = await repository.GetScheduleAsync(groupNumber);
 
-			return schedule.Weeks[(int)w].Days[(int)d];
+			//return schedule.Weeks[(int)w].Days[(int)d];
 		}
 
-
+		Nito.AsyncEx.AsyncLock mutex = new Nito.AsyncEx.AsyncLock();
 		//Получить расписание на неделю
 		public async Task<List<Day>> GetScheduleByWeekAsync(Weeks w, string groupNumber)
 		{
-			//List<Week> weeks = await repository.GetScheduleAsync(groupNumber);
+			List<Week> weeks;
+			using (await mutex.LockAsync())
+			{
+				weeks = await repository.GetScheduleAsync(groupNumber);
+			}
 
-			//var week = weeks[(int)w];
-			Schedule schedule = await repository.GetScheduleAsync(groupNumber);
+			var week = weeks[(int)w];
+			//Schedule schedule = await repository.GetScheduleAsync(groupNumber);
 
-			var week = schedule.Weeks[(int)w];
+			//var week = schedule.Weeks[(int)w];
 
 			//
 			List<Day> days = new List<Day>();
@@ -94,15 +98,16 @@ namespace PolyNaviLib.BL
 		//Получить расписание на день определенной недели
 		public async Task<List<Lesson>> GetScheduleByDayAsync(Weeks w, Days d, string groupNumber)
 		{
-			//List<Week> weeks = await repository.GetScheduleAsync(groupNumber);
+			List<Week> weeks = await repository.GetScheduleAsync(groupNumber);
 
-			//var day = weeks[(int)w].Days[(int)d];
-			Schedule schedule = await repository.GetScheduleAsync(groupNumber);
+			var day = weeks[(int)w].Days[(int)d];
+			//Schedule schedule = await repository.GetScheduleAsync(groupNumber);
 
-			var day = schedule.Weeks[(int)w].Days[(int)d];
+			//var day = schedule.Weeks[(int)w].Days[(int)d];
 
 			List<Lesson> lessons = new List<Lesson>();
 
+			// FIXME
 			foreach (var l in lessons)
 			{
 				lessons.Add(l);
