@@ -5,6 +5,7 @@
     <ListPreference
         android:key="startactivity"
         android:title="Стартовый экран"
+        android:summary="Он будет отображаться при запуске приложения"
         android:dialogTitle="Выберите стартовый экран"
         android:entries="@array/pref_activity"
         android:entryValues="@array/pref_activity_values" 
