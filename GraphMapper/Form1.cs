@@ -80,6 +80,14 @@ namespace GraphMapper
 					string activeStatus = stairsMode ? "активирован" : "деактивирован";
 					MessageBox.Show($"Режим лестниц {activeStatus}!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Information);
 				}
+				else if (e.KeyChar == '[')
+				{
+					pictureBox1_MouseClick(null, new MouseEventArgs(MouseButtons.Left, 1, Cursor.Position.X - 9 - this.AutoScrollPosition.X, Cursor.Position.Y - 47 - this.AutoScrollPosition.Y, 0));
+
+				} else if (e.KeyChar == ']')
+				{
+					pictureBox1_MouseClick(null, new MouseEventArgs(MouseButtons.Right, 1, Cursor.Position.X - 9 - this.AutoScrollPosition.X, Cursor.Position.Y - 47 - this.AutoScrollPosition.Y, 0));
+				}
 			};
 		}
 
