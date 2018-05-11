@@ -74,46 +74,6 @@ namespace PolyNaviLib.DAL
 			await database.DeleteItemsAsync<Week>(w => w.IsExpired());
 		}
 
-		//public async Task<List<Week>> GetScheduleAsync(string groupNumber)
-		//{
-		//	List<Week> weeks = new List<Week>();
-		//	if (await database.IsEmptyAsync<Week>())
-		//	{
-		//		weeks = await LoadScheduleFromWebAsync(groupNumber);
-		//		foreach (var week in weeks)
-		//		{
-		//			await database.SaveItemAsync(week);
-		//		}
-		//	}
-		//	else
-		//	{
-		//		var weeksFromDB = await database.GetOrderedItemsAsync<Week, DateTime>(x => x.Days[0].Date);
-		//		int expired = 0;
-		//		foreach (var week in weeksFromDB)
-		//		{
-		//			if (week.IsExpired())
-		//			{
-		//				await database.DeleteItemAsync(week);
-		//				++expired;
-		//			}
-		//			else
-		//			{
-		//				weeks.Add(week);
-		//			}
-		//		}
-		//		if (expired > 0)
-		//		{
-		//			var newWeeks = await LoadExpiredWeeksFromWebAsync(DateTime.Now, expired);
-		//			foreach (var week in newWeeks)
-		//			{
-		//				await database.SaveItemAsync(week);
-		//				weeks.Add(week);
-		//			}
-		//		}
-		//	}
-		//	return weeks;
-		//}
-
 		private async Task<List<Week>> LoadScheduleFromWebAsync()
 		{
 			HtmlDocument htmlDoc;
@@ -142,31 +102,5 @@ namespace PolyNaviLib.DAL
 			}
 			return weeks;
 		}
-
-		//private async Task<List<Week>> LoadExpiredWeeksFromWebAsync(DateTime weekDate, int expired)
-		//{
-		//	var weeks = new List<Week>();
-		//	HtmlDocument htmlDocNextWeek;
-		//	string nextWeekDate;
-
-		//	int weeksStored = CacheWeeks - expired;
-		//	weekDate.AddDays(weeksStored * 7); //Переходим на ту неделю, с которой нужно начать загрузку
-
-		//	for (int i = 0; i < expired; ++i)
-		//	{
-		//		var week = new Week();
-
-		//		nextWeekDate = weekDate.ToString("yyyy-M-d", new CultureInfo("ru-RU"));
-
-		//		htmlDocNextWeek = await HtmlLoader.LoadHtmlDocumentAsync(groupLink + "?date=" + nextWeekDate);
-		//		week = WeekBuilder.BuildWeek(htmlDocNextWeek);
-		//		weeks.Add(week);
-
-		//		weekDate = weekDate.AddDays(1);
-		//		while (weekDate.DayOfWeek != DayOfWeek.Monday)
-		//			weekDate = weekDate.AddDays(1);
-		//	}
-		//	return weeks;
-		//}
 	}
 }
