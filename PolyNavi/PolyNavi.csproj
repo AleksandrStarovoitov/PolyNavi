@@ -393,9 +393,6 @@
     <AndroidResource Include="Resources\drawable-xxhdpi\bg_navheader.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\first_plan1.png" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\drawable-xxhdpi\ic_date_range_black_24dp.png" />
   </ItemGroup>
   <ItemGroup>

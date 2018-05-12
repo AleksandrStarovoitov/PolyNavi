@@ -42,7 +42,7 @@ namespace PolyNavi
 			heightInDp = ConvertPixelsToDp(displ.HeightPixels);
 
 
-			_plan = ContextCompat.GetDrawable(context, Resource.Drawable.first_plan1);
+			_plan = ContextCompat.GetDrawable(context, Resource.Drawable.first_floor);
 			_plan.SetBounds(0, 0, _plan.IntrinsicWidth, _plan.IntrinsicHeight);
 			_scaleDetector = new ScaleGestureDetector(context, new MyScaleListener(this));
 			imm = (InputMethodManager)c.ApplicationContext.GetSystemService(Context.InputMethodService);
