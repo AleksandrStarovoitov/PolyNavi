@@ -26,8 +26,8 @@ namespace PolyNaviLib.BL
 
 		public bool DateEqual(DateTime rhs)
 		{
-			return rhs.Date > Days.First().Date.Date &&
-				   rhs.Date < Days.Last().Date.Date;
+			return rhs.Date >= Days.First().Date.Date &&
+				   rhs.Date <= Days.Last().Date.Date;
 		}
 	}
 }

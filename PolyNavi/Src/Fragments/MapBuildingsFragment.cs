@@ -233,6 +233,8 @@ namespace PolyNavi
 					map.Layers.Remove(routeLayer);
 					routeLayer = DrawRoute(route);
 					map.Layers.Add(routeLayer);
+					map.NavigateTo(new Point(s.Y, s.X).FromLonLat());
+					map.NavigateTo(4);
 					appBar.SetExpanded(false);
 				}
 				else
