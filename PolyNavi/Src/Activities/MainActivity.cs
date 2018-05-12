@@ -27,7 +27,7 @@ using static Android.Support.V4.Widget.DrawerLayout;
 
 namespace PolyNavi
 {
-	[Activity(Label = "PolyNavi", MainLauncher = true)]
+	[Activity(Label = "PolyNavi")]
 	public class MainActivity : AppCompatActivity, IDrawerListener
 	{
 		private DrawerLayout drawerLayout;

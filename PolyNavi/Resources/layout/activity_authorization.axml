@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:minWidth="25px"
+    android:minHeight="25px"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/relativelayout_auth">
+    <ImageView
+        android:src="@drawable/logo_about"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:id="@+id/imageview_logo_auth"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="55dp" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/linearlayout_polynavi_auth"
+        android:layout_below="@+id/imageview_logo_auth"
+        android:layout_marginTop="15dp">
+        <TextView
+            android:id="@+id/textview_auth_poly"
+            android:text="@string/poly"
+            android:textAppearance="@style/Poly"
+            android:fontFamily="@font/juliussansone_regular"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+        <TextView
+            android:id="@+id/textview_auth_navi"
+            android:text="@string/navi"
+            android:textAppearance="@style/Navi"
+            android:fontFamily="@font/juliussansone_regular"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+    <TextView
+        android:id="@+id/textview_auth_entergroup"
+        android:text="@string/enter_group_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/linearlayout_polynavi_auth" />
+    <TextView
+        android:id="@+id/textview_auth_edittext_title"
+        android:text="@string/edittext_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="35dp"
+        android:layout_below="@+id/textview_auth_entergroup" />
+    <EditText
+        android:id="@+id/edittext_auth"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/textview_auth_edittext_title"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:imeOptions="actionGo"
+        android:hint="@string/edittext_auth" />
+    <Button
+        android:id="@+id/button_auth" 
+        android:text="@string/button_auth"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edittext_auth"
+        android:layout_margin="40dp"/>
+    <TextView
+        android:id="@+id/textview_later_auth"
+        android:text="@string/group_later"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/button_auth" />
+</RelativeLayout>

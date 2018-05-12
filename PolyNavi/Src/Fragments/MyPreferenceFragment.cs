@@ -21,15 +21,6 @@ namespace PolyNavi
 		{
 			base.OnCreate(savedInstanceState);
 			AddPreferencesFromResource(Resource.Xml.preferences);
-			// Create your fragment here
-
-
-
-
-
-
 		}
-
-		
 	}
 }

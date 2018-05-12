@@ -55,6 +55,7 @@
     <EnableLLVM>false</EnableLLVM>
     <BundleAssemblies>false</BundleAssemblies>
     <AndroidSupportedAbis>armeabi-v7a;x86;x86_64</AndroidSupportedAbis>
+    <EnableProguard>false</EnableProguard>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BruTile, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -216,7 +217,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Src\Activities\AuthorizationActivity.cs" />
     <Compile Include="Src\Activities\CopyrightActivity.cs" />
+    <Compile Include="Src\Activities\MainEmptyActivity.cs" />
     <Compile Include="Src\Adapters\BuildingsAdapter.cs" />
     <Compile Include="Src\Fragments\AboutFragment.cs" />
     <Compile Include="Src\MainApp.cs" />
@@ -293,6 +296,9 @@
     <AndroidResource Include="Resources\layout\layout_week_schedule.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
+    <AndroidResource Include="Resources\layout\activity_authorization.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\activity_main.axml">
@@ -308,13 +314,6 @@
     <Folder Include="Resources\mipmap-xxxhdpi\" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\First_Floor.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Graph\Graph.csproj">
-      <Project>{846cca01-4e29-4c4f-8e58-a88b0e2925ef}</Project>
-      <Name>Graph</Name>
-    </ProjectReference>
     <ProjectReference Include="..\PolyNaviLib\PolyNaviLib.csproj">
       <Project>{4d3820d0-a7d3-4fdb-93b0-217fbce25bec}</Project>
       <Name>PolyNaviLib</Name>
@@ -486,7 +485,7 @@
     <AndroidResource Include="Resources\drawable\launch_screen.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\bg_splash.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\bg_splash.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-hdpi\ic_place_black_24dp.png" />
@@ -546,7 +545,7 @@
     <AndroidResource Include="Resources\drawable\baseline_refresh_24.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\logo_about.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\logo_about.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\baseline_email_black_24dp.png" />
@@ -565,6 +564,15 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\baseline_monetization_on_black_24dp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xxhdpi\first_floor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xxhdpi\second_floor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xxhdpi\third_floor.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Android.Support.Annotations.26.1.0.1\build\MonoAndroid80\Xamarin.Android.Support.Annotations.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Annotations.26.1.0.1\build\MonoAndroid80\Xamarin.Android.Support.Annotations.targets')" />
