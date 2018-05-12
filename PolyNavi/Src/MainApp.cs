@@ -88,7 +88,7 @@ namespace PolyNavi
 		private void DebugInit()
 		{
 			var editor = SharedPreferences.Edit();
-			editor.PutString("startactivity", "schedule");
+			editor.PutString("startactivity", "mainbuilding");
 			editor.PutString("groupnumber", "23537");
 			editor.Apply();
 		}

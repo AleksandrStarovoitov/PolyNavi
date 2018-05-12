@@ -9,6 +9,8 @@ using Android.Widget;
 using System;
 using static Android.Widget.TextView;
 
+using Graph;
+
 namespace PolyNavi
 {
 	public class MainBuildingFragment : Fragment, IOnEditorActionListener, AppBarLayout.IOnOffsetChangedListener
@@ -58,6 +60,13 @@ namespace PolyNavi
 
 			frameLayout = view.FindViewById<FrameLayout>(Resource.Id.frame_mainbuilding);
 			fabLayoutParams = (CoordinatorLayout.LayoutParams)fab.LayoutParameters;
+
+			using (var stream = Activity.Assets.Open("floor_1.graph"))
+			{
+				GraphNode graph = Graph.SaverLoader.Load(stream);
+
+				int a = 0;
+			}
 
 			return view;
 		}
