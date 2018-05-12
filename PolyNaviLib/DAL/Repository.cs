@@ -49,7 +49,7 @@ namespace PolyNaviLib.DAL
 		{
 			if (await database.IsEmptyAsync<Week>())
 			{
-				var week = (await LoadScheduleFromWebAsync()).Where(w => w.DateEqual(weekDate)).Single();
+				var week = (await LoadScheduleFromWebAsync(weekDate));
 				await database.SaveItemAsync(week);
 				return week;
 			}
@@ -58,7 +58,7 @@ namespace PolyNaviLib.DAL
 				var weekFromDb = (await database.GetItemsAsync<Week>()).Where(w => w.DateEqual(weekDate)).SingleOrDefault();
 				if (weekFromDb == null)
 				{
-					var newWeek = (await LoadScheduleFromWebAsync()).Where(w => w.DateEqual(weekDate)).Single();
+					var newWeek = (await LoadScheduleFromWebAsync(weekDate));
 					await database.SaveItemAsync(newWeek);
 					return newWeek;
 				}
@@ -74,33 +74,21 @@ namespace PolyNaviLib.DAL
 			await database.DeleteItemsAsync<Week>(w => w.IsExpired());
 		}
 
-		private async Task<List<Week>> LoadScheduleFromWebAsync()
+		private async Task<Week> LoadScheduleFromWebAsync(DateTime weekDate)
 		{
 			HtmlDocument htmlDoc;
-			var weeks = new List<Week>();
-			DateTime weekDate = DateTime.Now;
-			string weekDateStr;
 			string groupNumber = settings["groupnumber"].ToString();
 
 			//Поиск группы
 			HtmlDocument htmlDocSearch = await HtmlLoader.LoadHtmlDocumentAsync(baseLink + groupNumber);
 			groupLink = WeekBuilder.GetScheduleLink(htmlDocSearch); //Получили ссылку
+			
+			var week = new Week();
+			string weekDateStr = weekDate.ToString("yyyy-M-d", new CultureInfo("ru-RU"));
+			htmlDoc = await HtmlLoader.LoadHtmlDocumentAsync(groupLink + "?date=" + weekDateStr);
+			week = WeekBuilder.BuildWeek(htmlDoc);
 
-			for (int i = 0; i < CacheWeeks; ++i)
-			{
-				var week = new Week();
-
-				weekDateStr = weekDate.ToString("yyyy-M-d", new CultureInfo("ru-RU"));
-
-				htmlDoc = await HtmlLoader.LoadHtmlDocumentAsync(groupLink + "?date=" + weekDateStr);
-				week = WeekBuilder.BuildWeek(htmlDoc);
-				weeks.Add(week);
-
-				weekDate = weekDate.AddDays(1);
-				while (weekDate.DayOfWeek != DayOfWeek.Monday)
-					weekDate = weekDate.AddDays(1);
-			}
-			return weeks;
+			return week;
 		}
 	}
 }
