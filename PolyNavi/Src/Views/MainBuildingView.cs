@@ -33,8 +33,6 @@ namespace PolyNavi
 		Context c;
 		InputMethodManager imm;
 
-
-
 		public MainBuildingView(Context context) :
 			base(context, null, 0)
 		{
