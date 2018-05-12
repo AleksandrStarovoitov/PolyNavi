@@ -44,7 +44,6 @@ namespace PolyNaviLib.DL
 		public async Task<List<T>> GetItemsAsync<T>() where T : IBusinessEntity, new()
 		{
 			return await db.GetAllWithChildrenAsync<T>(recursive: true);
-			//return await db.Table<T>().ToListAsync();
 		}
 
 		public async Task<List<T>> GetOrderedItemsAsync<T, TKey>(Func<T, TKey> keySelector) where T : IBusinessEntity, new()
@@ -56,27 +55,23 @@ namespace PolyNaviLib.DL
 		public async Task<T> GetItemAsync<T>(int id) where T : IBusinessEntity, new()
 		{
 			return await db.GetWithChildrenAsync<T>(id);
-			//return await db.GetAsync<T>(id);
 		}
 
-		public async Task/*<int>*/ SaveItemAsync<T>(T item) where T : IBusinessEntity, new()
+		public async Task SaveItemAsync<T>(T item) where T : IBusinessEntity, new()
 		{
 			if (item.ID == 0)
 			{
 				await db.InsertWithChildrenAsync(item, recursive: true);
-				//return await db.InsertAsync(item);
 			}
 			else
 			{
 				await db.UpdateWithChildrenAsync(item);
-				//return await db.UpdateAsync(item);
 			}
 		}
 
-		public async Task/*<int>*/ DeleteItemAsync<T>(T item) where T : IBusinessEntity, new()
+		public async Task DeleteItemAsync<T>(T item) where T : IBusinessEntity, new()
 		{
 			await db.DeleteAsync(item, recursive: true);
-			//return await db.DeleteAsync(item);
 		}
 
 		public async Task DeleteItemsAsync<T>(Predicate<T> predicate) where T : IBusinessEntity, new()
