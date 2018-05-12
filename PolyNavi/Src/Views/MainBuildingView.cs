@@ -4,6 +4,8 @@ using Android.Views;
 using Android.Support.V4.Content;
 using Android.Graphics;
 using Android.Views.InputMethods;
+using System;
+using Android.Util;
 
 namespace PolyNavi
 {
@@ -20,8 +22,8 @@ namespace PolyNavi
 		private float _lastTouchY;
 		private float _posX;
 		private float _posY;
-		private float _scaleFactor = 0.4f;
-		private float _minScaleFactor = 0.3f;
+		private float _scaleFactor = 1.0f;
+		private float _minScaleFactor = 1.0f;
 		private float _maxScaleFactor = 5.0f;
 
 		Android.Util.DisplayMetrics displ;
@@ -41,8 +43,7 @@ namespace PolyNavi
 			widthInDp = ConvertPixelsToDp(displ.WidthPixels);
 			heightInDp = ConvertPixelsToDp(displ.HeightPixels);
 
-
-			_plan = ContextCompat.GetDrawable(context, Resource.Drawable.first_plan1);
+			_plan = ContextCompat.GetDrawable(context, Resource.Drawable.first_floor);
 			_plan.SetBounds(0, 0, _plan.IntrinsicWidth, _plan.IntrinsicHeight);
 			_scaleDetector = new ScaleGestureDetector(context, new MyScaleListener(this));
 			imm = (InputMethodManager)c.ApplicationContext.GetSystemService(Context.InputMethodService);
@@ -56,7 +57,6 @@ namespace PolyNavi
 
 		public override bool OnTouchEvent(MotionEvent e)
 		{
-
 			if (!MainBuildingFragment.CheckFocus())
 			{
 				//InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -86,6 +86,31 @@ namespace PolyNavi
 						float deltaY = y - _lastTouchY;
 						_posX += deltaX;
 						_posY += deltaY;
+												
+						float planScaleWidth = _plan.IntrinsicWidth * _scaleFactor;
+						float planScaleHeight = _plan.IntrinsicHeight * _scaleFactor;
+
+						float right = _posX + planScaleWidth;
+						float left = _posX;
+						float top = _posY;
+						float bottom = _posY + planScaleHeight;
+
+						if (right < displ.WidthPixels)
+						{
+							_posX -= deltaX;
+						}
+						if (left > 0)
+						{
+							_posX -= deltaX;
+						}
+						if (top > 0)
+						{
+							_posY -= deltaY;
+						}
+						if (bottom < _plan.IntrinsicHeight)
+						{
+							_posY -= deltaY;
+						}
 
 						Invalidate();
 					}
@@ -124,20 +149,28 @@ namespace PolyNavi
 		protected override void OnDraw(Canvas canvas)
 		{
 			base.OnDraw(canvas);
-
-
 			canvas.Save();
 			canvas.Translate(_posX, _posY);
 			canvas.Scale(_scaleFactor, _scaleFactor);
 			_plan.Draw(canvas);
 			canvas.Restore();
-
 		}
 
 
 		private class MyScaleListener : ScaleGestureDetector.SimpleOnScaleGestureListener
 		{
 			private readonly MainBuildingView _view;
+			private float centerX;
+			private float centerY;
+			private float deltaX;
+			private float deltaY;
+
+			private float planScaleWidth;
+			private float planScaleHeight;
+			private float right;
+			private float left;
+			private float top;
+			private float bottom;
 
 			public MyScaleListener(MainBuildingView view)
 			{
@@ -153,12 +186,43 @@ namespace PolyNavi
 
 				if (_view._scaleFactor > _view._minScaleFactor && _view._scaleFactor < _view._maxScaleFactor)
 				{
-					float centerX = detector.FocusX;
-					float centerY = detector.FocusY;
-					float deltaX = centerX - _view._posX;
-					float deltaY = centerY - _view._posY;
+					centerX = detector.FocusX;
+					centerY = detector.FocusY;
+					deltaX = centerX - _view._posX;
+					deltaY = centerY - _view._posY;
 					deltaX = deltaX * scale - deltaX;
 					deltaY = deltaY * scale - deltaY;
+
+					planScaleWidth = _view._plan.IntrinsicWidth * _view._scaleFactor;
+					planScaleHeight = _view._plan.IntrinsicHeight * _view._scaleFactor;
+
+					right = _view._posX + planScaleWidth;
+					left = _view._posX;
+					top = _view._posY;
+					bottom = _view._posY + planScaleHeight;
+					
+					//Log.Debug("plan", "right: " + right.ToString());
+					//Log.Debug("plan", "left: " + left.ToString());
+					//Log.Debug("plan", "top: " + top.ToString());
+					//Log.Debug("plan", "bottom: " + bottom.ToString());
+
+					if (right < _view.displ.WidthPixels)
+					{
+						_view._posX -= deltaX;
+					}
+					if (left > 0)
+					{
+						_view._posX += deltaX;
+					}
+					if (top > 0)
+					{
+						_view._posY += deltaY;
+					}
+					if (bottom < _view._plan.IntrinsicHeight)
+					{
+						_view._posY -= deltaY;
+					}
+
 					_view._posX -= deltaX;
 					_view._posY -= deltaY;
 				}
