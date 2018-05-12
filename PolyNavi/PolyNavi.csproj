@@ -314,6 +314,10 @@
     <Folder Include="Resources\mipmap-xxxhdpi\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Graph\Graph.csproj">
+      <Project>{846cca01-4e29-4c4f-8e58-a88b0e2925ef}</Project>
+      <Name>Graph</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PolyNaviLib\PolyNaviLib.csproj">
       <Project>{4d3820d0-a7d3-4fdb-93b0-217fbce25bec}</Project>
       <Name>PolyNaviLib</Name>
