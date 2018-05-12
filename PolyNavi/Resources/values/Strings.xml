@@ -63,4 +63,9 @@
     <a href="https://vk.com/pushkin_007">Кирилл Большаков</a>
   </string>
 
+  <string name="enter_group_number">Укажите номер группы</string>
+  <string name="edittext_title">Номер группы</string>
+  <string name="edittext_auth">Например - 23537/1</string>
+  <string name="button_auth">Поехали</string>
+  <string name="group_later">Я укажу номер группы позже</string>
 </resources>

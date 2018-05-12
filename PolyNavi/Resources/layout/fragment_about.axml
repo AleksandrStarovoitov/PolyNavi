@@ -243,7 +243,7 @@
                 </LinearLayout>
             </LinearLayout>
         </FrameLayout>
-      <RelativeLayout
+        <RelativeLayout
             android:id="@+id/relativelayout_contacts_about"
             android:minWidth="25px"
             android:minHeight="25px"
@@ -253,36 +253,33 @@
             android:layout_marginTop="15dp"
             android:layout_marginRight="15dp"
             android:layout_marginLeft="15dp"
-            android:padding="10dp"
-           >
+            android:padding="10dp">
             <TextView
-              android:id="@+id/textview_contacts_title_about"
+                android:id="@+id/textview_contacts_title_about"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:text="@string/about_contacts_title"
                 android:textColor="@color/colorBlack"
                 android:textSize="22sp" />
-          <TextView
-               android:id="@+id/textview_contacts_sasha_link_about"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:text="@string/about_contacts_sasha_link"
-               android:textColor="@color/colorBlack"
-               android:textSize="18sp"
-               android:layout_below="@+id/textview_contacts_title_about"
-               android:layout_marginTop="5dp"
-               />
-        <TextView
-              android:id="@+id/textview_contacts_kirill_link_about"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:text="@string/about_contacts_kirill_link"
-              android:textColor="@color/colorBlack"
-              android:textSize="18sp"
-              android:layout_below="@+id/textview_contacts_sasha_link_about"
-              android:layout_marginTop="5dp"
-               />
+            <TextView
+                android:id="@+id/textview_contacts_sasha_link_about"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/about_contacts_sasha_link"
+                android:textColor="@color/colorBlack"
+                android:textSize="18sp"
+                android:layout_below="@+id/textview_contacts_title_about"
+                android:layout_marginTop="5dp" />
+            <TextView
+                android:id="@+id/textview_contacts_kirill_link_about"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/about_contacts_kirill_link"
+                android:textColor="@color/colorBlack"
+                android:textSize="18sp"
+                android:layout_below="@+id/textview_contacts_sasha_link_about"
+                android:layout_marginTop="5dp" />
         </RelativeLayout>
     </RelativeLayout>
-</ScrollView> 
+</ScrollView>
