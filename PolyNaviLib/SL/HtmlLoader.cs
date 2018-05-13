@@ -16,6 +16,7 @@ namespace PolyNaviLib.SL
 			{
 				return await web.LoadFromWebAsync(addr);
 			}
+			//TODO реализовать сообщение об ошибке
 			catch (Exception ex)
 			{
 				throw;
