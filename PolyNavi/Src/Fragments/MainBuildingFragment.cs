@@ -28,7 +28,9 @@ namespace PolyNavi
 		private FrameLayout frameLayout;
 		private CoordinatorLayout.LayoutParams fabLayoutParams;
 		private FloatingActionButton buttonUp, buttonDown;
+		private List<MainBuildingMapFragment> fragments;
 		private int currentFloor = 1;
+
 		static bool editTextFromIsFocused, editTextToIsFocused;
 		
 		public override void OnCreate(Bundle savedInstanceState)
@@ -42,8 +44,14 @@ namespace PolyNavi
 
 			view = inflater.Inflate(Resource.Layout.fragment_mainbuilding, container, false);
 
+			fragments = new List<MainBuildingMapFragment>() { new MainBuildingMapFragment(Resource.Drawable.first_floor), new MainBuildingMapFragment(Resource.Drawable.second_floor), new MainBuildingMapFragment(Resource.Drawable.third_floor) };
+
 			fragmentTransaction = FragmentManager.BeginTransaction();
-			fragmentTransaction.Add(Resource.Id.frame_mainbuilding, new MainBuildingMapFragment(), "MAP_MAINBUILDING");
+			fragmentTransaction.Add(Resource.Id.frame_mainbuilding, fragments[2], "MAP_MAINBUILDING_3");
+			fragmentTransaction.Add(Resource.Id.frame_mainbuilding, fragments[1], "MAP_MAINBUILDING_2");
+			fragmentTransaction.Detach(fragments[2]);
+			fragmentTransaction.Detach(fragments[1]);
+			fragmentTransaction.Add(Resource.Id.frame_mainbuilding, fragments[0], "MAP_MAINBUILDING_1");
 			fragmentTransaction.Commit();
 
 			editTextInputFrom = view.FindViewById<EditText>(Resource.Id.edittext_input_from);
@@ -87,8 +95,10 @@ namespace PolyNavi
 			if (currentFloor < 3)
 			{
 				currentFloor++;
-				MainBuildingMapFragment fragment = (MainBuildingMapFragment)FragmentManager.FindFragmentByTag("MAP_MAINBUILDING");
-				fragment.MapView.ChangeDrawable(GetDrawableIdByFloor(currentFloor));
+				fragmentTransaction = FragmentManager.BeginTransaction();
+				fragmentTransaction.Detach(fragments[currentFloor - 2]);
+				fragmentTransaction.Attach(fragments[currentFloor - 1]);
+				fragmentTransaction.Commit();
 			}
 			if (currentFloor == 3)
 			{
@@ -102,27 +112,14 @@ namespace PolyNavi
 			if (currentFloor > 1)
 			{
 				currentFloor--;
-				MainBuildingMapFragment fragment = (MainBuildingMapFragment)FragmentManager.FindFragmentByTag("MAP_MAINBUILDING");
-				fragment.MapView.ChangeDrawable(GetDrawableIdByFloor(currentFloor));
+				fragmentTransaction = FragmentManager.BeginTransaction();
+				fragmentTransaction.Detach(fragments[currentFloor]);
+				fragmentTransaction.Attach(fragments[currentFloor - 1]);
+				fragmentTransaction.Commit();
 			}
 			if (currentFloor == 1)
 			{
 				buttonDown.Enabled = false;
-			}
-		}
-
-		private int GetDrawableIdByFloor(int floor)
-		{
-			switch (floor)
-			{
-				case 1:
-					return Resource.Drawable.first_floor;
-				case 2:
-					return Resource.Drawable.second_floor;
-				case 3:
-					return Resource.Drawable.third_floor;
-				default:
-					return Resource.Drawable.second_floor;
 			}
 		}
 

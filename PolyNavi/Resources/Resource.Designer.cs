@@ -3018,8 +3018,8 @@ namespace PolyNavi
 			// aapt resource value: 0x7f090071
 			public const int expanded_menu = 2131296369;
 			
-			// aapt resource value: 0x7f0900c1
-			public const int fab_down_mainbuilding = 2131296449;
+			// aapt resource value: 0x7f0900c0
+			public const int fab_down_mainbuilding = 2131296448;
 			
 			// aapt resource value: 0x7f0900c2
 			public const int fab_mainbuilding = 2131296450;
@@ -3027,8 +3027,8 @@ namespace PolyNavi
 			// aapt resource value: 0x7f0900cd
 			public const int fab_map_buildings = 2131296461;
 			
-			// aapt resource value: 0x7f0900c0
-			public const int fab_up_mainbuilding = 2131296448;
+			// aapt resource value: 0x7f0900c1
+			public const int fab_up_mainbuilding = 2131296449;
 			
 			// aapt resource value: 0x7f09004f
 			public const int fill = 2131296335;

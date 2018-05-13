@@ -16,11 +16,17 @@ namespace PolyNavi
 	public class MainBuildingMapFragment : Fragment
 	{
 		public MainBuildingView MapView { get; set; }
+		public int DrawawbleId { get; set; }
+
+		public MainBuildingMapFragment(int id)
+		{
+			DrawawbleId = id;
+		}
 
 		public override void OnCreate(Bundle savedInstanceState)
 		{
 			base.OnCreate(savedInstanceState);
-			MapView = new MainBuildingView(Activity.BaseContext);
+			MapView = new MainBuildingView(Activity.BaseContext, DrawawbleId);
 		}
 
 		public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
