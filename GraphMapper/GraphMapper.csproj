@@ -98,7 +98,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Graph\Graph.csproj">
-      <Project>{03a3ba7b-1808-4a3d-b78c-a17322de0f0a}</Project>
+      <Project>{846cca01-4e29-4c4f-8e58-a88b0e2925ef}</Project>
       <Name>Graph</Name>
     </ProjectReference>
   </ItemGroup>

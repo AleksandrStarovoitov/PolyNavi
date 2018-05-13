@@ -35,11 +35,11 @@ namespace GraphMapper
 		{
 			wayPen.SetLineCap(System.Drawing.Drawing2D.LineCap.Round, System.Drawing.Drawing2D.LineCap.Round, System.Drawing.Drawing2D.DashCap.Round);
 			InitializeComponent();
-#if DEBUG
-			pictureBox1.Load(@"C:\Users\Кирилл\Desktop\First_Floor.png");
-			drawArea = pictureBox1.Image;
-			this.WindowState = FormWindowState.Maximized;
-#endif
+//#if DEBUG
+//			pictureBox1.Load(@"C:\Users\Кирилл\Desktop\First_Floor.png");
+//			drawArea = pictureBox1.Image;
+//			this.WindowState = FormWindowState.Maximized;
+//#endif
 			this.KeyDown += (sender, e) =>
 			{
 				switch (e.KeyCode)
