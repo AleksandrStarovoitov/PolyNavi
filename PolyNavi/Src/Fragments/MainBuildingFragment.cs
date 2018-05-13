@@ -11,6 +11,7 @@ using static Android.Widget.TextView;
 
 using Graph;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace PolyNavi
 {
@@ -147,6 +148,7 @@ namespace PolyNavi
 					try
 					{
 						route = Algorithms.CalculateRoute(mapGraph, editTextInputFrom.Text, editTextInputTo.Text);
+						fragmentWithMap.MapView.SetRoute(route.Select(gnode => new Android.Graphics.Point(gnode.Point.X, gnode.Point.Y)).ToList());
 					}
 					catch (Algorithms.GraphRoutingException ex)
 					{
