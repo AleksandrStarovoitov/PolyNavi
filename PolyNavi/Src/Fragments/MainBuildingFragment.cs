@@ -140,7 +140,7 @@ namespace PolyNavi
 					//fabLayoutParams.AnchorId = frameLayout.Id;
 					//fab.LayoutParameters = fabLayoutParams;
 
-					var fragmentWithMap = FragmentManager.FindFragmentByTag<MainBuildingMapFragment>("MAP_MAINBUILDING");
+					var fragmentWithMap = FragmentManager.FindFragmentByTag<MainBuildingMapFragment>($"MAP_MAINBUILDING_{currentFloor}");
 					List<GraphNode> route;
 					try
 					{
