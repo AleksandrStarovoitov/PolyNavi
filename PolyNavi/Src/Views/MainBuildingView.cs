@@ -5,12 +5,17 @@ using Android.Support.V4.Content;
 using Android.Graphics;
 using Android.Views.InputMethods;
 using System;
+using System.Linq;
 using Android.Util;
+using System.Collections.Generic;
 
 namespace PolyNavi
 {
 	public class MainBuildingView : View
 	{
+		Paint routePaint = new Paint() { Color = Color.Red, StrokeCap = Paint.Cap.Round, StrokeWidth = 7.0f, };
+		float[] route;
+
 		public static bool drawerState = false;
 		private static readonly int InvalidPointerId = -1;
 
@@ -41,8 +46,9 @@ namespace PolyNavi
 			widthInDp = ConvertPixelsToDp(displ.WidthPixels);
 			heightInDp = ConvertPixelsToDp(displ.HeightPixels);
 
+			//FIXME исправить загрузку _plan чтобы он загружал файл произвольной величины
 			_plan = ContextCompat.GetDrawable(context, id);
-			_plan.SetBounds(0, 0, _plan.IntrinsicWidth, _plan.IntrinsicHeight);
+			_plan.SetBounds(0, 0, 3200, 1800);
 			_scaleDetector = new ScaleGestureDetector(context, new MyScaleListener(this));
 			imm = (InputMethodManager)c.ApplicationContext.GetSystemService(Context.InputMethodService);
 		}
@@ -151,7 +157,30 @@ namespace PolyNavi
 			canvas.Translate(_posX, _posY);
 			canvas.Scale(_scaleFactor, _scaleFactor);
 			_plan.Draw(canvas);
+			if (route != null)
+			{
+				canvas.DrawLines(route, routePaint);
+			}
 			canvas.Restore();
+		}
+
+		public void SetRoute(IList<Point> points)
+		{
+			int segmentsCount = points.Count - 1;
+			route = new float[segmentsCount * 4];
+			route[0] = points[0].X;
+			route[1] = points[0].Y;
+			int i;
+			int j;
+			for (i = 1, j = 2; i < points.Count - 1; ++i, j += 4)
+			{
+				route[j] = points[i].X;
+				route[j + 1] = points[i].Y;
+				route[j + 2] = points[i].X;
+				route[j + 3] = points[i].Y;
+			}
+			route[j] = points[i].X;
+			route[j + 1] = points[i].Y;
 		}
 
 
