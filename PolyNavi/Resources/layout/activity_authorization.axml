@@ -60,15 +60,16 @@
         android:layout_below="@+id/textview_auth_edittext_title"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
+        android:inputType="text"
         android:imeOptions="actionGo"
         android:hint="@string/edittext_auth" />
     <Button
-        android:id="@+id/button_auth" 
+        android:id="@+id/button_auth"
         android:text="@string/button_auth"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/edittext_auth"
-        android:layout_margin="40dp"/>
+        android:layout_margin="40dp" />
     <TextView
         android:id="@+id/textview_later_auth"
         android:text="@string/group_later"

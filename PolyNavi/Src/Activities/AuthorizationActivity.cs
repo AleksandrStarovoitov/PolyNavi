@@ -9,12 +9,13 @@ using Android.OS;
 using Android.Runtime;
 using Android.Support.V7.App;
 using Android.Views;
+using Android.Views.InputMethods;
 using Android.Widget;
 
 namespace PolyNavi
 {
 	[Activity(Label = "PolyNavi")]
-	public class AuthorizationActivity : AppCompatActivity
+	public class AuthorizationActivity : AppCompatActivity, TextView.IOnEditorActionListener
 	{
 		EditText editTextAuth;
 		ISharedPreferencesEditor prefEditor;
@@ -27,6 +28,8 @@ namespace PolyNavi
 			SetContentView(Resource.Layout.activity_authorization);
 
 			editTextAuth = FindViewById<EditText>(Resource.Id.edittext_auth);
+			editTextAuth.SetOnEditorActionListener(this);
+
 			var buttonAuth = FindViewById<Button>(Resource.Id.button_auth);
 			var textViewLater = FindViewById<TextView>(Resource.Id.textview_later_auth);
 
@@ -45,6 +48,20 @@ namespace PolyNavi
 				ProceedToMainActivity();
 			}
 		}
+
+		public bool OnEditorAction(TextView v, [GeneratedEnum] ImeAction actionId, KeyEvent e)
+		{
+			if (actionId == ImeAction.Go)
+			{
+				if (!editTextAuth.Text.Equals(""))
+				{
+					prefEditor.PutString("groupnumber", editTextAuth.Text).Apply();
+					ProceedToMainActivity();
+				}
+			}
+			return false;
+		}
+
 
 		private void TextViewLater_Click(object sender, EventArgs e)
 		{

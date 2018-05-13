@@ -14,7 +14,7 @@ namespace PolyNavi
 		public static bool drawerState = false;
 		private static readonly int InvalidPointerId = -1;
 
-		private readonly Drawable _plan;
+		private Drawable _plan;
 		private readonly ScaleGestureDetector _scaleDetector;
 
 		private int _activePointerId = -1;
@@ -46,6 +46,14 @@ namespace PolyNavi
 			_scaleDetector = new ScaleGestureDetector(context, new MyScaleListener(this));
 			imm = (InputMethodManager)c.ApplicationContext.GetSystemService(Context.InputMethodService);
 		}
+
+		public void ChangeDrawable(int id)
+		{
+			_plan = ContextCompat.GetDrawable(c, id);
+			_plan.SetBounds(0, 0, _plan.IntrinsicWidth, _plan.IntrinsicHeight);
+			Invalidate();
+		}
+
 
 		private int ConvertPixelsToDp(float pixelValue)
 		{

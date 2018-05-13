@@ -15,7 +15,8 @@ namespace PolyNavi
 {
 	public class MainBuildingMapFragment : Fragment
 	{
-		View view;
+		public MainBuildingView view;
+
 		public override void OnCreate(Bundle savedInstanceState)
 		{
 			base.OnCreate(savedInstanceState);

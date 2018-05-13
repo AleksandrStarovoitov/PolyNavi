@@ -24,10 +24,10 @@ namespace PolyNavi
 		private AppBarLayout.LayoutParams relativeLayoutParams;
 		private FrameLayout frameLayout;
 		private CoordinatorLayout.LayoutParams fabLayoutParams;
-
+		private FloatingActionButton buttonUp, buttonDown;
+		private int currentFloor = 1;
 		static bool editTextFromIsFocused, editTextToIsFocused;
 		
-
 		public override void OnCreate(Bundle savedInstanceState)
 		{
 			base.OnCreate(savedInstanceState);
@@ -38,7 +38,7 @@ namespace PolyNavi
 			view = inflater.Inflate(Resource.Layout.fragment_mainbuilding, container, false);
 
 			fragmentTransaction = FragmentManager.BeginTransaction();
-			fragmentTransaction.Add(Resource.Id.frame_mainbuilding, new MainBuildingMapFragment());
+			fragmentTransaction.Add(Resource.Id.frame_mainbuilding, new MainBuildingMapFragment(), "MAP_MAINBUILDING");
 			fragmentTransaction.Commit();
 
 			editTextInputFrom = view.FindViewById<EditText>(Resource.Id.edittext_input_from);
@@ -61,6 +61,18 @@ namespace PolyNavi
 			frameLayout = view.FindViewById<FrameLayout>(Resource.Id.frame_mainbuilding);
 			fabLayoutParams = (CoordinatorLayout.LayoutParams)fab.LayoutParameters;
 
+			var rl = view.FindViewById<RelativeLayout>(Resource.Id.relativelayout_floor_buttons_mainbuilding);
+			rl.BringToFront();
+
+			buttonUp = view.FindViewById<FloatingActionButton>(Resource.Id.fab_up_mainbuilding);
+			buttonUp.Click += ButtonUp_Click;
+			buttonUp.Alpha = 0.7f;
+
+			buttonDown = view.FindViewById<FloatingActionButton>(Resource.Id.fab_down_mainbuilding);
+			buttonDown.Click += ButtonDown_Click;
+			buttonDown.Alpha = 0.7f;
+			buttonDown.Enabled = false;
+
 			using (var stream = Activity.Assets.Open("floor_1.graph"))
 			{
 				GraphNode graph = Graph.SaverLoader.Load(stream);
@@ -70,7 +82,51 @@ namespace PolyNavi
 
 			return view;
 		}
-		
+
+		private void ButtonUp_Click(object sender, EventArgs e)
+		{
+			buttonDown.Enabled = true;
+			if (currentFloor < 3)
+			{
+				currentFloor++;
+				MainBuildingMapFragment fragment = (MainBuildingMapFragment)FragmentManager.FindFragmentByTag("MAP_MAINBUILDING");
+				fragment.view.ChangeDrawable(GetDrawableIdByFloor(currentFloor));
+			}
+			if (currentFloor == 3)
+			{
+				buttonUp.Enabled = false;
+			}
+		}
+
+		private void ButtonDown_Click(object sender, EventArgs e)
+		{
+			buttonUp.Enabled = true;
+			if (currentFloor > 1)
+			{
+				currentFloor--;
+				MainBuildingMapFragment fragment = (MainBuildingMapFragment)FragmentManager.FindFragmentByTag("MAP_MAINBUILDING");
+				fragment.view.ChangeDrawable(GetDrawableIdByFloor(currentFloor));
+			}
+			if (currentFloor == 1)
+			{
+				buttonDown.Enabled = false;
+			}
+		}
+
+		private int GetDrawableIdByFloor(int floor)
+		{
+			switch (floor)
+			{
+				case 1:
+					return Resource.Drawable.first_floor;
+				case 2:
+					return Resource.Drawable.second_floor;
+				case 3:
+					return Resource.Drawable.third_floor;
+				default:
+					return Resource.Drawable.second_floor;
+			}
+		}
 
 		bool fullyExpanded, fullyCollapsed;
 		private void Fab_Click(object sender, EventArgs e)
