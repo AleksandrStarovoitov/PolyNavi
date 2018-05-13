@@ -15,17 +15,17 @@ namespace PolyNavi
 {
 	public class MainBuildingMapFragment : Fragment
 	{
-		public MainBuildingView view;
+		public MainBuildingView MapView { get; set; }
 
 		public override void OnCreate(Bundle savedInstanceState)
 		{
 			base.OnCreate(savedInstanceState);
-			view = new MainBuildingView(Activity.BaseContext);
+			MapView = new MainBuildingView(Activity.BaseContext);
 		}
 
 		public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 		{
-			return view;
+			return MapView;
 		}
 	}
 }

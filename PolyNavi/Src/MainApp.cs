@@ -67,6 +67,15 @@ namespace PolyNavi
 			{ "Секретариат приемной комиссии", new Point(60.00048, 30.36805)}
 		};
 
+		public Lazy<Graph.GraphNode> MainBuildingGraph { get; private set; } = new Lazy<Graph.GraphNode>(() =>
+		{
+			using (var stream = MainApp.Instance.Assets.Open("floor_1.graph"))
+			{
+				Graph.GraphNode floor1 = Graph.SaverLoader.Load(stream);
+				return floor1;
+			}
+		});
+
 		public AsyncLazy<PolyManager> PolyManager { get; private set; } = new AsyncLazy<PolyManager>(async () =>
 		{
 			return await PolyNaviLib.BL.PolyManager.CreateAsync(GetFileFullPath(DatabaseFilename),

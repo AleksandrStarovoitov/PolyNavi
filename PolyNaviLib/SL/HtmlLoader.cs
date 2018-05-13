@@ -18,7 +18,6 @@ namespace PolyNaviLib.SL
 			}
 			catch (Exception ex)
 			{
-				int a = 0;
 				throw;
 			}
 		}

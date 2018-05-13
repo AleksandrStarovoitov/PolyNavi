@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Linq;
 
 namespace Graph
 {
@@ -79,13 +80,13 @@ namespace Graph
 			}
 
 			Queue<GraphNodeWithParent> open = new Queue<GraphNodeWithParent>();
-			List<GraphNodeWithParent> closed = new List<GraphNodeWithParent>();
+			List<GraphNode> closed = new List<GraphNode>();
 
 			open.Enqueue(new GraphNodeWithParent() { Data = start });
 			while (open.Count > 0)
 			{
 				var node = open.Dequeue();
-				closed.Add(node);
+				closed.Add(node.Data);
 				if (node.Data == finish)
 				{
 					List<GraphNode> route = new List<GraphNode>();
@@ -102,9 +103,13 @@ namespace Graph
 				foreach (var neighbour in node.Data.Neighbours)
 				{
 					var neighbourWithParent = new GraphNodeWithParent() { Data = neighbour, Parent = node };
-					if (!closed.Contains(neighbourWithParent))
+					if (!closed.Contains(neighbour))
 					{
 						open.Enqueue(neighbourWithParent);
+					}
+					else
+					{
+						int a = 0;
 					}
 				}
 			}

@@ -10,11 +10,14 @@ using System;
 using static Android.Widget.TextView;
 
 using Graph;
+using System.Collections.Generic;
 
 namespace PolyNavi
 {
 	public class MainBuildingFragment : Fragment, IOnEditorActionListener, AppBarLayout.IOnOffsetChangedListener
 	{
+		GraphNode mapGraph;
+
 		private View view;
 		private EditText editTextInputFrom, editTextInputTo;
 		private FragmentTransaction fragmentTransaction;
@@ -35,6 +38,8 @@ namespace PolyNavi
 
 		public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 		{
+			mapGraph = MainApp.Instance.MainBuildingGraph.Value;
+
 			view = inflater.Inflate(Resource.Layout.fragment_mainbuilding, container, false);
 
 			fragmentTransaction = FragmentManager.BeginTransaction();
@@ -73,13 +78,6 @@ namespace PolyNavi
 			buttonDown.Alpha = 0.7f;
 			buttonDown.Enabled = false;
 
-			using (var stream = Activity.Assets.Open("floor_1.graph"))
-			{
-				GraphNode graph = Graph.SaverLoader.Load(stream);
-
-				int a = 0;
-			}
-
 			return view;
 		}
 
@@ -90,7 +88,7 @@ namespace PolyNavi
 			{
 				currentFloor++;
 				MainBuildingMapFragment fragment = (MainBuildingMapFragment)FragmentManager.FindFragmentByTag("MAP_MAINBUILDING");
-				fragment.view.ChangeDrawable(GetDrawableIdByFloor(currentFloor));
+				fragment.MapView.ChangeDrawable(GetDrawableIdByFloor(currentFloor));
 			}
 			if (currentFloor == 3)
 			{
@@ -105,7 +103,7 @@ namespace PolyNavi
 			{
 				currentFloor--;
 				MainBuildingMapFragment fragment = (MainBuildingMapFragment)FragmentManager.FindFragmentByTag("MAP_MAINBUILDING");
-				fragment.view.ChangeDrawable(GetDrawableIdByFloor(currentFloor));
+				fragment.MapView.ChangeDrawable(GetDrawableIdByFloor(currentFloor));
 			}
 			if (currentFloor == 1)
 			{
@@ -133,15 +131,28 @@ namespace PolyNavi
 		{
 			if (fullyExpanded)
 			{
+				// FIXME в editTextInput пишутся имена комнат, количество символов может быть больше 3
 				if (editTextInputFrom.Text.Length == 3 && editTextInputTo.Text.Length == 3)
 				{
 					InputMethodManager imm = (InputMethodManager)Activity.BaseContext.GetSystemService(Context.InputMethodService);
 					imm.HideSoftInputFromWindow(View.WindowToken, 0);
 					fab.SetImageResource(Resource.Drawable.ic_gps_fixed_black_24dp);
 					appBar.SetExpanded(false);
-					
+
 					//fabLayoutParams.AnchorId = frameLayout.Id;
 					//fab.LayoutParameters = fabLayoutParams;
+
+					var fragmentWithMap = FragmentManager.FindFragmentByTag<MainBuildingMapFragment>("MAP_MAINBUILDING");
+					List<GraphNode> route;
+					try
+					{
+						route = Algorithms.CalculateRoute(mapGraph, editTextInputFrom.Text, editTextInputTo.Text);
+					}
+					catch (Algorithms.GraphRoutingException ex)
+					{
+						Toast.MakeText(Activity, ex.Message, ToastLength.Long).Show();
+					}
+					//fragmentWithMap.MapView.
 				}
 				else
 				{
