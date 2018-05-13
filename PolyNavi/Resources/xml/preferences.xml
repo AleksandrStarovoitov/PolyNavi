@@ -1,7 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-  <PreferenceCategory
-      android:title="Категория 1">
     <ListPreference
         android:key="startactivity"
         android:title="Стартовый экран"
@@ -22,9 +20,4 @@
         android:entries="@array/pref_language"
         android:entryValues="@array/pref_language_values"
         android:defaultValue="default"/>
-    
-  </PreferenceCategory>
-  
-  
-  
 </PreferenceScreen>
