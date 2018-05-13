@@ -244,6 +244,7 @@
     <None Include="app.config" />
     <AndroidAsset Include="Assets\floor_1.graph" />
     <AndroidAsset Include="Assets\polytech_map.routerdb" />
+    <AndroidAsset Include="Assets\floor_2.graph" />
     <None Include="packages.config" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Properties\AndroidManifest.xml" />

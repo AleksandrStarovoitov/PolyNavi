@@ -38,7 +38,7 @@ namespace PolyNavi
 		Context c;
 		InputMethodManager imm;
 
-		public MainBuildingView(Context context) :
+		public MainBuildingView(Context context, int id) :
 			base(context, null, 0)
 		{
 			c = context;
@@ -47,19 +47,11 @@ namespace PolyNavi
 			heightInDp = ConvertPixelsToDp(displ.HeightPixels);
 
 			//FIXME исправить загрузку _plan чтобы он загружал файл произвольной величины
-			_plan = ContextCompat.GetDrawable(context, Resource.Drawable.first_floor);
+			_plan = ContextCompat.GetDrawable(context, id);
 			_plan.SetBounds(0, 0, 3200, 1800);
 			_scaleDetector = new ScaleGestureDetector(context, new MyScaleListener(this));
 			imm = (InputMethodManager)c.ApplicationContext.GetSystemService(Context.InputMethodService);
 		}
-
-		public void ChangeDrawable(int id)
-		{
-			_plan = ContextCompat.GetDrawable(c, id);
-			_plan.SetBounds(0, 0, _plan.IntrinsicWidth, _plan.IntrinsicHeight);
-			Invalidate();
-		}
-
 
 		private int ConvertPixelsToDp(float pixelValue)
 		{
