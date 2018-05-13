@@ -76,6 +76,11 @@ namespace PolyNaviLib.DAL
 
 		private async Task<Week> LoadScheduleFromWebAsync(DateTime weekDate)
 		{
+			if (checker.Check() == false)
+			{
+				throw new NetworkException("No internet connection");
+			}
+
 			HtmlDocument htmlDoc;
 			string groupNumber = settings["groupnumber"].ToString();
 

@@ -56,14 +56,8 @@ namespace PolyNavi
 
 		public void OnRefresh()
 		{
-			// FIXME DrawContent заново надувает макет, хотя может не надувать, если этот макет уже загружен
-			DrawContent(Resource.Id.relativelayout_week_schedule, Resource.Layout.layout_week_schedule);
-			//mSwipeRefreshLayout = Activity.FindViewById<SwipeRefreshLayout>(Resource.Id.swipetorefresh_week_schedule);
-			//mSwipeRefreshLayout.SetOnRefreshListener(this);
-			//recyclerViewSchedule = Activity.FindViewById<RecyclerView>(Resource.Id.recyclerview_week_schedule);
-			recyclerViewSchedule.SetAdapter(null);
+			FragmentManager.BeginTransaction().Detach(this).Attach(this).Commit();
 			mSwipeRefreshLayout.Refreshing = false;
-			LoadSheduleAndUpdateUIWithPorgressBar(weekDate);
 		}
 
 		private void LoadSheduleAndUpdateUIWithPorgressBar(DateTime weekDate)
@@ -94,8 +88,7 @@ namespace PolyNavi
 						var v = Activity.FindViewById<RelativeLayout>(Resource.Id.layout_no_connection_clickable_zone);
 						v.Click += (sender, e) =>
 						{
-							DrawContent(Resource.Id.relativelayout_week_schedule, Resource.Layout.layout_week_schedule);
-							LoadSheduleAndUpdateUIWithPorgressBar(weekDate);
+							FragmentManager.BeginTransaction().Detach(this).Attach(this).Commit();
 						};
 					});
 				}
