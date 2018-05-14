@@ -179,21 +179,28 @@ namespace PolyNavi
 
 		public void SetRoute(IList<Point> points)
 		{
-			int segmentsCount = points.Count - 1;
-			route = new float[segmentsCount * 4];
-			route[0] = points[0].X;
-			route[1] = points[0].Y;
-			int i;
-			int j;
-			for (i = 1, j = 2; i < points.Count - 1; ++i, j += 4)
+			if (points == null)
 			{
+				route = new float[0];
+			}
+			else
+			{
+				int segmentsCount = points.Count - 1;
+				route = new float[segmentsCount * 4];
+				route[0] = points[0].X;
+				route[1] = points[0].Y;
+				int i;
+				int j;
+				for (i = 1, j = 2; i < points.Count - 1; ++i, j += 4)
+				{
+					route[j] = points[i].X;
+					route[j + 1] = points[i].Y;
+					route[j + 2] = points[i].X;
+					route[j + 3] = points[i].Y;
+				}
 				route[j] = points[i].X;
 				route[j + 1] = points[i].Y;
-				route[j + 2] = points[i].X;
-				route[j + 3] = points[i].Y;
 			}
-			route[j] = points[i].X;
-			route[j + 1] = points[i].Y;
 		}
 
 		private class MyDoubleTapListener : GestureDetector.SimpleOnGestureListener

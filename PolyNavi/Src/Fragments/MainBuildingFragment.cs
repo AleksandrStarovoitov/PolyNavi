@@ -33,6 +33,7 @@ namespace PolyNavi
 		private int currentFloor = 1;
 
 		static bool editTextFromIsFocused, editTextToIsFocused;
+
 		
 		public override void OnCreate(Bundle savedInstanceState)
 		{
@@ -129,6 +130,14 @@ namespace PolyNavi
 			}
 		}
 
+		private void ClearAllRoutes()
+		{
+			foreach (var fragment in fragments)
+			{
+				fragment.MapView.SetRoute(null);
+			}
+		}
+
 		bool fullyExpanded, fullyCollapsed;
 		private void Fab_Click(object sender, EventArgs e)
 		{
@@ -145,13 +154,28 @@ namespace PolyNavi
 					//fabLayoutParams.AnchorId = frameLayout.Id;
 					//fab.LayoutParameters = fabLayoutParams;
 
-					var fragmentWithMap = FragmentManager.FindFragmentByTag<MainBuildingMapFragment>($"MAP_MAINBUILDING_{currentFloor}");
 					List<GraphNode> route;
 					try
 					{
 						route = Algorithms.CalculateRoute(mapGraph, editTextInputFrom.Text, editTextInputTo.Text);
-						ChangeFloor(route[0].FloorNumber);
-						fragmentWithMap.MapView.SetRoute(route.Select(gnode => new Android.Graphics.Point(gnode.Point.X, gnode.Point.Y)).ToList());
+						var coordinateGroups = from node in route
+											   group node by node.FloorNumber into g
+											   select new
+											   {
+												   FloorNumber = g.Key,
+												   Coordinates = from gnode in g select new Android.Graphics.Point(gnode.Point.X, gnode.Point.Y),
+											   };
+						ClearAllRoutes();
+						foreach (var coordGroup in coordinateGroups)
+						{
+							var fragment = FragmentManager.FindFragmentByTag<MainBuildingMapFragment>($"MAP_MAINBUILDING_{coordGroup.FloorNumber}");
+							fragment.MapView.SetRoute(coordGroup.Coordinates.ToList());
+						}
+
+						int startFloor = route[0].FloorNumber;
+						//var startPointFragment = FragmentManager.FindFragmentByTag<MainBuildingMapFragment>($"MAP_MAINBUILDING_{startFloor}");
+						ChangeFloor(startFloor);
+						//startPointFragment.MapView.SetRoute(route.Select(gnode => new Android.Graphics.Point(gnode.Point.X, gnode.Point.Y)).ToList());
 					}
 					catch (GraphRoutingException ex)
 					{

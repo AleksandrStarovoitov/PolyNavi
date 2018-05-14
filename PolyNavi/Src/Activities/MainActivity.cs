@@ -26,10 +26,14 @@ using PolyNaviLib.BL;
 using static Android.Support.V4.Widget.DrawerLayout;
 using Java.Util;
 using Android.Content.Res;
+using Android.Content.PM;
 
 namespace PolyNavi
 {
-	[Activity(Label = "PolyNavi")]
+	[Activity(
+		Label = "PolyNavi",
+		ScreenOrientation = ScreenOrientation.Portrait,
+		ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.ScreenSize)]
 	public class MainActivity : AppCompatActivity, IDrawerListener
 	{
 		private DrawerLayout drawerLayout;

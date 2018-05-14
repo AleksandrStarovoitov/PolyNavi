@@ -5,6 +5,7 @@ using System.Text;
 
 using Android.App;
 using Android.Content;
+using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
 using Android.Support.V7.App;
@@ -13,7 +14,10 @@ using Android.Widget;
 
 namespace PolyNavi
 {
-	[Activity(Label = "CopyrightActivity")]
+	[Activity(
+		Label = "PolyNavi",
+		ScreenOrientation = ScreenOrientation.Portrait,
+		ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.ScreenSize)]
 	public class CopyrightActivity : AppCompatActivity
 	{
 		protected override void OnCreate(Bundle savedInstanceState)

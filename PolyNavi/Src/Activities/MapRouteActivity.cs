@@ -5,6 +5,7 @@ using System.Text;
 
 using Android.App;
 using Android.Content;
+using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
 using Android.Support.V7.App;
@@ -16,7 +17,10 @@ using Android.Widget;
 
 namespace PolyNavi
 {
-	[Activity(Label = "MapRouteActivity")]
+	[Activity(
+		Label = "PolyNavi",
+		ScreenOrientation = ScreenOrientation.Portrait,
+		ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.ScreenSize)]
 	public class MapRouteActivity : AppCompatActivity
 	{
 		private BuildingsAdapter adapterBuildings;
