@@ -4,6 +4,7 @@ using System.Text;
 using PolyNaviLib.BL;
 using HtmlAgilityPack;
 using System.Globalization;
+using System.Linq;
 
 namespace PolyNaviLib.SL
 {
@@ -16,7 +17,7 @@ namespace PolyNaviLib.SL
 		//Парсинг и построение расписания
 		public static Week BuildWeek(HtmlDocument htmlDoc)
 		{
-			Week w = new Week();
+			Week w = null;
 			Day d;
 			Lesson l = new Lesson();
 
@@ -43,6 +44,12 @@ namespace PolyNaviLib.SL
 
 				var lessons = day.LastChild.ChildNodes; //Список пар
 														//Проход по парам
+
+				if (w == null) //Проход по парам
+				{
+					w = new Week(d.Date);
+				}
+
 				foreach (var lesson in lessons)
 				{
 					l = new Lesson
@@ -57,7 +64,8 @@ namespace PolyNaviLib.SL
 					};
 					d.Lessons.Add(l); //Добавление пары в день
 				}
-				w.Days.Add(d); //Добавление дня в неделю
+				int k = w.Days.FindIndex(Day => Day.Date == d.Date);
+				w.Days[k] = d; //Добавление дня в неделю
 			}
 			return w;
 		}

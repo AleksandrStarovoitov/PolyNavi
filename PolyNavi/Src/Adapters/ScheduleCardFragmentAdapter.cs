@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Linq;using System;
 
 using Android.Views;
 using Android.Widget;
@@ -8,6 +8,7 @@ using Android.Content;
 using System.Collections.Generic;
 using PolyNaviLib.BL;
 using System.Globalization;
+using System.Linq;
 
 namespace PolyNavi
 {
@@ -162,7 +163,7 @@ namespace PolyNavi
 
 		public ScheduleCardFragmentAdapter(List<Day> days)
 		{
-			mDays = days;
+			mDays = days.Where(Day => Day.Lessons.Count != 0).ToList();
 		}
 
 		// Create new views (invoked by the layout manager)
