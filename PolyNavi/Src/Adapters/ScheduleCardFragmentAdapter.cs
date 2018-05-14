@@ -151,7 +151,6 @@ namespace PolyNavi
 		}
 	}
 
-
 	class ScheduleCardFragmentAdapter : RecyclerView.Adapter
 	{
 		private List<Day> mDays;

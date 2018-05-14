@@ -147,7 +147,7 @@ namespace PolyNavi
 						route = Algorithms.CalculateRoute(mapGraph, editTextInputFrom.Text, editTextInputTo.Text);
 						fragmentWithMap.MapView.SetRoute(route.Select(gnode => new Android.Graphics.Point(gnode.Point.X, gnode.Point.Y)).ToList());
 					}
-					catch (Algorithms.GraphRoutingException ex)
+					catch (GraphRoutingException ex)
 					{
 						Toast.MakeText(Activity, ex.Message, ToastLength.Long).Show();
 					}
