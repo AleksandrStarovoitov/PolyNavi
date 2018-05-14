@@ -108,6 +108,9 @@ namespace PolyNavi
 						Log.Debug("OnTouch", "top: " + top);
 						Log.Debug("OnTouch", "bottom: " + bottom);
 						Log.Debug("OnTouch", " ");
+						Log.Debug("OnTouch", "posX: " + _posX);
+						Log.Debug("OnTouch", "posY: " + _posY);
+						Log.Debug("OnTouch", " ");
 
 						if (right < displ.WidthPixels)
 						{

@@ -46,9 +46,11 @@ namespace PolyNavi
 
 			var sashaLink = view.FindViewById<TextView>(Resource.Id.textview_contacts_sasha_link_about);
 			var kirillLink = view.FindViewById<TextView>(Resource.Id.textview_contacts_kirill_link_about);
+			var mashaLink = view.FindViewById<TextView>(Resource.Id.textview_contacts_masha_link_about);
 
 			sashaLink.MovementMethod = LinkMovementMethod.Instance;
 			kirillLink.MovementMethod = LinkMovementMethod.Instance;
+			mashaLink.MovementMethod = LinkMovementMethod.Instance;
 
 			return view;
 		}
