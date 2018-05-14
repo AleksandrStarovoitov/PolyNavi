@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Graph floorCount="2">
+    <Data>
+        <Floor name="floor_1.graph" number="1"/>
+        <Floor name="floor_2.graph" number="2"/>
+    </Data>
+    <StairsLinker>
+        <Stairs>
+            <Item id="170" floor="1"/>
+            <Item id="181" floor="2"/>
+        </Stairs>
+        <Stairs>
+            <Item id="75" floor="1"/>
+            <Item id="183" floor="2" />
+        </Stairs>
+        <Stairs>
+            <Item id="171" floor="1"/>
+            <Item id="182" floor="2" />
+        </Stairs>
+        <Stairs>
+            <Item id="72" floor="1"/>
+            <Item id="184" floor="2" />
+        </Stairs>
+        <Stairs>
+            <Item id="86" floor="1"/>
+            <Item id="185" floor="2" />
+        </Stairs>
+        <Stairs>
+            <Item id="109" floor="1"/>
+            <Item id="63" floor="2" />
+        </Stairs>
+        <Stairs>
+            <Item id="161" floor="1"/>
+            <Item id="186" floor="2" />
+        </Stairs>
+        <!--<Stairs>
+            <Item id="187" floor="2"/>
+            <Item id="***" floor="3" />
+        </Stairs>-->
+    </StairsLinker>
+</Graph>
