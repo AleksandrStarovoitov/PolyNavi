@@ -62,6 +62,9 @@
   <string name="about_contacts_kirill_link">
     <a href="https://vk.com/pushkin_007">Кирилл Большаков</a>
   </string>
+  <string name="about_contacts_masha_link">
+    <a href="https://vk.com/kolomeets1997">Мария Коломеец</a>
+  </string>
 
   <string name="enter_group_number">Укажите номер группы</string>
   <string name="edittext_title">Номер группы</string>

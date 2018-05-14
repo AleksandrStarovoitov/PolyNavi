@@ -21,14 +21,15 @@ namespace PolyNavi
 
 		private Drawable _plan;
 		private readonly ScaleGestureDetector _scaleDetector;
+		private readonly GestureDetector _doubleTapListener;
 
 		private int _activePointerId = -1;
 		private float _lastTouchX;
 		private float _lastTouchY;
 		private float _posX;
 		private float _posY;
-		private float _scaleFactor = 1.0f;
-		private float _minScaleFactor = 1.0f;
+		private float _scaleFactor = 0.9f;
+		private float _minScaleFactor = 0.9f;
 		private float _maxScaleFactor = 5.0f;
 
 		Android.Util.DisplayMetrics displ;
@@ -50,6 +51,8 @@ namespace PolyNavi
 			_plan = ContextCompat.GetDrawable(context, id);
 			_plan.SetBounds(0, 0, 3200, 1800);
 			_scaleDetector = new ScaleGestureDetector(context, new MyScaleListener(this));
+			_doubleTapListener = new GestureDetector(context, new MyDoubleTapListener(this, displ));
+
 			imm = (InputMethodManager)c.ApplicationContext.GetSystemService(Context.InputMethodService);
 		}
 
@@ -67,6 +70,7 @@ namespace PolyNavi
 				imm.HideSoftInputFromWindow(WindowToken, 0);
 			}
 			_scaleDetector.OnTouchEvent(e);
+			_doubleTapListener.OnTouchEvent(e);
 
 			MotionEventActions action = e.Action & MotionEventActions.Mask;
 			int pointerIndex;
@@ -91,13 +95,22 @@ namespace PolyNavi
 						_posX += deltaX;
 						_posY += deltaY;
 												
-						float planScaleWidth = _plan.IntrinsicWidth * _scaleFactor;
-						float planScaleHeight = _plan.IntrinsicHeight * _scaleFactor;
+						float planScaleWidth = 3200 * _scaleFactor;
+						float planScaleHeight = 1800 * _scaleFactor;
 
 						float right = _posX + planScaleWidth;
 						float left = _posX;
 						float top = _posY;
 						float bottom = _posY + planScaleHeight;
+
+						Log.Debug("OnTouch", "right: " + right);
+						Log.Debug("OnTouch", "left: " + left);
+						Log.Debug("OnTouch", "top: " + top);
+						Log.Debug("OnTouch", "bottom: " + bottom);
+						Log.Debug("OnTouch", " ");
+						Log.Debug("OnTouch", "posX: " + _posX);
+						Log.Debug("OnTouch", "posY: " + _posY);
+						Log.Debug("OnTouch", " ");
 
 						if (right < displ.WidthPixels)
 						{
@@ -182,6 +195,27 @@ namespace PolyNavi
 			route[j] = points[i].X;
 			route[j + 1] = points[i].Y;
 		}
+
+		private class MyDoubleTapListener : GestureDetector.SimpleOnGestureListener
+		{
+			private MainBuildingView view;
+			private bool ZoomedIn = false;
+			private DisplayMetrics displ;
+
+			public MyDoubleTapListener(MainBuildingView view, DisplayMetrics displ)
+			{
+				this.view = view;
+				this.displ = displ;
+			}
+
+			public override bool OnDoubleTap(MotionEvent e)
+			{
+				Log.Debug("DoubleTap", "OnDoubleTap");
+				
+				return base.OnDoubleTap(e);
+			}
+		}
+
 
 
 		private class MyScaleListener : ScaleGestureDetector.SimpleOnScaleGestureListener

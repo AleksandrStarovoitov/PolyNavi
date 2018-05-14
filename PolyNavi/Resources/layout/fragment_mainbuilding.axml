@@ -17,6 +17,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:src="@drawable/baseline_keyboard_arrow_down_black_24dp"
+            app:backgroundTint="@color/button_floors"
             android:layout_margin="16dp"
             android:clickable="true" />
         <android.support.design.widget.FloatingActionButton
@@ -24,6 +25,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:src="@drawable/baseline_keyboard_arrow_up_black_24dp"
+            app:backgroundTint="@color/button_floors"
             android:layout_margin="16dp"
             android:clickable="true"
             android:layout_toRightOf="@+id/fab_down_mainbuilding" />

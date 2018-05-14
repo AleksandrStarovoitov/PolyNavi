@@ -583,6 +583,9 @@
     <AndroidResource Include="Resources\drawable\baseline_keyboard_arrow_down_black_24dp.png" />
   </ItemGroup>
   <ItemGroup>
+    <AndroidResource Include="Resources\color\button_floors.xml" />
+  </ItemGroup>
+  <ItemGroup>
     <AndroidAsset Include="Assets\main_graph.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />

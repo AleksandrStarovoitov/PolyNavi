@@ -55,7 +55,7 @@
             <LinearLayout
                 android:id="@+id/linearlayout_email_about"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:padding="5dp">
                 <ImageView
@@ -73,13 +73,13 @@
                         android:layout_height="wrap_content"
                         android:text="@string/about_email_title"
                         android:textColor="@color/colorBlack"
-                        android:textSize="18sp" />
+                        android:textSize="16sp" />
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="polynavi@yandex.ru"
                         android:textColor="@color/colorBlackWithTransparency"
-                        android:textSize="16sp" />
+                        android:textSize="15sp" />
                 </LinearLayout>
             </LinearLayout>
         </FrameLayout>
@@ -95,7 +95,7 @@
             <LinearLayout
                 android:id="@+id/linearlayout_rate_about"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:padding="5dp">
                 <ImageView
@@ -113,13 +113,13 @@
                         android:layout_height="wrap_content"
                         android:text="@string/about_rate_title"
                         android:textColor="@color/colorBlack"
-                        android:textSize="18sp" />
+                        android:textSize="16sp" />
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/about_rate_subtitle"
                         android:textColor="@color/colorBlackWithTransparency"
-                        android:textSize="16sp" />
+                        android:textSize="15sp" />
                 </LinearLayout>
             </LinearLayout>
         </FrameLayout>
@@ -135,7 +135,7 @@
             <LinearLayout
                 android:id="@+id/linearlayout_bitbucket_about"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:padding="5dp">
                 <ImageView
@@ -153,13 +153,13 @@
                         android:layout_height="wrap_content"
                         android:text="@string/about_bitbucket_title"
                         android:textColor="@color/colorBlack"
-                        android:textSize="18sp" />
+                        android:textSize="16sp" />
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/about_bitbucket_subtitle"
                         android:textColor="@color/colorBlackWithTransparency"
-                        android:textSize="16sp" />
+                        android:textSize="15sp" />
                 </LinearLayout>
             </LinearLayout>
         </FrameLayout>
@@ -175,7 +175,7 @@
             <LinearLayout
                 android:id="@+id/linearlayout_donate_about"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:padding="5dp">
                 <ImageView
@@ -193,13 +193,13 @@
                         android:layout_height="wrap_content"
                         android:text="@string/about_donate_title"
                         android:textColor="@color/colorBlack"
-                        android:textSize="18sp" />
+                        android:textSize="16sp" />
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/about_donate_subtitle"
                         android:textColor="@color/colorBlackWithTransparency"
-                        android:textSize="16sp" />
+                        android:textSize="15sp" />
                 </LinearLayout>
             </LinearLayout>
         </FrameLayout>
@@ -215,7 +215,7 @@
             <LinearLayout
                 android:id="@+id/linearlayout_copyright_about"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:padding="5dp">
                 <ImageView
@@ -233,7 +233,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/about_copyright_title"
                         android:textColor="@color/colorBlack"
-                        android:textSize="18sp" />
+                        android:textSize="16sp" />
                 <!--<TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -279,6 +279,15 @@
                 android:textColor="@color/colorBlack"
                 android:textSize="18sp"
                 android:layout_below="@+id/textview_contacts_sasha_link_about"
+                android:layout_marginTop="5dp" />
+          <TextView
+                android:id="@+id/textview_contacts_masha_link_about"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/about_contacts_masha_link"
+                android:textColor="@color/colorBlack"
+                android:textSize="18sp"
+                android:layout_below="@+id/textview_contacts_kirill_link_about"
                 android:layout_marginTop="5dp" />
         </RelativeLayout>
     </RelativeLayout>
