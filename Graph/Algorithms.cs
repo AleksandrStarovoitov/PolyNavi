@@ -14,8 +14,8 @@ namespace Graph
 
 		public static List<GraphNode> CalculateRoute(GraphNode graph, string startName, string finishName)
 		{
-			var start = FindNode(graph, startName);
-			var finish = FindNode(graph, finishName);
+			var start = FindNodeByName(graph, startName);
+			var finish = FindNodeByName(graph, finishName);
 			if (start == null)
 			{
 				throw new GraphRoutingException($"Node with name {startName} could not be found");
@@ -62,7 +62,7 @@ namespace Graph
 			throw new GraphRoutingException($"Can't find route between {startName} and {finishName}");
 		}
 
-		private static GraphNode FindNode(GraphNode graph, string name)
+		internal static GraphNode FindNode(GraphNode graph, Predicate<GraphNode> predicate)
 		{
 			Queue<GraphNode> bfsQueue = new Queue<GraphNode>();
 			List<GraphNode> closed = new List<GraphNode>();
@@ -71,7 +71,7 @@ namespace Graph
 			{
 				var node = bfsQueue.Dequeue();
 				closed.Add(node);
-				if (node.RoomName == name)
+				if (predicate(node))
 				{
 					return node;
 				}
@@ -87,6 +87,22 @@ namespace Graph
 				}
 			}
 			return null;
+		}
+
+		internal static GraphNode FindNodeByName(GraphNode graph, string name)
+		{
+			return FindNode(graph, (node) =>
+			{
+				return node.RoomName == name;
+			});
+		}
+
+		internal static GraphNode FindNodeById(GraphNode graph, int id)
+		{
+			return FindNode(graph, (node) =>
+			{
+				return node.Id == id;
+			});
 		}
 	}
 }
