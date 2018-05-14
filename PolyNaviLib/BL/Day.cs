@@ -14,7 +14,7 @@ namespace PolyNaviLib.BL
 		public List<Lesson> Lessons { get; set; } //Список пар
 		public string Datestr { get; set; }          //Дата, день недели
 		public DateTime Date { get; set; }
-
+		
 		[ManyToOne]
 		public Week Week { get; set; }
 
