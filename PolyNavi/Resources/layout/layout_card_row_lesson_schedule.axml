@@ -32,8 +32,8 @@
       android:fontFamily="@font/roboto_light"
       android:layout_alignBaseline="@+id/textview_card_starttime_row_lesson_schedule"
       android:layout_toRightOf="@+id/textview_card_starttime_row_lesson_schedule"
-      android:layout_marginLeft="@dimen/cardOuterTextMarginLeftRight"
-      android:layout_marginRight="@dimen/cardOuterTextMarginLeftRight" />
+      android:layout_toLeftOf="@+id/textview_card_type_row_lesson_schedule"
+      android:layout_marginLeft="@dimen/cardOuterTextMarginLeftRight" />
   <TextView
       android:text="@string/building_schedule_row"
       android:layout_width="wrap_content"
@@ -62,6 +62,6 @@
         android:textAppearance="@style/ScheduleRoom"
         android:fontFamily="@font/roboto_light"
         android:layout_alignParentRight="true"
-        android:layout_alignBaseline="@+id/textview_card_buildingnumber_row_lesson_schedule"
+        android:layout_alignBaseline="@+id/textview_card_subject_row_lesson_schedule"
         android:layout_marginRight="@dimen/cardOuterTextMarginLeftRight"/>
 </RelativeLayout>

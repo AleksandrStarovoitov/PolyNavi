@@ -3504,8 +3504,8 @@ namespace PolyNavi
 			// aapt resource value: 0x7f09008d
 			public const int textview_auth_poly = 2131296397;
 			
-			// aapt resource value: 0x7f0900e0
-			public const int textview_card_buildingnumber_row_lesson_schedule = 2131296480;
+			// aapt resource value: 0x7f0900e1
+			public const int textview_card_buildingnumber_row_lesson_schedule = 2131296481;
 			
 			// aapt resource value: 0x7f0900e5
 			public const int textview_card_date_row_title_schedule = 2131296485;
@@ -3516,8 +3516,8 @@ namespace PolyNavi
 			// aapt resource value: 0x7f0900de
 			public const int textview_card_endtime_row_lesson_schedule = 2131296478;
 			
-			// aapt resource value: 0x7f0900e1
-			public const int textview_card_room_row_lesson_schedule = 2131296481;
+			// aapt resource value: 0x7f0900e2
+			public const int textview_card_room_row_lesson_schedule = 2131296482;
 			
 			// aapt resource value: 0x7f0900dd
 			public const int textview_card_starttime_row_lesson_schedule = 2131296477;
@@ -3525,8 +3525,8 @@ namespace PolyNavi
 			// aapt resource value: 0x7f0900df
 			public const int textview_card_subject_row_lesson_schedule = 2131296479;
 			
-			// aapt resource value: 0x7f0900e2
-			public const int textview_card_type_row_lesson_schedule = 2131296482;
+			// aapt resource value: 0x7f0900e0
+			public const int textview_card_type_row_lesson_schedule = 2131296480;
 			
 			// aapt resource value: 0x7f0900bd
 			public const int textview_contacts_kirill_link_about = 2131296445;
@@ -4116,6 +4116,9 @@ namespace PolyNavi
 			
 			// aapt resource value: 0x7f0b004f
 			public const int about_rate_title = 2131427407;
+			
+			// aapt resource value: 0x7f0b005f
+			public const int app_language = 2131427423;
 			
 			// aapt resource value: 0x7f0b002d
 			public const int app_name = 2131427373;

@@ -62,5 +62,7 @@
   <string name="about_contacts_kirill_link">
     <a href="https://vk.com/pushkin_007">Kirill Bolshakov</a>
   </string>
-  
+
+  <string name="app_language">App language</string>
+
 </resources>

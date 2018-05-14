@@ -62,6 +62,9 @@ namespace PolyNaviLib.SL
 						StartTime = DateTime.Parse(lesson.FirstChild.FirstChild.InnerText.Substring(0, 5), ci),
 						EndTime = DateTime.Parse(lesson.FirstChild.FirstChild.InnerText.Substring(6), ci),
 					};
+					l.Type = l.Type.Replace("Лекции", "Лек");
+					l.Type = l.Type.Replace("Практика", "Пр");
+					l.Type = l.Type.Replace("Лабораторные", "Лаб");
 					d.Lessons.Add(l); //Добавление пары в день
 				}
 				int k = w.Days.FindIndex(Day => Day.Date == d.Date);
