@@ -92,33 +92,38 @@ namespace PolyNavi
 
 		private void ButtonUp_Click(object sender, EventArgs e)
 		{
-			buttonDown.Enabled = true;
-			if (currentFloor < 3)
-			{
-				currentFloor++;
-				fragmentTransaction = FragmentManager.BeginTransaction();
-				fragmentTransaction.Detach(fragments[currentFloor - 2]);
-				fragmentTransaction.Attach(fragments[currentFloor - 1]);
-				fragmentTransaction.Commit();
-			}
-			if (currentFloor == 3)
-			{
-				buttonUp.Enabled = false;
-			}
+			ChangeFloor(currentFloor + 1);
 		}
 
 		private void ButtonDown_Click(object sender, EventArgs e)
 		{
-			buttonUp.Enabled = true;
-			if (currentFloor > 1)
+			ChangeFloor(currentFloor - 1);
+		}
+
+		/// <summary>
+		/// Индексация с единицы
+		/// </summary>
+		/// <param name="newFloor"></param>
+		private void ChangeFloor(int newFloor)
+		{
+			if (newFloor < 1 && newFloor > 3)
 			{
-				currentFloor--;
-				fragmentTransaction = FragmentManager.BeginTransaction();
-				fragmentTransaction.Detach(fragments[currentFloor]);
-				fragmentTransaction.Attach(fragments[currentFloor - 1]);
-				fragmentTransaction.Commit();
+				throw new ArgumentOutOfRangeException("newFloor", newFloor, "Не валидный номер этажа");
 			}
-			if (currentFloor == 1)
+			buttonDown.Enabled = true;
+			buttonUp.Enabled = true;
+			var currentFragment = FragmentManager.FindFragmentByTag<MainBuildingMapFragment>($"MAP_MAINBUILDING_{currentFloor}");
+			var newFragment = FragmentManager.FindFragmentByTag<MainBuildingMapFragment>($"MAP_MAINBUILDING_{newFloor}");
+			FragmentManager.BeginTransaction().
+							Detach(currentFragment).
+							Attach(newFragment).
+							Commit();
+			currentFloor = newFloor;
+			if (currentFloor == 3)
+			{
+				buttonUp.Enabled = false;
+			}
+			else if (currentFloor == 1)
 			{
 				buttonDown.Enabled = false;
 			}
@@ -145,13 +150,13 @@ namespace PolyNavi
 					try
 					{
 						route = Algorithms.CalculateRoute(mapGraph, editTextInputFrom.Text, editTextInputTo.Text);
+						ChangeFloor(route[0].FloorNumber);
 						fragmentWithMap.MapView.SetRoute(route.Select(gnode => new Android.Graphics.Point(gnode.Point.X, gnode.Point.Y)).ToList());
 					}
 					catch (GraphRoutingException ex)
 					{
 						Toast.MakeText(Activity, ex.Message, ToastLength.Long).Show();
 					}
-					//fragmentWithMap.MapView.
 				}
 				else
 				{
