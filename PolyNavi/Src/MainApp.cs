@@ -7,11 +7,13 @@ using System.Reflection;
 
 using Android.App;
 using Android.Content;
+using Android.Content.Res;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.Support.V7.Preferences;
+using Java.Util;
 
 using Mapsui.Geometries;
 
@@ -34,6 +36,8 @@ namespace PolyNavi
 	public class MainApp : Application
 	{
 		private const string DatabaseFilename = "schedule.sqlite";
+		private Locale locale = null;
+		private string language;
 
 		public static MainApp Instance { get; private set; }
 
@@ -113,8 +117,9 @@ namespace PolyNavi
 		public override void OnCreate()
 		{
 			base.OnCreate();
+			language = SharedPreferences.GetString("language", null);
 		}
-
+	
 		internal static string GetFileFullPath(string fname)
 		{
 			string dirPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
@@ -129,6 +134,20 @@ namespace PolyNavi
 		{
 			var assembly = typeof(MainApp).GetTypeInfo().Assembly;
 			return assembly.GetManifestResourceStream($"PolyNavi.EmbeddedResources.{relativePath}");
+		}
+
+		public static void ChangeLanguage(Context c)
+		{
+			if (Instance.language != null)
+			{
+				Configuration config = c.Resources.Configuration;
+
+				var locale = new Locale(Instance.language);
+				Locale.Default = locale;
+				Configuration conf = new Configuration(config);
+				conf.SetLocale(locale);
+				c.Resources.UpdateConfiguration(conf, c.Resources.DisplayMetrics);
+			}
 		}
 	}
 }

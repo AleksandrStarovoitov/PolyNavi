@@ -22,6 +22,7 @@ namespace PolyNavi
 
 		protected override void OnCreate(Bundle savedInstanceState)
 		{
+			MainApp.ChangeLanguage(this);
 			SetTheme(Resource.Style.MyAppTheme);
 			base.OnCreate(savedInstanceState);
 

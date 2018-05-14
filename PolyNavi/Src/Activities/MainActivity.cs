@@ -24,6 +24,8 @@ using Android.Widget;
 using PolyNaviLib.BL;
 
 using static Android.Support.V4.Widget.DrawerLayout;
+using Java.Util;
+using Android.Content.Res;
 
 namespace PolyNavi
 {
@@ -42,10 +44,12 @@ namespace PolyNavi
 
 		protected override void OnCreate(Bundle savedInstanceState)
 		{
+			MainApp.ChangeLanguage(this);
 			SetTheme(Resource.Style.MyAppTheme);
 			base.OnCreate(savedInstanceState);
+
 			startActivity = MainApp.Instance.SharedPreferences.GetString("startactivity", null);
-			
+			string str = MainApp.Instance.SharedPreferences.GetString("language", null);
 			SetContentView(Resource.Layout.activity_main);
 
 			drawerLayout = FindViewById<DrawerLayout>(Resource.Id.drawerlayout_main);

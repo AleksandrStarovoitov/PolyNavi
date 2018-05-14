@@ -71,4 +71,7 @@
   <string name="edittext_auth">Например - 23537/1</string>
   <string name="button_auth">Поехали</string>
   <string name="group_later">Я укажу номер группы позже</string>
+
+  <string name="app_language">Язык приложения</string>
+  
 </resources>

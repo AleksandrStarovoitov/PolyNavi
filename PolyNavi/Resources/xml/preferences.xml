@@ -15,7 +15,7 @@
         android:dialogTitle="Введите номер группы"/>
     <ListPreference
         android:key="language"
-        android:title="Язык приложения"
+        android:title="@string/app_language"
         android:summary="Для применения изменений необходима перезагрузка приложения"
         android:entries="@array/pref_language"
         android:entryValues="@array/pref_language_values"
