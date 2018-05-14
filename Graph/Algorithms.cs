@@ -104,5 +104,13 @@ namespace Graph
 				return node.Id == id;
 			});
 		}
+
+		internal static GraphNode FindNodeByIdAndFloorNumber(GraphNode graph, int id, int floorNumber)
+		{
+			return FindNode(graph, (node) =>
+			{
+				return node.Id == id && node.FloorNumber == floorNumber;
+			});
+		}
 	}
 }

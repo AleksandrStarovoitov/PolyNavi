@@ -13,8 +13,20 @@ namespace PolyNavi
 {
 	public class MainBuildingView : View
 	{
-		Paint routePaint = new Paint() { Color = Color.Red, StrokeCap = Paint.Cap.Round, StrokeWidth = 7.0f, };
+		public enum Marker
+		{
+			Start,
+			End,
+			None,
+		}
+
+		Paint routePaint = new Paint() { Color = Color.Blue, StrokeCap = Paint.Cap.Round, StrokeWidth = 7.0f, };
+		Paint startPointPaint = new Paint() { Color = Color.Green };
+		Paint endPointPaint = new Paint() { Color = Color.Red };
 		float[] route;
+		//TODO изменить на рисунки
+		Marker marker = Marker.None;
+		Point markerPoint;
 
 		public static bool drawerState = false;
 		private static readonly int InvalidPointerId = -1;
@@ -42,6 +54,7 @@ namespace PolyNavi
 		public MainBuildingView(Context context, int id) :
 			base(context, null, 0)
 		{
+			startPointPaint.SetStyle(Paint.Style.Fill); //TODO
 			c = context;
 			displ = Resources.DisplayMetrics;
 			widthInDp = ConvertPixelsToDp(displ.WidthPixels);
@@ -174,7 +187,21 @@ namespace PolyNavi
 			{
 				canvas.DrawLines(route, routePaint);
 			}
+			if (marker == Marker.Start)
+			{
+				canvas.DrawCircle(markerPoint.X, markerPoint.Y, 10.0f, startPointPaint);
+			}
+			if (marker == Marker.End)
+			{
+				canvas.DrawRect(markerPoint.X - 10, markerPoint.Y - 10, markerPoint.X + 10, markerPoint.Y + 10, endPointPaint);
+			}
 			canvas.Restore();
+		}
+
+		public void SetMarker(Point point, Marker marker)
+		{
+			this.marker = marker;
+			markerPoint = point;
 		}
 
 		public void SetRoute(IList<Point> points)

@@ -56,6 +56,11 @@ namespace Graph
 				using (var graphStream = assetProvider.Open(name))
 				{
 					GraphNode floorGraph = Load(graphStream);
+					if (floorGraph.FloorNumber == 1)
+					{
+						var n = Algorithms.FindNodeById(floorGraph, 161);
+						int a = 0;
+					}
 					floorGraphes.Add(floorGraph);
 				}
 			}
@@ -65,19 +70,19 @@ namespace Graph
 			{
 				foreach (var item in stairs.Elements("Item"))
 				{
-					int id = (int)item.Attribute("id");
+					int floorId = (int)item.Attribute("id");
 					int floorNumber = (int)item.Attribute("floor");
 					var others = from i in stairs.Elements("Item")
-								 where (int)i.Attribute("id") != id
+								 where (int)i.Attribute("id") != floorId
 								 select i;
 					GraphNode floor = floorGraphes.Where(g => g.FloorNumber == floorNumber).Single();
-					GraphNode stairsNode = Algorithms.FindNodeById(floor, id);
+					GraphNode stairsNode = Algorithms.FindNodeByIdAndFloorNumber(floor, floorId, floorNumber);
 					foreach (var otherItem in others)
 					{
 						int otherId = (int)otherItem.Attribute("id");
 						int otherFloorNumber = (int)otherItem.Attribute("floor");
 						GraphNode otherFloor = floorGraphes.Where(g => g.FloorNumber == otherFloorNumber).Single();
-						GraphNode otherStairsNode = Algorithms.FindNodeById(otherFloor, otherId);
+						GraphNode otherStairsNode = Algorithms.FindNodeByIdAndFloorNumber(otherFloor, otherId, otherFloorNumber);
 						stairsNode.Neighbours.Add(otherStairsNode);
 					}
 				}
