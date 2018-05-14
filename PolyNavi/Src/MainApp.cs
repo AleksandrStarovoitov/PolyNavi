@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
+using System.Reflection;
 
 using Android.App;
 using Android.Content;
@@ -17,7 +18,6 @@ using Mapsui.Geometries;
 using Nito.AsyncEx;
 
 using PolyNaviLib.BL;
-using System.Reflection;
 
 namespace PolyNavi
 {
@@ -69,11 +69,27 @@ namespace PolyNavi
 
 		public Lazy<Graph.GraphNode> MainBuildingGraph { get; private set; } = new Lazy<Graph.GraphNode>(() =>
 		{
-			using (var stream = MainApp.Instance.Assets.Open("floor_1.graph"))
+			if (File.Exists(GetFileFullPath("main.graph")))
 			{
-				Graph.GraphNode floor1 = Graph.SaverLoader.Load(stream);
-				return floor1;
+				using (var stream = File.OpenRead(GetFileFullPath("main.graph")))
+				{
+					return Graph.SaverLoader.Load(stream);
+				}
 			}
+			else
+			{
+				var graph = MainApp.Instance.GraphSaverLoader.LoadFromXmlDescriptor("main_graph.xml");
+				using (var stream = File.Create(GetFileFullPath("main.graph")))
+				{
+					Graph.SaverLoader.Save(stream, graph);
+				}
+				return graph;
+			}
+			//using (var stream = MainApp.Instance.Assets.Open("floor_1.graph"))
+			//{
+			//	Graph.GraphNode floor1 = Graph.SaverLoader.Load(stream);
+			//	return floor1;
+			//}
 		});
 
 		public AsyncLazy<PolyManager> PolyManager { get; private set; } = new AsyncLazy<PolyManager>(async () =>
@@ -85,10 +101,13 @@ namespace PolyNavi
 
 		public ISharedPreferences SharedPreferences { get; private set; }
 
+		public Graph.SaverLoader GraphSaverLoader { get; private set; }
+
 		public MainApp(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
 		{
 			Instance = this;
-			SharedPreferences = PreferenceManager.GetDefaultSharedPreferences(this.ApplicationContext);
+			SharedPreferences = PreferenceManager.GetDefaultSharedPreferences(ApplicationContext);
+			GraphSaverLoader = new Graph.SaverLoader(new AssetsProvider(ApplicationContext));
 		}
 
 		public override void OnCreate()

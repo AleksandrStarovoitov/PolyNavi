@@ -3,6 +3,7 @@
     <Data>
         <Floor name="floor_1.graph" number="1"/>
         <Floor name="floor_2.graph" number="2"/>
+        <!--<Floor name="floor_3_1.graph" number="3" part="1"/>-->
     </Data>
     <StairsLinker>
         <Stairs>
