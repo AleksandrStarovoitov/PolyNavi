@@ -4117,9 +4117,6 @@ namespace PolyNavi
 			// aapt resource value: 0x7f0b004f
 			public const int about_rate_title = 2131427407;
 			
-			// aapt resource value: 0x7f0b005f
-			public const int app_language = 2131427423;
-			
 			// aapt resource value: 0x7f0b002d
 			public const int app_name = 2131427373;
 			
@@ -4225,11 +4222,35 @@ namespace PolyNavi
 			// aapt resource value: 0x7f0b0043
 			public const int pref_buildings_activity = 2131427395;
 			
+			// aapt resource value: 0x7f0b0063
+			public const int pref_groupnumber_dialog_title = 2131427427;
+			
+			// aapt resource value: 0x7f0b0062
+			public const int pref_groupnumber_summary = 2131427426;
+			
+			// aapt resource value: 0x7f0b0061
+			public const int pref_groupnumber_title = 2131427425;
+			
+			// aapt resource value: 0x7f0b0060
+			public const int pref_language_summary = 2131427424;
+			
+			// aapt resource value: 0x7f0b005f
+			public const int pref_language_title = 2131427423;
+			
 			// aapt resource value: 0x7f0b0042
 			public const int pref_mainbuilding_activity = 2131427394;
 			
 			// aapt resource value: 0x7f0b0044
 			public const int pref_schedule_activity = 2131427396;
+			
+			// aapt resource value: 0x7f0b0066
+			public const int pref_startactivity_dialog_title = 2131427430;
+			
+			// aapt resource value: 0x7f0b0065
+			public const int pref_startactivity_summary = 2131427429;
+			
+			// aapt resource value: 0x7f0b0064
+			public const int pref_startactivity_title = 2131427428;
 			
 			// aapt resource value: 0x7f0b0036
 			public const int room_schedule_row = 2131427382;

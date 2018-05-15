@@ -72,6 +72,13 @@
   <string name="button_auth">Поехали</string>
   <string name="group_later">Я укажу номер группы позже</string>
 
-  <string name="app_language">Язык приложения</string>
-  
+  <string name="pref_language_title">Язык приложения</string>
+  <string name="pref_language_summary">Для применения изменений необходима перезагрузка приложения</string>
+  <string name="pref_groupnumber_title">Номер группы</string>
+  <string name="pref_groupnumber_summary">Измените номер группы</string>
+  <string name="pref_groupnumber_dialog_title">Введите номер группы</string>
+  <string name="pref_startactivity_title">Стартовый экран</string>
+  <string name="pref_startactivity_summary">Он будет отображаться при запуске приложения</string>
+  <string name="pref_startactivity_dialog_title">Выберите стартовый экран</string>
+
 </resources>
