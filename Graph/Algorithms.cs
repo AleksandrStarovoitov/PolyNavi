@@ -53,10 +53,6 @@ namespace Graph
 					{
 						open.Enqueue(neighbourWithParent);
 					}
-					else
-					{
-						int a = 0;
-					}
 				}
 			}
 			throw new GraphRoutingException($"Can't find route between {startName} and {finishName}");

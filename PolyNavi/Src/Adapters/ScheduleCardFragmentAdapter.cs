@@ -9,7 +9,6 @@ using Android.Content;
 using System.Collections.Generic;
 using PolyNaviLib.BL;
 using System.Globalization;
-using System.Linq;
 
 namespace PolyNavi
 {

@@ -136,6 +136,7 @@ namespace PolyNavi
 			return assembly.GetManifestResourceStream($"PolyNavi.EmbeddedResources.{relativePath}");
 		}
 
+#pragma warning disable 618 // Disable "UpdateConfiguration" deprecate warning
 		public static void ChangeLanguage(Context c)
 		{
 			if (Instance.language != null)
@@ -149,5 +150,6 @@ namespace PolyNavi
 				c.Resources.UpdateConfiguration(conf, c.Resources.DisplayMetrics);
 			}
 		}
+#pragma warning restore 618
 	}
 }
