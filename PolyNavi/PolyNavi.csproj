@@ -597,6 +597,15 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-xhdpi\ic_error.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Screenshots\Buildings_2.png" />
+    <Content Include="Screenshots\Buildings_1.png" />
+    <Content Include="Screenshots\MainBuilding_1.png" />
+    <Content Include="Screenshots\MainBuilding_2.png" />
+    <Content Include="Screenshots\Menu_1.png" />
+    <Content Include="Screenshots\Schedule_1.png" />
+    <Content Include="Screenshots\Settings_1.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Android.Support.Annotations.26.1.0.1\build\MonoAndroid80\Xamarin.Android.Support.Annotations.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Annotations.26.1.0.1\build\MonoAndroid80\Xamarin.Android.Support.Annotations.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
