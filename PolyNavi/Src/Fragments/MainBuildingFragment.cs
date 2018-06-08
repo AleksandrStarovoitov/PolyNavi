@@ -145,7 +145,7 @@ namespace PolyNavi
 			if (fullyExpanded)
 			{
 				// FIXME в editTextInput пишутся имена комнат, количество символов может быть больше 3
-				if (editTextInputFrom.Text.Length == 3 && editTextInputTo.Text.Length == 3)
+				if (!editTextInputFrom.Text.Equals(""))
 				{
 					InputMethodManager imm = (InputMethodManager)Activity.BaseContext.GetSystemService(Context.InputMethodService);
 					imm.HideSoftInputFromWindow(View.WindowToken, 0);
