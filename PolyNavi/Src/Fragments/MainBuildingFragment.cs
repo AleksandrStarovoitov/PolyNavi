@@ -149,7 +149,7 @@ namespace PolyNavi
 				{
 					InputMethodManager imm = (InputMethodManager)Activity.BaseContext.GetSystemService(Context.InputMethodService);
 					imm.HideSoftInputFromWindow(View.WindowToken, 0);
-					fab.SetImageResource(Resource.Drawable.ic_gps_fixed_black_24dp);
+					fab.SetImageResource(Resource.Drawable.ic_directions_black_24dp);
 					appBar.SetExpanded(false);
 
 					//fabLayoutParams.AnchorId = frameLayout.Id;
@@ -249,7 +249,7 @@ namespace PolyNavi
 			
 			if (fullyCollapsed)
 			{
-				fab.SetImageResource(Resource.Drawable.ic_gps_fixed_black_24dp);
+				fab.SetImageResource(Resource.Drawable.ic_directions_black_24dp);
 			}
 			else if (fullyExpanded)
 			{

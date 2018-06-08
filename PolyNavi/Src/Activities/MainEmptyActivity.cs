@@ -35,6 +35,7 @@ namespace PolyNavi
 				intent = new Intent(this, typeof(AuthorizationActivity));
 			}
 			StartActivity(intent);
+			Finish();
 		}
 	}
 }
