@@ -2889,6 +2889,12 @@ namespace PolyNavi
 			// aapt resource value: 0x7f090043
 			public const int auto = 2131296323;
 			
+			// aapt resource value: 0x7f0900cf
+			public const int autoCompleteTextView_from = 2131296463;
+			
+			// aapt resource value: 0x7f0900d0
+			public const int autoCompleteTextView_to = 2131296464;
+			
 			// aapt resource value: 0x7f09002e
 			public const int beginning = 2131296302;
 			
@@ -2991,14 +2997,8 @@ namespace PolyNavi
 			// aapt resource value: 0x7f090091
 			public const int edittext_auth = 2131296401;
 			
-			// aapt resource value: 0x7f0900cf
-			public const int edittext_input_from = 2131296463;
-			
 			// aapt resource value: 0x7f0900da
 			public const int edittext_input_from_map_builidngs = 2131296474;
-			
-			// aapt resource value: 0x7f0900d0
-			public const int edittext_input_to = 2131296464;
 			
 			// aapt resource value: 0x7f0900db
 			public const int edittext_input_to_map_builidngs = 2131296475;
