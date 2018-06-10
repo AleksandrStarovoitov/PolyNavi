@@ -598,6 +598,7 @@
     <AndroidResource Include="Resources\drawable-xhdpi\ic_error.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="EmbeddedResources\Images\ic_gps_fixed_black_24dp.png" />
     <Content Include="Screenshots\Buildings_2.png" />
     <Content Include="Screenshots\Buildings_1.png" />
     <Content Include="Screenshots\MainBuilding_1.png" />
