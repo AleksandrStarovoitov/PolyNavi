@@ -61,7 +61,6 @@ namespace PolyNavi
 			{ "15-й учебный корпус (ИМОП)", new Point(60.00689, 30.39065)},
 			{ "16-й учебный корпус", new Point(60.00790, 30.39041)},
 			{ "Спортивный комплекс", new Point(60.00295, 30.36801)},
-
 			{ "Лабораторный корпус", new Point(60.00734, 30.37954)},
 			{ "Гидробашня", new Point(60.00583, 30.37428)},
 			{ "НОЦ РАН", new Point(60.00317, 30.37468)},
@@ -71,22 +70,26 @@ namespace PolyNavi
 			{ "Секретариат приемной комиссии", new Point(60.00048, 30.36805)}
 		};
 
+		public Dictionary<string, string> RoomsDictionary { get; private set; } = new Dictionary<string, string>();
+
 		public Lazy<Graph.GraphNode> MainBuildingGraph { get; private set; } = new Lazy<Graph.GraphNode>(() =>
 		{
 			if (File.Exists(GetFileFullPath("main.graph")))
 			{
 				using (var stream = File.OpenRead(GetFileFullPath("main.graph")))
 				{
+					FillRoomsDictionary();
 					return Graph.SaverLoader.Load(stream);
 				}
 			}
 			else
 			{
-				var graph = MainApp.Instance.GraphSaverLoader.LoadFromXmlDescriptor("main_graph.xml");
+				var graph = Instance.GraphSaverLoader.LoadFromXmlDescriptor("main_graph.xml");
 				using (var stream = File.Create(GetFileFullPath("main.graph")))
 				{
 					Graph.SaverLoader.Save(stream, graph);
 				}
+				FillRoomsDictionary();
 				return graph;
 			}
 			//using (var stream = MainApp.Instance.Assets.Open("floor_1.graph"))
@@ -95,6 +98,45 @@ namespace PolyNavi
 			//	return floor1;
 			//}
 		});
+
+		private static void FillRoomsDictionary()
+		{
+			using (var stream = File.OpenRead(GetFileFullPath("main.graph")))
+			{
+				var graph = Graph.SaverLoader.Load(stream);
+
+				var ids = new List<Tuple<int, int>>();
+				Queue<Graph.GraphNode> bfsQueue = new Queue<Graph.GraphNode>();
+				bfsQueue.Enqueue(graph);
+
+				ids.Add(new Tuple<int, int>(graph.Id, graph.FloorNumber));
+
+				while (bfsQueue.Count > 0)
+				{
+					var node = bfsQueue.Dequeue();
+
+					if (node == null)
+					{
+						continue;
+					}
+
+					foreach (var neighbour in node.Neighbours)
+					{
+						if (!ids.Contains(new Tuple<int, int>(neighbour.Id, neighbour.FloorNumber)))
+						{
+							ids.Add(new Tuple<int, int>(neighbour.Id, neighbour.FloorNumber));
+							bfsQueue.Enqueue(neighbour);
+							if (!neighbour.RoomName.Equals("*Unknown*"))
+							{
+								Instance.RoomsDictionary[neighbour.RoomName] = neighbour.RoomName.Replace("_М_1_1", " М").Replace("_М_2_1", " М").Replace("_М_2_2", " М");
+							}
+						}
+					}
+				}
+			}
+			var ordered = Instance.RoomsDictionary.OrderBy(x => x.Value);
+			Instance.RoomsDictionary = ordered.ToDictionary(x => x.Key, x => x.Value);
+		}
 
 		public AsyncLazy<PolyManager> PolyManager { get; private set; } = new AsyncLazy<PolyManager>(async () =>
 		{

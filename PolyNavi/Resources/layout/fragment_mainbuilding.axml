@@ -81,14 +81,16 @@
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:layout_toRightOf="@+id/imageview_notfixed"
-                android:layout_marginRight="15dp">
-                <EditText
-                    android:id="@+id/edittext_input_from"
-                    android:layout_height="match_parent"
+                android:layout_marginRight="15dp"
+                android:focusable="true"
+                android:focusableInTouchMode="true">
+                <AutoCompleteTextView
+                    android:id="@+id/autoCompleteTextView_from"
                     android:layout_width="match_parent"
-                    android:inputType="number"
-                    android:hint="@string/edittext_from"
-                    android:maxLength="3" />
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:completionThreshold="1"
+                    android:hint="@string/edittext_from" />
             </android.support.design.widget.TextInputLayout>
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/textinputlayout_to_mainbuilding"
@@ -97,14 +99,13 @@
                 android:layout_below="@+id/textinputlayout_from_mainbuilding"
                 android:layout_alignLeft="@+id/textinputlayout_from_mainbuilding"
                 android:layout_alignRight="@+id/textinputlayout_from_mainbuilding">
-                <EditText
-                    android:id="@+id/edittext_input_to"
-                    android:inputType="number"
-                    android:layout_height="match_parent"
+                <AutoCompleteTextView
+                    android:id="@+id/autoCompleteTextView_to"
                     android:layout_width="match_parent"
-                    android:imeOptions="actionGo"
-                    android:hint="@string/edittext_to"
-                    android:maxLength="3" />
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:completionThreshold="1"
+                    android:hint="@string/edittext_to" />
             </android.support.design.widget.TextInputLayout>
         </RelativeLayout>
     </android.support.design.widget.AppBarLayout>

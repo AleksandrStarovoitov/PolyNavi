@@ -20,7 +20,7 @@ namespace PolyNavi
 		GraphNode mapGraph;
 
 		private View view;
-		private EditText editTextInputFrom, editTextInputTo;
+		private AutoCompleteTextView editTextInputFrom, editTextInputTo;
 		private FragmentTransaction fragmentTransaction;
 		private AppBarLayout appBar;
 		private FloatingActionButton fab;
@@ -56,12 +56,15 @@ namespace PolyNavi
 			fragmentTransaction.Add(Resource.Id.frame_mainbuilding, fragments[0], "MAP_MAINBUILDING_1");
 			fragmentTransaction.Commit();
 
-			editTextInputFrom = view.FindViewById<EditText>(Resource.Id.edittext_input_from);
-			editTextInputFrom.FocusChange += EditTextToFocusChanged;
+			var array = MainApp.Instance.RoomsDictionary.Select(x => x.Key).ToArray();
+			editTextInputFrom = view.FindViewById<AutoCompleteTextView>(Resource.Id.autoCompleteTextView_from);
+			editTextInputFrom.FocusChange += EditTextFromFocusChanged;
+			editTextInputFrom.Adapter = new ArrayAdapter(Activity.BaseContext, Android.Resource.Layout.SimpleDropDownItem1Line, array);
 
-			editTextInputTo = view.FindViewById<EditText>(Resource.Id.edittext_input_to);
+			editTextInputTo = view.FindViewById<AutoCompleteTextView>(Resource.Id.autoCompleteTextView_to);
 			editTextInputTo.SetOnEditorActionListener(this);
-			editTextInputTo.FocusChange += EditTextFromFocusChanged;
+			editTextInputTo.FocusChange += EditTextToFocusChanged;
+			editTextInputTo.Adapter = new ArrayAdapter(Activity.BaseContext, Android.Resource.Layout.SimpleDropDownItem1Line, array);
 
 			appBar = view.FindViewById<AppBarLayout>(Resource.Id.appbar_mainbuilding);
 			appBar.AddOnOffsetChangedListener(this);
@@ -145,11 +148,11 @@ namespace PolyNavi
 			if (fullyExpanded)
 			{
 				// FIXME в editTextInput пишутся имена комнат, количество символов может быть больше 3
-				if (editTextInputFrom.Text.Length == 3 && editTextInputTo.Text.Length == 3)
+				if (!editTextInputFrom.Text.Equals(""))
 				{
 					InputMethodManager imm = (InputMethodManager)Activity.BaseContext.GetSystemService(Context.InputMethodService);
 					imm.HideSoftInputFromWindow(View.WindowToken, 0);
-					fab.SetImageResource(Resource.Drawable.ic_gps_fixed_black_24dp);
+					fab.SetImageResource(Resource.Drawable.ic_directions_black_24dp);
 					appBar.SetExpanded(false);
 
 					//fabLayoutParams.AnchorId = frameLayout.Id;
@@ -205,7 +208,8 @@ namespace PolyNavi
 
 		private void EditTextFromFocusChanged(object sender, View.FocusChangeEventArgs e)
 		{
-			if (!e.HasFocus)
+			editTextInputFrom.ShowDropDown();
+			if (e.HasFocus)
 			{
 				editTextFromIsFocused = false;
 			}
@@ -217,7 +221,8 @@ namespace PolyNavi
 
 		private void EditTextToFocusChanged(object sender, View.FocusChangeEventArgs e)
 		{
-			if (!e.HasFocus)
+			editTextInputTo.ShowDropDown();
+			if (e.HasFocus)
 			{
 				editTextToIsFocused = false;
 			}
@@ -249,7 +254,7 @@ namespace PolyNavi
 			
 			if (fullyCollapsed)
 			{
-				fab.SetImageResource(Resource.Drawable.ic_gps_fixed_black_24dp);
+				fab.SetImageResource(Resource.Drawable.ic_directions_black_24dp);
 			}
 			else if (fullyExpanded)
 			{

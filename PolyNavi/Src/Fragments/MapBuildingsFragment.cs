@@ -27,18 +27,29 @@ using BruTile.Predefined;
 
 using Itinero;
 using Itinero.Profiles;
+using Android.Locations;
+using Android.Support.V4.Content;
+using Android.Content.PM;
 
 namespace PolyNavi
 {
 	// TODO Кеширование RouterDB чтобы не загружать ее при каждой загрузке фрагмента
-	public class MapBuildingsFragment : Fragment, AppBarLayout.IOnOffsetChangedListener
+	public class MapBuildingsFragment : Fragment, AppBarLayout.IOnOffsetChangedListener, ILocationListener
 	{
 		private const string RouterDbName = "polytech_map.routerdb";
 		private const string Marker_A_Name = "ic_marker_a.png";
 		private const string Marker_B_Name = "ic_marker_b.png";
+		private const string Marker_Location_name = "ic_gps_fixed_black_24dp.png";
 
 		private const int RequestCodeFrom = 1;
 		private const int RequestCodeTo = 2;
+
+		readonly string[] PermissionsLocation =
+		{
+		  Android.Manifest.Permission.AccessCoarseLocation,
+		  Android.Manifest.Permission.AccessFineLocation
+		};
+		const int RequestFineLocationId = 10;
 
 		private View view;
 
@@ -53,6 +64,8 @@ namespace PolyNavi
 		private EditText editTextInputFrom, editTextInputTo;
 		private AppBarLayout appBar;
 		private FloatingActionButton fab;
+
+		private LocationManager locationManager;
 
 		public override void OnCreate(Bundle savedInstanceState)
 		{
@@ -69,7 +82,57 @@ namespace PolyNavi
 			fab = view.FindViewById<FloatingActionButton>(Resource.Id.fab_map_buildings);
 			fab.Click += Fab_Click;
 
+			if (ContextCompat.CheckSelfPermission(Activity, Android.Manifest.Permission.AccessFineLocation) != Permission.Granted)
+			{
+				// Permission is not granted
+				Android.Support.V4.App.ActivityCompat.RequestPermissions(Activity, new String[] { Android.Manifest.Permission.AccessFineLocation }, RequestFineLocationId);
+			}
+			else
+			{
+				// Permission granted
+				SetupLocationManager();
+			}
 			return view;
+		}
+
+		private void SetupLocationManager()
+		{
+			locationManager = (LocationManager)Activity.ApplicationContext.GetSystemService(Android.Content.Context.LocationService);
+			locationManager.RequestLocationUpdates(LocationManager.GpsProvider, 2000, 5, this);
+		}
+
+		public override void OnDetach()
+		{
+			base.OnStop();
+			locationManager.RemoveUpdates(this);
+		}
+
+		public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
+		{
+			base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+			switch (requestCode)
+			{
+				case RequestFineLocationId:
+					// If request is cancelled, the result arrays are empty.
+					if (grantResults.Length > 0 && grantResults[0] == Permission.Granted)
+					{
+						SetupLocationManager();
+						// permission was granted, yay! Do the
+						// contacts-related task you need to do.
+					}
+					else
+					{
+						Toast.MakeText(Activity, "DENIED", ToastLength.Short).Show();
+
+						// permission denied, boo! Disable the
+						// functionality that depends on this permission.
+					}
+					break;
+				default:
+					break;
+				// other 'case' lines to check for other
+				// permissions this app might request.
+			}
 		}
 
 		private void InitializeRouting()
@@ -279,6 +342,59 @@ namespace PolyNavi
 			{
 				fab.SetImageResource(Resource.Drawable.ic_done_black_24dp);
 			}
+		}
+
+		string locationLayerName = "Location Position";
+		ILayer deleteLayer = null;
+
+		public void OnLocationChanged(Location location)
+		{
+			if (deleteLayer != null)
+				map.Layers.Remove(deleteLayer);
+			var layer = DrawLocationPosition(locationLayerName, location);
+			deleteLayer = layer;
+			map.Layers.Add(layer);
+			//map.NavigateTo(new Point(location.Longitude, location.Latitude).FromLonLat());
+		}
+
+		private ILayer DrawLocationPosition(string locationLayerName, Location location)
+		{
+			Feature markerLocationFeature = new Feature()
+			{
+				Geometry = SphericalMercator.FromLonLat(location.Longitude, location.Latitude),
+				Styles = new List<IStyle>()
+				{
+					new SymbolStyle()
+					{
+						BitmapId = GetBitmapIdForEmbeddedResource(Marker_A_Name),
+						SymbolScale = 0.5,
+					}
+				}
+			};
+
+			var list = new List<IFeature>() { markerLocationFeature };
+
+			return new Layer(locationLayerName)
+			{
+				Name = locationLayerName,
+				DataSource = new MemoryProvider(list),
+				Style = null,
+			};
+		}
+
+		public void OnProviderDisabled(string provider)
+		{
+			//throw new NotImplementedException();
+		}
+
+		public void OnProviderEnabled(string provider)
+		{
+			//throw new NotImplementedException();
+		}
+
+		public void OnStatusChanged(string provider, [GeneratedEnum] Availability status, Bundle extras)
+		{
+			//throw new NotImplementedException();
 		}
 	}
 }

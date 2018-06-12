@@ -84,8 +84,8 @@ namespace PolyNavi
 				{
 					Activity.RunOnUiThread(() =>
 					{
-						DrawContent(Resource.Id.relativelayout_week_schedule, Resource.Layout.layout_no_connection);
-						var v = Activity.FindViewById<RelativeLayout>(Resource.Id.layout_no_connection_clickable_zone);
+						DrawContent(Resource.Id.relativelayout_week_schedule, Resource.Layout.fragment_error);
+						var v = Activity.FindViewById<RelativeLayout>(Resource.Id.layout_error_clickable_zone);
 						v.Click += (sender, e) =>
 						{
 							FragmentManager.BeginTransaction().Detach(this).Attach(this).Commit();
