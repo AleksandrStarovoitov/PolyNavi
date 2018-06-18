@@ -66,7 +66,7 @@ namespace PolyNavi
 		private FloatingActionButton fab;
 
 		private LocationManager locationManager;
-
+		private AnimatedPointsWithAutoUpdateLayer animatedLocation;
 		public override void OnCreate(Bundle savedInstanceState)
 		{
 			base.OnCreate(savedInstanceState);
@@ -85,7 +85,7 @@ namespace PolyNavi
 			if (ContextCompat.CheckSelfPermission(Activity, Android.Manifest.Permission.AccessFineLocation) != Permission.Granted)
 			{
 				// Permission is not granted
-				Android.Support.V4.App.ActivityCompat.RequestPermissions(Activity, new String[] { Android.Manifest.Permission.AccessFineLocation }, RequestFineLocationId);
+				RequestPermissions(new String[] { Android.Manifest.Permission.AccessFineLocation }, RequestFineLocationId);
 			}
 			else
 			{
@@ -98,13 +98,18 @@ namespace PolyNavi
 		private void SetupLocationManager()
 		{
 			locationManager = (LocationManager)Activity.ApplicationContext.GetSystemService(Android.Content.Context.LocationService);
-			locationManager.RequestLocationUpdates(LocationManager.GpsProvider, 2000, 5, this);
+			locationManager.RequestLocationUpdates(LocationManager.GpsProvider, 2000, 2, this);
+			animatedLocation = new AnimatedPointsWithAutoUpdateLayer { Name = "Animated Points" };
+			map.Layers.Add(animatedLocation);
 		}
 
 		public override void OnDetach()
 		{
 			base.OnStop();
-			locationManager.RemoveUpdates(this);
+			if (locationManager != null)
+				locationManager.RemoveUpdates(this);
+			//else
+			//	throw new Exception("Location manager is null");
 		}
 
 		public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
@@ -154,7 +159,7 @@ namespace PolyNavi
 			mapControl.RotationLock = false;
 			map = mapControl.Map;
 			map.CRS = "EPSG:3857";
-			//map.Layers.Add(new TileLayer(KnownTileSources.Create(KnownTileSource.EsriWorldTopo)));\
+			//map.Layers.Add(new TileLayer(KnownTileSources.Create(KnownTileSource.EsriWorldTopo)));
 			map.Layers.Add(OpenStreetMap.CreateTileLayer());
 			routeLayer = new Layer();
 			map.Layers.Add(routeLayer);
@@ -250,7 +255,7 @@ namespace PolyNavi
 			return new List<Feature> { lineFeature, markerStartFeature, markerFinishFeature, };
 		}
 
-		private int GetBitmapIdForEmbeddedResource(string resourceName)
+		private static int GetBitmapIdForEmbeddedResource(string resourceName)
 		{
 			var image = MainApp.GetEmbeddedResourceStream($"Images.{resourceName}");
 			return BitmapRegistry.Instance.Register(image);
@@ -344,42 +349,9 @@ namespace PolyNavi
 			}
 		}
 
-		string locationLayerName = "Location Position";
-		ILayer deleteLayer = null;
-
 		public void OnLocationChanged(Location location)
 		{
-			if (deleteLayer != null)
-				map.Layers.Remove(deleteLayer);
-			var layer = DrawLocationPosition(locationLayerName, location);
-			deleteLayer = layer;
-			map.Layers.Add(layer);
-			//map.NavigateTo(new Point(location.Longitude, location.Latitude).FromLonLat());
-		}
-
-		private ILayer DrawLocationPosition(string locationLayerName, Location location)
-		{
-			Feature markerLocationFeature = new Feature()
-			{
-				Geometry = SphericalMercator.FromLonLat(location.Longitude, location.Latitude),
-				Styles = new List<IStyle>()
-				{
-					new SymbolStyle()
-					{
-						BitmapId = GetBitmapIdForEmbeddedResource(Marker_Location_name),
-						SymbolScale = 0.5,
-					}
-				}
-			};
-
-			var list = new List<IFeature>() { markerLocationFeature };
-
-			return new Layer(locationLayerName)
-			{
-				Name = locationLayerName,
-				DataSource = new MemoryProvider(list),
-				Style = null,
-			};
+			animatedLocation.UpdateLocation(location);
 		}
 
 		public void OnProviderDisabled(string provider)
@@ -395,6 +367,47 @@ namespace PolyNavi
 		public void OnStatusChanged(string provider, [GeneratedEnum] Availability status, Bundle extras)
 		{
 			//throw new NotImplementedException();
+		}
+
+		private class AnimatedPointsWithAutoUpdateLayer : AnimatedPointLayer
+		{
+			private static IGeometry geometry;
+
+			public AnimatedPointsWithAutoUpdateLayer()
+				: base(new DynamicMemoryProvider())
+			{
+				Style = new SymbolStyle()
+				{
+					BitmapId = GetBitmapIdForEmbeddedResource(Marker_Location_name),
+					SymbolScale = 0.5,
+				};
+			}
+
+			public void UpdateLocation(Location location)
+			{
+				geometry = SphericalMercator.FromLonLat(location.Longitude, location.Latitude);
+				UpdateData();
+			}
+
+			private class DynamicMemoryProvider : MemoryProvider
+			{
+				public override IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
+				{
+					var features = new List<IFeature>();
+					var count = 0;
+
+					var feature = new Feature
+					{
+						Geometry = geometry,
+						["ID"] = count.ToString(System.Globalization.CultureInfo.InvariantCulture)
+					};
+
+					features.Add(feature);
+					count++;
+
+					return features;
+				}
+			}
 		}
 	}
 }
