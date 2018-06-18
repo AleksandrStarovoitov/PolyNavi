@@ -366,7 +366,7 @@ namespace PolyNavi
 				{
 					new SymbolStyle()
 					{
-						BitmapId = GetBitmapIdForEmbeddedResource(Marker_A_Name),
+						BitmapId = GetBitmapIdForEmbeddedResource(Marker_Location_name),
 						SymbolScale = 0.5,
 					}
 				}
