@@ -19,6 +19,17 @@
             android:layout_height="match_parent" />
     </FrameLayout>
     <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_location_map_buildings"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/baseline_near_me_black_24"
+        app:backgroundTint="@color/button_floors"
+        android:layout_margin="16dp"
+        android:scaleType="center"
+        android:clickable="true"
+        app:layout_anchor="@+id/frame_map_buildings"
+        app:layout_anchorGravity="right|center" />
+    <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_map_buildings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

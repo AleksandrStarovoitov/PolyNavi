@@ -599,6 +599,11 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="EmbeddedResources\Images\ic_gps_fixed_black_24dp.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\baseline_near_me_black_24.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\baseline_near_me_black_24.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\baseline_near_me_black_24.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\baseline_near_me_black_24.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\baseline_near_me_black_24.png" />
     <Content Include="Screenshots\Buildings_2.png" />
     <Content Include="Screenshots\Buildings_1.png" />
     <Content Include="Screenshots\MainBuilding_1.png" />

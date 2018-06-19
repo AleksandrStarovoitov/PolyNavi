@@ -64,9 +64,11 @@ namespace PolyNavi
 		private EditText editTextInputFrom, editTextInputTo;
 		private AppBarLayout appBar;
 		private FloatingActionButton fab;
+		private FloatingActionButton buttonLocation;
 
 		private LocationManager locationManager;
 		private AnimatedPointsWithAutoUpdateLayer animatedLocation;
+
 		public override void OnCreate(Bundle savedInstanceState)
 		{
 			base.OnCreate(savedInstanceState);
@@ -82,6 +84,10 @@ namespace PolyNavi
 			fab = view.FindViewById<FloatingActionButton>(Resource.Id.fab_map_buildings);
 			fab.Click += Fab_Click;
 
+			buttonLocation = view.FindViewById<FloatingActionButton>(Resource.Id.fab_location_map_buildings);
+			buttonLocation.Click += ButtonLocation_Click;
+			buttonLocation.Alpha = 0.7f;
+
 			if (ContextCompat.CheckSelfPermission(Activity, Android.Manifest.Permission.AccessFineLocation) != Permission.Granted)
 			{
 				// Permission is not granted
@@ -93,6 +99,18 @@ namespace PolyNavi
 				SetupLocationManager();
 			}
 			return view;
+		}
+
+		private void ButtonLocation_Click(object sender, EventArgs e)
+		{
+            var lastLocation = locationManager.GetLastKnownLocation(LocationManager.GpsProvider);
+            var delta = SystemClock.ElapsedRealtime() - lastLocation?.ElapsedRealtimeNanos / 1000000;
+          
+            if (lastLocation != null && delta < 5*1000)
+			{
+				Point currentLocation = new Point(lastLocation.Longitude, lastLocation.Latitude).FromLonLat();
+				map.NavigateTo(currentLocation);
+			}
 		}
 
 		private void SetupLocationManager()
@@ -356,13 +374,13 @@ namespace PolyNavi
 
 		public void OnProviderDisabled(string provider)
 		{
-			//throw new NotImplementedException();
-		}
+            map.Layers.Remove(animatedLocation);
+        }
 
 		public void OnProviderEnabled(string provider)
 		{
-			//throw new NotImplementedException();
-		}
+            map.Layers.Add(animatedLocation);
+        }
 
 		public void OnStatusChanged(string provider, [GeneratedEnum] Availability status, Bundle extras)
 		{
