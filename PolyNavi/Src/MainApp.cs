@@ -101,40 +101,46 @@ namespace PolyNavi
 
 		private static void FillRoomsDictionary()
 		{
-			using (var stream = File.OpenRead(GetFileFullPath("main.graph")))
-			{
-				var graph = Graph.SaverLoader.Load(stream);
+            using (var stream = File.OpenRead(GetFileFullPath("main.graph")))
+            {
+                var graph = Graph.SaverLoader.Load(stream);
 
-				var ids = new List<Tuple<int, int>>();
-				Queue<Graph.GraphNode> bfsQueue = new Queue<Graph.GraphNode>();
-				bfsQueue.Enqueue(graph);
+                var ids = new List<Tuple<int, int>>();
+                Queue<Graph.GraphNode> bfsQueue = new Queue<Graph.GraphNode>();
+                bfsQueue.Enqueue(graph);
 
-				ids.Add(new Tuple<int, int>(graph.Id, graph.FloorNumber));
+                ids.Add(new Tuple<int, int>(graph.Id, graph.FloorNumber));
 
-				while (bfsQueue.Count > 0)
-				{
-					var node = bfsQueue.Dequeue();
+                while (bfsQueue.Count > 0)
+                {
+                    var node = bfsQueue.Dequeue();
 
-					if (node == null)
-					{
-						continue;
-					}
+                    if (node == null)
+                    {
+                        continue;
+                    }
 
-					foreach (var neighbour in node.Neighbours)
-					{
-						if (!ids.Contains(new Tuple<int, int>(neighbour.Id, neighbour.FloorNumber)))
-						{
-							ids.Add(new Tuple<int, int>(neighbour.Id, neighbour.FloorNumber));
-							bfsQueue.Enqueue(neighbour);
-							if (!neighbour.RoomName.Equals("*Unknown*"))
-							{
-								Instance.RoomsDictionary[neighbour.RoomName] = neighbour.RoomName.Replace("_М_1_1", " М").Replace("_М_2_1", " М").Replace("_М_2_2", " М");
-							}
-						}
-					}
-				}
+                    foreach (var neighbour in node.Neighbours)
+                    {
+                        if (!ids.Contains(new Tuple<int, int>(neighbour.Id, neighbour.FloorNumber)))
+                        {
+                            ids.Add(new Tuple<int, int>(neighbour.Id, neighbour.FloorNumber));
+                            bfsQueue.Enqueue(neighbour);
+                            if (!neighbour.RoomName.Equals("*Unknown*"))
+                            {
+                                var name = neighbour.RoomName.Replace("_а", " (а)").Replace("_М_1_1", " М 1 эт. 1")
+                                                                                                    .Replace("_М_1_2", " М 1 эт. 2").Replace("_М_2_1", " М 2 эт. 1")
+                                                                                                    .Replace("_М_2_2", " М 2 эт. 2").Replace("_Ж_1_1", " Ж 1 эт. 1")
+                                                                                                    .Replace("_Ж_1_2", " Ж 1 эт. 2").Replace("_Ж_1_3", " Ж 1 эт. 3")
+                                                                                                    .Replace("_Ж_2_1", " Ж 2 эт. 1").Replace("_Ж_2_2", " Ж 2 эт. 2")
+                                                                                                    .Replace("_Ж_2_3", " Ж 2 эт. 3");
+                                Instance.RoomsDictionary[name] = neighbour.RoomName;
+                            }
+                        }
+                    }
+                }
 			}
-			var ordered = Instance.RoomsDictionary.OrderBy(x => x.Value);
+            var ordered = Instance.RoomsDictionary.OrderBy(x => x.Value, new DictionaryComp());
 			Instance.RoomsDictionary = ordered.ToDictionary(x => x.Key, x => x.Value);
 		}
 
@@ -178,8 +184,29 @@ namespace PolyNavi
 			return assembly.GetManifestResourceStream($"PolyNavi.EmbeddedResources.{relativePath}");
 		}
 
+        public class DictionaryComp : IComparer<string>
+        {
+            // Compares by Height, Length, and Width.
+            public int Compare(string x, string y)
+            {
+                if ((x[0] > '0' && x[0] < '9') && (y[0] > 'A' && y[0] < 'я')) //100 - Ректор
+                {
+                    return 1; //Больше 0 => x>y => сначала y, потом x
+                }
+                else
+                if ((y[0] > '0' && y[0] < '9') && (x[0] > 'A' && x[0] < 'я')) //Ректор - 100
+                {
+                    return -1;
+                }
+                else
+                {
+                    return x.CompareTo(y);
+                }
+            }
+        }
+
 #pragma warning disable 618 // Disable "UpdateConfiguration" deprecate warning
-		public static void ChangeLanguage(Context c)
+        public static void ChangeLanguage(Context c)
 		{
 			if (Instance.language != null)
 			{

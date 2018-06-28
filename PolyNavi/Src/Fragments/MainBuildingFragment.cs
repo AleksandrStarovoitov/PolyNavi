@@ -34,7 +34,6 @@ namespace PolyNavi
 
 		static bool editTextFromIsFocused, editTextToIsFocused;
 
-		
 		public override void OnCreate(Bundle savedInstanceState)
 		{
 			base.OnCreate(savedInstanceState);
@@ -161,7 +160,7 @@ namespace PolyNavi
 					List<GraphNode> route;
 					try
 					{
-						route = Algorithms.CalculateRoute(mapGraph, editTextInputFrom.Text, editTextInputTo.Text);
+						route = Algorithms.CalculateRoute(mapGraph, MainApp.Instance.RoomsDictionary[editTextInputFrom.Text], MainApp.Instance.RoomsDictionary[editTextInputTo.Text]);
 						var coordinateGroups = from node in route
 											   group node by node.FloorNumber into g
 											   select new
