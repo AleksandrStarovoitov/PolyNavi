@@ -40,7 +40,7 @@ namespace PolyNavi
 		private float _lastTouchY;
 		private float _posX;
 		private float _posY;
-		private float _scaleFactor = 0.85f;
+		private float _scaleFactor = 1.0f;
 		//private float _minScaleFactor = 0.9f;
 		//private float _maxScaleFactor = 5.0f;
 
