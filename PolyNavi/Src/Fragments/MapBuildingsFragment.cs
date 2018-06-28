@@ -65,6 +65,7 @@ namespace PolyNavi
 		private AppBarLayout appBar;
 		private FloatingActionButton fab;
 		private FloatingActionButton buttonLocation;
+        private ImageButton buttonFromCurrentLocation;
 
 		private LocationManager locationManager;
 		private AnimatedPointsWithAutoUpdateLayer animatedLocation;
@@ -88,7 +89,10 @@ namespace PolyNavi
 			buttonLocation.Click += ButtonLocation_Click;
 			buttonLocation.Alpha = 0.7f;
 
-			if (ContextCompat.CheckSelfPermission(Activity, Android.Manifest.Permission.AccessFineLocation) != Permission.Granted)
+            buttonFromCurrentLocation = view.FindViewById<ImageButton>(Resource.Id.imagebutton_currentlocation_map_buildings);
+            buttonFromCurrentLocation.Click += ButtonFromCurrentLocation_Click;
+
+            if (ContextCompat.CheckSelfPermission(Activity, Android.Manifest.Permission.AccessFineLocation) != Permission.Granted)
 			{
 				// Permission is not granted
 				RequestPermissions(new String[] { Android.Manifest.Permission.AccessFineLocation }, RequestFineLocationId);
@@ -101,14 +105,41 @@ namespace PolyNavi
 			return view;
 		}
 
-		private void ButtonLocation_Click(object sender, EventArgs e)
-		{
+        private bool IsInBounds(Location location)
+        {
+            var leftBottom = new Point(30.365751, 59.999560);
+            var rightTop = new Point(30.391848, 60.008916);
+
+            return leftBottom.X < location.Longitude && leftBottom.Y < location.Latitude
+                && rightTop.X > location.Longitude && rightTop.Y > location.Latitude;
+        }
+
+        private bool LocationIsValid(Location location)
+        {
+            var delta = SystemClock.ElapsedRealtime() - location?.ElapsedRealtimeNanos / 1000000;
+
+            return (location != null && delta < 5 * 1000 && IsInBounds(location));
+        }
+
+        private void ButtonFromCurrentLocation_Click(object sender, EventArgs e)
+        {
             var lastLocation = locationManager.GetLastKnownLocation(LocationManager.GpsProvider);
-            var delta = SystemClock.ElapsedRealtime() - lastLocation?.ElapsedRealtimeNanos / 1000000;
-          
-            if (lastLocation != null && delta < 5*1000)
-			{
-				Point currentLocation = new Point(lastLocation.Longitude, lastLocation.Latitude).FromLonLat();
+
+            if (LocationIsValid(lastLocation))
+            {
+                var currentLocation = new Point(lastLocation.Latitude, lastLocation.Longitude);
+                editTextInputFrom.Text = "Мое местоположение";
+                MainApp.Instance.BuildingsDictionary["Мое местоположение"] = currentLocation;
+            }
+        }
+
+        private void ButtonLocation_Click(object sender, EventArgs e)
+        {
+            var lastLocation = locationManager.GetLastKnownLocation(LocationManager.GpsProvider);
+
+            if (LocationIsValid(lastLocation))
+            {
+				var currentLocation = new Point(lastLocation.Longitude, lastLocation.Latitude).FromLonLat();
 				map.NavigateTo(currentLocation);
 			}
 		}

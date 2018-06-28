@@ -68,26 +68,40 @@
                 android:layout_alignRight="@+id/imageview_notfixed_map"
                 android:layout_alignTop="@+id/textinputlayout_to_map_buildings"
                 android:layout_marginTop="15dp" />
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/textinputlayout_from_map_buildings"
+            <RelativeLayout
+                android:id="@+id/frame_from_map_buildings"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
-                android:layout_toRightOf="@+id/imageview_notfixed_map"
-                android:layout_marginRight="15dp">
-                <EditText
-                    android:id="@+id/edittext_input_from_map_builidngs"
-                    android:layout_height="match_parent"
-                    android:layout_width="match_parent"
-                    android:hint="@string/edittext_from_buildings"
-                    android:focusableInTouchMode="false" />
-            </android.support.design.widget.TextInputLayout>
+                android:layout_marginRight="15dp"
+                android:layout_toRightOf="@+id/imageview_notfixed_map">
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/textinputlayout_from_map_buildings"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent">
+                    <EditText
+                        android:id="@+id/edittext_input_from_map_builidngs"
+                        android:layout_height="match_parent"
+                        android:layout_width="match_parent"
+                        android:hint="@string/edittext_from_buildings"
+                        android:focusableInTouchMode="false" />
+                </android.support.design.widget.TextInputLayout>
+                <ImageButton
+                    android:id="@+id/imagebutton_currentlocation_map_buildings"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/baseline_near_me_black_24"
+                    android:layout_centerVertical="true"
+                    android:layout_margin="5dp"
+                    android:text="Button" />
+            </RelativeLayout>
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/textinputlayout_to_map_buildings"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
-                android:layout_below="@+id/textinputlayout_from_map_buildings"
-                android:layout_alignLeft="@+id/textinputlayout_from_map_buildings"
-                android:layout_alignRight="@+id/textinputlayout_from_map_buildings">
+                android:layout_below="@+id/frame_from_map_buildings"
+                android:layout_alignLeft="@+id/frame_from_map_buildings"
+                android:layout_alignRight="@+id/frame_from_map_buildings">
                 <EditText
                     android:id="@+id/edittext_input_to_map_builidngs"
                     android:layout_height="match_parent"
