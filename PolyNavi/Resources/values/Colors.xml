@@ -15,4 +15,10 @@
   <color name="colorTitleScheduleText">#96000000</color>
   <color name="colorTitleScheduleTextDayOfWeek">#B4000000</color>
   <color name="colorTitleScheduleBackground">#5EC26E</color>
+
+  <color name="cyan">#00BCD4</color>
+  <color name="orange">#FF9800</color>
+  <color name="green">#4CAF50</color>
+  <color name="indicator_unselected">#4D000000</color>
+ 
 </resources>

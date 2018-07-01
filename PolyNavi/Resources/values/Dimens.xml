@@ -14,4 +14,7 @@
   <dimen name="cardOuterTextMarginLeftRight">10dp</dimen>
 
   <dimen name="icon_size">22dp</dimen>
+
+  <dimen name="activity_horizontal_margin">64dp</dimen>
+  <dimen name="activity_margin_half">8dp</dimen>
 </resources>

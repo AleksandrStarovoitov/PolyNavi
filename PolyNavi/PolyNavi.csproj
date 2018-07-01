@@ -220,8 +220,11 @@
     <Compile Include="Src\Activities\AuthorizationActivity.cs" />
     <Compile Include="Src\Activities\CopyrightActivity.cs" />
     <Compile Include="Src\Activities\MainEmptyActivity.cs" />
+    <Compile Include="Src\Activities\WelcomeActivity.cs" />
     <Compile Include="Src\Adapters\BuildingsAdapter.cs" />
+    <Compile Include="Src\Adapters\WelcomeSectionsPagerAdapter.cs" />
     <Compile Include="Src\Fragments\AboutFragment.cs" />
+    <Compile Include="Src\Fragments\WelcomePlaceholderFragment.cs" />
     <Compile Include="Src\MainApp.cs" />
     <Compile Include="Src\Fragments\MapBuildingsFragment.cs" />
     <Compile Include="Src\Activities\MainActivity.cs" />
@@ -604,6 +607,30 @@
     <AndroidResource Include="Resources\drawable-xhdpi\baseline_near_me_black_24.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\baseline_near_me_black_24.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\baseline_near_me_black_24.png" />
+    <AndroidResource Include="Resources\layout\activity_welcome.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\drawable\indicator_selected.xml" />
+    <AndroidResource Include="Resources\drawable\indicator_unselected.xml" />
+    <AndroidResource Include="Resources\drawable\ic_chevron_right_24dp.xml" />
+    <AndroidResource Include="Resources\layout\fragment_pager.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\drawable-hdpi\welcome_blueprint.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\welcome_calendar.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\welcome_route.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\welcome_blueprint.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\welcome_calendar.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\welcome_route.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\welcome_blueprint.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\welcome_calendar.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\welcome_route.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\welcome_blueprint.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\welcome_calendar.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\welcome_route.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\welcome_blueprint.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\welcome_calendar.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\welcome_route.png" />
     <Content Include="Screenshots\Buildings_2.png" />
     <Content Include="Screenshots\Buildings_1.png" />
     <Content Include="Screenshots\MainBuilding_1.png" />

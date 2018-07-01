@@ -30,7 +30,7 @@ namespace PolyNavi
 			SetTheme(Resource.Style.MyAppTheme);
 			base.OnCreate(savedInstanceState);
 
-			SetContentView(Resource.Layout.activity_authorization);
+            SetContentView(Resource.Layout.activity_authorization);
 
 			editTextAuth = FindViewById<EditText>(Resource.Id.edittext_auth);
 			editTextAuth.SetOnEditorActionListener(this);
@@ -43,7 +43,6 @@ namespace PolyNavi
 
 			prefEditor = MainApp.Instance.SharedPreferences.Edit();
 			prefEditor.PutString("groupnumber", editTextAuth.Text).Apply();
-			prefEditor.PutBoolean("auth", true).Apply();
 		}
 
 		private void ButtonAuth_Click(object sender, EventArgs e)
@@ -73,7 +72,8 @@ namespace PolyNavi
 
 		public void ProceedToMainActivity()
 		{
-			var mainIntent = new Intent(this, typeof(MainActivity));
+            prefEditor.PutBoolean("auth", true).Apply();
+            var mainIntent = new Intent(this, typeof(MainActivity));
 			mainIntent.SetFlags(ActivityFlags.ClearTop);
 			StartActivity(mainIntent);
 			Finish();

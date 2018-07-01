@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="15dp">
+    <FrameLayout
+        android:id="@+id/framelayout_welcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true">
+        <ImageView
+            android:id="@+id/imageview_welcome_featureimage"
+            android:layout_width="220dp"
+            android:layout_height="220dp"
+            android:layout_marginTop="100dp"
+            android:adjustViewBounds="true"
+            android:background="@drawable/ic_settings_black_24dp" />
+    </FrameLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/framelayout_welcome"
+        android:layout_margin="30dp">
+        <TextView
+            android:id="@+id/textview_welcome_header"
+            style="@style/ScheduleTitleDayOfWeek"
+            android:textSize="27sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_alignParentTop="true"
+            android:textColor="@android:color/white" />
+        <TextView
+            android:id="@+id/textview_welcome_description"
+            style="@style/ScheduleTitleDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="23sp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="40dp"
+            android:textColor="#FFFFFF" />
+    </RelativeLayout>
+</RelativeLayout>
