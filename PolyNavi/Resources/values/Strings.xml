@@ -91,5 +91,7 @@
   <string name="welcome_description_first">Поиск кратчайшего пути между аудиториями</string>
   <string name="welcome_description_second">Поиск кратчайшего пути между корпусами университета</string>
   <string name="welcome_description_third">Расписание занятий, которое доступно офлайн</string>
+  <string name="welcome_finish">Готово</string>
+  <string name="welcome_skip">Пропустить</string>
   
 </resources>

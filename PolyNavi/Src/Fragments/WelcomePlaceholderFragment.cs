@@ -38,7 +38,7 @@ namespace PolyNavi
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            var rootView = inflater.Inflate(Resource.Layout.fragment_pager, container, false);
+            var rootView = inflater.Inflate(Resource.Layout.fragment_welcome_pager, container, false);
             var header = rootView.FindViewById<TextView>(Resource.Id.textview_welcome_header);
             var description = rootView.FindViewById<TextView>(Resource.Id.textview_welcome_description);
 

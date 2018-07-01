@@ -613,7 +613,7 @@
     <AndroidResource Include="Resources\drawable\indicator_selected.xml" />
     <AndroidResource Include="Resources\drawable\indicator_unselected.xml" />
     <AndroidResource Include="Resources\drawable\ic_chevron_right_24dp.xml" />
-    <AndroidResource Include="Resources\layout\fragment_pager.axml">
+    <AndroidResource Include="Resources\layout\fragment_welcome_pager.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\drawable-hdpi\welcome_blueprint.png" />

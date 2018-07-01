@@ -3129,8 +3129,8 @@ namespace PolyNavi
 			// aapt resource value: 0x7f0900ba
 			public const int framelayout_rate_about = 2131296442;
 			
-			// aapt resource value: 0x7f0900e7
-			public const int framelayout_welcome = 2131296487;
+			// aapt resource value: 0x7f0900ec
+			public const int framelayout_welcome = 2131296492;
 			
 			// aapt resource value: 0x7f09000a
 			public const int ghost_view = 2131296266;
@@ -3189,8 +3189,8 @@ namespace PolyNavi
 			// aapt resource value: 0x7f090108
 			public const int imageview_route_otherbuildings = 2131296520;
 			
-			// aapt resource value: 0x7f0900e8
-			public const int imageview_welcome_featureimage = 2131296488;
+			// aapt resource value: 0x7f0900ed
+			public const int imageview_welcome_featureimage = 2131296493;
 			
 			// aapt resource value: 0x7f09009f
 			public const int imageview_welcome_indicator_0 = 2131296415;
@@ -3381,11 +3381,11 @@ namespace PolyNavi
 			// aapt resource value: 0x7f0900f7
 			public const int relativelayout_row_title_schedule = 2131296503;
 			
-			// aapt resource value: 0x7f0900eb
-			public const int relativelayout_schedule = 2131296491;
+			// aapt resource value: 0x7f0900e7
+			public const int relativelayout_schedule = 2131296487;
 			
-			// aapt resource value: 0x7f0900ef
-			public const int relativelayout_week_schedule = 2131296495;
+			// aapt resource value: 0x7f0900eb
+			public const int relativelayout_week_schedule = 2131296491;
 			
 			// aapt resource value: 0x7f090049
 			public const int right = 2131296329;
@@ -3537,8 +3537,8 @@ namespace PolyNavi
 			// aapt resource value: 0x7f09001e
 			public const int tabMode = 2131296286;
 			
-			// aapt resource value: 0x7f0900ec
-			public const int tablayout_schedule = 2131296492;
+			// aapt resource value: 0x7f0900e8
+			public const int tablayout_schedule = 2131296488;
 			
 			// aapt resource value: 0x7f090019
 			public const int text = 2131296281;
@@ -3651,11 +3651,11 @@ namespace PolyNavi
 			// aapt resource value: 0x7f090105
 			public const int textview_route = 2131296517;
 			
-			// aapt resource value: 0x7f0900ea
-			public const int textview_welcome_description = 2131296490;
+			// aapt resource value: 0x7f0900ef
+			public const int textview_welcome_description = 2131296495;
 			
-			// aapt resource value: 0x7f0900e9
-			public const int textview_welcome_header = 2131296489;
+			// aapt resource value: 0x7f0900ee
+			public const int textview_welcome_header = 2131296494;
 			
 			// aapt resource value: 0x7f090118
 			public const int time = 2131296536;
@@ -3669,8 +3669,8 @@ namespace PolyNavi
 			// aapt resource value: 0x7f09006e
 			public const int title_template = 2131296366;
 			
-			// aapt resource value: 0x7f0900ed
-			public const int toolbar = 2131296493;
+			// aapt resource value: 0x7f0900e9
+			public const int toolbar = 2131296489;
 			
 			// aapt resource value: 0x7f090094
 			public const int toolbar_copyright = 2131296404;
@@ -3717,8 +3717,8 @@ namespace PolyNavi
 			// aapt resource value: 0x7f090016
 			public const int view_offset_helper = 2131296278;
 			
-			// aapt resource value: 0x7f0900ee
-			public const int viewpager_schedule = 2131296494;
+			// aapt resource value: 0x7f0900ea
+			public const int viewpager_schedule = 2131296490;
 			
 			// aapt resource value: 0x7f09009d
 			public const int viewpager_welcome = 2131296413;
@@ -3939,13 +3939,13 @@ namespace PolyNavi
 			public const int fragment_map_buildings = 2130968625;
 			
 			// aapt resource value: 0x7f040032
-			public const int fragment_pager = 2130968626;
+			public const int fragment_schedule = 2130968626;
 			
 			// aapt resource value: 0x7f040033
-			public const int fragment_schedule = 2130968627;
+			public const int fragment_week_schedule = 2130968627;
 			
 			// aapt resource value: 0x7f040034
-			public const int fragment_week_schedule = 2130968628;
+			public const int fragment_welcome_pager = 2130968628;
 			
 			// aapt resource value: 0x7f040035
 			public const int layout_card_row_lesson_schedule = 2130968629;
@@ -4417,6 +4417,9 @@ namespace PolyNavi
 			// aapt resource value: 0x7f0b006f
 			public const int welcome_description_third = 2131427439;
 			
+			// aapt resource value: 0x7f0b0070
+			public const int welcome_finish = 2131427440;
+			
 			// aapt resource value: 0x7f0b006a
 			public const int welcome_header_first = 2131427434;
 			
@@ -4425,6 +4428,9 @@ namespace PolyNavi
 			
 			// aapt resource value: 0x7f0b006c
 			public const int welcome_header_third = 2131427436;
+			
+			// aapt resource value: 0x7f0b0071
+			public const int welcome_skip = 2131427441;
 			
 			static String()
 			{

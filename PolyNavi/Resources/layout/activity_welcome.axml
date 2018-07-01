@@ -32,7 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start|center"
-            android:text="Skip"
+            android:text="@string/welcome_skip"
             android:textColor="@android:color/white" />
         <LinearLayout
             android:layout_width="wrap_content"
@@ -66,7 +66,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end|center"
-            android:text="Finish"
+            android:text="@string/welcome_finish"
             android:textColor="@android:color/white"
             android:visibility="gone" />
         <ImageButton

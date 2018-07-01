@@ -81,4 +81,17 @@
   <string name="pref_startactivity_summary">Starts when you open the application</string>
   <string name="pref_startactivity_dialog_title">Choose start screen</string>
 
+  <string name="error_title">Error</string>
+  <string name="error_tap">Tap to try again</string>
+  <string name="error_summary">Details about error...Details about error...Details about error...Details about error...Details about error...Details about error...Details about error...Details about error...Details about error...Details about error...Details about error...Details about error...Details about error...Details about error...Details about error...Details about error...Details about error...Details about error...Details about error...Details about error...Details about error...Details about error...Details about error...Details about error...Details about error...Details about error...Details about error...Details about error...Details about error...Details about error...Details about error...Details about error...Details about error...</string>
+
+  <string name="welcome_header_first">Navigate inside main building...</string>
+  <string name="welcome_header_second">...and on Polytechnic University campus</string>
+  <string name="welcome_header_third">Arrive on time</string>
+  <string name="welcome_description_first">Finding the shortest path between classrooms</string>
+  <string name="welcome_description_second">Finding the shortest path between university\'s buildings</string>
+  <string name="welcome_description_third">Schedule, that is available offline</string>
+  <string name="welcome_finish">Done</string>
+  <string name="welcome_skip">Skip</string>
+
 </resources>
