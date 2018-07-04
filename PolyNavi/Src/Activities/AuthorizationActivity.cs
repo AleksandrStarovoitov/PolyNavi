@@ -42,7 +42,6 @@ namespace PolyNavi
 			textViewLater.Click += TextViewLater_Click;
 
 			prefEditor = MainApp.Instance.SharedPreferences.Edit();
-			prefEditor.PutString("groupnumber", editTextAuth.Text).Apply();
 		}
 
 		private void ButtonAuth_Click(object sender, EventArgs e)
@@ -73,6 +72,8 @@ namespace PolyNavi
 		public void ProceedToMainActivity()
 		{
             prefEditor.PutBoolean("auth", true).Apply();
+            if (!editTextAuth.Text.Equals(""))
+                prefEditor.PutString("groupnumber", editTextAuth.Text).Apply();
             var mainIntent = new Intent(this, typeof(MainActivity));
 			mainIntent.SetFlags(ActivityFlags.ClearTop);
 			StartActivity(mainIntent);

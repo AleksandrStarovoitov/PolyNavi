@@ -9,6 +9,6 @@ namespace PolyNaviLib.BL
 	public abstract class BusinessEntity : IBusinessEntity
 	{
 		[PrimaryKey, AutoIncrement]
-		public int ID { get; set; } = 0;
+		public int IDD { get; set; } = 0;
 	}
 }

@@ -5,28 +5,40 @@ using SQLiteNetExtensions.Attributes;
 
 namespace PolyNaviLib.BL
 {
-	public class Lesson : BusinessEntity
-	{
-		public string Subject { get; set; }  //Название пары
-		public string Timestr { get; set; }     //Время пары
-		public string Building { get; set; } //Корпус
-		public string Room { get; set; }     //Номер аудитории
-		public string Groups { get; set; }   //Номера групп
-		public string Type { get; set;  }      //Лекция/практика/лабораторные
-		public bool Last { get; set; }		//Последний в списке
+    public class Lesson : BusinessEntity
+    {
+        public string Subject { get; set; }
+        public string Subject_Short { get; set; }
+        public int Type { get; set; }
+        public string Additional_Info { get; set; }
+        public DateTime Time_Start { get; set; }
+        public DateTime Time_End { get; set; }
+        public int Parity { get; set; }
 
-		public DateTime StartTime { get; set; }
-		public DateTime EndTime { get; set; }
+        [OneToOne(CascadeOperations = CascadeOperation.All)]
+        public TypeObj TypeObj { get; set; }
 
-		[ManyToOne]
-		public Day Day { get; set; }
+        [OneToMany(CascadeOperations = CascadeOperation.All)]
+        public List<Group> Groups { get; set; }
 
-		[ForeignKey(typeof(Day))]
-		public int DayID { get; set; }
+        [OneToMany(CascadeOperations = CascadeOperation.All)]
+        public List<Teacher> Teachers { get; set; }
 
-		public Lesson()
-		{
+        [OneToMany(CascadeOperations = CascadeOperation.All)]
+        public List<Auditory> Auditories { get; set; }
 
-		}
-	}
+        [ManyToOne]
+        public Day Day { get; set; }
+
+        [ForeignKey(typeof(Day))]
+        public int DayID { get; set; }
+
+        public Lesson()
+        {
+            TypeObj = new TypeObj();
+            Groups = new List<Group>();
+            Teachers = new List<Teacher>();
+            Auditories = new List<Auditory>();
+        }
+    }
 }

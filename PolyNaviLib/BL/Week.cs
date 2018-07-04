@@ -6,38 +6,32 @@ using SQLiteNetExtensions.Attributes;
 
 namespace PolyNaviLib.BL
 {
-	public class Week : BusinessEntity
-	{
-		[OneToMany(CascadeOperations = CascadeOperation.All)]
-		public List<Day> Days { get; set; } //Дни
+    public class Week : BusinessEntity
+    {
+        public DateTime Date_Start { get; set; }
+        public DateTime Date_End { get; set; }
+        public bool Is_Odd { get; set; }
 
-		public string DummyStringToWorkaroundSQliteNetBug { get; set; }
+        [OneToOne]
+        public WeekRoot WeekRoot { get; set; }
 
-		public Week()
-		{
-			Days = new List<Day>();
-		}
+        [ForeignKey(typeof(WeekRoot))]
+        public int WeekRootID { get; set; }
 
-		public Week(DateTime weekDate)
-		{
-			while (weekDate.Date.DayOfWeek != DayOfWeek.Monday)
-			{
-				weekDate = weekDate.AddDays(-1);
-			}
+        public Week()
+        {
 
-			Days = new List<Day>() { new Day() { Date = weekDate }, new Day() { Date = weekDate.AddDays(1) }, new Day() { Date = weekDate.AddDays(2) }, new Day() { Date = weekDate.AddDays(3) }, new Day() { Date = weekDate.AddDays(4) }, new Day() { Date = weekDate.AddDays(5) }, new Day() { Date = weekDate.AddDays(6) } };
-		}
+        }
 
-		public bool IsExpired()
-		{
-			return DateTime.Now.Date > Days[6].Date;
-			//return DateTime.Now.Date > Days.Last().Date.Date;
-		}
+        public bool DateEqual(DateTime rhs)
+        {
+            return rhs.Date >= Date_Start &&
+                   rhs.Date <= Date_End;
+        }
 
-		public bool DateEqual(DateTime rhs)
-		{
-			return rhs.Date >= Days.First().Date.Date &&
-				   rhs.Date <= Days.Last().Date.Date;
-		}
-	}
+        public bool IsExpired()
+        {
+            return DateTime.Now.Date > Date_End.Date;
+        }
+    }
 }

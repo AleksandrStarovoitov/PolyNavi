@@ -22,10 +22,8 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:layout_gravity="bottom"
-        android:paddingEnd="@dimen/activity_horizontal_margin"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingStart="@dimen/activity_horizontal_margin">
+        android:paddingLeft="36dp"
+        android:paddingRight="36dp">
         <Button
             android:id="@+id/button_welcome_skip"
             style="@style/Widget.AppCompat.Button.Borderless"

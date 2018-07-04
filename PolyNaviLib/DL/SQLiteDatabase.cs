@@ -59,7 +59,7 @@ namespace PolyNaviLib.DL
 
 		public async Task SaveItemAsync<T>(T item) where T : IBusinessEntity, new()
 		{
-			if (item.ID == 0)
+			if (item.IDD == 0)
 			{
 				await db.InsertWithChildrenAsync(item, recursive: true);
 			}

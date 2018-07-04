@@ -2,98 +2,105 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using HtmlAgilityPack;
 using PolyNaviLib.BL;
 using PolyNaviLib.SL;
 using PolyNaviLib.DL;
 using System.Globalization;
 using System.Linq;
+using System.Net.Http;
+using Newtonsoft.Json;
 
 namespace PolyNaviLib.DAL
 {
-	public class Repository
-	{
-		//Номер группы....
-		private string baseLink = @"http://ruz.spbstu.ru/search/groups?q=";
-		private string groupLink;
+    public class Repository
+    {
+        readonly string groupLink = @"http://m.spbstu.ru/p/proxy.php?csurl=http://ruz.spbstu.ru/api/v1/ruz/search/groups&q=";
+        readonly string scheduleLink = @"http://m.spbstu.ru/p/proxy.php?csurl=http://ruz.spbstu.ru/api/v1/ruz/scheduler/";
 
-		SQLiteDatabase database;
-		INetworkChecker checker;
-		ISettingsProvider settings;
+        SQLiteDatabase database;
+        INetworkChecker checker;
+        ISettingsProvider settings;
 
-		const int CacheWeeks = 2;
+        private Repository()
+        {
+        }
 
-		private Repository()
-		{
-		}
+        private async Task<Repository> InitializeAsync(string dbPath, INetworkChecker checker, ISettingsProvider settings)
+        {
+            database = new SQLiteDatabase(dbPath);
 
-		private async Task<Repository> InitializeAsync(string dbPath, INetworkChecker checker, ISettingsProvider settings)
-		{
-			database = new SQLiteDatabase(dbPath);
-			await database.CreateTableAsync<Week>();
-			await database.CreateTableAsync<Day>();
-			await database.CreateTableAsync<Lesson>();
-			this.checker = checker;
-			this.settings = settings;
-			await RemoveExpiredWeeksAsync();
-			return this;
-		}
+            await database.CreateTableAsync<WeekRoot>();
+            await database.CreateTableAsync<Week>();
+            await database.CreateTableAsync<Day>();
+            await database.CreateTableAsync<Lesson>();
+            await database.CreateTableAsync<TypeObj>();
+            await database.CreateTableAsync<Group>();
+            await database.CreateTableAsync<Faculty>();
+            await database.CreateTableAsync<Teacher>();
+            await database.CreateTableAsync<Auditory>();
+            await database.CreateTableAsync<Building>();
+         
+            this.checker = checker;
+            this.settings = settings;
 
-		public static Task<Repository> CreateAsync(string dbPath, INetworkChecker networkChecker, ISettingsProvider settings)
-		{
-			var repo = new Repository();
-			return repo.InitializeAsync(dbPath, networkChecker, settings);
-		}
+            await RemoveExpiredWeeksAsync();
 
-		public async Task<Week> GetWeekAsync(DateTime weekDate)
-		{
-			if (await database.IsEmptyAsync<Week>())
-			{
-				var week = (await LoadScheduleFromWebAsync(weekDate));
-				await database.SaveItemAsync(week);
-				return week;
-			}
-			else
-			{
-				var weekFromDb = (await database.GetItemsAsync<Week>()).Where(w => w.DateEqual(weekDate)).SingleOrDefault();
-				if (weekFromDb == null)
-				{
-					var newWeek = (await LoadScheduleFromWebAsync(weekDate));
-					await database.SaveItemAsync(newWeek);
-					return newWeek;
-				}
-				else
-				{
-					return weekFromDb;
-				}
-			}
-		}
+            return this;
+        }
 
-		private async Task RemoveExpiredWeeksAsync()
-		{
-			await database.DeleteItemsAsync<Week>(w => w.IsExpired());
-		}
+        public static Task<Repository> CreateAsync(string dbPath, INetworkChecker networkChecker, ISettingsProvider settings)
+        {
+            var repo = new Repository();
+            return repo.InitializeAsync(dbPath, networkChecker, settings);
+        }
 
-		private async Task<Week> LoadScheduleFromWebAsync(DateTime weekDate)
-		{
-			if (checker.Check() == false)
-			{
-				throw new NetworkException("No internet connection");
-			}
+        public async Task<WeekRoot> GetWeekRootAsync(DateTime weekDate)
+        {
+            if (await database.IsEmptyAsync<WeekRoot>())
+            {
+                var weekRoot = await LoadWeekRootFromWebAsync(weekDate);
+                await database.SaveItemAsync(weekRoot);
+                return weekRoot;
+            }
+            else
+            {
+                var weekFromDb = (await database.GetItemsAsync<WeekRoot>()).Where(w => w.Week.DateEqual(weekDate)).SingleOrDefault();
+                if (weekFromDb == null)
+                {
+                    var newWeek = (await LoadWeekRootFromWebAsync(weekDate));
+                    await database.SaveItemAsync(newWeek);
+                    return newWeek;
+                }
+                else
+                {
+                    return weekFromDb;
+                }
+            }
+        }
 
-			HtmlDocument htmlDoc;
-			string groupNumber = settings["groupnumber"].ToString();
+        public async Task<WeekRoot> LoadWeekRootFromWebAsync(DateTime weekDate)
+        {
+            if (checker.Check() == false)
+            {
+                throw new NetworkException("No internet connection");
+            }
 
-			//Поиск группы
-			HtmlDocument htmlDocSearch = await HtmlLoader.LoadHtmlDocumentAsync(baseLink + groupNumber);
-			groupLink = WeekBuilder.GetScheduleLink(htmlDocSearch); //Получили ссылку
-			
-			var week = new Week();
-			string weekDateStr = weekDate.ToString("yyyy-M-d", new CultureInfo("ru-RU"));
-			htmlDoc = await HtmlLoader.LoadHtmlDocumentAsync(groupLink + "?date=" + weekDateStr);
-			week = WeekBuilder.BuildWeek(htmlDoc);
+            string groupNumber = settings["groupnumber"].ToString();
+            var client = new HttpClient();
 
-			return week;
-		}
-	}
+            var resultJson = await HttpClientSL.GetResponseAsync(client, groupLink + groupNumber);
+            var groupRoot = JsonConvert.DeserializeObject<GroupRoot>(resultJson);
+            var groupId = groupRoot.Groups[0].Id;
+
+            string dateStr = weekDate.ToString("yyyy-M-d", new CultureInfo("ru-RU"));
+            resultJson = await HttpClientSL.GetResponseAsync(client, scheduleLink + groupId + "&date=" + dateStr);
+            var weekRoot = JsonConvert.DeserializeObject<WeekRoot>(resultJson);
+            return weekRoot;
+        }
+        
+        private async Task RemoveExpiredWeeksAsync()
+        {
+            await database.DeleteItemsAsync<WeekRoot>(w => w.Week.IsExpired());
+        }
+    }
 }

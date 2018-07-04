@@ -69,8 +69,9 @@ namespace PolyNavi
 				var manager = await MainApp.Instance.PolyManager;
 				try
 				{
-					var week = await manager.GetWeekAsync(weekDate);
-					days = week.Days;
+                    var weekRoot = await manager.GetWeekRootAsync(weekDate);
+
+					days = weekRoot.Days;
 					Activity.RunOnUiThread(() =>
 					{
 						progress.Visibility = ViewStates.Invisible;

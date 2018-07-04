@@ -8,6 +8,6 @@ namespace PolyNaviLib.BL
 {
 	public interface IBusinessEntity
 	{
-		int ID { get; set; }
+		int IDD { get; set; }
 	}
 }

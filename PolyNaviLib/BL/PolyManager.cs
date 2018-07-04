@@ -15,27 +15,27 @@ namespace PolyNaviLib.BL
 		{
 		}
 
-		private async Task<PolyManager> InitializeAsync(string dbPath, INetworkChecker checker, ISettingsProvider settings)
-		{
-			repository = await Repository.CreateAsync(dbPath, checker, settings);
-			return this;
-		}
+        private async Task<PolyManager> InitializeAsync(string dbPath, INetworkChecker checker, ISettingsProvider settings)
+        {
+            repository = await Repository.CreateAsync(dbPath, checker, settings);
+            return this;
+        }
 
-		public static Task<PolyManager> CreateAsync(string dbPath, INetworkChecker checker, ISettingsProvider settings)
+        public static Task<PolyManager> CreateAsync(string dbPath, INetworkChecker checker, ISettingsProvider settings)
 		{
 			var manager = new PolyManager();
 			return manager.InitializeAsync(dbPath, checker, settings);
 		}
 
-		Nito.AsyncEx.AsyncLock mutex = new Nito.AsyncEx.AsyncLock();
-		//Получить расписание на неделю
-		public async Task<Week> GetWeekAsync(DateTime weekDate)
-		{
-			using (await mutex.LockAsync())
-			{
-				return await repository.GetWeekAsync(weekDate);
-			}
-		}
+        Nito.AsyncEx.AsyncLock mutex = new Nito.AsyncEx.AsyncLock();
+        //Получить расписание на неделю
+        public async Task<WeekRoot> GetWeekRootAsync(DateTime weekDate)
+        {
+            using (await mutex.LockAsync())
+            {
+                return await repository.GetWeekRootAsync(weekDate);
+            }
+        }
 
-	}
+    }
 }

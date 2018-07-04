@@ -78,12 +78,12 @@ namespace PolyNavi
 					TextView type = viewHolderLesson.type;
 
 					//time.Text = lesson.Timestr;
-					room.Text = lesson.Room;
-					building.Text = lesson.Building;
+					room.Text = "ауд. " + lesson.Auditories[0].Name;
+					building.Text = lesson.Auditories[0].Building.Name + ", ";
 					subject.Text = lesson.Subject;
-					startTime.Text = lesson.StartTime.ToString("HH:mm", cultureInfo);
-					endTime.Text = lesson.EndTime.ToString("HH:mm", cultureInfo);
-					type.Text = lesson.Type;
+					startTime.Text = lesson.Time_Start.ToString("HH:mm", cultureInfo);
+					endTime.Text = lesson.Time_End.ToString("HH:mm", cultureInfo);
+					type.Text = lesson.TypeObj.Name;
 
 					break;
 
