@@ -22,10 +22,10 @@ namespace PolyNaviLib.BL
         //[ForeignKey(typeof(GroupRoot))]
         //public int GroupRootId { get; set; }
 
-        //[OneToOne]
-        //public WeekRoot WeekRoot { get; set; }
-        //[ForeignKey(typeof(WeekRoot))]
-        //public int WeekRootID { get; set; }
+        [OneToOne]
+        public WeekRoot WeekRoot { get; set; }
+        [ForeignKey(typeof(WeekRoot))]
+        public int WeekRootID { get; set; }
 
         public Group()
         {

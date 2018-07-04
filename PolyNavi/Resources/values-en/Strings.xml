@@ -74,8 +74,8 @@
 
   <string name="pref_language_title">Application language</string>
   <string name="pref_language_summary">A reboot is required to apply changes</string>
-  <string name="pref_groupnumber_title">Group number</string>
-  <string name="pref_groupnumber_summary">Change group number</string>
+  <string name="pref_groupnumber_title">Change group number</string>
+  <string name="pref_groupnumber_summary">A reboot is required to apply changes</string>
   <string name="pref_groupnumber_dialog_title">Enter group number</string>
   <string name="pref_startactivity_title">Start screen</string>
   <string name="pref_startactivity_summary">Starts when you open the application</string>

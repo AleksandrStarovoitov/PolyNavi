@@ -43,6 +43,7 @@ namespace PolyNaviLib.DAL
             this.checker = checker;
             this.settings = settings;
 
+            
             await RemoveExpiredWeeksAsync();
 
             return this;
@@ -100,7 +101,7 @@ namespace PolyNaviLib.DAL
         
         private async Task RemoveExpiredWeeksAsync()
         {
-            await database.DeleteItemsAsync<WeekRoot>(w => w.Week.IsExpired());
+            await database.DeleteItemsAsync<WeekRoot>(w => w.Week.IsExpired(settings["groupnumber"].ToString()));
         }
     }
 }

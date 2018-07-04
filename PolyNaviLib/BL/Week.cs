@@ -29,9 +29,9 @@ namespace PolyNaviLib.BL
                    rhs.Date <= Date_End;
         }
 
-        public bool IsExpired()
+        public bool IsExpired(string groupNumber)
         {
-            return DateTime.Now.Date > Date_End.Date;
+            return !WeekRoot.Group.Name.Contains(groupNumber) || DateTime.Now.Date > Date_End.Date;
         }
     }
 }

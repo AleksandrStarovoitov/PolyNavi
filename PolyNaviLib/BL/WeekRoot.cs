@@ -15,13 +15,14 @@ namespace PolyNaviLib.BL
 
         public string DummyStringToWorkaroundSQliteNetBug { get; set; }
 
-        //[OneToOne]
-        //public Group Group { get; set; }
+        [OneToOne(CascadeOperations = CascadeOperation.All)]
+        public Group Group { get; set; }
 
         public WeekRoot()
         {
             Days = new List<Day>();
             Week = new Week();
+            Group = new Group();
         }
     }
 }
