@@ -1,4 +1,4 @@
-﻿using System;
+﻿    using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +20,11 @@ using Mapsui.Geometries;
 using Nito.AsyncEx;
 
 using PolyNaviLib.BL;
+using System.Threading.Tasks;
+using PolyNaviLib.SL;
+using System.Net.Http;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace PolyNavi
 {
@@ -36,7 +41,9 @@ namespace PolyNavi
 	public class MainApp : Application
 	{
 		private const string DatabaseFilename = "schedule.sqlite";
-		private Locale locale = null;
+        private readonly string groupLink = @"http://m.spbstu.ru/p/proxy.php?csurl=http://ruz.spbstu.ru/api/v1/ruz/search/groups";
+
+        private Locale locale = null;
 		private string language;
 
 		public static MainApp Instance { get; private set; }
@@ -71,6 +78,48 @@ namespace PolyNavi
 		};
 
 		public Dictionary<string, string> RoomsDictionary { get; private set; } = new Dictionary<string, string>();
+
+        public AsyncLazy<Dictionary<string, int>> GroupsDictionary { get; set; } = new AsyncLazy<Dictionary<string, int>>(async () =>
+        {
+            return await FillGroupsDictionary(false);
+        });
+
+        public static async Task<Dictionary<string, int>> FillGroupsDictionary(bool rewrite)
+        {
+            var networkChecker = new NetworkChecker(Instance);
+            string resultJson;
+
+            if (networkChecker.Check())
+            {
+                var client = new HttpClient();
+
+                var resourceName = "groups.json";
+
+                var b = File.Exists(GetFileFullPath(resourceName));
+
+                if (rewrite)
+                {
+                    resultJson = await HttpClientSL.GetResponseAsync(client, Instance.groupLink);
+                    File.WriteAllText(GetFileFullPath(resourceName), resultJson);
+                }
+                else
+                {
+                    using (var stream = GetEmbeddedResourceStream(resourceName))
+                    using (var reader = b ? new StreamReader(GetFileFullPath(resourceName)) : new StreamReader(stream))
+                    {
+                        resultJson = await reader.ReadToEndAsync();
+                    }
+                }
+                var groups = JsonConvert.DeserializeObject<GroupRoot>(resultJson);
+                var dictionary = groups.Groups.ToDictionary(x => x.Name, x => x.Id);
+                
+                return dictionary;
+            }
+            else
+            {
+                return null;
+            }            
+        }
 
 		public Lazy<Graph.GraphNode> MainBuildingGraph { get; private set; } = new Lazy<Graph.GraphNode>(() =>
 		{
@@ -166,7 +215,7 @@ namespace PolyNavi
 		{
 			base.OnCreate();
 			language = SharedPreferences.GetString("language", null);
-		}
+        }
 	
 		internal static string GetFileFullPath(string fname)
 		{
