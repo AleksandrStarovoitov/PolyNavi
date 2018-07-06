@@ -124,12 +124,18 @@ namespace PolyNavi
 		public void ProceedToMainActivity()
 		{
             prefEditor.PutBoolean("auth", true).Apply();
+
             if (!autoCompleteTextViewAuth.Text.Equals(""))
             {
-                var d = MainApp.Instance.GroupsDictionary.Task.Result;
                 prefEditor.PutString("groupnumber", autoCompleteTextViewAuth.Text).Apply();
-                prefEditor.PutInt("groupid", d[autoCompleteTextViewAuth.Text]).Apply();
+
+                var dictionary = MainApp.Instance.GroupsDictionary.Task.Result;
+                if (dictionary.ContainsKey(autoCompleteTextViewAuth.Text))
+                {
+                    prefEditor.PutInt("groupid", dictionary[autoCompleteTextViewAuth.Text]).Apply();
+                }
             }
+
             var mainIntent = new Intent(this, typeof(MainActivity));
 			mainIntent.SetFlags(ActivityFlags.ClearTop);
 			StartActivity(mainIntent);

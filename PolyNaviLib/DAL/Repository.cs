@@ -14,7 +14,6 @@ namespace PolyNaviLib.DAL
 {
     public class Repository
     {
-        readonly string groupLink = @"http://m.spbstu.ru/p/proxy.php?csurl=http://ruz.spbstu.ru/api/v1/ruz/search/groups&q=";
         readonly string scheduleLink = @"http://m.spbstu.ru/p/proxy.php?csurl=http://ruz.spbstu.ru/api/v1/ruz/scheduler/";
 
         SQLiteDatabase database;
@@ -42,10 +41,8 @@ namespace PolyNaviLib.DAL
          
             this.checker = checker;
             this.settings = settings;
-
-            
+                        
             await RemoveExpiredWeeksAsync();
-
             return this;
         }
 
@@ -86,22 +83,19 @@ namespace PolyNaviLib.DAL
                 throw new NetworkException("No internet connection");
             }
 
-            string groupNumber = settings["groupnumber"].ToString();
             var client = new HttpClient();
 
-            var resultJson = await HttpClientSL.GetResponseAsync(client, groupLink + groupNumber);
-            var groupRoot = JsonConvert.DeserializeObject<GroupRoot>(resultJson);
-            var groupId = groupRoot.Groups[0].Id;
+            var groupId = settings["groupid"];
 
             string dateStr = weekDate.ToString("yyyy-M-d", new CultureInfo("ru-RU"));
-            resultJson = await HttpClientSL.GetResponseAsync(client, scheduleLink + groupId + "&date=" + dateStr);
+            var resultJson = await HttpClientSL.GetResponseAsync(client, scheduleLink + groupId + "&date=" + dateStr);
             var weekRoot = JsonConvert.DeserializeObject<WeekRoot>(resultJson);
             return weekRoot;
         }
         
         private async Task RemoveExpiredWeeksAsync()
         {
-            await database.DeleteItemsAsync<WeekRoot>(w => w.Week.IsExpired(settings["groupnumber"].ToString()));
+            await database.DeleteItemsAsync<WeekRoot>(w => w.Week.IsExpired(Convert.ToInt32(settings["groupid"])));
         }
     }
 }
