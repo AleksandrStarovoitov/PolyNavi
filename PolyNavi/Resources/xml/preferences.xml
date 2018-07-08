@@ -8,7 +8,7 @@
         android:entries="@array/pref_activity"
         android:entryValues="@array/pref_activity_values" 
         android:defaultValue="mainbuilding"/>
-    <EditTextPreference
+  <PolyNavi.AutoCompleteTextViewPreference
         android:key="groupnumber"
         android:title="@string/pref_groupnumber_title"
         android:summary="@string/pref_groupnumber_summary"

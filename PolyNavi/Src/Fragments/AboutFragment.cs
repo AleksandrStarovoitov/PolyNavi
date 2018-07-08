@@ -21,7 +21,7 @@ using Android.Text.Method;
 namespace PolyNavi
 {
 	[Activity(Label = "AboutFragment")]
-	public class AboutFragment : Fragment
+	public class AboutFragment : Android.Support.V4.App.Fragment
 	{
 		private View view;
 	

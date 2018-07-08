@@ -7,6 +7,8 @@ using Android.Views;
 using Android.Views.InputMethods;
 using Android.Widget;
 using System;
+using Android.Support.V4.App;
+
 using static Android.Widget.TextView;
 
 using Graph;
@@ -15,13 +17,13 @@ using System.Linq;
 
 namespace PolyNavi
 {
-	public class MainBuildingFragment : Fragment, IOnEditorActionListener, AppBarLayout.IOnOffsetChangedListener
+	public class MainBuildingFragment : Android.Support.V4.App.Fragment, IOnEditorActionListener, AppBarLayout.IOnOffsetChangedListener
 	{
 		GraphNode mapGraph;
 
 		private View view;
 		private AutoCompleteTextView editTextInputFrom, editTextInputTo;
-		private FragmentTransaction fragmentTransaction;
+		private Android.Support.V4.App.FragmentTransaction fragmentTransaction;
 		private AppBarLayout appBar;
 		private FloatingActionButton fab;
 		private RelativeLayout relativeLayout;
@@ -47,7 +49,7 @@ namespace PolyNavi
 
 			fragments = new List<MainBuildingMapFragment>() { new MainBuildingMapFragment(Resource.Drawable.first_floor), new MainBuildingMapFragment(Resource.Drawable.second_floor), new MainBuildingMapFragment(Resource.Drawable.third_floor) };
 
-			fragmentTransaction = FragmentManager.BeginTransaction();
+			fragmentTransaction = Activity.SupportFragmentManager.BeginTransaction();
 			fragmentTransaction.Add(Resource.Id.frame_mainbuilding, fragments[2], "MAP_MAINBUILDING_3");
 			fragmentTransaction.Add(Resource.Id.frame_mainbuilding, fragments[1], "MAP_MAINBUILDING_2");
 			fragmentTransaction.Detach(fragments[2]);
@@ -115,8 +117,8 @@ namespace PolyNavi
 			}
 			buttonDown.Enabled = true;
 			buttonUp.Enabled = true;
-			var currentFragment = FragmentManager.FindFragmentByTag<MainBuildingMapFragment>($"MAP_MAINBUILDING_{currentFloor}");
-			var newFragment = FragmentManager.FindFragmentByTag<MainBuildingMapFragment>($"MAP_MAINBUILDING_{newFloor}");
+			var currentFragment = FragmentManager.FindFragmentByTag($"MAP_MAINBUILDING_{currentFloor}");
+			var newFragment = FragmentManager.FindFragmentByTag($"MAP_MAINBUILDING_{newFloor}");
 			FragmentManager.BeginTransaction().
 							Detach(currentFragment).
 							Attach(newFragment).
@@ -170,8 +172,8 @@ namespace PolyNavi
 						ClearAllRoutes();
 						foreach (var coordGroup in coordinateGroups)
 						{
-							var fragment = FragmentManager.FindFragmentByTag<MainBuildingMapFragment>($"MAP_MAINBUILDING_{coordGroup.FloorNumber}");
-							fragment.MapView.SetRoute(coordGroup.Coordinates.ToList());
+							var fragment = FragmentManager.FindFragmentByTag($"MAP_MAINBUILDING_{coordGroup.FloorNumber}") as MainBuildingMapFragment;
+                            fragment.MapView.SetRoute(coordGroup.Coordinates.ToList());
 						}
 
 						int startFloor = route[0].FloorNumber;

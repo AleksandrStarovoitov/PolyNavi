@@ -13,7 +13,7 @@ using Android.Widget;
 
 namespace PolyNavi
 {
-	public class MainBuildingMapFragment : Fragment
+	public class MainBuildingMapFragment : Android.Support.V4.App.Fragment
 	{
 		public MainBuildingView MapView { get; set; }
 		public int DrawawbleId { get; set; }

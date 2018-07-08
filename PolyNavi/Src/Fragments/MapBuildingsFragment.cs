@@ -34,7 +34,7 @@ using Android.Content.PM;
 namespace PolyNavi
 {
 	// TODO Кеширование RouterDB чтобы не загружать ее при каждой загрузке фрагмента
-	public class MapBuildingsFragment : Fragment, AppBarLayout.IOnOffsetChangedListener, ILocationListener
+	public class MapBuildingsFragment : Android.Support.V4.App.Fragment, AppBarLayout.IOnOffsetChangedListener, ILocationListener
 	{
 		private const string RouterDbName = "polytech_map.routerdb";
 		private const string Marker_A_Name = "ic_marker_a.png";
@@ -310,25 +310,25 @@ namespace PolyNavi
 			return BitmapRegistry.Instance.Register(image);
 		}
 
-		public override void OnActivityResult(int requestCode, Result resultCode, Intent data)
-		{
-			if (resultCode == Result.Ok)
-			{
-				switch (requestCode)
-				{
-					case RequestCodeFrom:
-						editTextInputFrom.Text = data.GetStringExtra("route");
-						break;
-					case RequestCodeTo:
-						editTextInputTo.Text = data.GetStringExtra("route");
-						break;
-					default:
-						Toast.MakeText(Activity.BaseContext, "Error", ToastLength.Short).Show();
-						break;
-				}
-			}
-		}
-
+        public override void OnActivityResult(int requestCode, int resultCode, Intent data)
+        {
+            if (resultCode == (int)Result.Ok)
+            {
+                switch (requestCode)
+                {
+                    case RequestCodeFrom:
+                        editTextInputFrom.Text = data.GetStringExtra("route");
+                        break;
+                    case RequestCodeTo:
+                        editTextInputTo.Text = data.GetStringExtra("route");
+                        break;
+                    default:
+                        Toast.MakeText(Activity.BaseContext, "Error", ToastLength.Short).Show();
+                        break;
+                }
+            }
+        }
+        
 		bool fullyExpanded, fullyCollapsed;
 		private void Fab_Click(object sender, EventArgs eargs)
 		{

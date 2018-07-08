@@ -79,6 +79,11 @@ namespace PolyNavi
 						recyclerViewSchedule.HasFixedSize = true;
 						recyclerViewSchedule.SetAdapter(adapter);
 						recyclerViewSchedule.SetLayoutManager(new LinearLayoutManager(Activity.BaseContext));
+                        var pos = days.FindIndex(day => day.Date.DayOfYear == DateTime.Now.DayOfYear);
+                        if (pos != -1)
+                        {
+                            recyclerViewSchedule.ScrollToPosition(pos);
+                        }
 					});
 				}
 				catch (NetworkException)

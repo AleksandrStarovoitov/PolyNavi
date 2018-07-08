@@ -39,7 +39,7 @@ namespace PolyNavi
 		private DrawerLayout drawerLayout;
 		private ActionBarDrawerToggle drawerToggle;
 		private Type fragmentClass = null;
-		private Fragment fragment;
+		private Android.Support.V4.App.Fragment fragment;
 		private Android.Support.V7.Widget.Toolbar toolbar;
 		private NavigationView navigationView;
 		private string startActivity;
@@ -106,10 +106,10 @@ namespace PolyNavi
 					startMenuItem = 0;
 					break;
 			}
-			fragment = (Fragment)Activator.CreateInstance(fragmentClass);
+			fragment = (Android.Support.V4.App.Fragment)Activator.CreateInstance(fragmentClass);
 			navigationView.Menu.GetItem(startMenuItem).SetChecked(true);
 			Title = startMenuItem == 4? navigationView.Menu.FindItem(Resource.Id.nav_about_menu).TitleFormatted.ToString() : navigationView.Menu.GetItem(startMenuItem).TitleFormatted.ToString();
-			FragmentManager.BeginTransaction().Replace(Resource.Id.contentframe_main, fragment).Commit();
+			SupportFragmentManager.BeginTransaction().Replace(Resource.Id.contentframe_main, fragment).Commit();
 		}
 
 		protected override void OnPostCreate(Bundle savedInstanceState)
