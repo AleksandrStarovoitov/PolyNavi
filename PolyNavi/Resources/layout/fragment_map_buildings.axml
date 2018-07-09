@@ -88,13 +88,12 @@
                 <ImageButton
                     android:id="@+id/imagebutton_currentlocation_map_buildings"
                     style="@style/Widget.AppCompat.Button.Borderless"
-                    android:layout_width="wrap_content"
+                    android:layout_width="50dp"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:src="@drawable/baseline_near_me_black_24"
                     android:layout_centerVertical="true"
-                    android:layout_margin="5dp"
-                    android:text="Button" />
+                    android:layout_margin="5dp" />
             </RelativeLayout>
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/textinputlayout_to_map_buildings"
