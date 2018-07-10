@@ -87,7 +87,7 @@
         android:layout_centerHorizontal="true">
         <TextView
             android:id="@+id/textview_groupsupdate_auth"
-            android:text="Обновить список групп"
+            android:text="@string/update_groups_auth"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"

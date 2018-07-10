@@ -26,6 +26,7 @@ namespace PolyNavi
         NetworkChecker networkChecker;
         ArrayAdapter suggestAdapter;
         ProgressBar progressBar;
+        Dictionary<string, int> groupsDictionary;
         string[] array;
         ISharedPreferencesEditor prefEditor;
 
@@ -45,7 +46,8 @@ namespace PolyNavi
             progressBar.Visibility = ViewStates.Visible;
             Task.Run(async () =>
             {
-                array = (await MainApp.Instance.GroupsDictionary).Select(x => x.Key).ToArray();
+                groupsDictionary = await MainApp.Instance.GroupsDictionary;
+                array = groupsDictionary.Select(x => x.Key).ToArray();
                 
                 RunOnUiThread(() =>
                 {
@@ -77,7 +79,9 @@ namespace PolyNavi
                 {
 
                     MainApp.Instance.GroupsDictionary = new Nito.AsyncEx.AsyncLazy<Dictionary<string, int>>(async () => { return await MainApp.FillGroupsDictionary(true); });
-                    array = (await MainApp.Instance.GroupsDictionary).Select(x => x.Key).ToArray();
+                    var newGroupsDictionary = await MainApp.Instance.GroupsDictionary;
+                    groupsDictionary = newGroupsDictionary;
+                    array = newGroupsDictionary.Select(x => x.Key).ToArray();
 
                     RunOnUiThread(() =>
                     {
@@ -128,11 +132,10 @@ namespace PolyNavi
             if (!autoCompleteTextViewAuth.Text.Equals(""))
             {
                 prefEditor.PutString("groupnumber", autoCompleteTextViewAuth.Text).Apply();
-
-                var dictionary = MainApp.Instance.GroupsDictionary.Task.Result;
-                if (dictionary.ContainsKey(autoCompleteTextViewAuth.Text))
+                                
+                if (groupsDictionary.ContainsKey(autoCompleteTextViewAuth.Text))
                 {
-                    prefEditor.PutInt("groupid", dictionary[autoCompleteTextViewAuth.Text]).Apply();
+                    prefEditor.PutInt("groupid", groupsDictionary[autoCompleteTextViewAuth.Text]).Apply();
                 }
             }
 

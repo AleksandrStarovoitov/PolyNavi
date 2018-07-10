@@ -84,7 +84,7 @@ namespace PolyNavi
 					startTime.Text = lesson.Time_Start.ToString("HH:mm", cultureInfo);
 					endTime.Text = lesson.Time_End.ToString("HH:mm", cultureInfo);
 					type.Text = lesson.TypeObj.Name;
-                    teacher.Text = String.Join(", ", lesson.Teachers.Select(t => t?.Full_Name).ToArray());
+                    teacher.Text = lesson.Teachers == null ? "" : String.Join(", ", lesson.Teachers.Select(t => t.Full_Name).ToArray());
 
 					break;
 

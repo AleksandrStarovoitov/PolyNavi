@@ -77,7 +77,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="polynavi@yandex.ru"
+                        android:text="@string/about_email_address"
                         android:textColor="@color/colorBlackWithTransparency"
                         android:textSize="15sp" />
                 </LinearLayout>
@@ -280,7 +280,7 @@
                 android:textSize="18sp"
                 android:layout_below="@+id/textview_contacts_sasha_link_about"
                 android:layout_marginTop="5dp" />
-          <TextView
+            <TextView
                 android:id="@+id/textview_contacts_masha_link_about"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

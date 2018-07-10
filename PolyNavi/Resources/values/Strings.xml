@@ -49,6 +49,7 @@
   <string name="other_nav">Прочее</string>
 
   <string name="about_email_title">Написать разработчикам</string>
+  <string name="about_email_address">polynavi@yandex.ru</string>
   <string name="about_rate_title">Оценить приложение</string>
   <string name="about_rate_subtitle">Перейти в GooglePlay</string>
   <string name="about_bitbucket_title">Открытое программное обеспечение</string>
@@ -73,6 +74,7 @@
   <string name="edittext_auth">Например - 23537/1</string>
   <string name="button_auth">Поехали</string>
   <string name="group_later">Я укажу номер группы позже</string>
+  <string name="update_groups_auth">Обновить список групп</string>
 
   <string name="pref_language_title">Язык приложения</string>
   <string name="pref_language_summary">Для применения изменений необходима перезагрузка приложения</string>
