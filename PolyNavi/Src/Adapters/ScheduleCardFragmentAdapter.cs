@@ -22,7 +22,7 @@ namespace PolyNavi
 		private List<Object> mLessons;
 		private Context context;
 		private LayoutInflater layoutInflater;
-		private View scheduleView;
+		protected View scheduleView;
 		private ScheduleCardRowLessonViewHolder viewHolderLesson;
 		private ScheduleCardRowTitleViewHolder viewHolderTitle;
 		private RecyclerView.ViewHolder viewHolder;
@@ -84,8 +84,27 @@ namespace PolyNavi
 					startTime.Text = lesson.Time_Start.ToString("HH:mm", cultureInfo);
 					endTime.Text = lesson.Time_End.ToString("HH:mm", cultureInfo);
 					type.Text = lesson.TypeObj.Name;
-                    teacher.Text = lesson.Teachers == null ? "" : String.Join(", ", lesson.Teachers.Select(t => t.Full_Name).ToArray());
+                    if (lesson.Teachers == null || lesson.Teachers.Count == 0)
+                    {
+                        var relativeLayout = ((ViewGroup)scheduleView).FindViewById(Resource.Id.relativelayout_row_schedule);
+                        relativeLayout.Measure(ViewGroup.LayoutParams.WrapContent, ViewGroup.LayoutParams.WrapContent);
+                        viewHolderLesson.teacher.Measure(ViewGroup.LayoutParams.WrapContent, ViewGroup.LayoutParams.WrapContent);
+                        
+                        var height = relativeLayout.MeasuredHeight;
+                        var tvHegiht = viewHolderLesson.teacher.MeasuredHeight;
 
+                        var layoutParams = relativeLayout.LayoutParameters;
+                        layoutParams.Height = height - tvHegiht;
+
+                        ((ViewGroup)scheduleView).RemoveView(viewHolderLesson.teacher);
+                        relativeLayout.LayoutParameters = layoutParams;
+                    }
+                    else
+                    {
+                        teacher.Text = String.Join(", ", lesson.Teachers.Select(t => t.Full_Name).ToArray());
+                    }
+                    
+                   
 					break;
 
 				case TitleConst:
