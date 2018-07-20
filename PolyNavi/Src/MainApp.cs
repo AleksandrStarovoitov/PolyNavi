@@ -88,39 +88,31 @@ namespace PolyNavi
         public static async Task<Dictionary<string, int>> FillGroupsDictionary(bool rewrite, CancellationToken cts)
         {
             var networkChecker = new NetworkChecker(Instance);
-            string resultJson;
+            string resultJson;                   
 
-            if (networkChecker.Check())
+            var resourceName = "groups.json";
+
+            var b = File.Exists(GetFileFullPath(resourceName));
+
+            if (rewrite && networkChecker.Check())
             {
                 var client = new HttpClient();
+                resultJson = await HttpClientSL.GetResponseAsync(client, Instance.groupLink, cts);
 
-                var resourceName = "groups.json";
-
-                var b = File.Exists(GetFileFullPath(resourceName));
-
-                if (rewrite)
-                {
-                    resultJson = await HttpClientSL.GetResponseAsync(client, Instance.groupLink, cts);
-
-                    File.WriteAllText(GetFileFullPath(resourceName), resultJson);
-                }
-                else
-                {
-                    using (var stream = GetEmbeddedResourceStream(resourceName))
-                    using (var reader = b ? new StreamReader(GetFileFullPath(resourceName)) : new StreamReader(stream))
-                    {
-                        resultJson = await reader.ReadToEndAsync();
-                    }
-                }
-                var groups = JsonConvert.DeserializeObject<GroupRoot>(resultJson);
-                var dictionary = groups.Groups.ToDictionary(x => x.Name, x => x.Id);
-                
-                return dictionary;
+                File.WriteAllText(GetFileFullPath(resourceName), resultJson);
             }
             else
             {
-                return null;
-            }            
+                using (var stream = GetEmbeddedResourceStream(resourceName))
+                using (var reader = b ? new StreamReader(GetFileFullPath(resourceName)) : new StreamReader(stream))
+                {
+                    resultJson = await reader.ReadToEndAsync();
+                }
+            }
+            var groups = JsonConvert.DeserializeObject<GroupRoot>(resultJson);
+            var dictionary = groups.Groups.ToDictionary(x => x.Name, x => x.Id);
+                
+            return dictionary;    
         }
 
 		public Lazy<Graph.GraphNode> MainBuildingGraph { get; private set; } = new Lazy<Graph.GraphNode>(() =>
