@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -16,37 +17,42 @@
     <TextView
         android:text="@string/no_connection_title"
         android:textAppearance="@style/NoConnectionTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
         android:id="@+id/textview_no_connection_title"
-        android:layout_centerHorizontal="true"
+        android:gravity="center_horizontal"
+        android:layout_gravity="center_horizontal"
         android:layout_below="@+id/imageview_no_connection"
-        android:layout_marginTop="15dp" />
-    <LinearLayout
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"
+        app:autoSizeTextType="uniform" />
+    <RelativeLayout
         android:orientation="horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
         android:minWidth="25px"
         android:minHeight="25px"
         android:layout_below="@+id/textview_no_connection_title"
         android:layout_marginTop="15dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"
         android:layout_centerHorizontal="true">
         <TextView
             android:text="@string/no_connection_tap"
             android:textAppearance="@style/ScheduleTitleDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:id="@+id/textview_no_connection_tap"
-            android:layout_centerInParent="true"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
-            />
+            android:layout_marginRight="5dp"
+            android:layout_alignParentLeft="true"
+            app:autoSizeTextType="uniform" />
         <ImageView
             android:src="@drawable/baseline_refresh_24"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/imageview_no_connection"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="3dp"/>
-    </LinearLayout>
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true" />
+    </RelativeLayout>
 </RelativeLayout>

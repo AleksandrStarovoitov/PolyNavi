@@ -17,6 +17,7 @@ using Android.Support.V4.Widget;
 using static Android.Support.V4.Widget.SwipeRefreshLayout;
 using PolyNaviLib.BL;
 using PolyNaviLib.DAL;
+using System.Globalization;
 
 namespace PolyNavi
 {
@@ -28,10 +29,12 @@ namespace PolyNavi
 		private RecyclerView recyclerViewSchedule;
 		private ScheduleCardFragmentAdapter adapter;
 		private DateTime weekDate;
+        int weekTag;
 
-		public ScheduleWeekFragment(DateTime weekDate)
+		public ScheduleWeekFragment(DateTime weekDate, int weekTag)
 		{
 			this.weekDate = weekDate;
+            this.weekTag = weekTag;
 		}
 
 		public override void OnCreate(Bundle savedInstanceState)
@@ -48,7 +51,7 @@ namespace PolyNavi
 			mSwipeRefreshLayout.SetOnRefreshListener(this);
 
 			recyclerViewSchedule = view.FindViewById<RecyclerView>(Resource.Id.recyclerview_week_schedule);
-
+            
 			LoadSheduleAndUpdateUIWithPorgressBar(weekDate);
 
 			return view;
@@ -75,14 +78,25 @@ namespace PolyNavi
 					Activity.RunOnUiThread(() =>
 					{
 						progress.Visibility = ViewStates.Invisible;
-						adapter = new ScheduleCardFragmentAdapter(days);
-						recyclerViewSchedule.HasFixedSize = true;
-						recyclerViewSchedule.SetAdapter(adapter);
-						recyclerViewSchedule.SetLayoutManager(new LinearLayoutManager(Activity.BaseContext));
-                        var pos = days.FindIndex(day => day.Date.DayOfYear == DateTime.Now.DayOfYear);
-                        if (pos != -1)
+                        if (days.Count == 0)
                         {
-                            recyclerViewSchedule.ScrollToPosition(pos);
+                            DrawContent(Resource.Id.relativelayout_week_schedule, Resource.Layout.layout_empty_schedule_error);
+                            var v = view.FindViewById<RelativeLayout>(Resource.Id.layout_empty_schedule_error_clickable_zone);
+
+                            view.FindViewById<TextView>(Resource.Id.textview_empty_schedule_error_title).Text = 
+                                "Расписание на " + (weekTag == 0 ? "текущую" : "следующую") + " неделю отсутствует";
+                        }
+                        else
+                        {
+                            adapter = new ScheduleCardFragmentAdapter(days);
+                            recyclerViewSchedule.HasFixedSize = true;
+                            recyclerViewSchedule.SetAdapter(adapter);
+                            recyclerViewSchedule.SetLayoutManager(new LinearLayoutManager(Activity.BaseContext));
+                            var pos = days.FindIndex(day => day.Date.DayOfYear == DateTime.Now.DayOfYear);
+                            if (pos != -1)
+                            {
+                                recyclerViewSchedule.ScrollToPosition(pos);
+                            }
                         }
 					});
 				}
@@ -90,11 +104,11 @@ namespace PolyNavi
 				{
 					Activity.RunOnUiThread(() =>
 					{
-						DrawContent(Resource.Id.relativelayout_week_schedule, Resource.Layout.fragment_error);
-						var v = view.FindViewById<RelativeLayout>(Resource.Id.layout_error_clickable_zone);
+						DrawContent(Resource.Id.relativelayout_week_schedule, Resource.Layout.layout_no_connection);
+						var v = view.FindViewById<RelativeLayout>(Resource.Id.layout_no_connection_clickable_zone);
 
-                        view.FindViewById<TextView>(Resource.Id.textview_error_title).Text = "Нет подключения к сети";
-                        view.FindViewById<TextView>(Resource.Id.textview_error_summary).Text = "Подключитесь к сети и нажмите, чтобы обновить";
+                        view.FindViewById<TextView>(Resource.Id.textview_no_connection_title).Text = "Нет подключения к сети";
+                        view.FindViewById<TextView>(Resource.Id.textview_no_connection_tap).Text = "Подключитесь к сети и нажмите, чтобы обновить";
 
                         v.Click += (sender, e) =>
 						{
