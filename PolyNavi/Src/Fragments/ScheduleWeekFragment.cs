@@ -91,8 +91,12 @@ namespace PolyNavi
 					Activity.RunOnUiThread(() =>
 					{
 						DrawContent(Resource.Id.relativelayout_week_schedule, Resource.Layout.fragment_error);
-						var v = Activity.FindViewById<RelativeLayout>(Resource.Id.layout_error_clickable_zone);
-						v.Click += (sender, e) =>
+						var v = view.FindViewById<RelativeLayout>(Resource.Id.layout_error_clickable_zone);
+
+                        view.FindViewById<TextView>(Resource.Id.textview_error_title).Text = "Нет подключения к сети";
+                        view.FindViewById<TextView>(Resource.Id.textview_error_summary).Text = "Подключитесь к сети и нажмите, чтобы обновить";
+
+                        v.Click += (sender, e) =>
 						{
 							FragmentManager.BeginTransaction().Detach(this).Attach(this).Commit();
 						};
