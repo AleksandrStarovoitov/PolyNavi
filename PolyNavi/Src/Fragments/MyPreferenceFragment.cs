@@ -64,12 +64,10 @@ namespace PolyNavi
                 }
 
                 var dictionary = MainApp.Instance.GroupsDictionary.Task.Result;
-                    
-                if (dictionary.ContainsKey(groupName))
-                {
-                    var id = dictionary[groupName];
 
-                    sharedPreferences.Edit().PutInt("groupid", id).Apply();                        
+                if (dictionary.TryGetValue(groupName, out int id))
+                {
+                    sharedPreferences.Edit().PutInt("groupid", id).Apply();
                 }
                 else
                 {

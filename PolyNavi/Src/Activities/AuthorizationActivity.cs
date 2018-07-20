@@ -132,10 +132,9 @@ namespace PolyNavi
             if (!autoCompleteTextViewAuth.Text.Equals(""))
             {
                 prefEditor.PutString("groupnumber", autoCompleteTextViewAuth.Text).Apply();
-                                
-                if (groupsDictionary.ContainsKey(autoCompleteTextViewAuth.Text))
+                if (groupsDictionary.TryGetValue(autoCompleteTextViewAuth.Text, out int groupId))
                 {
-                    prefEditor.PutInt("groupid", groupsDictionary[autoCompleteTextViewAuth.Text]).Apply();
+                    prefEditor.PutInt("groupid", groupId).Apply();
                 }
             }
 
