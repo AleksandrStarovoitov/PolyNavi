@@ -3,17 +3,18 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace PolyNaviLib.SL
 {
     public static class HttpClientSL
     {
-        public static async Task<string> GetResponseAsync(HttpClient client, string uri)
+        public static async Task<string> GetResponseAsync(HttpClient client, string uri, CancellationToken cts)
         {
             try
             {
-                var response = await client.GetAsync(uri);
+                var response = await client.GetAsync(uri, cts);
                 response.EnsureSuccessStatusCode();
 
                 string responseBody = await response.Content.ReadAsStringAsync();

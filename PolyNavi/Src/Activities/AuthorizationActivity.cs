@@ -78,10 +78,10 @@ namespace PolyNavi
                 Task.Run(async () =>
                 {
 
-                    MainApp.Instance.GroupsDictionary = new Nito.AsyncEx.AsyncLazy<Dictionary<string, int>>(async () => { return await MainApp.FillGroupsDictionary(true); });
+                    MainApp.Instance.GroupsDictionary = new Nito.AsyncEx.AsyncLazy<Dictionary<string, int>>(async () => { return await MainApp.FillGroupsDictionary(true, new System.Threading.CancellationToken()); });
                     var newGroupsDictionary = await MainApp.Instance.GroupsDictionary;
-                    groupsDictionary = newGroupsDictionary;
                     array = newGroupsDictionary.Select(x => x.Key).ToArray();
+                    groupsDictionary = newGroupsDictionary;
 
                     RunOnUiThread(() =>
                     {

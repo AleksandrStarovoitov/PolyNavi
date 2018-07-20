@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using System.Threading;
+using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -18,40 +19,25 @@ namespace PolyNavi
 	public class MyPreferenceFragment : PreferenceFragmentCompat, ISharedPreferencesOnSharedPreferenceChangeListener
 	{
         ISharedPreferences sharedPreferences;
-
-        //public override void OnCreate(Bundle savedInstanceState)
-        //{
-        //	base.OnCreate(savedInstanceState);
-        //	AddPreferencesFromResource(Resource.Xml.preferences);
-
-        //          MainApp.Instance.SharedPreferences.RegisterOnSharedPreferenceChangeListener(this);
-        //}
-
+        CancellationTokenSource cts;
         public override void OnDisplayPreferenceDialog(Preference preference)
         {
-            //base.OnDisplayPreferenceDialog(preference);
-
             PreferenceDialogFragmentCompat dialogFragment = null;
             if (preference is AutoCompleteTextViewPreference) {
-                // Create a new instance of TimePreferenceDialogFragment with the key of the related
-                // Preference
+                cts = new CancellationTokenSource();
                 dialogFragment = AutoCompleteTextViewPreferenceDialogFragmentCompat
-                        .NewInstance(preference.Key);
+                        .NewInstance(preference.Key, cts);
             }
-
-            // If it was one of our cutom Preferences, show its dialog
+            
             if (dialogFragment != null)
             {
                 dialogFragment.SetTargetFragment(this, 0);
                 dialogFragment.Show(FragmentManager, "android.support.v7.preference.PreferenceFragment.DIALOG");
             }
-            // Could not be handled here. Try with the super method.
             else
             {
                 base.OnDisplayPreferenceDialog(preference);
-            }
-
-
+            }            
         }
 
         public override void OnDestroy()
@@ -65,26 +51,35 @@ namespace PolyNavi
             if (key.Equals("groupnumber"))
             {
                 var groupName = sharedPreferences.GetString(key, "-1");
+
+                var status = MainApp.Instance.GroupsDictionary.Task.Status;
+                var isStarted = MainApp.Instance.GroupsDictionary.IsStarted;
+
+                if (isStarted && status != TaskStatus.RanToCompletion)
+                {
+                    cts.Cancel();
+
+                    cts = new CancellationTokenSource();
+                    MainApp.Instance.GroupsDictionary = new Nito.AsyncEx.AsyncLazy<Dictionary<string, int>>(async () => await MainApp.FillGroupsDictionary(false, cts.Token));
+                }
+
                 var dictionary = MainApp.Instance.GroupsDictionary.Task.Result;
+                    
                 if (dictionary.ContainsKey(groupName))
                 {
                     var id = dictionary[groupName];
 
-                    sharedPreferences.Edit().PutInt("groupid", id).Apply();
-
-                    Toast.MakeText(Activity.BaseContext, id.ToString(), ToastLength.Short).Show();
+                    sharedPreferences.Edit().PutInt("groupid", id).Apply();                        
                 }
                 else
                 {
                     Toast.MakeText(Activity.BaseContext, "Wrong group", ToastLength.Short).Show();
-                }
+                }                
             }
         }
 
         public override void OnCreatePreferences(Bundle savedInstanceState, string rootKey)
         {
-            //base.OnCreatePreferences(savedInstanceState, rootKey);
-
             AddPreferencesFromResource(Resource.Xml.preferences);
 
             MainApp.Instance.SharedPreferences.RegisterOnSharedPreferenceChangeListener(this);

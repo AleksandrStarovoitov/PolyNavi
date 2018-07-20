@@ -25,6 +25,7 @@ using PolyNaviLib.SL;
 using System.Net.Http;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.Threading;
 
 namespace PolyNavi
 {
@@ -81,10 +82,10 @@ namespace PolyNavi
 
         public AsyncLazy<Dictionary<string, int>> GroupsDictionary { get; set; } = new AsyncLazy<Dictionary<string, int>>(async () =>
         {
-            return await FillGroupsDictionary(false);
+            return await FillGroupsDictionary(false, new CancellationToken());
         });
 
-        public static async Task<Dictionary<string, int>> FillGroupsDictionary(bool rewrite)
+        public static async Task<Dictionary<string, int>> FillGroupsDictionary(bool rewrite, CancellationToken cts)
         {
             var networkChecker = new NetworkChecker(Instance);
             string resultJson;
@@ -99,7 +100,8 @@ namespace PolyNavi
 
                 if (rewrite)
                 {
-                    resultJson = await HttpClientSL.GetResponseAsync(client, Instance.groupLink);
+                    resultJson = await HttpClientSL.GetResponseAsync(client, Instance.groupLink, cts);
+
                     File.WriteAllText(GetFileFullPath(resourceName), resultJson);
                 }
                 else

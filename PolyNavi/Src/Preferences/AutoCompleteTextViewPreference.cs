@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
@@ -50,7 +51,6 @@ namespace PolyNavi
         public void SaveGroupName(string name)
         {
             GroupName = name;
-            // Save to Shared Preferences
             PersistString(name);
         }
 
@@ -70,14 +70,18 @@ namespace PolyNavi
         ImageView imageViewRefresh;
         ArrayAdapter suggestAdapter;
         NetworkChecker networkChecker;
+        Dictionary<string, int> groupsDictionary;
+        static CancellationTokenSource cts;
+
         string[] array;
 
-        public static AutoCompleteTextViewPreferenceDialogFragmentCompat NewInstance(string key)
+        public static AutoCompleteTextViewPreferenceDialogFragmentCompat NewInstance(string key, CancellationTokenSource ctSource)
         {
             AutoCompleteTextViewPreferenceDialogFragmentCompat fragment = new AutoCompleteTextViewPreferenceDialogFragmentCompat();
             Bundle b = new Bundle(1);
             b.PutString("key", key);
             fragment.Arguments = b;
+            cts = ctSource;
 
             return fragment;
         }
@@ -86,12 +90,6 @@ namespace PolyNavi
         {
             base.OnBindDialogView(view);
 
-
-
-            //if (autoComplete == null)
-            //{
-            //    throw new System.Exception("AutoComplete is null");
-            //}
             networkChecker = new NetworkChecker(Activity.BaseContext);
             autoCompleteTextViewPref = view.FindViewById<AutoCompleteTextView>(Resource.Id.autocompletetextview_group_pref);
             progressBar = view.FindViewById<ProgressBar>(Resource.Id.progressbar_group_pref);
@@ -102,7 +100,8 @@ namespace PolyNavi
             progressBar.Visibility = ViewStates.Visible;
             Task.Run(async () =>
             {
-                array = (await MainApp.Instance.GroupsDictionary).Select(x => x.Key).ToArray();
+                groupsDictionary = await MainApp.Instance.GroupsDictionary;
+                array = groupsDictionary.Select(x => x.Key).ToArray();
 
                 Activity.RunOnUiThread(() =>
                 {
@@ -114,8 +113,7 @@ namespace PolyNavi
                     imageViewRefresh.Visibility = ViewStates.Visible;
                 });
             });
-
-
+            
             string groupName = null;
             DialogPreference preference = Preference;
             if (preference is AutoCompleteTextViewPreference)
@@ -137,9 +135,10 @@ namespace PolyNavi
                 progressBar.Visibility = ViewStates.Visible;
                 Task.Run(async () =>
                 {
-
-                    MainApp.Instance.GroupsDictionary = new Nito.AsyncEx.AsyncLazy<Dictionary<string, int>>(async () => { return await MainApp.FillGroupsDictionary(true); });
-                    array = (await MainApp.Instance.GroupsDictionary).Select(x => x.Key).ToArray();
+                    MainApp.Instance.GroupsDictionary = new Nito.AsyncEx.AsyncLazy<Dictionary<string, int>>(async () => { return await MainApp.FillGroupsDictionary(true, cts.Token); });
+                    var newGroupsDictionary = await MainApp.Instance.GroupsDictionary;
+                    array = newGroupsDictionary.Select(x => x.Key).ToArray();
+                    groupsDictionary = newGroupsDictionary;
 
                     Activity.RunOnUiThread(() =>
                     {
@@ -168,11 +167,10 @@ namespace PolyNavi
                 DialogPreference preference = Preference;
                 if (preference is AutoCompleteTextViewPreference autoCompleteTVPreference)
                 {
-                    // This allows the client to ignore the user value.
                     if (autoCompleteTVPreference.CallChangeListener(groupName))
                     {
                         autoCompleteTVPreference.SaveGroupName(groupName);
-                    }
+                    }                    
                 }
             }
         }
