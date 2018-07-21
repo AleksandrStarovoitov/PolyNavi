@@ -30,12 +30,15 @@ namespace PolyNavi
 		private ScheduleCardFragmentAdapter adapter;
 		private DateTime weekDate;
         int weekTag;
+        int dayOfYear;
 
-		public ScheduleWeekFragment(DateTime weekDate, int weekTag)
+		public ScheduleWeekFragment(DateTime weekDate, int weekTag, int dayOfYear)
 		{
 			this.weekDate = weekDate;
             this.weekTag = weekTag;
-		}
+            this.dayOfYear = dayOfYear;
+
+        }
 
 		public override void OnCreate(Bundle savedInstanceState)
 		{
@@ -92,7 +95,7 @@ namespace PolyNavi
                             recyclerViewSchedule.HasFixedSize = true;
                             recyclerViewSchedule.SetAdapter(adapter);
                             recyclerViewSchedule.SetLayoutManager(new LinearLayoutManager(Activity.BaseContext));
-                            var pos = days.FindIndex(day => day.Date.DayOfYear == DateTime.Now.DayOfYear);
+                            var pos = days.FindIndex(day => day.Date.DayOfYear == (dayOfYear == -1 ? DateTime.Now.DayOfYear : dayOfYear));
                             if (pos != -1)
                             {
                                 recyclerViewSchedule.ScrollToPosition(pos);

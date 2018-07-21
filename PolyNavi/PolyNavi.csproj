@@ -227,6 +227,7 @@
     <Compile Include="Src\Adapters\BuildingsAdapter.cs" />
     <Compile Include="Src\Adapters\WelcomeSectionsPagerAdapter.cs" />
     <Compile Include="Src\Fragments\AboutFragment.cs" />
+    <Compile Include="Src\Fragments\DateTimePickerFragment.cs" />
     <Compile Include="Src\Fragments\WelcomePlaceholderFragment.cs" />
     <Compile Include="Src\MainApp.cs" />
     <Compile Include="Src\Fragments\MapBuildingsFragment.cs" />
@@ -643,6 +644,7 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\drawable\baseline_empty_schedule_24.xml" />
+    <AndroidResource Include="Resources\menu\menu_schedule.xml" />
     <Content Include="Screenshots\Buildings_2.png" />
     <Content Include="Screenshots\Buildings_1.png" />
     <Content Include="Screenshots\MainBuilding_1.png" />

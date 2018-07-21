@@ -24,6 +24,7 @@ namespace PolyNavi
 		private TabLayout tabLayout;
 		private ViewPager viewPager;
 		private ScheduleFragmentAdapter adapter;
+        DateTime? lastDate = null;
 
 		public override void OnCreate(Bundle savedInstanceState)
 		{
@@ -34,12 +35,14 @@ namespace PolyNavi
 		{
 			view = inflater.Inflate(Resource.Layout.fragment_schedule, container, false);
 
-			tabLayout = view.FindViewById<TabLayout>(Resource.Id.tablayout_schedule);
+            HasOptionsMenu = true;
+
+            tabLayout = view.FindViewById<TabLayout>(Resource.Id.tablayout_schedule);
 			tabLayout.AddTab(tabLayout.NewTab().SetText(GetString(Resource.String.currentweek_tab)));
 			tabLayout.AddTab(tabLayout.NewTab().SetText(GetString(Resource.String.nextweek_tab)));
 			tabLayout.SetForegroundGravity(TabLayout.GravityFill);
 
-			adapter = new ScheduleFragmentAdapter(((AppCompatActivity)Activity).SupportFragmentManager, tabLayout.TabCount);
+			adapter = new ScheduleFragmentAdapter(((AppCompatActivity)Activity).SupportFragmentManager, tabLayout.TabCount, DateTime.Today);
 
 			viewPager = view.FindViewById<ViewPager>(Resource.Id.viewpager_schedule);
 			viewPager.Adapter = adapter;
@@ -49,9 +52,33 @@ namespace PolyNavi
 			{
 				viewPager.CurrentItem = e.Tab.Position;
 			};
-
+            
 			return view;
 		}
 
-	}
+        public override void OnCreateOptionsMenu(IMenu menu, MenuInflater inflater)
+        {
+            inflater.Inflate(Resource.Menu.menu_schedule, menu);
+            base.OnCreateOptionsMenu(menu, inflater);
+        }
+
+        public override bool OnOptionsItemSelected(IMenuItem item)
+        {
+            switch (item.ItemId)
+            {
+                case Resource.Id.menu_schedule_datetimepicker:
+                    DateTimePickerFragment frag = DateTimePickerFragment.NewInstance(delegate (DateTime time)
+                    {
+                        viewPager.Adapter = null;
+                        adapter = new ScheduleFragmentAdapter(((AppCompatActivity)Activity).SupportFragmentManager, tabLayout.TabCount, time, time.DayOfYear);
+                        viewPager.Adapter = adapter;
+                        lastDate = time;
+                    }, lastDate);
+                    frag.Show(Activity.FragmentManager, DateTimePickerFragment.TAG);
+                    return true;
+                default:
+                    return base.OnOptionsItemSelected(item);
+            }
+        }
+    }
 }

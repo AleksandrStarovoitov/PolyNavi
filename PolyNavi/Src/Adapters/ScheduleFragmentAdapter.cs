@@ -21,13 +21,14 @@ namespace PolyNavi
 
         const int CurrentWeekTag = 0;
         const int NextWeekTag = 1;
+        DateTime date;
 
-		public ScheduleFragmentAdapter(FragmentManager fragmentManager, int numOfTabs) : base(fragmentManager)
+        public ScheduleFragmentAdapter(FragmentManager fragmentManager, int numOfTabs, DateTime date, int dayOfYear = -1) : base(fragmentManager)
 		{
 			this.numOfTabs = numOfTabs;
 			
-			tab1 = new ScheduleWeekFragment(DateTime.Today, CurrentWeekTag);
-			tab2 = new ScheduleWeekFragment(DateTime.Today + TimeSpan.FromDays(7), NextWeekTag);
+			tab1 = new ScheduleWeekFragment(date, CurrentWeekTag, dayOfYear);
+			tab2 = new ScheduleWeekFragment(date + TimeSpan.FromDays(7), NextWeekTag, dayOfYear);
 		}
 
 		public override Fragment GetItem(int position)

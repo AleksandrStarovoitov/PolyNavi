@@ -3297,6 +3297,9 @@ namespace PolyNavi
 			// aapt resource value: 0x7f090119
 			public const int media_actions = 2131296537;
 			
+			// aapt resource value: 0x7f090137
+			public const int menu_schedule_datetimepicker = 2131296567;
+			
 			// aapt resource value: 0x7f09012f
 			public const int message = 2131296559;
 			
@@ -4136,6 +4139,9 @@ namespace PolyNavi
 			
 			// aapt resource value: 0x7f100000
 			public const int menu_main = 2131755008;
+			
+			// aapt resource value: 0x7f100001
+			public const int menu_schedule = 2131755009;
 			
 			static Menu()
 			{
