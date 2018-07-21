@@ -19,8 +19,7 @@
   <string name="subject_schedule_row">Название предмета</string>
   <string name="building_schedule_row">Корпус</string>
   <string name="type_schedule_row">Тип пары</string>
-  <string name="teacher_schedule_row">Преподаватель</string>
-  
+  <string name="teacher_schedule_row">Преподаватель</string> 
 
   <string name="mainbuilding_nav">Главное здание</string>
   <string name="buildings_nav">Корпуса</string>
@@ -45,6 +44,11 @@
   <string name="no_connection_title">Нет подключения к сети</string>
   <string name="no_connection_tap">Нажмите, чтобы повторить</string>
 
+  <string name="empty_schedule_error_title_start">Расписание на</string>
+  <string name="empty_schedule_error_title_current">текущую</string>
+  <string name="empty_schedule_error_title_next">следующую</string>
+  <string name="empty_schedule_error_title_end">неделю отсутствует</string>
+
   <string name="about_nav">О приложении</string>
   <string name="other_nav">Прочее</string>
 
@@ -64,9 +68,6 @@
   </string>
   <string name="about_contacts_kirill_link">
     <a href="https://vk.com/pushkin_007">Кирилл Большаков</a>
-  </string>
-  <string name="about_contacts_masha_link">
-    <a href="https://vk.com/kolomeets1997">Мария Коломеец</a>
   </string>
 
   <string name="enter_group_number">Укажите номер группы</string>
@@ -97,5 +98,6 @@
   <string name="welcome_description_third">Расписание занятий, которое доступно офлайн</string>
   <string name="welcome_finish">Готово</string>
   <string name="welcome_skip">Пропустить</string>
-  
+
+  <string name="wrong_group">Неверный номер группы</string>
 </resources>

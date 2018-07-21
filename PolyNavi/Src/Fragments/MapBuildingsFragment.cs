@@ -94,12 +94,12 @@ namespace PolyNavi
 
             if (ContextCompat.CheckSelfPermission(Activity, Android.Manifest.Permission.AccessFineLocation) != Permission.Granted)
 			{
-				// Permission is not granted
+				//Permission is not granted
 				RequestPermissions(new String[] { Android.Manifest.Permission.AccessFineLocation }, RequestFineLocationId);
 			}
 			else
 			{
-				// Permission granted
+				//Permission granted
 				SetupLocationManager();
 			}
 			return view;
@@ -167,25 +167,17 @@ namespace PolyNavi
 			switch (requestCode)
 			{
 				case RequestFineLocationId:
-					// If request is cancelled, the result arrays are empty.
 					if (grantResults.Length > 0 && grantResults[0] == Permission.Granted)
 					{
 						SetupLocationManager();
-						// permission was granted, yay! Do the
-						// contacts-related task you need to do.
 					}
 					else
 					{
-						Toast.MakeText(Activity, "DENIED", ToastLength.Short).Show();
-
-						// permission denied, boo! Disable the
-						// functionality that depends on this permission.
+						
 					}
 					break;
 				default:
 					break;
-				// other 'case' lines to check for other
-				// permissions this app might request.
 			}
 		}
 

@@ -37,7 +37,6 @@ namespace PolyNavi
 			this.weekDate = weekDate;
             this.weekTag = weekTag;
             this.dayOfYear = dayOfYear;
-
         }
 
 		public override void OnCreate(Bundle savedInstanceState)
@@ -86,8 +85,12 @@ namespace PolyNavi
                             DrawContent(Resource.Id.relativelayout_week_schedule, Resource.Layout.layout_empty_schedule_error);
                             var v = view.FindViewById<RelativeLayout>(Resource.Id.layout_empty_schedule_error_clickable_zone);
 
-                            view.FindViewById<TextView>(Resource.Id.textview_empty_schedule_error_title).Text = 
-                                "Расписание на " + (weekTag == 0 ? "текущую" : "следующую") + " неделю отсутствует";
+                            view.FindViewById<TextView>(Resource.Id.textview_empty_schedule_error_title).Text =
+                                GetString(Resource.String.empty_schedule_error_title_start) + " " +
+                                (weekTag == 0 ?
+                                GetString(Resource.String.empty_schedule_error_title_current) :
+                                GetString(Resource.String.empty_schedule_error_title_next)) + " " +
+                                GetString(Resource.String.empty_schedule_error_title_end);
                         }
                         else
                         {
@@ -109,9 +112,6 @@ namespace PolyNavi
 					{
 						DrawContent(Resource.Id.relativelayout_week_schedule, Resource.Layout.layout_no_connection);
 						var v = view.FindViewById<RelativeLayout>(Resource.Id.layout_no_connection_clickable_zone);
-
-                        view.FindViewById<TextView>(Resource.Id.textview_no_connection_title).Text = "Нет подключения к сети";
-                        view.FindViewById<TextView>(Resource.Id.textview_no_connection_tap).Text = "Подключитесь к сети и нажмите, чтобы обновить";
 
                         v.Click += (sender, e) =>
 						{

@@ -28,7 +28,6 @@
         android:layout_marginLeft="30dp"
         app:autoSizeTextType="uniform" />
     <RelativeLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:minWidth="25px"
@@ -45,7 +44,10 @@
             android:layout_height="match_parent"
             android:id="@+id/textview_no_connection_tap"
             android:layout_marginRight="5dp"
-            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@+id/imageview_no_connection"
+            android:layout_alignBaseline="@+id/imageview_no"
+            android:gravity="center_vertical"
+            android:maxLines="1"
             app:autoSizeTextType="uniform" />
         <ImageView
             android:src="@drawable/baseline_refresh_24"
@@ -53,6 +55,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/imageview_no_connection"
             android:layout_alignParentRight="true"
-            android:layout_centerVertical="true" />
+            android:layout_centerVertical="true"
+            android:layout_marginTop="3dp" />
     </RelativeLayout>
 </RelativeLayout>

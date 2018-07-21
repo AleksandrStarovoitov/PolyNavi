@@ -241,7 +241,6 @@ namespace PolyNavi
 		{
 			if (actionId == ImeAction.Go)
 			{
-				Toast.MakeText(Activity.BaseContext, "HELLO", ToastLength.Short).Show();
 				appBar.SetExpanded(false);
 			}
 			return false;

@@ -154,7 +154,7 @@ namespace PolyNavi
             }
             else
             {
-                Toast.MakeText(Activity.BaseContext, "No internet", ToastLength.Short).Show();
+                Toast.MakeText(Activity.BaseContext, GetString(Resource.String.no_connection_title), ToastLength.Short).Show();
             }
         }
 

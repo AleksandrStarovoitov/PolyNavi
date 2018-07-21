@@ -162,19 +162,15 @@ namespace PolyNavi
 			switch (mItemId)
 			{
 				case (Resource.Id.nav_gz_menu):
-					Toast.MakeText(this, GetString(Resource.String.mainbuilding_nav), ToastLength.Short).Show();
 					startActivity = "mainbuilding";
 					break;
 				case (Resource.Id.nav_buildings_menu):
-					Toast.MakeText(this, GetString(Resource.String.buildings_nav), ToastLength.Short).Show();
 					startActivity = "buildings";
 					break;
 				case (Resource.Id.nav_rasp_menu):
-					Toast.MakeText(this, GetString(Resource.String.schedule_nav), ToastLength.Short).Show();
 					startActivity = "schedule";
 					break;
 				case (Resource.Id.nav_settings_menu):
-					Toast.MakeText(this, GetString(Resource.String.settings_nav), ToastLength.Short).Show();
 					startActivity = "settings";
 					break;
 				case (Resource.Id.nav_about_menu):

@@ -19,6 +19,7 @@
   <string name="subject_schedule_row">Subject name</string>
   <string name="building_schedule_row">Building</string>
   <string name="type_schedule_row">Type of lesson</string>
+  <string name="teacher_schedule_row">Teacher</string>
 
   <string name="mainbuilding_nav">Main building</string>
   <string name="buildings_nav">Buildings</string>
@@ -43,10 +44,16 @@
   <string name="no_connection_title">No network connection</string>
   <string name="no_connection_tap">Tap to try again</string>
 
+  <string name="empty_schedule_error_title_start">No schedule for </string>
+  <string name="empty_schedule_error_title_current">current</string>
+  <string name="empty_schedule_error_title_next">next</string>
+  <string name="empty_schedule_error_title_end"> week</string>
+
   <string name="about_nav">About</string>
   <string name="other_nav">Other</string>
 
   <string name="about_email_title">Email developers</string>
+  
   <string name="about_rate_title">Rate application</string>
   <string name="about_rate_subtitle">Open in GooglePlay</string>
   <string name="about_bitbucket_title">Open source software</string>
@@ -62,15 +69,13 @@
   <string name="about_contacts_kirill_link">
     <a href="https://vk.com/pushkin_007">Kirill Bolshakov</a>
   </string>
-  <string name="about_contacts_masha_link">
-    <a href="https://vk.com/kolomeets1997">Mariya Kolomeets</a>
-  </string>
 
   <string name="enter_group_number">Enter group number</string>
   <string name="edittext_title">Group number</string>
   <string name="edittext_auth">For example - 23537/1</string>
   <string name="button_auth">Let\'s go</string>
   <string name="group_later">I\'ll enter group number later</string>
+  <string name="update_groups_auth">Update group list</string>
 
   <string name="pref_language_title">Application language</string>
   <string name="pref_language_summary">A reboot is required to apply changes</string>
@@ -94,4 +99,5 @@
   <string name="welcome_finish">Done</string>
   <string name="welcome_skip">Skip</string>
 
+  <string name="wrong_group">Wrong group number</string>
 </resources>

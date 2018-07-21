@@ -71,7 +71,7 @@ namespace PolyNavi
                 }
                 else
                 {
-                    Toast.MakeText(Activity.BaseContext, "Wrong group", ToastLength.Short).Show();
+                    Toast.MakeText(Activity.BaseContext, GetString(Resource.String.wrong_group), ToastLength.Short).Show();
                 }                
             }
         }
