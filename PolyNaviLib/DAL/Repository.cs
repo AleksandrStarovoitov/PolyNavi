@@ -19,6 +19,7 @@ namespace PolyNaviLib.DAL
         SQLiteDatabase database;
         INetworkChecker checker;
         ISettingsProvider settings;
+        HttpClient client;
 
         private Repository()
         {
@@ -41,7 +42,8 @@ namespace PolyNaviLib.DAL
          
             this.checker = checker;
             this.settings = settings;
-                        
+            client = new HttpClient();
+
             await RemoveExpiredWeeksAsync();
             return this;
         }
@@ -81,9 +83,7 @@ namespace PolyNaviLib.DAL
             if (checker.Check() == false)
             {
                 throw new NetworkException("No internet connection");
-            }
-
-            var client = new HttpClient();
+            }                 
 
             var groupId = settings["groupid"];
 

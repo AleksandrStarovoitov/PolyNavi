@@ -624,19 +624,14 @@
     </AndroidResource>
     <AndroidResource Include="Resources\drawable-hdpi\welcome_blueprint.png" />
     <AndroidResource Include="Resources\drawable-hdpi\welcome_calendar.png" />
-    <AndroidResource Include="Resources\drawable-hdpi\welcome_route.png" />
     <AndroidResource Include="Resources\drawable-mdpi\welcome_blueprint.png" />
     <AndroidResource Include="Resources\drawable-mdpi\welcome_calendar.png" />
-    <AndroidResource Include="Resources\drawable-mdpi\welcome_route.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\welcome_blueprint.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\welcome_calendar.png" />
-    <AndroidResource Include="Resources\drawable-xhdpi\welcome_route.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\welcome_blueprint.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\welcome_calendar.png" />
-    <AndroidResource Include="Resources\drawable-xxhdpi\welcome_route.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\welcome_blueprint.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\welcome_calendar.png" />
-    <AndroidResource Include="Resources\drawable-xxxhdpi\welcome_route.png" />
     <AndroidResource Include="Resources\layout\preference_dialog_autocomplete.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
@@ -645,6 +640,11 @@
     </AndroidResource>
     <AndroidResource Include="Resources\drawable\baseline_empty_schedule_24.xml" />
     <AndroidResource Include="Resources\menu\menu_schedule.xml" />
+    <AndroidResource Include="Resources\drawable-hdpi\welcome_route.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\welcome_route.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\welcome_route.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\welcome_route.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\welcome_route.png" />
     <Content Include="Screenshots\Buildings_2.png" />
     <Content Include="Screenshots\Buildings_1.png" />
     <Content Include="Screenshots\MainBuilding_1.png" />
