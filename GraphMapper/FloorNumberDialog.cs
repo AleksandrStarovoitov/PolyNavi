@@ -10,12 +10,12 @@ using System.Windows.Forms;
 
 namespace GraphMapper
 {
-	public partial class FloorNumberDialoge : Form
+	public partial class FloorNumberDialog : Form
 	{
 		public int FloorNumber { get; set; } = 1;
         public int FloorPartNumber { get; set; } = 1;
 
-		public FloorNumberDialoge()
+		public FloorNumberDialog()
 		{
 			InitializeComponent();
 			floorNumberNumericUpDown.KeyDown += (sender, e) =>

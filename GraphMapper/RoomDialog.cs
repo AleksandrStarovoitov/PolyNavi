@@ -10,11 +10,11 @@ using System.Windows.Forms;
 
 namespace GraphMapper
 {
-	public partial class RoomDialoge : Form
+	public partial class RoomDialog : Form
 	{
 		public string RoomName { get; private set; } = "*Unknown*";
 
-		public RoomDialoge()
+		public RoomDialog()
 		{
 			InitializeComponent();
 			this.ActiveControl = textBox1;

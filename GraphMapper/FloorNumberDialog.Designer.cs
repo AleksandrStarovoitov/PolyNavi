@@ -1,6 +1,6 @@
 ﻿namespace GraphMapper
 {
-	partial class FloorNumberDialoge
+	partial class FloorNumberDialog
 	{
 		/// <summary>
 		/// Required designer variable.

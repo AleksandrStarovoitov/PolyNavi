@@ -17,8 +17,8 @@ namespace GraphMapper
 		Pen wayPen = new Pen(Brushes.Brown, 6.0f);
 		Pen roomPen = Pens.Red;
 		Pen interPen = Pens.Blue;
-		RoomDialoge roomDialoge = new RoomDialoge();
-		FloorNumberDialoge floorDialoge = new FloorNumberDialoge();
+		RoomDialog roomDialoge = new RoomDialog();
+		FloorNumberDialog floorDialoge = new FloorNumberDialog();
 		int roomId = 0;
 
 		Image drawArea = null;
