@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace Graph
 {
@@ -22,6 +23,8 @@ namespace Graph
 		public int Id { get; set; } = 0;
 		public string RoomName { get; set; } = "";
 		public int FloorNumber { get; set; } = 1;
+        [OptionalField]
+        public int FloorPartNumber = 0;
 		public List<GraphNode> Neighbours { get; set; } = new List<GraphNode>();
 		public bool IsIntermediate { get; set; } = false;
 		public bool IsStairs { get; set; } = false;

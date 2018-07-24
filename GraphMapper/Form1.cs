@@ -204,7 +204,8 @@ namespace GraphMapper
 		{
 			if (floorDialoge.ShowDialog() == DialogResult.OK)
 			{
-				SetFloorNumber(floorDialoge.FloorNumber);
+				SetFloorNumber(floorDialoge.FloorNumber, floorDialoge.FloorPartNumber);
+
 				if (saveFileDialog1.ShowDialog() == DialogResult.OK)
 				{
 					try
@@ -222,12 +223,13 @@ namespace GraphMapper
 			}
 		}
 
-		private void SetFloorNumber(int floorNumber)
+		private void SetFloorNumber(int floorNumber, int floorPartNumber)
 		{
 			foreach (var node in nodes)
 			{
 				node.FloorNumber = floorNumber;
+                node.FloorPartNumber = floorPartNumber;
 			}
-		}
+		}                
 	}
 }

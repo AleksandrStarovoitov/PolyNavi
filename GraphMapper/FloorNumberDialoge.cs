@@ -13,6 +13,7 @@ namespace GraphMapper
 	public partial class FloorNumberDialoge : Form
 	{
 		public int FloorNumber { get; set; } = 1;
+        public int FloorPartNumber { get; set; } = 1;
 
 		public FloorNumberDialoge()
 		{
@@ -36,7 +37,8 @@ namespace GraphMapper
 		private void buttonOk_Click(object sender, EventArgs e)
 		{
 			FloorNumber = (int)floorNumberNumericUpDown.Value;
-			this.Close();
+            FloorPartNumber = (int)floorPartNumericUpDown.Value;
+            this.Close();
 		}
 
 		private void buttonCancel_Click(object sender, EventArgs e)

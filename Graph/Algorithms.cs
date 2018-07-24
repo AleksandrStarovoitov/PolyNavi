@@ -40,7 +40,7 @@ namespace Graph
 					while (routeNode.Data != start)
 					{
 						route.Add(routeNode.Data);
-						routeNode = routeNode.Parent;
+						routeNode = routeNode.Parent;                        
 					}
 					route.Add(start);
 					route.Reverse();
@@ -108,5 +108,13 @@ namespace Graph
 				return node.Id == id && node.FloorNumber == floorNumber;
 			});
 		}
-	}
+
+        internal static GraphNode FindNodeByIdFloorNumberAndFloorPartNumber(GraphNode graph, int id, int floorNumber, int floorPartNumber)
+        {
+            return FindNode(graph, (node) =>
+            {
+                return node.Id == id && node.FloorNumber == floorNumber && node.FloorPartNumber == floorPartNumber;
+            });
+        }
+    }
 }

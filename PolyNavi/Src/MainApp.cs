@@ -148,26 +148,20 @@ namespace PolyNavi
             {
                 var graph = Graph.SaverLoader.Load(stream);
 
-                var ids = new List<Tuple<int, int>>();
+                var ids = new List<Graph.GraphNode>();
+
                 Queue<Graph.GraphNode> bfsQueue = new Queue<Graph.GraphNode>();
                 bfsQueue.Enqueue(graph);
-
-                ids.Add(new Tuple<int, int>(graph.Id, graph.FloorNumber));
 
                 while (bfsQueue.Count > 0)
                 {
                     var node = bfsQueue.Dequeue();
 
-                    if (node == null)
-                    {
-                        continue;
-                    }
-
                     foreach (var neighbour in node.Neighbours)
                     {
-                        if (!ids.Contains(new Tuple<int, int>(neighbour.Id, neighbour.FloorNumber)))
+                        if (!ids.Contains(neighbour))
                         {
-                            ids.Add(new Tuple<int, int>(neighbour.Id, neighbour.FloorNumber));
+                            ids.Add(neighbour);
                             bfsQueue.Enqueue(neighbour);
                             if (!neighbour.RoomName.Equals("*Unknown*"))
                             {

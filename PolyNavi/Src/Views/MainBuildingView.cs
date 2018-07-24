@@ -23,7 +23,7 @@ namespace PolyNavi
 		Paint routePaint = new Paint() { Color = Color.Blue, StrokeCap = Paint.Cap.Round, StrokeWidth = 7.0f, };
 		Paint startPointPaint = new Paint() { Color = Color.Green };
 		Paint endPointPaint = new Paint() { Color = Color.Red };
-		float[] route;
+		float[] route = null;
 		//TODO изменить на рисунки
 		Marker marker = Marker.None;
 		Point markerPoint;
@@ -206,6 +206,11 @@ namespace PolyNavi
 
 		public void SetRoute(IList<Point> points)
 		{
+            var r = new List<float>();
+            if (route != null)
+            {
+                r = route.ToList();
+            }
 			if (points == null)
 			{
 				route = new float[0];
@@ -227,6 +232,13 @@ namespace PolyNavi
 				}
 				route[j] = points[i].X;
 				route[j + 1] = points[i].Y;
+
+                if (r != null)
+                {
+                    r.AddRange(route.ToList());
+                    route = new float[r.Count];
+                    route = r.ToArray();
+                }
 			}
 		}
 

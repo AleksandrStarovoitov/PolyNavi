@@ -163,16 +163,21 @@ namespace PolyNavi
 					{
 						route = Algorithms.CalculateRoute(mapGraph, MainApp.Instance.RoomsDictionary[editTextInputFrom.Text], MainApp.Instance.RoomsDictionary[editTextInputTo.Text]);
 						var coordinateGroups = from node in route
-											   group node by node.FloorNumber into g
+											   group node by new
+                                               {
+                                                   node.FloorNumber,
+                                                   node.FloorPartNumber
+                                               }
+                                               into g
 											   select new
 											   {
-												   FloorNumber = g.Key,
+												   Floor = g.Key,
 												   Coordinates = from gnode in g select new Android.Graphics.Point(gnode.Point.X, gnode.Point.Y),
 											   };
 						ClearAllRoutes();
 						foreach (var coordGroup in coordinateGroups)
 						{
-							var fragment = FragmentManager.FindFragmentByTag($"MAP_MAINBUILDING_{coordGroup.FloorNumber}") as MainBuildingMapFragment;
+							var fragment = FragmentManager.FindFragmentByTag($"MAP_MAINBUILDING_{coordGroup.Floor.FloorNumber}") as MainBuildingMapFragment;
                             fragment.MapView.SetRoute(coordGroup.Coordinates.ToList());
 						}
 

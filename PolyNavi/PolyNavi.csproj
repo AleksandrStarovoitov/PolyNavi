@@ -251,10 +251,17 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <AndroidAsset Include="Assets\floor_1.graph" />
     <AndroidAsset Include="Assets\polytech_map.routerdb" />
-    <AndroidAsset Include="Assets\floor_2.graph" />
     <EmbeddedResource Include="EmbeddedResources\groups.json" />
+    <AndroidAsset Include="Assets\floor_1.graph" />
+    <AndroidAsset Include="Assets\floor_2.graph" />
+    <AndroidAsset Include="Assets\floor_3_1.graph" />
+    <AndroidAsset Include="Assets\floor_3_2.graph" />
+    <AndroidAsset Include="Assets\floor_3_3.graph" />
+    <AndroidAsset Include="Assets\floor_3_4.graph" />
+    <AndroidAsset Include="Assets\floor_3_5.graph" />
+    <AndroidAsset Include="Assets\floor_3_6.graph" />
+    <AndroidAsset Include="Assets\floor_3_7.graph" />
     <None Include="packages.config" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Properties\AndroidManifest.xml" />
@@ -583,15 +590,6 @@
     <AndroidResource Include="Resources\drawable\baseline_monetization_on_black_24dp.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\first_floor.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\second_floor.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\third_floor.png" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\drawable\baseline_keyboard_arrow_up_black_24dp.png" />
   </ItemGroup>
   <ItemGroup>
@@ -645,6 +643,9 @@
     <AndroidResource Include="Resources\drawable-xhdpi\welcome_route.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\welcome_route.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\welcome_route.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\first_floor.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\third_floor.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\second_floor.png" />
     <Content Include="Screenshots\Buildings_2.png" />
     <Content Include="Screenshots\Buildings_1.png" />
     <Content Include="Screenshots\MainBuilding_1.png" />
