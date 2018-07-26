@@ -83,7 +83,7 @@ namespace PolyNavi
 					subject.Text = lesson.Subject;
 					startTime.Text = lesson.Time_Start.ToString("HH:mm", cultureInfo);
 					endTime.Text = lesson.Time_End.ToString("HH:mm", cultureInfo);
-					type.Text = lesson.TypeObj.Name;
+					type.Text = lesson.TypeObj.Name.Replace("Лабораторные", "Лаб.");
                     if (lesson.Teachers == null || lesson.Teachers.Count == 0)
                     {
                         var relativeLayout = ((ViewGroup)scheduleView).FindViewById(Resource.Id.relativelayout_row_schedule);

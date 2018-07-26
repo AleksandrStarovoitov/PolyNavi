@@ -173,6 +173,7 @@ namespace PolyNavi
                         {
                             autoCompleteTVPreference.SaveGroupName(groupName);
                         }
+                        else
                         {
                             Toast.MakeText(Activity.BaseContext, GetString(Resource.String.wrong_group), ToastLength.Short).Show();
                         }

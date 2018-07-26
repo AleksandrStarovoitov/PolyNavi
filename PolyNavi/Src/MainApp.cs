@@ -170,7 +170,8 @@ namespace PolyNavi
                                                                                                     .Replace("_М_2_2", " М 2 эт. 2").Replace("_Ж_1_1", " Ж 1 эт. 1")
                                                                                                     .Replace("_Ж_1_2", " Ж 1 эт. 2").Replace("_Ж_1_3", " Ж 1 эт. 3")
                                                                                                     .Replace("_Ж_2_1", " Ж 2 эт. 1").Replace("_Ж_2_2", " Ж 2 эт. 2")
-                                                                                                    .Replace("_Ж_2_3", " Ж 2 эт. 3");
+                                                                                                    .Replace("_Ж_2_3", " Ж 2 эт. 3").Replace("Ректорат_", "Ректорат ")
+                                                                                                    .Replace("101а", "101 (а)").Replace("170_б", "170 (б)");
                                 Instance.RoomsDictionary[name] = neighbour.RoomName;
                             }
                         }

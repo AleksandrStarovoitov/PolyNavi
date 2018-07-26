@@ -53,9 +53,9 @@
   <string name="other_nav">Прочее</string>
 
   <string name="about_email_title">Написать разработчикам</string>
-  <string name="about_email_address">polynavi@yandex.ru</string>
+  <string name="about_email_address">polynavi@mail.ru</string>
   <string name="about_rate_title">Оценить приложение</string>
-  <string name="about_rate_subtitle">Перейти в GooglePlay</string>
+  <string name="about_rate_subtitle">Перейти в Google Play</string>
   <string name="about_bitbucket_title">Открытое ПО</string>
   <string name="about_bitbucket_subtitle">Посмотреть исходный код</string>
   <string name="about_donate_title">Поддержать разработчиков</string>
