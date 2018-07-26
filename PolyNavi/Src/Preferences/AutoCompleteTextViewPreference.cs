@@ -71,17 +71,16 @@ namespace PolyNavi
         ArrayAdapter suggestAdapter;
         NetworkChecker networkChecker;
         Dictionary<string, int> groupsDictionary;
-        static CancellationTokenSource cts;
+        CancellationTokenSource cts;
 
         string[] array;
 
-        public static AutoCompleteTextViewPreferenceDialogFragmentCompat NewInstance(string key, CancellationTokenSource ctSource)
+        public static AutoCompleteTextViewPreferenceDialogFragmentCompat NewInstance(string key)
         {
             AutoCompleteTextViewPreferenceDialogFragmentCompat fragment = new AutoCompleteTextViewPreferenceDialogFragmentCompat();
             Bundle b = new Bundle(1);
             b.PutString("key", key);
             fragment.Arguments = b;
-            cts = ctSource;
 
             return fragment;
         }
@@ -125,6 +124,8 @@ namespace PolyNavi
             {
                 autoCompleteTextViewPref.Text = groupName;
             }
+
+            cts = new CancellationTokenSource();
         }
 
         private void ImageViewRefresh_Click(object sender, EventArgs e)
@@ -169,6 +170,18 @@ namespace PolyNavi
                 {
                     if (autoCompleteTVPreference.CallChangeListener(groupName))
                     {
+                        var status = MainApp.Instance.GroupsDictionary.Task.Status;
+                        var isStarted = MainApp.Instance.GroupsDictionary.IsStarted;
+
+                        if (isStarted && status != TaskStatus.RanToCompletion)
+                        {
+                            cts.Cancel();
+
+                            cts = new CancellationTokenSource();
+                            MainApp.Instance.GroupsDictionary = new Nito.AsyncEx.AsyncLazy<Dictionary<string, int>>(async () => await MainApp.FillGroupsDictionary(false, cts.Token));
+                            groupsDictionary = MainApp.Instance.GroupsDictionary.Task.Result;
+                        }
+
                         if (groupsDictionary.ContainsKey(groupName))
                         {
                             autoCompleteTVPreference.SaveGroupName(groupName);

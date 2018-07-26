@@ -18,14 +18,14 @@ namespace PolyNavi
 	public class MyPreferenceFragment : PreferenceFragmentCompat, ISharedPreferencesOnSharedPreferenceChangeListener
 	{
         ISharedPreferences sharedPreferences;
-        CancellationTokenSource cts;
+
         public override void OnDisplayPreferenceDialog(Preference preference)
         {
             PreferenceDialogFragmentCompat dialogFragment = null;
-            if (preference is AutoCompleteTextViewPreference) {
-                cts = new CancellationTokenSource();
+            if (preference is AutoCompleteTextViewPreference)
+            {
                 dialogFragment = AutoCompleteTextViewPreferenceDialogFragmentCompat
-                        .NewInstance(preference.Key, cts);
+                        .NewInstance(preference.Key);
             }
             
             if (dialogFragment != null)
@@ -50,17 +50,6 @@ namespace PolyNavi
             if (key.Equals("groupnumber"))
             {
                 var groupName = sharedPreferences.GetString(key, "-1");
-
-                var status = MainApp.Instance.GroupsDictionary.Task.Status;
-                var isStarted = MainApp.Instance.GroupsDictionary.IsStarted;
-
-                if (isStarted && status != TaskStatus.RanToCompletion)
-                {
-                    cts.Cancel();
-
-                    cts = new CancellationTokenSource();
-                    MainApp.Instance.GroupsDictionary = new Nito.AsyncEx.AsyncLazy<Dictionary<string, int>>(async () => await MainApp.FillGroupsDictionary(false, cts.Token));
-                }
 
                 var dictionary = MainApp.Instance.GroupsDictionary.Task.Result;
 
