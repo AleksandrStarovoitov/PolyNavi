@@ -148,57 +148,58 @@ namespace PolyNavi
 		{
 			if (fullyExpanded)
 			{
-				if (!editTextInputFrom.Text.Equals(""))
-				{
-					InputMethodManager imm = (InputMethodManager)Activity.BaseContext.GetSystemService(Context.InputMethodService);
-					imm.HideSoftInputFromWindow(View.WindowToken, 0);
-					fab.SetImageResource(Resource.Drawable.ic_directions_black_24dp);
-					appBar.SetExpanded(false);
 
-					//fabLayoutParams.AnchorId = frameLayout.Id;
-					//fab.LayoutParameters = fabLayoutParams;
+                if (MainApp.Instance.RoomsDictionary.TryGetValue(editTextInputFrom.Text, out string startName) && MainApp.Instance.RoomsDictionary.TryGetValue(editTextInputTo.Text, out string finishName))
+                {
+                    InputMethodManager imm = (InputMethodManager)Activity.BaseContext.GetSystemService(Context.InputMethodService);
+                    imm.HideSoftInputFromWindow(View.WindowToken, 0);
+                    fab.SetImageResource(Resource.Drawable.ic_directions_black_24dp);
+                    appBar.SetExpanded(false);
 
-					List<GraphNode> route;
-					try
-					{
-						route = Algorithms.CalculateRoute(mapGraph, MainApp.Instance.RoomsDictionary[editTextInputFrom.Text], MainApp.Instance.RoomsDictionary[editTextInputTo.Text]);
-						var coordinateGroups = from node in route
-											   group node by new
+                    //fabLayoutParams.AnchorId = frameLayout.Id;
+                    //fab.LayoutParameters = fabLayoutParams;
+
+                    List<GraphNode> route;
+                    try
+                    {
+                        route = Algorithms.CalculateRoute(mapGraph, startName, finishName);
+                        var coordinateGroups = from node in route
+                                               group node by new
                                                {
                                                    node.FloorNumber,
                                                    node.FloorPartNumber
                                                }
                                                into g
-											   select new
-											   {
-												   Floor = g.Key,
-												   Coordinates = from gnode in g select new Android.Graphics.Point(gnode.Point.X, gnode.Point.Y),
-											   };
-						ClearAllRoutes();
-						foreach (var coordGroup in coordinateGroups)
-						{
-							var fragment = FragmentManager.FindFragmentByTag($"MAP_MAINBUILDING_{coordGroup.Floor.FloorNumber}") as MainBuildingMapFragment;
+                                               select new
+                                               {
+                                                   Floor = g.Key,
+                                                   Coordinates = from gnode in g select new Android.Graphics.Point(gnode.Point.X, gnode.Point.Y),
+                                               };
+                        ClearAllRoutes();
+                        foreach (var coordGroup in coordinateGroups)
+                        {
+                            var fragment = FragmentManager.FindFragmentByTag($"MAP_MAINBUILDING_{coordGroup.Floor.FloorNumber}") as MainBuildingMapFragment;
                             fragment.MapView.SetRoute(coordGroup.Coordinates.ToList());
-						}
+                        }
 
-						int startFloor = route[0].FloorNumber;
-						int endFloor = route.Last().FloorNumber;
-						fragments[startFloor - 1].MapView.SetMarker(new Android.Graphics.Point(route.First().Point.X, route.First().Point.Y), MainBuildingView.Marker.Start);
-						fragments[endFloor - 1].MapView.SetMarker(new Android.Graphics.Point(route.Last().Point.X, route.Last().Point.Y), MainBuildingView.Marker.End);
-						//var startPointFragment = FragmentManager.FindFragmentByTag<MainBuildingMapFragment>($"MAP_MAINBUILDING_{startFloor}");
-						ChangeFloor(startFloor);
-						//startPointFragment.MapView.SetRoute(route.Select(gnode => new Android.Graphics.Point(gnode.Point.X, gnode.Point.Y)).ToList());
-					}
-					catch (GraphRoutingException ex)
-					{
-						Toast.MakeText(Activity, ex.Message, ToastLength.Long).Show();
-					}
-				}
-				else
-				{
-					Toast.MakeText(Activity.BaseContext, GetString(Resource.String.enter_correct_number), ToastLength.Short).Show();
-				}
-			}
+                        int startFloor = route[0].FloorNumber;
+                        int endFloor = route.Last().FloorNumber;
+                        fragments[startFloor - 1].MapView.SetMarker(new Android.Graphics.Point(route.First().Point.X, route.First().Point.Y), MainBuildingView.Marker.Start);
+                        fragments[endFloor - 1].MapView.SetMarker(new Android.Graphics.Point(route.Last().Point.X, route.Last().Point.Y), MainBuildingView.Marker.End);
+                        //var startPointFragment = FragmentManager.FindFragmentByTag<MainBuildingMapFragment>($"MAP_MAINBUILDING_{startFloor}");
+                        ChangeFloor(startFloor);
+                        //startPointFragment.MapView.SetRoute(route.Select(gnode => new Android.Graphics.Point(gnode.Point.X, gnode.Point.Y)).ToList());
+                    }
+                    catch (GraphRoutingException ex)
+                    {
+                        Toast.MakeText(Activity, ex.Message, ToastLength.Long).Show();
+                    }
+                }
+                else
+                {
+                    Toast.MakeText(Activity.BaseContext, GetString(Resource.String.enter_correct_number), ToastLength.Short).Show();
+                }
+            }
 			else
 			if (fullyCollapsed)
 			{
