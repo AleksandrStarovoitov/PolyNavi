@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Graph
@@ -16,7 +17,10 @@ namespace Graph
 		{
 			var start = FindNodeByName(graph, startName);
 			var finish = FindNodeByName(graph, finishName);
-			if (start == null)
+
+            bool badFloor = false;
+
+            if (start == null)
 			{
 				throw new GraphRoutingException($"Node with name {startName} could not be found");
 			}
@@ -48,11 +52,13 @@ namespace Graph
 				}
 				foreach (var neighbour in node.Data.Neighbours)
 				{
-					var neighbourWithParent = new GraphNodeWithParent() { Data = neighbour, Parent = node };
-					if (!closed.Contains(neighbour))
-					{
-						open.Enqueue(neighbourWithParent);
-					}
+                    badFloor = (neighbour.FloorNumber != start.FloorNumber && neighbour.FloorNumber != finish.FloorNumber && Math.Abs(start.FloorNumber - finish.FloorNumber) <= 1);
+
+                    var neighbourWithParent = new GraphNodeWithParent() { Data = neighbour, Parent = node };
+                    if (!closed.Contains(neighbour) && (!badFloor || !neighbour.IsStairs))
+                    {
+                        open.Enqueue(neighbourWithParent);
+                    }
 				}
 			}
 			throw new GraphRoutingException($"Can't find route between {startName} and {finishName}");
