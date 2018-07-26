@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
 using Android.OS;
-//using Android.Preferences;
 using Android.Runtime;
 using Android.Support.V7.Preferences;
 using Android.Util;

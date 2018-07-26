@@ -24,7 +24,6 @@ namespace PolyNavi
         {
             base.OnCreate(savedInstanceState);
 
-            // Create your application here
             Intent intent;
             if (MainApp.Instance.SharedPreferences.GetBoolean("auth", false))
             {

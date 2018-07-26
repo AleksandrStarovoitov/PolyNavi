@@ -68,7 +68,6 @@ namespace PolyNavi
 			SetSupportActionBar(toolbar);
 			SupportActionBar.SetDisplayHomeAsUpEnabled(true);
 			SupportActionBar.SetHomeAsUpIndicator(Resource.Drawable.ic_menu);
-			//SupportActionBar.SetDisplayShowHomeEnabled(true);
 
 			navigationView = FindViewById<NavigationView>(Resource.Id.navview_main);
 			navigationView.NavigationItemSelected += NavViewItemSelected;
@@ -99,7 +98,6 @@ namespace PolyNavi
 				case "about":
 					fragmentClass = typeof(AboutFragment);
 					startMenuItem = 4;
-					//Title = navigationView.Menu.FindItem(Resource.Id.nav_about_menu).TitleFormatted.ToString();
 					break;
 				default:
 					fragmentClass = typeof(MainBuildingFragment);
@@ -133,7 +131,6 @@ namespace PolyNavi
 		public void OnDrawerSlide(View drawerView, float slideOffset)
 		{
 			InputMethodManager imm = (InputMethodManager)GetSystemService(InputMethodService);
-			//InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
 			imm.HideSoftInputFromWindow(drawerView.WindowToken, 0);
 		}
 		public void OnDrawerOpened(View drawerView)

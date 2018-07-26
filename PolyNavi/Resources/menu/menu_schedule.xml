@@ -3,6 +3,6 @@
   <item
       android:id="@+id/menu_schedule_datetimepicker"
       android:icon="@drawable/ic_date_range_black_24dp"
-      android:title="Выбрать дату"
+      android:title="@string/choose_date"
       app:showAsAction="always" />
 </menu>

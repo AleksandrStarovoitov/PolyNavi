@@ -13,7 +13,6 @@ using Android.Widget;
 
 namespace PolyNavi
 {
-    //A FragmentPagerAdapter that returns a fragment corresponding to one of the sections/tabs/pages.
     public class WelcomeSectionsPagerAdapter : FragmentPagerAdapter
     {
         public override int Count => 3;
@@ -25,8 +24,6 @@ namespace PolyNavi
 
         public override Android.Support.V4.App.Fragment GetItem(int position)
         {
-            // getItem is called to instantiate the fragment for the given page.
-            // Return a PlaceholderFragment
             return WelcomePlaceholderFragment.NewInstance(position + 1);
         }
 

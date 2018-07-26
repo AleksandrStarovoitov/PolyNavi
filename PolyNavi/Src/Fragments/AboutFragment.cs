@@ -16,8 +16,6 @@ using Android.Support.Design.Widget;
 using Android.Widget;
 using Android.Text.Method;
 
-//using static Android.Support.Design.Widget.TabLayout;
-
 namespace PolyNavi
 {
 	[Activity(Label = "AboutFragment")]
@@ -60,7 +58,6 @@ namespace PolyNavi
 			emailIntent.SetType("message/rfc822");
 			emailIntent.PutExtra(Intent.ExtraEmail, new string[] { "polynavi@yandex.ru" });
 			StartActivity(emailIntent);
-			//activity.startActivity(Intent.createChooser(emailIntent, activity.getString(R.string.send_mail) + "..."));
 		}
 
 		private void FrameRate_Click(object sender, EventArgs e)

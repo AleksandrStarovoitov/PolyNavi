@@ -33,8 +33,6 @@ namespace PolyNavi
 			SupportActionBar.SetDisplayHomeAsUpEnabled(true);
 
 			Title = GetString(Resource.String.title_copyright_activity);
-
-			// Create your application here
 		}
 
 		public override bool OnSupportNavigateUp()

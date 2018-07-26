@@ -101,4 +101,6 @@
 
   <string name="wrong_group">Неверный номер группы</string>
   <string name="wrong_group_error">Неверный номер группы! Укажите корректный в настройках приложения</string>
+
+  <string name="choose_date">Выберите дату</string>
 </resources>

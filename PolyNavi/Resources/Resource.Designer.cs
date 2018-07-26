@@ -4522,6 +4522,9 @@ namespace PolyNavi
 			// aapt resource value: 0x7f0b0025
 			public const int character_counter_pattern = 2131427365;
 			
+			// aapt resource value: 0x7f0b007a
+			public const int choose_date = 2131427450;
+			
 			// aapt resource value: 0x7f0b0041
 			public const int currentweek_tab = 2131427393;
 			

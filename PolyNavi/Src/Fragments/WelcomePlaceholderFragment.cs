@@ -13,10 +13,8 @@ using Android.Widget;
 
 namespace PolyNavi
 {
-    //A placeholder fragment containing a simple view.
     public class WelcomePlaceholderFragment : Android.Support.V4.App.Fragment
     {
-        //The fragment argument representing the section number for this fragment.
         private static readonly String ARG_SECTION_NUMBER = "section_number";
 
         ImageView img;
@@ -26,7 +24,6 @@ namespace PolyNavi
         {
         }
 
-        //Returns a new instance of this fragment for the given section number
         public static WelcomePlaceholderFragment NewInstance(int sectionNumber)
         {
             var fragment = new WelcomePlaceholderFragment();

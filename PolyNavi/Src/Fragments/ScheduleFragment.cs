@@ -13,7 +13,6 @@ using Android.Support.V7.App;
 using Android.Support.V7.Widget;
 using Android.Support.V4.View;
 using Android.Support.Design.Widget;
-//using static Android.Support.Design.Widget.TabLayout;
 
 namespace PolyNavi
 {

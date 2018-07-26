@@ -28,7 +28,7 @@ namespace PolyNaviLib.BL
 		}
 
         Nito.AsyncEx.AsyncLock mutex = new Nito.AsyncEx.AsyncLock();
-        //Получить расписание на неделю
+
         public async Task<WeekRoot> GetWeekRootAsync(DateTime weekDate)
         {
             using (await mutex.LockAsync())

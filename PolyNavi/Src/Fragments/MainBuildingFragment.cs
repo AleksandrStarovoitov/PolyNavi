@@ -185,9 +185,8 @@ namespace PolyNavi
                         int endFloor = route.Last().FloorNumber;
                         fragments[startFloor - 1].MapView.SetMarker(new Android.Graphics.Point(route.First().Point.X, route.First().Point.Y), MainBuildingView.Marker.Start);
                         fragments[endFloor - 1].MapView.SetMarker(new Android.Graphics.Point(route.Last().Point.X, route.Last().Point.Y), MainBuildingView.Marker.End);
-                        //var startPointFragment = FragmentManager.FindFragmentByTag<MainBuildingMapFragment>($"MAP_MAINBUILDING_{startFloor}");
+                        
                         ChangeFloor(startFloor);
-                        //startPointFragment.MapView.SetRoute(route.Select(gnode => new Android.Graphics.Point(gnode.Point.X, gnode.Point.Y)).ToList());
                     }
                     catch (GraphRoutingException ex)
                     {

@@ -60,7 +60,7 @@ namespace PolyNavi
 			widthInDp = ConvertPixelsToDp(displ.WidthPixels);
 			heightInDp = ConvertPixelsToDp(displ.HeightPixels);
 
-			//FIXME исправить загрузку _plan чтобы он загружал файл произвольной величины
+			//TODO исправить загрузку _plan чтобы он загружал файл произвольной величины
 			_plan = ContextCompat.GetDrawable(context, id);
 			_plan.SetBounds(0, 0, 3200, 1800);
 			//_scaleDetector = new ScaleGestureDetector(context, new MyScaleListener(this));
@@ -79,7 +79,6 @@ namespace PolyNavi
 		{
 			if (!MainBuildingFragment.CheckFocus())
 			{
-				//InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
 				imm.HideSoftInputFromWindow(WindowToken, 0);
 			}
 			//_scaleDetector.OnTouchEvent(e);
@@ -88,26 +87,26 @@ namespace PolyNavi
 			MotionEventActions action = e.Action & MotionEventActions.Mask;
 			int pointerIndex;
 
-			switch (action)
-			{
-				case MotionEventActions.Down:
-					_lastTouchX = e.GetX();
-					_lastTouchY = e.GetY();
-					_activePointerId = e.GetPointerId(0);
-					break;
+            switch (action)
+            {
+                case MotionEventActions.Down:
+                    _lastTouchX = e.GetX();
+                    _lastTouchY = e.GetY();
+                    _activePointerId = e.GetPointerId(0);
+                    break;
 
-				case MotionEventActions.Move:
-					pointerIndex = e.FindPointerIndex(_activePointerId);
-					float x = e.GetX(pointerIndex);
-					float y = e.GetY(pointerIndex);
-					//if (!_scaleDetector.IsInProgress)
-					//{
-						//Only move the ScaleGestureDetector isn't already processing a gesture.
-						float deltaX = x - _lastTouchX;
-						float deltaY = y - _lastTouchY;
-						_posX += deltaX;
-						_posY += deltaY;
-
+                case MotionEventActions.Move:
+                    pointerIndex = e.FindPointerIndex(_activePointerId);
+                    float x = e.GetX(pointerIndex);
+                    float y = e.GetY(pointerIndex);
+                    //if (!_scaleDetector.IsInProgress)
+                    //{
+                    //Only move the ScaleGestureDetector isn't already processing a gesture.
+                    float deltaX = x - _lastTouchX;
+                    float deltaY = y - _lastTouchY;
+                    _posX += deltaX;
+                    _posY += deltaY;
+                    
 					float planScaleWidth = 3200 * _scaleFactor;
 					float planScaleHeight = 1800 * _scaleFactor;
 
@@ -115,16 +114,7 @@ namespace PolyNavi
 					float left = _posX;
 					float top = _posY;
 					float bottom = _posY + planScaleHeight;
-
-					//	Log.Debug("OnTouch", "right: " + right);
-					//	Log.Debug("OnTouch", "left: " + left);
-					//	Log.Debug("OnTouch", "top: " + top);
-					//	Log.Debug("OnTouch", "bottom: " + bottom);
-					//	Log.Debug("OnTouch", " ");
-					//	Log.Debug("OnTouch", "posX: " + _posX);
-					//	Log.Debug("OnTouch", "posY: " + _posY);
-					//	Log.Debug("OnTouch", " ");
-
+                    
 					if (right < displ.WidthPixels)
 					{
 						_posX -= deltaX;
@@ -151,21 +141,14 @@ namespace PolyNavi
 
 				case MotionEventActions.Up:
 				case MotionEventActions.Cancel:
-					// This events occur when something cancels the gesture (for example the
-					//activity going in the background) or when the pointer has been lifted up.
-					//We no longer need to keep track of the active pointer.
 					_activePointerId = InvalidPointerId;
 					break;
 
 				case MotionEventActions.PointerUp:
-					//We only want to update the last touch position if the the appropriate pointer
-					//has been lifted off the screen.
 					pointerIndex = (int)(e.Action & MotionEventActions.PointerIndexMask) >> (int)MotionEventActions.PointerIndexShift;
 					int pointerId = e.GetPointerId(pointerIndex);
 					if (pointerId == _activePointerId)
 					{
-						//This was our active pointer going up. Choose a new
-						//action pointer and adjust accordingly
 						int newPointerIndex = pointerIndex == 0 ? 1 : 0;
 						_lastTouchX = e.GetX(newPointerIndex);
 						_lastTouchY = e.GetY(newPointerIndex);
@@ -242,101 +225,99 @@ namespace PolyNavi
 			}
 		}
 
-		private class MyDoubleTapListener : GestureDetector.SimpleOnGestureListener
-		{
-			private MainBuildingView view;
-			private bool ZoomedIn = false;
-			private DisplayMetrics displ;
+        private class MyDoubleTapListener : GestureDetector.SimpleOnGestureListener
+        {
+            private MainBuildingView view;
+            private bool ZoomedIn = false;
+            private DisplayMetrics displ;
 
-			public MyDoubleTapListener(MainBuildingView view, DisplayMetrics displ)
-			{
-				this.view = view;
-				this.displ = displ;
-			}
+            public MyDoubleTapListener(MainBuildingView view, DisplayMetrics displ)
+            {
+                this.view = view;
+                this.displ = displ;
+            }
 
-			public override bool OnDoubleTap(MotionEvent e)
-			{
-				Log.Debug("DoubleTap", "OnDoubleTap");
-				
-				return base.OnDoubleTap(e);
-			}
-		}
+            public override bool OnDoubleTap(MotionEvent e)
+            {
+                return base.OnDoubleTap(e);
+            }
+        }
 
 
 
-		//private class MyScaleListener : ScaleGestureDetector.SimpleOnScaleGestureListener
-		//{
-		//	private readonly MainBuildingView _view;
-		//	private float centerX;
-		//	private float centerY;
-		//	private float deltaX;
-		//	private float deltaY;
+        //private class MyScaleListener : ScaleGestureDetector.SimpleOnScaleGestureListener
+        //{
+        //	private readonly MainBuildingView _view;
+        //	private float centerX;
+        //	private float centerY;
+        //	private float deltaX;
+        //	private float deltaY;
 
-		//	private float planScaleWidth;
-		//	private float planScaleHeight;
-		//	private float right;
-		//	private float left;
-		//	private float top;
-		//	private float bottom;
+        //	private float planScaleWidth;
+        //	private float planScaleHeight;
+        //	private float right;
+        //	private float left;
+        //	private float top;
+        //	private float bottom;
 
-		//	public MyScaleListener(MainBuildingView view)
-		//	{
-		//		_view = view;
-		//	}
+        //	public MyScaleListener(MainBuildingView view)
+        //	{
+        //		_view = view;
+        //	}
 
-		//	public override bool OnScale(ScaleGestureDetector detector)
-		//	{
+        //	public override bool OnScale(ScaleGestureDetector detector)
+        //	{
 
-		//		float scale = detector.ScaleFactor;
+        //		float scale = detector.ScaleFactor;
 
-		//		_view._scaleFactor = System.Math.Max(_view._minScaleFactor, System.Math.Min(_view._scaleFactor * scale, _view._maxScaleFactor));
+        //		_view._scaleFactor = System.Math.Max(_view._minScaleFactor, System.Math.Min(_view._scaleFactor * scale, _view._maxScaleFactor));
 
-		//		if (_view._scaleFactor > _view._minScaleFactor && _view._scaleFactor < _view._maxScaleFactor)
-		//		{
-		//			centerX = detector.FocusX;
-		//			centerY = detector.FocusY;
-		//			deltaX = centerX - _view._posX;
-		//			deltaY = centerY - _view._posY;
-		//			deltaX = deltaX * scale - deltaX;
-		//			deltaY = deltaY * scale - deltaY;
+        //		if (_view._scaleFactor > _view._minScaleFactor && _view._scaleFactor < _view._maxScaleFactor)
+        //		{
+        //			centerX = detector.FocusX;
+        //			centerY = detector.FocusY;
+        //			deltaX = centerX - _view._posX;
+        //			deltaY = centerY - _view._posY;
+        //			deltaX = deltaX * scale - deltaX;
+        //			deltaY = deltaY * scale - deltaY;
 
-		//			planScaleWidth = _view._plan.IntrinsicWidth * _view._scaleFactor;
-		//			planScaleHeight = _view._plan.IntrinsicHeight * _view._scaleFactor;
+        //			planScaleWidth = _view._plan.IntrinsicWidth * _view._scaleFactor;
+        //			planScaleHeight = _view._plan.IntrinsicHeight * _view._scaleFactor;
 
-		//			right = _view._posX + planScaleWidth;
-		//			left = _view._posX;
-		//			top = _view._posY;
-		//			bottom = _view._posY + planScaleHeight;
-					
-		//			//Log.Debug("plan", "right: " + right.ToString());
-		//			//Log.Debug("plan", "left: " + left.ToString());
-		//			//Log.Debug("plan", "top: " + top.ToString());
-		//			//Log.Debug("plan", "bottom: " + bottom.ToString());
+        //			right = _view._posX + planScaleWidth;
+        //			left = _view._posX;
+        //			top = _view._posY;
+        //			bottom = _view._posY + planScaleHeight;
 
-		//			if (right < _view.displ.WidthPixels)
-		//			{
-		//				_view._posX -= deltaX;
-		//			}
-		//			if (left > 0)
-		//			{
-		//				_view._posX += deltaX;
-		//			}
-		//			if (top > 0)
-		//			{
-		//				_view._posY += deltaY;
-		//			}
-		//			if (bottom < _view._plan.IntrinsicHeight)
-		//			{
-		//				_view._posY -= deltaY;
-		//			}
+        //			//Log.Debug("plan", "right: " + right.ToString());
+        //			//Log.Debug("plan", "left: " + left.ToString());
+        //			//Log.Debug("plan", "top: " + top.ToString());
+        //			//Log.Debug("plan", "bottom: " + bottom.ToString());
 
-		//			_view._posX -= deltaX;
-		//			_view._posY -= deltaY;
-		//		}
+        //			if (right < _view.displ.WidthPixels)
+        //			{
+        //				_view._posX -= deltaX;
+        //			}
+        //			if (left > 0)
+        //			{
+        //				_view._posX += deltaX;
+        //			}
+        //			if (top > 0)
+        //			{
+        //				_view._posY += deltaY;
+        //			}
+        //			if (bottom < _view._plan.IntrinsicHeight)
+        //			{
+        //				_view._posY -= deltaY;
+        //			}
 
-		//		_view.Invalidate();
-		//		return true;
-		//	}
-		//}
-	}
+        //			_view._posX -= deltaX;
+        //			_view._posY -= deltaY;
+        //		}
+
+        //		_view.Invalidate();
+        //		return true;
+        //	}
+        //}
+    }
 }

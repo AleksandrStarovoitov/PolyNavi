@@ -135,11 +135,6 @@ namespace PolyNavi
 				FillRoomsDictionary();
 				return graph;
 			}
-			//using (var stream = MainApp.Instance.Assets.Open("floor_1.graph"))
-			//{
-			//	Graph.GraphNode floor1 = Graph.SaverLoader.Load(stream);
-			//	return floor1;
-			//}
 		});
 
 		private static void FillRoomsDictionary()
@@ -224,15 +219,14 @@ namespace PolyNavi
 
         public class DictionaryComp : IComparer<string>
         {
-            // Compares by Height, Length, and Width.
             public int Compare(string x, string y)
             {
-                if ((x[0] > '0' && x[0] < '9') && (y[0] > 'A' && y[0] < 'я')) //100 - Ректор
+                if ((x[0] > '0' && x[0] < '9') && (y[0] > 'A' && y[0] < 'я')) //100, abc
                 {
-                    return 1; //Больше 0 => x>y => сначала y, потом x
+                    return 1;
                 }
                 else
-                if ((y[0] > '0' && y[0] < '9') && (x[0] > 'A' && x[0] < 'я')) //Ректор - 100
+                if ((y[0] > '0' && y[0] < '9') && (x[0] > 'A' && x[0] < 'я')) //abc, 100
                 {
                     return -1;
                 }

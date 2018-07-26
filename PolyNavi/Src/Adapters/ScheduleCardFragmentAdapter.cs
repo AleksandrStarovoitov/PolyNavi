@@ -29,15 +29,12 @@ namespace PolyNavi
 		private CultureInfo cultureInfo = new CultureInfo("ru-RU");
 		private const int TitleConst = 0, LessonConst = 1;
 
-		//	private CultureInfo ci = new CultureInfo("ru-RU") {DateTimeFormat = new DateTimeFormatInfo() { AbbreviatedMonthNames = PolyNaviLib.DAL.ScheduleBuilder.months } };
-
 		public ScheduleCardRowAdapter(List<Object> lessons, DateTime date)
 		{
 			lessons.Insert(0, new TitleTag() { Date = date });
 			mLessons = lessons;
 		}
 
-		// Create new views (invoked by the layout manager)
 		public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
 		{
 			context = parent.Context;
@@ -60,7 +57,6 @@ namespace PolyNavi
 			return viewHolder;
 		}
 
-		// Replace the contents of a view (invoked by the layout manager)
 		public override void OnBindViewHolder(RecyclerView.ViewHolder viewHolder, int position)
 		{
 			switch (viewHolder.ItemViewType)
@@ -69,7 +65,6 @@ namespace PolyNavi
 					viewHolderLesson = (ScheduleCardRowLessonViewHolder)viewHolder;
 					Lesson lesson = (Lesson)mLessons[position];
 
-					// Set item views based on your views and data model
 					TextView room = viewHolderLesson.room;
 					TextView building = viewHolderLesson.building;
 					TextView subject = viewHolderLesson.subject;
@@ -102,11 +97,8 @@ namespace PolyNavi
                     else
                     {
                         teacher.Text = String.Join(", ", lesson.Teachers.Select(t => t.Full_Name).ToArray());
-                    }
-                    
-                   
+                    }                    
 					break;
-
 				case TitleConst:
 					viewHolderTitle = (ScheduleCardRowTitleViewHolder)viewHolder;
 					TitleTag title = (TitleTag)mLessons[position];
@@ -187,26 +179,21 @@ namespace PolyNavi
 			mDays = days.Where(Day => Day.Lessons.Count != 0).ToList();
 		}
 
-		// Create new views (invoked by the layout manager)
 		public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
 		{
 			context = parent.Context;
 			layoutInflater = LayoutInflater.From(context);
 
-			// Inflate the custom layout
 			scheduleView = layoutInflater.Inflate(Resource.Layout.layout_card_schedule, parent, false);
 						
-			// Return a new holder instance
 			viewHolder = new ScheduleCardFragmentAdapterViewHolder(scheduleView);
 			return viewHolder;
 		}
 
-		// Replace the contents of a view (invoked by the layout manager)
 		public override void OnBindViewHolder(RecyclerView.ViewHolder viewHolder, int position)
 		{
-			var vh = (ScheduleCardFragmentAdapter.ScheduleCardFragmentAdapterViewHolder)viewHolder;
+			var vh = (ScheduleCardFragmentAdapterViewHolder)viewHolder;
 
-			// Get the data model based on position
 			Day day = mDays[position];
 
 			recyclerViewSchedule = viewHolder.ItemView.FindViewById<RecyclerView>(Resource.Id.recyclerview_card_schedule);

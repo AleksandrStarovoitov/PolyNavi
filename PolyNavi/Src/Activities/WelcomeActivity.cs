@@ -117,10 +117,8 @@ namespace PolyNavi
         }
 
 
-        private class ViewPagerPageChangeListener : Java.Lang.Object, ViewPager.IOnPageChangeListener {
-           
-            //public new IntPtr Handle => throw new NotImplementedException();
-
+        private class ViewPagerPageChangeListener : Java.Lang.Object, ViewPager.IOnPageChangeListener
+        {            
             public void OnPageScrollStateChanged(int state)
             {
 
@@ -155,7 +153,6 @@ namespace PolyNavi
 
             public void OnPageScrolled(int position, float positionOffset, int positionOffsetPixels)
             {
-                //Color update
                 int colorUpdate = (int)evaluator.Evaluate(positionOffset, colorList[position], colorList[position == 2 ? position : position + 1]);
                 var color = new Color(colorUpdate);
                 mViewPager.SetBackgroundColor(color);

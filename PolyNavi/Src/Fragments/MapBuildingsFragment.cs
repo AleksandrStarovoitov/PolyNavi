@@ -157,8 +157,6 @@ namespace PolyNavi
 			base.OnStop();
 			if (locationManager != null)
 				locationManager.RemoveUpdates(this);
-			//else
-			//	throw new Exception("Location manager is null");
 		}
 
 		public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
@@ -173,7 +171,7 @@ namespace PolyNavi
 					}
 					else
 					{
-						
+						//
 					}
 					break;
 				default:
@@ -200,7 +198,6 @@ namespace PolyNavi
 			mapControl.RotationLock = false;
 			map = mapControl.Map;
 			map.CRS = "EPSG:3857";
-			//map.Layers.Add(new TileLayer(KnownTileSources.Create(KnownTileSource.EsriWorldTopo)));
 			map.Layers.Add(OpenStreetMap.CreateTileLayer());
 			routeLayer = new Layer();
 			map.Layers.Add(routeLayer);
@@ -407,7 +404,7 @@ namespace PolyNavi
 
 		public void OnStatusChanged(string provider, [GeneratedEnum] Availability status, Bundle extras)
 		{
-			//throw new NotImplementedException();
+
 		}
 
 		private class AnimatedPointsWithAutoUpdateLayer : AnimatedPointLayer
