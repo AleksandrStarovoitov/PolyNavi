@@ -1,24 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <resources>
   <!-- color int as #AARRGGBB (alpha, red, green, blue) -->
-  <color name="colorPrimaryDark">#00821B</color>
-  <color name="colorPrimary">#37B34A</color>
-  <color name="colorAccent">#FF9800</color>
+  <color name="color_primary_dark">#00821B</color>
+  <color name="color_primary">#37B34A</color>
+  <color name="color_accent">#FF9800</color>
 
-  <color name="colorToolbarText">#B3000000</color>
-  <color name="colorBlack">#000000</color>
-  <color name="colorIconsBlack">#DD000000</color>
-  <color name="colorBlackWithTransparency">#99000000</color>
+  <color name="color_toolbar_text">#B3000000</color>
+  <color name="color_black">#000000</color>
+  <color name="color_icons_black">#DD000000</color>
+  <color name="color_black_with_transparency">#99000000</color>
 
-  <color name="colorCardBackground">#E6E6E6</color>
+  <color name="color_card_Background">#E6E6E6</color>
   
-  <color name="colorTitleScheduleText">#96000000</color>
-  <color name="colorTitleScheduleTextDayOfWeek">#B4000000</color>
-  <color name="colorTitleScheduleBackground">#5EC26E</color>
+  <color name="color_title_schedule_text">#96000000</color>
+  <color name="color_title_schedule_text_dayofweek">#B4000000</color>
+  <color name="color_title_schedule_background">#5EC26E</color>
 
-  <color name="cyan">#00BCD4</color>
-  <color name="orange">#FF9800</color>
-  <color name="green">#4CAF50</color>
-  <color name="indicator_unselected">#4D000000</color>
+  <color name="color_cyan">#00BCD4</color>
+  <color name="color_orange">#FF9800</color>
+  <color name="color_green">#4CAF50</color>
+  <color name="color_indicator_unselected">#4D000000</color>
  
 </resources>

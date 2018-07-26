@@ -1560,40 +1560,49 @@ namespace PolyNavi
 			public const int cardview_shadow_start_color = 2131492867;
 			
 			// aapt resource value: 0x7f0c004e
-			public const int colorAccent = 2131492942;
+			public const int color_accent = 2131492942;
 			
 			// aapt resource value: 0x7f0c0050
-			public const int colorBlack = 2131492944;
+			public const int color_black = 2131492944;
 			
 			// aapt resource value: 0x7f0c0052
-			public const int colorBlackWithTransparency = 2131492946;
+			public const int color_black_with_transparency = 2131492946;
 			
 			// aapt resource value: 0x7f0c0053
-			public const int colorCardBackground = 2131492947;
-			
-			// aapt resource value: 0x7f0c0051
-			public const int colorIconsBlack = 2131492945;
-			
-			// aapt resource value: 0x7f0c004d
-			public const int colorPrimary = 2131492941;
-			
-			// aapt resource value: 0x7f0c004c
-			public const int colorPrimaryDark = 2131492940;
-			
-			// aapt resource value: 0x7f0c0056
-			public const int colorTitleScheduleBackground = 2131492950;
-			
-			// aapt resource value: 0x7f0c0054
-			public const int colorTitleScheduleText = 2131492948;
-			
-			// aapt resource value: 0x7f0c0055
-			public const int colorTitleScheduleTextDayOfWeek = 2131492949;
-			
-			// aapt resource value: 0x7f0c004f
-			public const int colorToolbarText = 2131492943;
+			public const int color_card_Background = 2131492947;
 			
 			// aapt resource value: 0x7f0c0057
-			public const int cyan = 2131492951;
+			public const int color_cyan = 2131492951;
+			
+			// aapt resource value: 0x7f0c0059
+			public const int color_green = 2131492953;
+			
+			// aapt resource value: 0x7f0c0051
+			public const int color_icons_black = 2131492945;
+			
+			// aapt resource value: 0x7f0c005a
+			public const int color_indicator_unselected = 2131492954;
+			
+			// aapt resource value: 0x7f0c0058
+			public const int color_orange = 2131492952;
+			
+			// aapt resource value: 0x7f0c004d
+			public const int color_primary = 2131492941;
+			
+			// aapt resource value: 0x7f0c004c
+			public const int color_primary_dark = 2131492940;
+			
+			// aapt resource value: 0x7f0c0056
+			public const int color_title_schedule_background = 2131492950;
+			
+			// aapt resource value: 0x7f0c0054
+			public const int color_title_schedule_text = 2131492948;
+			
+			// aapt resource value: 0x7f0c0055
+			public const int color_title_schedule_text_dayofweek = 2131492949;
+			
+			// aapt resource value: 0x7f0c004f
+			public const int color_toolbar_text = 2131492943;
 			
 			// aapt resource value: 0x7f0c0041
 			public const int design_bottom_navigation_shadow_color = 2131492929;
@@ -1655,17 +1664,11 @@ namespace PolyNavi
 			// aapt resource value: 0x7f0c001c
 			public const int foreground_material_light = 2131492892;
 			
-			// aapt resource value: 0x7f0c0059
-			public const int green = 2131492953;
-			
 			// aapt resource value: 0x7f0c001d
 			public const int highlighted_text_material_dark = 2131492893;
 			
 			// aapt resource value: 0x7f0c001e
 			public const int highlighted_text_material_light = 2131492894;
-			
-			// aapt resource value: 0x7f0c005a
-			public const int indicator_unselected = 2131492954;
 			
 			// aapt resource value: 0x7f0c001f
 			public const int material_blue_grey_800 = 2131492895;
@@ -1711,9 +1714,6 @@ namespace PolyNavi
 			
 			// aapt resource value: 0x7f0c0040
 			public const int notification_material_background_media_default_color = 2131492928;
-			
-			// aapt resource value: 0x7f0c0058
-			public const int orange = 2131492952;
 			
 			// aapt resource value: 0x7f0c003f
 			public const int preference_fallback_accent_color = 2131492927;

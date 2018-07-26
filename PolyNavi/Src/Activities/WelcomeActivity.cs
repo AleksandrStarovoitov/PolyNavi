@@ -65,9 +65,9 @@ namespace PolyNavi
             mViewPager.CurrentItem = page;
             UpdateIndicators(page);
 
-            int color1 = ContextCompat.GetColor(this, Resource.Color.cyan);
-            int color2 = ContextCompat.GetColor(this, Resource.Color.orange);
-            int color3 = ContextCompat.GetColor(this, Resource.Color.green);
+            int color1 = ContextCompat.GetColor(this, Resource.Color.color_cyan);
+            int color2 = ContextCompat.GetColor(this, Resource.Color.color_orange);
+            int color3 = ContextCompat.GetColor(this, Resource.Color.color_green);
 
             colorList = new int[] { color1, color2, color3 };
             colors = new Color[] { new Color(color1), new Color(color2), new Color(3) };

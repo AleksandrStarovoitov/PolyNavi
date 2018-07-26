@@ -4,7 +4,7 @@
     android:id="@+id/cardview_schedule"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    card_view:cardBackgroundColor="@color/colorCardBackground"
+    card_view:cardBackgroundColor="@color/color_card_Background"
     card_view:cardCornerRadius="2dp"
     card_view:cardElevation="2dp"
     card_view:cardMaxElevation="2dp"

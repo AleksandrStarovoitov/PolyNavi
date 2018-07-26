@@ -2,5 +2,5 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="oval">
   <corners android:radius="100dp" />
-  <solid android:color="@color/indicator_unselected" />
+  <solid android:color="@color/color_indicator_unselected" />
 </shape>

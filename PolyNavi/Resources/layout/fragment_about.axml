@@ -72,13 +72,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/about_email_title"
-                        android:textColor="@color/colorBlack"
+                        android:textColor="@color/color_black"
                         android:textSize="@dimen/textsize_about_frame_title" />
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/about_email_address"
-                        android:textColor="@color/colorBlackWithTransparency"
+                        android:textColor="@color/color_black_with_transparency"
                         android:textSize="@dimen/textsize_about_frame_summary" />
                 </LinearLayout>
             </LinearLayout>
@@ -112,13 +112,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/about_rate_title"
-                        android:textColor="@color/colorBlack"
+                        android:textColor="@color/color_black"
                         android:textSize="@dimen/textsize_about_frame_title" />
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/about_rate_subtitle"
-                        android:textColor="@color/colorBlackWithTransparency"
+                        android:textColor="@color/color_black_with_transparency"
                         android:textSize="@dimen/textsize_about_frame_summary" />
                 </LinearLayout>
             </LinearLayout>
@@ -152,13 +152,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/about_bitbucket_title"
-                        android:textColor="@color/colorBlack"
+                        android:textColor="@color/color_black"
                         android:textSize="@dimen/textsize_about_frame_title" />
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/about_bitbucket_subtitle"
-                        android:textColor="@color/colorBlackWithTransparency"
+                        android:textColor="@color/color_black_with_transparency"
                         android:textSize="@dimen/textsize_about_frame_summary" />
                 </LinearLayout>
             </LinearLayout>
@@ -192,13 +192,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/about_donate_title"
-                        android:textColor="@color/colorBlack"
+                        android:textColor="@color/color_black"
                         android:textSize="@dimen/textsize_about_frame_title" />
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/about_donate_subtitle"
-                        android:textColor="@color/colorBlackWithTransparency"
+                        android:textColor="@color/color_black_with_transparency"
                         android:textSize="@dimen/textsize_about_frame_summary" />
                 </LinearLayout>
             </LinearLayout>
@@ -232,7 +232,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/about_copyright_title"
-                        android:textColor="@color/colorBlack"
+                        android:textColor="@color/color_black"
                         android:textSize="@dimen/textsize_about_frame_title" />
                 </LinearLayout>
             </LinearLayout>
@@ -251,14 +251,14 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:text="@string/about_contacts_title"
-                android:textColor="@color/colorBlack"
+                android:textColor="@color/color_black"
                 android:textSize="@dimen/textsize_about_contacts_title" />
             <TextView
                 android:id="@+id/textview_contacts_sasha_link_about"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/about_contacts_sasha_link"
-                android:textColor="@color/colorBlack"
+                android:textColor="@color/color_black"
                 android:textSize="@dimen/textsize_about_contacts_entry"
                 android:layout_below="@+id/textview_contacts_title_about"
                 android:layout_marginTop="@dimen/margin_about_contacts_inner" />
@@ -267,7 +267,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/about_contacts_kirill_link"
-                android:textColor="@color/colorBlack"
+                android:textColor="@color/color_black"
                 android:textSize="@dimen/textsize_about_contacts_entry"
                 android:layout_below="@+id/textview_contacts_sasha_link_about"
                 android:layout_marginTop="@dimen/margin_about_contacts_inner" />
