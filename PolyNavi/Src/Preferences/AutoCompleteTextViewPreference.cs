@@ -169,7 +169,13 @@ namespace PolyNavi
                 {
                     if (autoCompleteTVPreference.CallChangeListener(groupName))
                     {
-                        autoCompleteTVPreference.SaveGroupName(groupName);
+                        if (groupsDictionary.ContainsKey(groupName))
+                        {
+                            autoCompleteTVPreference.SaveGroupName(groupName);
+                        }
+                        {
+                            Toast.MakeText(Activity.BaseContext, GetString(Resource.String.wrong_group), ToastLength.Short).Show();
+                        }
                     }                    
                 }
             }

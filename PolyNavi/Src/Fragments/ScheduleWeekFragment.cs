@@ -83,8 +83,7 @@ namespace PolyNavi
                         if (days.Count == 0)
                         {
                             DrawContent(Resource.Id.relativelayout_week_schedule, Resource.Layout.layout_empty_schedule_error);
-                            var v = view.FindViewById<RelativeLayout>(Resource.Id.layout_empty_schedule_error_clickable_zone);
-
+                            
                             view.FindViewById<TextView>(Resource.Id.textview_empty_schedule_error_title).Text =
                                 GetString(Resource.String.empty_schedule_error_title_start) + " " +
                                 (weekTag == 0 ?
@@ -119,6 +118,16 @@ namespace PolyNavi
 						};
 					});
 				}
+                catch (GroupNumberException)
+                {
+                    Activity.RunOnUiThread(() =>
+                    {
+                        DrawContent(Resource.Id.relativelayout_week_schedule, Resource.Layout.layout_empty_schedule_error);
+
+                        view.FindViewById<TextView>(Resource.Id.textview_empty_schedule_error_title).Text =
+                            GetString(Resource.String.wrong_group_error);
+                    });
+                }
 			});
 		}
 

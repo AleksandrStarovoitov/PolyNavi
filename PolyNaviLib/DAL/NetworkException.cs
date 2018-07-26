@@ -4,7 +4,6 @@ using System.Text;
 
 namespace PolyNaviLib.DAL
 {
-
 	[Serializable]
 	public class NetworkException : Exception
 	{

@@ -68,11 +68,7 @@ namespace PolyNavi
                 if (dictionary.TryGetValue(groupName, out int id))
                 {
                     sharedPreferences.Edit().PutInt("groupid", id).Apply();
-                }
-                else
-                {
-                    Toast.MakeText(Activity.BaseContext, GetString(Resource.String.wrong_group), ToastLength.Short).Show();
-                }                
+                }          
             }
         }
 

@@ -100,4 +100,5 @@
   <string name="welcome_skip">Пропустить</string>
 
   <string name="wrong_group">Неверный номер группы</string>
+  <string name="wrong_group_error">Неверный номер группы! Укажите корректный в настройках приложения</string>
 </resources>

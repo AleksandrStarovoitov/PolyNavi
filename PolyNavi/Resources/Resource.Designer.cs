@@ -4726,6 +4726,9 @@ namespace PolyNavi
 			// aapt resource value: 0x7f0b0078
 			public const int wrong_group = 2131427448;
 			
+			// aapt resource value: 0x7f0b0079
+			public const int wrong_group_error = 2131427449;
+			
 			static String()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();

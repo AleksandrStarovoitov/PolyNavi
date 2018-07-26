@@ -148,7 +148,6 @@ namespace PolyNavi
 		{
 			if (fullyExpanded)
 			{
-
                 if (MainApp.Instance.RoomsDictionary.TryGetValue(editTextInputFrom.Text, out string startName) && MainApp.Instance.RoomsDictionary.TryGetValue(editTextInputTo.Text, out string finishName))
                 {
                     InputMethodManager imm = (InputMethodManager)Activity.BaseContext.GetSystemService(Context.InputMethodService);
