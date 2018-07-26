@@ -4,23 +4,23 @@
     android:layout_height="wrap_content"
     android:id="@+id/relativelayout_row_title_schedule"
     android:background="@color/colorTitleScheduleBackground">
-  <TextView
-      android:text="@string/dayofweek_title_schedule_row"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_alignParentLeft="true"
-      android:layout_margin="@dimen/cardTitleMarginLeft"
-      android:id="@+id/textview_card_dayofweek_row_title_schedule"
-      android:textAppearance="@style/ScheduleTitleDayOfWeek"
-      android:fontFamily="@font/roboto_light" />
-  <TextView
-      android:text="@string/date_title_schedule_row"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_margin="@dimen/cardTitleMarginLeft"
-      android:layout_alignParentRight="true"
-      android:layout_alignBaseline="@+id/textview_card_dayofweek_row_title_schedule"
-      android:id="@+id/textview_card_date_row_title_schedule"
-      android:textAppearance="@style/ScheduleTitleDate"
-      android:fontFamily="@font/roboto_light" />
+    <TextView
+        android:text="@string/dayofweek_title_schedule_row"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_margin="@dimen/marginleft_card_row_title_schedule"
+        android:id="@+id/textview_card_dayofweek_row_title_schedule"
+        android:textAppearance="@style/ScheduleTitleDayOfWeek"
+        android:fontFamily="@font/roboto_light" />
+    <TextView
+        android:text="@string/date_title_schedule_row"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/marginleft_card_row_title_schedule"
+        android:layout_alignParentRight="true"
+        android:layout_alignBaseline="@+id/textview_card_dayofweek_row_title_schedule"
+        android:id="@+id/textview_card_date_row_title_schedule"
+        android:textAppearance="@style/ScheduleTitleDate"
+        android:fontFamily="@font/roboto_light" />
 </RelativeLayout>

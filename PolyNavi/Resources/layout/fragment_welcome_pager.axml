@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="15dp">
+    android:paddingBottom="@dimen/paddingbottom_welcome_pager_imagelayout">
     <FrameLayout
         android:id="@+id/framelayout_welcome"
         android:layout_width="wrap_content"
@@ -11,9 +11,9 @@
         android:layout_centerHorizontal="true">
         <ImageView
             android:id="@+id/imageview_welcome_featureimage"
-            android:layout_width="220dp"
-            android:layout_height="220dp"
-            android:layout_marginTop="100dp"
+            android:layout_width="@dimen/size_welcome_pager_image"
+            android:layout_height="@dimen/size_welcome_pager_image"
+            android:layout_marginTop="@dimen/margintop_welcome_pager_image"
             android:adjustViewBounds="true"
             android:background="@drawable/ic_settings_black_24dp" />
     </FrameLayout>
@@ -22,25 +22,29 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/framelayout_welcome"
-        android:layout_margin="30dp">
+        android:layout_margin="@dimen/margin_welcome_pager_textlayout">
         <TextView
             android:id="@+id/textview_welcome_header"
             style="@style/ScheduleTitleDayOfWeek"
-            android:textSize="27sp"
+            android:textSize="@dimen/textsize_welcome_pager_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="@dimen/margintop_welcome_pager_header"
             android:layout_alignParentTop="true"
             android:textColor="@android:color/white" />
-        <TextView
-            android:id="@+id/textview_welcome_description"
-            style="@style/ScheduleTitleDate"
-            android:fontFamily="@font/roboto_light"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="23sp"
-            android:layout_alignParentBottom="true"
-            android:layout_marginTop="40dp"
-            android:textColor="#FFFFFF" />
+            android:layout_height="@dimen/height_welcome_pager_descriptionlayout"
+            android:layout_alignParentBottom="true">
+            <TextView
+                android:id="@+id/textview_welcome_description"
+                style="@style/ScheduleTitleDate"
+                android:fontFamily="@font/roboto_light"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/textsize_welcome_pager_description"
+                android:layout_marginTop="@dimen/margintop_welcome_pager_description"
+                android:textColor="#FFFFFF" />
+        </RelativeLayout>
     </RelativeLayout>
 </RelativeLayout>

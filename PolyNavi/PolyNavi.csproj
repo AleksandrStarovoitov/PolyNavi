@@ -494,12 +494,6 @@
     <AndroidResource Include="Resources\drawable\bg_edittext.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\ic_edittext_from.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\ic_edittext_to.xml" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\drawable-xxhdpi\bg_mainbuilding.png" />
   </ItemGroup>
   <ItemGroup>

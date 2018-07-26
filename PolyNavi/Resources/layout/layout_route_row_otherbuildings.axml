@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/imageview_route_otherbuildings"
         android:layout_alignParentLeft="true"
-        android:layout_margin="16dp" />
+        android:layout_margin="@dimen/margin_route_row_otherbuildings_image" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -21,7 +21,7 @@
         android:layout_alignBottom="@+id/imageview_route_otherbuildings" />
     <View
         android:layout_width="wrap_content"
-        android:layout_height="1dp"
+        android:layout_height="@dimen/size_divider"
         android:id="@+id/divider_route_row_otherbuildings"
         android:background="@android:color/darker_gray"
         android:visibility="visible"

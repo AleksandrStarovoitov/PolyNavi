@@ -1,20 +1,132 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <resources>
-  <dimen name="cardMarginLeftRight">12dp</dimen>
-  <dimen name="cardMarginTop">5dp</dimen>
-  <dimen name="cardMarginBottom">15dp</dimen>
+  <!--activity_authorization-->
+  <dimen name="size_auth_circle_image">140dp</dimen>
+  <dimen name="margintop_auth_image">55dp</dimen>
+  <dimen name="marginleft_auth_edittexttitle">20dp</dimen>
+  <dimen name="margintop_auth_edittexttitle">35dp</dimen>
+  <dimen name="margintop_auth_polynavi">15dp</dimen>
+  <dimen name="margintop_auth_entergroup">15dp</dimen>
+  <dimen name="marginlr_auth_edittext">15dp</dimen>
+  <dimen name="margin_auth_gobutton">35dp</dimen>
+  <dimen name="margintop_auth_update">20dp</dimen>
+  <dimen name="marginleft_auth_progressbar">15dp</dimen>
+  <dimen name="size_auth_progressbar">55dp</dimen>
   
-  <dimen name="cardTitleMarginLeft">10dp</dimen>
+  <!--activity_main-->
+  <dimen name="margintop_main_navview">-25dp</dimen>
+
+  <!--activity_welcome-->
+  <dimen name="size_welcome_indicator">8dp</dimen>
+  <dimen name="padding_welcome_frame">15dp</dimen>
+  <dimen name="marginright_welcome_indicator">12dp</dimen>
   
-  <dimen name="cardTextMarginTop">5dp</dimen>
-  <dimen name="cardTextMarginBottom">15dp</dimen>
-  <dimen name="cardInnerTextMarginLeft">10dp</dimen>
-  <dimen name="cardInnerTextMarginTop">5dp</dimen>
-  <dimen name="cardOuterTextMargin">10dp</dimen>
-  <dimen name="cardOuterTextMarginLeftRight">10dp</dimen>
+  <!--fragment_about-->
+  <dimen name="size_about_circle_image">140dp</dimen>
+  <dimen name="margin_about_frame_outer">15dp</dimen>
+  <dimen name="padding_about_frame_inner">5dp</dimen>
+  <dimen name="margin_about_frame_image">15dp</dimen>
+  <dimen name="margin_about_contacts_outer">25dp</dimen>
+  <dimen name="margin_about_contacts_inner">5dp</dimen>
+  
+  <dimen name="textsize_about_frame_title">16sp</dimen>
+  <dimen name="textsize_about_frame_summary">15sp</dimen>
+  <dimen name="textsize_about_contacts_title">21sp</dimen>
+  <dimen name="textsize_about_contacts_entry">18sp</dimen>
+  
+  <!--fragment_error-->
+  <dimen name="size_error_image">140dp</dimen>
+  <dimen name="margintop_error_image">80dp</dimen>
+  <dimen name="margintop_error_title">15dp</dimen>
+  <dimen name="margintop_error_summary">20dp</dimen>
+  
+  <!--appbar (mainbuilding and map_buildings)-->
+  <dimen name="height_appbar">150dp</dimen>
+  <dimen name="marginleft_appbar_image_from">15dp</dimen>  
+  <dimen name="marginright_appbar_image_from">10dp</dimen>  
+  <dimen name="margintop_appbar_image_from">14dp</dimen>
+  <dimen name="margintop_appbar_image_to">15dp</dimen>
+  <dimen name="marginright_appbar_input_from">15dp</dimen>
+  
+  <!--fragment_map_buildings-->
+  <dimen name="width_map_buildings_button_currentlocation">50dp</dimen>
+  <dimen name="margin_map_buildings_button_currentlocation">5dp</dimen>
+  
+  <!--fragment_schedule-->
+  <dimen name="elevation_schedule_tablayout">6dp</dimen>
+  
+  <!--fragment_week_schedule-->
+  <dimen name="margintop_week_schedule_layout">150dp</dimen>
+  
+  <!--fragment_welcome_pager-->
+  <dimen name="paddingbottom_welcome_pager_imagelayout">15dp</dimen>
+  <dimen name="size_welcome_pager_image">220dp</dimen>
+  <dimen name="margintop_welcome_pager_image">100dp</dimen>
+  <dimen name="margin_welcome_pager_textlayout">30dp</dimen>
+  <dimen name="margintop_welcome_pager_header">10dp</dimen>
+  <dimen name="margintop_welcome_pager_description">40dp</dimen>
+  <dimen name="height_welcome_pager_descriptionlayout">125dp</dimen>
+  
+  <dimen name="textsize_welcome_pager_header">27sp</dimen>
+  <dimen name="textsize_welcome_pager_description">23sp</dimen>
+  
+  <!--layout_card_row_lesson_schedule-->
+  <dimen name="margintop_card_row_lesson_schedule_outer">5dp</dimen>
+  <dimen name="marginbottom_card_row_lesson_schedule">15dp</dimen>
+  <dimen name="marginleft_card_row_lesson_schedule_inner">10dp</dimen>
+  <dimen name="margintop_card_row_lesson_schedule_inner">5dp</dimen>
+  <dimen name="margin_card_row_lesson_schedule_outer">10dp</dimen>
+  <dimen name="marginlr_card_row_lesson_schedule_outer">10dp</dimen>
+  
+  <!--layout_card_row_title_schedule-->
+  <dimen name="marginleft_card_row_title_schedule">10dp</dimen>
+  
+  <!--layout_card_schedule-->
+  <dimen name="marginlr_card_schedule">12dp</dimen>
+  <dimen name="margintop_card_schedule">5dp</dimen>
+  <dimen name="marginbottom_card_schedule">15dp</dimen>
 
-  <dimen name="icon_size">22dp</dimen>
+  <!--layout_empty_schedule_error-->
+  <dimen name="margintop_empty_schedule_error_image">150dp</dimen>
+  <dimen name="height_empty_schedule_error_text">50dp</dimen>
+  <dimen name="margintop_empty_schedule_error_text">15dp</dimen>
+  <dimen name="marginright_empty_schedule_error_text">30dp</dimen>
+  <dimen name="marginleft_empty_schedule_error_text">30dp</dimen>
+  
+  <!--layout_navheader_main-->
+  <dimen name="height_navheader_main_layout">217dp</dimen>
+  <dimen name="padding_navheader_main_layout">16dp</dimen>
+  <dimen name="marginbottom_navheader_main_text">50dp</dimen>
+  
+  <!--layout_no_connection-->
+  <dimen name="margintop_no_connection_image">150dp</dimen>
+  <dimen name="height_no_connection_text">50dp</dimen>
+  <dimen name="margintop_no_connection_text">15dp</dimen>
+  <dimen name="marginright_no_connection_text">30dp</dimen>
+  <dimen name="marginleft_no_connection_text">30dp</dimen>
+  <dimen name="height_no_connection_update_layout">40dp</dimen>
+  <dimen name="marginright_no_connection_update_text">5dp</dimen>
+  <dimen name="margintop_no_connection_update_image">5dp</dimen>
 
-  <dimen name="activity_horizontal_margin">64dp</dimen>
-  <dimen name="activity_margin_half">8dp</dimen>
+  <!--layout_route_row_mainbuilding-->
+  <dimen name="margin_route_row_mainbuilding_image">15dp</dimen>
+
+  <!--layout_route_row_otherbuildings-->
+  <dimen name="margin_route_row_otherbuildings_image">16dp</dimen>
+
+  <!--preference_dialog_autocomplete-->
+  <dimen name="margin_pref_dialog_autocomplete_textview">20dp</dimen>
+  <dimen name="size_pref_dialog_autocomplete_frame">45dp</dimen>
+  <dimen name="marginrtb_pref_dialog_autocomplete_frame">20dp</dimen>
+  <dimen name="size_pref_dialog_autocomplete_image">40dp</dimen>
+
+  <!--Margins-->
+  <dimen name="margin_small">15dp</dimen>
+  <dimen name="margin_medium">25dp</dimen>
+  <dimen name="margin_fab">16dp</dimen>
+  
+  <!--Sizes-->
+  <dimen name="size_divider">1dp</dimen>
+  <dimen name="size_fab_small">50dp</dimen>
+  
 </resources>

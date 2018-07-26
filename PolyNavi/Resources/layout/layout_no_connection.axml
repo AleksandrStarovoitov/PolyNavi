@@ -13,49 +13,41 @@
         android:layout_height="wrap_content"
         android:id="@+id/imageview_no_connection"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="150dp" />
+        android:layout_marginTop="@dimen/margintop_no_connection_image" />
     <TextView
         android:text="@string/no_connection_title"
         android:textAppearance="@style/NoConnectionTitle"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="@dimen/height_no_connection_text"
         android:id="@+id/textview_no_connection_title"
         android:gravity="center_horizontal"
         android:layout_gravity="center_horizontal"
         android:layout_below="@+id/imageview_no_connection"
-        android:layout_marginTop="15dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginLeft="30dp"
+        android:layout_marginTop="@dimen/margintop_no_connection_text"
+        android:layout_marginRight="@dimen/marginright_no_connection_text"
+        android:layout_marginLeft="@dimen/marginleft_no_connection_text"
         app:autoSizeTextType="uniform" />
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/height_no_connection_update_layout"
         android:minWidth="25px"
         android:minHeight="25px"
         android:layout_below="@+id/textview_no_connection_title"
-        android:layout_marginTop="15dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginLeft="30dp"
         android:layout_centerHorizontal="true">
         <TextView
             android:text="@string/no_connection_tap"
             android:textAppearance="@style/ScheduleTitleDate"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:id="@+id/textview_no_connection_tap"
-            android:layout_marginRight="5dp"
-            android:layout_toLeftOf="@+id/imageview_no_connection"
-            android:layout_alignBaseline="@+id/imageview_no"
-            android:gravity="center_vertical"
-            android:maxLines="1"
-            app:autoSizeTextType="uniform" />
+            android:layout_marginRight="@dimen/marginright_no_connection_update_text"
+            android:maxLines="1" />
         <ImageView
             android:src="@drawable/baseline_refresh_24"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/imageview_no_connection"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginTop="3dp" />
-    </RelativeLayout>
+            android:layout_marginTop="@dimen/margintop_no_connection_update_image" />
+    </LinearLayout>
 </RelativeLayout>

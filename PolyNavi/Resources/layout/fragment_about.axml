@@ -13,11 +13,11 @@
         android:id="@+id/relativelayout_about">
         <ImageView
             android:src="@drawable/logo_about"
-            android:layout_width="140dp"
-            android:layout_height="140dp"
+            android:layout_width="@dimen/size_about_circle_image"
+            android:layout_height="@dimen/size_about_circle_image"
             android:id="@+id/imageview_logo_about"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="25dp" />
+            android:layout_marginTop="@dimen/margin_medium" />
         <LinearLayout
             android:orientation="horizontal"
             android:minWidth="25px"
@@ -27,7 +27,7 @@
             android:layout_centerHorizontal="true"
             android:id="@+id/linearlayout_polynavi_about"
             android:layout_below="@+id/imageview_logo_about"
-            android:layout_marginTop="15dp">
+            android:layout_marginTop="@dimen/margin_small">
             <TextView
                 android:id="@+id/textview_about_poly"
                 android:text="@string/poly"
@@ -47,9 +47,9 @@
             android:id="@+id/framelayout_email_about"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginLeft="15dp"
+            android:layout_marginTop="@dimen/margin_about_frame_outer"
+            android:layout_marginRight="@dimen/margin_about_frame_outer"
+            android:layout_marginLeft="@dimen/margin_about_frame_outer"
             android:background="@drawable/shape_border_round"
             android:layout_below="@+id/linearlayout_polynavi_about">
             <LinearLayout
@@ -57,12 +57,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:padding="5dp">
+                android:padding="@dimen/padding_about_frame_inner">
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/baseline_email_black_24dp"
-                    android:layout_margin="15dp" />
+                    android:layout_margin="@dimen/margin_about_frame_image" />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -73,13 +73,13 @@
                         android:layout_height="wrap_content"
                         android:text="@string/about_email_title"
                         android:textColor="@color/colorBlack"
-                        android:textSize="16sp" />
+                        android:textSize="@dimen/textsize_about_frame_title" />
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/about_email_address"
                         android:textColor="@color/colorBlackWithTransparency"
-                        android:textSize="15sp" />
+                        android:textSize="@dimen/textsize_about_frame_summary" />
                 </LinearLayout>
             </LinearLayout>
         </FrameLayout>
@@ -87,9 +87,9 @@
             android:id="@+id/framelayout_rate_about"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginLeft="15dp"
+            android:layout_marginTop="@dimen/margin_about_frame_outer"
+            android:layout_marginRight="@dimen/margin_about_frame_outer"
+            android:layout_marginLeft="@dimen/margin_about_frame_outer"
             android:background="@drawable/shape_border_round"
             android:layout_below="@+id/framelayout_email_about">
             <LinearLayout
@@ -97,12 +97,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:padding="5dp">
+                android:padding="@dimen/padding_about_frame_inner">
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/baseline_star_rate_black_24dp"
-                    android:layout_margin="15dp" />
+                    android:layout_margin="@dimen/margin_about_frame_image" />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -113,13 +113,13 @@
                         android:layout_height="wrap_content"
                         android:text="@string/about_rate_title"
                         android:textColor="@color/colorBlack"
-                        android:textSize="16sp" />
+                        android:textSize="@dimen/textsize_about_frame_title" />
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/about_rate_subtitle"
                         android:textColor="@color/colorBlackWithTransparency"
-                        android:textSize="15sp" />
+                        android:textSize="@dimen/textsize_about_frame_summary" />
                 </LinearLayout>
             </LinearLayout>
         </FrameLayout>
@@ -127,9 +127,9 @@
             android:id="@+id/framelayout_bitbucket_about"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginLeft="15dp"
+            android:layout_marginTop="@dimen/margin_about_frame_outer"
+            android:layout_marginRight="@dimen/margin_about_frame_outer"
+            android:layout_marginLeft="@dimen/margin_about_frame_outer"
             android:background="@drawable/shape_border_round"
             android:layout_below="@+id/framelayout_rate_about">
             <LinearLayout
@@ -137,12 +137,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:padding="5dp">
+                android:padding="@dimen/padding_about_frame_inner">
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/baseline_bitbucket_black_24dp"
-                    android:layout_margin="15dp" />
+                    android:layout_margin="@dimen/margin_about_frame_image" />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -153,13 +153,13 @@
                         android:layout_height="wrap_content"
                         android:text="@string/about_bitbucket_title"
                         android:textColor="@color/colorBlack"
-                        android:textSize="16sp" />
+                        android:textSize="@dimen/textsize_about_frame_title" />
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/about_bitbucket_subtitle"
                         android:textColor="@color/colorBlackWithTransparency"
-                        android:textSize="15sp" />
+                        android:textSize="@dimen/textsize_about_frame_summary" />
                 </LinearLayout>
             </LinearLayout>
         </FrameLayout>
@@ -167,9 +167,9 @@
             android:id="@+id/framelayout_donate_about"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginLeft="15dp"
+            android:layout_marginTop="@dimen/margin_about_frame_outer"
+            android:layout_marginRight="@dimen/margin_about_frame_outer"
+            android:layout_marginLeft="@dimen/margin_about_frame_outer"
             android:background="@drawable/shape_border_round"
             android:layout_below="@+id/framelayout_bitbucket_about">
             <LinearLayout
@@ -177,12 +177,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:padding="5dp">
+                android:padding="@dimen/padding_about_frame_inner">
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/baseline_monetization_on_black_24dp"
-                    android:layout_margin="15dp" />
+                    android:layout_margin="@dimen/margin_about_frame_image" />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -193,13 +193,13 @@
                         android:layout_height="wrap_content"
                         android:text="@string/about_donate_title"
                         android:textColor="@color/colorBlack"
-                        android:textSize="16sp" />
+                        android:textSize="@dimen/textsize_about_frame_title" />
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/about_donate_subtitle"
                         android:textColor="@color/colorBlackWithTransparency"
-                        android:textSize="15sp" />
+                        android:textSize="@dimen/textsize_about_frame_summary" />
                 </LinearLayout>
             </LinearLayout>
         </FrameLayout>
@@ -207,9 +207,9 @@
             android:id="@+id/framelayout_copyright_about"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginLeft="15dp"
+            android:layout_marginTop="@dimen/margin_about_frame_outer"
+            android:layout_marginRight="@dimen/margin_about_frame_outer"
+            android:layout_marginLeft="@dimen/margin_about_frame_outer"
             android:background="@drawable/shape_border_round"
             android:layout_below="@+id/framelayout_donate_about">
             <LinearLayout
@@ -217,12 +217,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:padding="5dp">
+                android:padding="@dimen/padding_about_frame_inner">
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/baseline_copyright_black_24dp"
-                    android:layout_margin="15dp" />
+                    android:layout_margin="@dimen/margin_about_frame_image" />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -233,13 +233,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/about_copyright_title"
                         android:textColor="@color/colorBlack"
-                        android:textSize="16sp" />
-                <!--<TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/about_bitbucket_subtitle"
-            android:textColor="@color/colorBlackWithTransparency"
-            android:textSize="16sp" />-->
+                        android:textSize="@dimen/textsize_about_frame_title" />
                 </LinearLayout>
             </LinearLayout>
         </FrameLayout>
@@ -250,10 +244,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/framelayout_copyright_about"
-            android:layout_marginTop="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginLeft="15dp"
-            android:padding="10dp">
+            android:layout_margin="@dimen/margin_about_contacts_outer">
             <TextView
                 android:id="@+id/textview_contacts_title_about"
                 android:layout_width="wrap_content"
@@ -261,25 +252,25 @@
                 android:layout_centerHorizontal="true"
                 android:text="@string/about_contacts_title"
                 android:textColor="@color/colorBlack"
-                android:textSize="22sp" />
+                android:textSize="@dimen/textsize_about_contacts_title" />
             <TextView
                 android:id="@+id/textview_contacts_sasha_link_about"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/about_contacts_sasha_link"
                 android:textColor="@color/colorBlack"
-                android:textSize="18sp"
+                android:textSize="@dimen/textsize_about_contacts_entry"
                 android:layout_below="@+id/textview_contacts_title_about"
-                android:layout_marginTop="5dp" />
+                android:layout_marginTop="@dimen/margin_about_contacts_inner" />
             <TextView
                 android:id="@+id/textview_contacts_kirill_link_about"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/about_contacts_kirill_link"
                 android:textColor="@color/colorBlack"
-                android:textSize="18sp"
+                android:textSize="@dimen/textsize_about_contacts_entry"
                 android:layout_below="@+id/textview_contacts_sasha_link_about"
-                android:layout_marginTop="5dp" />
+                android:layout_marginTop="@dimen/margin_about_contacts_inner" />
         </RelativeLayout>
     </RelativeLayout>
 </ScrollView>

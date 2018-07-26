@@ -13,17 +13,17 @@
         android:layout_height="wrap_content"
         android:id="@+id/imageview_empty_schedule_error"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="150dp" />
+        android:layout_marginTop="@dimen/margintop_empty_schedule_error_image" />
     <TextView
         android:textAppearance="@style/NoConnectionTitle"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="@dimen/height_empty_schedule_error_text"
         android:id="@+id/textview_empty_schedule_error_title"
         android:gravity="center_horizontal"
         android:layout_gravity="center_horizontal"
         android:layout_below="@+id/imageview_empty_schedule_error"
-        android:layout_marginTop="15dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginLeft="30dp"
+        android:layout_marginTop="@dimen/margintop_empty_schedule_error_text"
+        android:layout_marginRight="@dimen/marginright_empty_schedule_error_text"
+        android:layout_marginLeft="@dimen/marginleft_empty_schedule_error_text"
         app:autoSizeTextType="uniform" />
 </RelativeLayout>

@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/toolbar"
         android:background="?attr/colorPrimary"
-        android:elevation="6dp"
+        android:elevation="@dimen/elevation_schedule_tablayout"
         android:minHeight="?attr/actionBarSize"
         android:theme="@style/MyAppTheme" />
     <android.support.v4.view.ViewPager

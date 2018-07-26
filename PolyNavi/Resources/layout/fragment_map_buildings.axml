@@ -20,11 +20,11 @@
     </FrameLayout>
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_location_map_buildings"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="@dimen/size_fab_small"
+        android:layout_height="@dimen/size_fab_small"
         android:src="@drawable/baseline_near_me_black_24"
         app:backgroundTint="@color/button_floors"
-        android:layout_margin="16dp"
+        android:layout_margin="@dimen/margin_fab"
         android:scaleType="center"
         android:clickable="true"
         app:layout_anchor="@+id/frame_map_buildings"
@@ -34,14 +34,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_done_black_24dp"
-        android:layout_margin="16dp"
+        android:layout_margin="@dimen/margin_fab"
         android:clickable="true"
         app:layout_anchor="@+id/search_frame_map_buildings"
         app:layout_anchorGravity="bottom|right|end" />
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar_map_buildings"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="@dimen/height_appbar"
         android:theme="@style/MyAppTheme">
         <RelativeLayout
             android:minWidth="25px"
@@ -56,9 +56,9 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/imageview_notfixed_map"
                 android:layout_alignParentLeft="true"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="14dp" />
+                android:layout_marginLeft="@dimen/marginleft_appbar_image_from"
+                android:layout_marginRight="@dimen/marginright_appbar_image_from"
+                android:layout_marginTop="@dimen/margintop_appbar_image_from" />
             <ImageView
                 android:src="@drawable/ic_gps_fixed_black_24dp"
                 android:layout_width="wrap_content"
@@ -67,12 +67,12 @@
                 android:layout_alignLeft="@+id/imageview_notfixed_map"
                 android:layout_alignRight="@+id/imageview_notfixed_map"
                 android:layout_alignTop="@+id/textinputlayout_to_map_buildings"
-                android:layout_marginTop="15dp" />
+                android:layout_marginTop="@dimen/margintop_appbar_image_to" />
             <RelativeLayout
                 android:id="@+id/frame_from_map_buildings"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
-                android:layout_marginRight="15dp"
+                android:layout_marginRight="@dimen/marginright_appbar_input_from"
                 android:layout_toRightOf="@+id/imageview_notfixed_map">
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/textinputlayout_from_map_buildings"
@@ -88,7 +88,7 @@
                 <ImageButton
                     android:id="@+id/imagebutton_currentlocation_map_buildings"
                     style="@style/Widget.AppCompat.Button.Borderless"
-                    android:layout_width="50dp"
+                    android:layout_width="@dimen/width_map_buildings_button_currentlocation"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:src="@drawable/baseline_near_me_black_24"

@@ -10,10 +10,10 @@
     card_view:cardMaxElevation="2dp"
     card_view:cardUseCompatPadding="true"
     card_view:cardPreventCornerOverlap="true"
-    android:layout_marginLeft="@dimen/cardMarginLeftRight"
-    android:layout_marginRight="@dimen/cardMarginLeftRight"
-    android:layout_marginBottom="@dimen/cardMarginBottom"
-    android:layout_marginTop="@dimen/cardMarginTop">
+    android:layout_marginLeft="@dimen/marginlr_card_schedule"
+    android:layout_marginRight="@dimen/marginlr_card_schedule"
+    android:layout_marginBottom="@dimen/marginbottom_card_schedule"
+    android:layout_marginTop="@dimen/margintop_card_schedule">
     <android.support.v7.widget.RecyclerView
         android:minWidth="25px"
         android:minHeight="25px"

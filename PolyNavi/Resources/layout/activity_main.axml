@@ -14,7 +14,6 @@
         android:minWidth="25px"
         android:minHeight="25px"
         android:fitsSystemWindows="true">
-    <!-- Layout to contain contents of main body of screen (drawer will slide over this) -->
         <LinearLayout
             android:id="@+id/linearlayout_main"
             android:layout_width="match_parent"
@@ -27,8 +26,6 @@
                 android:minHeight="?attr/actionBarSize"
                 android:background="?attr/colorPrimary"
                 android:theme="@style/MyAppTheme" />
-        <!--android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />-->
             <FrameLayout
                 android:id="@+id/contentframe_main"
                 android:layout_width="match_parent"
@@ -36,9 +33,8 @@
                 android:minWidth="25px"
                 android:minHeight="25px" />
         </LinearLayout>
-    <!-- Container for contents of drawer - use NavigationView to make configuration easier -->
         <android.support.design.widget.NavigationView
-            android:layout_marginTop="-25dp"
+            android:layout_marginTop="@dimen/margintop_main_navview"
             android:fitsSystemWindows="true"
             android:id="@+id/navview_main"
             android:layout_width="wrap_content"
