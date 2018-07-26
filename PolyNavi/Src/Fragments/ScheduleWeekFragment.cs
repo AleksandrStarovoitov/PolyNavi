@@ -12,7 +12,6 @@ using Android.Views;
 using Android.Widget;
 using Android.Support.V4.App;
 using Android.Support.V7.Widget;
-using HtmlAgilityPack;
 using Android.Support.V4.Widget;
 using static Android.Support.V4.Widget.SwipeRefreshLayout;
 using PolyNaviLib.BL;
