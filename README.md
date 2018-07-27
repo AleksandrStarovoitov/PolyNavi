@@ -1,3 +1,6 @@
+# POLYNAVI
+POLYNAVI - Мобильное приложение - навигатор для Санкт-Петербургского Политехнического Университета им. Петра Великого.
+
 ![menu](PolyNavi/Screenshots/Menu_1.png)
 ![buildings_1](PolyNavi/Screenshots/Buildings_1.png)
 ![buildings_2](PolyNavi/Screenshots/Buildings_2.png)

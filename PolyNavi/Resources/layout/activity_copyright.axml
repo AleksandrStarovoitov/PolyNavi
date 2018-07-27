@@ -4,12 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:minWidth="25px"
-    android:minHeight="25px">
-  <android.support.v7.widget.Toolbar
-      android:id="@+id/toolbar_copyright"
-      android:layout_width="match_parent"
-      android:layout_height="?attr/actionBarSize"
-      android:minHeight="?attr/actionBarSize"
-      android:background="?attr/colorPrimary"
-      android:theme="@style/MyAppTheme" />
+    android:minHeight="25px"
+    android:fitsSystemWindows="true">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_copyright"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:minHeight="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:theme="@style/MyAppTheme" />
+    <WebView
+        android:id="@+id/webview_copyright"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </LinearLayout>

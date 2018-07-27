@@ -643,6 +643,7 @@
     <AndroidResource Include="Resources\drawable-xxhdpi\first_floor.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\third_floor.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\second_floor.png" />
+    <AndroidAsset Include="Assets\copyright.html" />
     <Content Include="Screenshots\Buildings_2.png" />
     <Content Include="Screenshots\Buildings_1.png" />
     <Content Include="Screenshots\MainBuilding_1.png" />

@@ -10,6 +10,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Support.V7.App;
 using Android.Views;
+using Android.Webkit;
 using Android.Widget;
 
 namespace PolyNavi
@@ -26,14 +27,17 @@ namespace PolyNavi
 			SetTheme(Resource.Style.MyAppTheme);
 			base.OnCreate(savedInstanceState);
 
-			SetContentView(Resource.Layout.activity_map_routing);
+			SetContentView(Resource.Layout.activity_copyright);
 
-			var toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar_route);
+			var toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar_copyright);
 			SetSupportActionBar(toolbar);
 			SupportActionBar.SetDisplayHomeAsUpEnabled(true);
 
 			Title = GetString(Resource.String.title_copyright_activity);
-		}
+
+            var webView = FindViewById<WebView>(Resource.Id.webview_copyright);
+            webView.LoadUrl("file:///android_asset/copyright.html");
+        }
 
 		public override bool OnSupportNavigateUp()
 		{
