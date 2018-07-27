@@ -6,8 +6,10 @@ using System.Text;
 using Android.App;
 using Android.Content;
 using Android.Content.PM;
+using Android.Graphics;
 using Android.OS;
 using Android.Runtime;
+using Android.Support.V4.Content;
 using Android.Support.V7.App;
 using Android.Views;
 using Android.Webkit;
@@ -28,8 +30,11 @@ namespace PolyNavi
 			base.OnCreate(savedInstanceState);
 
 			SetContentView(Resource.Layout.activity_copyright);
+            Window.ClearFlags(WindowManagerFlags.TranslucentStatus);
+            Window.SetStatusBarColor(new Color(ContextCompat.GetColor(this, Resource.Color.color_primary_dark)));
 
-			var toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar_copyright);
+            var toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar_copyright);
+
 			SetSupportActionBar(toolbar);
 			SupportActionBar.SetDisplayHomeAsUpEnabled(true);
 

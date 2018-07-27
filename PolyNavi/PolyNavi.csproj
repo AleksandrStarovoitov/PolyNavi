@@ -273,7 +273,6 @@
     <AndroidResource Include="Resources\layout\layout_navheader_main.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\font\juliussansone_regular.ttf" />
     <AndroidResource Include="Resources\layout\fragment_mainbuilding.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
@@ -283,7 +282,6 @@
     <AndroidResource Include="Resources\layout\fragment_week_schedule.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\font\roboto_light.ttf" />
     <AndroidResource Include="Resources\layout\layout_card_schedule.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
@@ -323,6 +321,8 @@
     <AndroidResource Include="Resources\layout\fragment_error.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
+    <AndroidResource Include="Resources\font\juliussansone_regular.ttf" />
+    <AndroidResource Include="Resources\font\roboto_light.ttf" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\activity_main.axml">
