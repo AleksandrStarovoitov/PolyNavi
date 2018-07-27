@@ -56,19 +56,19 @@ namespace PolyNavi
 		{
 			var emailIntent = new Intent(Intent.ActionSend);
 			emailIntent.SetType("message/rfc822");
-			emailIntent.PutExtra(Intent.ExtraEmail, new string[] { "polynavi@yandex.ru" });
+			emailIntent.PutExtra(Intent.ExtraEmail, new string[] { GetString(Resource.String.about_email_address) });
 			StartActivity(emailIntent);
 		}
 
 		private void FrameRate_Click(object sender, EventArgs e)
 		{
-			var rateIntent = new Intent(Intent.ActionView, Android.Net.Uri.Parse("https://play.google.com/store/apps/details?id=ru.spbstu.spbpu"));
+			var rateIntent = new Intent(Intent.ActionView, Android.Net.Uri.Parse(GetString(Resource.String.about_rate_link)));
 			StartActivity(rateIntent);
 		}
 
 		private void FrameBitbucket_Click(object sender, EventArgs e)
 		{
-			var bitbucketIntent = new Intent(Intent.ActionView, Android.Net.Uri.Parse("https://bitbucket.org/product"));
+			var bitbucketIntent = new Intent(Intent.ActionView, Android.Net.Uri.Parse(GetString(Resource.String.about_bitbucket_link)));
 			StartActivity(bitbucketIntent);
 		}
 
