@@ -7,5 +7,5 @@
 	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 	<uses-feature android:name="android.hardware.location.gps" />
 	<uses-feature android:name="android.hardware.location.network" />
-	<application />
+	<application android:icon="@drawable/icon" />
 </manifest>
