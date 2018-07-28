@@ -60,7 +60,7 @@
   
   <!--fragment_welcome_pager-->
   <dimen name="paddingbottom_welcome_pager_imagelayout">15dp</dimen>
-  <dimen name="size_welcome_pager_image">220dp</dimen>
+  <dimen name="size_welcome_pager_image">200dp</dimen>
   <dimen name="margintop_welcome_pager_image">100dp</dimen>
   <dimen name="margin_welcome_pager_textlayout">30dp</dimen>
   <dimen name="margintop_welcome_pager_header">10dp</dimen>

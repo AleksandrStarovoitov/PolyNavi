@@ -32,6 +32,6 @@
             android:id="@+id/imageview_group_pref"
             android:layout_width="@dimen/size_pref_dialog_autocomplete_image"
             android:layout_height="@dimen/size_pref_dialog_autocomplete_image"
-            android:src="@drawable/baseline_refresh_24" />
+            android:src="@drawable/baseline_refresh" />
     </FrameLayout>
 </LinearLayout>

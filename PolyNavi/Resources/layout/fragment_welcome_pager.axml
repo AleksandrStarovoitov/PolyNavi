@@ -15,7 +15,7 @@
             android:layout_height="@dimen/size_welcome_pager_image"
             android:layout_marginTop="@dimen/margintop_welcome_pager_image"
             android:adjustViewBounds="true"
-            android:background="@drawable/ic_settings_black_24dp" />
+            android:background="@drawable/ic_settings_black" />
     </FrameLayout>
     <RelativeLayout
         android:layout_width="match_parent"

@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:id="@+id/relativelayout_route_row_mainbuilng">
     <ImageView
-        android:src="@drawable/ic_city_hall_black"
+        android:src="@drawable/ic_gz"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/imageview_route_mainbuilding"

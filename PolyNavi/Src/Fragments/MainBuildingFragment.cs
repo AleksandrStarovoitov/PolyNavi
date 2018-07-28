@@ -152,7 +152,7 @@ namespace PolyNavi
                 {
                     InputMethodManager imm = (InputMethodManager)Activity.BaseContext.GetSystemService(Context.InputMethodService);
                     imm.HideSoftInputFromWindow(View.WindowToken, 0);
-                    fab.SetImageResource(Resource.Drawable.ic_directions_black_24dp);
+                    fab.SetImageResource(Resource.Drawable.ic_directions_black);
                     appBar.SetExpanded(false);
 
                     //fabLayoutParams.AnchorId = frameLayout.Id;
@@ -201,12 +201,12 @@ namespace PolyNavi
 			else
 			if (fullyCollapsed)
 			{
-				fab.SetImageResource(Resource.Drawable.ic_done_black_24dp);
+				fab.SetImageResource(Resource.Drawable.ic_done_black);
 				appBar.SetExpanded(true);
 
 				//fabLayoutParams.AnchorId = relativeLayout.Id;
 				//fab.LayoutParameters = fabLayoutParams;
-				//fab.SetImageResource(Resource.Drawable.ic_done_black_24dp);
+				//fab.SetImageResource(Resource.Drawable.ic_done_black);
 			}
 		}
 
@@ -257,11 +257,11 @@ namespace PolyNavi
 			
 			if (fullyCollapsed)
 			{
-				fab.SetImageResource(Resource.Drawable.ic_directions_black_24dp);
+				fab.SetImageResource(Resource.Drawable.ic_directions_black);
 			}
 			else if (fullyExpanded)
 			{
-				fab.SetImageResource(Resource.Drawable.ic_done_black_24dp);
+				fab.SetImageResource(Resource.Drawable.ic_done_black);
 			}
 		}
 	}

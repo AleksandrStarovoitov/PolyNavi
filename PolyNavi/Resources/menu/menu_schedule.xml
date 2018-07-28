@@ -2,7 +2,7 @@
   xmlns:app="http://schemas.android.com/apk/res-auto">
   <item
       android:id="@+id/menu_schedule_datetimepicker"
-      android:icon="@drawable/ic_date_range_black_24dp"
+      android:icon="@drawable/ic_date_range_black"
       android:title="@string/choose_date"
       app:showAsAction="always" />
 </menu>

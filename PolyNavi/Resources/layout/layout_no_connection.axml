@@ -8,7 +8,7 @@
     android:minHeight="25px"
     android:id="@+id/layout_no_connection_clickable_zone">
     <ImageView
-        android:src="@drawable/baseline_signal_wifi_off_24"
+        android:src="@drawable/baseline_signal_wifi_off"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/imageview_no_connection"
@@ -44,7 +44,7 @@
             android:layout_marginRight="@dimen/marginright_no_connection_update_text"
             android:maxLines="1" />
         <ImageView
-            android:src="@drawable/baseline_refresh_24"
+            android:src="@drawable/baseline_refresh"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/imageview_no_connection"

@@ -67,7 +67,7 @@ namespace PolyNavi
 
 			SetSupportActionBar(toolbar);
 			SupportActionBar.SetDisplayHomeAsUpEnabled(true);
-			SupportActionBar.SetHomeAsUpIndicator(Resource.Drawable.ic_menu);
+			SupportActionBar.SetHomeAsUpIndicator(Resource.Drawable.baseline_menu_black);
 
 			navigationView = FindViewById<NavigationView>(Resource.Id.navview_main);
 			navigationView.NavigationItemSelected += NavViewItemSelected;

@@ -39,7 +39,7 @@ namespace PolyNavi
 		private const string RouterDbName = "polytech_map.routerdb";
 		private const string Marker_A_Name = "ic_marker_a.png";
 		private const string Marker_B_Name = "ic_marker_b.png";
-		private const string Marker_Location_name = "ic_gps_fixed_black_24dp.png";
+		private const string Marker_Location_name = "ic_gps_fixed_black.png";
 
 		private const int RequestCodeFrom = 1;
 		private const int RequestCodeTo = 2;
@@ -351,12 +351,12 @@ namespace PolyNavi
 			else
 			if (fullyCollapsed)
 			{
-				fab.SetImageResource(Resource.Drawable.ic_done_black_24dp);
+				fab.SetImageResource(Resource.Drawable.ic_done_black);
 				appBar.SetExpanded(true);
 
 				//fabLayoutParams.AnchorId = relativeLayout.Id;
 				//fab.LayoutParameters = fabLayoutParams;
-				//fab.SetImageResource(Resource.Drawable.ic_done_black_24dp);
+				//fab.SetImageResource(Resource.Drawable.ic_done_black);
 			}
 		}
 
@@ -379,11 +379,11 @@ namespace PolyNavi
 
 			if (fullyCollapsed)
 			{
-				fab.SetImageResource(Resource.Drawable.ic_directions_black_24dp);
+				fab.SetImageResource(Resource.Drawable.ic_directions_black);
 			}
 			else if (fullyExpanded)
 			{
-				fab.SetImageResource(Resource.Drawable.ic_done_black_24dp);
+				fab.SetImageResource(Resource.Drawable.ic_done_black);
 			}
 		}
 

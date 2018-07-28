@@ -61,7 +61,7 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/baseline_email_black_24dp"
+                    android:src="@drawable/baseline_email_black"
                     android:layout_margin="@dimen/margin_about_frame_image" />
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -101,7 +101,7 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/baseline_star_rate_black_24dp"
+                    android:src="@drawable/baseline_star_rate_black"
                     android:layout_margin="@dimen/margin_about_frame_image" />
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -141,7 +141,7 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/baseline_bitbucket_black_24dp"
+                    android:src="@drawable/baseline_bitbucket_black"
                     android:layout_margin="@dimen/margin_about_frame_image" />
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -181,7 +181,7 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/baseline_monetization_on_black_24dp"
+                    android:src="@drawable/baseline_monetization_on_black"
                     android:layout_margin="@dimen/margin_about_frame_image" />
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -221,7 +221,7 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/baseline_copyright_black_24dp"
+                    android:src="@drawable/baseline_copyright_black"
                     android:layout_margin="@dimen/margin_about_frame_image" />
                 <LinearLayout
                     android:layout_width="match_parent"
