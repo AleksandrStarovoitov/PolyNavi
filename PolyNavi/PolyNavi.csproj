@@ -555,6 +555,7 @@
     <AndroidResource Include="Resources\drawable-hdpi\baseline_bitbucket_black.png" />
     <AndroidResource Include="Resources\drawable-hdpi\baseline_copyright_black.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\ic_place_black.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\baseline_keyboard_arrow_down_black.png" />
     <Content Include="Screenshots\Buildings_2.png" />
     <Content Include="Screenshots\Buildings_1.png" />
     <Content Include="Screenshots\MainBuilding_1.png" />
