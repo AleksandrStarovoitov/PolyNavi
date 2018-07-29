@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
 using System.Linq;
+using System.Threading.Tasks;
 
 using SQLite;
 using SQLiteNetExtensionsAsync.Extensions;
@@ -11,7 +10,7 @@ using PolyNaviLib.BL;
 
 namespace PolyNaviLib.DL
 {
-	public class SQLiteDatabase
+    public class SQLiteDatabase
 	{
 		SQLiteAsyncConnection db;
 

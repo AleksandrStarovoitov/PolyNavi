@@ -1,17 +1,17 @@
-﻿using Android.Content;
-using Android.Graphics.Drawables;
-using Android.Views;
-using Android.Support.V4.Content;
-using Android.Graphics;
-using Android.Views.InputMethods;
-using System;
+﻿using System.Collections.Generic;
 using System.Linq;
+
+using Android.Content;
+using Android.Graphics;
+using Android.Graphics.Drawables;
+using Android.Support.V4.Content;
+using Android.Views;
+using Android.Views.InputMethods;
 using Android.Util;
-using System.Collections.Generic;
 
 namespace PolyNavi
 {
-	public class MainBuildingView : View
+    public class MainBuildingView : View
 	{
 		public enum Marker
 		{
@@ -29,20 +29,20 @@ namespace PolyNavi
 		Point markerPoint;
 
 		public static bool drawerState = false;
-		private static readonly int InvalidPointerId = -1;
+		static readonly int InvalidPointerId = -1;
 
-		private Drawable _plan;
-		//private readonly ScaleGestureDetector _scaleDetector;
-		private readonly GestureDetector _doubleTapListener;
+		Drawable _plan;
+		//readonly ScaleGestureDetector _scaleDetector;
+		readonly GestureDetector _doubleTapListener;
 
-		private int _activePointerId = -1;
-		private float _lastTouchX;
-		private float _lastTouchY;
-		private float _posX;
-		private float _posY;
-		private float _scaleFactor = 1.0f;
-		//private float _minScaleFactor = 0.9f;
-		//private float _maxScaleFactor = 5.0f;
+		int _activePointerId = -1;
+		float _lastTouchX;
+		float _lastTouchY;
+		float _posX;
+		float _posY;
+		float _scaleFactor = 1.0f;
+		//float _minScaleFactor = 0.9f;
+		//float _maxScaleFactor = 5.0f;
 
 		Android.Util.DisplayMetrics displ;
 		int widthInDp;
@@ -227,9 +227,9 @@ namespace PolyNavi
 
         private class MyDoubleTapListener : GestureDetector.SimpleOnGestureListener
         {
-            private MainBuildingView view;
-            private bool ZoomedIn = false;
-            private DisplayMetrics displ;
+            MainBuildingView view;
+            bool zoomedIn = false;
+            DisplayMetrics displ;
 
             public MyDoubleTapListener(MainBuildingView view, DisplayMetrics displ)
             {
@@ -247,18 +247,18 @@ namespace PolyNavi
 
         //private class MyScaleListener : ScaleGestureDetector.SimpleOnScaleGestureListener
         //{
-        //	private readonly MainBuildingView _view;
-        //	private float centerX;
-        //	private float centerY;
-        //	private float deltaX;
-        //	private float deltaY;
+        //	readonly MainBuildingView _view;
+        //	float centerX;
+        //	float centerY;
+        //	float deltaX;
+        //	float deltaY;
 
-        //	private float planScaleWidth;
-        //	private float planScaleHeight;
-        //	private float right;
-        //	private float left;
-        //	private float top;
-        //	private float bottom;
+        //	float planScaleWidth;
+        //	float planScaleHeight;
+        //	float right;
+        //	float left;
+        //	float top;
+        //	float bottom;
 
         //	public MyScaleListener(MainBuildingView view)
         //	{

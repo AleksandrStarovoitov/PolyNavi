@@ -1,13 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using PolyNaviLib.BL;
-using PolyNaviLib.SL;
-using PolyNaviLib.DL;
 using System.Globalization;
 using System.Linq;
 using System.Net.Http;
+using System.Threading.Tasks;
+
+using PolyNaviLib.BL;
+using PolyNaviLib.SL;
+using PolyNaviLib.DL;
+
 using Newtonsoft.Json;
 
 namespace PolyNaviLib.DAL

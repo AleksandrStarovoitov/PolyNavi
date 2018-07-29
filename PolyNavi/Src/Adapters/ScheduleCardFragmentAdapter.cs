@@ -1,33 +1,33 @@
-﻿using System.Linq;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 
+using Android.Content;
+using Android.Support.V7.Widget;
 using Android.Views;
 using Android.Widget;
-using Android.Support.V7.Widget;
-using System.Collections;
-using Android.Content;
-using System.Collections.Generic;
+
 using PolyNaviLib.BL;
-using System.Globalization;
 
 namespace PolyNavi
 {
-	public class TitleTag
+    public class TitleTag
 	{
 		public DateTime Date { get; set; }
 	}
 
 	public class ScheduleCardRowAdapter : RecyclerView.Adapter
 	{
-		private List<Object> mLessons;
-		private Context context;
-		private LayoutInflater layoutInflater;
+		List<Object> mLessons;
+		Context context;
+		LayoutInflater layoutInflater;
 		protected View scheduleView;
-		private ScheduleCardRowLessonViewHolder viewHolderLesson;
-		private ScheduleCardRowTitleViewHolder viewHolderTitle;
-		private RecyclerView.ViewHolder viewHolder;
-		private CultureInfo cultureInfo = new CultureInfo("ru-RU");
-		private const int TitleConst = 0, LessonConst = 1;
+		ScheduleCardRowLessonViewHolder viewHolderLesson;
+		ScheduleCardRowTitleViewHolder viewHolderTitle;
+		RecyclerView.ViewHolder viewHolder;
+		CultureInfo cultureInfo = new CultureInfo("ru-RU");
+		const int TitleConst = 0, LessonConst = 1;
 
 		public ScheduleCardRowAdapter(List<Object> lessons, DateTime date)
 		{
@@ -167,11 +167,11 @@ namespace PolyNavi
 
 	class ScheduleCardFragmentAdapter : RecyclerView.Adapter
 	{
-		private List<Day> mDays;
-		private Context context;
-		private LayoutInflater layoutInflater;
-		private View scheduleView;
-		private ScheduleCardFragmentAdapterViewHolder viewHolder;
+		List<Day> mDays;
+		Context context;
+		LayoutInflater layoutInflater;
+		View scheduleView;
+		ScheduleCardFragmentAdapterViewHolder viewHolder;
 		public RecyclerView recyclerViewSchedule;
 
 		public ScheduleCardFragmentAdapter(List<Day> days)

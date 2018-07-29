@@ -1,22 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using Android.Support.V4.App;
 
 namespace PolyNavi
 {
-	class ScheduleFragmentAdapter : FragmentStatePagerAdapter
+    class ScheduleFragmentAdapter : FragmentStatePagerAdapter
 	{
-		private int numOfTabs;
-		private ScheduleWeekFragment tab1;
-		private ScheduleWeekFragment tab2;
+		int numOfTabs;
+		ScheduleWeekFragment tab1;
+		ScheduleWeekFragment tab2;
 
         const int CurrentWeekTag = 0;
         const int NextWeekTag = 1;

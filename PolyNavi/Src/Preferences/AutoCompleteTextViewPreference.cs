@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+
 using Android.App;
 using Android.Content;
 using Android.Content.Res;
@@ -13,7 +13,6 @@ using Android.Support.V7.Preferences;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
-using Java.Lang;
 
 namespace PolyNavi
 {

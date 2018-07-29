@@ -1,17 +1,16 @@
-﻿    using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
+using System.Linq;
+using System.Net.Http;
 using System.Reflection;
+using System.Threading;
+using System.Threading.Tasks;
 
 using Android.App;
 using Android.Content;
 using Android.Content.Res;
-using Android.OS;
 using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using Android.Support.V7.Preferences;
 using Java.Util;
 
@@ -20,16 +19,13 @@ using Mapsui.Geometries;
 using Nito.AsyncEx;
 
 using PolyNaviLib.BL;
-using System.Threading.Tasks;
 using PolyNaviLib.SL;
-using System.Net.Http;
+
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System.Threading;
 
 namespace PolyNavi
 {
-	[Application(
+    [Application(
 		Label = "@string/app_name",
 		AllowBackup = true,
 		Theme = "@style/MyAppTheme.Launcher",
@@ -41,11 +37,11 @@ namespace PolyNavi
 		)]
 	public class MainApp : Application
 	{
-		private const string DatabaseFilename = "schedule.sqlite";
-        private readonly string groupLink = @"http://m.spbstu.ru/p/proxy.php?csurl=http://ruz.spbstu.ru/api/v1/ruz/search/groups";
+		const string DatabaseFilename = "schedule.sqlite";
+        readonly string groupLink = @"http://m.spbstu.ru/p/proxy.php?csurl=http://ruz.spbstu.ru/api/v1/ruz/search/groups";
 
-        private Locale locale = null;
-		private string language;
+        Locale locale = null;
+		string language;
 
 		public static MainApp Instance { get; private set; }
 

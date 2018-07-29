@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace PolyNaviLib.DAL
 {
-	[Serializable]
+    [Serializable]
 	public class NetworkException : Exception
 	{
 		public NetworkException() { }

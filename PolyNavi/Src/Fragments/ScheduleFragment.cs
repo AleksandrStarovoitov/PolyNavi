@@ -1,28 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 using Android.App;
-using Android.Content;
 using Android.OS;
-using Android.Runtime;
 using Android.Views;
 
-using Android.Support.V7.App;
-using Android.Support.V7.Widget;
-using Android.Support.V4.View;
 using Android.Support.Design.Widget;
+using Android.Support.V4.View;
+using Android.Support.V7.App;
 
 namespace PolyNavi
 {
-	[Activity(Label = "ScheduleSwipeActivity")]
+    [Activity(Label = "ScheduleSwipeActivity")]
 	public class ScheduleFragment : Android.Support.V4.App.Fragment
 	{
-		private View view;
-		private TabLayout tabLayout;
-		private ViewPager viewPager;
-		private ScheduleFragmentAdapter adapter;
+		View view;
+		TabLayout tabLayout;
+		ViewPager viewPager;
+		ScheduleFragmentAdapter adapter;
         DateTime? lastDate = null;
 
 		public override void OnCreate(Bundle savedInstanceState)

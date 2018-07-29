@@ -1,19 +1,20 @@
-﻿using Android.App;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+
+using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
 using Android.Support.Design.Widget;
+using Android.Support.V4.App;
 using Android.Views;
 using Android.Views.InputMethods;
 using Android.Widget;
-using System;
-using Android.Support.V4.App;
 
 using static Android.Widget.TextView;
 
 using Graph;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace PolyNavi
 {
@@ -21,18 +22,18 @@ namespace PolyNavi
 	{
 		GraphNode mapGraph;
 
-		private View view;
-		private AutoCompleteTextView editTextInputFrom, editTextInputTo;
-		private Android.Support.V4.App.FragmentTransaction fragmentTransaction;
-		private AppBarLayout appBar;
-		private FloatingActionButton fab;
-		private RelativeLayout relativeLayout;
-		private AppBarLayout.LayoutParams relativeLayoutParams;
-		private FrameLayout frameLayout;
-		private CoordinatorLayout.LayoutParams fabLayoutParams;
-		private FloatingActionButton buttonUp, buttonDown;
-		private List<MainBuildingMapFragment> fragments;
-		private int currentFloor = 1;
+		View view;
+		AutoCompleteTextView editTextInputFrom, editTextInputTo;
+		Android.Support.V4.App.FragmentTransaction fragmentTransaction;
+		AppBarLayout appBar;
+		FloatingActionButton fab;
+		RelativeLayout relativeLayout;
+		AppBarLayout.LayoutParams relativeLayoutParams;
+		FrameLayout frameLayout;
+		CoordinatorLayout.LayoutParams fabLayoutParams;
+		FloatingActionButton buttonUp, buttonDown;
+		List<MainBuildingMapFragment> fragments;
+		int currentFloor = 1;
 
 		static bool editTextFromIsFocused, editTextToIsFocused;
 

@@ -1,16 +1,12 @@
-﻿using System;
+﻿using System.Collections.Generic;
 
+using Android.Content;
 using Android.Views;
 using Android.Widget;
-using Android.Support.V7.Widget;
-using System.Collections;
-using Android.Content;
-using System.Collections.Generic;
-using PolyNaviLib.BL;
 
 namespace PolyNavi
 {
-	public class MainBuildingTag
+    public class MainBuildingTag
 	{
 		public string MainBuildingString { get; set; }
 
@@ -22,11 +18,11 @@ namespace PolyNavi
 
 	public class BuildingsAdapter : ArrayAdapter<object>
 	{
-		private Context context;
-		private TextView building;
-		private object item;
-		private int type;
-		private const int MainBuilding = 0, OtherBuildings = 1;
+		Context context;
+		TextView building;
+		object item;
+		int type;
+		const int MainBuilding = 0, OtherBuildings = 1;
 
 		public BuildingsAdapter(Context context, List<object> buildings) : base(context, 0, buildings)
 		{

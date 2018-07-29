@@ -1,33 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 using Android.Content;
 using Android.OS;
-using Android.Runtime;
-using Android.Util;
+using Android.Support.V4.App;
+using Android.Support.V4.Widget;
+using Android.Support.V7.Widget;
 using Android.Views;
 using Android.Widget;
-using Android.Support.V4.App;
-using Android.Support.V7.Widget;
-using Android.Support.V4.Widget;
+
 using static Android.Support.V4.Widget.SwipeRefreshLayout;
+
 using PolyNaviLib.BL;
 using PolyNaviLib.DAL;
-using System.Globalization;
 
 namespace PolyNavi
 {
-	public class ScheduleWeekFragment : Fragment, IOnRefreshListener
+    public class ScheduleWeekFragment : Fragment, IOnRefreshListener
 	{
-		private SwipeRefreshLayout mSwipeRefreshLayout;
-		private View view;
-		private List<Day> days;
-		private RecyclerView recyclerViewSchedule;
-		private ScheduleCardFragmentAdapter adapter;
-		private DateTime weekDate;
+		SwipeRefreshLayout mSwipeRefreshLayout;
+		View view;
+		List<Day> days;
+		RecyclerView recyclerViewSchedule;
+		ScheduleCardFragmentAdapter adapter;
+		DateTime weekDate;
         int weekTag;
         int dayOfYear;
 

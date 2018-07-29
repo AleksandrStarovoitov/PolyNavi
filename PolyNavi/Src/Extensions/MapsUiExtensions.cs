@@ -1,23 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
-
-using Mapsui.Geometries;
+﻿using Mapsui.Geometries;
 using Mapsui.Projection;
 
 using Itinero.LocalGeo;
 
 namespace PolyNavi
 {
-	public static class MapsUiExtensions
+    public static class MapsUiExtensions
 	{
 		public static Point ToLonLat(this Point point)
 		{

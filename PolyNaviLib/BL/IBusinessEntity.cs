@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-using SQLite;
-
-namespace PolyNaviLib.BL
+﻿namespace PolyNaviLib.BL
 {
-	public interface IBusinessEntity
+    public interface IBusinessEntity
 	{
 		int IDD { get; set; }
 	}

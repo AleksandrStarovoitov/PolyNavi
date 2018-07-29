@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace PolyNaviLib
 {
-	public static class ListExtensions
+    public static class ListExtensions
 	{
 		public static T First<T>(this List<T> self)
 		{

@@ -1,50 +1,34 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-
-using Nito.AsyncEx;
 
 using Android.App;
-using Android.Content;
+using Android.Content.PM;
 using Android.OS;
-using Android.Runtime;
 using Android.Support.Design.Widget;
 using Android.Support.V4.Widget;
 using Android.Support.V7.App;
-using Android.Support.V7.Preferences;
-using Android.Text;
 using Android.Views;
 using Android.Views.InputMethods;
-using Android.Widget;
-
-using PolyNaviLib.BL;
 
 using static Android.Support.V4.Widget.DrawerLayout;
-using Java.Util;
-using Android.Content.Res;
-using Android.Content.PM;
+
 
 namespace PolyNavi
 {
-	[Activity(
+    [Activity(
 		Label = "PolyNavi",
 		ScreenOrientation = ScreenOrientation.Portrait,
 		ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.ScreenSize)]
 	public class MainActivity : AppCompatActivity, IDrawerListener
 	{
-		private DrawerLayout drawerLayout;
-		private ActionBarDrawerToggle drawerToggle;
-		private Type fragmentClass = null;
-		private Android.Support.V4.App.Fragment fragment;
-		private Android.Support.V7.Widget.Toolbar toolbar;
-		private NavigationView navigationView;
-		private string startActivity;
-		private int startMenuItem;
-		private bool tapped = false;
+		DrawerLayout drawerLayout;
+		ActionBarDrawerToggle drawerToggle;
+		Type fragmentClass = null;
+		Android.Support.V4.App.Fragment fragment;
+		Android.Support.V7.Widget.Toolbar toolbar;
+		NavigationView navigationView;
+		string startActivity;
+		int startMenuItem;
+		bool tapped = false;
 
 		protected override void OnCreate(Bundle savedInstanceState)
 		{

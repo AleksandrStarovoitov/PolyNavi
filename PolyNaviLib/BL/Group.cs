@@ -1,7 +1,6 @@
-﻿using SQLiteNetExtensions.Attributes;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
+
+using SQLiteNetExtensions.Attributes;
 
 namespace PolyNaviLib.BL
 {

@@ -1,48 +1,44 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.IO;
 
 using Android.App;
 using Android.Content;
+using Android.Content.PM;
+using Android.Locations;
 using Android.OS;
 using Android.Runtime;
-using Android.Util;
+using Android.Support.Design.Widget;
+using Android.Support.V4.Content;
 using Android.Views;
 using Android.Widget;
-using Android.Support.Design.Widget;
 
-
+using Mapsui;
 using Mapsui.Geometries;
+using Mapsui.Layers;
+using Mapsui.Projection;
+using Mapsui.Providers;
+using Mapsui.Styles;
 using Mapsui.UI;
 using Mapsui.UI.Android;
 using Mapsui.Utilities;
-using Mapsui.Projection;
-using Mapsui.Layers;
-using Mapsui.Providers;
-using Mapsui.Styles;
-using Mapsui;
-using BruTile.Predefined;
 
 using Itinero;
 using Itinero.Profiles;
-using Android.Locations;
-using Android.Support.V4.Content;
-using Android.Content.PM;
 
 namespace PolyNavi
 {
-	// TODO Кеширование RouterDB чтобы не загружать ее при каждой загрузке фрагмента
-	public class MapBuildingsFragment : Android.Support.V4.App.Fragment, AppBarLayout.IOnOffsetChangedListener, ILocationListener
+    // TODO Кеширование RouterDB чтобы не загружать ее при каждой загрузке фрагмента
+    public class MapBuildingsFragment : Android.Support.V4.App.Fragment, AppBarLayout.IOnOffsetChangedListener, ILocationListener
 	{
-		private const string RouterDbName = "polytech_map.routerdb";
-		private const string Marker_A_Name = "ic_marker_a.png";
-		private const string Marker_B_Name = "ic_marker_b.png";
-		private const string Marker_Location_name = "ic_gps_fixed_black.png";
+		const string RouterDbName = "polytech_map.routerdb";
+		const string Marker_A_Name = "ic_marker_a.png";
+		const string Marker_B_Name = "ic_marker_b.png";
+		const string Marker_Location_name = "ic_gps_fixed_black.png";
 
-		private const int RequestCodeFrom = 1;
-		private const int RequestCodeTo = 2;
+		const int RequestCodeFrom = 1;
+		const int RequestCodeTo = 2;
 
 		readonly string[] PermissionsLocation =
 		{
@@ -51,24 +47,24 @@ namespace PolyNavi
 		};
 		const int RequestFineLocationId = 10;
 
-		private View view;
+		View view;
 
-		private RouterDb routerDb;
-		private Router router;
-		private Profile profile;
+		RouterDb routerDb;
+		Router router;
+		Profile profile;
 
-		private MapControl mapControl;
-		private Map map;
-		private ILayer routeLayer;
+		MapControl mapControl;
+		Map map;
+		ILayer routeLayer;
 
-		private EditText editTextInputFrom, editTextInputTo;
-		private AppBarLayout appBar;
-		private FloatingActionButton fab;
-		private FloatingActionButton buttonLocation;
-        private ImageButton buttonFromCurrentLocation;
+		EditText editTextInputFrom, editTextInputTo;
+		AppBarLayout appBar;
+		FloatingActionButton fab;
+		FloatingActionButton buttonLocation;
+        ImageButton buttonFromCurrentLocation;
 
-		private LocationManager locationManager;
-		private AnimatedPointsWithAutoUpdateLayer animatedLocation;
+		LocationManager locationManager;
+		AnimatedPointsWithAutoUpdateLayer animatedLocation;
 
 		public override void OnCreate(Bundle savedInstanceState)
 		{
@@ -409,7 +405,7 @@ namespace PolyNavi
 
 		private class AnimatedPointsWithAutoUpdateLayer : AnimatedPointLayer
 		{
-			private static IGeometry geometry;
+			static IGeometry geometry;
 
 			public AnimatedPointsWithAutoUpdateLayer()
 				: base(new DynamicMemoryProvider())
