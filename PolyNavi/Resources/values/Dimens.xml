@@ -14,7 +14,7 @@
   <dimen name="size_auth_progressbar">55dp</dimen>
   
   <!--activity_main-->
-  <dimen name="margintop_main_navview">-25dp</dimen>
+  <dimen name="margintop_main_navview">0dp</dimen>
 
   <!--activity_welcome-->
   <dimen name="size_welcome_indicator">8dp</dimen>
@@ -94,7 +94,7 @@
   <dimen name="marginleft_empty_schedule_error_text">30dp</dimen>
   
   <!--layout_navheader_main-->
-  <dimen name="height_navheader_main_layout">217dp</dimen>
+  <dimen name="height_navheader_main_layout">196dp</dimen>
   <dimen name="padding_navheader_main_layout">16dp</dimen>
   <dimen name="marginbottom_navheader_main_text">50dp</dimen>
   
@@ -125,8 +125,9 @@
   <dimen name="margin_medium">25dp</dimen>
   <dimen name="margin_fab">16dp</dimen>
   
-  <!--Sizes-->
+  <!--all-->
   <dimen name="size_divider">1dp</dimen>
   <dimen name="size_fab_small">50dp</dimen>
-  
+  <dimen name="width_nav_drawer">304dp</dimen>
+
 </resources>

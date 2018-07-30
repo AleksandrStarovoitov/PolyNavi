@@ -37,7 +37,7 @@
             android:layout_marginTop="@dimen/margintop_main_navview"
             android:fitsSystemWindows="true"
             android:id="@+id/navview_main"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/width_nav_drawer"
             android:layout_height="match_parent"
             android:layout_gravity="start"
             app:menu="@menu/menu_main"

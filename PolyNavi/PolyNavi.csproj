@@ -528,9 +528,6 @@
     <AndroidResource Include="Resources\drawable-xxhdpi\baseline_monetization_on_black.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\baseline_near_me_black.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\baseline_star_rate_black.png" />
-    <AndroidResource Include="Resources\drawable-xxhdpi\bg_navheader.png" />
-    <AndroidResource Include="Resources\drawable-xxhdpi\bg_splash.png" />
-    <AndroidResource Include="Resources\drawable-xxhdpi\first_floor.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\ic_date_range_black.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\ic_directions_black.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\ic_done_black.png" />
@@ -539,8 +536,6 @@
     <AndroidResource Include="Resources\drawable-xxhdpi\ic_settings_black.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\icon.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\logo_about.png" />
-    <AndroidResource Include="Resources\drawable-xxhdpi\second_floor.png" />
-    <AndroidResource Include="Resources\drawable-xxhdpi\third_floor.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\welcome_blueprint.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\welcome_calendar.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\welcome_route.png" />
@@ -556,6 +551,33 @@
     <AndroidResource Include="Resources\drawable-hdpi\baseline_copyright_black.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\ic_place_black.png" />
     <AndroidResource Include="Resources\drawable-mdpi\baseline_keyboard_arrow_down_black.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xxxhdpi\bg_navheader.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xxxhdpi\bg_splash.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xxxhdpi\first_floor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xxxhdpi\second_floor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xxxhdpi\third_floor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xxhdpi\bg_navheader.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xhdpi\bg_navheader.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-mdpi\bg_navheader.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-hdpi\bg_navheader.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

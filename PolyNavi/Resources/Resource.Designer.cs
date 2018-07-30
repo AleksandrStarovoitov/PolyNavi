@@ -2538,6 +2538,9 @@ namespace PolyNavi
 			// aapt resource value: 0x7f0800c5
 			public const int width_map_buildings_button_currentlocation = 2131230917;
 			
+			// aapt resource value: 0x7f0800f7
+			public const int width_nav_drawer = 2131230967;
+			
 			static Dimension()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
