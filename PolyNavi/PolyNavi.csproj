@@ -556,13 +556,6 @@
     <AndroidResource Include="Resources\drawable-hdpi\baseline_copyright_black.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\ic_place_black.png" />
     <AndroidResource Include="Resources\drawable-mdpi\baseline_keyboard_arrow_down_black.png" />
-    <Content Include="Screenshots\Buildings_2.png" />
-    <Content Include="Screenshots\Buildings_1.png" />
-    <Content Include="Screenshots\MainBuilding_1.png" />
-    <Content Include="Screenshots\MainBuilding_2.png" />
-    <Content Include="Screenshots\Menu_1.png" />
-    <Content Include="Screenshots\Schedule_1.png" />
-    <Content Include="Screenshots\Settings_1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
