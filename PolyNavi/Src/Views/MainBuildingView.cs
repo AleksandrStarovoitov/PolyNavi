@@ -45,8 +45,12 @@ namespace PolyNavi
 		//float _maxScaleFactor = 5.0f;
 
 		Android.Util.DisplayMetrics displ;
-		int widthInDp;
-		int heightInDp;
+
+		readonly int baseWidth = 3200;
+		readonly int baseHeight = 1800;
+
+		float widthScale, heightScale;
+		int imageWidth, imageHeight;
 
 		Context c;
 		InputMethodManager imm;
@@ -57,16 +61,21 @@ namespace PolyNavi
 			startPointPaint.SetStyle(Paint.Style.Fill); //TODO
 			c = context;
 			displ = Resources.DisplayMetrics;
-			widthInDp = ConvertPixelsToDp(displ.WidthPixels);
-			heightInDp = ConvertPixelsToDp(displ.HeightPixels);
 
-			//TODO исправить загрузку _plan чтобы он загружал файл произвольной величины
-			_plan = ContextCompat.GetDrawable(context, id);
-			_plan.SetBounds(0, 0, 3200, 1800);
+			_plan = ContextCompat.GetDrawable(Context, id);
+
+			imageWidth = _plan.IntrinsicWidth;
+			imageHeight = _plan.IntrinsicHeight;
+
+			widthScale = (float)imageWidth / baseWidth;
+			heightScale = (float)imageHeight / baseHeight;
+			routePaint.StrokeWidth = routePaint.StrokeWidth * widthScale;
+
+			_plan.SetBounds(0, 0, imageWidth, imageHeight);
 			//_scaleDetector = new ScaleGestureDetector(context, new MyScaleListener(this));
 			_doubleTapListener = new GestureDetector(context, new MyDoubleTapListener(this, displ));
 
-			imm = (InputMethodManager)c.ApplicationContext.GetSystemService(Context.InputMethodService);
+			imm = (InputMethodManager)c.GetSystemService(Context.InputMethodService);
 		}
 
 		private int ConvertPixelsToDp(float pixelValue)
@@ -107,8 +116,8 @@ namespace PolyNavi
                     _posX += deltaX;
                     _posY += deltaY;
                     
-					float planScaleWidth = 3200 * _scaleFactor;
-					float planScaleHeight = 1800 * _scaleFactor;
+					float planScaleWidth = imageWidth * _scaleFactor;
+					float planScaleHeight = imageHeight * _scaleFactor;
 
 					float right = _posX + planScaleWidth;
 					float left = _posX;
@@ -172,11 +181,11 @@ namespace PolyNavi
 			}
 			if (marker == Marker.Start)
 			{
-				canvas.DrawCircle(markerPoint.X, markerPoint.Y, 10.0f, startPointPaint);
+				canvas.DrawCircle(markerPoint.X, markerPoint.Y, 10.0f * widthScale, startPointPaint);
 			}
 			if (marker == Marker.End)
 			{
-				canvas.DrawRect(markerPoint.X - 10, markerPoint.Y - 10, markerPoint.X + 10, markerPoint.Y + 10, endPointPaint);
+				canvas.DrawRect(markerPoint.X - 10.0f * widthScale, markerPoint.Y - 10.0f * heightScale, markerPoint.X + 10.0f * widthScale, markerPoint.Y + 10.0f * heightScale, endPointPaint);
 			}
 			canvas.Restore();
 		}
@@ -184,6 +193,10 @@ namespace PolyNavi
 		public void SetMarker(Point point, Marker marker)
 		{
 			this.marker = marker;
+
+			point.X = (int)(point.X * widthScale);
+			point.Y = (int)(point.Y * heightScale);
+
 			markerPoint = point;
 		}
 
@@ -202,21 +215,21 @@ namespace PolyNavi
 			{
 				int segmentsCount = points.Count - 1;
 				route = new float[segmentsCount * 4];
-				route[0] = points[0].X;
-				route[1] = points[0].Y;
+				route[0] = points[0].X * widthScale;
+				route[1] = points[0].Y * heightScale;
 				int i;
 				int j;
 				for (i = 1, j = 2; i < points.Count - 1; ++i, j += 4)
 				{
-					route[j] = points[i].X;
-					route[j + 1] = points[i].Y;
-					route[j + 2] = points[i].X;
-					route[j + 3] = points[i].Y;
+					route[j] = points[i].X * widthScale;
+					route[j + 1] = points[i].Y * heightScale;
+					route[j + 2] = points[i].X * widthScale;
+					route[j + 3] = points[i].Y * heightScale;
 				}
-				route[j] = points[i].X;
-				route[j + 1] = points[i].Y;
+				route[j] = points[i].X * widthScale;
+				route[j + 1] = points[i].Y * heightScale;
 
-                if (r != null)
+				if (r != null)
                 {
                     r.AddRange(route.ToList());
                     route = new float[r.Count];
