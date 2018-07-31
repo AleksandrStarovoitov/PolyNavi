@@ -364,9 +364,6 @@
     <AndroidResource Include="Resources\values\Colors.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\bg_navheader.png" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\values\Dimens.xml" />
   </ItemGroup>
   <ItemGroup>
@@ -380,9 +377,6 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values-zh\Strings.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\bg_edittext.xml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\launch_screen.xml" />
@@ -438,10 +432,6 @@
     <AndroidResource Include="Resources\drawable-hdpi\ic_error.png" />
     <AndroidResource Include="Resources\drawable-mdpi\ic_error.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\ic_error.png" />
-    <AndroidResource Include="Resources\drawable-xxxhdpi\logo_about.png" />
-    <AndroidResource Include="Resources\drawable-xhdpi\logo_about.png" />
-    <AndroidResource Include="Resources\drawable-mdpi\logo_about.png" />
-    <AndroidResource Include="Resources\drawable-hdpi\logo_about.png" />
     <AndroidResource Include="Resources\drawable\baseline_empty_schedule.xml" />
     <AndroidResource Include="Resources\drawable\baseline_refresh.xml" />
     <AndroidResource Include="Resources\drawable\baseline_signal_wifi_off.xml" />
@@ -535,7 +525,6 @@
     <AndroidResource Include="Resources\drawable-xxhdpi\ic_gz.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\ic_settings_black.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\icon.png" />
-    <AndroidResource Include="Resources\drawable-xxhdpi\logo_about.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\welcome_blueprint.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\welcome_calendar.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\welcome_route.png" />
@@ -554,9 +543,6 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-xxxhdpi\bg_navheader.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxxhdpi\bg_splash.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-xxxhdpi\first_floor.png" />
@@ -623,6 +609,21 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-420dpi\first_floor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-hdpi\app_logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-mdpi\app_logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xhdpi\app_logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xxhdpi\app_logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xxxhdpi\app_logo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
