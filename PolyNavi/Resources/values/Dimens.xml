@@ -1,15 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <resources>
   <!--activity_authorization-->
-  <dimen name="size_auth_circle_image">140dp</dimen>
-  <dimen name="margintop_auth_image">55dp</dimen>
   <dimen name="marginleft_auth_edittexttitle">20dp</dimen>
-  <dimen name="margintop_auth_edittexttitle">35dp</dimen>
-  <dimen name="margintop_auth_polynavi">15dp</dimen>
-  <dimen name="margintop_auth_entergroup">15dp</dimen>
   <dimen name="marginlr_auth_edittext">15dp</dimen>
-  <dimen name="margin_auth_gobutton">35dp</dimen>
+  <dimen name="marginLR_auth_gobutton">35dp</dimen>
+  <dimen name="margintopTB_auth_gobutton">15dp</dimen>  
   <dimen name="margintop_auth_update">20dp</dimen>
+  <dimen name="marginbottom_auth_update">15dp</dimen>
   <dimen name="marginleft_auth_progressbar">15dp</dimen>
   <dimen name="size_auth_progressbar">55dp</dimen>
   
@@ -59,13 +56,11 @@
   <dimen name="margintop_week_schedule_layout">150dp</dimen>
   
   <!--fragment_welcome_pager-->
-  <dimen name="paddingbottom_welcome_pager_imagelayout">15dp</dimen>
-  <dimen name="size_welcome_pager_image">200dp</dimen>
-  <dimen name="margintop_welcome_pager_image">100dp</dimen>
-  <dimen name="margin_welcome_pager_textlayout">30dp</dimen>
-  <dimen name="margintop_welcome_pager_header">10dp</dimen>
-  <dimen name="margintop_welcome_pager_description">40dp</dimen>
-  <dimen name="height_welcome_pager_descriptionlayout">125dp</dimen>
+  <dimen name="size_welcome_pager_image">140dp</dimen>
+  <dimen name="margintop_welcome_pager_image">80dp</dimen>
+  <dimen name="margin_welcome_pager_textlayout">25dp</dimen>
+  <dimen name="marginBT_welcome_pager_layour_text">2dp</dimen>
+  <dimen name="height_welcome_pager_divider">0dp</dimen>
   
   <dimen name="textsize_welcome_pager_header">27sp</dimen>
   <dimen name="textsize_welcome_pager_description">23sp</dimen>
@@ -87,7 +82,7 @@
   <dimen name="marginbottom_card_schedule">10dp</dimen>
 
   <!--layout_empty_schedule_error-->
-  <dimen name="margintop_empty_schedule_error_image">150dp</dimen>
+  <dimen name="margintop_empty_schedule_error_image">100dp</dimen>
   <dimen name="height_empty_schedule_error_text">50dp</dimen>
   <dimen name="margintop_empty_schedule_error_text">15dp</dimen>
   <dimen name="marginright_empty_schedule_error_text">30dp</dimen>
@@ -99,7 +94,7 @@
   <dimen name="marginbottom_navheader_main_text">50dp</dimen>
   
   <!--layout_no_connection-->
-  <dimen name="margintop_no_connection_image">150dp</dimen>
+  <dimen name="margintop_no_connection_image">80dp</dimen>
   <dimen name="height_no_connection_text">50dp</dimen>
   <dimen name="margintop_no_connection_text">15dp</dimen>
   <dimen name="marginright_no_connection_text">30dp</dimen>

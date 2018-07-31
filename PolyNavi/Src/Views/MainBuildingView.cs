@@ -71,6 +71,11 @@ namespace PolyNavi
 			heightScale = (float)imageHeight / baseHeight;
 			routePaint.StrokeWidth = routePaint.StrokeWidth * widthScale;
 
+			if (displ.HeightPixels - imageHeight > 0 && displ.HeightPixels - imageHeight < 50)
+			{
+				_scaleFactor *= 0.9f;
+			}
+			
 			_plan.SetBounds(0, 0, imageWidth, imageHeight);
 			//_scaleDetector = new ScaleGestureDetector(context, new MyScaleListener(this));
 			_doubleTapListener = new GestureDetector(context, new MyDoubleTapListener(this, displ));

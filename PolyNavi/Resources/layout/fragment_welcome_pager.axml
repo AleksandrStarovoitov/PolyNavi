@@ -2,8 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/paddingbottom_welcome_pager_imagelayout">
+    android:layout_height="match_parent">
     <FrameLayout
         android:id="@+id/framelayout_welcome"
         android:layout_width="wrap_content"
@@ -13,38 +12,50 @@
             android:id="@+id/imageview_welcome_featureimage"
             android:layout_width="@dimen/size_welcome_pager_image"
             android:layout_height="@dimen/size_welcome_pager_image"
-            android:layout_marginTop="@dimen/margintop_welcome_pager_image"
-            android:adjustViewBounds="true"
-            android:background="@drawable/ic_settings_black" />
+            android:layout_marginTop="@dimen/margintop_welcome_pager_image" />
     </FrameLayout>
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
+        android:layout_height="match_parent"
         android:layout_below="@+id/framelayout_welcome"
-        android:layout_margin="@dimen/margin_welcome_pager_textlayout">
-        <TextView
-            android:id="@+id/textview_welcome_header"
-            style="@style/ScheduleTitleDayOfWeek"
-            android:textSize="@dimen/textsize_welcome_pager_header"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margintop_welcome_pager_header"
-            android:layout_alignParentTop="true"
-            android:textColor="@android:color/white" />
+        android:layout_marginRight="@dimen/margin_welcome_pager_textlayout"
+        android:layout_marginLeft="@dimen/margin_welcome_pager_textlayout"
+        android:layout_marginTop="@dimen/margin_welcome_pager_textlayout">
         <RelativeLayout
+            android:id="@+id/layout_welcome_pager_title"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/height_welcome_pager_descriptionlayout"
-            android:layout_alignParentBottom="true">
+            android:layout_height="match_parent"
+            android:layout_above="@+id/divider_welcome_pager"
+            android:layout_marginBottom="@dimen/marginBT_welcome_pager_layour_text">
+            <TextView
+                android:id="@+id/textview_welcome_header"
+                style="@style/ScheduleTitleDayOfWeek"
+                android:textSize="@dimen/textsize_welcome_pager_header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:layout_centerVertical="true" />
+        </RelativeLayout>
+        <View
+            android:id="@+id/divider_welcome_pager"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_welcome_pager_divider"
+            android:layout_centerInParent="true" />
+        <RelativeLayout
+            android:id="@+id/layout_welcome_description"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/divider_welcome_pager"
+            android:layout_marginTop="@dimen/marginBT_welcome_pager_layour_text">
             <TextView
                 android:id="@+id/textview_welcome_description"
                 style="@style/ScheduleTitleDate"
                 android:fontFamily="@font/roboto_light"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/textsize_welcome_pager_description"
-                android:layout_marginTop="@dimen/margintop_welcome_pager_description"
-                android:textColor="#FFFFFF" />
+                android:textColor="#FFFFFF"
+                android:layout_centerVertical="true" />
         </RelativeLayout>
     </RelativeLayout>
 </RelativeLayout>
