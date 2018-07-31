@@ -128,6 +128,6 @@
   <!--all-->
   <dimen name="size_divider">1dp</dimen>
   <dimen name="size_fab_small">50dp</dimen>
-  <dimen name="width_nav_drawer">304dp</dimen>
+  <dimen name="width_nav_drawer">280dp</dimen>
 
 </resources>
