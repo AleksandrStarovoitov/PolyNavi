@@ -83,8 +83,8 @@
   
   <!--layout_card_schedule-->
   <dimen name="marginlr_card_schedule">12dp</dimen>
-  <dimen name="margintop_card_schedule">5dp</dimen>
-  <dimen name="marginbottom_card_schedule">15dp</dimen>
+  <dimen name="margintop_card_schedule">10dp</dimen>
+  <dimen name="marginbottom_card_schedule">10dp</dimen>
 
   <!--layout_empty_schedule_error-->
   <dimen name="margintop_empty_schedule_error_image">150dp</dimen>
