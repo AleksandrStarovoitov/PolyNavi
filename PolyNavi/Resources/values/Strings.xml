@@ -62,8 +62,8 @@
   <string name="about_bitbucket_link">https://bitbucket.org/darksasha5/polynavi/src/master/</string>
   <string name="about_donate_title">Поддержать разработчиков</string>
   <string name="about_donate_subtitle">А почему нет?</string>
+  <string name="about_donate_link">https://yasobe.ru/na/polynavi_app</string>  
   <string name="about_copyright_title">Копирайт</string>
-
   <string name="about_contacts_title">Контакты</string>
   <string name="about_contacts_sasha_link">
     <a href="https://www.vk.com/dark_sasha">Александр Старовойтов</a>
