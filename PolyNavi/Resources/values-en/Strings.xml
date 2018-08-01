@@ -95,7 +95,7 @@
   <string name="welcome_header_first">Navigate inside main building...</string>
   <string name="welcome_header_second">...and on Polytechnic University campus</string>
   <string name="welcome_header_third">Arrive on time</string>
-  <string name="welcome_description_first">Finding the shortest path between classrooms</string>
+  <string name="welcome_description_first">Finding path between classrooms</string>
   <string name="welcome_description_second">Finding the shortest path between university\'s buildings</string>
   <string name="welcome_description_third">Schedule, that is available offline</string>
   <string name="welcome_finish">Done</string>
