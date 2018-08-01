@@ -105,4 +105,5 @@
   <string name="wrong_group_error">Неверный номер группы! Укажите корректный в настройках приложения</string>
 
   <string name="choose_date">Выберите дату</string>
+  <string name="email_send_intent">Отправить email с помощью</string>
 </resources>

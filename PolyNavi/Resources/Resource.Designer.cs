@@ -4537,6 +4537,9 @@ namespace PolyNavi
 			// aapt resource value: 0x7f0b0046
 			public const int edittext_to_buildings = 2131427398;
 			
+			// aapt resource value: 0x7f0b007b
+			public const int email_send_intent = 2131427451;
+			
 			// aapt resource value: 0x7f0b004c
 			public const int empty_schedule_error_title_current = 2131427404;
 			

@@ -48,7 +48,7 @@ namespace PolyNavi
 			var emailIntent = new Intent(Intent.ActionSend);
 			emailIntent.SetType("message/rfc822");
 			emailIntent.PutExtra(Intent.ExtraEmail, new string[] { GetString(Resource.String.about_email_address) });
-			StartActivity(emailIntent);
+			StartActivity(Intent.CreateChooser(emailIntent, GetString(Resource.String.email_send_intent)));
 		}
 
 		private void FrameRate_Click(object sender, EventArgs e)
