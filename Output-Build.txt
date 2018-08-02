@@ -1,1 +1,0 @@
-﻿1>------ Clean started: Project: PolyNavi, Configuration: Debug Any CPU ------

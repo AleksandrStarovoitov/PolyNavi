@@ -55,7 +55,7 @@
     <EnableLLVM>false</EnableLLVM>
     <BundleAssemblies>false</BundleAssemblies>
     <AndroidSupportedAbis>armeabi-v7a;x86;x86_64</AndroidSupportedAbis>
-    <EnableProguard>false</EnableProguard>
+    <EnableProguard>true</EnableProguard>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BruTile, Version=1.0.3.0, Culture=neutral, processorArchitecture=MSIL">
