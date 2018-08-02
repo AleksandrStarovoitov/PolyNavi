@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("PolyNavi")]
-[assembly: AssemblyCopyright("Copyright © Aleksandr Starovoitov 2018, MIT License except some graphical assets and third party libraries.")]
+[assembly: AssemblyCopyright("Copyright © 2018 Aleksandr Starovoitov, Kirill Bolshakov. The project is distributed under MIT License except some graphical assets and third party libraries.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]
