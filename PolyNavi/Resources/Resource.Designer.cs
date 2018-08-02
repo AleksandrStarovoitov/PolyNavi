@@ -2816,22 +2816,22 @@ namespace PolyNavi
 			public const int avd_show_password_3 = 2130837653;
 			
 			// aapt resource value: 0x7f020056
-			public const int baseline_bitbucket_black = 2130837590;
+			public const int baseline_copyright_black = 2130837590;
 			
 			// aapt resource value: 0x7f020057
-			public const int baseline_copyright_black = 2130837591;
+			public const int baseline_directions_black = 2130837591;
 			
 			// aapt resource value: 0x7f020058
-			public const int baseline_directions_black = 2130837592;
+			public const int baseline_done_black = 2130837592;
 			
 			// aapt resource value: 0x7f020059
-			public const int baseline_done_black = 2130837593;
+			public const int baseline_email_black = 2130837593;
 			
 			// aapt resource value: 0x7f02005a
-			public const int baseline_email_black = 2130837594;
+			public const int baseline_empty_schedule = 2130837594;
 			
 			// aapt resource value: 0x7f02005b
-			public const int baseline_empty_schedule = 2130837595;
+			public const int baseline_github_black = 2130837595;
 			
 			// aapt resource value: 0x7f02005c
 			public const int baseline_gps_fixed_black = 2130837596;
@@ -3315,9 +3315,6 @@ namespace PolyNavi
 			// aapt resource value: 0x7f0900db
 			public const int frame_map_buildings = 2131296475;
 			
-			// aapt resource value: 0x7f0900bf
-			public const int framelayout_bitbucket_about = 2131296447;
-			
 			// aapt resource value: 0x7f0900c3
 			public const int framelayout_copyright_about = 2131296451;
 			
@@ -3326,6 +3323,9 @@ namespace PolyNavi
 			
 			// aapt resource value: 0x7f0900bb
 			public const int framelayout_email_about = 2131296443;
+			
+			// aapt resource value: 0x7f0900bf
+			public const int framelayout_github_about = 2131296447;
 			
 			// aapt resource value: 0x7f0900bd
 			public const int framelayout_rate_about = 2131296445;
@@ -3444,9 +3444,6 @@ namespace PolyNavi
 			// aapt resource value: 0x7f090018
 			public const int line3 = 2131296280;
 			
-			// aapt resource value: 0x7f0900c0
-			public const int linearlayout_bitbucket_about = 2131296448;
-			
 			// aapt resource value: 0x7f0900c4
 			public const int linearlayout_copyright_about = 2131296452;
 			
@@ -3455,6 +3452,9 @@ namespace PolyNavi
 			
 			// aapt resource value: 0x7f0900bc
 			public const int linearlayout_email_about = 2131296444;
+			
+			// aapt resource value: 0x7f0900c0
+			public const int linearlayout_github_about = 2131296448;
 			
 			// aapt resource value: 0x7f090105
 			public const int linearlayout_header_main = 2131296517;
@@ -4441,15 +4441,6 @@ namespace PolyNavi
 			// aapt resource value: 0x7f0b0012
 			public const int abc_toolbar_collapse_description = 2131427346;
 			
-			// aapt resource value: 0x7f0b0058
-			public const int about_bitbucket_link = 2131427416;
-			
-			// aapt resource value: 0x7f0b0057
-			public const int about_bitbucket_subtitle = 2131427415;
-			
-			// aapt resource value: 0x7f0b0056
-			public const int about_bitbucket_title = 2131427414;
-			
 			// aapt resource value: 0x7f0b005f
 			public const int about_contacts_kirill_link = 2131427423;
 			
@@ -4476,6 +4467,15 @@ namespace PolyNavi
 			
 			// aapt resource value: 0x7f0b0051
 			public const int about_email_title = 2131427409;
+			
+			// aapt resource value: 0x7f0b0058
+			public const int about_github_link = 2131427416;
+			
+			// aapt resource value: 0x7f0b0057
+			public const int about_github_subtitle = 2131427415;
+			
+			// aapt resource value: 0x7f0b0056
+			public const int about_github_title = 2131427414;
 			
 			// aapt resource value: 0x7f0b004f
 			public const int about_nav = 2131427407;

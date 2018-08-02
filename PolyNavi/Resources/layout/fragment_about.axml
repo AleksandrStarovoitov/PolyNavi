@@ -124,7 +124,7 @@
             </LinearLayout>
         </FrameLayout>
         <FrameLayout
-            android:id="@+id/framelayout_bitbucket_about"
+            android:id="@+id/framelayout_github_about"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_about_frame_outer"
@@ -133,7 +133,7 @@
             android:background="@drawable/shape_border_round"
             android:layout_below="@+id/framelayout_rate_about">
             <LinearLayout
-                android:id="@+id/linearlayout_bitbucket_about"
+                android:id="@+id/linearlayout_github_about"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
@@ -141,7 +141,7 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/baseline_bitbucket_black"
+                    android:src="@drawable/baseline_github_black"
                     android:layout_margin="@dimen/margin_about_frame_image" />
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -151,13 +151,13 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/about_bitbucket_title"
+                        android:text="@string/about_github_title"
                         android:textColor="@color/color_black"
                         android:textSize="@dimen/textsize_about_frame_title" />
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/about_bitbucket_subtitle"
+                        android:text="@string/about_github_subtitle"
                         android:textColor="@color/color_black_with_transparency"
                         android:textSize="@dimen/textsize_about_frame_summary" />
                 </LinearLayout>
@@ -171,7 +171,7 @@
             android:layout_marginRight="@dimen/margin_about_frame_outer"
             android:layout_marginLeft="@dimen/margin_about_frame_outer"
             android:background="@drawable/shape_border_round"
-            android:layout_below="@+id/framelayout_bitbucket_about">
+            android:layout_below="@+id/framelayout_github_about">
             <LinearLayout
                 android:id="@+id/linearlayout_donate_about"
                 android:layout_width="match_parent"

@@ -57,9 +57,9 @@
   <string name="about_rate_title">Оценить приложение</string>
   <string name="about_rate_subtitle">Перейти в Google Play</string>
   <string name="about_rate_link">https://play.google.com/store/apps/details?id=ru.spbstu.spbpu</string> 
-  <string name="about_bitbucket_title">Открытое ПО</string>
-  <string name="about_bitbucket_subtitle">Посмотреть исходный код</string>
-  <string name="about_bitbucket_link">https://bitbucket.org/darksasha5/polynavi/src/master/</string>
+  <string name="about_github_title">Открытое ПО</string>
+  <string name="about_github_subtitle">Посмотреть исходный код</string>
+  <string name="about_github_link">https://github.com/darksasha5/PolyNavi</string>
   <string name="about_donate_title">Поддержать разработчиков</string>
   <string name="about_donate_subtitle">А почему нет?</string>
   <string name="about_donate_link">https://yasobe.ru/na/polynavi_app</string>  

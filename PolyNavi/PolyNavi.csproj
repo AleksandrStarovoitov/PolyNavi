@@ -528,15 +528,10 @@
     <AndroidResource Include="Resources\drawable-xxhdpi\welcome_blueprint.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\welcome_calendar.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\welcome_route.png" />
-    <AndroidResource Include="Resources\drawable-xxxhdpi\baseline_bitbucket_black.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\baseline_copyright_black.png" />
-    <AndroidResource Include="Resources\drawable-xxhdpi\baseline_bitbucket_black.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\baseline_copyright_black.png" />
-    <AndroidResource Include="Resources\drawable-xhdpi\baseline_bitbucket_black.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\baseline_copyright_black.png" />
-    <AndroidResource Include="Resources\drawable-mdpi\baseline_bitbucket_black.png" />
     <AndroidResource Include="Resources\drawable-mdpi\baseline_copyright_black.png" />
-    <AndroidResource Include="Resources\drawable-hdpi\baseline_bitbucket_black.png" />
     <AndroidResource Include="Resources\drawable-hdpi\baseline_copyright_black.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\ic_place_black.png" />
     <AndroidResource Include="Resources\drawable-mdpi\baseline_keyboard_arrow_down_black.png" />
@@ -624,6 +619,21 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-xxxhdpi\app_logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-hdpi\baseline_github_black.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-mdpi\baseline_github_black.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xhdpi\baseline_github_black.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xxhdpi\baseline_github_black.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xxxhdpi\baseline_github_black.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

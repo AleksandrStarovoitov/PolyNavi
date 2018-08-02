@@ -25,13 +25,13 @@ namespace PolyNavi
 
 			var frameMail = view.FindViewById<FrameLayout>(Resource.Id.framelayout_email_about);
 			var frameRate = view.FindViewById<FrameLayout>(Resource.Id.framelayout_rate_about);
-			var frameBitbucket = view.FindViewById<FrameLayout>(Resource.Id.framelayout_bitbucket_about);
+			var frameGithub = view.FindViewById<FrameLayout>(Resource.Id.framelayout_github_about);
 			var frameDonate = view.FindViewById<FrameLayout>(Resource.Id.framelayout_donate_about);
 			var frameCopyright = view.FindViewById<FrameLayout>(Resource.Id.framelayout_copyright_about);
 
 			frameMail.Click += FrameMail_Click;
 			frameRate.Click += FrameRate_Click;
-			frameBitbucket.Click += FrameBitbucket_Click;
+            frameGithub.Click += FrameGithub_Click;
 			frameDonate.Click += FrameDonate_Click;
 			frameCopyright.Click += FrameCopyright_Click;
 
@@ -46,8 +46,8 @@ namespace PolyNavi
 
 		private void FrameDonate_Click(object sender, EventArgs e)
 		{
-			var bitbucketIntent = new Intent(Intent.ActionView, Android.Net.Uri.Parse(GetString(Resource.String.about_donate_link)));
-			StartActivity(bitbucketIntent);
+			var donateIntent = new Intent(Intent.ActionView, Android.Net.Uri.Parse(GetString(Resource.String.about_donate_link)));
+			StartActivity(donateIntent);
 		}
 
 		private void FrameMail_Click(object sender, EventArgs e)
@@ -64,10 +64,10 @@ namespace PolyNavi
 			StartActivity(rateIntent);
 		}
 
-		private void FrameBitbucket_Click(object sender, EventArgs e)
+		private void FrameGithub_Click(object sender, EventArgs e)
 		{
-			var bitbucketIntent = new Intent(Intent.ActionView, Android.Net.Uri.Parse(GetString(Resource.String.about_bitbucket_link)));
-			StartActivity(bitbucketIntent);
+			var githubIntent = new Intent(Intent.ActionView, Android.Net.Uri.Parse(GetString(Resource.String.about_github_link)));
+			StartActivity(githubIntent);
 		}
 
 		private void FrameCopyright_Click(object sender, EventArgs e)

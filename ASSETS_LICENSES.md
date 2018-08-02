@@ -12,7 +12,7 @@
 * *third_floor.png* is made by Aleksandr Starovoitov and licensed under a [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-nc-sa/4.0/)
 * *app_logo.png* is made by Aleksandr Starovoitov and licensed under a [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-nc-sa/4.0/)
 * *icon.png* is made by Aleksandr Starovoitov and licensed under a [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-nc-sa/4.0/)
-* *baseline_bitbucket_black.png* made by [Dave Gandy](https://www.flaticon.com/authors/dave-gandy) from [Flaticon](https://www.flaticon.com/) is licensed by [Creative Commons BY 3.0](http://creativecommons.org/licenses/by/3.0/)
+* *baseline_github_black.png* made by [Dave Gandy](https://www.flaticon.com/authors/dave-gandy) from [Flaticon](https://www.flaticon.com/) is licensed by [Creative Commons BY 3.0](http://creativecommons.org/licenses/by/3.0/)
 * *baseline_copyright_black.png* made by [Vaadin](https://www.flaticon.com/authors/vaadin) from [Flaticon](https://www.flaticon.com/) is licensed by [Creative Commons BY 3.0](http://creativecommons.org/licenses/by/3.0/)
 * *ic_error.png* made by [Freepik](http://www.freepik.com) from [Flaticon](https://www.flaticon.com/) is licensed by [Creative Commons BY 3.0](http://creativecommons.org/licenses/by/3.0/)
 * *ic_gz.png* made by [Freepik](http://www.freepik.com) from [Flaticon](https://www.flaticon.com/) is licensed by [Creative Commons BY 3.0](http://creativecommons.org/licenses/by/3.0/)
