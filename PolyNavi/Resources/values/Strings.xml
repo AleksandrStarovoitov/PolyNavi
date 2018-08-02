@@ -56,7 +56,7 @@
   <string name="about_email_address">polynavi@mail.ru</string>
   <string name="about_rate_title">Оценить приложение</string>
   <string name="about_rate_subtitle">Перейти в Google Play</string>
-  <string name="about_rate_link">https://play.google.com/store/apps/details?id=ru.spbstu.spbpu</string> 
+  <string name="about_rate_link">https://play.google.com/store/apps/details?id=com.starovoitov.polynavi</string> 
   <string name="about_github_title">Открытое ПО</string>
   <string name="about_github_subtitle">Посмотреть исходный код</string>
   <string name="about_github_link">https://github.com/darksasha5/PolyNavi</string>
