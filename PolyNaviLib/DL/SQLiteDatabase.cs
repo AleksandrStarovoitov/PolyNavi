@@ -7,6 +7,7 @@ using SQLite;
 using SQLiteNetExtensionsAsync.Extensions;
 
 using PolyNaviLib.BL;
+using SQLiteNetExtensions.Extensions;
 
 namespace PolyNaviLib.DL
 {
@@ -60,7 +61,10 @@ namespace PolyNaviLib.DL
 		{
 			if (item.IDD == 0)
 			{
-				await db.InsertWithChildrenAsync(item, recursive: true);
+                await db.RunInTransactionAsync((SQLiteConnection conn) =>
+                {
+                    conn.InsertWithChildren(item, recursive: true);
+                });
 			}
 			else
 			{
