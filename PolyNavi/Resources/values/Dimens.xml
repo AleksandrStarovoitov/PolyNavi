@@ -104,10 +104,11 @@
   <dimen name="margintop_no_connection_update_image">5dp</dimen>
 
   <!--layout_route_row_mainbuilding-->
-  <dimen name="margin_route_row_mainbuilding_image">15dp</dimen>
-
+  <dimen name="margin_route_row_mainbuilding_image">16dp</dimen>
+  <dimen name="margin_route_row_mainbuilding_text">8dp</dimen>
   <!--layout_route_row_otherbuildings-->
   <dimen name="margin_route_row_otherbuildings_image">16dp</dimen>
+  <dimen name="margin_route_row_otherbuildings_text">8dp</dimen>
 
   <!--preference_dialog_autocomplete-->
   <dimen name="margin_pref_dialog_autocomplete_textview">20dp</dimen>

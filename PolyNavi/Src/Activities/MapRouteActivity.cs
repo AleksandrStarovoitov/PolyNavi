@@ -42,6 +42,8 @@ namespace PolyNavi
 
 			var listView = FindViewById<ListView>(Resource.Id.listview_buildingslist);
 
+
+
 			adapterBuildings = new BuildingsAdapter(this, buildings);
 			listView.Adapter = adapterBuildings;
 			listView.ItemClick += ListView_ItemClick;

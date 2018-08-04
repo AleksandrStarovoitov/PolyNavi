@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/relativelayout_route_row_mainbuilng">
@@ -8,20 +8,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/imageview_route_mainbuilding"
-        android:layout_alignParentLeft="true"
+        android:layout_gravity="left|center_vertical"
         android:layout_margin="@dimen/margin_route_row_mainbuilding_image" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textview_route"
-        android:layout_toRightOf="@+id/imageview_route_mainbuilding"
         android:textAppearance="@style/ScheduleTitleDate"
-        android:layout_alignBottom="@+id/imageview_route_mainbuilding" />
-    <View
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/size_divider"
-        android:id="@+id/divider_route_row_mainbuilding"
-        android:background="@android:color/darker_gray"
-        android:visibility="visible"
-        android:layout_below="@+id/imageview_route_mainbuilding" />
-</RelativeLayout>
+        android:layout_gravity="center_vertical"
+        android:layout_marginTop="@dimen/margin_route_row_mainbuilding_text"
+        android:layout_marginRight="@dimen/margin_route_row_mainbuilding_text"
+        android:layout_marginBottom="@dimen/margin_route_row_mainbuilding_text" />
+</LinearLayout>
