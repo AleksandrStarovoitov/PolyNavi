@@ -38,8 +38,8 @@ namespace PolyNavi
 		int _activePointerId = -1;
 		float _lastTouchX;
 		float _lastTouchY;
-		float _posX;
-		float _posY;
+		public float _posX { get; set; }
+		public float _posY { get; set; }
 		float _scaleFactor = 1.0f;
 		//float _minScaleFactor = 0.9f;
 		//float _maxScaleFactor = 5.0f;
