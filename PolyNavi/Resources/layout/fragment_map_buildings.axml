@@ -111,4 +111,12 @@
             </android.support.design.widget.TextInputLayout>
         </RelativeLayout>
     </android.support.design.widget.AppBarLayout>
+    <ProgressBar
+        android:id="@+id/progressbar_map_buildings"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:layout_gravity="center"
+        android:visibility="visible" />
 </android.support.design.widget.CoordinatorLayout>

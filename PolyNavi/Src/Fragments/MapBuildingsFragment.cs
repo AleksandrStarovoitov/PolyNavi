@@ -26,6 +26,7 @@ using Mapsui.Utilities;
 
 using Itinero;
 using Itinero.Profiles;
+using System.Threading.Tasks;
 
 namespace PolyNavi
 {
@@ -75,29 +76,63 @@ namespace PolyNavi
 		{
 			view = inflater.Inflate(Resource.Layout.fragment_map_buildings, container, false);
 
-			InitializeRouting();
-			InitializeMapControl();
+            appBar = view.FindViewById<AppBarLayout>(Resource.Id.appbar_map_buildings);
+            appBar.AddOnOffsetChangedListener(this);
 
-			fab = view.FindViewById<FloatingActionButton>(Resource.Id.fab_map_buildings);
-			fab.Click += Fab_Click;
+            fab = view.FindViewById<FloatingActionButton>(Resource.Id.fab_map_buildings);
+            fab.Click += Fab_Click;
 
-			buttonLocation = view.FindViewById<FloatingActionButton>(Resource.Id.fab_location_map_buildings);
-			buttonLocation.Click += ButtonLocation_Click;
-			buttonLocation.Alpha = 0.7f;
+            editTextInputFrom = view.FindViewById<EditText>(Resource.Id.edittext_input_from_map_builidngs);
+            editTextInputFrom.Click += EditTextInputFrom_Click; ;
+
+            editTextInputTo = view.FindViewById<EditText>(Resource.Id.edittext_input_to_map_builidngs);
+            editTextInputTo.Click += EditTextInputTo_Click;
+            
+            fab = view.FindViewById<FloatingActionButton>(Resource.Id.fab_map_buildings);
+            fab.Click += Fab_Click;
+
+            buttonLocation = view.FindViewById<FloatingActionButton>(Resource.Id.fab_location_map_buildings);
+            buttonLocation.Click += ButtonLocation_Click;
+
 
             buttonFromCurrentLocation = view.FindViewById<ImageButton>(Resource.Id.imagebutton_currentlocation_map_buildings);
             buttonFromCurrentLocation.Click += ButtonFromCurrentLocation_Click;
 
-            if (ContextCompat.CheckSelfPermission(Activity, Android.Manifest.Permission.AccessFineLocation) != Permission.Granted)
-			{
-				//Permission is not granted
-				RequestPermissions(new String[] { Android.Manifest.Permission.AccessFineLocation }, RequestFineLocationId);
-			}
-			else
-			{
-				//Permission granted
-				SetupLocationManager();
-			}
+
+            var progress = view.FindViewById<ProgressBar>(Resource.Id.progressbar_map_buildings);
+            progress.Visibility = ViewStates.Visible;
+
+            var tasks = new List<Task>
+            {
+                Task.Run(() =>
+                {
+                    InitializeRouting();
+                }),
+
+                Task.Run(() =>
+                {
+                    InitializeMapControl();
+
+                    Activity.RunOnUiThread(() =>
+                    {
+                        buttonLocation.Alpha = 0.7f;
+
+                        if (ContextCompat.CheckSelfPermission(Activity, Android.Manifest.Permission.AccessFineLocation) != Permission.Granted)
+                        {
+                        //Permission is not granted
+                        RequestPermissions(new String[] { Android.Manifest.Permission.AccessFineLocation }, RequestFineLocationId);
+                        }
+                        else
+                        {
+                        //Permission granted
+                        SetupLocationManager();
+                        }
+                    });
+                })
+            };
+
+            Task.WhenAll(tasks).ContinueWith( (t) => progress.Visibility = ViewStates.Invisible);
+
 			return view;
 		}
 
@@ -177,13 +212,15 @@ namespace PolyNavi
 
 		private void InitializeRouting()
 		{
-			using (var ms = new MemoryStream())
-			using (var stream = Activity.BaseContext.Assets.Open(RouterDbName))
-			{
-				stream.CopyTo(ms);
-				ms.Seek(0, SeekOrigin.Begin);
-				routerDb = RouterDb.Deserialize(ms);
-			}
+            using (var ms = new MemoryStream())
+            {
+                using (var stream = Activity.BaseContext.Assets.Open(RouterDbName))
+                {
+                    stream.CopyTo(ms);
+                }
+                ms.Seek(0, SeekOrigin.Begin);
+                routerDb = RouterDb.Deserialize(ms);
+            }
 			router = new Router(routerDb);
 			profile = Itinero.Osm.Vehicles.Vehicle.Pedestrian.Shortest();
 		}
@@ -194,35 +231,26 @@ namespace PolyNavi
 			mapControl.RotationLock = false;
 			map = mapControl.Map;
 			map.CRS = "EPSG:3857";
-			map.Layers.Add(OpenStreetMap.CreateTileLayer());
-			routeLayer = new Layer();
-			map.Layers.Add(routeLayer);
+            Activity.RunOnUiThread(() =>
+            {
+                map.Layers.Add(OpenStreetMap.CreateTileLayer());
+                routeLayer = new Layer();
+                map.Layers.Add(routeLayer);
 
-			Point centerOfPolytech = new Point(30.371144, 60.003675).FromLonLat();
-			map.NavigateTo(centerOfPolytech);
-			map.NavigateTo(7);
-			map.Transformation = new MinimalTransformation();
+                Point centerOfPolytech = new Point(30.371144, 60.003675).FromLonLat();
+                map.NavigateTo(centerOfPolytech);
+                map.NavigateTo(7);
+                map.Transformation = new MinimalTransformation();
 
-			Point leftBot = new Point(30.365751, 59.999560).FromLonLat();
-			Point rightTop = new Point(30.391848, 60.008916).FromLonLat();
-			map.PanLimits = new BoundingBox(leftBot, rightTop);
-			map.PanMode = PanMode.KeepCenterWithinExtents;
+                Point leftBot = new Point(30.365751, 59.999560).FromLonLat();
+                Point rightTop = new Point(30.391848, 60.008916).FromLonLat();
+                map.PanLimits = new BoundingBox(leftBot, rightTop);
+                map.PanMode = PanMode.KeepCenterWithinExtents;
 
-			map.ZoomLimits = new MinMax(1, 7);
+                map.ZoomLimits = new MinMax(1, 7);
 
-			map.Widgets.Add(new Mapsui.Widgets.ScaleBar.ScaleBarWidget(map) { TextAlignment = Mapsui.Widgets.Alignment.Center, HorizontalAlignment = Mapsui.Widgets.HorizontalAlignment.Center, VerticalAlignment = Mapsui.Widgets.VerticalAlignment.Top });
-
-			appBar = view.FindViewById<AppBarLayout>(Resource.Id.appbar_map_buildings);
-			appBar.AddOnOffsetChangedListener(this);
-
-			fab = view.FindViewById<FloatingActionButton>(Resource.Id.fab_map_buildings);
-			fab.Click += Fab_Click;
-
-			editTextInputFrom = view.FindViewById<EditText>(Resource.Id.edittext_input_from_map_builidngs);
-			editTextInputFrom.Click += EditTextInputFrom_Click; ;
-
-			editTextInputTo = view.FindViewById<EditText>(Resource.Id.edittext_input_to_map_builidngs);
-			editTextInputTo.Click += EditTextInputTo_Click; ;
+                map.Widgets.Add(new Mapsui.Widgets.ScaleBar.ScaleBarWidget(map) { TextAlignment = Mapsui.Widgets.Alignment.Center, HorizontalAlignment = Mapsui.Widgets.HorizontalAlignment.Center, VerticalAlignment = Mapsui.Widgets.VerticalAlignment.Top });
+            });
 		}
 
 		private ILayer DrawRoute(Route route)
