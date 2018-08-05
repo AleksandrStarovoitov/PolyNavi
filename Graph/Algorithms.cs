@@ -50,7 +50,7 @@ namespace Graph
 				}
 				foreach (var neighbour in node.Data.Neighbours)
 				{
-                    badFloor = (neighbour.FloorNumber != start.FloorNumber && neighbour.FloorNumber != finish.FloorNumber && Math.Abs(start.FloorNumber - finish.FloorNumber) <= 1);
+                    badFloor = (neighbour.FloorNumber != start.FloorNumber && neighbour.FloorNumber != finish.FloorNumber && Math.Abs(neighbour.FloorNumber - start.FloorNumber) > 1);
 
                     var neighbourWithParent = new GraphNodeWithParent() { Data = neighbour, Parent = node };
                     if (!closed.Contains(neighbour) && (!badFloor || !neighbour.IsStairs))

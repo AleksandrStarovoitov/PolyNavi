@@ -254,7 +254,6 @@
     <AndroidAsset Include="Assets\polytech_map.routerdb" />
     <EmbeddedResource Include="EmbeddedResources\groups.json" />
     <AndroidAsset Include="Assets\floor_1.graph" />
-    <AndroidAsset Include="Assets\floor_2.graph" />
     <AndroidAsset Include="Assets\floor_3_1.graph" />
     <AndroidAsset Include="Assets\floor_3_2.graph" />
     <AndroidAsset Include="Assets\floor_3_3.graph" />
@@ -262,6 +261,7 @@
     <AndroidAsset Include="Assets\floor_3_5.graph" />
     <AndroidAsset Include="Assets\floor_3_6.graph" />
     <AndroidAsset Include="Assets\floor_3_7.graph" />
+    <AndroidAsset Include="Assets\floor_2_1.graph" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
