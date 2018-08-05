@@ -1,13 +1,9 @@
 # POLYNAVI
 
----
-
 POLYNAVI - Navigation and shedule for SPbPU students. Unofficial app.
-
 
 ![Screenshots](Screenshots.png)
 
----
 ## License
 
 The source code is licensed under the MIT license ([LICENSE](LICENSE)).
