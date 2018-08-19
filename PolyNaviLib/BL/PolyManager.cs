@@ -28,11 +28,11 @@ namespace PolyNaviLib.BL
 
         Nito.AsyncEx.AsyncLock mutex = new Nito.AsyncEx.AsyncLock();
 
-        public async Task<WeekRoot> GetWeekRootAsync(DateTime weekDate)
+        public async Task<WeekRoot> GetWeekRootAsync(DateTime weekDate, bool forceUpdate)
         {
             using (await mutex.LockAsync())
             {
-                return await repository.GetWeekRootAsync(weekDate);
+                return await repository.GetWeekRootAsync(weekDate, forceUpdate);
             }
         }
 

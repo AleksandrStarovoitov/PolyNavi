@@ -58,7 +58,7 @@ namespace PolyNavi
 		public void OnRefresh()
 		{
 			FragmentManager.BeginTransaction().Detach(this).Attach(this).Commit();
-			mSwipeRefreshLayout.Refreshing = false;
+            mSwipeRefreshLayout.Refreshing = false;
 		}
 
 		private void LoadSheduleAndUpdateUIWithPorgressBar(DateTime weekDate)
@@ -70,7 +70,7 @@ namespace PolyNavi
 				var manager = await MainApp.Instance.PolyManager;
 				try
 				{
-                    var weekRoot = await manager.GetWeekRootAsync(weekDate);
+                    var weekRoot = await manager.GetWeekRootAsync(weekDate, forceUpdate: false);
 
 					days = weekRoot.Days;
 					Activity.RunOnUiThread(() =>

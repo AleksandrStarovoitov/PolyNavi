@@ -54,7 +54,7 @@ namespace PolyNaviLib.DAL
             return repo.InitializeAsync(dbPath, networkChecker, settings);
         }
 
-        public async Task<WeekRoot> GetWeekRootAsync(DateTime weekDate)
+        public async Task<WeekRoot> GetWeekRootAsync(DateTime weekDate, bool forceUpdate)
         {
             if (await database.IsEmptyAsync<WeekRoot>())
             {
@@ -65,7 +65,7 @@ namespace PolyNaviLib.DAL
             else
             {
                 var weekFromDb = (await database.GetItemsAsync<WeekRoot>()).Where(w => w.Week.DateEqual(weekDate)).SingleOrDefault();
-                if (weekFromDb == null)
+                if (weekFromDb == null || forceUpdate)
                 {
                     var newWeek = (await LoadWeekRootFromWebAsync(weekDate));
                     await database.SaveItemAsync(newWeek);
@@ -90,6 +90,8 @@ namespace PolyNaviLib.DAL
             string dateStr = weekDate.ToString("yyyy-M-d", new CultureInfo("ru-RU"));
             var resultJson = await HttpClientSL.GetResponseAsync(client, scheduleLink + groupId + "&date=" + dateStr, new System.Threading.CancellationToken());
             var weekRoot = JsonConvert.DeserializeObject<WeekRoot>(resultJson);
+            weekRoot.LastUpdated = DateTime.Now;
+
             return weekRoot;
         }
         

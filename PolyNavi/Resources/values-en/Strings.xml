@@ -21,6 +21,8 @@
   <string name="type_schedule_row">Type of lesson</string>
   <string name="teacher_schedule_row">Teacher</string>
 
+  <string name="updated">Updated on</string>
+  
   <string name="mainbuilding_nav">Main building</string>
   <string name="buildings_nav">Buildings</string>
   <string name="schedule_nav">Schedule</string>

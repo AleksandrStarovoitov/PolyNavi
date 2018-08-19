@@ -15,10 +15,12 @@ using Android.Widget;
 using static Android.Widget.TextView;
 
 using Graph;
+using Android.Text;
+using Java.Lang;
 
 namespace PolyNavi
 {
-	public class MainBuildingFragment : Android.Support.V4.App.Fragment, IOnEditorActionListener, AppBarLayout.IOnOffsetChangedListener
+	public class MainBuildingFragment : Android.Support.V4.App.Fragment, IOnEditorActionListener, AppBarLayout.IOnOffsetChangedListener, ITextWatcher
 	{
 		GraphNode mapGraph;
 
@@ -62,18 +64,19 @@ namespace PolyNavi
 			editTextInputFrom = view.FindViewById<AutoCompleteTextView>(Resource.Id.autoCompleteTextView_from);
 			editTextInputFrom.FocusChange += EditTextFromFocusChanged;
 			editTextInputFrom.Adapter = new ArrayAdapter(Activity.BaseContext, Android.Resource.Layout.SimpleDropDownItem1Line, array);
+            editTextInputFrom.AddTextChangedListener(this);
 
 			editTextInputTo = view.FindViewById<AutoCompleteTextView>(Resource.Id.autoCompleteTextView_to);
 			editTextInputTo.SetOnEditorActionListener(this);
 			editTextInputTo.FocusChange += EditTextToFocusChanged;
 			editTextInputTo.Adapter = new ArrayAdapter(Activity.BaseContext, Android.Resource.Layout.SimpleDropDownItem1Line, array);
+            editTextInputTo.AddTextChangedListener(this);
 
 			appBar = view.FindViewById<AppBarLayout>(Resource.Id.appbar_mainbuilding);
 			appBar.AddOnOffsetChangedListener(this);
 
 			fab = view.FindViewById<FloatingActionButton>(Resource.Id.fab_mainbuilding);
 			fab.Click += Fab_Click;
-
 
 			relativeLayout = view.FindViewById<RelativeLayout>(Resource.Id.search_frame_mainbuilding);
 			relativeLayoutParams = (AppBarLayout.LayoutParams)relativeLayout.LayoutParameters;
@@ -156,7 +159,7 @@ namespace PolyNavi
 		{
 			if (fullyExpanded)
 			{
-                if (editTextInputFrom.Text != editTextInputTo.Text && MainApp.Instance.RoomsDictionary.TryGetValue(editTextInputFrom.Text, out string startName) && MainApp.Instance.RoomsDictionary.TryGetValue(editTextInputTo.Text, out string finishName))
+			    if (editTextInputFrom.Text != editTextInputTo.Text & MainApp.Instance.RoomsDictionary.TryGetValue(editTextInputFrom.Text, out var startName) & MainApp.Instance.RoomsDictionary.TryGetValue(editTextInputTo.Text, out var finishName))
                 {
                     InputMethodManager imm = (InputMethodManager)Activity.BaseContext.GetSystemService(Context.InputMethodService);
                     imm.HideSoftInputFromWindow(View.WindowToken, 0);
@@ -202,8 +205,15 @@ namespace PolyNavi
                     }
                 }
                 else
-                {
-                    Toast.MakeText(Activity.BaseContext, GetString(Resource.String.enter_correct_number), ToastLength.Short).Show();
+                {                    
+                    if (startName == null)
+                    {
+                        editTextInputFrom.Error = GetString(Resource.String.wrong_group); 
+                    }
+                    if (finishName == null)
+                    {
+                        editTextInputTo.Error = GetString(Resource.String.wrong_group);
+                    }
                 }
             }
 			else
@@ -272,5 +282,26 @@ namespace PolyNavi
 				fab.SetImageResource(Resource.Drawable.ic_done_black);
 			}
 		}
-	}
+
+        public void AfterTextChanged(IEditable s)
+        {
+        }
+
+        public void BeforeTextChanged(ICharSequence s, int start, int count, int after)
+        {
+        }
+
+        public void OnTextChanged(ICharSequence s, int start, int before, int count)
+        {
+            if (editTextInputFrom.Error != null)
+            {
+                editTextInputFrom.Error = null;
+            }
+
+            if (editTextInputTo.Error != null)
+            {
+                editTextInputTo.Error = null;
+            }
+        }
+    }
 }
