@@ -42,7 +42,7 @@ namespace PolyNavi
 
 			drawerLayout = FindViewById<DrawerLayout>(Resource.Id.drawerlayout_main);
 			drawerLayout.AddDrawerListener(this);
-			drawerLayout.SetStatusBarBackground(Resource.Color.color_primary_dark);
+			drawerLayout.SetStatusBarBackground(Resource.Color.color_status_bar);
 
 			toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar_main);
 

@@ -2,6 +2,7 @@
 <resources>
   <!-- color int as #AARRGGBB (alpha, red, green, blue) -->
   <color name="color_primary_dark">#00821B</color>
+  <color name="color_status_bar">#00E62E</color>
   <color name="color_primary">#37B34A</color>
   <color name="color_accent">#FF9800</color>
 
