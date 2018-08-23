@@ -208,11 +208,11 @@ namespace PolyNavi
                 {                    
                     if (startName == null)
                     {
-                        editTextInputFrom.Error = GetString(Resource.String.wrong_group); 
+                        editTextInputFrom.Error = GetString(Resource.String.wrong_room); 
                     }
                     if (finishName == null)
                     {
-                        editTextInputTo.Error = GetString(Resource.String.wrong_group);
+                        editTextInputTo.Error = GetString(Resource.String.wrong_room);
                     }
                 }
             }

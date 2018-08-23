@@ -104,6 +104,7 @@
   <string name="welcome_skip">Skip</string>
 
   <string name="wrong_group">Wrong group number</string>
+  <string name="wrong_room">Wrong room name</string>
   <string name="wrong_group_error">Wrong group number! Enter correct one in application settings</string>
   <string name="choose_date">Choose date</string>
   <string name="email_send_intent">Send email using</string>

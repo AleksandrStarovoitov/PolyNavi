@@ -4516,8 +4516,8 @@ namespace PolyNavi
 			// aapt resource value: 0x7f0b0022
 			public const int character_counter_pattern = 2131427362;
 			
-			// aapt resource value: 0x7f0b007c
-			public const int choose_date = 2131427452;
+			// aapt resource value: 0x7f0b007d
+			public const int choose_date = 2131427453;
 			
 			// aapt resource value: 0x7f0b0040
 			public const int currentweek_tab = 2131427392;
@@ -4546,8 +4546,8 @@ namespace PolyNavi
 			// aapt resource value: 0x7f0b0047
 			public const int edittext_to_buildings = 2131427399;
 			
-			// aapt resource value: 0x7f0b007d
-			public const int email_send_intent = 2131427453;
+			// aapt resource value: 0x7f0b007e
+			public const int email_send_intent = 2131427454;
 			
 			// aapt resource value: 0x7f0b004d
 			public const int empty_schedule_error_title_current = 2131427405;
@@ -4729,8 +4729,11 @@ namespace PolyNavi
 			// aapt resource value: 0x7f0b007a
 			public const int wrong_group = 2131427450;
 			
+			// aapt resource value: 0x7f0b007c
+			public const int wrong_group_error = 2131427452;
+			
 			// aapt resource value: 0x7f0b007b
-			public const int wrong_group_error = 2131427451;
+			public const int wrong_room = 2131427451;
 			
 			static String()
 			{

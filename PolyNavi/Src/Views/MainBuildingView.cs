@@ -64,19 +64,23 @@ namespace PolyNavi
 
 			_plan = ContextCompat.GetDrawable(Context, id);
 
-			imageWidth = _plan.IntrinsicWidth;
-			imageHeight = _plan.IntrinsicHeight;
+			//imageWidth = _plan.IntrinsicWidth;
+			//imageHeight = _plan.IntrinsicHeight;
 
-			widthScale = (float)imageWidth / baseWidth;
+            imageWidth = (int)(displ.HeightPixels * 1.777778 * 0.85);
+		    imageHeight = (int)(displ.HeightPixels * 0.85);
+
+            widthScale = (float)imageWidth / baseWidth;
 			heightScale = (float)imageHeight / baseHeight;
+
 			routePaint.StrokeWidth = routePaint.StrokeWidth * widthScale;
 
-			if (displ.HeightPixels - imageHeight > 0 && displ.HeightPixels - imageHeight < 50)
-			{
-				_scaleFactor *= 0.9f;
-			}
-			
-			_plan.SetBounds(0, 0, imageWidth, imageHeight);
+			//if (displ.HeightPixels - imageHeight > 0 && displ.HeightPixels - imageHeight < 50)
+			//{
+			//	_scaleFactor *= 0.9f;
+			//}
+            
+            _plan.SetBounds(0, 0, imageWidth, imageHeight);
 			//_scaleDetector = new ScaleGestureDetector(context, new MyScaleListener(this));
 			_doubleTapListener = new GestureDetector(context, new MyDoubleTapListener(this, displ));
 
@@ -128,8 +132,13 @@ namespace PolyNavi
 					float left = _posX;
 					float top = _posY;
 					float bottom = _posY + planScaleHeight;
+
+                    Log.Debug("PLAN", "Right: " + right);
+                    Log.Debug("PLAN", "Left: " + left);
+                    Log.Debug("PLAN", "Top: " + top);
+                    Log.Debug("PLAN", "Bottom: " + bottom + " // IntristicHeight: " + _plan.IntrinsicHeight + " // ImageHeight: " + imageHeight);
                     
-					if (right < displ.WidthPixels)
+                    if (right < displ.WidthPixels)
 					{
 						_posX -= deltaX;
 					}
@@ -141,7 +150,7 @@ namespace PolyNavi
 					{
 						_posY -= deltaY;
 					}
-					if (bottom < _plan.IntrinsicHeight)
+					if (bottom < imageHeight)
 					{
 						_posY -= deltaY;
 					}
