@@ -17,7 +17,7 @@ namespace PolyNavi
         public ScheduleFragmentAdapter(FragmentManager fragmentManager, int numOfTabs, DateTime date, int dayOfYear = -1) : base(fragmentManager)
 		{
 			this.numOfTabs = numOfTabs;
-			
+
 			tab1 = new ScheduleWeekFragment(date, CurrentWeekTag, dayOfYear);
 			tab2 = new ScheduleWeekFragment(date + TimeSpan.FromDays(7), NextWeekTag, dayOfYear);
 		}

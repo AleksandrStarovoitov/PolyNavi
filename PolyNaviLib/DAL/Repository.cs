@@ -64,13 +64,22 @@ namespace PolyNaviLib.DAL
             }
             else
             {
-                var weekFromDb = (await database.GetItemsAsync<WeekRoot>()).Where(w => w.Week.DateEqual(weekDate)).SingleOrDefault();
-                if (weekFromDb == null || forceUpdate)
+				var weeks = await database.GetItemsAsync<WeekRoot>();
+
+				var weekFromDb = (await database.GetItemsAsync<WeekRoot>()).Where(w => w.Week.DateEqual(weekDate)).SingleOrDefault();
+                if (weekFromDb == null)
                 {
                     var newWeek = (await LoadWeekRootFromWebAsync(weekDate));
                     await database.SaveItemAsync(newWeek);
                     return newWeek;
                 }
+				else if (forceUpdate)
+				{
+					var newWeek = (await LoadWeekRootFromWebAsync(weekDate));
+					await database.DeleteItemsAsync<WeekRoot>(w => w.Week.DateEqual(weekDate));
+					await database.SaveItemAsync(newWeek);
+					return newWeek;
+				}
                 else
                 {
                     return weekFromDb;

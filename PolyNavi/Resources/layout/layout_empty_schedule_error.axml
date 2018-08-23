@@ -1,29 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:minWidth="25px"
-    android:minHeight="25px"
-    android:id="@+id/layout_empty_schedule_error_clickable_zone">
-    <ImageView
-        android:src="@drawable/baseline_empty_schedule"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageview_empty_schedule_error"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/margintop_empty_schedule_error_image" />
-    <TextView
-        android:textAppearance="@style/NoConnectionTitle"
+<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	 xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/swipetorefresh_empty_schedule_error"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/height_empty_schedule_error_text"
-        android:id="@+id/textview_empty_schedule_error_title"
-        android:gravity="center_horizontal"
-        android:layout_gravity="center_horizontal"
-        android:layout_below="@+id/imageview_empty_schedule_error"
-        android:layout_marginTop="@dimen/margintop_empty_schedule_error_text"
-        android:layout_marginRight="@dimen/marginright_empty_schedule_error_text"
-        android:layout_marginLeft="@dimen/marginleft_empty_schedule_error_text"
-        app:autoSizeTextType="uniform" />
-</RelativeLayout>
+        android:layout_height="match_parent">
+	<RelativeLayout    
+		android:orientation="vertical"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:minWidth="25px"
+		android:minHeight="25px"
+		android:id="@+id/layout_empty_schedule_error_clickable_zone">	 
+			<ImageView
+				android:src="@drawable/baseline_empty_schedule"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:id="@+id/imageview_empty_schedule_error"
+				android:layout_centerHorizontal="true"
+				android:layout_marginTop="@dimen/margintop_empty_schedule_error_image" />
+			<TextView
+				android:textAppearance="@style/NoConnectionTitle"
+				android:layout_width="match_parent"
+				android:layout_height="@dimen/height_empty_schedule_error_text"
+				android:id="@+id/textview_empty_schedule_error_title"
+				android:gravity="center_horizontal"
+				android:layout_gravity="center_horizontal"
+				android:layout_below="@+id/imageview_empty_schedule_error"
+				android:layout_marginTop="@dimen/margintop_empty_schedule_error_text"
+				android:layout_marginRight="@dimen/marginright_empty_schedule_error_text"
+				android:layout_marginLeft="@dimen/marginleft_empty_schedule_error_text"
+				app:autoSizeTextType="uniform" />
+		<TextView 
+				android:id="@+id/textview_empty_schedule_error"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_margin="15dp"
+				android:gravity="center_horizontal"
+				android:layout_gravity="center_horizontal"
+				android:textAppearance="@style/ScheduleTitleDate"		
+				android:layout_alignParentBottom="true"/>
+	</RelativeLayout>
+</android.support.v4.widget.SwipeRefreshLayout>

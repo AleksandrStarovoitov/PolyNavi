@@ -50,19 +50,27 @@ namespace PolyNavi
 
 			recyclerViewSchedule = view.FindViewById<RecyclerView>(Resource.Id.recyclerview_week_schedule);
             
-			LoadSheduleAndUpdateUIWithPorgressBar(weekDate);
+			LoadSheduleAndUpdateUIWithPorgressBar(weekDate, false);
 
 			return view;
 		}
 
 		public void OnRefresh()
 		{
-			FragmentManager.BeginTransaction().Detach(this).Attach(this).Commit();
+			if (days.Count == 0)
+			{
+				DrawContent(Resource.Id.relativelayout_week_schedule, Resource.Layout.layout_week_schedule);
+			}
+			LoadSheduleAndUpdateUIWithPorgressBar(weekDate, true);
             mSwipeRefreshLayout.Refreshing = false;
 		}
 
-		private void LoadSheduleAndUpdateUIWithPorgressBar(DateTime weekDate)
+		private void LoadSheduleAndUpdateUIWithPorgressBar(DateTime weekDate, bool forceUpdate)
 		{
+			if (forceUpdate)
+			{
+				recyclerViewSchedule.SetAdapter(null);
+			}
 			var progress = view.FindViewById<ProgressBar>(Resource.Id.progressbar_week_schedule);
 			progress.Visibility = ViewStates.Visible;
 			Task.Run(async () =>
@@ -70,7 +78,7 @@ namespace PolyNavi
 				var manager = await MainApp.Instance.PolyManager;
 				try
 				{
-                    var weekRoot = await manager.GetWeekRootAsync(weekDate, forceUpdate: false);
+                    var weekRoot = await manager.GetWeekRootAsync(weekDate, forceUpdate: forceUpdate);
 
 					days = weekRoot.Days;
 					Activity.RunOnUiThread(() =>
@@ -86,7 +94,9 @@ namespace PolyNavi
                                 GetString(Resource.String.empty_schedule_error_title_current) :
                                 GetString(Resource.String.empty_schedule_error_title_next)) + " " +
                                 GetString(Resource.String.empty_schedule_error_title_end);
-                        }
+							view.FindViewById<TextView>(Resource.Id.textview_empty_schedule_error).Text = GetString(Resource.String.updated) + " " + weekRoot.LastUpdated.ToString();
+							view.FindViewById<SwipeRefreshLayout>(Resource.Id.swipetorefresh_empty_schedule_error).SetOnRefreshListener(this);
+						}
                         else
                         {
                             adapter = new ScheduleCardFragmentAdapter(days);
@@ -98,7 +108,7 @@ namespace PolyNavi
                             {
                                 recyclerViewSchedule.ScrollToPosition(pos);
                             }
-                        }
+						}
 					});
 				}
 				catch (NetworkException)

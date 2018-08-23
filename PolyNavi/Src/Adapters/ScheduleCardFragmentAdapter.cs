@@ -171,12 +171,16 @@ namespace PolyNavi
 		Context context;
 		LayoutInflater layoutInflater;
 		View scheduleView;
-		ScheduleCardFragmentAdapterViewHolder viewHolder;
+		RecyclerView.ViewHolder viewHolder;
+		DateTime lastUpdatedDate;
 		public RecyclerView recyclerViewSchedule;
+
+		const int EndConst = 0, CardConst = 1;
 
 		public ScheduleCardFragmentAdapter(List<Day> days)
 		{
 			mDays = days.Where(Day => Day.Lessons.Count != 0).ToList();
+			lastUpdatedDate = mDays.FirstOrDefault().WeekRoot.LastUpdated;
 		}
 
 		public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
@@ -184,36 +188,89 @@ namespace PolyNavi
 			context = parent.Context;
 			layoutInflater = LayoutInflater.From(context);
 
-			scheduleView = layoutInflater.Inflate(Resource.Layout.layout_card_schedule, parent, false);
-						
-			viewHolder = new ScheduleCardFragmentAdapterViewHolder(scheduleView);
+			switch (viewType)
+			{
+				case CardConst:
+					scheduleView = layoutInflater.Inflate(Resource.Layout.layout_card_schedule, parent, false);
+					viewHolder = new ScheduleCardFragmentAdapterViewHolder(scheduleView);
+					break;
+
+				case EndConst:
+					scheduleView = layoutInflater.Inflate(Resource.Layout.layout_card_schedule_end, parent, false);
+					viewHolder = new ScheduleCardEndFragmentAdapterViewHolder(scheduleView);
+					break;
+				default:
+
+					break;
+			}
+			
 			return viewHolder;
 		}
 
 		public override void OnBindViewHolder(RecyclerView.ViewHolder viewHolder, int position)
 		{
-			var vh = (ScheduleCardFragmentAdapterViewHolder)viewHolder;
+			switch (viewHolder.ItemViewType)
+			{
+				case CardConst:
+					var vh = (ScheduleCardFragmentAdapterViewHolder)viewHolder;
 
-			Day day = mDays[position];
+					Day day = mDays[position];
 
-			recyclerViewSchedule = viewHolder.ItemView.FindViewById<RecyclerView>(Resource.Id.recyclerview_card_schedule);
-			
-			recyclerViewSchedule.HasFixedSize = true;
+					recyclerViewSchedule = vh.recyclerView;
 
-		    var adapter = new ScheduleCardRowAdapter(new List<object>(day.Lessons), day.Date);
-			recyclerViewSchedule.SetAdapter(adapter);
-			recyclerViewSchedule.SetLayoutManager(new LinearLayoutManager(context));
+					recyclerViewSchedule.HasFixedSize = true;
+
+					var adapter = new ScheduleCardRowAdapter(new List<object>(day.Lessons), day.Date);
+					recyclerViewSchedule.SetAdapter(adapter);
+					recyclerViewSchedule.SetLayoutManager(new LinearLayoutManager(context));
+					break;
+
+				case EndConst:
+					var vhe = (ScheduleCardEndFragmentAdapterViewHolder)viewHolder;
+
+					TextView tv = vhe.textView;
+
+					tv.Text = context.GetString(Resource.String.updated) + " " + lastUpdatedDate.ToString();
+					break;
+
+				default:
+
+					break;
+			}
+
 		}
 
-		public override int ItemCount => mDays.Count;
+		public override int ItemCount => mDays.Count + 1;
+
+		public override int GetItemViewType(int position)
+		{
+			if (position == mDays.Count)
+			{
+				return EndConst;
+			}
+			else
+			{
+				return CardConst;
+			}
+		}
 
 		internal class ScheduleCardFragmentAdapterViewHolder : RecyclerView.ViewHolder
 		{
-			public CardView cardView;
+			public RecyclerView recyclerView;
 
 			public ScheduleCardFragmentAdapterViewHolder(View itemView) : base(itemView)
 			{
-				cardView = itemView.FindViewById<CardView>(Resource.Id.cardview_schedule);
+				recyclerView = itemView.FindViewById<RecyclerView>(Resource.Id.recyclerview_card_schedule); ;
+			}
+		}
+
+		internal class ScheduleCardEndFragmentAdapterViewHolder : RecyclerView.ViewHolder
+		{
+			public TextView textView;
+
+			public ScheduleCardEndFragmentAdapterViewHolder(View itemView) : base(itemView)
+			{
+				textView = itemView.FindViewById<TextView>(Resource.Id.textview_card_schedule_end);
 			}
 		}
 	}
