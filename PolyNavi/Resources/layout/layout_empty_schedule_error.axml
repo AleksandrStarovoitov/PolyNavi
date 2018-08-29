@@ -32,12 +32,13 @@
 				app:autoSizeTextType="uniform" />
 		<TextView 
 				android:id="@+id/textview_empty_schedule_error"
-				android:layout_width="wrap_content"
+				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:layout_margin="15dp"
 				android:gravity="center_horizontal"
-				android:layout_gravity="center_horizontal"
 				android:textAppearance="@style/ScheduleTitleDate"		
-				android:layout_alignParentBottom="true"/>
+				android:layout_alignParentBottom="true"
+		        app:autoSizeTextType="uniform"
+		        android:maxLines="1"/>
 	</RelativeLayout>
 </android.support.v4.widget.SwipeRefreshLayout>
