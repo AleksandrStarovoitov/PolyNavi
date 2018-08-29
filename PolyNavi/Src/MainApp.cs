@@ -72,7 +72,8 @@ namespace PolyNavi
             { "1-й профессорский корпус", new Point(60.00481, 30.37071)},
             { "2-й профессорский корпус", new Point(60.00475, 30.37796)},
             { "Дом ученых в Лесном", new Point(60.00448, 30.37908)},
-            { "Секретариат приемной комиссии", new Point(60.009405, 30.371689)}
+            { "Секретариат приемной комиссии", new Point(60.009405, 30.371689)},
+            { "ИПМЭиТ", new Point(59.994757, 30.356456) }
         };
 
         public Dictionary<string, string> RoomsDictionary { get; private set; } = new Dictionary<string, string>();

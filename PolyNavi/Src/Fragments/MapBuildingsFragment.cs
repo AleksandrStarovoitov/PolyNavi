@@ -38,7 +38,10 @@ namespace PolyNavi
 		const string Marker_B_Name = "ic_marker_b.png";
 		const string Marker_Location_name = "ic_gps_fixed_black.png";
 
-		const int RequestCodeFrom = 1;
+	    readonly Point leftBottom = new Point(30.356456, 59.994757);
+	    readonly Point rightTop = new Point(30.391848, 60.008916);
+
+        const int RequestCodeFrom = 1;
 		const int RequestCodeTo = 2;
 
 		readonly string[] PermissionsLocation =
@@ -67,7 +70,7 @@ namespace PolyNavi
 		LocationManager locationManager;
 		AnimatedPointsWithAutoUpdateLayer animatedLocation;
 
-		public override void OnCreate(Bundle savedInstanceState)
+        public override void OnCreate(Bundle savedInstanceState)
 		{
 			base.OnCreate(savedInstanceState);
 		}
@@ -138,9 +141,6 @@ namespace PolyNavi
 
         private bool IsInBounds(Location location)
         {
-            var leftBottom = new Point(30.365751, 59.999560);
-            var rightTop = new Point(30.391848, 60.008916);
-
             return leftBottom.X < location.Longitude && leftBottom.Y < location.Latitude
                 && rightTop.X > location.Longitude && rightTop.Y > location.Latitude;
         }
@@ -242,9 +242,7 @@ namespace PolyNavi
                 map.NavigateTo(7);
                 map.Transformation = new MinimalTransformation();
 
-                Point leftBot = new Point(30.365751, 59.999560).FromLonLat();
-                Point rightTop = new Point(30.391848, 60.008916).FromLonLat();
-                map.PanLimits = new BoundingBox(leftBot, rightTop);
+                map.PanLimits = new BoundingBox(leftBottom.FromLonLat(), rightTop.FromLonLat());
                 map.PanMode = PanMode.KeepCenterWithinExtents;
 
                 map.ZoomLimits = new MinMax(1, 7);

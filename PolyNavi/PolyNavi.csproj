@@ -249,10 +249,10 @@
     <Compile Include="Src\Fragments\ScheduleWeekFragment.cs" />
   </ItemGroup>
   <ItemGroup>
+    <AndroidAsset Include="Assets\polytech_map.routerdb" />
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
-    <AndroidAsset Include="Assets\polytech_map.routerdb" />
     <EmbeddedResource Include="EmbeddedResources\groups.json" />
     <AndroidAsset Include="Assets\floor_1.graph" />
     <AndroidAsset Include="Assets\floor_3_1.graph" />
