@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.starovoitov.polynavi" android:versionName="1.0.5" android:installLocation="auto" android:versionCode="6">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.starovoitov.polynavi" android:versionName="1.0.6" android:installLocation="auto" android:versionCode="7">
 	<uses-sdk android:minSdkVersion="21" android:targetSdkVersion="27" />
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 	<uses-permission android:name="android.permission.INTERNET" />
