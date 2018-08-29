@@ -211,6 +211,17 @@ namespace PolyNavi
             Instance = this;
             SharedPreferences = PreferenceManager.GetDefaultSharedPreferences(ApplicationContext);
             GraphSaverLoader = new Graph.SaverLoader(new AssetsProvider(ApplicationContext));
+            if (IsAppUpdated())
+            {
+                var groupName = SharedPreferences.GetString("groupnumber", "-1");
+
+                var dictionary = Instance.GroupsDictionary.Task.Result;
+
+                if (dictionary.TryGetValue(groupName, out int id))
+                {
+                    SharedPreferences.Edit().PutInt("groupid", id).Apply();
+                }
+            }
         }
 
         public override void OnCreate()
