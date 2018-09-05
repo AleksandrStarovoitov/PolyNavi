@@ -62,7 +62,6 @@ namespace PolyNavi
 				DrawContent(Resource.Id.relativelayout_week_schedule, Resource.Layout.layout_week_schedule);
 			}
 			LoadSheduleAndUpdateUIWithPorgressBar(weekDate, true);
-            mSwipeRefreshLayout.Refreshing = false;
 		}
 
 		private void LoadSheduleAndUpdateUIWithPorgressBar(DateTime weekDate, bool forceUpdate)
@@ -72,8 +71,10 @@ namespace PolyNavi
 				recyclerViewSchedule.SetAdapter(null);
 			}
 			var progress = view.FindViewById<ProgressBar>(Resource.Id.progressbar_week_schedule);
-			progress.Visibility = ViewStates.Visible;
-			Task.Run(async () =>
+            mSwipeRefreshLayout.Refreshing = true;
+            mSwipeRefreshLayout.Visibility = ViewStates.Invisible;
+            progress.Visibility = ViewStates.Visible;            
+            Task.Run(async () =>
 			{
 				var manager = await MainApp.Instance.PolyManager;
 				try
@@ -84,6 +85,8 @@ namespace PolyNavi
 					Activity.RunOnUiThread(() =>
 					{
 						progress.Visibility = ViewStates.Invisible;
+                        mSwipeRefreshLayout.Visibility = ViewStates.Visible;
+                        mSwipeRefreshLayout.Refreshing = false;
                         if (days.Count == 0)
                         {
                             DrawContent(Resource.Id.relativelayout_week_schedule, Resource.Layout.layout_empty_schedule_error);
