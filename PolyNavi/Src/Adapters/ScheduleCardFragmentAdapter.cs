@@ -72,6 +72,7 @@ namespace PolyNavi
 					TextView endTime = viewHolderLesson.endTime;
 					TextView type = viewHolderLesson.type;
                     TextView teacher = viewHolderLesson.teacher;
+                    TextView group = viewHolderLesson.group;
 
 					room.Text = "ауд. " + lesson.Auditories[0].Name;
 					building.Text = lesson.Auditories[0].Building.Name + ", ";
@@ -79,26 +80,31 @@ namespace PolyNavi
 					startTime.Text = lesson.Time_Start.ToString("HH:mm", cultureInfo);
 					endTime.Text = lesson.Time_End.ToString("HH:mm", cultureInfo);
 					type.Text = lesson.TypeObj.Name.Replace("Лабораторные", "Лаб.");
+                                        
                     if (lesson.Teachers == null || lesson.Teachers.Count == 0)
                     {
-                        var relativeLayout = ((ViewGroup)scheduleView).FindViewById(Resource.Id.relativelayout_row_schedule);
-                        relativeLayout.Measure(ViewGroup.LayoutParams.WrapContent, ViewGroup.LayoutParams.WrapContent);
-                        viewHolderLesson.teacher.Measure(ViewGroup.LayoutParams.WrapContent, ViewGroup.LayoutParams.WrapContent);
-                        
-                        var height = relativeLayout.MeasuredHeight;
-                        var tvHegiht = viewHolderLesson.teacher.MeasuredHeight;
-
-                        var layoutParams = relativeLayout.LayoutParameters;
-                        layoutParams.Height = height - tvHegiht;
+                        var lparams = (RelativeLayout.LayoutParams)group.LayoutParameters;
+                        lparams.AddRule(LayoutRules.Below, Resource.Id.textview_card_buildingnumber_row_lesson_schedule);
+                        group.LayoutParameters = lparams;
 
                         ((ViewGroup)scheduleView).RemoveView(viewHolderLesson.teacher);
-                        relativeLayout.LayoutParameters = layoutParams;
                     }
                     else
                     {
                         teacher.Text = String.Join(", ", lesson.Teachers.Select(t => t.Full_Name).ToArray());
-                    }                    
-					break;
+                    }
+
+                    if (!lesson.Additional_Info.Equals("")) //Поток или подгруппы
+                    {
+                        group.Text = lesson.Additional_Info;
+                    }
+                    else
+                    {
+                        group.Text = lesson.Groups.First().Name;
+                    }
+
+
+                    break;
 				case TitleConst:
 					viewHolderTitle = (ScheduleCardRowTitleViewHolder)viewHolder;
 					TitleTag title = (TitleTag)mLessons[position];
@@ -126,6 +132,7 @@ namespace PolyNavi
 			public TextView endTime;
 			public TextView type;
             public TextView teacher;
+            public TextView group;
 
 			public ScheduleCardRowLessonViewHolder(View itemView) : base(itemView)
 			{
@@ -136,6 +143,7 @@ namespace PolyNavi
 				endTime = itemView.FindViewById<TextView>(Resource.Id.textview_card_endtime_row_lesson_schedule);
 				type = itemView.FindViewById<TextView>(Resource.Id.textview_card_type_row_lesson_schedule);
                 teacher = itemView.FindViewById<TextView>(Resource.Id.textview_card_teacher_row_lesson_schedule);
+                group = itemView.FindViewById<TextView>(Resource.Id.textview_card_group_row_lesson_schedule);
 			}
 		}
 

@@ -3048,8 +3048,8 @@ namespace PolyNavi
 			// aapt resource value: 0x7f090037
 			public const int SYM = 2131296311;
 			
-			// aapt resource value: 0x7f09011b
-			public const int action0 = 2131296539;
+			// aapt resource value: 0x7f09011c
+			public const int action0 = 2131296540;
 			
 			// aapt resource value: 0x7f09007c
 			public const int action_bar = 2131296380;
@@ -3072,17 +3072,17 @@ namespace PolyNavi
 			// aapt resource value: 0x7f09005a
 			public const int action_bar_title = 2131296346;
 			
-			// aapt resource value: 0x7f090118
-			public const int action_container = 2131296536;
+			// aapt resource value: 0x7f090119
+			public const int action_container = 2131296537;
 			
 			// aapt resource value: 0x7f09007d
 			public const int action_context_bar = 2131296381;
 			
-			// aapt resource value: 0x7f09011f
-			public const int action_divider = 2131296543;
+			// aapt resource value: 0x7f090120
+			public const int action_divider = 2131296544;
 			
-			// aapt resource value: 0x7f090119
-			public const int action_image = 2131296537;
+			// aapt resource value: 0x7f09011a
+			public const int action_image = 2131296538;
 			
 			// aapt resource value: 0x7f090003
 			public const int action_menu_divider = 2131296259;
@@ -3099,11 +3099,11 @@ namespace PolyNavi
 			// aapt resource value: 0x7f09005c
 			public const int action_mode_close_button = 2131296348;
 			
-			// aapt resource value: 0x7f09011a
-			public const int action_text = 2131296538;
+			// aapt resource value: 0x7f09011b
+			public const int action_text = 2131296539;
 			
-			// aapt resource value: 0x7f090128
-			public const int actions = 2131296552;
+			// aapt resource value: 0x7f090129
+			public const int actions = 2131296553;
 			
 			// aapt resource value: 0x7f09005d
 			public const int activity_chooser_view_content = 2131296349;
@@ -3141,8 +3141,8 @@ namespace PolyNavi
 			// aapt resource value: 0x7f090090
 			public const int autocompletetextview_auth = 2131296400;
 			
-			// aapt resource value: 0x7f09012c
-			public const int autocompletetextview_group_pref = 2131296556;
+			// aapt resource value: 0x7f09012d
+			public const int autocompletetextview_group_pref = 2131296557;
 			
 			// aapt resource value: 0x7f09002f
 			public const int beginning = 2131296303;
@@ -3168,11 +3168,11 @@ namespace PolyNavi
 			// aapt resource value: 0x7f0900a1
 			public const int button_welcome_skip = 2131296417;
 			
-			// aapt resource value: 0x7f09011c
-			public const int cancel_action = 2131296540;
+			// aapt resource value: 0x7f09011d
+			public const int cancel_action = 2131296541;
 			
-			// aapt resource value: 0x7f090101
-			public const int cardview_schedule = 2131296513;
+			// aapt resource value: 0x7f090102
+			public const int cardview_schedule = 2131296514;
 			
 			// aapt resource value: 0x7f090045
 			public const int center = 2131296325;
@@ -3186,8 +3186,8 @@ namespace PolyNavi
 			// aapt resource value: 0x7f090073
 			public const int checkbox = 2131296371;
 			
-			// aapt resource value: 0x7f090124
-			public const int chronometer = 2131296548;
+			// aapt resource value: 0x7f090125
+			public const int chronometer = 2131296549;
 			
 			// aapt resource value: 0x7f09004e
 			public const int clip_horizontal = 2131296334;
@@ -3261,8 +3261,8 @@ namespace PolyNavi
 			// aapt resource value: 0x7f090030
 			public const int end = 2131296304;
 			
-			// aapt resource value: 0x7f09012a
-			public const int end_padder = 2131296554;
+			// aapt resource value: 0x7f09012b
+			public const int end_padder = 2131296555;
 			
 			// aapt resource value: 0x7f09003f
 			public const int enterAlways = 2131296319;
@@ -3348,11 +3348,11 @@ namespace PolyNavi
 			// aapt resource value: 0x7f090062
 			public const int icon = 2131296354;
 			
-			// aapt resource value: 0x7f09012b
-			public const int icon_frame = 2131296555;
+			// aapt resource value: 0x7f09012c
+			public const int icon_frame = 2131296556;
 			
-			// aapt resource value: 0x7f090129
-			public const int icon_group = 2131296553;
+			// aapt resource value: 0x7f09012a
+			public const int icon_group = 2131296554;
 			
 			// aapt resource value: 0x7f09003a
 			public const int ifRoom = 2131296314;
@@ -3363,8 +3363,8 @@ namespace PolyNavi
 			// aapt resource value: 0x7f0900e7
 			public const int imagebutton_currentlocation_map_buildings = 2131296487;
 			
-			// aapt resource value: 0x7f090106
-			public const int imageview_empty_schedule_error = 2131296518;
+			// aapt resource value: 0x7f090107
+			public const int imageview_empty_schedule_error = 2131296519;
 			
 			// aapt resource value: 0x7f0900ca
 			public const int imageview_error = 2131296458;
@@ -3375,14 +3375,14 @@ namespace PolyNavi
 			// aapt resource value: 0x7f0900e2
 			public const int imageview_fixed_map = 2131296482;
 			
-			// aapt resource value: 0x7f09012e
-			public const int imageview_group_pref = 2131296558;
+			// aapt resource value: 0x7f09012f
+			public const int imageview_group_pref = 2131296559;
 			
 			// aapt resource value: 0x7f0900b7
 			public const int imageview_logo_about = 2131296439;
 			
-			// aapt resource value: 0x7f09010d
-			public const int imageview_no_connection = 2131296525;
+			// aapt resource value: 0x7f09010e
+			public const int imageview_no_connection = 2131296526;
 			
 			// aapt resource value: 0x7f0900d5
 			public const int imageview_notfixed = 2131296469;
@@ -3390,11 +3390,11 @@ namespace PolyNavi
 			// aapt resource value: 0x7f0900e1
 			public const int imageview_notfixed_map = 2131296481;
 			
-			// aapt resource value: 0x7f090111
-			public const int imageview_route_mainbuilding = 2131296529;
+			// aapt resource value: 0x7f090112
+			public const int imageview_route_mainbuilding = 2131296530;
 			
-			// aapt resource value: 0x7f090114
-			public const int imageview_route_otherbuildings = 2131296532;
+			// aapt resource value: 0x7f090115
+			public const int imageview_route_otherbuildings = 2131296533;
 			
 			// aapt resource value: 0x7f0900f0
 			public const int imageview_welcome_featureimage = 2131296496;
@@ -3408,8 +3408,8 @@ namespace PolyNavi
 			// aapt resource value: 0x7f0900a4
 			public const int imageview_welcome_indicator_2 = 2131296420;
 			
-			// aapt resource value: 0x7f090125
-			public const int info = 2131296549;
+			// aapt resource value: 0x7f090126
+			public const int info = 2131296550;
 			
 			// aapt resource value: 0x7f090059
 			public const int italic = 2131296345;
@@ -3423,14 +3423,14 @@ namespace PolyNavi
 			// aapt resource value: 0x7f090093
 			public const int layout_auth_update = 2131296403;
 			
-			// aapt resource value: 0x7f090105
-			public const int layout_empty_schedule_error_clickable_zone = 2131296517;
+			// aapt resource value: 0x7f090106
+			public const int layout_empty_schedule_error_clickable_zone = 2131296518;
 			
 			// aapt resource value: 0x7f0900c9
 			public const int layout_error_clickable_zone = 2131296457;
 			
-			// aapt resource value: 0x7f09010c
-			public const int layout_no_connection_clickable_zone = 2131296524;
+			// aapt resource value: 0x7f09010d
+			public const int layout_no_connection_clickable_zone = 2131296525;
 			
 			// aapt resource value: 0x7f0900f4
 			public const int layout_welcome_description = 2131296500;
@@ -3459,8 +3459,8 @@ namespace PolyNavi
 			// aapt resource value: 0x7f0900c0
 			public const int linearlayout_github_about = 2131296448;
 			
-			// aapt resource value: 0x7f090109
-			public const int linearlayout_header_main = 2131296521;
+			// aapt resource value: 0x7f09010a
+			public const int linearlayout_header_main = 2131296522;
 			
 			// aapt resource value: 0x7f090099
 			public const int linearlayout_main = 2131296409;
@@ -3474,8 +3474,8 @@ namespace PolyNavi
 			// aapt resource value: 0x7f0900be
 			public const int linearlayout_rate_about = 2131296446;
 			
-			// aapt resource value: 0x7f090130
-			public const int list = 2131296560;
+			// aapt resource value: 0x7f090131
+			public const int list = 2131296561;
 			
 			// aapt resource value: 0x7f09001d
 			public const int listMode = 2131296285;
@@ -3489,17 +3489,17 @@ namespace PolyNavi
 			// aapt resource value: 0x7f0900dc
 			public const int mapControl = 2131296476;
 			
-			// aapt resource value: 0x7f090136
-			public const int masked = 2131296566;
+			// aapt resource value: 0x7f090137
+			public const int masked = 2131296567;
 			
-			// aapt resource value: 0x7f09011e
-			public const int media_actions = 2131296542;
+			// aapt resource value: 0x7f09011f
+			public const int media_actions = 2131296543;
 			
-			// aapt resource value: 0x7f09013c
-			public const int menu_schedule_datetimepicker = 2131296572;
+			// aapt resource value: 0x7f09013d
+			public const int menu_schedule_datetimepicker = 2131296573;
 			
-			// aapt resource value: 0x7f090134
-			public const int message = 2131296564;
+			// aapt resource value: 0x7f090135
+			public const int message = 2131296565;
 			
 			// aapt resource value: 0x7f090031
 			public const int middle = 2131296305;
@@ -3510,20 +3510,20 @@ namespace PolyNavi
 			// aapt resource value: 0x7f090028
 			public const int multiply = 2131296296;
 			
-			// aapt resource value: 0x7f09013b
-			public const int nav_about_menu = 2131296571;
-			
-			// aapt resource value: 0x7f090138
-			public const int nav_buildings_menu = 2131296568;
-			
-			// aapt resource value: 0x7f090137
-			public const int nav_gz_menu = 2131296567;
+			// aapt resource value: 0x7f09013c
+			public const int nav_about_menu = 2131296572;
 			
 			// aapt resource value: 0x7f090139
-			public const int nav_rasp_menu = 2131296569;
+			public const int nav_buildings_menu = 2131296569;
+			
+			// aapt resource value: 0x7f090138
+			public const int nav_gz_menu = 2131296568;
 			
 			// aapt resource value: 0x7f09013a
-			public const int nav_settings_menu = 2131296570;
+			public const int nav_rasp_menu = 2131296570;
+			
+			// aapt resource value: 0x7f09013b
+			public const int nav_settings_menu = 2131296571;
 			
 			// aapt resource value: 0x7f0900af
 			public const int navigation_header_container = 2131296431;
@@ -3540,14 +3540,14 @@ namespace PolyNavi
 			// aapt resource value: 0x7f09001e
 			public const int normal = 2131296286;
 			
-			// aapt resource value: 0x7f090127
-			public const int notification_background = 2131296551;
+			// aapt resource value: 0x7f090128
+			public const int notification_background = 2131296552;
+			
+			// aapt resource value: 0x7f090122
+			public const int notification_main_column = 2131296546;
 			
 			// aapt resource value: 0x7f090121
-			public const int notification_main_column = 2131296545;
-			
-			// aapt resource value: 0x7f090120
-			public const int notification_main_column_container = 2131296544;
+			public const int notification_main_column_container = 2131296545;
 			
 			// aapt resource value: 0x7f09004c
 			public const int parallax = 2131296332;
@@ -3570,26 +3570,26 @@ namespace PolyNavi
 			// aapt resource value: 0x7f090095
 			public const int progressbar_auth = 2131296405;
 			
-			// aapt resource value: 0x7f09012d
-			public const int progressbar_group_pref = 2131296557;
+			// aapt resource value: 0x7f09012e
+			public const int progressbar_group_pref = 2131296558;
 			
 			// aapt resource value: 0x7f0900e9
 			public const int progressbar_map_buildings = 2131296489;
 			
-			// aapt resource value: 0x7f090115
-			public const int progressbar_week_schedule = 2131296533;
+			// aapt resource value: 0x7f090116
+			public const int progressbar_week_schedule = 2131296534;
 			
 			// aapt resource value: 0x7f090075
 			public const int radio = 2131296373;
 			
-			// aapt resource value: 0x7f090102
-			public const int recyclerview_card_schedule = 2131296514;
+			// aapt resource value: 0x7f090103
+			public const int recyclerview_card_schedule = 2131296515;
 			
-			// aapt resource value: 0x7f090117
-			public const int recyclerview_week_schedule = 2131296535;
+			// aapt resource value: 0x7f090118
+			public const int recyclerview_week_schedule = 2131296536;
 			
-			// aapt resource value: 0x7f090113
-			public const int relativeLayout_route_row_otherbuildings = 2131296531;
+			// aapt resource value: 0x7f090114
+			public const int relativeLayout_route_row_otherbuildings = 2131296532;
 			
 			// aapt resource value: 0x7f0900b6
 			public const int relativelayout_about = 2131296438;
@@ -3603,14 +3603,14 @@ namespace PolyNavi
 			// aapt resource value: 0x7f0900ce
 			public const int relativelayout_floor_buttons_mainbuilding = 2131296462;
 			
-			// aapt resource value: 0x7f090110
-			public const int relativelayout_route_row_mainbuilng = 2131296528;
+			// aapt resource value: 0x7f090111
+			public const int relativelayout_route_row_mainbuilng = 2131296529;
 			
 			// aapt resource value: 0x7f0900f6
 			public const int relativelayout_row_schedule = 2131296502;
 			
-			// aapt resource value: 0x7f0900fe
-			public const int relativelayout_row_title_schedule = 2131296510;
+			// aapt resource value: 0x7f0900ff
+			public const int relativelayout_row_title_schedule = 2131296511;
 			
 			// aapt resource value: 0x7f0900ea
 			public const int relativelayout_schedule = 2131296490;
@@ -3621,11 +3621,11 @@ namespace PolyNavi
 			// aapt resource value: 0x7f09004a
 			public const int right = 2131296330;
 			
-			// aapt resource value: 0x7f090126
-			public const int right_icon = 2131296550;
+			// aapt resource value: 0x7f090127
+			public const int right_icon = 2131296551;
 			
-			// aapt resource value: 0x7f090122
-			public const int right_side = 2131296546;
+			// aapt resource value: 0x7f090123
+			public const int right_side = 2131296547;
 			
 			// aapt resource value: 0x7f09000c
 			public const int save_image_matrix = 2131296268;
@@ -3696,11 +3696,11 @@ namespace PolyNavi
 			// aapt resource value: 0x7f090089
 			public const int search_voice_btn = 2131296393;
 			
-			// aapt resource value: 0x7f090131
-			public const int seekbar = 2131296561;
-			
 			// aapt resource value: 0x7f090132
-			public const int seekbar_value = 2131296562;
+			public const int seekbar = 2131296562;
+			
+			// aapt resource value: 0x7f090133
+			public const int seekbar_value = 2131296563;
 			
 			// aapt resource value: 0x7f09008a
 			public const int select_dialog_listview = 2131296394;
@@ -3732,8 +3732,8 @@ namespace PolyNavi
 			// aapt resource value: 0x7f090064
 			public const int spacer = 2131296356;
 			
-			// aapt resource value: 0x7f09012f
-			public const int spinner = 2131296559;
+			// aapt resource value: 0x7f090130
+			public const int spinner = 2131296560;
 			
 			// aapt resource value: 0x7f090008
 			public const int split_action_bar = 2131296264;
@@ -3750,8 +3750,8 @@ namespace PolyNavi
 			// aapt resource value: 0x7f09004b
 			public const int start = 2131296331;
 			
-			// aapt resource value: 0x7f09011d
-			public const int status_bar_latest_event_content = 2131296541;
+			// aapt resource value: 0x7f09011e
+			public const int status_bar_latest_event_content = 2131296542;
 			
 			// aapt resource value: 0x7f090076
 			public const int submenuarrow = 2131296374;
@@ -3759,14 +3759,14 @@ namespace PolyNavi
 			// aapt resource value: 0x7f090087
 			public const int submit_area = 2131296391;
 			
-			// aapt resource value: 0x7f090104
-			public const int swipetorefresh_empty_schedule_error = 2131296516;
+			// aapt resource value: 0x7f090105
+			public const int swipetorefresh_empty_schedule_error = 2131296517;
 			
-			// aapt resource value: 0x7f090116
-			public const int swipetorefresh_week_schedule = 2131296534;
+			// aapt resource value: 0x7f090117
+			public const int swipetorefresh_week_schedule = 2131296535;
 			
-			// aapt resource value: 0x7f090133
-			public const int switchWidget = 2131296563;
+			// aapt resource value: 0x7f090134
+			public const int switchWidget = 2131296564;
 			
 			// aapt resource value: 0x7f09001f
 			public const int tabMode = 2131296287;
@@ -3828,20 +3828,23 @@ namespace PolyNavi
 			// aapt resource value: 0x7f0900fb
 			public const int textview_card_buildingnumber_row_lesson_schedule = 2131296507;
 			
-			// aapt resource value: 0x7f090100
-			public const int textview_card_date_row_title_schedule = 2131296512;
+			// aapt resource value: 0x7f090101
+			public const int textview_card_date_row_title_schedule = 2131296513;
 			
-			// aapt resource value: 0x7f0900ff
-			public const int textview_card_dayofweek_row_title_schedule = 2131296511;
+			// aapt resource value: 0x7f090100
+			public const int textview_card_dayofweek_row_title_schedule = 2131296512;
 			
 			// aapt resource value: 0x7f0900f8
 			public const int textview_card_endtime_row_lesson_schedule = 2131296504;
 			
+			// aapt resource value: 0x7f0900fe
+			public const int textview_card_group_row_lesson_schedule = 2131296510;
+			
 			// aapt resource value: 0x7f0900fc
 			public const int textview_card_room_row_lesson_schedule = 2131296508;
 			
-			// aapt resource value: 0x7f090103
-			public const int textview_card_schedule_end = 2131296515;
+			// aapt resource value: 0x7f090104
+			public const int textview_card_schedule_end = 2131296516;
 			
 			// aapt resource value: 0x7f0900f7
 			public const int textview_card_starttime_row_lesson_schedule = 2131296503;
@@ -3864,11 +3867,11 @@ namespace PolyNavi
 			// aapt resource value: 0x7f0900c6
 			public const int textview_contacts_title_about = 2131296454;
 			
-			// aapt resource value: 0x7f090108
-			public const int textview_empty_schedule_error = 2131296520;
+			// aapt resource value: 0x7f090109
+			public const int textview_empty_schedule_error = 2131296521;
 			
-			// aapt resource value: 0x7f090107
-			public const int textview_empty_schedule_error_title = 2131296519;
+			// aapt resource value: 0x7f090108
+			public const int textview_empty_schedule_error_title = 2131296520;
 			
 			// aapt resource value: 0x7f0900cd
 			public const int textview_error_summary = 2131296461;
@@ -3879,23 +3882,23 @@ namespace PolyNavi
 			// aapt resource value: 0x7f090094
 			public const int textview_groupsupdate_auth = 2131296404;
 			
-			// aapt resource value: 0x7f09010b
-			public const int textview_header_navi = 2131296523;
+			// aapt resource value: 0x7f09010c
+			public const int textview_header_navi = 2131296524;
 			
-			// aapt resource value: 0x7f09010a
-			public const int textview_header_poly = 2131296522;
+			// aapt resource value: 0x7f09010b
+			public const int textview_header_poly = 2131296523;
 			
 			// aapt resource value: 0x7f090092
 			public const int textview_later_auth = 2131296402;
 			
+			// aapt resource value: 0x7f090110
+			public const int textview_no_connection_tap = 2131296528;
+			
 			// aapt resource value: 0x7f09010f
-			public const int textview_no_connection_tap = 2131296527;
+			public const int textview_no_connection_title = 2131296527;
 			
-			// aapt resource value: 0x7f09010e
-			public const int textview_no_connection_title = 2131296526;
-			
-			// aapt resource value: 0x7f090112
-			public const int textview_route = 2131296530;
+			// aapt resource value: 0x7f090113
+			public const int textview_route = 2131296531;
 			
 			// aapt resource value: 0x7f0900f5
 			public const int textview_welcome_description = 2131296501;
@@ -3903,8 +3906,8 @@ namespace PolyNavi
 			// aapt resource value: 0x7f0900f3
 			public const int textview_welcome_header = 2131296499;
 			
-			// aapt resource value: 0x7f090123
-			public const int time = 2131296547;
+			// aapt resource value: 0x7f090124
+			public const int time = 2131296548;
 			
 			// aapt resource value: 0x7f09001c
 			public const int title = 2131296284;
@@ -3969,8 +3972,8 @@ namespace PolyNavi
 			// aapt resource value: 0x7f0900a0
 			public const int viewpager_welcome = 2131296416;
 			
-			// aapt resource value: 0x7f090135
-			public const int visible = 2131296565;
+			// aapt resource value: 0x7f090136
+			public const int visible = 2131296566;
 			
 			// aapt resource value: 0x7f090097
 			public const int webview_copyright = 2131296407;
@@ -4459,53 +4462,53 @@ namespace PolyNavi
 			// aapt resource value: 0x7f0b0012
 			public const int abc_toolbar_collapse_description = 2131427346;
 			
+			// aapt resource value: 0x7f0b0061
+			public const int about_contacts_kirill_link = 2131427425;
+			
 			// aapt resource value: 0x7f0b0060
-			public const int about_contacts_kirill_link = 2131427424;
+			public const int about_contacts_sasha_link = 2131427424;
 			
 			// aapt resource value: 0x7f0b005f
-			public const int about_contacts_sasha_link = 2131427423;
+			public const int about_contacts_title = 2131427423;
 			
 			// aapt resource value: 0x7f0b005e
-			public const int about_contacts_title = 2131427422;
+			public const int about_copyright_title = 2131427422;
 			
 			// aapt resource value: 0x7f0b005d
-			public const int about_copyright_title = 2131427421;
+			public const int about_donate_link = 2131427421;
 			
 			// aapt resource value: 0x7f0b005c
-			public const int about_donate_link = 2131427420;
+			public const int about_donate_subtitle = 2131427420;
 			
 			// aapt resource value: 0x7f0b005b
-			public const int about_donate_subtitle = 2131427419;
-			
-			// aapt resource value: 0x7f0b005a
-			public const int about_donate_title = 2131427418;
-			
-			// aapt resource value: 0x7f0b0053
-			public const int about_email_address = 2131427411;
-			
-			// aapt resource value: 0x7f0b0052
-			public const int about_email_title = 2131427410;
-			
-			// aapt resource value: 0x7f0b0059
-			public const int about_github_link = 2131427417;
-			
-			// aapt resource value: 0x7f0b0058
-			public const int about_github_subtitle = 2131427416;
-			
-			// aapt resource value: 0x7f0b0057
-			public const int about_github_title = 2131427415;
-			
-			// aapt resource value: 0x7f0b0050
-			public const int about_nav = 2131427408;
-			
-			// aapt resource value: 0x7f0b0056
-			public const int about_rate_link = 2131427414;
-			
-			// aapt resource value: 0x7f0b0055
-			public const int about_rate_subtitle = 2131427413;
+			public const int about_donate_title = 2131427419;
 			
 			// aapt resource value: 0x7f0b0054
-			public const int about_rate_title = 2131427412;
+			public const int about_email_address = 2131427412;
+			
+			// aapt resource value: 0x7f0b0053
+			public const int about_email_title = 2131427411;
+			
+			// aapt resource value: 0x7f0b005a
+			public const int about_github_link = 2131427418;
+			
+			// aapt resource value: 0x7f0b0059
+			public const int about_github_subtitle = 2131427417;
+			
+			// aapt resource value: 0x7f0b0058
+			public const int about_github_title = 2131427416;
+			
+			// aapt resource value: 0x7f0b0051
+			public const int about_nav = 2131427409;
+			
+			// aapt resource value: 0x7f0b0057
+			public const int about_rate_link = 2131427415;
+			
+			// aapt resource value: 0x7f0b0056
+			public const int about_rate_subtitle = 2131427414;
+			
+			// aapt resource value: 0x7f0b0055
+			public const int about_rate_title = 2131427413;
 			
 			// aapt resource value: 0x7f0b002b
 			public const int app_name = 2131427371;
@@ -4519,20 +4522,20 @@ namespace PolyNavi
 			// aapt resource value: 0x7f0b0038
 			public const int building_schedule_row = 2131427384;
 			
-			// aapt resource value: 0x7f0b003d
-			public const int buildings_nav = 2131427389;
+			// aapt resource value: 0x7f0b003e
+			public const int buildings_nav = 2131427390;
 			
-			// aapt resource value: 0x7f0b0064
-			public const int button_auth = 2131427428;
+			// aapt resource value: 0x7f0b0065
+			public const int button_auth = 2131427429;
 			
 			// aapt resource value: 0x7f0b0022
 			public const int character_counter_pattern = 2131427362;
 			
-			// aapt resource value: 0x7f0b007d
-			public const int choose_date = 2131427453;
+			// aapt resource value: 0x7f0b007e
+			public const int choose_date = 2131427454;
 			
-			// aapt resource value: 0x7f0b0040
-			public const int currentweek_tab = 2131427392;
+			// aapt resource value: 0x7f0b0041
+			public const int currentweek_tab = 2131427393;
 			
 			// aapt resource value: 0x7f0b0032
 			public const int date_title_schedule_row = 2131427378;
@@ -4540,62 +4543,65 @@ namespace PolyNavi
 			// aapt resource value: 0x7f0b0033
 			public const int dayofweek_title_schedule_row = 2131427379;
 			
-			// aapt resource value: 0x7f0b0063
-			public const int edittext_auth = 2131427427;
+			// aapt resource value: 0x7f0b0064
+			public const int edittext_auth = 2131427428;
 			
 			// aapt resource value: 0x7f0b002e
 			public const int edittext_from = 2131427374;
 			
-			// aapt resource value: 0x7f0b0046
-			public const int edittext_from_buildings = 2131427398;
+			// aapt resource value: 0x7f0b0047
+			public const int edittext_from_buildings = 2131427399;
 			
-			// aapt resource value: 0x7f0b0062
-			public const int edittext_title = 2131427426;
+			// aapt resource value: 0x7f0b0063
+			public const int edittext_title = 2131427427;
 			
 			// aapt resource value: 0x7f0b002f
 			public const int edittext_to = 2131427375;
 			
-			// aapt resource value: 0x7f0b0047
-			public const int edittext_to_buildings = 2131427399;
+			// aapt resource value: 0x7f0b0048
+			public const int edittext_to_buildings = 2131427400;
 			
-			// aapt resource value: 0x7f0b007e
-			public const int email_send_intent = 2131427454;
-			
-			// aapt resource value: 0x7f0b004d
-			public const int empty_schedule_error_title_current = 2131427405;
-			
-			// aapt resource value: 0x7f0b004f
-			public const int empty_schedule_error_title_end = 2131427407;
+			// aapt resource value: 0x7f0b007f
+			public const int email_send_intent = 2131427455;
 			
 			// aapt resource value: 0x7f0b004e
-			public const int empty_schedule_error_title_next = 2131427406;
+			public const int empty_schedule_error_title_current = 2131427406;
 			
-			// aapt resource value: 0x7f0b004c
-			public const int empty_schedule_error_title_start = 2131427404;
+			// aapt resource value: 0x7f0b0050
+			public const int empty_schedule_error_title_end = 2131427408;
+			
+			// aapt resource value: 0x7f0b004f
+			public const int empty_schedule_error_title_next = 2131427407;
+			
+			// aapt resource value: 0x7f0b004d
+			public const int empty_schedule_error_title_start = 2131427405;
 			
 			// aapt resource value: 0x7f0b0036
 			public const int endtime_schedule_row = 2131427382;
 			
-			// aapt resource value: 0x7f0b0045
-			public const int enter_correct_number = 2131427397;
+			// aapt resource value: 0x7f0b0046
+			public const int enter_correct_number = 2131427398;
 			
-			// aapt resource value: 0x7f0b0061
-			public const int enter_group_number = 2131427425;
+			// aapt resource value: 0x7f0b0062
+			public const int enter_group_number = 2131427426;
+			
+			// aapt resource value: 0x7f0b0072
+			public const int error_summary = 2131427442;
 			
 			// aapt resource value: 0x7f0b0071
-			public const int error_summary = 2131427441;
+			public const int error_tap = 2131427441;
 			
 			// aapt resource value: 0x7f0b0070
-			public const int error_tap = 2131427440;
+			public const int error_title = 2131427440;
 			
-			// aapt resource value: 0x7f0b006f
-			public const int error_title = 2131427439;
+			// aapt resource value: 0x7f0b0066
+			public const int group_later = 2131427430;
 			
-			// aapt resource value: 0x7f0b0065
-			public const int group_later = 2131427429;
+			// aapt resource value: 0x7f0b003b
+			public const int group_schedule_row = 2131427387;
 			
-			// aapt resource value: 0x7f0b003c
-			public const int mainbuilding_nav = 2131427388;
+			// aapt resource value: 0x7f0b003d
+			public const int mainbuilding_nav = 2131427389;
 			
 			// aapt resource value: 0x7f0b0031
 			public const int navi = 2131427377;
@@ -4606,17 +4612,17 @@ namespace PolyNavi
 			// aapt resource value: 0x7f0b002c
 			public const int navigation_drawer_open = 2131427372;
 			
-			// aapt resource value: 0x7f0b0041
-			public const int nextweek_tab = 2131427393;
+			// aapt resource value: 0x7f0b0042
+			public const int nextweek_tab = 2131427394;
+			
+			// aapt resource value: 0x7f0b004c
+			public const int no_connection_tap = 2131427404;
 			
 			// aapt resource value: 0x7f0b004b
-			public const int no_connection_tap = 2131427403;
+			public const int no_connection_title = 2131427403;
 			
-			// aapt resource value: 0x7f0b004a
-			public const int no_connection_title = 2131427402;
-			
-			// aapt resource value: 0x7f0b0051
-			public const int other_nav = 2131427409;
+			// aapt resource value: 0x7f0b0052
+			public const int other_nav = 2131427410;
 			
 			// aapt resource value: 0x7f0b0023
 			public const int password_toggle_content_description = 2131427363;
@@ -4636,50 +4642,50 @@ namespace PolyNavi
 			// aapt resource value: 0x7f0b0030
 			public const int poly = 2131427376;
 			
-			// aapt resource value: 0x7f0b0043
-			public const int pref_buildings_activity = 2131427395;
-			
-			// aapt resource value: 0x7f0b006b
-			public const int pref_groupnumber_dialog_title = 2131427435;
-			
-			// aapt resource value: 0x7f0b006a
-			public const int pref_groupnumber_summary = 2131427434;
-			
-			// aapt resource value: 0x7f0b0069
-			public const int pref_groupnumber_title = 2131427433;
-			
-			// aapt resource value: 0x7f0b0068
-			public const int pref_language_summary = 2131427432;
-			
-			// aapt resource value: 0x7f0b0067
-			public const int pref_language_title = 2131427431;
-			
-			// aapt resource value: 0x7f0b0042
-			public const int pref_mainbuilding_activity = 2131427394;
-			
 			// aapt resource value: 0x7f0b0044
-			public const int pref_schedule_activity = 2131427396;
-			
-			// aapt resource value: 0x7f0b006e
-			public const int pref_startactivity_dialog_title = 2131427438;
-			
-			// aapt resource value: 0x7f0b006d
-			public const int pref_startactivity_summary = 2131427437;
+			public const int pref_buildings_activity = 2131427396;
 			
 			// aapt resource value: 0x7f0b006c
-			public const int pref_startactivity_title = 2131427436;
+			public const int pref_groupnumber_dialog_title = 2131427436;
+			
+			// aapt resource value: 0x7f0b006b
+			public const int pref_groupnumber_summary = 2131427435;
+			
+			// aapt resource value: 0x7f0b006a
+			public const int pref_groupnumber_title = 2131427434;
+			
+			// aapt resource value: 0x7f0b0069
+			public const int pref_language_summary = 2131427433;
+			
+			// aapt resource value: 0x7f0b0068
+			public const int pref_language_title = 2131427432;
+			
+			// aapt resource value: 0x7f0b0043
+			public const int pref_mainbuilding_activity = 2131427395;
+			
+			// aapt resource value: 0x7f0b0045
+			public const int pref_schedule_activity = 2131427397;
+			
+			// aapt resource value: 0x7f0b006f
+			public const int pref_startactivity_dialog_title = 2131427439;
+			
+			// aapt resource value: 0x7f0b006e
+			public const int pref_startactivity_summary = 2131427438;
+			
+			// aapt resource value: 0x7f0b006d
+			public const int pref_startactivity_title = 2131427437;
 			
 			// aapt resource value: 0x7f0b0034
 			public const int room_schedule_row = 2131427380;
 			
-			// aapt resource value: 0x7f0b003e
-			public const int schedule_nav = 2131427390;
+			// aapt resource value: 0x7f0b003f
+			public const int schedule_nav = 2131427391;
 			
 			// aapt resource value: 0x7f0b0013
 			public const int search_menu_title = 2131427347;
 			
-			// aapt resource value: 0x7f0b003f
-			public const int settings_nav = 2131427391;
+			// aapt resource value: 0x7f0b0040
+			public const int settings_nav = 2131427392;
 			
 			// aapt resource value: 0x7f0b0035
 			public const int starttime_schedule_row = 2131427381;
@@ -4693,20 +4699,20 @@ namespace PolyNavi
 			// aapt resource value: 0x7f0b003a
 			public const int teacher_schedule_row = 2131427386;
 			
-			// aapt resource value: 0x7f0b0049
-			public const int title_copyright_activity = 2131427401;
+			// aapt resource value: 0x7f0b004a
+			public const int title_copyright_activity = 2131427402;
 			
-			// aapt resource value: 0x7f0b0048
-			public const int title_route_activity = 2131427400;
+			// aapt resource value: 0x7f0b0049
+			public const int title_route_activity = 2131427401;
 			
 			// aapt resource value: 0x7f0b0039
 			public const int type_schedule_row = 2131427385;
 			
-			// aapt resource value: 0x7f0b0066
-			public const int update_groups_auth = 2131427430;
+			// aapt resource value: 0x7f0b0067
+			public const int update_groups_auth = 2131427431;
 			
-			// aapt resource value: 0x7f0b003b
-			public const int updated = 2131427387;
+			// aapt resource value: 0x7f0b003c
+			public const int updated = 2131427388;
 			
 			// aapt resource value: 0x7f0b0000
 			public const int v7_preference_off = 2131427328;
@@ -4714,38 +4720,38 @@ namespace PolyNavi
 			// aapt resource value: 0x7f0b0001
 			public const int v7_preference_on = 2131427329;
 			
-			// aapt resource value: 0x7f0b0075
-			public const int welcome_description_first = 2131427445;
-			
 			// aapt resource value: 0x7f0b0076
-			public const int welcome_description_second = 2131427446;
+			public const int welcome_description_first = 2131427446;
 			
 			// aapt resource value: 0x7f0b0077
-			public const int welcome_description_third = 2131427447;
+			public const int welcome_description_second = 2131427447;
 			
 			// aapt resource value: 0x7f0b0078
-			public const int welcome_finish = 2131427448;
-			
-			// aapt resource value: 0x7f0b0072
-			public const int welcome_header_first = 2131427442;
-			
-			// aapt resource value: 0x7f0b0073
-			public const int welcome_header_second = 2131427443;
-			
-			// aapt resource value: 0x7f0b0074
-			public const int welcome_header_third = 2131427444;
+			public const int welcome_description_third = 2131427448;
 			
 			// aapt resource value: 0x7f0b0079
-			public const int welcome_skip = 2131427449;
+			public const int welcome_finish = 2131427449;
+			
+			// aapt resource value: 0x7f0b0073
+			public const int welcome_header_first = 2131427443;
+			
+			// aapt resource value: 0x7f0b0074
+			public const int welcome_header_second = 2131427444;
+			
+			// aapt resource value: 0x7f0b0075
+			public const int welcome_header_third = 2131427445;
 			
 			// aapt resource value: 0x7f0b007a
-			public const int wrong_group = 2131427450;
-			
-			// aapt resource value: 0x7f0b007c
-			public const int wrong_group_error = 2131427452;
+			public const int welcome_skip = 2131427450;
 			
 			// aapt resource value: 0x7f0b007b
-			public const int wrong_room = 2131427451;
+			public const int wrong_group = 2131427451;
+			
+			// aapt resource value: 0x7f0b007d
+			public const int wrong_group_error = 2131427453;
+			
+			// aapt resource value: 0x7f0b007c
+			public const int wrong_room = 2131427452;
 			
 			static String()
 			{
