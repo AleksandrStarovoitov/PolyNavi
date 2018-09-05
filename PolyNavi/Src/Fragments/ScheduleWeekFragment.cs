@@ -28,6 +28,11 @@ namespace PolyNavi
         int weekTag;
         int dayOfYear;
 
+        public ScheduleWeekFragment()
+        {
+
+        }
+
 		public ScheduleWeekFragment(DateTime weekDate, int weekTag, int dayOfYear)
 		{
 			this.weekDate = weekDate;

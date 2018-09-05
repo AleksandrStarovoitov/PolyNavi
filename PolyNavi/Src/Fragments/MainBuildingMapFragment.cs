@@ -8,6 +8,11 @@ namespace PolyNavi
 		public MainBuildingView MapView { get; set; }
 		public int DrawawbleId { get; set; }
 
+        public MainBuildingMapFragment()
+        {
+
+        }
+
 		public MainBuildingMapFragment(int id)
 		{
 			DrawawbleId = id;
