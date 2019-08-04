@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Threading.Tasks;
 
 using Android.Content;
@@ -24,9 +25,9 @@ namespace PolyNavi
 		List<Day> days;
 		RecyclerView recyclerViewSchedule;
 		ScheduleCardFragmentAdapter adapter;
-		DateTime weekDate;
-        int weekTag;
-        int dayOfYear;
+	    readonly DateTime weekDate;
+	    readonly int weekTag;
+	    readonly int dayOfYear;
 
 		public ScheduleWeekFragment(DateTime weekDate, int weekTag, int dayOfYear)
 		{
@@ -34,11 +35,6 @@ namespace PolyNavi
             this.weekTag = weekTag;
             this.dayOfYear = dayOfYear;
         }
-
-		public override void OnCreate(Bundle savedInstanceState)
-		{
-			base.OnCreate(savedInstanceState);
-		}
 
 		public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 		{
@@ -94,7 +90,7 @@ namespace PolyNavi
                                 GetString(Resource.String.empty_schedule_error_title_current) :
                                 GetString(Resource.String.empty_schedule_error_title_next)) + " " +
                                 GetString(Resource.String.empty_schedule_error_title_end);
-							view.FindViewById<TextView>(Resource.Id.textview_empty_schedule_error).Text = GetString(Resource.String.updated) + " " + weekRoot.LastUpdated.ToString();
+							view.FindViewById<TextView>(Resource.Id.textview_empty_schedule_error).Text = GetString(Resource.String.updated) + " " + weekRoot.LastUpdated.ToString(CultureInfo.CurrentCulture);
 							view.FindViewById<SwipeRefreshLayout>(Resource.Id.swipetorefresh_empty_schedule_error).SetOnRefreshListener(this);
 						}
                         else

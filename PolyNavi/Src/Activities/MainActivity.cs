@@ -37,7 +37,6 @@ namespace PolyNavi
 			base.OnCreate(savedInstanceState);
 
 			startActivity = MainApp.Instance.SharedPreferences.GetString("startactivity", null);
-			string str = MainApp.Instance.SharedPreferences.GetString("language", null);
 			SetContentView(Resource.Layout.activity_main);
 
 			drawerLayout = FindViewById<DrawerLayout>(Resource.Id.drawerlayout_main);

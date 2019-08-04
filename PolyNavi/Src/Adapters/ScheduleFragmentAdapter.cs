@@ -12,7 +12,6 @@ namespace PolyNavi
 
         const int CurrentWeekTag = 0;
         const int NextWeekTag = 1;
-        DateTime date;
 
         public ScheduleFragmentAdapter(FragmentManager fragmentManager, int numOfTabs, DateTime date, int dayOfYear = -1) : base(fragmentManager)
 		{

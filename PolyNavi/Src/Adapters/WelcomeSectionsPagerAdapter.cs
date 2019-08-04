@@ -6,12 +6,12 @@ namespace PolyNavi
     {
         public override int Count => 3;
 
-        public WelcomeSectionsPagerAdapter(Android.Support.V4.App.FragmentManager fm) : base(fm)
+        public WelcomeSectionsPagerAdapter(FragmentManager fm) : base(fm)
         {
 
         }
 
-        public override Android.Support.V4.App.Fragment GetItem(int position)
+        public override Fragment GetItem(int position)
         {
             return WelcomePlaceholderFragment.NewInstance(position + 1);
         }

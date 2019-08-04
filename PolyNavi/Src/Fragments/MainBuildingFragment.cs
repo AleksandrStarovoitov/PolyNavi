@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
-using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
 using Android.Support.Design.Widget;
-using Android.Support.V4.App;
 using Android.Views;
 using Android.Views.InputMethods;
 using Android.Widget;
@@ -29,20 +26,11 @@ namespace PolyNavi
 		Android.Support.V4.App.FragmentTransaction fragmentTransaction;
 		AppBarLayout appBar;
 		FloatingActionButton fab;
-		RelativeLayout relativeLayout;
-		AppBarLayout.LayoutParams relativeLayoutParams;
-		FrameLayout frameLayout;
-		CoordinatorLayout.LayoutParams fabLayoutParams;
-		FloatingActionButton buttonUp, buttonDown;
+	    FloatingActionButton buttonUp, buttonDown;
 		List<MainBuildingMapFragment> fragments;
 		int currentFloor = 1;
 
 		static bool editTextFromIsFocused, editTextToIsFocused;
-
-		public override void OnCreate(Bundle savedInstanceState)
-		{
-			base.OnCreate(savedInstanceState);
-		}
 
 		public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 		{
@@ -78,13 +66,7 @@ namespace PolyNavi
 			fab = view.FindViewById<FloatingActionButton>(Resource.Id.fab_mainbuilding);
 			fab.Click += Fab_Click;
 
-			relativeLayout = view.FindViewById<RelativeLayout>(Resource.Id.search_frame_mainbuilding);
-			relativeLayoutParams = (AppBarLayout.LayoutParams)relativeLayout.LayoutParameters;
-
-			frameLayout = view.FindViewById<FrameLayout>(Resource.Id.frame_mainbuilding);
-			fabLayoutParams = (CoordinatorLayout.LayoutParams)fab.LayoutParameters;
-
-			var rl = view.FindViewById<RelativeLayout>(Resource.Id.relativelayout_floor_buttons_mainbuilding);
+		    var rl = view.FindViewById<RelativeLayout>(Resource.Id.relativelayout_floor_buttons_mainbuilding);
 			rl.BringToFront();
 
 			buttonUp = view.FindViewById<FloatingActionButton>(Resource.Id.fab_up_mainbuilding);
@@ -189,7 +171,7 @@ namespace PolyNavi
                         foreach (var coordGroup in coordinateGroups)
                         {
                             var fragment = FragmentManager.FindFragmentByTag($"MAP_MAINBUILDING_{coordGroup.Floor.FloorNumber}") as MainBuildingMapFragment;
-                            fragment.MapView.SetRoute(coordGroup.Coordinates.ToList());
+                            fragment?.MapView.SetRoute(coordGroup.Coordinates.ToList());
                         }
 
                         int startFloor = route[0].FloorNumber;

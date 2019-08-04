@@ -20,10 +20,10 @@ namespace PolyNavi
 			None,
 		}
 
-		Paint routePaint = new Paint() { Color = Color.Blue, StrokeCap = Paint.Cap.Round, StrokeWidth = 7.0f, };
-		Paint startPointPaint = new Paint() { Color = Color.Green };
-		Paint endPointPaint = new Paint() { Color = Color.Red };
-		float[] route = null;
+	    readonly Paint routePaint = new Paint() { Color = Color.Blue, StrokeCap = Paint.Cap.Round, StrokeWidth = 7.0f, };
+	    readonly Paint startPointPaint = new Paint() { Color = Color.Green };
+	    readonly Paint endPointPaint = new Paint() { Color = Color.Red };
+		float[] route;
 		//TODO изменить на рисунки
 		Marker marker = Marker.None;
 		Point markerPoint;
@@ -31,7 +31,7 @@ namespace PolyNavi
 		public static bool drawerState = false;
 		static readonly int InvalidPointerId = -1;
 
-		Drawable _plan;
+	    readonly Drawable _plan;
 		//readonly ScaleGestureDetector _scaleDetector;
 		readonly GestureDetector _doubleTapListener;
 

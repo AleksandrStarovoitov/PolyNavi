@@ -19,8 +19,8 @@ namespace PolyNavi
     [Activity(Label = "AutoCompleteTextViewPreference")]
     public class AutoCompleteTextViewPreference : EditTextPreference
     {
-        int resourceId = Resource.Layout.preference_dialog_autocomplete;
-        public string GroupName { get; set; }
+        readonly int resourceId = Resource.Layout.preference_dialog_autocomplete;
+        public string GroupName { get; private set; }
 
         public AutoCompleteTextViewPreference(Context context) : this(context, null)
         {
@@ -114,9 +114,9 @@ namespace PolyNavi
             
             string groupName = null;
             DialogPreference preference = Preference;
-            if (preference is AutoCompleteTextViewPreference)
+            if (preference is AutoCompleteTextViewPreference viewPreference)
             {
-                groupName = ((AutoCompleteTextViewPreference)preference).GroupName;
+                groupName = viewPreference.GroupName;
             }
 
             if (groupName != null)
@@ -160,37 +160,36 @@ namespace PolyNavi
 
         public override void OnDialogClosed(bool positiveResult)
         {
-            if (positiveResult)
+            if (!positiveResult) return;
+
+            var groupName = autoCompleteTextViewPref.Text;
+
+            DialogPreference preference = Preference;
+            if (preference is AutoCompleteTextViewPreference autoCompleteTVPreference)
             {
-                var groupName = autoCompleteTextViewPref.Text;
-
-                DialogPreference preference = Preference;
-                if (preference is AutoCompleteTextViewPreference autoCompleteTVPreference)
+                if (autoCompleteTVPreference.CallChangeListener(groupName))
                 {
-                    if (autoCompleteTVPreference.CallChangeListener(groupName))
+                    var status = MainApp.Instance.GroupsDictionary.Task.Status;
+                    var isStarted = MainApp.Instance.GroupsDictionary.IsStarted;
+
+                    if (isStarted && status != TaskStatus.RanToCompletion)
                     {
-                        var status = MainApp.Instance.GroupsDictionary.Task.Status;
-                        var isStarted = MainApp.Instance.GroupsDictionary.IsStarted;
+                        cts.Cancel();
 
-                        if (isStarted && status != TaskStatus.RanToCompletion)
-                        {
-                            cts.Cancel();
+                        cts = new CancellationTokenSource();
+                        MainApp.Instance.GroupsDictionary = new Nito.AsyncEx.AsyncLazy<Dictionary<string, int>>(async () => await MainApp.FillGroupsDictionary(false, cts.Token));
+                        groupsDictionary = MainApp.Instance.GroupsDictionary.Task.Result;
+                    }
 
-                            cts = new CancellationTokenSource();
-                            MainApp.Instance.GroupsDictionary = new Nito.AsyncEx.AsyncLazy<Dictionary<string, int>>(async () => await MainApp.FillGroupsDictionary(false, cts.Token));
-                            groupsDictionary = MainApp.Instance.GroupsDictionary.Task.Result;
-                        }
-
-                        if (groupsDictionary.ContainsKey(groupName))
-                        {
-                            autoCompleteTVPreference.SaveGroupName(groupName);
-                        }
-                        else
-                        {
-                            Toast.MakeText(Activity.BaseContext, GetString(Resource.String.wrong_group), ToastLength.Short).Show();
-                        }
-                    }                    
-                }
+                    if (groupsDictionary.ContainsKey(groupName))
+                    {
+                        autoCompleteTVPreference.SaveGroupName(groupName);
+                    }
+                    else
+                    {
+                        Toast.MakeText(Activity.BaseContext, GetString(Resource.String.wrong_group), ToastLength.Short).Show();
+                    }
+                }                    
             }
         }
     }

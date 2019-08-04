@@ -1,6 +1,4 @@
-﻿using System;
-
-using Android.OS;
+﻿using Android.OS;
 using Android.Views;
 using Android.Widget;
 
@@ -8,12 +6,12 @@ namespace PolyNavi
 {
     public class WelcomePlaceholderFragment : Android.Support.V4.App.Fragment
     {
-        static readonly String ARG_SECTION_NUMBER = "section_number";
+        private const string ARG_SECTION_NUMBER = "section_number";
 
         ImageView img;
-        readonly int[] bgs = new int[] { Resource.Drawable.welcome_blueprint, Resource.Drawable.welcome_route, Resource.Drawable.welcome_calendar };
+        readonly int[] bgs = { Resource.Drawable.welcome_blueprint, Resource.Drawable.welcome_route, Resource.Drawable.welcome_calendar };
 
-        public WelcomePlaceholderFragment()
+        private WelcomePlaceholderFragment()
         {
         }
 
@@ -48,6 +46,8 @@ namespace PolyNavi
                 case 3:
                     headerText = GetString(Resource.String.welcome_header_third);
                     descriptionText = GetString(Resource.String.welcome_description_third);
+                    break;
+                default:
                     break;
             }
 

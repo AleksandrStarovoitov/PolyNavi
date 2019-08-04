@@ -69,12 +69,7 @@ namespace PolyNavi
 
 		LocationManager locationManager;
 		AnimatedPointsWithAutoUpdateLayer animatedLocation;
-
-        public override void OnCreate(Bundle savedInstanceState)
-		{
-			base.OnCreate(savedInstanceState);
-		}
-
+        
 		public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 		{
 			view = inflater.Inflate(Resource.Layout.fragment_map_buildings, container, false);
@@ -86,9 +81,9 @@ namespace PolyNavi
             fab.Click += Fab_Click;
 
             editTextInputFrom = view.FindViewById<EditText>(Resource.Id.edittext_input_from_map_builidngs);
-            editTextInputFrom.Click += EditTextInputFrom_Click; ;
+            editTextInputFrom.Click += EditTextInputFrom_Click;
 
-            editTextInputTo = view.FindViewById<EditText>(Resource.Id.edittext_input_to_map_builidngs);
+		    editTextInputTo = view.FindViewById<EditText>(Resource.Id.edittext_input_to_map_builidngs);
             editTextInputTo.Click += EditTextInputTo_Click;
             
             fab = view.FindViewById<FloatingActionButton>(Resource.Id.fab_map_buildings);
@@ -96,12 +91,10 @@ namespace PolyNavi
 
             buttonLocation = view.FindViewById<FloatingActionButton>(Resource.Id.fab_location_map_buildings);
             buttonLocation.Click += ButtonLocation_Click;
-
-
+            
             buttonFromCurrentLocation = view.FindViewById<ImageButton>(Resource.Id.imagebutton_currentlocation_map_buildings);
             buttonFromCurrentLocation.Click += ButtonFromCurrentLocation_Click;
-
-
+            
             var progress = view.FindViewById<ProgressBar>(Resource.Id.progressbar_map_buildings);
             progress.Visibility = ViewStates.Visible;
 
@@ -186,8 +179,7 @@ namespace PolyNavi
 		public override void OnDetach()
 		{
 			base.OnStop();
-			if (locationManager != null)
-				locationManager.RemoveUpdates(this);
+		    locationManager?.RemoveUpdates(this);
 		}
 
 		public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
@@ -454,16 +446,13 @@ namespace PolyNavi
 				public override IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
 				{
 					var features = new List<IFeature>();
-					var count = 0;
-
 					var feature = new Feature
 					{
 						Geometry = geometry,
-						["ID"] = count.ToString(System.Globalization.CultureInfo.InvariantCulture)
+						["ID"] = 0
 					};
 
 					features.Add(feature);
-					count++;
 
 					return features;
 				}

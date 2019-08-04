@@ -59,9 +59,9 @@ namespace PolyNavi
 			return convertView;
 		}
 
-		private View GetInflatedLayoutForType(int type)
+		private View GetInflatedLayoutForType(int layoutType)
 		{
-			switch (type)
+			switch (layoutType)
 			{
 				case MainBuilding:
 					return LayoutInflater.From(context).Inflate(Resource.Layout.layout_route_row_mainbuilding, null);

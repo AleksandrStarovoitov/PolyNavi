@@ -19,11 +19,6 @@ namespace PolyNavi
 		ScheduleFragmentAdapter adapter;
         DateTime? lastDate = null;
 
-		public override void OnCreate(Bundle savedInstanceState)
-		{
-			base.OnCreate(savedInstanceState);
-		}
-
 		public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 		{
 			view = inflater.Inflate(Resource.Layout.fragment_schedule, container, false);
@@ -41,7 +36,7 @@ namespace PolyNavi
 			viewPager.Adapter = adapter;
 			viewPager.AddOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
-			tabLayout.TabSelected += (object sender, TabLayout.TabSelectedEventArgs e) =>
+			tabLayout.TabSelected += (sender, e) =>
 			{
 				viewPager.CurrentItem = e.Tab.Position;
 			};

@@ -19,17 +19,17 @@ namespace PolyNavi
 
 	public class ScheduleCardRowAdapter : RecyclerView.Adapter
 	{
-		List<Object> mLessons;
+		List<object> mLessons;
 		Context context;
 		LayoutInflater layoutInflater;
-		protected View scheduleView;
+	    View scheduleView;
 		ScheduleCardRowLessonViewHolder viewHolderLesson;
 		ScheduleCardRowTitleViewHolder viewHolderTitle;
 		RecyclerView.ViewHolder viewHolder;
 		CultureInfo cultureInfo = new CultureInfo("ru-RU");
 		const int TitleConst = 0, LessonConst = 1;
 
-		public ScheduleCardRowAdapter(List<Object> lessons, DateTime date)
+		public ScheduleCardRowAdapter(List<object> lessons, DateTime date)
 		{
 			lessons.Insert(0, new TitleTag() { Date = date });
 			mLessons = lessons;

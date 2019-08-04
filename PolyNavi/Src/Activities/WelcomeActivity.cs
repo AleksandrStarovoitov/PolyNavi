@@ -53,7 +53,7 @@ namespace PolyNavi
             one = FindViewById<ImageView>(Resource.Id.imageview_welcome_indicator_1);
             two = FindViewById<ImageView>(Resource.Id.imageview_welcome_indicator_2);
 
-            indicators = new ImageView[] { zero, one, two };
+            indicators = new[] { zero, one, two };
 
             mViewPager = FindViewById<ViewPager>(Resource.Id.viewpager_welcome);
             mViewPager.Adapter = mSectionsPagerAdapter;
@@ -64,8 +64,8 @@ namespace PolyNavi
             int color2 = ContextCompat.GetColor(this, Resource.Color.color_orange);
             int color3 = ContextCompat.GetColor(this, Resource.Color.color_green);
 
-            colorList = new int[] { color1, color2, color3 };
-            colors = new Color[] { new Color(color1), new Color(color2), new Color(3) };
+            colorList = new[] { color1, color2, color3 };
+            colors = new[] { new Color(color1), new Color(color2), new Color(3) };
 
             evaluator = new ArgbEvaluator();
 

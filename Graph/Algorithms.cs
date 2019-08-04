@@ -16,9 +16,7 @@ namespace Graph
 			var start = FindNodeByName(graph, startName);
 			var finish = FindNodeByName(graph, finishName);
 
-            bool badFloor = false;
-
-            if (start == null)
+		    if (start == null)
 			{
 				throw new GraphRoutingException($"Node with name {startName} could not be found");
 			}
@@ -50,7 +48,7 @@ namespace Graph
 				}
 				foreach (var neighbour in node.Data.Neighbours)
 				{
-                    badFloor = (neighbour.FloorNumber != start.FloorNumber && neighbour.FloorNumber != finish.FloorNumber && Math.Abs(neighbour.FloorNumber - start.FloorNumber) > 1);
+                    var badFloor = (neighbour.FloorNumber != start.FloorNumber && neighbour.FloorNumber != finish.FloorNumber && Math.Abs(neighbour.FloorNumber - start.FloorNumber) > 1);
 
                     var neighbourWithParent = new GraphNodeWithParent() { Data = neighbour, Parent = node };
                     if (!closed.Contains(neighbour) && (!badFloor || !neighbour.IsStairs))

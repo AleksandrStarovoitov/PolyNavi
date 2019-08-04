@@ -8,7 +8,7 @@ namespace PolyNavi
 
     public class NetworkChecker : INetworkChecker
 	{
-		Context context;
+	    readonly Context context;
 
 		public NetworkChecker(Context context)
 		{
@@ -17,16 +17,9 @@ namespace PolyNavi
 
 		public bool Check()
 		{
-			ConnectivityManager cm = (ConnectivityManager)context.GetSystemService(Context.ConnectivityService);
-			NetworkInfo info = cm.ActiveNetworkInfo;
-			if (info != null && info.IsConnected)
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
+			var cm = (ConnectivityManager)context.GetSystemService(Context.ConnectivityService);
+			var info = cm.ActiveNetworkInfo;
+			return info != null && info.IsConnected;
 		}
 	}
 }

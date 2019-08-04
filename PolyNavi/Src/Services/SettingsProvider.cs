@@ -9,7 +9,7 @@ namespace PolyNavi
 {
     public class SettingsProvider : ISettingsProvider
 	{
-		IDictionary<string, object> preferences;
+	    readonly IDictionary<string, object> preferences;
 
 		public SettingsProvider(ISharedPreferences preferences)
 		{
@@ -26,7 +26,6 @@ namespace PolyNavi
                 }
                 else
                 {
-
                     if (key == "groupid")
                         throw new GroupNumberException();
                     else
@@ -35,7 +34,7 @@ namespace PolyNavi
             }	
 			set
 			{
-				preferences[key] = value;
+			    if (preferences != null) preferences[key] = value;
 			}
 		}
 	}

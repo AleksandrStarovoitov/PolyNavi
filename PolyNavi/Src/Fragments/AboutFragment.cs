@@ -13,13 +13,8 @@ namespace PolyNavi
 	public class AboutFragment : Android.Support.V4.App.Fragment
 	{
 		View view;
-	
-		public override void OnCreate(Bundle savedInstanceState)
-		{
-			base.OnCreate(savedInstanceState);
-		}
 
-		public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+	    public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 		{
 			view = inflater.Inflate(Resource.Layout.fragment_about, container, false);
 
