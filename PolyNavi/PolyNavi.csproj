@@ -18,7 +18,7 @@
     <AndroidResgenClass>Resource</AndroidResgenClass>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
     <AndroidUseLatestPlatformSdk>false</AndroidUseLatestPlatformSdk>
-    <TargetFrameworkVersion>v8.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v9.0</TargetFrameworkVersion>
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
     <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
     <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
@@ -60,6 +60,8 @@
     <AndroidSupportedAbis>armeabi-v7a;x86;x86_64;arm64-v8a</AndroidSupportedAbis>
     <EnableProguard>false</EnableProguard>
     <AndroidCreatePackagePerAbi>true</AndroidCreatePackagePerAbi>
+    <AndroidEnableProfiledAot>false</AndroidEnableProfiledAot>
+    <MandroidI18n />
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BruTile, Version=1.0.3.0, Culture=neutral, processorArchitecture=MSIL">
