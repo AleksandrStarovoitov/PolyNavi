@@ -20,6 +20,7 @@
   <string name="building_schedule_row">Building</string>
   <string name="type_schedule_row">Type of lesson</string>
   <string name="teacher_schedule_row">Teacher</string>
+  <string name="group_schedule_row">Group</string>
 
   <string name="updated">Updated on</string>
   

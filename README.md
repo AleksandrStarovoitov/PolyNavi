@@ -1,6 +1,6 @@
 # POLYNAVI
 
-POLYNAVI - Navigation and shedule for SPbPU students. Unofficial app.
+POLYNAVI - Navigation and schedule for SPbPU students. Unofficial app.
 
 ![Screenshots](Screenshots.png)
 
