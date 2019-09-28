@@ -15,23 +15,4 @@
         android:layout_weight="1"
         android:layout_margin="@dimen/margin_pref_dialog_autocomplete_textview"
         android:hint="@string/edittext_auth" />
-    <FrameLayout
-        android:layout_width="@dimen/size_pref_dialog_autocomplete_frame"
-        android:layout_height="@dimen/size_pref_dialog_autocomplete_frame"
-        android:layout_marginRight="@dimen/marginrtb_pref_dialog_autocomplete_frame"
-        android:layout_marginTop="@dimen/marginrtb_pref_dialog_autocomplete_frame"
-        android:layout_marginBottom="@dimen/marginrtb_pref_dialog_autocomplete_frame">
-        <ProgressBar
-            android:id="@+id/progressbar_group_pref"
-            style="?android:attr/progressBarStyleLarge"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:indeterminate="true"
-            android:visibility="invisible" />
-        <ImageView
-            android:id="@+id/imageview_group_pref"
-            android:layout_width="@dimen/size_pref_dialog_autocomplete_image"
-            android:layout_height="@dimen/size_pref_dialog_autocomplete_image"
-            android:src="@drawable/baseline_refresh" />
-    </FrameLayout>
 </LinearLayout>

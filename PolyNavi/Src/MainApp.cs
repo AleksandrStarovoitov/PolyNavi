@@ -39,7 +39,6 @@ namespace PolyNavi
     public class MainApp : Application
     {
         const string DatabaseFilename = "schedule.sqlite";
-        readonly string groupLink = @"http://m.spbstu.ru/p/proxy.php?csurl=http://ruz.spbstu.ru/api/v1/ruz/search/groups";
 
         Locale locale = null;
         string language;
@@ -77,42 +76,7 @@ namespace PolyNavi
         };
 
         public Dictionary<string, string> RoomsDictionary { get; private set; } = new Dictionary<string, string>();
-
-        public AsyncLazy<Dictionary<string, int>> GroupsDictionary { get; set; } = new AsyncLazy<Dictionary<string, int>>(async () =>
-        {
-            return await FillGroupsDictionary(false, new CancellationToken());
-        });
-
-        public static async Task<Dictionary<string, int>> FillGroupsDictionary(bool rewrite, CancellationToken cts)
-        {
-            var networkChecker = new NetworkChecker(Instance);
-            string resultJson;
-
-            var resourceName = "groups.json";
-
-            var b = File.Exists(GetFileFullPath(resourceName));
-
-            if (rewrite && networkChecker.Check())
-            {
-                var client = new HttpClient();
-                resultJson = await HttpClientSL.GetResponseAsync(client, Instance.groupLink, cts);
-
-                File.WriteAllText(GetFileFullPath(resourceName), resultJson);
-            }
-            else
-            {
-                using (var stream = GetEmbeddedResourceStream(resourceName))
-                using (var reader = b ? new StreamReader(GetFileFullPath(resourceName)) : new StreamReader(stream))
-                {
-                    resultJson = await reader.ReadToEndAsync();
-                }
-            }
-            var groups = JsonConvert.DeserializeObject<GroupRoot>(resultJson);
-            var dictionary = groups.Groups.ToDictionary(x => x.Name, x => x.Id);
-
-            return dictionary;
-        }
-
+        
         public int GetVersionCode()
         {
             PackageInfo packageInfo = PackageManager.GetPackageInfo(PackageName, 0);
@@ -211,17 +175,7 @@ namespace PolyNavi
             Instance = this;
             SharedPreferences = PreferenceManager.GetDefaultSharedPreferences(ApplicationContext);
             GraphSaverLoader = new Graph.SaverLoader(new AssetsProvider(ApplicationContext));
-            if (IsAppUpdated())
-            {
-                var groupName = SharedPreferences.GetString("groupnumber", "-1");
-
-                var dictionary = Instance.GroupsDictionary.Task.Result;
-
-                if (dictionary.TryGetValue(groupName, out int id))
-                {
-                    SharedPreferences.Edit().PutInt("groupid", id).Apply();
-                }
-            }
+            if (IsAppUpdated()) { }
         }
 
         public override void OnCreate()

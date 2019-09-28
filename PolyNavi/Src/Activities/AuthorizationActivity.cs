@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
+using System.Timers;
 using Android.App;
 using Android.Content;
 using Android.Content.PM;
@@ -13,6 +15,9 @@ using Android.Views;
 using Android.Views.InputMethods;
 using Android.Widget;
 using Java.Lang;
+using Newtonsoft.Json;
+using PolyNaviLib.BL;
+using PolyNaviLib.SL;
 
 namespace PolyNavi
 {
@@ -25,9 +30,12 @@ namespace PolyNavi
         AutoCompleteTextView autoCompleteTextViewAuth;
         NetworkChecker networkChecker;
         ArrayAdapter suggestAdapter;
-        ProgressBar progressBar;
         Dictionary<string, int> groupsDictionary;
         string[] array;
+        Timer searchTimer;
+        private const int millsToSearch = 700;
+        private const string groupSearchLink =
+            "http://m.spbstu.ru/p/proxy.php?csurl=http://ruz.spbstu.ru/api/v1/ruz/search/groups&q=";
         ISharedPreferencesEditor prefEditor;
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -42,65 +50,14 @@ namespace PolyNavi
             autoCompleteTextViewAuth = FindViewById<AutoCompleteTextView>(Resource.Id.autocompletetextview_auth);
             autoCompleteTextViewAuth.SetOnEditorActionListener(this);
             autoCompleteTextViewAuth.AddTextChangedListener(this);
-            progressBar = FindViewById<ProgressBar>(Resource.Id.progressbar_auth);
-
-            progressBar.Visibility = ViewStates.Visible;
-            Task.Run(async () =>
-            {
-                groupsDictionary = await MainApp.Instance.GroupsDictionary;
-                array = groupsDictionary.Select(x => x.Key).ToArray();
-
-                RunOnUiThread(() =>
-                {
-                    suggestAdapter = new ArrayAdapter(this, Android.Resource.Layout.SimpleDropDownItem1Line, array);
-
-                    autoCompleteTextViewAuth.Adapter = suggestAdapter;
-
-                    progressBar.Visibility = ViewStates.Invisible;
-                });
-            });
 
             var buttonAuth = FindViewById<Button>(Resource.Id.button_auth);
             var textViewLater = FindViewById<TextView>(Resource.Id.textview_later_auth);
-            var textViewUpdate = FindViewById<TextView>(Resource.Id.textview_groupsupdate_auth);
 
             buttonAuth.Click += ButtonAuth_Click;
             textViewLater.Click += TextViewLater_Click;
-            textViewUpdate.Click += TextViewUpdate_Click;
 
             prefEditor = MainApp.Instance.SharedPreferences.Edit();
-        }
-
-        private void TextViewUpdate_Click(object sender, EventArgs e)
-        {
-            if (networkChecker.Check())
-            {
-                progressBar.Visibility = ViewStates.Visible;
-                Task.Run(async () =>
-                {
-                    MainApp.Instance.GroupsDictionary = new Nito.AsyncEx.AsyncLazy<Dictionary<string, int>>(async () =>
-                    {
-                        return await MainApp.FillGroupsDictionary(true, new System.Threading.CancellationToken());
-                    });
-                    var newGroupsDictionary = await MainApp.Instance.GroupsDictionary;
-                    array = newGroupsDictionary.Select(x => x.Key).ToArray();
-                    groupsDictionary = newGroupsDictionary;
-
-                    RunOnUiThread(() =>
-                    {
-                        suggestAdapter = new ArrayAdapter(this, Android.Resource.Layout.SimpleDropDownItem1Line, array);
-
-                        autoCompleteTextViewAuth.Adapter = null;
-                        autoCompleteTextViewAuth.Adapter = suggestAdapter;
-
-                        progressBar.Visibility = ViewStates.Invisible;
-                    });
-                });
-            }
-            else
-            {
-                Toast.MakeText(this, GetString(Resource.String.no_connection_title), ToastLength.Short).Show();
-            }
         }
 
         private void ButtonAuth_Click(object sender, EventArgs e)
@@ -120,6 +77,7 @@ namespace PolyNavi
 
         private void CheckGroupNumberAndProceed()
         {
+
             if (groupsDictionary.TryGetValue(autoCompleteTextViewAuth.Text, out int groupId))
             {
                 prefEditor.PutString("groupnumber", autoCompleteTextViewAuth.Text).Apply();
@@ -157,10 +115,58 @@ namespace PolyNavi
 
         public void OnTextChanged(ICharSequence s, int start, int before, int count)
         {
+            autoCompleteTextViewAuth.Adapter = null;
+            autoCompleteTextViewAuth.DismissDropDown();
             if (autoCompleteTextViewAuth.Error != null && s.ToString().Length != 0)
             {
                 autoCompleteTextViewAuth.Error = null;
             }
+
+            if (searchTimer != null)
+            {
+                searchTimer.Stop();
+            }
+            else
+            {
+                searchTimer = new Timer(millsToSearch);
+                searchTimer.Elapsed += delegate
+                {
+                    if (networkChecker.Check())
+                    {
+                        var client = new HttpClient();
+                        Task.Run(async () =>
+                        {
+                            var resultJson = await HttpClientSL.GetResponseAsync(client,
+                                groupSearchLink +
+                                s.ToString(), new System.Threading.CancellationToken());
+                            var groups = JsonConvert.DeserializeObject<GroupRoot>(resultJson);
+                            groupsDictionary = groups.Groups.ToDictionary(x => x.Name, x => x.Id);
+                            array = groupsDictionary.Select(x => x.Key).ToArray();
+                            RunOnUiThread(() =>
+                            {
+                                suggestAdapter = new ArrayAdapter(this,
+                                    Android.Resource.Layout.SimpleDropDownItem1Line,
+                                    array);
+                                autoCompleteTextViewAuth.Adapter = null;
+                                autoCompleteTextViewAuth.Adapter = suggestAdapter;
+                                if (s.Length() > 0 && before != count)
+                                {
+                                    autoCompleteTextViewAuth.ShowDropDown();
+                                }
+                            });
+                        });
+                    }
+                    else
+                    {
+                        Toast.MakeText(this, GetString(Resource.String.no_connection_title), ToastLength.Short).Show();
+                    }
+
+                    searchTimer.Close();
+                    searchTimer = null;
+                };
+            }
+
+            searchTimer.Start();
         }
     }
 }

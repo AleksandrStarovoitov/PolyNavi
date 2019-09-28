@@ -36,17 +36,6 @@ namespace PolyNavi
         
         public void OnSharedPreferenceChanged(ISharedPreferences sharedPreferences, string key)
         {
-            if (key.Equals("groupnumber"))
-            {
-                var groupName = sharedPreferences.GetString(key, "-1");
-
-                var dictionary = MainApp.Instance.GroupsDictionary.Task.Result;
-
-                if (dictionary.TryGetValue(groupName, out int id))
-                {
-                    sharedPreferences.Edit().PutInt("groupid", id).Apply();
-                }          
-            }
         }
 
         public override void OnCreatePreferences(Bundle savedInstanceState, string rootKey)

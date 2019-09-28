@@ -67,42 +67,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/button_auth">
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true">
             <TextView
                 android:id="@+id/textview_later_auth"
                 android:text="@string/group_later"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true" />
-            <RelativeLayout
-                android:id="@+id/layout_auth_update"
-                android:layout_below="@+id/textview_later_auth"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margintop_auth_update"
-                android:layout_marginBottom="@dimen/marginbottom_auth_update"
-                android:layout_centerHorizontal="true">
-                <TextView
-                    android:id="@+id/textview_groupsupdate_auth"
-                    android:text="@string/update_groups_auth"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_centerHorizontal="true" />
-                <ProgressBar
-                    android:id="@+id/progressbar_auth"
-                    style="?android:attr/progressBarStyleLarge"
-                    android:layout_marginLeft="@dimen/marginleft_auth_progressbar"
-                    android:layout_width="@dimen/size_auth_progressbar"
-                    android:layout_height="@dimen/size_auth_progressbar"
-                    android:indeterminate="true"
-                    android:layout_toRightOf="@+id/textview_groupsupdate_auth"
-                    android:layout_alignBottom="@+id/textview_groupsupdate_auth"
-                    android:visibility="invisible" />
-            </RelativeLayout>
-        </RelativeLayout>
+                android:layout_centerHorizontal="true"
+                android:layout_centerInParent="true"/>
     </RelativeLayout>
 </RelativeLayout>

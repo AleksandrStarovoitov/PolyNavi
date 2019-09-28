@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -10,9 +11,14 @@ using Android.Content.Res;
 using Android.OS;
 using Android.Runtime;
 using Android.Support.V7.Preferences;
+using Android.Text;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
+using Java.Lang;
+using Newtonsoft.Json;
+using PolyNaviLib.BL;
+using PolyNaviLib.SL;
 
 namespace PolyNavi
 {
@@ -62,17 +68,18 @@ namespace PolyNavi
     }
 
 
-    public class AutoCompleteTextViewPreferenceDialogFragmentCompat : PreferenceDialogFragmentCompat
+    public class AutoCompleteTextViewPreferenceDialogFragmentCompat : PreferenceDialogFragmentCompat, ITextWatcher
     {
         AutoCompleteTextView autoCompleteTextViewPref;
-        ProgressBar progressBar;
-        ImageView imageViewRefresh;
         ArrayAdapter suggestAdapter;
         NetworkChecker networkChecker;
         Dictionary<string, int> groupsDictionary;
         CancellationTokenSource cts;
-
+        private System.Timers.Timer searchTimer;
+        private const int millsToSearch = 700;
         string[] array;
+        private const string groupSearchLink =
+            "http://m.spbstu.ru/p/proxy.php?csurl=http://ruz.spbstu.ru/api/v1/ruz/search/groups&q=";
 
         public static AutoCompleteTextViewPreferenceDialogFragmentCompat NewInstance(string key)
         {
@@ -90,28 +97,9 @@ namespace PolyNavi
 
             networkChecker = new NetworkChecker(Activity.BaseContext);
             autoCompleteTextViewPref = view.FindViewById<AutoCompleteTextView>(Resource.Id.autocompletetextview_group_pref);
-            progressBar = view.FindViewById<ProgressBar>(Resource.Id.progressbar_group_pref);
-            imageViewRefresh = view.FindViewById<ImageView>(Resource.Id.imageview_group_pref);
-            imageViewRefresh.Click += ImageViewRefresh_Click;
 
-            imageViewRefresh.Visibility = ViewStates.Invisible;
-            progressBar.Visibility = ViewStates.Visible;
-            Task.Run(async () =>
-            {
-                groupsDictionary = await MainApp.Instance.GroupsDictionary;
-                array = groupsDictionary.Select(x => x.Key).ToArray();
-
-                Activity.RunOnUiThread(() =>
-                {
-                    suggestAdapter = new ArrayAdapter(Activity.BaseContext, Android.Resource.Layout.SimpleDropDownItem1Line, array);
-
-                    autoCompleteTextViewPref.Adapter = suggestAdapter;
-
-                    progressBar.Visibility = ViewStates.Invisible;
-                    imageViewRefresh.Visibility = ViewStates.Visible;
-                });
-            });
-            
+            autoCompleteTextViewPref.AddTextChangedListener(this);
+           
             string groupName = null;
             DialogPreference preference = Preference;
             if (preference is AutoCompleteTextViewPreference viewPreference)
@@ -127,37 +115,6 @@ namespace PolyNavi
             cts = new CancellationTokenSource();
         }
 
-        private void ImageViewRefresh_Click(object sender, EventArgs e)
-        {
-            if (networkChecker.Check())
-            {
-                imageViewRefresh.Visibility = ViewStates.Invisible;
-                progressBar.Visibility = ViewStates.Visible;
-                Task.Run(async () =>
-                {
-                    MainApp.Instance.GroupsDictionary = new Nito.AsyncEx.AsyncLazy<Dictionary<string, int>>(async () => { return await MainApp.FillGroupsDictionary(true, cts.Token); });
-                    var newGroupsDictionary = await MainApp.Instance.GroupsDictionary;
-                    array = newGroupsDictionary.Select(x => x.Key).ToArray();
-                    groupsDictionary = newGroupsDictionary;
-
-                    Activity.RunOnUiThread(() =>
-                    {
-                        suggestAdapter = new ArrayAdapter(Activity.BaseContext, Android.Resource.Layout.SimpleDropDownItem1Line, array);
-
-                        autoCompleteTextViewPref.Adapter = null;
-                        autoCompleteTextViewPref.Adapter = suggestAdapter;
-
-                        imageViewRefresh.Visibility = ViewStates.Visible;
-                        progressBar.Visibility = ViewStates.Invisible;
-                    });
-                });
-            }
-            else
-            {
-                Toast.MakeText(Activity.BaseContext, GetString(Resource.String.no_connection_title), ToastLength.Short).Show();
-            }
-        }
-
         public override void OnDialogClosed(bool positiveResult)
         {
             if (!positiveResult) return;
@@ -169,21 +126,10 @@ namespace PolyNavi
             {
                 if (autoCompleteTVPreference.CallChangeListener(groupName))
                 {
-                    var status = MainApp.Instance.GroupsDictionary.Task.Status;
-                    var isStarted = MainApp.Instance.GroupsDictionary.IsStarted;
-
-                    if (isStarted && status != TaskStatus.RanToCompletion)
-                    {
-                        cts.Cancel();
-
-                        cts = new CancellationTokenSource();
-                        MainApp.Instance.GroupsDictionary = new Nito.AsyncEx.AsyncLazy<Dictionary<string, int>>(async () => await MainApp.FillGroupsDictionary(false, cts.Token));
-                        groupsDictionary = MainApp.Instance.GroupsDictionary.Task.Result;
-                    }
-
-                    if (groupsDictionary.ContainsKey(groupName))
+                    if (groupsDictionary.TryGetValue(groupName, out int groupId))
                     {
                         autoCompleteTVPreference.SaveGroupName(groupName);
+                        MainApp.Instance.SharedPreferences.Edit().PutInt("groupid", groupId).Apply();
                     }
                     else
                     {
@@ -191,6 +137,70 @@ namespace PolyNavi
                     }
                 }                    
             }
+        }
+
+        public void AfterTextChanged(IEditable s)
+        {
+        }
+
+        public void BeforeTextChanged(ICharSequence s, int start, int count, int after)
+        {
+        }
+
+        public void OnTextChanged(ICharSequence s, int start, int before, int count)
+        {
+            autoCompleteTextViewPref.Adapter = null;
+            autoCompleteTextViewPref.DismissDropDown();
+            if (autoCompleteTextViewPref.Error != null && s.ToString().Length != 0)
+            {
+                autoCompleteTextViewPref.Error = null;
+            }
+
+            if (searchTimer != null)
+            {
+                searchTimer.Stop();
+            }
+            else
+            {
+                searchTimer = new System.Timers.Timer(millsToSearch);
+                searchTimer.Elapsed += delegate
+                {
+                    if (networkChecker.Check())
+                    {
+                        var client = new HttpClient();
+                        Task.Run(async () =>
+                        {
+                            var resultJson = await HttpClientSL.GetResponseAsync(client,
+                                groupSearchLink +
+                                s.ToString(), new System.Threading.CancellationToken());
+                            var groups = JsonConvert.DeserializeObject<GroupRoot>(resultJson);
+                            groupsDictionary = groups.Groups.ToDictionary(x => x.Name, x => x.Id);
+                            array = groupsDictionary.Select(x => x.Key).ToArray();
+                            Activity.RunOnUiThread(() =>
+                            {
+                                suggestAdapter = new ArrayAdapter(Activity.BaseContext,
+                                    Android.Resource.Layout.SimpleDropDownItem1Line,
+                                    array);
+                                autoCompleteTextViewPref.Adapter = null;
+                                autoCompleteTextViewPref.Adapter = suggestAdapter;
+                                if (s.Length() > 0 && before != count)
+                                {
+                                    autoCompleteTextViewPref.ShowDropDown();
+                                }
+                            });
+                        });
+                    }
+                    else
+                    {
+                        Toast.MakeText(Activity.BaseContext, GetString(Resource.String.no_connection_title), ToastLength.Short).Show();
+                    }
+
+                    searchTimer.Close();
+                    searchTimer = null;
+                };
+            }
+
+            searchTimer.Start();
         }
     }
 }

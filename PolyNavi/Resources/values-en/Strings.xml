@@ -77,7 +77,7 @@
 
   <string name="enter_group_number">Enter group number</string>
   <string name="edittext_title">Group number</string>
-  <string name="edittext_auth">For example - 33537/1</string>
+  <string name="edittext_auth">For example - 3530202/60201</string>
   <string name="button_auth">Let\'s go</string>
   <string name="group_later">I\'ll enter group number later</string>
   <string name="update_groups_auth">Update group list</string>
