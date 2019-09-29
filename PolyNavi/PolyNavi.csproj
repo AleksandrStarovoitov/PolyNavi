@@ -58,9 +58,8 @@
     <EnableLLVM>false</EnableLLVM>
     <BundleAssemblies>false</BundleAssemblies>
     <AndroidSupportedAbis>armeabi-v7a;x86;x86_64;arm64-v8a</AndroidSupportedAbis>
+    <EnableProguard>false</EnableProguard>
     <AndroidCreatePackagePerAbi>true</AndroidCreatePackagePerAbi>
-    <AndroidEnableProfiledAot>false</AndroidEnableProfiledAot>
-    <MandroidI18n />
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BruTile, Version=1.0.3.0, Culture=neutral, processorArchitecture=MSIL">
@@ -643,9 +642,6 @@
     <AndroidResource Include="Resources\layout\layout_card_schedule_end.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\layout\fragment_mainbuilding.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
