@@ -4693,9 +4693,6 @@ namespace PolyNavi
 			// aapt resource value: 0x7f0b0039
 			public const int type_schedule_row = 2131427385;
 			
-			// aapt resource value: 0x7f0b007f
-			public const int update_groups_auth = 2131427455;
-			
 			// aapt resource value: 0x7f0b003c
 			public const int updated = 2131427388;
 			

@@ -257,7 +257,6 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
-    <EmbeddedResource Include="EmbeddedResources\groups.json" />
     <AndroidAsset Include="Assets\floor_1.graph" />
     <AndroidAsset Include="Assets\floor_3_1.graph" />
     <AndroidAsset Include="Assets\floor_3_2.graph" />
