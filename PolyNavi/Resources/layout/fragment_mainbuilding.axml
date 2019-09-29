@@ -89,7 +89,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text=""
+                    android:singleLine="true"
                     android:completionThreshold="1"
+                    android:imeOptions="actionNext"
                     android:hint="@string/edittext_from" />
             </android.support.design.widget.TextInputLayout>
             <android.support.design.widget.TextInputLayout
@@ -104,6 +106,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text=""
+                    android:singleLine="true"
+                    android:imeOptions="actionGo"
                     android:completionThreshold="1"
                     android:hint="@string/edittext_to" />
             </android.support.design.widget.TextInputLayout>

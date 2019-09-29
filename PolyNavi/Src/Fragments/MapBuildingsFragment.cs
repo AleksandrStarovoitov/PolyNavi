@@ -85,9 +85,6 @@ namespace PolyNavi
 
 		    editTextInputTo = view.FindViewById<EditText>(Resource.Id.edittext_input_to_map_builidngs);
             editTextInputTo.Click += EditTextInputTo_Click;
-            
-            fab = view.FindViewById<FloatingActionButton>(Resource.Id.fab_map_buildings);
-            fab.Click += Fab_Click;
 
             buttonLocation = view.FindViewById<FloatingActionButton>(Resource.Id.fab_location_map_buildings);
             buttonLocation.Click += ButtonLocation_Click;

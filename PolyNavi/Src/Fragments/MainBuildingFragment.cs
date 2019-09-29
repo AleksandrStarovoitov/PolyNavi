@@ -135,13 +135,18 @@ namespace PolyNavi
 				fragment.MapView.SetMarker(new Android.Graphics.Point(), MainBuildingView.Marker.None);
 			}
 		}
-
-		bool fullyExpanded, fullyCollapsed;
-		private void Fab_Click(object sender, EventArgs e)
-		{
-			if (fullyExpanded)
-			{
-			    if (editTextInputFrom.Text != editTextInputTo.Text & MainApp.Instance.RoomsDictionary.TryGetValue(editTextInputFrom.Text, out var startName) & MainApp.Instance.RoomsDictionary.TryGetValue(editTextInputTo.Text, out var finishName))
+		
+        private void Fab_Click(object sender, EventArgs e)
+        {
+            DrawRoute();
+        }
+        
+        bool fullyExpanded, fullyCollapsed;
+        private void DrawRoute()
+        {
+            if (fullyExpanded)
+            {
+                if (editTextInputFrom.Text != editTextInputTo.Text & MainApp.Instance.RoomsDictionary.TryGetValue(editTextInputFrom.Text, out var startName) & MainApp.Instance.RoomsDictionary.TryGetValue(editTextInputTo.Text, out var finishName))
                 {
                     InputMethodManager imm = (InputMethodManager)Activity.BaseContext.GetSystemService(Context.InputMethodService);
                     imm.HideSoftInputFromWindow(View.WindowToken, 0);
@@ -178,7 +183,7 @@ namespace PolyNavi
                         int endFloor = route.Last().FloorNumber;
                         fragments[startFloor - 1].MapView.SetMarker(new Android.Graphics.Point(route.First().Point.X, route.First().Point.Y), MainBuildingView.Marker.Start);
                         fragments[endFloor - 1].MapView.SetMarker(new Android.Graphics.Point(route.Last().Point.X, route.Last().Point.Y), MainBuildingView.Marker.End);
-                        
+
                         ChangeFloor(startFloor);
                     }
                     catch (GraphRoutingException ex)
@@ -187,10 +192,10 @@ namespace PolyNavi
                     }
                 }
                 else
-                {                    
+                {
                     if (startName == null)
                     {
-                        editTextInputFrom.Error = GetString(Resource.String.wrong_room); 
+                        editTextInputFrom.Error = GetString(Resource.String.wrong_room);
                     }
                     if (finishName == null)
                     {
@@ -198,18 +203,17 @@ namespace PolyNavi
                     }
                 }
             }
-			else
-			if (fullyCollapsed)
-			{
-				fab.SetImageResource(Resource.Drawable.ic_done_black);
-				appBar.SetExpanded(true);
+            else
+            if (fullyCollapsed)
+            {
+                fab.SetImageResource(Resource.Drawable.ic_done_black);
+                appBar.SetExpanded(true);
 
-				//fabLayoutParams.AnchorId = relativeLayout.Id;
-				//fab.LayoutParameters = fabLayoutParams;
-				//fab.SetImageResource(Resource.Drawable.ic_done_black);
-			}
-		}
-
+                //fabLayoutParams.AnchorId = relativeLayout.Id;
+                //fab.LayoutParameters = fabLayoutParams;
+                //fab.SetImageResource(Resource.Drawable.ic_done_black);
+            }
+        }
 		private void EditTextFromFocusChanged(object sender, View.FocusChangeEventArgs e)
 		{
 			editTextInputFrom.ShowDropDown();
@@ -245,8 +249,8 @@ namespace PolyNavi
 		{
 			if (actionId == ImeAction.Go)
 			{
-				appBar.SetExpanded(false);
-			}
+                DrawRoute();
+            }
 			return false;
 		}
 
