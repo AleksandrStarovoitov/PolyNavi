@@ -112,16 +112,16 @@ namespace PolyNavi
                     Activity.RunOnUiThread(() =>
                     {
                         buttonLocation.Alpha = 0.7f;
-
-                        if (ContextCompat.CheckSelfPermission(Activity, Android.Manifest.Permission.AccessFineLocation) != Permission.Granted)
+                        
+                        if (IsLocationGranted())
                         {
-                        //Permission is not granted
-                        RequestPermissions(new String[] { Android.Manifest.Permission.AccessFineLocation }, RequestFineLocationId);
+                            //Permission granted
+                            SetupLocationManager();
                         }
                         else
                         {
-                        //Permission granted
-                        SetupLocationManager();
+                            //Permission is not granted. Request.
+                            RequestPermissions(new String[] { Android.Manifest.Permission.AccessFineLocation }, RequestFineLocationId);
                         }
                     });
                 })
@@ -131,6 +131,12 @@ namespace PolyNavi
 
 			return view;
 		}
+
+        private bool IsLocationGranted()
+        {
+            return ContextCompat.CheckSelfPermission(Activity, Android.Manifest.Permission.AccessFineLocation) ==
+                   Permission.Granted;
+        }
 
         private bool IsInBounds(Location location)
         {
@@ -147,26 +153,40 @@ namespace PolyNavi
 
         private void ButtonFromCurrentLocation_Click(object sender, EventArgs e)
         {
-            var lastLocation = locationManager.GetLastKnownLocation(LocationManager.GpsProvider);
-
-            if (LocationIsValid(lastLocation))
+            if (IsLocationGranted())
             {
-                var currentLocation = new Point(lastLocation.Latitude, lastLocation.Longitude);
-                editTextInputFrom.Text = "Мое местоположение";
-                MainApp.Instance.BuildingsDictionary["Мое местоположение"] = currentLocation;
+                var lastLocation = locationManager.GetLastKnownLocation(LocationManager.GpsProvider);
+
+                if (LocationIsValid(lastLocation))
+                {
+                    var currentLocation = new Point(lastLocation.Latitude, lastLocation.Longitude);
+                    editTextInputFrom.Text = "Мое местоположение";
+                    MainApp.Instance.BuildingsDictionary["Мое местоположение"] = currentLocation;
+                }
+            }
+            else
+            {
+                Toast.MakeText(Activity.BaseContext, GetString(Resource.String.no_location_permission_buildings), ToastLength.Long).Show();
             }
         }
 
         private void ButtonLocation_Click(object sender, EventArgs e)
         {
-            var lastLocation = locationManager.GetLastKnownLocation(LocationManager.GpsProvider);
-
-            if (LocationIsValid(lastLocation))
+            if (IsLocationGranted())
             {
-				var currentLocation = new Point(lastLocation.Longitude, lastLocation.Latitude).FromLonLat();
-				map.NavigateTo(currentLocation);
-			}
-		}
+                var lastLocation = locationManager.GetLastKnownLocation(LocationManager.GpsProvider);
+
+                if (LocationIsValid(lastLocation))
+                {
+                    var currentLocation = new Point(lastLocation.Longitude, lastLocation.Latitude).FromLonLat();
+                    map.NavigateTo(currentLocation);
+                }
+            }
+            else
+            {
+                Toast.MakeText(Activity.BaseContext, GetString(Resource.String.no_location_permission_buildings), ToastLength.Long).Show();
+            }
+        }
 
 		private void SetupLocationManager()
 		{
@@ -191,11 +211,9 @@ namespace PolyNavi
 					if (grantResults.Length > 0 && grantResults[0] == Permission.Granted)
 					{
 						SetupLocationManager();
-					}
-					else
-					{
-						//
-					}
+                        buttonLocation.Enabled = true;
+                        buttonFromCurrentLocation.Enabled = true;
+                    }
 					break;
 				default:
 					break;

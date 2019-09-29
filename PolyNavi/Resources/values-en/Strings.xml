@@ -40,6 +40,7 @@
 
   <string name="edittext_from_buildings">Departure point</string>
   <string name="edittext_to_buildings">Destination point</string>
+  <string name="no_location_permission_buildings">No location permission</string>
 
   <string name="title_route_activity">Choose buildings</string>
   <string name="title_copyright_activity">Copyright</string>

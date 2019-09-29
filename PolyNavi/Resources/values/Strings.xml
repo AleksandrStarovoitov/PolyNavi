@@ -40,6 +40,7 @@
 
   <string name="edittext_from_buildings">Пункт отправления</string>
   <string name="edittext_to_buildings">Пункт назначения</string>
+  <string name="no_location_permission_buildings">Нет разрешения на местоположение</string>
 
   <string name="title_route_activity">Выберите корпуса</string>
   <string name="title_copyright_activity">Копирайт</string>
