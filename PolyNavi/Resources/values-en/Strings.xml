@@ -64,13 +64,10 @@
   <string name="about_github_title">Open-source software</string>
   <string name="about_github_subtitle">Browse source code</string>
   
-  <string name="about_donate_title">Support developers</string>
-  <string name="about_donate_subtitle">Why not?</string>
-  
   <string name="about_copyright_title">Copyright</string>
   <string name="about_contacts_title">Contacts</string>
   <string name="about_contacts_sasha_link">
-    <a href="https://www.vk.com/dark_sasha">Aleksandr Starovoitov</a>
+    Aleksandr Starovoitov
   </string>
   <string name="about_contacts_kirill_link">
     <a href="https://vk.com/pushkin_007">Kirill Bolshakov</a>
