@@ -14,7 +14,7 @@ namespace PolyNaviLib.SL
                 var response = await client.GetAsync(uri, cts);
                 response.EnsureSuccessStatusCode();
 
-                string responseBody = await response.Content.ReadAsStringAsync();
+                var responseBody = await response.Content.ReadAsStringAsync();
                 return responseBody;
             }
             catch (HttpRequestException e)

@@ -67,7 +67,7 @@ namespace GraphMapper
 				else if (e.KeyChar == 'l')
 				{
 					stairsMode = !stairsMode;
-					string activeStatus = stairsMode ? "активирован" : "деактивирован";
+					var activeStatus = stairsMode ? "активирован" : "деактивирован";
 					MessageBox.Show($"Режим лестниц {activeStatus}!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Information);
 				}
 				else if (e.KeyChar == '[')
@@ -101,14 +101,14 @@ namespace GraphMapper
 		{
 			if (drawArea != null)
 			{
-				int x = e.X;
-				int y = e.Y;
-				bool newFocusFound = false;
+				var x = e.X;
+				var y = e.Y;
+				var newFocusFound = false;
 				foreach (var node in nodes)
 				{
-					int nodeX = node.Point.X;
-					int nodeY = node.Point.Y;
-					double length = Math.Sqrt((x - nodeX) * (x - nodeX) + (y - nodeY) * (y - nodeY));
+					var nodeX = node.Point.X;
+					var nodeY = node.Point.Y;
+					var length = Math.Sqrt((x - nodeX) * (x - nodeX) + (y - nodeY) * (y - nodeY));
 					if (length < NodeRadius)
 					{
 						if (stairsMode)
@@ -135,11 +135,11 @@ namespace GraphMapper
 				}
 				if (newFocusFound == false)
 				{
-					using (Graphics gr = Graphics.FromImage(drawArea))
+					using (var gr = Graphics.FromImage(drawArea))
 					{
 						Pen pen = null;
-						string roomName = "*Unknown*";
-						bool isIntermediate = false;
+						var roomName = "*Unknown*";
+						var isIntermediate = false;
 						if (e.Button == MouseButtons.Left)
 						{
 							pen = roomPen;
@@ -154,7 +154,7 @@ namespace GraphMapper
 							pen = interPen;
 							isIntermediate = true;
 						}
-						GraphNode newNode = new GraphNode()
+						var newNode = new GraphNode()
 						{
 							Id = roomId++,
 							Point = new Graph.Point(x, y),
@@ -172,8 +172,8 @@ namespace GraphMapper
 						{
 							focusedNode = newNode;
 						}
-						int focusedX = focusedNode.Point.X;
-						int focusedY = focusedNode.Point.Y;
+						var focusedX = focusedNode.Point.X;
+						var focusedY = focusedNode.Point.Y;
 						newNode.Neighbours.Add(focusedNode);
 						focusedNode.Neighbours.Add(newNode);
 						gr.DrawLine(wayPen, x, y, focusedX, focusedY);

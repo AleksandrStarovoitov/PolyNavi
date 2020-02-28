@@ -242,7 +242,7 @@ namespace PolyNavi.Fragments
                 routeLayer = new Layer();
                 map.Layers.Add(routeLayer);
 
-                Point centerOfPolytech = new Point(30.371144, 60.003675).FromLonLat();
+                var centerOfPolytech = new Point(30.371144, 60.003675).FromLonLat();
                 map.NavigateTo(centerOfPolytech);
                 map.NavigateTo(7);
                 map.Transformation = new MinimalTransformation();
@@ -258,7 +258,7 @@ namespace PolyNavi.Fragments
 
 		private ILayer DrawRoute(Route route)
 		{
-			string layerName = "Itinero Route";
+			var layerName = "Itinero Route";
 			return new Layer(layerName)
 			{
 				Name = layerName,
@@ -269,12 +269,12 @@ namespace PolyNavi.Fragments
 
 		private IEnumerable<IFeature> GenerateLinesAndMarkers(Route route)
 		{
-			LineString line = new LineString
+			var line = new LineString
 			{
 				Vertices = (from c in route.Shape
 							select SphericalMercator.FromLonLat(c.Longitude, c.Latitude)).ToList()
 			};
-			Feature lineFeature = new Feature()
+			var lineFeature = new Feature()
 			{
 				Geometry = line,
 				Styles = new List<IStyle>()
@@ -292,7 +292,7 @@ namespace PolyNavi.Fragments
 					}
 				},
 			};
-			Feature markerStartFeature = new Feature()
+			var markerStartFeature = new Feature()
 			{
 				Geometry = route.Stops[0].Coordinate.ToWorld(),
 				Styles = new List<IStyle>()
@@ -304,7 +304,7 @@ namespace PolyNavi.Fragments
 					}
 				}
 			};
-			Feature markerFinishFeature = new Feature()
+			var markerFinishFeature = new Feature()
 			{
 				Geometry = route.Stops[1].Coordinate.ToWorld(),
 				Styles = new List<IStyle>()
@@ -352,16 +352,16 @@ namespace PolyNavi.Fragments
 			{
 				if (!editTextInputFrom.Text.Equals("") && !editTextInputTo.Text.Equals(""))
 				{
-					string[] routeNames = new string[] { editTextInputFrom.Text, editTextInputTo.Text };
-					string startName = routeNames[0];
-					string endName = routeNames[1];
+					var routeNames = new string[] { editTextInputFrom.Text, editTextInputTo.Text };
+					var startName = routeNames[0];
+					var endName = routeNames[1];
 
-					Point s = MainApp.Instance.BuildingsDictionary[startName];
-					Point e = MainApp.Instance.BuildingsDictionary[endName];
-					RouterPoint start = router.Resolve(profile, (float)s.X, (float)s.Y);
-					RouterPoint end = router.Resolve(profile, (float)e.X, (float)e.Y);
+					var s = MainApp.Instance.BuildingsDictionary[startName];
+					var e = MainApp.Instance.BuildingsDictionary[endName];
+					var start = router.Resolve(profile, (float)s.X, (float)s.Y);
+					var end = router.Resolve(profile, (float)e.X, (float)e.Y);
 
-					Route route = router.Calculate(profile, start, end);
+					var route = router.Calculate(profile, start, end);
 
 					map.Layers.Remove(routeLayer);
 					routeLayer = DrawRoute(route);

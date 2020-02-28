@@ -37,7 +37,7 @@ namespace PolyNavi.Fragments
 
         public void OnDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth)
         {
-            DateTime selectedDate = new DateTime(year, monthOfYear + 1, dayOfMonth);
+            var selectedDate = new DateTime(year, monthOfYear + 1, dayOfMonth);
             dateSelectedHandler(selectedDate);
         }
     }

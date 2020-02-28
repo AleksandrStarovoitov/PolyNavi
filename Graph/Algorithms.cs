@@ -25,8 +25,8 @@ namespace Graph
 				throw new GraphRoutingException($"Node with name {finishName} could not be found");
 			}
 
-			Queue<GraphNodeWithParent> open = new Queue<GraphNodeWithParent>();
-			List<GraphNode> closed = new List<GraphNode>();
+			var open = new Queue<GraphNodeWithParent>();
+			var closed = new List<GraphNode>();
 
 			open.Enqueue(new GraphNodeWithParent() { Data = start });
 			while (open.Count > 0)
@@ -35,7 +35,7 @@ namespace Graph
 				closed.Add(node.Data);
 				if (node.Data == finish)
 				{
-					List<GraphNode> route = new List<GraphNode>();
+					var route = new List<GraphNode>();
 					var routeNode = node;
 					while (routeNode.Data != start)
 					{
@@ -62,8 +62,8 @@ namespace Graph
 
 		internal static GraphNode FindNode(GraphNode graph, Predicate<GraphNode> predicate)
 		{
-			Queue<GraphNode> bfsQueue = new Queue<GraphNode>();
-			List<GraphNode> closed = new List<GraphNode>();
+			var bfsQueue = new Queue<GraphNode>();
+			var closed = new List<GraphNode>();
 			bfsQueue.Enqueue(graph);
 			while (bfsQueue.Count > 0)
 			{

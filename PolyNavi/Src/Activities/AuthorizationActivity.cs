@@ -80,7 +80,7 @@ namespace PolyNavi.Activities
         private void CheckGroupNumberAndProceed()
         {
 
-            if (groupsDictionary.TryGetValue(autoCompleteTextViewAuth.Text, out int groupId))
+            if (groupsDictionary.TryGetValue(autoCompleteTextViewAuth.Text, out var groupId))
             {
                 prefEditor.PutString("groupnumber", autoCompleteTextViewAuth.Text).Apply();
                 prefEditor.PutInt("groupid", groupId).Apply();

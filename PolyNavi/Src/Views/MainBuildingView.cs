@@ -102,7 +102,7 @@ namespace PolyNavi.Views
 			//_scaleDetector.OnTouchEvent(e);
 			doubleTapListener.OnTouchEvent(e);
 
-			MotionEventActions action = e.Action & MotionEventActions.Mask;
+			var action = e.Action & MotionEventActions.Mask;
 			int pointerIndex;
 
             switch (action)
@@ -115,23 +115,23 @@ namespace PolyNavi.Views
 
                 case MotionEventActions.Move:
                     pointerIndex = e.FindPointerIndex(activePointerId);
-                    float x = e.GetX(pointerIndex);
-                    float y = e.GetY(pointerIndex);
+                    var x = e.GetX(pointerIndex);
+                    var y = e.GetY(pointerIndex);
                     //if (!_scaleDetector.IsInProgress)
                     //{
                     //Only move the ScaleGestureDetector isn't already processing a gesture.
-                    float deltaX = x - lastTouchX;
-                    float deltaY = y - lastTouchY;
+                    var deltaX = x - lastTouchX;
+                    var deltaY = y - lastTouchY;
                     PosX += deltaX;
                     PosY += deltaY;
                     
-					float planScaleWidth = imageWidth * _scaleFactor;
-					float planScaleHeight = imageHeight * _scaleFactor;
+					var planScaleWidth = imageWidth * _scaleFactor;
+					var planScaleHeight = imageHeight * _scaleFactor;
 
-					float right = PosX + planScaleWidth;
-					float left = PosX;
-					float top = PosY;
-					float bottom = PosY + planScaleHeight;
+					var right = PosX + planScaleWidth;
+					var left = PosX;
+					var top = PosY;
+					var bottom = PosY + planScaleHeight;
 
                     Log.Debug("PLAN", "Right: " + right);
                     Log.Debug("PLAN", "Left: " + left);
@@ -169,10 +169,10 @@ namespace PolyNavi.Views
 
 				case MotionEventActions.PointerUp:
 					pointerIndex = (int)(e.Action & MotionEventActions.PointerIndexMask) >> (int)MotionEventActions.PointerIndexShift;
-					int pointerId = e.GetPointerId(pointerIndex);
+					var pointerId = e.GetPointerId(pointerIndex);
 					if (pointerId == activePointerId)
 					{
-						int newPointerIndex = pointerIndex == 0 ? 1 : 0;
+						var newPointerIndex = pointerIndex == 0 ? 1 : 0;
 						lastTouchX = e.GetX(newPointerIndex);
 						lastTouchY = e.GetY(newPointerIndex);
 						activePointerId = e.GetPointerId(newPointerIndex);
@@ -227,7 +227,7 @@ namespace PolyNavi.Views
 			}
 			else
 			{
-				int segmentsCount = points.Count - 1;
+				var segmentsCount = points.Count - 1;
 				route = new float[segmentsCount * 4];
 				route[0] = points[0].X * widthScale;
 				route[1] = points[0].Y * heightScale;

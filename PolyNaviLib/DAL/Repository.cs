@@ -96,7 +96,7 @@ namespace PolyNaviLib.DAL
 
             var groupId = settings["groupid"];
 
-            string dateStr = weekDate.ToString("yyyy-M-d", new CultureInfo("ru-RU"));
+            var dateStr = weekDate.ToString("yyyy-M-d", new CultureInfo("ru-RU"));
             var resultJson = await HttpClientService.GetResponseAsync(client, scheduleLink + groupId + "&date=" + dateStr, new System.Threading.CancellationToken());
             var weekRoot = JsonConvert.DeserializeObject<WeekRoot>(resultJson);
             weekRoot.LastUpdated = DateTime.Now;

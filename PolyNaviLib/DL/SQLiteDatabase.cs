@@ -37,7 +37,7 @@ namespace PolyNaviLib.DL
 
 		public async Task<bool> IsEmptyAsync<T>() where T :IBusinessEntity, new()
 		{
-			int count = await CountAsync<T>();
+			var count = await CountAsync<T>();
 			return count == 0;
 		}
 

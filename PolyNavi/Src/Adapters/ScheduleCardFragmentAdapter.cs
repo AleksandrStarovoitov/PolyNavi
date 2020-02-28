@@ -58,16 +58,16 @@ namespace PolyNavi.Adapters
 			{
 				case LessonConst:
 					viewHolderLesson = (ScheduleCardRowLessonViewHolder)viewHolder;
-					Lesson lesson = (Lesson)mLessons[position];
+					var lesson = (Lesson)mLessons[position];
 
-					TextView room = viewHolderLesson.room;
-					TextView building = viewHolderLesson.building;
-					TextView subject = viewHolderLesson.subject;
-					TextView startTime = viewHolderLesson.startTime;
-					TextView endTime = viewHolderLesson.endTime;
-					TextView type = viewHolderLesson.type;
-                    TextView teacher = viewHolderLesson.teacher;
-                    TextView group = viewHolderLesson.group;
+					var room = viewHolderLesson.room;
+					var building = viewHolderLesson.building;
+					var subject = viewHolderLesson.subject;
+					var startTime = viewHolderLesson.startTime;
+					var endTime = viewHolderLesson.endTime;
+					var type = viewHolderLesson.type;
+                    var teacher = viewHolderLesson.teacher;
+                    var group = viewHolderLesson.group;
 
 					room.Text = "ауд. " + lesson.Auditories[0].Name;
 					building.Text = lesson.Auditories[0].Building.Name + ", ";
@@ -102,10 +102,10 @@ namespace PolyNavi.Adapters
                     break;
 				case TitleConst:
 					viewHolderTitle = (ScheduleCardRowTitleViewHolder)viewHolder;
-					TitleTag title = (TitleTag)mLessons[position];
+					var title = (TitleTag)mLessons[position];
 
-					TextView date = viewHolderTitle.date;
-					TextView dayOfWeek = viewHolderTitle.dayOfWeek;
+					var date = viewHolderTitle.date;
+					var dayOfWeek = viewHolderTitle.dayOfWeek;
 
 					date.Text = title.Date.ToString("M", cultureInfo); //"dd MMMM"
 					dayOfWeek.Text = title.Date.ToString("dddd", cultureInfo);
@@ -212,7 +212,7 @@ namespace PolyNavi.Adapters
 				case CardConst:
 					var vh = (ScheduleCardFragmentAdapterViewHolder)viewHolder;
 
-					Day day = mDays[position];
+					var day = mDays[position];
 
 					recyclerViewSchedule = vh.recyclerView;
 
@@ -226,7 +226,7 @@ namespace PolyNavi.Adapters
 				case EndConst:
 					var vhe = (ScheduleCardEndFragmentAdapterViewHolder)viewHolder;
 
-					TextView tv = vhe.textView;
+					var tv = vhe.textView;
 
 					tv.Text = context.GetString(Resource.String.updated) + " " + lastUpdatedDate.ToString(CultureInfo.InvariantCulture);
 					break;

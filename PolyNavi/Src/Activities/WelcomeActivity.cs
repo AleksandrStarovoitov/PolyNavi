@@ -60,9 +60,9 @@ namespace PolyNavi.Activities
             mViewPager.CurrentItem = page;
             UpdateIndicators(page);
 
-            int color1 = ContextCompat.GetColor(this, Resource.Color.color_cyan);
-            int color2 = ContextCompat.GetColor(this, Resource.Color.color_orange);
-            int color3 = ContextCompat.GetColor(this, Resource.Color.color_green);
+            var color1 = ContextCompat.GetColor(this, Resource.Color.color_cyan);
+            var color2 = ContextCompat.GetColor(this, Resource.Color.color_orange);
+            var color3 = ContextCompat.GetColor(this, Resource.Color.color_green);
 
             colorList = new[] { color1, color2, color3 };
             colors = new[] { new Color(color1), new Color(color2), new Color(3) };
@@ -105,7 +105,7 @@ namespace PolyNavi.Activities
 
         private static void UpdateIndicators(int position)
         {
-            for (int i = 0; i < indicators.Length; i++)
+            for (var i = 0; i < indicators.Length; i++)
             {
                 indicators[i].SetBackgroundResource(i == position ? Resource.Drawable.indicator_selected : Resource.Drawable.indicator_unselected);
             }
@@ -148,7 +148,7 @@ namespace PolyNavi.Activities
 
             public void OnPageScrolled(int position, float positionOffset, int positionOffsetPixels)
             {
-                int colorUpdate = (int)evaluator.Evaluate(positionOffset, colorList[position], colorList[position == 2 ? position : position + 1]);
+                var colorUpdate = (int)evaluator.Evaluate(positionOffset, colorList[position], colorList[position == 2 ? position : position + 1]);
                 var color = new Color(colorUpdate);
                 mViewPager.SetBackgroundColor(color);
             }

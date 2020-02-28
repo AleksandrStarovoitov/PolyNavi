@@ -83,8 +83,8 @@ namespace PolyNavi.Preferences
 
         public static AutoCompleteTextViewPreferenceDialogFragmentCompat NewInstance(string key)
         {
-            AutoCompleteTextViewPreferenceDialogFragmentCompat fragment = new AutoCompleteTextViewPreferenceDialogFragmentCompat();
-            Bundle b = new Bundle(1);
+            var fragment = new AutoCompleteTextViewPreferenceDialogFragmentCompat();
+            var b = new Bundle(1);
             b.PutString("key", key);
             fragment.Arguments = b;
 
@@ -101,7 +101,7 @@ namespace PolyNavi.Preferences
             autoCompleteTextViewPref.AddTextChangedListener(this);
            
             string groupName = null;
-            DialogPreference preference = Preference;
+            var preference = Preference;
             if (preference is AutoCompleteTextViewPreference viewPreference)
             {
                 groupName = viewPreference.GroupName;
@@ -121,12 +121,12 @@ namespace PolyNavi.Preferences
 
             var groupName = autoCompleteTextViewPref.Text;
 
-            DialogPreference preference = Preference;
+            var preference = Preference;
             if (preference is AutoCompleteTextViewPreference autoCompleteTvPreference)
             {
                 if (autoCompleteTvPreference.CallChangeListener(groupName))
                 {
-                    if (groupsDictionary.TryGetValue(groupName, out int groupId))
+                    if (groupsDictionary.TryGetValue(groupName, out var groupId))
                     {
                         autoCompleteTvPreference.SaveGroupName(groupName);
                         MainApp.Instance.SharedPreferences.Edit().PutInt("groupid", groupId).Apply();

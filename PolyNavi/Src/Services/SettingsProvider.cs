@@ -18,7 +18,7 @@ namespace PolyNavi.Services
 		{
 			get
             {
-                if (preferences.TryGetValue(key, out object value))
+                if (preferences.TryGetValue(key, out var value))
                 {
                     return value;
                 }

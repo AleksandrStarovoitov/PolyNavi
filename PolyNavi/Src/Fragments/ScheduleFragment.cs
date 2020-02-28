@@ -54,7 +54,7 @@ namespace PolyNavi.Fragments
             switch (item.ItemId)
             {
                 case Resource.Id.menu_schedule_datetimepicker:
-                    DateTimePickerFragment frag = DateTimePickerFragment.NewInstance(delegate (DateTime time)
+                    var frag = DateTimePickerFragment.NewInstance(delegate (DateTime time)
                     {
                         viewPager.Adapter = null;
                         adapter = new ScheduleFragmentAdapter(((AppCompatActivity)Activity).SupportFragmentManager, tabLayout.TabCount, time, time.DayOfYear);

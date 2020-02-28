@@ -147,7 +147,7 @@ namespace PolyNavi.Fragments
             {
                 if (editTextInputFrom.Text != editTextInputTo.Text & MainApp.Instance.RoomsDictionary.TryGetValue(editTextInputFrom.Text, out var startName) & MainApp.Instance.RoomsDictionary.TryGetValue(editTextInputTo.Text, out var finishName))
                 {
-                    InputMethodManager imm = (InputMethodManager)Activity.BaseContext.GetSystemService(Context.InputMethodService);
+                    var imm = (InputMethodManager)Activity.BaseContext.GetSystemService(Context.InputMethodService);
                     imm.HideSoftInputFromWindow(View.WindowToken, 0);
                     fab.SetImageResource(Resource.Drawable.ic_directions_black);
                     appBar.SetExpanded(false);
@@ -178,8 +178,8 @@ namespace PolyNavi.Fragments
                             fragment?.MapView.SetRoute(coordGroup.Coordinates.ToList());
                         }
 
-                        int startFloor = route[0].FloorNumber;
-                        int endFloor = route.Last().FloorNumber;
+                        var startFloor = route[0].FloorNumber;
+                        var endFloor = route.Last().FloorNumber;
                         fragments[startFloor - 1].MapView.SetMarker(new Android.Graphics.Point(route.First().Point.X, route.First().Point.Y), MainBuildingView.Marker.Start);
                         fragments[endFloor - 1].MapView.SetMarker(new Android.Graphics.Point(route.Last().Point.X, route.Last().Point.Y), MainBuildingView.Marker.End);
 

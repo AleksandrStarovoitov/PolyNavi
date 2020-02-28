@@ -53,7 +53,7 @@ namespace PolyNavi.Activities
 		{
 			var obj = buildings[e.Position];
 
-			string route = obj.ToString();
+			var route = obj.ToString();
 			var intent = new Intent();
 			intent.PutExtra("route", route);
 			SetResult(Result.Ok, intent);

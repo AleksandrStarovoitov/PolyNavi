@@ -73,13 +73,13 @@ namespace PolyNavi
         
         public int GetVersionCode()
         {
-            PackageInfo packageInfo = PackageManager.GetPackageInfo(PackageName, 0);
+            var packageInfo = PackageManager.GetPackageInfo(PackageName, 0);
             return packageInfo.VersionCode;
         }
 
         public bool IsAppUpdated()
         {
-            int ver = GetVersionCode();
+            var ver = GetVersionCode();
             if (ver > SharedPreferences.GetInt("version", 0))
             {
                 SharedPreferences.Edit().PutInt("version", ver).Commit();
@@ -121,7 +121,7 @@ namespace PolyNavi
 
                 var ids = new List<Graph.GraphNode>();
 
-                Queue<Graph.GraphNode> bfsQueue = new Queue<Graph.GraphNode>();
+                var bfsQueue = new Queue<Graph.GraphNode>();
                 bfsQueue.Enqueue(graph);
 
                 while (bfsQueue.Count > 0)
@@ -180,7 +180,7 @@ namespace PolyNavi
 
         internal static string GetFileFullPath(string fname)
         {
-            string dirPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+            var dirPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
             return Path.Combine(dirPath, fname);
         }
 
@@ -219,11 +219,11 @@ namespace PolyNavi
         {
             if (Instance.language != null)
             {
-                Configuration config = c.Resources.Configuration;
+                var config = c.Resources.Configuration;
 
                 var locale = new Locale(Instance.language);
                 Locale.Default = locale;
-                Configuration conf = new Configuration(config);
+                var conf = new Configuration(config);
                 conf.SetLocale(locale);
                 c.Resources.UpdateConfiguration(conf, c.Resources.DisplayMetrics);
             }

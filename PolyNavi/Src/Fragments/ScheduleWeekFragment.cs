@@ -141,7 +141,7 @@ namespace PolyNavi.Fragments
 
 		private void DrawContent(int rootContainerId, int newLayoutId)
 		{
-			ViewGroup vg = view.FindViewById<ViewGroup>(rootContainerId);
+			var vg = view.FindViewById<ViewGroup>(rootContainerId);
 			vg.RemoveAllViews();
 			vg.AddView(Inflate(newLayoutId),
 			           0,

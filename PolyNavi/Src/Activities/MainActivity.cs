@@ -113,7 +113,7 @@ namespace PolyNavi.Activities
 
 		public void OnDrawerSlide(View drawerView, float slideOffset)
 		{
-			InputMethodManager imm = (InputMethodManager)GetSystemService(InputMethodService);
+			var imm = (InputMethodManager)GetSystemService(InputMethodService);
 			imm.HideSoftInputFromWindow(drawerView.WindowToken, 0);
 		}
 		public void OnDrawerOpened(View drawerView)
