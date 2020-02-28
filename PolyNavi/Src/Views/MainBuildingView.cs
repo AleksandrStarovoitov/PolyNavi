@@ -54,15 +54,13 @@ namespace PolyNavi.Views
         private float widthScale, heightScale;
         private int imageWidth, imageHeight;
 
-        private Context c;
         private InputMethodManager imm;
 
 		public MainBuildingView(Context context, int id) :
 			base(context, null, 0)
 		{
-			startPointPaint.SetStyle(Paint.Style.Fill); //TODO
-			c = context;
-			displ = Resources.DisplayMetrics;
+            startPointPaint.SetStyle(Paint.Style.Fill); //TODO
+            displ = Resources.DisplayMetrics;
 
 			plan = ContextCompat.GetDrawable(Context, id);
 
@@ -86,7 +84,7 @@ namespace PolyNavi.Views
 			//_scaleDetector = new ScaleGestureDetector(context, new MyScaleListener(this));
 			doubleTapListener = new GestureDetector(context, new MyDoubleTapListener(this, displ));
 
-			imm = (InputMethodManager)c.GetSystemService(Context.InputMethodService);
+			imm = (InputMethodManager)context.GetSystemService(Context.InputMethodService);
 		}
 
 		private int ConvertPixelsToDp(float pixelValue)
@@ -245,13 +243,10 @@ namespace PolyNavi.Views
 				route[j] = points[i].X * widthScale;
 				route[j + 1] = points[i].Y * heightScale;
 
-				if (r != null)
-                {
-                    r.AddRange(route.ToList());
-                    route = new float[r.Count];
-                    route = r.ToArray();
-                }
-			}
+                r.AddRange(route.ToList());
+                route = new float[r.Count];
+                route = r.ToArray();
+            }
 		}
 
         private class MyDoubleTapListener : GestureDetector.SimpleOnGestureListener

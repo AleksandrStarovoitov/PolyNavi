@@ -33,9 +33,9 @@ namespace PolyNavi.Fragments
     public class MapBuildingsFragment : Android.Support.V4.App.Fragment, AppBarLayout.IOnOffsetChangedListener, ILocationListener
 	{
         private const string RouterDbName = "polytech_map.routerdb";
-        private const string Marker_A_Name = "ic_marker_a.png";
-        private const string Marker_B_Name = "ic_marker_b.png";
-        private const string Marker_Location_name = "ic_gps_fixed_black.png";
+        private const string MarkerAName = "ic_marker_a.png";
+        private const string MarkerBName = "ic_marker_b.png";
+        private const string MarkerLocationName = "ic_gps_fixed_black.png";
 
         private readonly Point leftBottom = new Point(30.356456, 59.994757);
         private readonly Point rightTop = new Point(30.391848, 60.008916);
@@ -299,7 +299,7 @@ namespace PolyNavi.Fragments
 				{
 					new SymbolStyle()
 					{
-						BitmapId = GetBitmapIdForEmbeddedResource(Marker_A_Name),
+						BitmapId = GetBitmapIdForEmbeddedResource(MarkerAName),
 						SymbolScale = 0.5,
 					}
 				}
@@ -311,7 +311,7 @@ namespace PolyNavi.Fragments
 				{
 					new SymbolStyle()
 					{
-						BitmapId = GetBitmapIdForEmbeddedResource(Marker_B_Name),
+						BitmapId = GetBitmapIdForEmbeddedResource(MarkerBName),
 						SymbolScale = 0.5,
 					}
 				}
@@ -443,7 +443,7 @@ namespace PolyNavi.Fragments
 			{
 				Style = new SymbolStyle()
 				{
-					BitmapId = GetBitmapIdForEmbeddedResource(Marker_Location_name),
+					BitmapId = GetBitmapIdForEmbeddedResource(MarkerLocationName),
 					SymbolScale = 0.5,
 				};
 			}
