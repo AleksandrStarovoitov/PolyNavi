@@ -1,6 +1,7 @@
 ﻿using Android.Support.V4.App;
+using PolyNavi.Fragments;
 
-namespace PolyNavi
+namespace PolyNavi.Adapters
 {
     public class WelcomeSectionsPagerAdapter : FragmentPagerAdapter
     {

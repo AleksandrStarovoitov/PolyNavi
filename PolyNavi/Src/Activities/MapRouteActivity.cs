@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-
 using Android.App;
 using Android.Content;
 using Android.Content.PM;
@@ -9,8 +8,9 @@ using Android.Support.V4.Content;
 using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
+using PolyNavi.Adapters;
 
-namespace PolyNavi
+namespace PolyNavi.Activities
 {
     [Activity(
 		Label = "PolyNavi",

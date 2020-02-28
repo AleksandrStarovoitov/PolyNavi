@@ -2,15 +2,13 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-
 using Android.Content;
 using Android.Support.V7.Widget;
 using Android.Views;
 using Android.Widget;
-
 using PolyNaviLib.BL;
 
-namespace PolyNavi
+namespace PolyNavi.Adapters
 {
     public class TitleTag
 	{

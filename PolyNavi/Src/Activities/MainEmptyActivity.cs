@@ -3,7 +3,7 @@ using Android.Content;
 using Android.Content.PM;
 using Android.OS;
 
-namespace PolyNavi
+namespace PolyNavi.Activities
 {
     [Activity(
 		Label = "PolyNavi",

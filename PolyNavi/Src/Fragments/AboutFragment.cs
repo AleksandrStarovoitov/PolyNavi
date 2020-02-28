@@ -1,13 +1,13 @@
 ﻿using System;
-
 using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Text.Method;
 using Android.Views;
 using Android.Widget;
+using PolyNavi.Activities;
 
-namespace PolyNavi
+namespace PolyNavi.Fragments
 {
     [Activity(Label = "AboutFragment")]
 	public class AboutFragment : Android.Support.V4.App.Fragment

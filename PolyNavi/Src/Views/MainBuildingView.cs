@@ -1,15 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-
 using Android.Content;
 using Android.Graphics;
 using Android.Graphics.Drawables;
 using Android.Support.V4.Content;
+using Android.Util;
 using Android.Views;
 using Android.Views.InputMethods;
-using Android.Util;
+using PolyNavi.Fragments;
 
-namespace PolyNavi
+namespace PolyNavi.Views
 {
     public class MainBuildingView : View
 	{

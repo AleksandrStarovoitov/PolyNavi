@@ -1,10 +1,9 @@
 ﻿using System;
-
 using Android.App;
 using Android.OS;
 using Android.Widget;
 
-namespace PolyNavi
+namespace PolyNavi.Fragments
 {
     public class DateTimePickerFragment : DialogFragment,
                                   DatePickerDialog.IOnDateSetListener

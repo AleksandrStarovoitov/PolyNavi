@@ -5,17 +5,16 @@ using Android.Content;
 using Android.OS;
 using Android.Runtime;
 using Android.Support.Design.Widget;
+using Android.Text;
 using Android.Views;
 using Android.Views.InputMethods;
 using Android.Widget;
-
+using Graph;
+using Java.Lang;
+using PolyNavi.Views;
 using static Android.Widget.TextView;
 
-using Graph;
-using Android.Text;
-using Java.Lang;
-
-namespace PolyNavi
+namespace PolyNavi.Fragments
 {
 	public class MainBuildingFragment : Android.Support.V4.App.Fragment, IOnEditorActionListener, AppBarLayout.IOnOffsetChangedListener, ITextWatcher
 	{

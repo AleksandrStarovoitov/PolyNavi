@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
-
 using Android.Content;
 using Android.Views;
 using Android.Widget;
 
-namespace PolyNavi
+namespace PolyNavi.Adapters
 {
     public class MainBuildingTag
 	{

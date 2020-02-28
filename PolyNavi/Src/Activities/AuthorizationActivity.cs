@@ -16,10 +16,11 @@ using Android.Views.InputMethods;
 using Android.Widget;
 using Java.Lang;
 using Newtonsoft.Json;
+using PolyNavi.Services;
 using PolyNaviLib.BL;
 using PolyNaviLib.SL;
 
-namespace PolyNavi
+namespace PolyNavi.Activities
 {
     [Activity(
         Label = "PolyNavi",

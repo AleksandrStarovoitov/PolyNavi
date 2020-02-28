@@ -1,5 +1,4 @@
 ﻿using System;
-
 using Android.App;
 using Android.Content.PM;
 using Android.OS;
@@ -8,11 +7,12 @@ using Android.Support.V4.Widget;
 using Android.Support.V7.App;
 using Android.Views;
 using Android.Views.InputMethods;
-
+using PolyNavi.Fragments;
+using PolyNavi.Views;
 using static Android.Support.V4.Widget.DrawerLayout;
 
 
-namespace PolyNavi
+namespace PolyNavi.Activities
 {
     [Activity(
 		Label = "PolyNavi",

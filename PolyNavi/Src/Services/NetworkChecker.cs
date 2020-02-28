@@ -1,9 +1,8 @@
 ﻿using Android.Content;
 using Android.Net;
-
 using PolyNaviLib.BL;
 
-namespace PolyNavi
+namespace PolyNavi.Services
 {
 
     public class NetworkChecker : INetworkChecker

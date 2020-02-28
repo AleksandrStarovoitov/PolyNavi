@@ -1,8 +1,8 @@
 ﻿using System;
-
 using Android.Support.V4.App;
+using PolyNavi.Fragments;
 
-namespace PolyNavi
+namespace PolyNavi.Adapters
 {
     internal class ScheduleFragmentAdapter : FragmentStatePagerAdapter
 	{

@@ -1,5 +1,4 @@
 ﻿using System;
-
 using Android.Animation;
 using Android.App;
 using Android.Content;
@@ -11,8 +10,9 @@ using Android.Support.V4.View;
 using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
+using PolyNavi.Adapters;
 
-namespace PolyNavi
+namespace PolyNavi.Activities
 {
     [Activity(Label = "WelcomeActivity", ScreenOrientation = ScreenOrientation.Portrait,
         ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.ScreenSize)]

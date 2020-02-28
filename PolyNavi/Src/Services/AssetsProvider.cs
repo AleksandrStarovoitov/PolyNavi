@@ -1,8 +1,7 @@
 ﻿using System.IO;
-
 using Android.Content;
 
-namespace PolyNavi
+namespace PolyNavi.Services
 {
     public class AssetsProvider : Graph.IAssetsProvider
 	{

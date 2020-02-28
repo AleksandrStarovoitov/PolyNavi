@@ -1,9 +1,8 @@
-﻿using Mapsui.Geometries;
+﻿using Itinero.LocalGeo;
+using Mapsui.Geometries;
 using Mapsui.Projection;
 
-using Itinero.LocalGeo;
-
-namespace PolyNavi
+namespace PolyNavi.Extensions
 {
     public static class MapsUiExtensions
 	{

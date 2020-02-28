@@ -1,7 +1,8 @@
 ﻿using Android.OS;
 using Android.Views;
+using PolyNavi.Views;
 
-namespace PolyNavi
+namespace PolyNavi.Fragments
 {
     public class MainBuildingMapFragment : Android.Support.V4.App.Fragment
 	{

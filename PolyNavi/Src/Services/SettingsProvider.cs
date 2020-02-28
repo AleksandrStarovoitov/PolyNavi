@@ -1,11 +1,9 @@
 ﻿using System.Collections.Generic;
-
 using Android.Content;
-
 using PolyNaviLib.BL;
 using PolyNaviLib.DAL;
 
-namespace PolyNavi
+namespace PolyNavi.Services
 {
     public class SettingsProvider : ISettingsProvider
 	{

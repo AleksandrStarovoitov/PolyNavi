@@ -2,11 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net.Http;
 using System.Reflection;
-using System.Threading;
-using System.Threading.Tasks;
-
 using Android.App;
 using Android.Content;
 using Android.Content.Res;
@@ -19,10 +15,8 @@ using Mapsui.Geometries;
 using Nito.AsyncEx;
 
 using PolyNaviLib.BL;
-using PolyNaviLib.SL;
-
-using Newtonsoft.Json;
 using Android.Content.PM;
+using PolyNavi.Services;
 
 namespace PolyNavi
 {

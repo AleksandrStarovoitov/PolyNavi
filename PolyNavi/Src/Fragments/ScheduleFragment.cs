@@ -1,14 +1,13 @@
 ﻿using System;
-
 using Android.App;
 using Android.OS;
-using Android.Views;
-
 using Android.Support.Design.Widget;
 using Android.Support.V4.View;
 using Android.Support.V7.App;
+using Android.Views;
+using PolyNavi.Adapters;
 
-namespace PolyNavi
+namespace PolyNavi.Fragments
 {
     [Activity(Label = "ScheduleSwipeActivity")]
 	public class ScheduleFragment : Android.Support.V4.App.Fragment

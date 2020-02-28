@@ -6,7 +6,8 @@ using Android.Support.V4.Content;
 using Android.Support.V7.App;
 using Android.Views;
 using Android.Webkit;
-namespace PolyNavi
+
+namespace PolyNavi.Activities
 {
     [Activity(
 		Label = "PolyNavi",

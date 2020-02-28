@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.IO;
-
+using System.Linq;
+using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
 using Android.Content.PM;
@@ -13,7 +13,8 @@ using Android.Support.Design.Widget;
 using Android.Support.V4.Content;
 using Android.Views;
 using Android.Widget;
-
+using Itinero;
+using Itinero.Profiles;
 using Mapsui;
 using Mapsui.Geometries;
 using Mapsui.Layers;
@@ -23,12 +24,10 @@ using Mapsui.Styles;
 using Mapsui.UI;
 using Mapsui.UI.Android;
 using Mapsui.Utilities;
+using PolyNavi.Activities;
+using PolyNavi.Extensions;
 
-using Itinero;
-using Itinero.Profiles;
-using System.Threading.Tasks;
-
-namespace PolyNavi
+namespace PolyNavi.Fragments
 {
     // TODO Кеширование RouterDB чтобы не загружать ее при каждой загрузке фрагмента
     public class MapBuildingsFragment : Android.Support.V4.App.Fragment, AppBarLayout.IOnOffsetChangedListener, ILocationListener
