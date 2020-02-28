@@ -20,14 +20,14 @@ namespace PolyNavi
 {
     public class ScheduleWeekFragment : Fragment, IOnRefreshListener
 	{
-		SwipeRefreshLayout mSwipeRefreshLayout;
-		View view;
-		List<Day> days;
-		RecyclerView recyclerViewSchedule;
-		ScheduleCardFragmentAdapter adapter;
-	    readonly DateTime weekDate;
-	    readonly int weekTag;
-	    readonly int dayOfYear;
+        private SwipeRefreshLayout mSwipeRefreshLayout;
+        private View view;
+        private List<Day> days;
+        private RecyclerView recyclerViewSchedule;
+        private ScheduleCardFragmentAdapter adapter;
+        private readonly DateTime weekDate;
+        private readonly int weekTag;
+        private readonly int dayOfYear;
 
         public ScheduleWeekFragment()
         {

@@ -10,9 +10,9 @@ namespace PolyNavi
                                   DatePickerDialog.IOnDateSetListener
     {
         public static readonly string TAG = "X:" + typeof(DateTimePickerFragment).Name.ToUpper();
-        static DateTime? _lastDate;
+        private static DateTime? _lastDate;
 
-        Action<DateTime> dateSelectedHandler = delegate { };
+        private Action<DateTime> dateSelectedHandler = delegate { };
 
         public static DateTimePickerFragment NewInstance(Action<DateTime> onDateSelected, DateTime? lastDate = null)
         {

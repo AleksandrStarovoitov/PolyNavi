@@ -4,14 +4,14 @@ using Android.Support.V4.App;
 
 namespace PolyNavi
 {
-    class ScheduleFragmentAdapter : FragmentStatePagerAdapter
+    internal class ScheduleFragmentAdapter : FragmentStatePagerAdapter
 	{
-		int numOfTabs;
-		ScheduleWeekFragment tab1;
-		ScheduleWeekFragment tab2;
+        private int numOfTabs;
+        private ScheduleWeekFragment tab1;
+        private ScheduleWeekFragment tab2;
 
-        const int CurrentWeekTag = 0;
-        const int NextWeekTag = 1;
+        private const int CurrentWeekTag = 0;
+        private const int NextWeekTag = 1;
 
         public ScheduleFragmentAdapter(FragmentManager fragmentManager, int numOfTabs, DateTime date, int dayOfYear = -1) : base(fragmentManager)
 		{

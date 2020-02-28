@@ -20,15 +20,15 @@ namespace PolyNavi
 		ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.ScreenSize)]
 	public class MainActivity : AppCompatActivity, IDrawerListener
 	{
-		DrawerLayout drawerLayout;
-		ActionBarDrawerToggle drawerToggle;
-		Type fragmentClass = null;
-		Android.Support.V4.App.Fragment fragment;
-		Android.Support.V7.Widget.Toolbar toolbar;
-		NavigationView navigationView;
-		string startActivity;
-		int startMenuItem;
-		bool tapped = false;
+        private DrawerLayout drawerLayout;
+        private ActionBarDrawerToggle drawerToggle;
+        private Type fragmentClass;
+        private Android.Support.V4.App.Fragment fragment;
+        private Android.Support.V7.Widget.Toolbar toolbar;
+        private NavigationView navigationView;
+        private string startActivity;
+        private int startMenuItem;
+        private bool tapped;
 
 		protected override void OnCreate(Bundle savedInstanceState)
 		{
@@ -135,7 +135,7 @@ namespace PolyNavi
 			MainBuildingView.drawerState = false;
 		}
 
-		void NavViewItemSelected(object sender, NavigationView.NavigationItemSelectedEventArgs e)
+        private void NavViewItemSelected(object sender, NavigationView.NavigationItemSelectedEventArgs e)
 		{
 			var mItemId = e.MenuItem.ItemId;
 

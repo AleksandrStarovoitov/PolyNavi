@@ -8,8 +8,8 @@ namespace PolyNavi
     {
         private const string ARG_SECTION_NUMBER = "section_number";
 
-        ImageView img;
-        readonly int[] bgs = { Resource.Drawable.welcome_blueprint, Resource.Drawable.welcome_route, Resource.Drawable.welcome_calendar };
+        private ImageView img;
+        private readonly int[] bgs = { Resource.Drawable.welcome_blueprint, Resource.Drawable.welcome_route, Resource.Drawable.welcome_calendar };
 
         private WelcomePlaceholderFragment()
         {

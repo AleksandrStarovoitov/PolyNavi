@@ -8,7 +8,7 @@ namespace PolyNaviLib.BL
 
 	public class PolyManager
 	{
-		Repository repository;
+        private Repository repository;
 
 		private PolyManager()
 		{
@@ -26,7 +26,7 @@ namespace PolyNaviLib.BL
 			return manager.InitializeAsync(dbPath, checker, settings);
 		}
 
-        Nito.AsyncEx.AsyncLock mutex = new Nito.AsyncEx.AsyncLock();
+        private Nito.AsyncEx.AsyncLock mutex = new Nito.AsyncEx.AsyncLock();
 
         public async Task<WeekRoot> GetWeekRootAsync(DateTime weekDate, bool forceUpdate)
         {

@@ -20,40 +20,42 @@ namespace PolyNavi
 			None,
 		}
 
-	    readonly Paint routePaint = new Paint() { Color = Color.Blue, StrokeCap = Paint.Cap.Round, StrokeWidth = 7.0f, };
-	    readonly Paint startPointPaint = new Paint() { Color = Color.Green };
-	    readonly Paint endPointPaint = new Paint() { Color = Color.Red };
-		float[] route;
+        private readonly Paint routePaint = new Paint() { Color = Color.Blue, StrokeCap = Paint.Cap.Round, StrokeWidth = 7.0f, };
+        private readonly Paint startPointPaint = new Paint() { Color = Color.Green };
+        private readonly Paint endPointPaint = new Paint() { Color = Color.Red };
+
+        private float[] route;
 		//TODO изменить на рисунки
-		Marker marker = Marker.None;
-		Point markerPoint;
+        private Marker marker = Marker.None;
+        private Point markerPoint;
 
 		public static bool drawerState = false;
-		static readonly int InvalidPointerId = -1;
+        private static readonly int InvalidPointerId = -1;
 
-	    readonly Drawable _plan;
+        private readonly Drawable _plan;
 		//readonly ScaleGestureDetector _scaleDetector;
-		readonly GestureDetector _doubleTapListener;
+        private readonly GestureDetector _doubleTapListener;
 
-		int _activePointerId = -1;
-		float _lastTouchX;
-		float _lastTouchY;
+        private int _activePointerId = -1;
+        private float _lastTouchX;
+        private float _lastTouchY;
 		public float _posX { get; set; }
 		public float _posY { get; set; }
-		float _scaleFactor = 1.0f;
+
+        private float _scaleFactor = 1.0f;
 		//float _minScaleFactor = 0.9f;
 		//float _maxScaleFactor = 5.0f;
 
-		Android.Util.DisplayMetrics displ;
+        private Android.Util.DisplayMetrics displ;
 
-		readonly int baseWidth = 3200;
-		readonly int baseHeight = 1800;
+        private readonly int baseWidth = 3200;
+        private readonly int baseHeight = 1800;
 
-		float widthScale, heightScale;
-		int imageWidth, imageHeight;
+        private float widthScale, heightScale;
+        private int imageWidth, imageHeight;
 
-		Context c;
-		InputMethodManager imm;
+        private Context c;
+        private InputMethodManager imm;
 
 		public MainBuildingView(Context context, int id) :
 			base(context, null, 0)
@@ -254,9 +256,9 @@ namespace PolyNavi
 
         private class MyDoubleTapListener : GestureDetector.SimpleOnGestureListener
         {
-            MainBuildingView view;
-            bool zoomedIn = false;
-            DisplayMetrics displ;
+            private MainBuildingView view;
+            private bool zoomedIn = false;
+            private DisplayMetrics displ;
 
             public MyDoubleTapListener(MainBuildingView view, DisplayMetrics displ)
             {

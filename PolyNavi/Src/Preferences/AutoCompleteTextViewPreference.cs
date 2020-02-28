@@ -25,7 +25,7 @@ namespace PolyNavi
     [Activity(Label = "AutoCompleteTextViewPreference")]
     public class AutoCompleteTextViewPreference : EditTextPreference
     {
-        readonly int resourceId = Resource.Layout.preference_dialog_autocomplete;
+        private readonly int resourceId = Resource.Layout.preference_dialog_autocomplete;
         public string GroupName { get; private set; }
 
         public AutoCompleteTextViewPreference(Context context) : this(context, null)
@@ -70,14 +70,14 @@ namespace PolyNavi
 
     public class AutoCompleteTextViewPreferenceDialogFragmentCompat : PreferenceDialogFragmentCompat, ITextWatcher
     {
-        AutoCompleteTextView autoCompleteTextViewPref;
-        ArrayAdapter suggestAdapter;
-        NetworkChecker networkChecker;
-        Dictionary<string, int> groupsDictionary;
-        CancellationTokenSource cts;
+        private AutoCompleteTextView autoCompleteTextViewPref;
+        private ArrayAdapter suggestAdapter;
+        private NetworkChecker networkChecker;
+        private Dictionary<string, int> groupsDictionary;
+        private CancellationTokenSource cts;
         private System.Timers.Timer searchTimer;
         private const int millsToSearch = 700;
-        string[] array;
+        private string[] array;
         private const string groupSearchLink =
             "http://m.spbstu.ru/p/proxy.php?csurl=http://ruz.spbstu.ru/api/v1/ruz/search/groups&q=";
 

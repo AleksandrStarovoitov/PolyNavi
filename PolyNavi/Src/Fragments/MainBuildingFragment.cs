@@ -19,18 +19,18 @@ namespace PolyNavi
 {
 	public class MainBuildingFragment : Android.Support.V4.App.Fragment, IOnEditorActionListener, AppBarLayout.IOnOffsetChangedListener, ITextWatcher
 	{
-		GraphNode mapGraph;
+        private GraphNode mapGraph;
 
-		View view;
-		AutoCompleteTextView editTextInputFrom, editTextInputTo;
-		Android.Support.V4.App.FragmentTransaction fragmentTransaction;
-		AppBarLayout appBar;
-		FloatingActionButton fab;
-	    FloatingActionButton buttonUp, buttonDown;
-		List<MainBuildingMapFragment> fragments;
-		int currentFloor = 1;
+        private View view;
+        private AutoCompleteTextView editTextInputFrom, editTextInputTo;
+        private Android.Support.V4.App.FragmentTransaction fragmentTransaction;
+        private AppBarLayout appBar;
+        private FloatingActionButton fab;
+        private FloatingActionButton buttonUp, buttonDown;
+        private List<MainBuildingMapFragment> fragments;
+        private int currentFloor = 1;
 
-		static bool editTextFromIsFocused, editTextToIsFocused;
+        private static bool editTextFromIsFocused, editTextToIsFocused;
 
 		public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 		{
@@ -140,8 +140,8 @@ namespace PolyNavi
         {
             DrawRoute();
         }
-        
-        bool fullyExpanded, fullyCollapsed;
+
+        private bool fullyExpanded, fullyCollapsed;
         private void DrawRoute()
         {
             if (fullyExpanded)

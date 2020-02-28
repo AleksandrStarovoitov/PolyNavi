@@ -13,7 +13,7 @@ namespace PolyNaviLib.DL
 {
     public class SQLiteDatabase
 	{
-		SQLiteAsyncConnection db;
+        private SQLiteAsyncConnection db;
 
 		public SQLiteDatabase(string dbPath)
 		{

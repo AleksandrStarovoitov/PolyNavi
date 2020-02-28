@@ -18,8 +18,8 @@ namespace PolyNavi
 		ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.ScreenSize)]
 	public class MapRouteActivity : AppCompatActivity
 	{
-		BuildingsAdapter adapterBuildings;
-		List<object> buildings;
+        private BuildingsAdapter adapterBuildings;
+        private List<object> buildings;
 
 		protected override void OnCreate(Bundle savedInstanceState)
 		{

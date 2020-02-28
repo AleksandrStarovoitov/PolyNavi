@@ -18,11 +18,11 @@ namespace PolyNavi
 
 	public class BuildingsAdapter : ArrayAdapter<object>
 	{
-		Context context;
-		TextView building;
-		object item;
-		int type;
-		const int MainBuilding = 0, OtherBuildings = 1;
+        private Context context;
+        private TextView building;
+        private object item;
+        private int type;
+        private const int MainBuilding = 0, OtherBuildings = 1;
 
 		public BuildingsAdapter(Context context, List<object> buildings) : base(context, 0, buildings)
 		{

@@ -33,42 +33,43 @@ namespace PolyNavi
     // TODO Кеширование RouterDB чтобы не загружать ее при каждой загрузке фрагмента
     public class MapBuildingsFragment : Android.Support.V4.App.Fragment, AppBarLayout.IOnOffsetChangedListener, ILocationListener
 	{
-		const string RouterDbName = "polytech_map.routerdb";
-		const string Marker_A_Name = "ic_marker_a.png";
-		const string Marker_B_Name = "ic_marker_b.png";
-		const string Marker_Location_name = "ic_gps_fixed_black.png";
+        private const string RouterDbName = "polytech_map.routerdb";
+        private const string Marker_A_Name = "ic_marker_a.png";
+        private const string Marker_B_Name = "ic_marker_b.png";
+        private const string Marker_Location_name = "ic_gps_fixed_black.png";
 
-	    readonly Point leftBottom = new Point(30.356456, 59.994757);
-	    readonly Point rightTop = new Point(30.391848, 60.008916);
+        private readonly Point leftBottom = new Point(30.356456, 59.994757);
+        private readonly Point rightTop = new Point(30.391848, 60.008916);
 
-        const int RequestCodeFrom = 1;
-		const int RequestCodeTo = 2;
+        private const int RequestCodeFrom = 1;
+        private const int RequestCodeTo = 2;
 
-		readonly string[] PermissionsLocation =
+        private readonly string[] PermissionsLocation =
 		{
 		  Android.Manifest.Permission.AccessCoarseLocation,
 		  Android.Manifest.Permission.AccessFineLocation
 		};
-		const int RequestFineLocationId = 10;
 
-		View view;
+        private const int RequestFineLocationId = 10;
 
-		RouterDb routerDb;
-		Router router;
-		Profile profile;
+        private View view;
 
-		MapControl mapControl;
-		Map map;
-		ILayer routeLayer;
+        private RouterDb routerDb;
+        private Router router;
+        private Profile profile;
 
-		EditText editTextInputFrom, editTextInputTo;
-		AppBarLayout appBar;
-		FloatingActionButton fab;
-		FloatingActionButton buttonLocation;
-        ImageButton buttonFromCurrentLocation;
+        private MapControl mapControl;
+        private Map map;
+        private ILayer routeLayer;
 
-		LocationManager locationManager;
-		AnimatedPointsWithAutoUpdateLayer animatedLocation;
+        private EditText editTextInputFrom, editTextInputTo;
+        private AppBarLayout appBar;
+        private FloatingActionButton fab;
+        private FloatingActionButton buttonLocation;
+        private ImageButton buttonFromCurrentLocation;
+
+        private LocationManager locationManager;
+        private AnimatedPointsWithAutoUpdateLayer animatedLocation;
         
 		public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 		{
@@ -346,8 +347,8 @@ namespace PolyNavi
                 }
             }
         }
-        
-		bool fullyExpanded, fullyCollapsed;
+
+        private bool fullyExpanded, fullyCollapsed;
 		private void Fab_Click(object sender, EventArgs eargs)
 		{
 			if (fullyExpanded)
@@ -438,7 +439,7 @@ namespace PolyNavi
 
 		private class AnimatedPointsWithAutoUpdateLayer : AnimatedPointLayer
 		{
-			static IGeometry geometry;
+            private static IGeometry geometry;
 
 			public AnimatedPointsWithAutoUpdateLayer()
 				: base(new DynamicMemoryProvider())

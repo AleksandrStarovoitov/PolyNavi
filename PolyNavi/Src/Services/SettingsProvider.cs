@@ -9,7 +9,7 @@ namespace PolyNavi
 {
     public class SettingsProvider : ISettingsProvider
 	{
-	    readonly IDictionary<string, object> preferences;
+        private readonly IDictionary<string, object> preferences;
 
 		public SettingsProvider(ISharedPreferences preferences)
 		{

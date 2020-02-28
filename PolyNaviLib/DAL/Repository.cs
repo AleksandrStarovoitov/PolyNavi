@@ -14,12 +14,12 @@ namespace PolyNaviLib.DAL
 {
     public class Repository
     {
-        readonly string scheduleLink = @"http://m.spbstu.ru/p/proxy.php?csurl=http://ruz.spbstu.ru/api/v1/ruz/scheduler/";
+        private readonly string scheduleLink = @"http://m.spbstu.ru/p/proxy.php?csurl=http://ruz.spbstu.ru/api/v1/ruz/scheduler/";
 
-        SQLiteDatabase database;
-        INetworkChecker checker;
-        ISettingsProvider settings;
-        HttpClient client;
+        private SQLiteDatabase database;
+        private INetworkChecker checker;
+        private ISettingsProvider settings;
+        private HttpClient client;
 
         private Repository()
         {

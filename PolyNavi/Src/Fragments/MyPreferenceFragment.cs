@@ -6,7 +6,7 @@ namespace PolyNavi
 {
     public class MyPreferenceFragment : PreferenceFragmentCompat, ISharedPreferencesOnSharedPreferenceChangeListener
 	{
-        ISharedPreferences sharedPreferences;
+        private ISharedPreferences sharedPreferences;
 
         public override void OnDisplayPreferenceDialog(Preference preference)
         {

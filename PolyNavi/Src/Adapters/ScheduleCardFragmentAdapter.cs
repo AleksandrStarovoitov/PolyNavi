@@ -19,15 +19,15 @@ namespace PolyNavi
 
 	public class ScheduleCardRowAdapter : RecyclerView.Adapter
 	{
-		List<object> mLessons;
-		Context context;
-		LayoutInflater layoutInflater;
-	    View scheduleView;
-		ScheduleCardRowLessonViewHolder viewHolderLesson;
-		ScheduleCardRowTitleViewHolder viewHolderTitle;
-		RecyclerView.ViewHolder viewHolder;
-		CultureInfo cultureInfo = new CultureInfo("ru-RU");
-		const int TitleConst = 0, LessonConst = 1;
+        private List<object> mLessons;
+        private Context context;
+        private LayoutInflater layoutInflater;
+        private View scheduleView;
+        private ScheduleCardRowLessonViewHolder viewHolderLesson;
+        private ScheduleCardRowTitleViewHolder viewHolderTitle;
+        private RecyclerView.ViewHolder viewHolder;
+        private CultureInfo cultureInfo = new CultureInfo("ru-RU");
+        private const int TitleConst = 0, LessonConst = 1;
 
 		public ScheduleCardRowAdapter(List<object> lessons, DateTime date)
 		{
@@ -173,17 +173,17 @@ namespace PolyNavi
 		}
 	}
 
-	class ScheduleCardFragmentAdapter : RecyclerView.Adapter
+    internal class ScheduleCardFragmentAdapter : RecyclerView.Adapter
 	{
-		List<Day> mDays;
-		Context context;
-		LayoutInflater layoutInflater;
-		View scheduleView;
-		RecyclerView.ViewHolder viewHolder;
-		DateTime lastUpdatedDate;
+        private List<Day> mDays;
+        private Context context;
+        private LayoutInflater layoutInflater;
+        private View scheduleView;
+        private RecyclerView.ViewHolder viewHolder;
+        private DateTime lastUpdatedDate;
 		public RecyclerView recyclerViewSchedule;
 
-		const int EndConst = 0, CardConst = 1;
+        private const int EndConst = 0, CardConst = 1;
 
 		public ScheduleCardFragmentAdapter(List<Day> days)
 		{

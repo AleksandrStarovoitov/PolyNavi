@@ -18,20 +18,20 @@ namespace PolyNavi
         ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.ScreenSize)]
     public class WelcomeActivity : AppCompatActivity
     {
-        WelcomeSectionsPagerAdapter mSectionsPagerAdapter;
-        static ViewPager mViewPager;
-        static ImageButton mNextBtn;
-        static Button mSkipBtn, mFinishBtn;
+        private WelcomeSectionsPagerAdapter mSectionsPagerAdapter;
+        private static ViewPager mViewPager;
+        private static ImageButton mNextBtn;
+        private static Button mSkipBtn, mFinishBtn;
 
-        ImageView zero, one, two;
-        static ImageView[] indicators;
+        private ImageView zero, one, two;
+        private static ImageView[] indicators;
 
-        static int page = 0;
-        static int[] colorList;
-        static ArgbEvaluator evaluator;
-        static Color[] colors;
+        private static int page;
+        private static int[] colorList;
+        private static ArgbEvaluator evaluator;
+        private static Color[] colors;
 
-        ISharedPreferencesEditor prefEditor;
+        private ISharedPreferencesEditor prefEditor;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -103,7 +103,7 @@ namespace PolyNavi
             Finish();
         }
 
-        static void UpdateIndicators(int position)
+        private static void UpdateIndicators(int position)
         {
             for (int i = 0; i < indicators.Length; i++)
             {

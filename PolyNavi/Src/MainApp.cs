@@ -38,10 +38,10 @@ namespace PolyNavi
         )]
     public class MainApp : Application
     {
-        const string DatabaseFilename = "schedule.sqlite";
+        private const string DatabaseFilename = "schedule.sqlite";
 
-        Locale locale = null;
-        string language;
+        private Locale locale = null;
+        private string language;
 
         public static MainApp Instance { get; private set; }
 

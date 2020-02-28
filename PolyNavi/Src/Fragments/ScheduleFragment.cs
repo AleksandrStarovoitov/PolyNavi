@@ -13,11 +13,11 @@ namespace PolyNavi
     [Activity(Label = "ScheduleSwipeActivity")]
 	public class ScheduleFragment : Android.Support.V4.App.Fragment
 	{
-		View view;
-		TabLayout tabLayout;
-		ViewPager viewPager;
-		ScheduleFragmentAdapter adapter;
-        DateTime? lastDate = null;
+        private View view;
+        private TabLayout tabLayout;
+        private ViewPager viewPager;
+        private ScheduleFragmentAdapter adapter;
+        private DateTime? lastDate;
 
 		public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 		{

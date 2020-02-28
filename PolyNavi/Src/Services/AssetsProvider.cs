@@ -6,7 +6,7 @@ namespace PolyNavi
 {
     public class AssetsProvider : Graph.IAssetsProvider
 	{
-	    readonly Context context;
+        private readonly Context context;
 
 		public AssetsProvider(Context context)
 		{

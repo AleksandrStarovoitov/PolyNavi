@@ -9,22 +9,22 @@ namespace GraphMapper
 {
     public partial class GraphMapperForm : Form
 	{
-		Pen wayPen = new Pen(Brushes.Brown, 6.0f);
-		Pen roomPen = Pens.Red;
-		Pen interPen = Pens.Blue;
-		RoomDialog roomDialoge = new RoomDialog();
-		FloorNumberDialog floorDialoge = new FloorNumberDialog();
-		int roomId = 0;
+        private Pen wayPen = new Pen(Brushes.Brown, 6.0f);
+        private Pen roomPen = Pens.Red;
+        private Pen interPen = Pens.Blue;
+        private RoomDialog roomDialoge = new RoomDialog();
+        private FloorNumberDialog floorDialoge = new FloorNumberDialog();
+        private int roomId;
 
-		Image drawArea = null;
-		Image lastArea = null;
-		GraphNode focusedNode = null;
-		GraphNode lastFocusedNode = null;
-		List<GraphNode> nodes = new List<GraphNode>();
-		bool stairsMode = false;
+        private Image drawArea;
+        private Image lastArea;
+        private GraphNode focusedNode;
+        private GraphNode lastFocusedNode;
+        private List<GraphNode> nodes = new List<GraphNode>();
+        private bool stairsMode;
 
-		const int NodeRadius = 20;
-		const int CursorSpeed = 5;
+        private const int NodeRadius = 20;
+        private const int CursorSpeed = 5;
 
 		public GraphMapperForm()
 		{

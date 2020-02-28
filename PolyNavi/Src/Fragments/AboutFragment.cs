@@ -12,7 +12,7 @@ namespace PolyNavi
     [Activity(Label = "AboutFragment")]
 	public class AboutFragment : Android.Support.V4.App.Fragment
 	{
-		View view;
+        private View view;
 
 	    public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 		{

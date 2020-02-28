@@ -27,16 +27,17 @@ namespace PolyNavi
         ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.ScreenSize)]
     public class AuthorizationActivity : AppCompatActivity, TextView.IOnEditorActionListener, ITextWatcher
     {
-        AutoCompleteTextView autoCompleteTextViewAuth;
-        NetworkChecker networkChecker;
-        ArrayAdapter suggestAdapter;
-        Dictionary<string, int> groupsDictionary;
-        string[] array;
-        Timer searchTimer;
+        private AutoCompleteTextView autoCompleteTextViewAuth;
+        private NetworkChecker networkChecker;
+        private ArrayAdapter suggestAdapter;
+        private Dictionary<string, int> groupsDictionary;
+        private string[] array;
+        private Timer searchTimer;
         private const int millsToSearch = 700;
         private const string groupSearchLink =
             "http://m.spbstu.ru/p/proxy.php?csurl=http://ruz.spbstu.ru/api/v1/ruz/search/groups&q=";
-        ISharedPreferencesEditor prefEditor;
+
+        private ISharedPreferencesEditor prefEditor;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {

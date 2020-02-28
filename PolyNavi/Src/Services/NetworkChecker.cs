@@ -8,7 +8,7 @@ namespace PolyNavi
 
     public class NetworkChecker : INetworkChecker
 	{
-	    readonly Context context;
+        private readonly Context context;
 
 		public NetworkChecker(Context context)
 		{
