@@ -34,8 +34,8 @@ namespace PolyNavi.Activities
         private Dictionary<string, int> groupsDictionary;
         private string[] array;
         private Timer searchTimer;
-        private const int millsToSearch = 700;
-        private const string groupSearchLink =
+        private const int MillsToSearch = 700;
+        private const string GroupSearchLink =
             "http://m.spbstu.ru/p/proxy.php?csurl=http://ruz.spbstu.ru/api/v1/ruz/search/groups&q=";
 
         private ISharedPreferencesEditor prefEditor;
@@ -130,7 +130,7 @@ namespace PolyNavi.Activities
             }
             else
             {
-                searchTimer = new Timer(millsToSearch);
+                searchTimer = new Timer(MillsToSearch);
                 searchTimer.Elapsed += delegate
                 {
                     if (networkChecker.Check())
@@ -138,8 +138,8 @@ namespace PolyNavi.Activities
                         var client = new HttpClient();
                         Task.Run(async () =>
                         {
-                            var resultJson = await HttpClientSL.GetResponseAsync(client,
-                                groupSearchLink +
+                            var resultJson = await HttpClientService.GetResponseAsync(client,
+                                GroupSearchLink +
                                 s.ToString(), new System.Threading.CancellationToken());
                             var groups = JsonConvert.DeserializeObject<GroupRoot>(resultJson);
                             groupsDictionary = groups.Groups.ToDictionary(x => x.Name, x => x.Id);

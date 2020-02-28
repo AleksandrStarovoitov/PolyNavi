@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace PolyNaviLib.SL
 {
-    public static class HttpClientSL
+    public static class HttpClientService
     {
         public static async Task<string> GetResponseAsync(HttpClient client, string uri, CancellationToken cts)
         {

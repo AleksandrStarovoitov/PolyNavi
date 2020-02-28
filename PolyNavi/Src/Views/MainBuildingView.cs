@@ -32,21 +32,21 @@ namespace PolyNavi.Views
 		public static bool drawerState = false;
         private static readonly int InvalidPointerId = -1;
 
-        private readonly Drawable _plan;
+        private readonly Drawable plan;
 		//readonly ScaleGestureDetector _scaleDetector;
-        private readonly GestureDetector _doubleTapListener;
+        private readonly GestureDetector doubleTapListener;
 
-        private int _activePointerId = -1;
-        private float _lastTouchX;
-        private float _lastTouchY;
-		public float _posX { get; set; }
-		public float _posY { get; set; }
+        private int activePointerId = -1;
+        private float lastTouchX;
+        private float lastTouchY;
+		public float PosX { get; set; }
+		public float PosY { get; set; }
 
-        private float _scaleFactor = 1.0f;
+        private readonly float _scaleFactor = 1.0f;
 		//float _minScaleFactor = 0.9f;
 		//float _maxScaleFactor = 5.0f;
 
-        private Android.Util.DisplayMetrics displ;
+        private DisplayMetrics displ;
 
         private readonly int baseWidth = 3200;
         private readonly int baseHeight = 1800;
@@ -64,7 +64,7 @@ namespace PolyNavi.Views
 			c = context;
 			displ = Resources.DisplayMetrics;
 
-			_plan = ContextCompat.GetDrawable(Context, id);
+			plan = ContextCompat.GetDrawable(Context, id);
 
 			//imageWidth = _plan.IntrinsicWidth;
 			//imageHeight = _plan.IntrinsicHeight;
@@ -82,9 +82,9 @@ namespace PolyNavi.Views
 			//	_scaleFactor *= 0.9f;
 			//}
             
-            _plan.SetBounds(0, 0, imageWidth, imageHeight);
+            plan.SetBounds(0, 0, imageWidth, imageHeight);
 			//_scaleDetector = new ScaleGestureDetector(context, new MyScaleListener(this));
-			_doubleTapListener = new GestureDetector(context, new MyDoubleTapListener(this, displ));
+			doubleTapListener = new GestureDetector(context, new MyDoubleTapListener(this, displ));
 
 			imm = (InputMethodManager)c.GetSystemService(Context.InputMethodService);
 		}
@@ -102,7 +102,7 @@ namespace PolyNavi.Views
 				imm.HideSoftInputFromWindow(WindowToken, 0);
 			}
 			//_scaleDetector.OnTouchEvent(e);
-			_doubleTapListener.OnTouchEvent(e);
+			doubleTapListener.OnTouchEvent(e);
 
 			MotionEventActions action = e.Action & MotionEventActions.Mask;
 			int pointerIndex;
@@ -110,74 +110,74 @@ namespace PolyNavi.Views
             switch (action)
             {
                 case MotionEventActions.Down:
-                    _lastTouchX = e.GetX();
-                    _lastTouchY = e.GetY();
-                    _activePointerId = e.GetPointerId(0);
+                    lastTouchX = e.GetX();
+                    lastTouchY = e.GetY();
+                    activePointerId = e.GetPointerId(0);
                     break;
 
                 case MotionEventActions.Move:
-                    pointerIndex = e.FindPointerIndex(_activePointerId);
+                    pointerIndex = e.FindPointerIndex(activePointerId);
                     float x = e.GetX(pointerIndex);
                     float y = e.GetY(pointerIndex);
                     //if (!_scaleDetector.IsInProgress)
                     //{
                     //Only move the ScaleGestureDetector isn't already processing a gesture.
-                    float deltaX = x - _lastTouchX;
-                    float deltaY = y - _lastTouchY;
-                    _posX += deltaX;
-                    _posY += deltaY;
+                    float deltaX = x - lastTouchX;
+                    float deltaY = y - lastTouchY;
+                    PosX += deltaX;
+                    PosY += deltaY;
                     
 					float planScaleWidth = imageWidth * _scaleFactor;
 					float planScaleHeight = imageHeight * _scaleFactor;
 
-					float right = _posX + planScaleWidth;
-					float left = _posX;
-					float top = _posY;
-					float bottom = _posY + planScaleHeight;
+					float right = PosX + planScaleWidth;
+					float left = PosX;
+					float top = PosY;
+					float bottom = PosY + planScaleHeight;
 
                     Log.Debug("PLAN", "Right: " + right);
                     Log.Debug("PLAN", "Left: " + left);
                     Log.Debug("PLAN", "Top: " + top);
-                    Log.Debug("PLAN", "Bottom: " + bottom + " // IntristicHeight: " + _plan.IntrinsicHeight + " // ImageHeight: " + imageHeight);
+                    Log.Debug("PLAN", "Bottom: " + bottom + " // IntristicHeight: " + plan.IntrinsicHeight + " // ImageHeight: " + imageHeight);
                     
                     if (right < displ.WidthPixels)
 					{
-						_posX -= deltaX;
+						PosX -= deltaX;
 					}
 					if (left > 0)
 					{
-						_posX -= deltaX;
+						PosX -= deltaX;
 					}
 					if (top > 0)
 					{
-						_posY -= deltaY;
+						PosY -= deltaY;
 					}
 					if (bottom < imageHeight)
 					{
-						_posY -= deltaY;
+						PosY -= deltaY;
 					}
 
 					Invalidate();
 					//}
 
-					_lastTouchX = x;
-					_lastTouchY = y;
+					lastTouchX = x;
+					lastTouchY = y;
 					break;
 
 				case MotionEventActions.Up:
 				case MotionEventActions.Cancel:
-					_activePointerId = InvalidPointerId;
+					activePointerId = InvalidPointerId;
 					break;
 
 				case MotionEventActions.PointerUp:
 					pointerIndex = (int)(e.Action & MotionEventActions.PointerIndexMask) >> (int)MotionEventActions.PointerIndexShift;
 					int pointerId = e.GetPointerId(pointerIndex);
-					if (pointerId == _activePointerId)
+					if (pointerId == activePointerId)
 					{
 						int newPointerIndex = pointerIndex == 0 ? 1 : 0;
-						_lastTouchX = e.GetX(newPointerIndex);
-						_lastTouchY = e.GetY(newPointerIndex);
-						_activePointerId = e.GetPointerId(newPointerIndex);
+						lastTouchX = e.GetX(newPointerIndex);
+						lastTouchY = e.GetY(newPointerIndex);
+						activePointerId = e.GetPointerId(newPointerIndex);
 					}
 					break;
 			}
@@ -188,9 +188,9 @@ namespace PolyNavi.Views
 		{
 			base.OnDraw(canvas);
 			canvas.Save();
-			canvas.Translate(_posX, _posY);
+			canvas.Translate(PosX, PosY);
 			canvas.Scale(_scaleFactor, _scaleFactor);
-			_plan.Draw(canvas);
+			plan.Draw(canvas);
 			if (route != null)
 			{
 				canvas.DrawLines(route, routePaint);

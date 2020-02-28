@@ -118,7 +118,7 @@ namespace PolyNavi.Fragments
                         else
                         {
                             //Permission is not granted. Request.
-                            RequestPermissions(new String[] { Android.Manifest.Permission.AccessFineLocation }, RequestFineLocationId);
+                            RequestPermissions(new string[] { Android.Manifest.Permission.AccessFineLocation }, RequestFineLocationId);
                         }
                     });
                 })
@@ -212,9 +212,7 @@ namespace PolyNavi.Fragments
                         buttonFromCurrentLocation.Enabled = true;
                     }
 					break;
-				default:
-					break;
-			}
+            }
 		}
 
 		private void InitializeRouting()

@@ -61,7 +61,7 @@ namespace PolyNaviLib.DL
 		{
 			if (item.IDD == 0)
 			{
-                await db.RunInTransactionAsync((SQLiteConnection conn) =>
+                await db.RunInTransactionAsync(conn =>
                 {
                     conn.InsertWithChildren(item, recursive: true);
                 });
@@ -84,7 +84,7 @@ namespace PolyNaviLib.DL
 			{
 				if (predicate(item))
 				{
-					await DeleteItemAsync<T>(item);
+					await DeleteItemAsync(item);
 				}
 			}
 		}

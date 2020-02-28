@@ -6,7 +6,7 @@ namespace PolyNavi.Fragments
 {
     public class WelcomePlaceholderFragment : Android.Support.V4.App.Fragment
     {
-        private const string ARG_SECTION_NUMBER = "section_number";
+        private const string ArgSectionNumber = "section_number";
 
         private ImageView img;
         private readonly int[] bgs = { Resource.Drawable.welcome_blueprint, Resource.Drawable.welcome_route, Resource.Drawable.welcome_calendar };
@@ -19,7 +19,7 @@ namespace PolyNavi.Fragments
         {
             var fragment = new WelcomePlaceholderFragment();
             var args = new Bundle();
-            args.PutInt(ARG_SECTION_NUMBER, sectionNumber);
+            args.PutInt(ArgSectionNumber, sectionNumber);
             fragment.Arguments = args;
             return fragment;
         }
@@ -30,7 +30,7 @@ namespace PolyNavi.Fragments
             var header = rootView.FindViewById<TextView>(Resource.Id.textview_welcome_header);
             var description = rootView.FindViewById<TextView>(Resource.Id.textview_welcome_description);
 
-            var pos = Arguments.GetInt(ARG_SECTION_NUMBER);
+            var pos = Arguments.GetInt(ArgSectionNumber);
             string headerText = null, descriptionText = null;
 
             switch (pos)
@@ -47,8 +47,6 @@ namespace PolyNavi.Fragments
                     headerText = GetString(Resource.String.welcome_header_third);
                     descriptionText = GetString(Resource.String.welcome_description_third);
                     break;
-                default:
-                    break;
             }
 
             if (headerText != null)
@@ -61,7 +59,7 @@ namespace PolyNavi.Fragments
             }
 
             img = rootView.FindViewById<ImageView>(Resource.Id.imageview_welcome_featureimage);
-            img.SetBackgroundResource(bgs[Arguments.GetInt(ARG_SECTION_NUMBER) - 1]);
+            img.SetBackgroundResource(bgs[Arguments.GetInt(ArgSectionNumber) - 1]);
 
             return rootView;
         }

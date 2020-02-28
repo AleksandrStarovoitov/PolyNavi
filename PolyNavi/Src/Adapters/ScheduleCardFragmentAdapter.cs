@@ -48,10 +48,7 @@ namespace PolyNavi.Adapters
 					scheduleView = layoutInflater.Inflate(Resource.Layout.layout_card_row_title_schedule, parent, false);
 					viewHolder = new ScheduleCardRowTitleViewHolder(scheduleView);
 					break;
-				default:
-
-					break;
-			}
+            }
 			return viewHolder;
 		}
 
@@ -114,9 +111,7 @@ namespace PolyNavi.Adapters
 					dayOfWeek.Text = title.Date.ToString("dddd", cultureInfo);
 					dayOfWeek.Text = dayOfWeek.Text.Substring(0, 1).ToUpper() + dayOfWeek.Text.Substring(1);
 					break;
-				default:
-					break;
-			}
+            }
 		}
 
 		public override int ItemCount => mLessons.Count;
@@ -185,7 +180,7 @@ namespace PolyNavi.Adapters
 
 		public ScheduleCardFragmentAdapter(List<Day> days)
 		{
-			mDays = days.Where(Day => Day.Lessons.Count != 0).ToList();
+			mDays = days.Where(day => day.Lessons.Count != 0).ToList();
 			lastUpdatedDate = mDays.FirstOrDefault().WeekRoot.LastUpdated;
 		}
 
@@ -205,10 +200,7 @@ namespace PolyNavi.Adapters
 					scheduleView = layoutInflater.Inflate(Resource.Layout.layout_card_schedule_end, parent, false);
 					viewHolder = new ScheduleCardEndFragmentAdapterViewHolder(scheduleView);
 					break;
-				default:
-
-					break;
-			}
+            }
 			
 			return viewHolder;
 		}
@@ -236,15 +228,10 @@ namespace PolyNavi.Adapters
 
 					TextView tv = vhe.textView;
 
-					tv.Text = context.GetString(Resource.String.updated) + " " + lastUpdatedDate.ToString();
+					tv.Text = context.GetString(Resource.String.updated) + " " + lastUpdatedDate.ToString(CultureInfo.InvariantCulture);
 					break;
-
-				default:
-
-					break;
-			}
-
-		}
+            }
+        }
 
 		public override int ItemCount => mDays.Count + 1;
 
@@ -266,7 +253,7 @@ namespace PolyNavi.Adapters
 
 			public ScheduleCardFragmentAdapterViewHolder(View itemView) : base(itemView)
 			{
-				recyclerView = itemView.FindViewById<RecyclerView>(Resource.Id.recyclerview_card_schedule); ;
+				recyclerView = itemView.FindViewById<RecyclerView>(Resource.Id.recyclerview_card_schedule);
 			}
 		}
 

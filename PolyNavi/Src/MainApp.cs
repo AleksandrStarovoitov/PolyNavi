@@ -180,7 +180,7 @@ namespace PolyNavi
 
         internal static string GetFileFullPath(string fname)
         {
-            string dirPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
+            string dirPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
             return Path.Combine(dirPath, fname);
         }
 

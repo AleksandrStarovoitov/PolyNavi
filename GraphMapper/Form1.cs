@@ -138,7 +138,6 @@ namespace GraphMapper
 					using (Graphics gr = Graphics.FromImage(drawArea))
 					{
 						Pen pen = null;
-						Graph.Point point = new Graph.Point(x, y);
 						string roomName = "*Unknown*";
 						bool isIntermediate = false;
 						if (e.Button == MouseButtons.Left)
@@ -164,11 +163,8 @@ namespace GraphMapper
 						};
 
 						gr.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-						if (lastArea != null)
-						{
-							lastArea.Dispose();
-						}
-						lastArea = (Image)pictureBox1.Image.Clone();
+                        lastArea?.Dispose();
+                        lastArea = (Image)pictureBox1.Image.Clone();
 
 						gr.DrawEllipse(pen, x - NodeRadius, y - NodeRadius, NodeRadius * 2, NodeRadius * 2);
 						nodes.Add(newNode);

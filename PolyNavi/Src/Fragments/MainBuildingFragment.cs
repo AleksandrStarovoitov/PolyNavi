@@ -108,8 +108,8 @@ namespace PolyNavi.Fragments
 			var newFragment = (MainBuildingMapFragment)FragmentManager.FindFragmentByTag($"MAP_MAINBUILDING_{newFloor}");
             var newView = newFragment.MapView;
 
-            newView._posX = currentView._posX;
-            newView._posY = currentView._posY;
+            newView.PosX = currentView.PosX;
+            newView.PosY = currentView.PosY;
 
 			FragmentManager.BeginTransaction().
 							Detach(currentFragment).

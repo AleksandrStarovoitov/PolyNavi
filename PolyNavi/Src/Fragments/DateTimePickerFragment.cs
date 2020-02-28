@@ -8,8 +8,8 @@ namespace PolyNavi.Fragments
     public class DateTimePickerFragment : DialogFragment,
                                   DatePickerDialog.IOnDateSetListener
     {
-        public static readonly string TAG = "X:" + typeof(DateTimePickerFragment).Name.ToUpper();
-        private static DateTime? _lastDate;
+        public static readonly string DateTimePickerTag = "X:" + typeof(DateTimePickerFragment).Name.ToUpper();
+        private static DateTime? lastDate;
 
         private Action<DateTime> dateSelectedHandler = delegate { };
 
@@ -19,14 +19,14 @@ namespace PolyNavi.Fragments
             {
                 dateSelectedHandler = onDateSelected
             };
-            _lastDate = lastDate;
+            DateTimePickerFragment.lastDate = lastDate;
 
             return frag;
         }
 
         public override Dialog OnCreateDialog(Bundle savedInstanceState)
         {
-            var currentDate = (DateTime) (_lastDate == null ? DateTime.Now : _lastDate);
+            var currentDate = (DateTime) (lastDate == null ? DateTime.Now : lastDate);
             var dialog = new DatePickerDialog(Activity,
                                                            this,
                                                            currentDate.Year,

@@ -61,7 +61,7 @@ namespace PolyNavi.Fragments
                         viewPager.Adapter = adapter;
                         lastDate = time;
                     }, lastDate);
-                    frag.Show(Activity.FragmentManager, DateTimePickerFragment.TAG);
+                    frag.Show(Activity.FragmentManager, DateTimePickerFragment.DateTimePickerTag);
                     return true;
                 default:
                     return base.OnOptionsItemSelected(item);

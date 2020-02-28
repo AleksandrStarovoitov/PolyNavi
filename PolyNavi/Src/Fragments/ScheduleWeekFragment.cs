@@ -49,7 +49,7 @@ namespace PolyNavi.Fragments
 
 			recyclerViewSchedule = view.FindViewById<RecyclerView>(Resource.Id.recyclerview_week_schedule);
             
-			LoadSheduleAndUpdateUIWithPorgressBar(weekDate, false);
+			LoadScheduleAndUpdateUiWithProgressBar(weekDate, false);
 
 			return view;
 		}
@@ -60,10 +60,10 @@ namespace PolyNavi.Fragments
 			{
 				DrawContent(Resource.Id.relativelayout_week_schedule, Resource.Layout.layout_week_schedule);
 			}
-			LoadSheduleAndUpdateUIWithPorgressBar(weekDate, true);
+			LoadScheduleAndUpdateUiWithProgressBar(weekDate, true);
 		}
 
-		private void LoadSheduleAndUpdateUIWithPorgressBar(DateTime weekDate, bool forceUpdate)
+		private void LoadScheduleAndUpdateUiWithProgressBar(DateTime weekDate, bool forceUpdate)
 		{
 			if (forceUpdate)
 			{

@@ -76,9 +76,9 @@ namespace PolyNavi.Preferences
         private Dictionary<string, int> groupsDictionary;
         private CancellationTokenSource cts;
         private System.Timers.Timer searchTimer;
-        private const int millsToSearch = 700;
+        private const int MillsToSearch = 700;
         private string[] array;
-        private const string groupSearchLink =
+        private const string GroupSearchLink =
             "http://m.spbstu.ru/p/proxy.php?csurl=http://ruz.spbstu.ru/api/v1/ruz/search/groups&q=";
 
         public static AutoCompleteTextViewPreferenceDialogFragmentCompat NewInstance(string key)
@@ -122,13 +122,13 @@ namespace PolyNavi.Preferences
             var groupName = autoCompleteTextViewPref.Text;
 
             DialogPreference preference = Preference;
-            if (preference is AutoCompleteTextViewPreference autoCompleteTVPreference)
+            if (preference is AutoCompleteTextViewPreference autoCompleteTvPreference)
             {
-                if (autoCompleteTVPreference.CallChangeListener(groupName))
+                if (autoCompleteTvPreference.CallChangeListener(groupName))
                 {
                     if (groupsDictionary.TryGetValue(groupName, out int groupId))
                     {
-                        autoCompleteTVPreference.SaveGroupName(groupName);
+                        autoCompleteTvPreference.SaveGroupName(groupName);
                         MainApp.Instance.SharedPreferences.Edit().PutInt("groupid", groupId).Apply();
                     }
                     else
@@ -162,7 +162,7 @@ namespace PolyNavi.Preferences
             }
             else
             {
-                searchTimer = new System.Timers.Timer(millsToSearch);
+                searchTimer = new System.Timers.Timer(MillsToSearch);
                 searchTimer.Elapsed += delegate
                 {
                     if (networkChecker.Check())
@@ -170,9 +170,9 @@ namespace PolyNavi.Preferences
                         var client = new HttpClient();
                         Task.Run(async () =>
                         {
-                            var resultJson = await HttpClientSL.GetResponseAsync(client,
-                                groupSearchLink +
-                                s.ToString(), new System.Threading.CancellationToken());
+                            var resultJson = await HttpClientService.GetResponseAsync(client,
+                                GroupSearchLink +
+                                s.ToString(), new CancellationToken());
                             var groups = JsonConvert.DeserializeObject<GroupRoot>(resultJson);
                             groupsDictionary = groups.Groups.ToDictionary(x => x.Name, x => x.Id);
                             array = groupsDictionary.Select(x => x.Key).ToArray();
