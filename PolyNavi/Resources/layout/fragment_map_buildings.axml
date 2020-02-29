@@ -25,8 +25,9 @@
         android:background="@android:color/transparent" />
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_location_map_buildings"
-        android:layout_width="@dimen/size_fab_small"
-        android:layout_height="@dimen/size_fab_small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:fabCustomSize="@dimen/size_fab_small"
         android:src="@drawable/baseline_near_me_black"
         app:backgroundTint="@color/button_floors"
         android:layout_margin="@dimen/margin_fab"

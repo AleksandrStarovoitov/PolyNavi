@@ -14,16 +14,18 @@
         app:layout_anchorGravity="bottom|center">
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab_down_mainbuilding"
-            android:layout_width="@dimen/size_fab_small"
-            android:layout_height="@dimen/size_fab_small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fabCustomSize="@dimen/size_fab_small"
             android:src="@drawable/baseline_keyboard_arrow_down_black"
             app:backgroundTint="@color/button_floors"
             android:layout_margin="@dimen/margin_fab"
             android:clickable="true" />
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab_up_mainbuilding"
-            android:layout_width="@dimen/size_fab_small"
-            android:layout_height="@dimen/size_fab_small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fabCustomSize="@dimen/size_fab_small"
             android:src="@drawable/baseline_keyboard_arrow_up_black"
             app:backgroundTint="@color/button_floors"
             android:layout_margin="@dimen/margin_fab"
