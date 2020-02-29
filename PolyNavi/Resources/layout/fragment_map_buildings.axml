@@ -18,6 +18,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </FrameLayout>
+    <!--Navigation drawer behind map fix-->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent" />
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_location_map_buildings"
         android:layout_width="@dimen/size_fab_small"
