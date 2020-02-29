@@ -10,7 +10,7 @@ using System;
 namespace PolyNavi.Fragments
 {
     [Activity(Label = "AboutFragment")]
-    public class AboutFragment : Android.Support.V4.App.Fragment
+    public class AboutFragment : AndroidX.Fragment.App.Fragment
     {
         private View view;
 

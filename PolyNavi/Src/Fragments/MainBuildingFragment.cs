@@ -1,11 +1,13 @@
 ﻿using Android.Content;
 using Android.OS;
 using Android.Runtime;
-using Android.Support.Design.Widget;
 using Android.Text;
 using Android.Views;
 using Android.Views.InputMethods;
 using Android.Widget;
+using AndroidX.Fragment.App;
+using Google.Android.Material.AppBar;
+using Google.Android.Material.FloatingActionButton;
 using Graph;
 using Java.Lang;
 using PolyNavi.Views;
@@ -16,12 +18,12 @@ using static Android.Widget.TextView;
 
 namespace PolyNavi.Fragments
 {
-    public class MainBuildingFragment : Android.Support.V4.App.Fragment, IOnEditorActionListener, AppBarLayout.IOnOffsetChangedListener, ITextWatcher
+    public class MainBuildingFragment : Fragment, IOnEditorActionListener, AppBarLayout.IOnOffsetChangedListener, ITextWatcher
     {
         private GraphNode mapGraph;
         private View view;
         private AutoCompleteTextView editTextInputFrom, editTextInputTo;
-        private Android.Support.V4.App.FragmentTransaction fragmentTransaction;
+        private FragmentTransaction fragmentTransaction;
         private AppBarLayout appBar;
         private FloatingActionButton fab;
         private FloatingActionButton upButton, downButton;

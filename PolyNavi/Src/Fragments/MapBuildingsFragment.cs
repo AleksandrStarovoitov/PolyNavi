@@ -4,10 +4,11 @@ using Android.Content.PM;
 using Android.Locations;
 using Android.OS;
 using Android.Runtime;
-using Android.Support.Design.Widget;
-using Android.Support.V4.Content;
 using Android.Views;
 using Android.Widget;
+using AndroidX.Core.Content;
+using Google.Android.Material.AppBar;
+using Google.Android.Material.FloatingActionButton;
 using Itinero;
 using Itinero.Profiles;
 using Mapsui;
@@ -30,7 +31,7 @@ using System.Threading.Tasks;
 namespace PolyNavi.Fragments
 {
 	// TODO Кеширование RouterDB чтобы не загружать ее при каждой загрузке фрагмента
-	public class MapBuildingsFragment : Android.Support.V4.App.Fragment, AppBarLayout.IOnOffsetChangedListener, ILocationListener
+	public class MapBuildingsFragment : AndroidX.Fragment.App.Fragment, AppBarLayout.IOnOffsetChangedListener, ILocationListener
 	{
 		private const string RouterDbName = "polytech_map.routerdb";
 		private const string MarkerAName = "ic_marker_a.png";

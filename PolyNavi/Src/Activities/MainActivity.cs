@@ -1,20 +1,21 @@
-﻿using Android.App;
-using Android.Content.PM;
+﻿using Android.Content.PM;
 using Android.OS;
-using Android.Support.Design.Widget;
-using Android.Support.V4.Widget;
-using Android.Support.V7.App;
 using Android.Views;
 using Android.Views.InputMethods;
+using AndroidX.AppCompat.App;
+using AndroidX.AppCompat.Widget;
+using AndroidX.Core.View;
+using AndroidX.DrawerLayout.Widget;
+using AndroidX.Fragment.App;
+using Google.Android.Material.Navigation;
 using PolyNavi.Fragments;
 using PolyNavi.Views;
 using System;
-using static Android.Support.V4.Widget.DrawerLayout;
-
+using static AndroidX.DrawerLayout.Widget.DrawerLayout;
 
 namespace PolyNavi.Activities
 {
-    [Activity(
+    [Android.App.Activity(
         Label = "PolyNavi",
         ScreenOrientation = ScreenOrientation.Portrait,
         ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.ScreenSize)]
@@ -23,8 +24,8 @@ namespace PolyNavi.Activities
         private DrawerLayout drawerLayout;
         private ActionBarDrawerToggle drawerToggle;
         private Type fragmentClass;
-        private Android.Support.V4.App.Fragment fragment;
-        private Android.Support.V7.Widget.Toolbar toolbar;
+        private Fragment fragment;
+        private Toolbar toolbar;
         private NavigationView navigationView;
         private string startActivity;
         private int startMenuItem;
@@ -43,7 +44,7 @@ namespace PolyNavi.Activities
             drawerLayout.AddDrawerListener(this);
             drawerLayout.SetStatusBarBackground(Resource.Color.color_status_bar);
 
-            toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar_main);
+            toolbar = FindViewById<Toolbar>(Resource.Id.toolbar_main);
 
             drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, Resource.String.navigation_drawer_open, Resource.String.navigation_drawer_close);
             drawerLayout.AddDrawerListener(drawerToggle);
@@ -88,7 +89,7 @@ namespace PolyNavi.Activities
                     break;
             }
 
-            fragment = (Android.Support.V4.App.Fragment)Activator.CreateInstance(fragmentClass);
+            fragment = (Fragment)Activator.CreateInstance(fragmentClass);
             navigationView.Menu.GetItem(startMenuItem).SetChecked(true);
             Title = startMenuItem == 4 ?
                 navigationView.Menu.FindItem(Resource.Id.nav_about_menu).TitleFormatted.ToString() :
@@ -107,7 +108,7 @@ namespace PolyNavi.Activities
             switch (item.ItemId)
             {
                 case (Android.Resource.Id.Home):
-                    drawerLayout.OpenDrawer(Android.Support.V4.View.GravityCompat.Start);
+                    drawerLayout.OpenDrawer(GravityCompat.Start);
                     return true;
                 default:
                     return base.OnOptionsItemSelected(item);

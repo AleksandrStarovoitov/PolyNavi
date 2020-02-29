@@ -6,7 +6,7 @@
     android:minWidth="25px"
     android:minHeight="25px"
     android:fitsSystemWindows="true">
-    <android.support.v7.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_copyright"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
-    <android.support.design.widget.TabLayout
+    <com.google.android.material.tabs.TabLayout
         android:id="@+id/tablayout_schedule"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -15,7 +15,7 @@
         android:elevation="@dimen/elevation_schedule_tablayout"
         android:minHeight="?attr/actionBarSize"
         android:theme="@style/MyAppTheme" />
-    <android.support.v4.view.ViewPager
+    <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewpager_schedule"
         android:layout_width="match_parent"
         android:layout_height="fill_parent"

@@ -2,7 +2,7 @@
 using Android.Content;
 using Android.Content.Res;
 using Android.Runtime;
-using Android.Support.V7.Preferences;
+using AndroidX.Preference;
 using Java.Util;
 using Mapsui.Geometries;
 using Nito.AsyncEx;

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -23,7 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@android:color/transparent" />
-    <android.support.design.widget.FloatingActionButton
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_location_map_buildings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -35,7 +35,7 @@
         android:clickable="true"
         app:layout_anchor="@+id/frame_map_buildings"
         app:layout_anchorGravity="right|center" />
-    <android.support.design.widget.FloatingActionButton
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_map_buildings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -44,7 +44,7 @@
         android:clickable="true"
         app:layout_anchor="@+id/search_frame_map_buildings"
         app:layout_anchorGravity="bottom|right|end" />
-    <android.support.design.widget.AppBarLayout
+    <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar_map_buildings"
         android:layout_width="match_parent"
         android:layout_height="@dimen/height_appbar"
@@ -80,7 +80,7 @@
                 android:layout_width="match_parent"
                 android:layout_marginRight="@dimen/marginright_appbar_input_from"
                 android:layout_toRightOf="@+id/imageview_notfixed_map">
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/textinputlayout_from_map_buildings"
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent">
@@ -90,7 +90,7 @@
                         android:layout_width="match_parent"
                         android:hint="@string/edittext_from_buildings"
                         android:focusableInTouchMode="false" />
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
                 <ImageButton
                     android:id="@+id/imagebutton_currentlocation_map_buildings"
                     style="@style/Widget.AppCompat.Button.Borderless"
@@ -101,7 +101,7 @@
                     android:layout_centerVertical="true"
                     android:layout_margin="5dp" />
             </RelativeLayout>
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textinputlayout_to_map_buildings"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
@@ -114,9 +114,9 @@
                     android:layout_width="match_parent"
                     android:hint="@string/edittext_to_buildings"
                     android:focusableInTouchMode="false" />
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
         </RelativeLayout>
-    </android.support.design.widget.AppBarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
     <ProgressBar
         android:id="@+id/progressbar_map_buildings"
         style="?android:attr/progressBarStyleLarge"
@@ -125,4 +125,4 @@
         android:indeterminate="true"
         android:layout_gravity="center"
         android:visibility="visible" />
-</android.support.design.widget.CoordinatorLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

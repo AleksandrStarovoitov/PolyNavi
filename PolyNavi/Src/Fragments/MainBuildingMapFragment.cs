@@ -1,10 +1,11 @@
 ﻿using Android.OS;
 using Android.Views;
+using AndroidX.Fragment.App;
 using PolyNavi.Views;
 
 namespace PolyNavi.Fragments
 {
-    public class MainBuildingMapFragment : Android.Support.V4.App.Fragment
+    public class MainBuildingMapFragment : Fragment
     {
         public MainBuildingView MapView { get; private set; }
         private readonly int drawableId;

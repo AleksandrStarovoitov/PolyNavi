@@ -1,16 +1,16 @@
 ﻿using Android.App;
 using Android.OS;
-using Android.Support.Design.Widget;
-using Android.Support.V4.View;
-using Android.Support.V7.App;
 using Android.Views;
+using AndroidX.AppCompat.App;
+using AndroidX.ViewPager.Widget;
+using Google.Android.Material.Tabs;
 using PolyNavi.Adapters;
 using System;
 
 namespace PolyNavi.Fragments
 {
     [Activity(Label = "ScheduleSwipeActivity")]
-    public class ScheduleFragment : Android.Support.V4.App.Fragment
+    public class ScheduleFragment : AndroidX.Fragment.App.Fragment
     {
         private View view;
         private TabLayout tabLayout;

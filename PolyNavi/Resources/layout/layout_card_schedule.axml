@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+<androidx.cardview.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/cardview_schedule"
     android:layout_width="match_parent"
@@ -14,10 +14,10 @@
     android:layout_marginRight="@dimen/marginlr_card_schedule"
     android:layout_marginBottom="@dimen/marginbottom_card_schedule"
     android:layout_marginTop="@dimen/margintop_card_schedule">
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:minWidth="25px"
         android:minHeight="25px"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/recyclerview_card_schedule" />
-</android.support.v7.widget.CardView>
+</androidx.cardview.widget.CardView>

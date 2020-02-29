@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:minWidth="25px"
     android:minHeight="25px">
-    <android.support.v4.widget.DrawerLayout
+    <androidx.drawerlayout.widget.DrawerLayout
         android:orientation="vertical"
         android:id="@+id/drawerlayout_main"
         android:layout_width="match_parent"
@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-            <android.support.v7.widget.Toolbar
+            <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar_main"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
@@ -33,7 +33,7 @@
                 android:minWidth="25px"
                 android:minHeight="25px" />
         </LinearLayout>
-        <android.support.design.widget.NavigationView
+        <com.google.android.material.navigation.NavigationView
             android:layout_marginTop="@dimen/margintop_main_navview"
             android:fitsSystemWindows="true"
             android:id="@+id/navview_main"
@@ -44,5 +44,5 @@
             app:headerLayout="@layout/layout_navheader_main"
             app:itemIconTint="@color/drawer_icon_colors"
             app:itemTextColor="@color/drawer_colors" />
-    </android.support.v4.widget.DrawerLayout>
+    </androidx.drawerlayout.widget.DrawerLayout>
 </LinearLayout>

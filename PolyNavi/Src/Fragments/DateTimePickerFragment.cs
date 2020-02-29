@@ -5,7 +5,7 @@ using System;
 
 namespace PolyNavi.Fragments
 {
-    public class DateTimePickerFragment : DialogFragment,
+    public class DateTimePickerFragment : DialogFragment, //TODO
                                   DatePickerDialog.IOnDateSetListener
     {
         public static readonly string DateTimePickerTag = "X:" + typeof(DateTimePickerFragment).Name.ToUpper();

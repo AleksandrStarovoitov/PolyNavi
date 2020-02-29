@@ -1,11 +1,10 @@
-﻿using System;
-using Android.Content;
+﻿using Android.Content;
 using Android.Graphics;
 using Android.Graphics.Drawables;
-using Android.Support.V4.Content;
 using Android.Util;
 using Android.Views;
 using Android.Views.InputMethods;
+using AndroidX.Core.Content;
 using PolyNavi.Fragments;
 using System.Collections.Generic;
 using System.Linq;

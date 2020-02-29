@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         app:layout_anchor="@+id/frame_mainbuilding"
         app:layout_anchorGravity="bottom|center">
-        <android.support.design.widget.FloatingActionButton
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_down_mainbuilding"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -21,7 +21,7 @@
             app:backgroundTint="@color/button_floors"
             android:layout_margin="@dimen/margin_fab"
             android:clickable="true" />
-        <android.support.design.widget.FloatingActionButton
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_up_mainbuilding"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -39,7 +39,7 @@
         android:layout_height="match_parent"
         android:id="@+id/frame_mainbuilding"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-    <android.support.design.widget.FloatingActionButton
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_mainbuilding"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -48,7 +48,7 @@
         android:clickable="true"
         app:layout_anchor="@+id/search_frame_mainbuilding"
         app:layout_anchorGravity="bottom|right|end" />
-    <android.support.design.widget.AppBarLayout
+    <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar_mainbuilding"
         android:layout_width="match_parent"
         android:layout_height="@dimen/height_appbar"
@@ -78,7 +78,7 @@
                 android:layout_alignRight="@+id/imageview_notfixed"
                 android:layout_alignTop="@+id/textinputlayout_to_mainbuilding"
                 android:layout_marginTop="@dimen/margintop_appbar_image_to" />
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textinputlayout_from_mainbuilding"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
@@ -95,8 +95,8 @@
                     android:completionThreshold="1"
                     android:imeOptions="actionNext"
                     android:hint="@string/edittext_from" />
-            </android.support.design.widget.TextInputLayout>
-            <android.support.design.widget.TextInputLayout
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textinputlayout_to_mainbuilding"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
@@ -112,7 +112,7 @@
                     android:imeOptions="actionGo"
                     android:completionThreshold="1"
                     android:hint="@string/edittext_to" />
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
         </RelativeLayout>
-    </android.support.design.widget.AppBarLayout>
-</android.support.design.widget.CoordinatorLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

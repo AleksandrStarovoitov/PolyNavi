@@ -1,6 +1,6 @@
 ﻿using Android.Content;
 using Android.OS;
-using Android.Support.V7.Preferences;
+using AndroidX.Preference;
 using PolyNavi.Preferences;
 
 namespace PolyNavi.Fragments
@@ -19,7 +19,7 @@ namespace PolyNavi.Fragments
             if (dialogFragment != null)
             {
                 dialogFragment.SetTargetFragment(this, 0);
-                dialogFragment.Show(FragmentManager, "android.support.v7.preference.PreferenceFragment.DIALOG");
+                dialogFragment.Show(FragmentManager, "android.support.v7.preference.PreferenceFragment.DIALOG"); //TODO AndroidX?
             }
             else
             {

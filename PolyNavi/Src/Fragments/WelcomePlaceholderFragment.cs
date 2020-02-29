@@ -1,10 +1,11 @@
 ﻿using Android.OS;
 using Android.Views;
 using Android.Widget;
+using AndroidX.Fragment.App;
 
 namespace PolyNavi.Fragments
 {
-    public class WelcomePlaceholderFragment : Android.Support.V4.App.Fragment
+    public class WelcomePlaceholderFragment : Fragment
     {
         private const string ArgSectionNumber = "section_number";
 
