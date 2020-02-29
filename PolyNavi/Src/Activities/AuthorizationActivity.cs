@@ -32,13 +32,12 @@ namespace PolyNavi.Activities
         private NetworkChecker networkChecker;
         private ArrayAdapter suggestAdapter;
         private Dictionary<string, int> groupsDictionary;
-        private string[] array;
+        private string[] groupsDictionaryKeys;
         private Timer searchTimer;
+        private ISharedPreferencesEditor preferencesEditor;
         private const int MillsToSearch = 700;
         private const string GroupSearchLink =
             "http://m.spbstu.ru/p/proxy.php?csurl=http://ruz.spbstu.ru/api/v1/ruz/search/groups&q=";
-
-        private ISharedPreferencesEditor prefEditor;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -59,7 +58,7 @@ namespace PolyNavi.Activities
             buttonAuth.Click += ButtonAuth_Click;
             textViewLater.Click += TextViewLater_Click;
 
-            prefEditor = MainApp.Instance.SharedPreferences.Edit();
+            preferencesEditor = MainApp.Instance.SharedPreferences.Edit();
         }
 
         private void ButtonAuth_Click(object sender, EventArgs e)
@@ -82,8 +81,8 @@ namespace PolyNavi.Activities
 
             if (groupsDictionary.TryGetValue(autoCompleteTextViewAuth.Text, out var groupId))
             {
-                prefEditor.PutString("groupnumber", autoCompleteTextViewAuth.Text).Apply();
-                prefEditor.PutInt("groupid", groupId).Apply();
+                preferencesEditor.PutString("groupnumber", autoCompleteTextViewAuth.Text).Apply();
+                preferencesEditor.PutInt("groupid", groupId).Apply();
 
                 ProceedToMainActivity();
             }
@@ -98,9 +97,9 @@ namespace PolyNavi.Activities
             ProceedToMainActivity();
         }
 
-        public void ProceedToMainActivity()
+        private void ProceedToMainActivity()
         {
-            prefEditor.PutBoolean("auth", true).Apply();
+            preferencesEditor.PutBoolean("auth", true).Apply();
             var mainIntent = new Intent(this, typeof(MainActivity));
             mainIntent.SetFlags(ActivityFlags.ClearTop);
             StartActivity(mainIntent);
@@ -143,12 +142,12 @@ namespace PolyNavi.Activities
                                 s.ToString(), new System.Threading.CancellationToken());
                             var groups = JsonConvert.DeserializeObject<GroupRoot>(resultJson);
                             groupsDictionary = groups.Groups.ToDictionary(x => x.Name, x => x.Id);
-                            array = groupsDictionary.Select(x => x.Key).ToArray();
+                            groupsDictionaryKeys = groupsDictionary.Select(x => x.Key).ToArray();
                             RunOnUiThread(() =>
                             {
                                 suggestAdapter = new ArrayAdapter(this,
                                     Android.Resource.Layout.SimpleDropDownItem1Line,
-                                    array);
+                                    groupsDictionaryKeys);
                                 autoCompleteTextViewAuth.Adapter = null;
                                 autoCompleteTextViewAuth.Adapter = suggestAdapter;
                                 if (s.Length() > 0 && before != count)

@@ -8,8 +8,13 @@ namespace PolyNavi.Fragments
     {
         private const string ArgSectionNumber = "section_number";
 
-        private ImageView img;
-        private readonly int[] bgs = { Resource.Drawable.welcome_blueprint, Resource.Drawable.welcome_route, Resource.Drawable.welcome_calendar };
+        private ImageView image;
+        private readonly int[] backgroundDrawableIds =
+        {
+            Resource.Drawable.welcome_blueprint,
+            Resource.Drawable.welcome_route, 
+            Resource.Drawable.welcome_calendar
+        };
 
         private WelcomePlaceholderFragment()
         {
@@ -58,8 +63,8 @@ namespace PolyNavi.Fragments
                 description.Text = descriptionText;
             }
 
-            img = rootView.FindViewById<ImageView>(Resource.Id.imageview_welcome_featureimage);
-            img.SetBackgroundResource(bgs[Arguments.GetInt(ArgSectionNumber) - 1]);
+            image = rootView.FindViewById<ImageView>(Resource.Id.imageview_welcome_featureimage);
+            image.SetBackgroundResource(backgroundDrawableIds[Arguments.GetInt(ArgSectionNumber) - 1]);
 
             return rootView;
         }

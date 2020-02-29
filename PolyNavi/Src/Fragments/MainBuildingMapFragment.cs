@@ -7,7 +7,7 @@ namespace PolyNavi.Fragments
     public class MainBuildingMapFragment : Android.Support.V4.App.Fragment
     {
         public MainBuildingView MapView { get; private set; }
-        private int DrawawbleId { get; }
+        private readonly int drawableId;
 
         public MainBuildingMapFragment()
         {
@@ -16,13 +16,13 @@ namespace PolyNavi.Fragments
 
         public MainBuildingMapFragment(int id)
         {
-            DrawawbleId = id;
+            drawableId = id;
         }
 
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            MapView = new MainBuildingView(Activity.BaseContext, DrawawbleId);
+            MapView = new MainBuildingView(Activity.BaseContext, drawableId);
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)

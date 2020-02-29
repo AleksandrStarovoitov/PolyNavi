@@ -38,12 +38,6 @@
             android:layout_gravity="center"
             android:orientation="horizontal">
             <ImageView
-                android:id="@+id/imageview_welcome_indicator_0"
-                android:layout_width="@dimen/size_welcome_indicator"
-                android:layout_height="@dimen/size_welcome_indicator"
-                android:layout_marginRight="@dimen/marginright_welcome_indicator"
-                android:background="@drawable/indicator_unselected" />
-            <ImageView
                 android:id="@+id/imageview_welcome_indicator_1"
                 android:layout_width="@dimen/size_welcome_indicator"
                 android:layout_height="@dimen/size_welcome_indicator"
@@ -51,6 +45,12 @@
                 android:background="@drawable/indicator_unselected" />
             <ImageView
                 android:id="@+id/imageview_welcome_indicator_2"
+                android:layout_width="@dimen/size_welcome_indicator"
+                android:layout_height="@dimen/size_welcome_indicator"
+                android:layout_marginRight="@dimen/marginright_welcome_indicator"
+                android:background="@drawable/indicator_unselected" />
+            <ImageView
+                android:id="@+id/imageview_welcome_indicator_3"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="@dimen/size_welcome_indicator"
                 android:layout_height="@dimen/size_welcome_indicator"

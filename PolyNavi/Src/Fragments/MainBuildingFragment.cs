@@ -19,16 +19,14 @@ namespace PolyNavi.Fragments
     public class MainBuildingFragment : Android.Support.V4.App.Fragment, IOnEditorActionListener, AppBarLayout.IOnOffsetChangedListener, ITextWatcher
     {
         private GraphNode mapGraph;
-
         private View view;
         private AutoCompleteTextView editTextInputFrom, editTextInputTo;
         private Android.Support.V4.App.FragmentTransaction fragmentTransaction;
         private AppBarLayout appBar;
         private FloatingActionButton fab;
-        private FloatingActionButton buttonUp, buttonDown;
+        private FloatingActionButton upButton, downButton;
         private List<MainBuildingMapFragment> fragments;
         private int currentFloor = 1;
-
         private static bool editTextFromIsFocused, editTextToIsFocused;
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -37,7 +35,12 @@ namespace PolyNavi.Fragments
 
             view = inflater.Inflate(Resource.Layout.fragment_mainbuilding, container, false);
 
-            fragments = new List<MainBuildingMapFragment>() { new MainBuildingMapFragment(Resource.Drawable.first_floor), new MainBuildingMapFragment(Resource.Drawable.second_floor), new MainBuildingMapFragment(Resource.Drawable.third_floor) };
+            fragments = new List<MainBuildingMapFragment>()
+            {
+                new MainBuildingMapFragment(Resource.Drawable.first_floor), 
+                new MainBuildingMapFragment(Resource.Drawable.second_floor),
+                new MainBuildingMapFragment(Resource.Drawable.third_floor)
+            };
 
             fragmentTransaction = Activity.SupportFragmentManager.BeginTransaction();
             fragmentTransaction.Add(Resource.Id.frame_mainbuilding, fragments[2], "MAP_MAINBUILDING_3");
@@ -68,24 +71,24 @@ namespace PolyNavi.Fragments
             var rl = view.FindViewById<RelativeLayout>(Resource.Id.relativelayout_floor_buttons_mainbuilding);
             rl.BringToFront();
 
-            buttonUp = view.FindViewById<FloatingActionButton>(Resource.Id.fab_up_mainbuilding);
-            buttonUp.Click += ButtonUp_Click;
-            buttonUp.Alpha = 0.7f;
+            upButton = view.FindViewById<FloatingActionButton>(Resource.Id.fab_up_mainbuilding);
+            upButton.Click += UpButtonClick;
+            upButton.Alpha = 0.7f;
 
-            buttonDown = view.FindViewById<FloatingActionButton>(Resource.Id.fab_down_mainbuilding);
-            buttonDown.Click += ButtonDown_Click;
-            buttonDown.Alpha = 0.7f;
-            buttonDown.Enabled = false;
+            downButton = view.FindViewById<FloatingActionButton>(Resource.Id.fab_down_mainbuilding);
+            downButton.Click += DownButtonClick;
+            downButton.Alpha = 0.7f;
+            downButton.Enabled = false;
 
             return view;
         }
 
-        private void ButtonUp_Click(object sender, EventArgs e)
+        private void UpButtonClick(object sender, EventArgs e)
         {
             ChangeFloor(currentFloor + 1);
         }
 
-        private void ButtonDown_Click(object sender, EventArgs e)
+        private void DownButtonClick(object sender, EventArgs e)
         {
             ChangeFloor(currentFloor - 1);
         }
@@ -98,10 +101,10 @@ namespace PolyNavi.Fragments
         {
             if (newFloor < 1 && newFloor > 3)
             {
-                throw new ArgumentOutOfRangeException("newFloor", newFloor, "Не валидный номер этажа");
+                throw new ArgumentOutOfRangeException(nameof(newFloor), newFloor, "Не валидный номер этажа");
             }
-            buttonDown.Enabled = true;
-            buttonUp.Enabled = true;
+            downButton.Enabled = true;
+            upButton.Enabled = true;
             var currentFragment = (MainBuildingMapFragment)FragmentManager.FindFragmentByTag($"MAP_MAINBUILDING_{currentFloor}");
             var currentView = currentFragment.MapView;
 
@@ -116,13 +119,14 @@ namespace PolyNavi.Fragments
                             Attach(newFragment).
                             Commit();
             currentFloor = newFloor;
-            if (currentFloor == 3)
+            switch (currentFloor)
             {
-                buttonUp.Enabled = false;
-            }
-            else if (currentFloor == 1)
-            {
-                buttonDown.Enabled = false;
+                case 3:
+                    upButton.Enabled = false;
+                    break;
+                case 1:
+                    downButton.Enabled = false;
+                    break;
             }
         }
 
@@ -152,13 +156,9 @@ namespace PolyNavi.Fragments
                     fab.SetImageResource(Resource.Drawable.ic_directions_black);
                     appBar.SetExpanded(false);
 
-                    //fabLayoutParams.AnchorId = frameLayout.Id;
-                    //fab.LayoutParameters = fabLayoutParams;
-
-                    List<GraphNode> route;
                     try
                     {
-                        route = Algorithms.CalculateRoute(mapGraph, startName, finishName);
+                        var route = Algorithms.CalculateRoute(mapGraph, startName, finishName);
                         var coordinateGroups = from node in route
                                                group node by new
                                                {
@@ -169,13 +169,13 @@ namespace PolyNavi.Fragments
                                                select new
                                                {
                                                    Floor = g.Key,
-                                                   Coordinates = from gnode in g select new Android.Graphics.Point(gnode.Point.X, gnode.Point.Y),
+                                                   Coordinates = from graphNode in g select new Android.Graphics.Point(graphNode.Point.X, graphNode.Point.Y),
                                                };
                         ClearAllRoutes();
-                        foreach (var coordGroup in coordinateGroups)
+                        foreach (var coordinateGroup in coordinateGroups)
                         {
-                            var fragment = FragmentManager.FindFragmentByTag($"MAP_MAINBUILDING_{coordGroup.Floor.FloorNumber}") as MainBuildingMapFragment;
-                            fragment?.MapView.SetRoute(coordGroup.Coordinates.ToList());
+                            var fragment = FragmentManager.FindFragmentByTag($"MAP_MAINBUILDING_{coordinateGroup.Floor.FloorNumber}") as MainBuildingMapFragment;
+                            fragment?.MapView.SetRoute(coordinateGroup.Coordinates.ToList());
                         }
 
                         var startFloor = route[0].FloorNumber;
@@ -202,41 +202,22 @@ namespace PolyNavi.Fragments
                     }
                 }
             }
-            else
-            if (fullyCollapsed)
+            else if (fullyCollapsed)
             {
                 fab.SetImageResource(Resource.Drawable.ic_done_black);
                 appBar.SetExpanded(true);
-
-                //fabLayoutParams.AnchorId = relativeLayout.Id;
-                //fab.LayoutParameters = fabLayoutParams;
-                //fab.SetImageResource(Resource.Drawable.ic_done_black);
             }
         }
         private void EditTextFromFocusChanged(object sender, View.FocusChangeEventArgs e)
         {
             editTextInputFrom.ShowDropDown();
-            if (e.HasFocus)
-            {
-                editTextFromIsFocused = false;
-            }
-            else
-            {
-                editTextFromIsFocused = true;
-            }
+            editTextFromIsFocused = !e.HasFocus;
         }
 
         private void EditTextToFocusChanged(object sender, View.FocusChangeEventArgs e)
         {
             editTextInputTo.ShowDropDown();
-            if (e.HasFocus)
-            {
-                editTextToIsFocused = false;
-            }
-            else
-            {
-                editTextToIsFocused = true;
-            }
+            editTextToIsFocused = !e.HasFocus;
         }
 
         public static bool CheckFocus()

@@ -19,19 +19,13 @@ namespace PolyNavi.Adapters
 
         public override Java.Lang.ICharSequence GetPageTitleFormatted(int position)
         {
-            switch (position)
+            return position switch
             {
-                case 0:
-                    Java.Lang.ICharSequence ch1 = new Java.Lang.String("SECTION 1");
-                    return ch1;
-                case 1:
-                    Java.Lang.ICharSequence ch2 = new Java.Lang.String("SECTION 2");
-                    return ch2;
-                case 2:
-                    Java.Lang.ICharSequence ch3 = new Java.Lang.String("SECTION 3");
-                    return ch3;
-            }
-            return null;
+                0 => new Java.Lang.String("SECTION 1"),
+                1 => new Java.Lang.String("SECTION 2"),
+                2 => new Java.Lang.String("SECTION 3"),
+                _ => null
+            };
         }
     }
 }

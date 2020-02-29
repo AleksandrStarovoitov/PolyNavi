@@ -4063,13 +4063,13 @@ namespace PolyNavi
 			public const int imageview_welcome_featureimage = 2131361915;
 			
 			// aapt resource value: 0x7F0A007C
-			public const int imageview_welcome_indicator_0 = 2131361916;
+			public const int imageview_welcome_indicator_1 = 2131361916;
 			
 			// aapt resource value: 0x7F0A007D
-			public const int imageview_welcome_indicator_1 = 2131361917;
+			public const int imageview_welcome_indicator_2 = 2131361917;
 			
 			// aapt resource value: 0x7F0A007E
-			public const int imageview_welcome_indicator_2 = 2131361918;
+			public const int imageview_welcome_indicator_3 = 2131361918;
 			
 			// aapt resource value: 0x7F0A007F
 			public const int info = 2131361919;

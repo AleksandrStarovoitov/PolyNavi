@@ -25,26 +25,26 @@ namespace PolyNavi.Preferences
     [Activity(Label = "AutoCompleteTextViewPreference")]
     public class AutoCompleteTextViewPreference : EditTextPreference
     {
-        private readonly int resourceId = Resource.Layout.preference_dialog_autocomplete;
+        private const int ResourceId = Resource.Layout.preference_dialog_autocomplete;
         public string GroupName { get; private set; }
-
-        public AutoCompleteTextViewPreference(Context context) : this(context, null)
+        
+        protected AutoCompleteTextViewPreference(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
         {
         }
 
-        public AutoCompleteTextViewPreference(Context context, IAttributeSet attrs) : this(context, attrs, Resource.Attribute.editTextPreferenceStyle)
+        public AutoCompleteTextViewPreference(Context context) : base(context)
         {
         }
 
-        public AutoCompleteTextViewPreference(Context context, IAttributeSet attrs, int defStyleAttr) : this(context, attrs, defStyleAttr, defStyleAttr)
+        public AutoCompleteTextViewPreference(Context context, IAttributeSet attrs) : base(context, attrs)
+        {
+        }
+
+        public AutoCompleteTextViewPreference(Context context, IAttributeSet attrs, int defStyleAttr) : base(context, attrs, defStyleAttr)
         {
         }
 
         public AutoCompleteTextViewPreference(Context context, IAttributeSet attrs, int defStyleAttr, int defStyleRes) : base(context, attrs, defStyleAttr, defStyleRes)
-        {
-        }
-
-        protected AutoCompleteTextViewPreference(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
         {
         }
 
@@ -64,7 +64,7 @@ namespace PolyNavi.Preferences
             GroupName = restorePersistedValue ? GetPersistedString(GroupName) : defaultValue.ToString();
         }
 
-        public override int DialogLayoutResource { get => resourceId; set => base.DialogLayoutResource = value; }
+        public override int DialogLayoutResource { get => ResourceId; set => base.DialogLayoutResource = value; }
     }
 
 
@@ -74,7 +74,6 @@ namespace PolyNavi.Preferences
         private ArrayAdapter suggestAdapter;
         private NetworkChecker networkChecker;
         private Dictionary<string, int> groupsDictionary;
-        private CancellationTokenSource cts;
         private System.Timers.Timer searchTimer;
         private const int MillsToSearch = 700;
         private string[] array;
@@ -111,8 +110,6 @@ namespace PolyNavi.Preferences
             {
                 autoCompleteTextViewPref.Text = groupName;
             }
-
-            cts = new CancellationTokenSource();
         }
 
         public override void OnDialogClosed(bool positiveResult)
@@ -122,19 +119,16 @@ namespace PolyNavi.Preferences
             var groupName = autoCompleteTextViewPref.Text;
 
             var preference = Preference;
-            if (preference is AutoCompleteTextViewPreference autoCompleteTvPreference)
+            if (preference is AutoCompleteTextViewPreference autoCompleteTvPreference && autoCompleteTvPreference.CallChangeListener(groupName)) //TODO
             {
-                if (autoCompleteTvPreference.CallChangeListener(groupName))
+                if (groupsDictionary.TryGetValue(groupName, out var groupId))
                 {
-                    if (groupsDictionary.TryGetValue(groupName, out var groupId))
-                    {
-                        autoCompleteTvPreference.SaveGroupName(groupName);
-                        MainApp.Instance.SharedPreferences.Edit().PutInt("groupid", groupId).Apply();
-                    }
-                    else
-                    {
-                        Toast.MakeText(Activity.BaseContext, GetString(Resource.String.wrong_group), ToastLength.Short).Show();
-                    }
+                    autoCompleteTvPreference.SaveGroupName(groupName);
+                    MainApp.Instance.SharedPreferences.Edit().PutInt("groupid", groupId).Apply();
+                }
+                else
+                {
+                    Toast.MakeText(Activity.BaseContext, GetString(Resource.String.wrong_group), ToastLength.Short).Show();
                 }
             }
         }

@@ -25,7 +25,7 @@ namespace PolyNaviLib.BL
             return manager.InitializeAsync(dbPath, checker, settings);
         }
 
-        private Nito.AsyncEx.AsyncLock mutex = new Nito.AsyncEx.AsyncLock();
+        private readonly Nito.AsyncEx.AsyncLock mutex = new Nito.AsyncEx.AsyncLock();
 
         public async Task<WeekRoot> GetWeekRootAsync(DateTime weekDate, bool forceUpdate)
         {
@@ -34,6 +34,5 @@ namespace PolyNaviLib.BL
                 return await repository.GetWeekRootAsync(weekDate, forceUpdate);
             }
         }
-
     }
 }

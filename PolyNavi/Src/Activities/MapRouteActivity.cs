@@ -18,7 +18,7 @@ namespace PolyNavi.Activities
         ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.ScreenSize)]
     public class MapRouteActivity : AppCompatActivity
     {
-        private BuildingsAdapter adapterBuildings;
+        private BuildingsAdapter buildingsAdapter;
         private List<object> buildings;
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -38,24 +38,26 @@ namespace PolyNavi.Activities
             Title = GetString(Resource.String.title_route_activity);
 
             buildings = new List<object>(MainApp.Instance.BuildingsDictionary.Keys);
-            buildings[0] = new MainBuildingTag() { MainBuildingString = buildings[0].ToString() };
+            buildings[0] = new MainBuildingTag()
+            {
+                MainBuildingString = buildings[0].ToString()
+            };
 
             var listView = FindViewById<ListView>(Resource.Id.listview_buildingslist);
 
-
-
-            adapterBuildings = new BuildingsAdapter(this, buildings);
-            listView.Adapter = adapterBuildings;
+            buildingsAdapter = new BuildingsAdapter(this, buildings);
+            listView.Adapter = buildingsAdapter;
             listView.ItemClick += ListView_ItemClick;
         }
 
         private void ListView_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {
             var obj = buildings[e.Position];
-
             var route = obj.ToString();
+
             var intent = new Intent();
             intent.PutExtra("route", route);
+
             SetResult(Result.Ok, intent);
             Finish();
         }

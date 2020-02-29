@@ -28,7 +28,7 @@ namespace PolyNavi.Activities
         private NavigationView navigationView;
         private string startActivity;
         private int startMenuItem;
-        private bool tapped;
+        private bool isTapped;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -87,9 +87,12 @@ namespace PolyNavi.Activities
                     startMenuItem = 0;
                     break;
             }
+
             fragment = (Android.Support.V4.App.Fragment)Activator.CreateInstance(fragmentClass);
             navigationView.Menu.GetItem(startMenuItem).SetChecked(true);
-            Title = startMenuItem == 4 ? navigationView.Menu.FindItem(Resource.Id.nav_about_menu).TitleFormatted.ToString() : navigationView.Menu.GetItem(startMenuItem).TitleFormatted.ToString();
+            Title = startMenuItem == 4 ?
+                navigationView.Menu.FindItem(Resource.Id.nav_about_menu).TitleFormatted.ToString() :
+                navigationView.Menu.GetItem(startMenuItem).TitleFormatted.ToString();
             SupportFragmentManager.BeginTransaction().Replace(Resource.Id.contentframe_main, fragment).Commit();
         }
 
@@ -116,10 +119,12 @@ namespace PolyNavi.Activities
             var imm = (InputMethodManager)GetSystemService(InputMethodService);
             imm.HideSoftInputFromWindow(drawerView.WindowToken, 0);
         }
+
         public void OnDrawerOpened(View drawerView)
         {
 
         }
+
         public void OnDrawerStateChanged(int newState)
         {
 
@@ -127,11 +132,12 @@ namespace PolyNavi.Activities
 
         public void OnDrawerClosed(View drawerView)
         {
-            if (fragmentClass != null && tapped)
+            if (fragmentClass != null && isTapped)
             {
                 InstantiateFragment();
-                tapped = false;
+                isTapped = false;
             }
+
             MainBuildingView.drawerState = false;
         }
 
@@ -139,27 +145,19 @@ namespace PolyNavi.Activities
         {
             var mItemId = e.MenuItem.ItemId;
 
-            switch (mItemId)
+            startActivity = mItemId switch
             {
-                case (Resource.Id.nav_gz_menu):
-                    startActivity = "mainbuilding";
-                    break;
-                case (Resource.Id.nav_buildings_menu):
-                    startActivity = "buildings";
-                    break;
-                case (Resource.Id.nav_rasp_menu):
-                    startActivity = "schedule";
-                    break;
-                case (Resource.Id.nav_settings_menu):
-                    startActivity = "settings";
-                    break;
-                case (Resource.Id.nav_about_menu):
-                    startActivity = "about";
-                    break;
-            }
+                Resource.Id.nav_gz_menu => "mainbuilding",
+                Resource.Id.nav_buildings_menu => "buildings",
+                Resource.Id.nav_rasp_menu => "schedule",
+                Resource.Id.nav_settings_menu => "settings",
+                Resource.Id.nav_about_menu => "about",
+                _ => startActivity
+            };
+
             Title = e.MenuItem.TitleFormatted.ToString();
             e.MenuItem.SetChecked(true);
-            tapped = true;
+            isTapped = true;
             drawerLayout.CloseDrawers();
         }
     }

@@ -18,7 +18,7 @@ namespace PolyNavi.Fragments
 {
     public class ScheduleWeekFragment : Fragment, IOnRefreshListener
     {
-        private SwipeRefreshLayout mSwipeRefreshLayout;
+        private SwipeRefreshLayout swipeRefreshLayout;
         private View view;
         private List<Day> days;
         private RecyclerView recyclerViewSchedule;
@@ -26,12 +26,7 @@ namespace PolyNavi.Fragments
         private readonly DateTime weekDate;
         private readonly int weekTag;
         private readonly int dayOfYear;
-
-        public ScheduleWeekFragment()
-        {
-
-        }
-
+        
         public ScheduleWeekFragment(DateTime weekDate, int weekTag, int dayOfYear)
         {
             this.weekDate = weekDate;
@@ -44,8 +39,8 @@ namespace PolyNavi.Fragments
             view = inflater.Inflate(Resource.Layout.fragment_week_schedule, container, false);
             DrawContent(Resource.Id.relativelayout_week_schedule, Resource.Layout.layout_week_schedule);
 
-            mSwipeRefreshLayout = view.FindViewById<SwipeRefreshLayout>(Resource.Id.swipetorefresh_week_schedule);
-            mSwipeRefreshLayout.SetOnRefreshListener(this);
+            swipeRefreshLayout = view.FindViewById<SwipeRefreshLayout>(Resource.Id.swipetorefresh_week_schedule);
+            swipeRefreshLayout.SetOnRefreshListener(this);
 
             recyclerViewSchedule = view.FindViewById<RecyclerView>(Resource.Id.recyclerview_week_schedule);
 
@@ -60,6 +55,7 @@ namespace PolyNavi.Fragments
             {
                 DrawContent(Resource.Id.relativelayout_week_schedule, Resource.Layout.layout_week_schedule);
             }
+
             LoadScheduleAndUpdateUiWithProgressBar(weekDate, true);
         }
 
@@ -69,10 +65,12 @@ namespace PolyNavi.Fragments
             {
                 recyclerViewSchedule.SetAdapter(null);
             }
+
             var progress = view.FindViewById<ProgressBar>(Resource.Id.progressbar_week_schedule);
-            mSwipeRefreshLayout.Refreshing = true;
-            mSwipeRefreshLayout.Visibility = ViewStates.Invisible;
+            swipeRefreshLayout.Refreshing = true;
+            swipeRefreshLayout.Visibility = ViewStates.Invisible;
             progress.Visibility = ViewStates.Visible;
+
             Task.Run(async () =>
             {
                 var manager = await MainApp.Instance.PolyManager;
@@ -84,8 +82,8 @@ namespace PolyNavi.Fragments
                     Activity.RunOnUiThread(() =>
                     {
                         progress.Visibility = ViewStates.Invisible;
-                        mSwipeRefreshLayout.Visibility = ViewStates.Visible;
-                        mSwipeRefreshLayout.Refreshing = false;
+                        swipeRefreshLayout.Visibility = ViewStates.Visible;
+                        swipeRefreshLayout.Refreshing = false;
                         if (days.Count == 0)
                         {
                             DrawContent(Resource.Id.relativelayout_week_schedule, Resource.Layout.layout_empty_schedule_error);

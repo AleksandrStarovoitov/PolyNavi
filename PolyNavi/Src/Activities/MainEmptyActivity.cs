@@ -21,8 +21,7 @@ namespace PolyNavi.Activities
             {
                 intent = new Intent(this, typeof(MainActivity));
             }
-            else
-                if (MainApp.Instance.SharedPreferences.GetBoolean("welcome", false))
+            else if (MainApp.Instance.SharedPreferences.GetBoolean("welcome", false))
             {
                 intent = new Intent(this, typeof(AuthorizationActivity));
             }

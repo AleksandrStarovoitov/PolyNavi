@@ -18,17 +18,17 @@ namespace PolyNavi.Fragments
         {
             view = inflater.Inflate(Resource.Layout.fragment_about, container, false);
 
-            var frameMail = view.FindViewById<FrameLayout>(Resource.Id.framelayout_email_about);
-            var frameRate = view.FindViewById<FrameLayout>(Resource.Id.framelayout_rate_about);
-            var frameGithub = view.FindViewById<FrameLayout>(Resource.Id.framelayout_github_about);
-            var frameCopyright = view.FindViewById<FrameLayout>(Resource.Id.framelayout_copyright_about);
+            var mailFrame = view.FindViewById<FrameLayout>(Resource.Id.framelayout_email_about);
+            var rateFrame = view.FindViewById<FrameLayout>(Resource.Id.framelayout_rate_about);
+            var githubFrame = view.FindViewById<FrameLayout>(Resource.Id.framelayout_github_about);
+            var copyrightFrame = view.FindViewById<FrameLayout>(Resource.Id.framelayout_copyright_about);
 
-            frameMail.Click += FrameMail_Click;
-            frameRate.Click += FrameRate_Click;
-            frameGithub.Click += FrameGithub_Click;
-            frameCopyright.Click += FrameCopyright_Click;
+            mailFrame.Click += FrameMail_Click;
+            rateFrame.Click += FrameRate_Click;
+            githubFrame.Click += FrameGithub_Click;
+            copyrightFrame.Click += FrameCopyright_Click;
 
-            var sashaLink = view.FindViewById<TextView>(Resource.Id.textview_contacts_sasha_link_about);
+            var sashaLink = view.FindViewById<TextView>(Resource.Id.textview_contacts_sasha_link_about); //TODO Remove
             var kirillLink = view.FindViewById<TextView>(Resource.Id.textview_contacts_kirill_link_about);
 
             sashaLink.MovementMethod = LinkMovementMethod.Instance;

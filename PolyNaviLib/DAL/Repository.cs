@@ -12,7 +12,7 @@ namespace PolyNaviLib.DAL
 {
     public class Repository
     {
-        private readonly string scheduleLink = @"http://m.spbstu.ru/p/proxy.php?csurl=http://ruz.spbstu.ru/api/v1/ruz/scheduler/";
+        private const string scheduleLink = @"http://m.spbstu.ru/p/proxy.php?csurl=http://ruz.spbstu.ru/api/v1/ruz/scheduler/";
 
         private SQLiteDatabase database;
         private INetworkChecker checker;
@@ -60,39 +60,34 @@ namespace PolyNaviLib.DAL
                 await database.SaveItemAsync(weekRoot);
                 return weekRoot;
             }
-            else
-            {
-                var weeks = await database.GetItemsAsync<WeekRoot>();
 
-                var weekFromDb = (await database.GetItemsAsync<WeekRoot>()).Where(w => w.Week.DateEqual(weekDate)).SingleOrDefault();
-                if (weekFromDb == null)
-                {
-                    var newWeek = (await LoadWeekRootFromWebAsync(weekDate));
-                    await database.SaveItemAsync(newWeek);
-                    return newWeek;
-                }
-                else if (forceUpdate)
-                {
-                    var newWeek = (await LoadWeekRootFromWebAsync(weekDate));
-                    await database.DeleteItemsAsync<WeekRoot>(w => w.Week.DateEqual(weekDate));
-                    await database.SaveItemAsync(newWeek);
-                    return newWeek;
-                }
-                else
-                {
-                    return weekFromDb;
-                }
+            var weekFromDb = (await database.GetItemsAsync<WeekRoot>()).SingleOrDefault(w => w.Week.DateEqual(weekDate));
+            if (weekFromDb == null)
+            {
+                var newWeek = (await LoadWeekRootFromWebAsync(weekDate));
+                await database.SaveItemAsync(newWeek);
+                return newWeek;
             }
+
+            if (forceUpdate)
+            {
+                var newWeek = (await LoadWeekRootFromWebAsync(weekDate));
+                await database.DeleteItemsAsync<WeekRoot>(w => w.Week.DateEqual(weekDate));
+                await database.SaveItemAsync(newWeek);
+                return newWeek;
+            }
+
+            return weekFromDb;
         }
 
-        public async Task<WeekRoot> LoadWeekRootFromWebAsync(DateTime weekDate)
+        private async Task<WeekRoot> LoadWeekRootFromWebAsync(DateTime weekDate)
         {
             if (checker.Check() == false)
             {
-                throw new NetworkException("No internet connection");
+                throw new NetworkException("No internet connection"); //TODO
             }
 
-            var groupId = settings["groupid"];
+            var groupId = settings["groupid"]; //TODO
 
             var dateStr = weekDate.ToString("yyyy-M-d", new CultureInfo("ru-RU"));
             var resultJson = await HttpClientService.GetResponseAsync(client, scheduleLink + groupId + "&date=" + dateStr, new System.Threading.CancellationToken());
@@ -104,7 +99,7 @@ namespace PolyNaviLib.DAL
 
         private async Task RemoveExpiredWeeksAsync()
         {
-            await database.DeleteItemsAsync<WeekRoot>(w => w.Week.IsExpired(Convert.ToInt32(settings["groupid"])));
+            await database.DeleteItemsAsync<WeekRoot>(w => w.Week.IsExpired(Convert.ToInt32(settings["groupid"]))); //TODO
         }
     }
 }

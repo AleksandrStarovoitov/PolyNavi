@@ -9,21 +9,18 @@ namespace PolyNavi.Adapters
     {
         public string MainBuildingString { get; set; }
 
-        public override string ToString()
-        {
-            return MainBuildingString;
-        }
+        public override string ToString() => MainBuildingString;
     }
 
     public class BuildingsAdapter : ArrayAdapter<object>
     {
-        private Context context;
-        private TextView building;
+        private readonly Context context;
+        private TextView buildingTextView;
         private object item;
-        private int type;
-        private const int MainBuilding = 0, OtherBuildings = 1;
+        private int itemType;
+        private const int MainBuildingTypeTag = 0, OtherBuildingsTypeTag = 1;
 
-        public BuildingsAdapter(Context context, List<object> buildings) : base(context, 0, buildings)
+        public BuildingsAdapter(Context context, IList<object> buildings) : base(context, 0, buildings)
         {
             this.context = context;
         }
@@ -32,11 +29,11 @@ namespace PolyNavi.Adapters
         {
             if (GetItem(position) is string)
             {
-                return OtherBuildings;
+                return OtherBuildingsTypeTag;
             }
             else if (GetItem(position) is MainBuildingTag)
             {
-                return MainBuilding;
+                return MainBuildingTypeTag;
             }
             return -1;
         }
@@ -46,14 +43,14 @@ namespace PolyNavi.Adapters
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
             item = GetItem(position);
-            type = GetItemViewType(position);
+            itemType = GetItemViewType(position);
             if (convertView == null)
             {
-                convertView = GetInflatedLayoutForType(type);
+                convertView = GetInflatedLayoutForType(itemType);
             }
 
-            building = convertView.FindViewById<TextView>(Resource.Id.textview_route);
-            building.Text = item.ToString();
+            buildingTextView = convertView.FindViewById<TextView>(Resource.Id.textview_route);
+            buildingTextView.Text = item.ToString();
 
             return convertView;
         }
@@ -62,9 +59,9 @@ namespace PolyNavi.Adapters
         {
             switch (layoutType)
             {
-                case MainBuilding:
+                case MainBuildingTypeTag:
                     return LayoutInflater.From(context).Inflate(Resource.Layout.layout_route_row_mainbuilding, null);
-                case OtherBuildings:
+                case OtherBuildingsTypeTag:
                     return LayoutInflater.From(context).Inflate(Resource.Layout.layout_route_row_otherbuildings, null);
                 default:
                     return LayoutInflater.From(context).Inflate(Resource.Layout.layout_route_row_mainbuilding, null);
@@ -72,7 +69,3 @@ namespace PolyNavi.Adapters
         }
     }
 }
-
-
-
-

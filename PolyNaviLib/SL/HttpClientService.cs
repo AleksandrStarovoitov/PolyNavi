@@ -19,9 +19,8 @@ namespace PolyNaviLib.SL
             }
             catch (HttpRequestException e)
             {
-                Console.WriteLine("\nException Caught!");
-                Console.WriteLine("Message :{0} ", e.Message);
-                return null;
+                Console.WriteLine("Message :{0} ", e.Message); //TODO Log
+                return null; //TODO
             }
         }
     }

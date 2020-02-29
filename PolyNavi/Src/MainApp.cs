@@ -19,23 +19,15 @@ namespace PolyNavi
     [Application(
         Label = "@string/app_name",
         AllowBackup = true,
-        Theme = "@style/MyAppTheme.Launcher",
-#if DEBUG
-        Debuggable = true
-#else
-        Debuggable = false
-#endif
-        )]
+        Theme = "@style/MyAppTheme.Launcher")]
     public class MainApp : Application
     {
         private const string DatabaseFilename = "schedule.sqlite";
-
-        private Locale locale = null;
         private string language;
 
         public static MainApp Instance { get; private set; }
 
-        public Dictionary<string, Point> BuildingsDictionary { get; private set; } = new Dictionary<string, Point>()
+        public Dictionary<string, Point> BuildingsDictionary { get; } = new Dictionary<string, Point>()
         {
             { "Главный учебный корпус", new Point(60.00718, 30.37281)},
             { "Химический корпус", new Point(60.00648, 30.37630)},
@@ -67,13 +59,13 @@ namespace PolyNavi
 
         public Dictionary<string, string> RoomsDictionary { get; private set; } = new Dictionary<string, string>();
 
-        public int GetVersionCode()
+        private int GetVersionCode()
         {
             var packageInfo = PackageManager.GetPackageInfo(PackageName, 0);
             return packageInfo.VersionCode;
         }
 
-        public bool IsAppUpdated()
+        private bool IsAppUpdated()
         {
             var ver = GetVersionCode();
             if (ver > SharedPreferences.GetInt("version", 0))
@@ -81,32 +73,27 @@ namespace PolyNavi
                 SharedPreferences.Edit().PutInt("version", ver).Commit();
                 return true;
             }
-            else
-            {
-                return false;
-            }
+
+            return false;
         }
 
         public Lazy<Graph.GraphNode> MainBuildingGraph { get; private set; } = new Lazy<Graph.GraphNode>(() =>
         {
             if (File.Exists(GetFileFullPath("main.graph")) && !Instance.IsAppUpdated())
             {
-                using (var stream = File.OpenRead(GetFileFullPath("main.graph")))
-                {
-                    FillRoomsDictionary();
-                    return Graph.SaverLoader.Load(stream);
-                }
-            }
-            else
-            {
-                var graph = Instance.GraphSaverLoader.LoadFromXmlDescriptor("main_graph.xml");
-                using (var stream = File.Create(GetFileFullPath("main.graph")))
-                {
-                    Graph.SaverLoader.Save(stream, graph);
-                }
+                using var stream = File.OpenRead(GetFileFullPath("main.graph"));
+
                 FillRoomsDictionary();
-                return graph;
+                return Graph.SaverLoader.Load(stream);
             }
+
+            var graph = Instance.GraphSaverLoader.LoadFromXmlDescriptor("main_graph.xml");
+            using (var stream = File.Create(GetFileFullPath("main.graph")))
+            {
+                Graph.SaverLoader.Save(stream, graph);
+            }
+            FillRoomsDictionary();
+            return graph;
         });
 
         private static void FillRoomsDictionary()
@@ -124,24 +111,21 @@ namespace PolyNavi
                 {
                     var node = bfsQueue.Dequeue();
 
-                    foreach (var neighbour in node.Neighbours)
+                    foreach (var neighbour in node.Neighbours.Where(neighbour => !ids.Contains(neighbour)))
                     {
-                        if (!ids.Contains(neighbour))
-                        {
-                            ids.Add(neighbour);
-                            bfsQueue.Enqueue(neighbour);
-                            if (!neighbour.RoomName.Equals("*Unknown*"))
-                            {
-                                var name = neighbour.RoomName.Replace("_а", " (а)").Replace("_М_1_1", " М 1 эт. 1")
-                                                                                                    .Replace("_М_1_2", " М 1 эт. 2").Replace("_М_2_1", " М 2 эт. 1")
-                                                                                                    .Replace("_М_2_2", " М 2 эт. 2").Replace("_Ж_1_1", " Ж 1 эт. 1")
-                                                                                                    .Replace("_Ж_1_2", " Ж 1 эт. 2").Replace("_Ж_1_3", " Ж 1 эт. 3")
-                                                                                                    .Replace("_Ж_2_1", " Ж 2 эт. 1").Replace("_Ж_2_2", " Ж 2 эт. 2")
-                                                                                                    .Replace("_Ж_2_3", " Ж 2 эт. 3").Replace("Ректорат_", "Ректорат ")
-                                                                                                    .Replace("101а", "101 (а)").Replace("170_б", "170 (б)");
-                                Instance.RoomsDictionary[name] = neighbour.RoomName;
-                            }
-                        }
+                        ids.Add(neighbour);
+                        bfsQueue.Enqueue(neighbour);
+                        if (neighbour.RoomName.Equals("*Unknown*")) 
+                            continue;
+
+                        var name = neighbour.RoomName.Replace("_а", " (а)").Replace("_М_1_1", " М 1 эт. 1")
+                            .Replace("_М_1_2", " М 1 эт. 2").Replace("_М_2_1", " М 2 эт. 1")
+                            .Replace("_М_2_2", " М 2 эт. 2").Replace("_Ж_1_1", " Ж 1 эт. 1")
+                            .Replace("_Ж_1_2", " Ж 1 эт. 2").Replace("_Ж_1_3", " Ж 1 эт. 3")
+                            .Replace("_Ж_2_1", " Ж 2 эт. 1").Replace("_Ж_2_2", " Ж 2 эт. 2")
+                            .Replace("_Ж_2_3", " Ж 2 эт. 3").Replace("Ректорат_", "Ректорат ")
+                            .Replace("101а", "101 (а)").Replace("170_б", "170 (б)");
+                        Instance.RoomsDictionary[name] = neighbour.RoomName;
                     }
                 }
             }
@@ -151,14 +135,15 @@ namespace PolyNavi
 
         public AsyncLazy<PolyManager> PolyManager { get; private set; } = new AsyncLazy<PolyManager>(async () =>
         {
-            return await PolyNaviLib.BL.PolyManager.CreateAsync(GetFileFullPath(DatabaseFilename),
-                                                                new NetworkChecker(MainApp.Instance),
-                                                                new SettingsProvider(MainApp.Instance.SharedPreferences));
+            return await PolyNaviLib.BL.PolyManager.CreateAsync(
+                GetFileFullPath(DatabaseFilename),
+                new NetworkChecker(MainApp.Instance),
+                new SettingsProvider(MainApp.Instance.SharedPreferences));
         });
 
         public ISharedPreferences SharedPreferences { get; private set; }
 
-        public Graph.SaverLoader GraphSaverLoader { get; private set; }
+        private Graph.SaverLoader GraphSaverLoader { get; set; }
 
         public MainApp(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
         {
@@ -174,23 +159,23 @@ namespace PolyNavi
             language = SharedPreferences.GetString("language", null);
         }
 
-        internal static string GetFileFullPath(string fname)
+        private static string GetFileFullPath(string fileName) //TODO Move
         {
             var dirPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-            return Path.Combine(dirPath, fname);
+            return Path.Combine(dirPath, fileName);
         }
 
         /// <summary>
         /// Возвращает поток встроенного ресурса, с указанным относительным путём
         /// </summary>
         /// <param name="relativePath">Путь относительно папки PolyNavi.EmbeddedResources</param>
-        internal static Stream GetEmbeddedResourceStream(string relativePath)
+        internal static Stream GetEmbeddedResourceStream(string relativePath) //TODO Move
         {
             var assembly = typeof(MainApp).GetTypeInfo().Assembly;
             return assembly.GetManifestResourceStream($"PolyNavi.EmbeddedResources.{relativePath}");
         }
 
-        public class DictionaryComp : IComparer<string>
+        private class DictionaryComp : IComparer<string>
         {
             public int Compare(string x, string y)
             {
@@ -198,15 +183,13 @@ namespace PolyNavi
                 {
                     return 1;
                 }
-                else
+
                 if ((y[0] > '0' && y[0] < '9') && (x[0] > 'A' && x[0] < 'я')) //abc, 100
                 {
                     return -1;
                 }
-                else
-                {
-                    return x.CompareTo(y);
-                }
+
+                return x.CompareTo(y); //TODO ?
             }
         }
 

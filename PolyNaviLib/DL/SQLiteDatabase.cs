@@ -11,26 +11,26 @@ namespace PolyNaviLib.DL
 {
     public class SQLiteDatabase
     {
-        private SQLiteAsyncConnection db;
+        private readonly SQLiteAsyncConnection dbConnection;
 
         public SQLiteDatabase(string dbPath)
         {
-            db = new SQLiteAsyncConnection(dbPath);
+            dbConnection = new SQLiteAsyncConnection(dbPath);
         }
 
         public async Task CreateTableAsync<T>() where T : IBusinessEntity, new()
         {
-            await db.CreateTableAsync<T>();
+            await dbConnection.CreateTableAsync<T>();
         }
 
         public async Task DropTableAsync<T>() where T : IBusinessEntity, new()
         {
-            await db.DropTableAsync<T>();
+            await dbConnection.DropTableAsync<T>();
         }
 
         public async Task<int> CountAsync<T>() where T : IBusinessEntity, new()
         {
-            return await db.Table<T>().CountAsync();
+            return await dbConnection.Table<T>().CountAsync();
         }
 
         public async Task<bool> IsEmptyAsync<T>() where T : IBusinessEntity, new()
@@ -41,7 +41,7 @@ namespace PolyNaviLib.DL
 
         public async Task<List<T>> GetItemsAsync<T>() where T : IBusinessEntity, new()
         {
-            return await db.GetAllWithChildrenAsync<T>(recursive: true);
+            return await dbConnection.GetAllWithChildrenAsync<T>(recursive: true);
         }
 
         public async Task<List<T>> GetOrderedItemsAsync<T, TKey>(Func<T, TKey> keySelector) where T : IBusinessEntity, new()
@@ -52,27 +52,27 @@ namespace PolyNaviLib.DL
 
         public async Task<T> GetItemAsync<T>(int id) where T : IBusinessEntity, new()
         {
-            return await db.GetWithChildrenAsync<T>(id);
+            return await dbConnection.GetWithChildrenAsync<T>(id);
         }
 
         public async Task SaveItemAsync<T>(T item) where T : IBusinessEntity, new()
         {
             if (item.IDD == 0)
             {
-                await db.RunInTransactionAsync(conn =>
+                await dbConnection.RunInTransactionAsync(conn =>
                 {
                     conn.InsertWithChildren(item, recursive: true);
                 });
             }
             else
             {
-                await db.UpdateWithChildrenAsync(item);
+                await dbConnection.UpdateWithChildrenAsync(item);
             }
         }
 
         public async Task DeleteItemAsync<T>(T item) where T : IBusinessEntity, new()
         {
-            await db.DeleteAsync(item, recursive: true);
+            await dbConnection.DeleteAsync(item, recursive: true);
         }
 
         public async Task DeleteItemsAsync<T>(Predicate<T> predicate) where T : IBusinessEntity, new()

@@ -26,12 +26,9 @@ namespace PolyNavi.Fragments
 
         public override Dialog OnCreateDialog(Bundle savedInstanceState)
         {
-            var currentDate = (DateTime)(lastDate == null ? DateTime.Now : lastDate);
-            var dialog = new DatePickerDialog(Activity,
-                                                           this,
-                                                           currentDate.Year,
-                                                           currentDate.Month - 1,
-                                                           currentDate.Day);
+            var currentDate = (DateTime)(lastDate ?? DateTime.Now);
+            var dialog = new DatePickerDialog(Activity, this, currentDate.Year,
+                                        currentDate.Month - 1, currentDate.Day);
             return dialog;
         }
 

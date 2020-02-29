@@ -17,20 +17,20 @@ namespace PolyNavi.Adapters
 
     public class ScheduleCardRowAdapter : RecyclerView.Adapter
     {
-        private List<object> mLessons;
+        private readonly List<object> lessons;
         private Context context;
         private LayoutInflater layoutInflater;
         private View scheduleView;
-        private ScheduleCardRowLessonViewHolder viewHolderLesson;
-        private ScheduleCardRowTitleViewHolder viewHolderTitle;
+        private ScheduleCardRowLessonViewHolder lessonViewHolder;
+        private ScheduleCardRowTitleViewHolder titleViewHolder;
         private RecyclerView.ViewHolder viewHolder;
-        private CultureInfo cultureInfo = new CultureInfo("ru-RU");
-        private const int TitleConst = 0, LessonConst = 1;
+        private readonly CultureInfo cultureInfo = new CultureInfo("ru-RU"); //TODO ?
+        private const int TitleTag = 0, LessonTag = 1;
 
         public ScheduleCardRowAdapter(List<object> lessons, DateTime date)
         {
             lessons.Insert(0, new TitleTag() { Date = date });
-            mLessons = lessons;
+            this.lessons = lessons;
         }
 
         public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
@@ -40,11 +40,11 @@ namespace PolyNavi.Adapters
 
             switch (viewType)
             {
-                case LessonConst:
+                case LessonTag:
                     scheduleView = layoutInflater.Inflate(Resource.Layout.layout_card_row_lesson_schedule, parent, false);
                     viewHolder = new ScheduleCardRowLessonViewHolder(scheduleView);
                     break;
-                case TitleConst:
+                case TitleTag:
                     scheduleView = layoutInflater.Inflate(Resource.Layout.layout_card_row_title_schedule, parent, false);
                     viewHolder = new ScheduleCardRowTitleViewHolder(scheduleView);
                     break;
@@ -56,40 +56,41 @@ namespace PolyNavi.Adapters
         {
             switch (viewHolder.ItemViewType)
             {
-                case LessonConst:
-                    viewHolderLesson = (ScheduleCardRowLessonViewHolder)viewHolder;
-                    var lesson = (Lesson)mLessons[position];
+                case LessonTag:
+                    lessonViewHolder = (ScheduleCardRowLessonViewHolder)viewHolder;
+                    var lesson = (Lesson)lessons[position];
 
-                    var room = viewHolderLesson.room;
-                    var building = viewHolderLesson.building;
-                    var subject = viewHolderLesson.subject;
-                    var startTime = viewHolderLesson.startTime;
-                    var endTime = viewHolderLesson.endTime;
-                    var type = viewHolderLesson.type;
-                    var teacher = viewHolderLesson.teacher;
-                    var group = viewHolderLesson.group;
+                    var room = lessonViewHolder.roomTextView;
+                    var building = lessonViewHolder.buildingTextView;
+                    var subject = lessonViewHolder.subjectTextView;
+                    var startTime = lessonViewHolder.startTimeTextView;
+                    var endTime = lessonViewHolder.endTimeTextView;
+                    var type = lessonViewHolder.typeTextView;
+                    var teacher = lessonViewHolder.teacherTextView;
+                    var group = lessonViewHolder.groupTextView;
 
                     room.Text = "ауд. " + lesson.Auditories[0].Name;
                     building.Text = lesson.Auditories[0].Building.Name + ", ";
                     subject.Text = lesson.Subject;
                     startTime.Text = lesson.Time_Start.ToString("HH:mm", cultureInfo);
                     endTime.Text = lesson.Time_End.ToString("HH:mm", cultureInfo);
-                    type.Text = lesson.TypeObj.Name.Replace("Лабораторные", "Лаб.");
+                    type.Text = lesson.TypeObj.Name.Replace("Лабораторные", "Лаб.")
+                                                    .Replace("Курсовое проектирование", "Курс."); //TODO in xml
 
                     if (lesson.Teachers == null || lesson.Teachers.Count == 0)
                     {
-                        var lparams = (RelativeLayout.LayoutParams)group.LayoutParameters;
-                        lparams.AddRule(LayoutRules.Below, Resource.Id.textview_card_buildingnumber_row_lesson_schedule);
-                        group.LayoutParameters = lparams;
+                        var layoutParams = (RelativeLayout.LayoutParams)group.LayoutParameters;
+                        layoutParams.AddRule(LayoutRules.Below, Resource.Id.textview_card_buildingnumber_row_lesson_schedule);
+                        group.LayoutParameters = layoutParams;
 
-                        ((ViewGroup)scheduleView).RemoveView(viewHolderLesson.teacher);
+                        ((ViewGroup)scheduleView).RemoveView(lessonViewHolder.teacherTextView);
                     }
                     else
                     {
                         teacher.Text = string.Join(", ", lesson.Teachers.Select(t => t.Full_Name).ToArray());
                     }
 
-                    if (!lesson.Additional_Info.Equals("")) //Поток или подгруппы
+                    if (!lesson.Additional_Info.Equals("")) //Поток или подгруппы //TODO
                     {
                         group.Text = lesson.Additional_Info;
                     }
@@ -97,15 +98,14 @@ namespace PolyNavi.Adapters
                     {
                         group.Text = lesson.Groups.First().Name;
                     }
-
-
                     break;
-                case TitleConst:
-                    viewHolderTitle = (ScheduleCardRowTitleViewHolder)viewHolder;
-                    var title = (TitleTag)mLessons[position];
 
-                    var date = viewHolderTitle.date;
-                    var dayOfWeek = viewHolderTitle.dayOfWeek;
+                case TitleTag:
+                    titleViewHolder = (ScheduleCardRowTitleViewHolder)viewHolder;
+                    var title = (TitleTag)lessons[position];
+
+                    var date = titleViewHolder.dateTextView;
+                    var dayOfWeek = titleViewHolder.dayOfWeekTextView;
 
                     date.Text = title.Date.ToString("M", cultureInfo); //"dd MMMM"
                     dayOfWeek.Text = title.Date.ToString("dddd", cultureInfo);
@@ -114,74 +114,71 @@ namespace PolyNavi.Adapters
             }
         }
 
-        public override int ItemCount => mLessons.Count;
+        public override int ItemCount => lessons.Count;
 
-        internal class ScheduleCardRowLessonViewHolder : RecyclerView.ViewHolder
+        private class ScheduleCardRowLessonViewHolder : RecyclerView.ViewHolder
         {
-            public TextView building;
-            public TextView room;
-            public TextView subject;
-            public TextView startTime;
-            public TextView endTime;
-            public TextView type;
-            public TextView teacher;
-            public TextView group;
+            public readonly TextView buildingTextView;
+            public readonly TextView roomTextView;
+            public readonly TextView subjectTextView;
+            public readonly TextView startTimeTextView;
+            public readonly TextView endTimeTextView;
+            public readonly TextView typeTextView;
+            public readonly TextView teacherTextView;
+            public readonly TextView groupTextView;
 
             public ScheduleCardRowLessonViewHolder(View itemView) : base(itemView)
             {
-                room = itemView.FindViewById<TextView>(Resource.Id.textview_card_room_row_lesson_schedule);
-                building = itemView.FindViewById<TextView>(Resource.Id.textview_card_buildingnumber_row_lesson_schedule);
-                subject = itemView.FindViewById<TextView>(Resource.Id.textview_card_subject_row_lesson_schedule);
-                startTime = itemView.FindViewById<TextView>(Resource.Id.textview_card_starttime_row_lesson_schedule);
-                endTime = itemView.FindViewById<TextView>(Resource.Id.textview_card_endtime_row_lesson_schedule);
-                type = itemView.FindViewById<TextView>(Resource.Id.textview_card_type_row_lesson_schedule);
-                teacher = itemView.FindViewById<TextView>(Resource.Id.textview_card_teacher_row_lesson_schedule);
-                group = itemView.FindViewById<TextView>(Resource.Id.textview_card_group_row_lesson_schedule);
+                roomTextView = itemView.FindViewById<TextView>(Resource.Id.textview_card_room_row_lesson_schedule);
+                buildingTextView = itemView.FindViewById<TextView>(Resource.Id.textview_card_buildingnumber_row_lesson_schedule);
+                subjectTextView = itemView.FindViewById<TextView>(Resource.Id.textview_card_subject_row_lesson_schedule);
+                startTimeTextView = itemView.FindViewById<TextView>(Resource.Id.textview_card_starttime_row_lesson_schedule);
+                endTimeTextView = itemView.FindViewById<TextView>(Resource.Id.textview_card_endtime_row_lesson_schedule);
+                typeTextView = itemView.FindViewById<TextView>(Resource.Id.textview_card_type_row_lesson_schedule);
+                teacherTextView = itemView.FindViewById<TextView>(Resource.Id.textview_card_teacher_row_lesson_schedule);
+                groupTextView = itemView.FindViewById<TextView>(Resource.Id.textview_card_group_row_lesson_schedule);
             }
         }
 
-        internal class ScheduleCardRowTitleViewHolder : RecyclerView.ViewHolder
+        private class ScheduleCardRowTitleViewHolder : RecyclerView.ViewHolder
         {
-            public TextView date;
-            public TextView dayOfWeek;
+            public readonly TextView dateTextView;
+            public readonly TextView dayOfWeekTextView;
 
             public ScheduleCardRowTitleViewHolder(View itemView) : base(itemView)
             {
-                date = itemView.FindViewById<TextView>(Resource.Id.textview_card_date_row_title_schedule);
-                dayOfWeek = itemView.FindViewById<TextView>(Resource.Id.textview_card_dayofweek_row_title_schedule);
+                dateTextView = itemView.FindViewById<TextView>(Resource.Id.textview_card_date_row_title_schedule);
+                dayOfWeekTextView = itemView.FindViewById<TextView>(Resource.Id.textview_card_dayofweek_row_title_schedule);
             }
         }
 
         public override int GetItemViewType(int position)
         {
-            if (mLessons[position] is Lesson)
+            return lessons[position] switch
             {
-                return LessonConst;
-            }
-            else if (mLessons[position] is TitleTag)
-            {
-                return TitleConst;
-            }
-            return -1;
+                Lesson _ => LessonTag,
+                TitleTag _ => TitleTag,
+                _ => -1
+            };
         }
     }
 
     internal class ScheduleCardFragmentAdapter : RecyclerView.Adapter
     {
-        private List<Day> mDays;
+        private readonly List<Day> days;
         private Context context;
         private LayoutInflater layoutInflater;
         private View scheduleView;
         private RecyclerView.ViewHolder viewHolder;
-        private DateTime lastUpdatedDate;
-        public RecyclerView recyclerViewSchedule;
+        private readonly DateTime lastUpdatedDate;
+        private RecyclerView recyclerViewSchedule;
 
-        private const int EndConst = 0, CardConst = 1;
+        private const int EndTag = 0, CardTag = 1;
 
-        public ScheduleCardFragmentAdapter(List<Day> days)
+        public ScheduleCardFragmentAdapter(IEnumerable<Day> days)
         {
-            mDays = days.Where(day => day.Lessons.Count != 0).ToList();
-            lastUpdatedDate = mDays.FirstOrDefault().WeekRoot.LastUpdated;
+            this.days = days.Where(day => day.Lessons.Count != 0).ToList();
+            lastUpdatedDate = this.days.FirstOrDefault().WeekRoot.LastUpdated; //TODO
         }
 
         public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
@@ -191,12 +188,12 @@ namespace PolyNavi.Adapters
 
             switch (viewType)
             {
-                case CardConst:
+                case CardTag:
                     scheduleView = layoutInflater.Inflate(Resource.Layout.layout_card_schedule, parent, false);
                     viewHolder = new ScheduleCardFragmentAdapterViewHolder(scheduleView);
                     break;
 
-                case EndConst:
+                case EndTag:
                     scheduleView = layoutInflater.Inflate(Resource.Layout.layout_card_schedule_end, parent, false);
                     viewHolder = new ScheduleCardEndFragmentAdapterViewHolder(scheduleView);
                     break;
@@ -209,10 +206,10 @@ namespace PolyNavi.Adapters
         {
             switch (viewHolder.ItemViewType)
             {
-                case CardConst:
+                case CardTag:
                     var vh = (ScheduleCardFragmentAdapterViewHolder)viewHolder;
 
-                    var day = mDays[position];
+                    var day = days[position];
 
                     recyclerViewSchedule = vh.recyclerView;
 
@@ -223,7 +220,7 @@ namespace PolyNavi.Adapters
                     recyclerViewSchedule.SetLayoutManager(new LinearLayoutManager(context));
                     break;
 
-                case EndConst:
+                case EndTag:
                     var vhe = (ScheduleCardEndFragmentAdapterViewHolder)viewHolder;
 
                     var tv = vhe.textView;
@@ -233,23 +230,16 @@ namespace PolyNavi.Adapters
             }
         }
 
-        public override int ItemCount => mDays.Count + 1;
+        public override int ItemCount => days.Count + 1;
 
         public override int GetItemViewType(int position)
         {
-            if (position == mDays.Count)
-            {
-                return EndConst;
-            }
-            else
-            {
-                return CardConst;
-            }
+            return position == days.Count ? EndTag : CardTag;
         }
 
-        internal class ScheduleCardFragmentAdapterViewHolder : RecyclerView.ViewHolder
+        private class ScheduleCardFragmentAdapterViewHolder : RecyclerView.ViewHolder
         {
-            public RecyclerView recyclerView;
+            public readonly RecyclerView recyclerView;
 
             public ScheduleCardFragmentAdapterViewHolder(View itemView) : base(itemView)
             {
@@ -257,9 +247,9 @@ namespace PolyNavi.Adapters
             }
         }
 
-        internal class ScheduleCardEndFragmentAdapterViewHolder : RecyclerView.ViewHolder
+        private class ScheduleCardEndFragmentAdapterViewHolder : RecyclerView.ViewHolder
         {
-            public TextView textView;
+            public readonly TextView textView;
 
             public ScheduleCardEndFragmentAdapterViewHolder(View itemView) : base(itemView)
             {

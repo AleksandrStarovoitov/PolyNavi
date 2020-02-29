@@ -24,7 +24,7 @@ namespace PolyNavi.Services
                 }
                 else
                 {
-                    if (key == "groupid")
+                    if (key == "groupid") //TODO
                         throw new GroupNumberException();
                     else
                         throw new KeyNotFoundException();
