@@ -6,7 +6,7 @@ using PolyNavi.Preferences;
 namespace PolyNavi.Fragments
 {
     public class MyPreferenceFragment : PreferenceFragmentCompat, ISharedPreferencesOnSharedPreferenceChangeListener
-	{
+    {
         private ISharedPreferences sharedPreferences;
 
         public override void OnDisplayPreferenceDialog(Preference preference)
@@ -17,7 +17,7 @@ namespace PolyNavi.Fragments
                 dialogFragment = AutoCompleteTextViewPreferenceDialogFragmentCompat
                         .NewInstance(preference.Key);
             }
-            
+
             if (dialogFragment != null)
             {
                 dialogFragment.SetTargetFragment(this, 0);
@@ -26,7 +26,7 @@ namespace PolyNavi.Fragments
             else
             {
                 base.OnDisplayPreferenceDialog(preference);
-            }            
+            }
         }
 
         public override void OnDestroy()
@@ -34,7 +34,7 @@ namespace PolyNavi.Fragments
             base.OnDestroy();
             MainApp.Instance.SharedPreferences.UnregisterOnSharedPreferenceChangeListener(this);
         }
-        
+
         public void OnSharedPreferenceChanged(ISharedPreferences sharedPreferences, string key)
         {
         }

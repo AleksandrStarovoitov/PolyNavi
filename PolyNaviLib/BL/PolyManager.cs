@@ -1,18 +1,17 @@
-﻿using System;
+﻿using PolyNaviLib.DAL;
+using System;
 using System.Threading.Tasks;
-
-using PolyNaviLib.DAL;
 
 namespace PolyNaviLib.BL
 {
 
-	public class PolyManager
-	{
+    public class PolyManager
+    {
         private Repository repository;
 
-		private PolyManager()
-		{
-		}
+        private PolyManager()
+        {
+        }
 
         private async Task<PolyManager> InitializeAsync(string dbPath, INetworkChecker checker, ISettingsProvider settings)
         {
@@ -21,10 +20,10 @@ namespace PolyNaviLib.BL
         }
 
         public static Task<PolyManager> CreateAsync(string dbPath, INetworkChecker checker, ISettingsProvider settings)
-		{
-			var manager = new PolyManager();
-			return manager.InitializeAsync(dbPath, checker, settings);
-		}
+        {
+            var manager = new PolyManager();
+            return manager.InitializeAsync(dbPath, checker, settings);
+        }
 
         private Nito.AsyncEx.AsyncLock mutex = new Nito.AsyncEx.AsyncLock();
 

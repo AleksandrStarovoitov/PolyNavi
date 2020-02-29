@@ -1,47 +1,47 @@
-﻿using System;
-using Android.App;
+﻿using Android.App;
 using Android.OS;
 using Android.Support.Design.Widget;
 using Android.Support.V4.View;
 using Android.Support.V7.App;
 using Android.Views;
 using PolyNavi.Adapters;
+using System;
 
 namespace PolyNavi.Fragments
 {
     [Activity(Label = "ScheduleSwipeActivity")]
-	public class ScheduleFragment : Android.Support.V4.App.Fragment
-	{
+    public class ScheduleFragment : Android.Support.V4.App.Fragment
+    {
         private View view;
         private TabLayout tabLayout;
         private ViewPager viewPager;
         private ScheduleFragmentAdapter adapter;
         private DateTime? lastDate;
 
-		public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
-		{
-			view = inflater.Inflate(Resource.Layout.fragment_schedule, container, false);
+        public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+        {
+            view = inflater.Inflate(Resource.Layout.fragment_schedule, container, false);
 
             HasOptionsMenu = true;
 
             tabLayout = view.FindViewById<TabLayout>(Resource.Id.tablayout_schedule);
-			tabLayout.AddTab(tabLayout.NewTab().SetText(GetString(Resource.String.currentweek_tab)));
-			tabLayout.AddTab(tabLayout.NewTab().SetText(GetString(Resource.String.nextweek_tab)));
-			tabLayout.SetForegroundGravity(TabLayout.GravityFill);
+            tabLayout.AddTab(tabLayout.NewTab().SetText(GetString(Resource.String.currentweek_tab)));
+            tabLayout.AddTab(tabLayout.NewTab().SetText(GetString(Resource.String.nextweek_tab)));
+            tabLayout.SetForegroundGravity(TabLayout.GravityFill);
 
-			adapter = new ScheduleFragmentAdapter(((AppCompatActivity)Activity).SupportFragmentManager, tabLayout.TabCount, DateTime.Today);
+            adapter = new ScheduleFragmentAdapter(((AppCompatActivity)Activity).SupportFragmentManager, tabLayout.TabCount, DateTime.Today);
 
-			viewPager = view.FindViewById<ViewPager>(Resource.Id.viewpager_schedule);
-			viewPager.Adapter = adapter;
-			viewPager.AddOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+            viewPager = view.FindViewById<ViewPager>(Resource.Id.viewpager_schedule);
+            viewPager.Adapter = adapter;
+            viewPager.AddOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
-			tabLayout.TabSelected += (sender, e) =>
-			{
-				viewPager.CurrentItem = e.Tab.Position;
-			};
-            
-			return view;
-		}
+            tabLayout.TabSelected += (sender, e) =>
+            {
+                viewPager.CurrentItem = e.Tab.Position;
+            };
+
+            return view;
+        }
 
         public override void OnCreateOptionsMenu(IMenu menu, MenuInflater inflater)
         {

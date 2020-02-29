@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Threading;
-using System.Threading.Tasks;
-using Android.App;
+﻿using Android.App;
 using Android.Content;
 using Android.Content.Res;
 using Android.OS;
@@ -19,6 +13,12 @@ using Newtonsoft.Json;
 using PolyNavi.Services;
 using PolyNaviLib.BL;
 using PolyNaviLib.SL;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace PolyNavi.Preferences
 {
@@ -99,7 +99,7 @@ namespace PolyNavi.Preferences
             autoCompleteTextViewPref = view.FindViewById<AutoCompleteTextView>(Resource.Id.autocompletetextview_group_pref);
 
             autoCompleteTextViewPref.AddTextChangedListener(this);
-           
+
             string groupName = null;
             var preference = Preference;
             if (preference is AutoCompleteTextViewPreference viewPreference)
@@ -135,7 +135,7 @@ namespace PolyNavi.Preferences
                     {
                         Toast.MakeText(Activity.BaseContext, GetString(Resource.String.wrong_group), ToastLength.Short).Show();
                     }
-                }                    
+                }
             }
         }
 

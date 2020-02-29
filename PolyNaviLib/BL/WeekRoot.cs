@@ -1,7 +1,6 @@
-﻿using System;
+﻿using SQLiteNetExtensions.Attributes;
+using System;
 using System.Collections.Generic;
-
-using SQLiteNetExtensions.Attributes;
 
 namespace PolyNaviLib.BL
 {
@@ -9,7 +8,7 @@ namespace PolyNaviLib.BL
     {
         [OneToOne(CascadeOperations = CascadeOperation.All)]
         public Week Week { get; set; }
-        
+
         [OneToMany(CascadeOperations = CascadeOperation.All)]
         public List<Day> Days { get; set; }
 

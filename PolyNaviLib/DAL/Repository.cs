@@ -1,14 +1,12 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using PolyNaviLib.BL;
+using PolyNaviLib.DL;
+using PolyNaviLib.SL;
+using System;
 using System.Globalization;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-
-using PolyNaviLib.BL;
-using PolyNaviLib.SL;
-using PolyNaviLib.DL;
-
-using Newtonsoft.Json;
 
 namespace PolyNaviLib.DAL
 {
@@ -39,7 +37,7 @@ namespace PolyNaviLib.DAL
             await database.CreateTableAsync<Teacher>();
             await database.CreateTableAsync<Auditory>();
             await database.CreateTableAsync<Building>();
-         
+
             this.checker = checker;
             this.settings = settings;
             client = new HttpClient();
@@ -64,22 +62,22 @@ namespace PolyNaviLib.DAL
             }
             else
             {
-				var weeks = await database.GetItemsAsync<WeekRoot>();
+                var weeks = await database.GetItemsAsync<WeekRoot>();
 
-				var weekFromDb = (await database.GetItemsAsync<WeekRoot>()).Where(w => w.Week.DateEqual(weekDate)).SingleOrDefault();
+                var weekFromDb = (await database.GetItemsAsync<WeekRoot>()).Where(w => w.Week.DateEqual(weekDate)).SingleOrDefault();
                 if (weekFromDb == null)
                 {
                     var newWeek = (await LoadWeekRootFromWebAsync(weekDate));
                     await database.SaveItemAsync(newWeek);
                     return newWeek;
                 }
-				else if (forceUpdate)
-				{
-					var newWeek = (await LoadWeekRootFromWebAsync(weekDate));
-					await database.DeleteItemsAsync<WeekRoot>(w => w.Week.DateEqual(weekDate));
-					await database.SaveItemAsync(newWeek);
-					return newWeek;
-				}
+                else if (forceUpdate)
+                {
+                    var newWeek = (await LoadWeekRootFromWebAsync(weekDate));
+                    await database.DeleteItemsAsync<WeekRoot>(w => w.Week.DateEqual(weekDate));
+                    await database.SaveItemAsync(newWeek);
+                    return newWeek;
+                }
                 else
                 {
                     return weekFromDb;
@@ -92,7 +90,7 @@ namespace PolyNaviLib.DAL
             if (checker.Check() == false)
             {
                 throw new NetworkException("No internet connection");
-            }                 
+            }
 
             var groupId = settings["groupid"];
 
@@ -103,7 +101,7 @@ namespace PolyNaviLib.DAL
 
             return weekRoot;
         }
-        
+
         private async Task RemoveExpiredWeeksAsync()
         {
             await database.DeleteItemsAsync<WeekRoot>(w => w.Week.IsExpired(Convert.ToInt32(settings["groupid"])));

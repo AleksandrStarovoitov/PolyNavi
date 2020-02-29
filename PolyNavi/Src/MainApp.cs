@@ -1,21 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using Android.App;
+﻿using Android.App;
 using Android.Content;
 using Android.Content.Res;
 using Android.Runtime;
 using Android.Support.V7.Preferences;
 using Java.Util;
-
 using Mapsui.Geometries;
-
 using Nito.AsyncEx;
-
-using PolyNaviLib.BL;
 using PolyNavi.Services;
+using PolyNaviLib.BL;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Reflection;
 
 namespace PolyNavi
 {
@@ -24,7 +21,7 @@ namespace PolyNavi
         AllowBackup = true,
         Theme = "@style/MyAppTheme.Launcher",
 #if DEBUG
-		Debuggable = true
+        Debuggable = true
 #else
         Debuggable = false
 #endif
@@ -69,7 +66,7 @@ namespace PolyNavi
         };
 
         public Dictionary<string, string> RoomsDictionary { get; private set; } = new Dictionary<string, string>();
-        
+
         public int GetVersionCode()
         {
             var packageInfo = PackageManager.GetPackageInfo(PackageName, 0);

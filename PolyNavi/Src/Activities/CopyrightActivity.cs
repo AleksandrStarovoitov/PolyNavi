@@ -10,36 +10,36 @@ using Android.Webkit;
 namespace PolyNavi.Activities
 {
     [Activity(
-		Label = "PolyNavi",
-		ScreenOrientation = ScreenOrientation.Portrait,
-		ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.ScreenSize)]
-	public class CopyrightActivity : AppCompatActivity
-	{
-		protected override void OnCreate(Bundle savedInstanceState)
-		{
-			MainApp.ChangeLanguage(this);
-			SetTheme(Resource.Style.MyAppTheme);
-			base.OnCreate(savedInstanceState);
+        Label = "PolyNavi",
+        ScreenOrientation = ScreenOrientation.Portrait,
+        ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.ScreenSize)]
+    public class CopyrightActivity : AppCompatActivity
+    {
+        protected override void OnCreate(Bundle savedInstanceState)
+        {
+            MainApp.ChangeLanguage(this);
+            SetTheme(Resource.Style.MyAppTheme);
+            base.OnCreate(savedInstanceState);
 
-			SetContentView(Resource.Layout.activity_copyright);
+            SetContentView(Resource.Layout.activity_copyright);
             Window.ClearFlags(WindowManagerFlags.TranslucentStatus);
             Window.SetStatusBarColor(new Color(ContextCompat.GetColor(this, Resource.Color.color_primary_dark)));
 
             var toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar_copyright);
 
-			SetSupportActionBar(toolbar);
-			SupportActionBar.SetDisplayHomeAsUpEnabled(true);
+            SetSupportActionBar(toolbar);
+            SupportActionBar.SetDisplayHomeAsUpEnabled(true);
 
-			Title = GetString(Resource.String.title_copyright_activity);
+            Title = GetString(Resource.String.title_copyright_activity);
 
             var webView = FindViewById<WebView>(Resource.Id.webview_copyright);
             webView.LoadUrl("file:///android_asset/copyright.html");
         }
 
-		public override bool OnSupportNavigateUp()
-		{
-			Finish();
-			return true;
-		}
-	}
+        public override bool OnSupportNavigateUp()
+        {
+            Finish();
+            return true;
+        }
+    }
 }

@@ -1,7 +1,7 @@
 ﻿namespace PolyNaviLib.BL
 {
     public interface IBusinessEntity
-	{
-		int IDD { get; set; }
-	}
+    {
+        int IDD { get; set; }
+    }
 }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using Android.App;
+﻿using Android.App;
 using Android.Content;
 using Android.Content.PM;
 using Android.Locations;
@@ -26,165 +21,170 @@ using Mapsui.UI.Android;
 using Mapsui.Utilities;
 using PolyNavi.Activities;
 using PolyNavi.Extensions;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace PolyNavi.Fragments
 {
-    // TODO Кеширование RouterDB чтобы не загружать ее при каждой загрузке фрагмента
-    public class MapBuildingsFragment : Android.Support.V4.App.Fragment, AppBarLayout.IOnOffsetChangedListener, ILocationListener
+	// TODO Кеширование RouterDB чтобы не загружать ее при каждой загрузке фрагмента
+	public class MapBuildingsFragment : Android.Support.V4.App.Fragment, AppBarLayout.IOnOffsetChangedListener, ILocationListener
 	{
-        private const string RouterDbName = "polytech_map.routerdb";
-        private const string MarkerAName = "ic_marker_a.png";
-        private const string MarkerBName = "ic_marker_b.png";
-        private const string MarkerLocationName = "ic_gps_fixed_black.png";
+		private const string RouterDbName = "polytech_map.routerdb";
+		private const string MarkerAName = "ic_marker_a.png";
+		private const string MarkerBName = "ic_marker_b.png";
+		private const string MarkerLocationName = "ic_gps_fixed_black.png";
 
-        private readonly Point leftBottom = new Point(30.356456, 59.994757);
-        private readonly Point rightTop = new Point(30.391848, 60.008916);
+		private readonly Point leftBottom = new Point(30.356456, 59.994757);
+		private readonly Point rightTop = new Point(30.391848, 60.008916);
 
-        private const int RequestCodeFrom = 1;
-        private const int RequestCodeTo = 2;
+		private const int RequestCodeFrom = 1;
+		private const int RequestCodeTo = 2;
 
-        private readonly string[] PermissionsLocation =
+		private readonly string[] PermissionsLocation =
 		{
 		  Android.Manifest.Permission.AccessCoarseLocation,
 		  Android.Manifest.Permission.AccessFineLocation
 		};
 
-        private const int RequestFineLocationId = 10;
+		private const int RequestFineLocationId = 10;
 
-        private View view;
+		private View view;
 
-        private RouterDb routerDb;
-        private Router router;
-        private Profile profile;
+		private RouterDb routerDb;
+		private Router router;
+		private Profile profile;
 
-        private MapControl mapControl;
-        private Map map;
-        private ILayer routeLayer;
+		private MapControl mapControl;
+		private Map map;
+		private ILayer routeLayer;
 
-        private EditText editTextInputFrom, editTextInputTo;
-        private AppBarLayout appBar;
-        private FloatingActionButton fab;
-        private FloatingActionButton buttonLocation;
-        private ImageButton buttonFromCurrentLocation;
+		private EditText editTextInputFrom, editTextInputTo;
+		private AppBarLayout appBar;
+		private FloatingActionButton fab;
+		private FloatingActionButton buttonLocation;
+		private ImageButton buttonFromCurrentLocation;
 
-        private LocationManager locationManager;
-        private AnimatedPointsWithAutoUpdateLayer animatedLocation;
-        
+		private LocationManager locationManager;
+		private AnimatedPointsWithAutoUpdateLayer animatedLocation;
+
 		public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 		{
 			view = inflater.Inflate(Resource.Layout.fragment_map_buildings, container, false);
 
-            appBar = view.FindViewById<AppBarLayout>(Resource.Id.appbar_map_buildings);
-            appBar.AddOnOffsetChangedListener(this);
+			appBar = view.FindViewById<AppBarLayout>(Resource.Id.appbar_map_buildings);
+			appBar.AddOnOffsetChangedListener(this);
 
-            fab = view.FindViewById<FloatingActionButton>(Resource.Id.fab_map_buildings);
-            fab.Click += Fab_Click;
+			fab = view.FindViewById<FloatingActionButton>(Resource.Id.fab_map_buildings);
+			fab.Click += Fab_Click;
 
-            editTextInputFrom = view.FindViewById<EditText>(Resource.Id.edittext_input_from_map_builidngs);
-            editTextInputFrom.Click += EditTextInputFrom_Click;
+			editTextInputFrom = view.FindViewById<EditText>(Resource.Id.edittext_input_from_map_builidngs);
+			editTextInputFrom.Click += EditTextInputFrom_Click;
 
-		    editTextInputTo = view.FindViewById<EditText>(Resource.Id.edittext_input_to_map_builidngs);
-            editTextInputTo.Click += EditTextInputTo_Click;
+			editTextInputTo = view.FindViewById<EditText>(Resource.Id.edittext_input_to_map_builidngs);
+			editTextInputTo.Click += EditTextInputTo_Click;
 
-            buttonLocation = view.FindViewById<FloatingActionButton>(Resource.Id.fab_location_map_buildings);
-            buttonLocation.Click += ButtonLocation_Click;
-            
-            buttonFromCurrentLocation = view.FindViewById<ImageButton>(Resource.Id.imagebutton_currentlocation_map_buildings);
-            buttonFromCurrentLocation.Click += ButtonFromCurrentLocation_Click;
-            
-            var progress = view.FindViewById<ProgressBar>(Resource.Id.progressbar_map_buildings);
-            progress.Visibility = ViewStates.Visible;
+			buttonLocation = view.FindViewById<FloatingActionButton>(Resource.Id.fab_location_map_buildings);
+			buttonLocation.Click += ButtonLocation_Click;
 
-            var tasks = new List<Task>
-            {
-                Task.Run(() =>
-                {
-                    InitializeRouting();
-                }),
+			buttonFromCurrentLocation = view.FindViewById<ImageButton>(Resource.Id.imagebutton_currentlocation_map_buildings);
+			buttonFromCurrentLocation.Click += ButtonFromCurrentLocation_Click;
 
-                Task.Run(() =>
-                {
-                    InitializeMapControl();
+			var progress = view.FindViewById<ProgressBar>(Resource.Id.progressbar_map_buildings);
+			progress.Visibility = ViewStates.Visible;
 
-                    Activity.RunOnUiThread(() =>
-                    {
-                        buttonLocation.Alpha = 0.7f;
-                        
-                        if (IsLocationGranted())
-                        {
+			var tasks = new List<Task>
+			{
+				Task.Run(() =>
+				{
+					InitializeRouting();
+				}),
+
+				Task.Run(() =>
+				{
+					InitializeMapControl();
+
+					Activity.RunOnUiThread(() =>
+					{
+						buttonLocation.Alpha = 0.7f;
+
+						if (IsLocationGranted())
+						{
                             //Permission granted
                             SetupLocationManager();
-                        }
-                        else
-                        {
+						}
+						else
+						{
                             //Permission is not granted. Request.
                             RequestPermissions(new string[] { Android.Manifest.Permission.AccessFineLocation }, RequestFineLocationId);
-                        }
-                    });
-                })
-            };
+						}
+					});
+				})
+			};
 
-            Task.WhenAll(tasks).ContinueWith( (t) => progress.Visibility = ViewStates.Invisible);
+			Task.WhenAll(tasks).ContinueWith((t) => progress.Visibility = ViewStates.Invisible);
 
 			return view;
 		}
 
-        private bool IsLocationGranted()
-        {
-            return ContextCompat.CheckSelfPermission(Activity, Android.Manifest.Permission.AccessFineLocation) ==
-                   Permission.Granted;
-        }
+		private bool IsLocationGranted()
+		{
+			return ContextCompat.CheckSelfPermission(Activity, Android.Manifest.Permission.AccessFineLocation) ==
+				   Permission.Granted;
+		}
 
-        private bool IsInBounds(Location location)
-        {
-            return leftBottom.X < location.Longitude && leftBottom.Y < location.Latitude
-                && rightTop.X > location.Longitude && rightTop.Y > location.Latitude;
-        }
+		private bool IsInBounds(Location location)
+		{
+			return leftBottom.X < location.Longitude && leftBottom.Y < location.Latitude
+				&& rightTop.X > location.Longitude && rightTop.Y > location.Latitude;
+		}
 
-        private bool LocationIsValid(Location location)
-        {
-            var delta = SystemClock.ElapsedRealtime() - location?.ElapsedRealtimeNanos / 1000000;
+		private bool LocationIsValid(Location location)
+		{
+			var delta = SystemClock.ElapsedRealtime() - location?.ElapsedRealtimeNanos / 1000000;
 
-            return (location != null && delta < 5 * 1000 && IsInBounds(location));
-        }
+			return (location != null && delta < 5 * 1000 && IsInBounds(location));
+		}
 
-        private void ButtonFromCurrentLocation_Click(object sender, EventArgs e)
-        {
-            if (IsLocationGranted())
-            {
-                var lastLocation = locationManager.GetLastKnownLocation(LocationManager.GpsProvider);
-
-                if (LocationIsValid(lastLocation))
-                {
-                    var currentLocation = new Point(lastLocation.Latitude, lastLocation.Longitude);
-                    editTextInputFrom.Text = "Мое местоположение";
-                    MainApp.Instance.BuildingsDictionary["Мое местоположение"] = currentLocation;
-                }
-            }
-            else
-            {
-                Toast.MakeText(Activity.BaseContext, GetString(Resource.String.no_location_permission_buildings), ToastLength.Long).Show();
-            }
-        }
-
-        private void ButtonLocation_Click(object sender, EventArgs e)
-        {
+		private void ButtonFromCurrentLocation_Click(object sender, EventArgs e)
+		{
 			if (IsLocationGranted())
-            {
-                var lastLocation = locationManager.GetLastKnownLocation(LocationManager.GpsProvider);
+			{
+				var lastLocation = locationManager.GetLastKnownLocation(LocationManager.GpsProvider);
 
-                if (LocationIsValid(lastLocation))
-                {
-                    var currentLocation = new Point(lastLocation.Longitude, lastLocation.Latitude).FromLonLat();
+				if (LocationIsValid(lastLocation))
+				{
+					var currentLocation = new Point(lastLocation.Latitude, lastLocation.Longitude);
+					editTextInputFrom.Text = "Мое местоположение";
+					MainApp.Instance.BuildingsDictionary["Мое местоположение"] = currentLocation;
+				}
+			}
+			else
+			{
+				Toast.MakeText(Activity.BaseContext, GetString(Resource.String.no_location_permission_buildings), ToastLength.Long).Show();
+			}
+		}
+
+		private void ButtonLocation_Click(object sender, EventArgs e)
+		{
+			if (IsLocationGranted())
+			{
+				var lastLocation = locationManager.GetLastKnownLocation(LocationManager.GpsProvider);
+
+				if (LocationIsValid(lastLocation))
+				{
+					var currentLocation = new Point(lastLocation.Longitude, lastLocation.Latitude).FromLonLat();
 
 					mapControl.Navigator.NavigateTo(currentLocation, map.Resolutions[0]);
 				}
-            }
-            else
-            {
-                Toast.MakeText(Activity.BaseContext, GetString(Resource.String.no_location_permission_buildings), ToastLength.Long).Show();
-            }
-        }
+			}
+			else
+			{
+				Toast.MakeText(Activity.BaseContext, GetString(Resource.String.no_location_permission_buildings), ToastLength.Long).Show();
+			}
+		}
 
 		private void SetupLocationManager()
 		{
@@ -197,7 +197,7 @@ namespace PolyNavi.Fragments
 		public override void OnDetach()
 		{
 			base.OnStop();
-		    locationManager?.RemoveUpdates(this);
+			locationManager?.RemoveUpdates(this);
 		}
 
 		public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
@@ -209,24 +209,24 @@ namespace PolyNavi.Fragments
 					if (grantResults.Length > 0 && grantResults[0] == Permission.Granted)
 					{
 						SetupLocationManager();
-                        buttonLocation.Enabled = true;
-                        buttonFromCurrentLocation.Enabled = true;
-                    }
+						buttonLocation.Enabled = true;
+						buttonFromCurrentLocation.Enabled = true;
+					}
 					break;
-            }
+			}
 		}
 
 		private void InitializeRouting()
 		{
-            using (var ms = new MemoryStream())
-            {
-                using (var stream = Activity.BaseContext.Assets.Open(RouterDbName))
-                {
-                    stream.CopyTo(ms);
-                }
-                ms.Seek(0, SeekOrigin.Begin);
-                routerDb = RouterDb.Deserialize(ms);
-            }
+			using (var ms = new MemoryStream())
+			{
+				using (var stream = Activity.BaseContext.Assets.Open(RouterDbName))
+				{
+					stream.CopyTo(ms);
+				}
+				ms.Seek(0, SeekOrigin.Begin);
+				routerDb = RouterDb.Deserialize(ms);
+			}
 			router = new Router(routerDb);
 			profile = Itinero.Osm.Vehicles.Vehicle.Pedestrian.Shortest();
 		}
@@ -237,29 +237,29 @@ namespace PolyNavi.Fragments
 
 			map = mapControl.Map;
 			map.CRS = "EPSG:3857";
-            Activity.RunOnUiThread(() =>
-            {
-                map.Layers.Add(OpenStreetMap.CreateTileLayer());
+			Activity.RunOnUiThread(() =>
+			{
+				map.Layers.Add(OpenStreetMap.CreateTileLayer());
 
-                mapControl.Navigator.NavigateTo(new BoundingBox(leftBottom.FromLonLat(), rightTop.FromLonLat()));
-				
+				mapControl.Navigator.NavigateTo(new BoundingBox(leftBottom.FromLonLat(), rightTop.FromLonLat()));
+
 				map.Transformation = new MinimalTransformation();
-                
-                map.Limiter = new ViewportLimiter() 
-                {
-                    PanLimits = new BoundingBox(leftBottom.FromLonLat(), rightTop.FromLonLat()),
+
+				map.Limiter = new ViewportLimiter()
+				{
+					PanLimits = new BoundingBox(leftBottom.FromLonLat(), rightTop.FromLonLat()),
 					ZoomLimits = new MinMax(1, 12)
-			    };
+				};
 
 				routeLayer = new Layer();
-                map.Layers.Add(routeLayer);
+				map.Layers.Add(routeLayer);
 				map.Widgets.Add(new Mapsui.Widgets.ScaleBar.ScaleBarWidget(map)
-                {
-                    TextAlignment = Mapsui.Widgets.Alignment.Center, 
-                    HorizontalAlignment = Mapsui.Widgets.HorizontalAlignment.Center,
-                    VerticalAlignment = Mapsui.Widgets.VerticalAlignment.Top
-                });
-            });
+				{
+					TextAlignment = Mapsui.Widgets.Alignment.Center,
+					HorizontalAlignment = Mapsui.Widgets.HorizontalAlignment.Center,
+					VerticalAlignment = Mapsui.Widgets.VerticalAlignment.Top
+				});
+			});
 		}
 
 		private ILayer DrawRoute(Route route)
@@ -332,26 +332,26 @@ namespace PolyNavi.Fragments
 			return BitmapRegistry.Instance.Register(image);
 		}
 
-        public override void OnActivityResult(int requestCode, int resultCode, Intent data)
-        {
-            if (resultCode == (int)Result.Ok)
-            {
-                switch (requestCode)
-                {
-                    case RequestCodeFrom:
-                        editTextInputFrom.Text = data.GetStringExtra("route");
-                        break;
-                    case RequestCodeTo:
-                        editTextInputTo.Text = data.GetStringExtra("route");
-                        break;
-                    default:
-                        Toast.MakeText(Activity.BaseContext, "Error", ToastLength.Short).Show();
-                        break;
-                }
-            }
-        }
+		public override void OnActivityResult(int requestCode, int resultCode, Intent data)
+		{
+			if (resultCode == (int)Result.Ok)
+			{
+				switch (requestCode)
+				{
+					case RequestCodeFrom:
+						editTextInputFrom.Text = data.GetStringExtra("route");
+						break;
+					case RequestCodeTo:
+						editTextInputTo.Text = data.GetStringExtra("route");
+						break;
+					default:
+						Toast.MakeText(Activity.BaseContext, "Error", ToastLength.Short).Show();
+						break;
+				}
+			}
+		}
 
-        private bool fullyExpanded, fullyCollapsed;
+		private bool fullyExpanded, fullyCollapsed;
 		private void Fab_Click(object sender, EventArgs eargs)
 		{
 			if (fullyExpanded)
@@ -391,7 +391,7 @@ namespace PolyNavi.Fragments
 		private void EditTextInputFrom_Click(object sender, EventArgs e)
 		{
 			var searchActivity = new Intent(Activity, typeof(MapRouteActivity));
-			StartActivityForResult(searchActivity,RequestCodeFrom);
+			StartActivityForResult(searchActivity, RequestCodeFrom);
 		}
 
 		private void EditTextInputTo_Click(object sender, EventArgs e)
@@ -401,7 +401,7 @@ namespace PolyNavi.Fragments
 		}
 
 		public void OnOffsetChanged(AppBarLayout appBarLayout, int verticalOffset)
-        {
+		{
 			fullyExpanded = (verticalOffset == 0);
 			fullyCollapsed = (appBar.Height + verticalOffset == 0);
 
@@ -422,13 +422,13 @@ namespace PolyNavi.Fragments
 
 		public void OnProviderDisabled(string provider)
 		{
-            map.Layers.Remove(animatedLocation);
-        }
+			map.Layers.Remove(animatedLocation);
+		}
 
 		public void OnProviderEnabled(string provider)
 		{
-            map.Layers.Add(animatedLocation);
-        }
+			map.Layers.Add(animatedLocation);
+		}
 
 		public void OnStatusChanged(string provider, [GeneratedEnum] Availability status, Bundle extras)
 		{
@@ -437,7 +437,7 @@ namespace PolyNavi.Fragments
 
 		private class AnimatedPointsWithAutoUpdateLayer : AnimatedPointLayer
 		{
-            private static IGeometry geometry;
+			private static IGeometry geometry;
 
 			public AnimatedPointsWithAutoUpdateLayer()
 				: base(new DynamicMemoryProvider())

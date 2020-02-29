@@ -2,6 +2,6 @@
 {
     public interface INetworkChecker
     {
-		bool Check();
+        bool Check();
     }
 }

@@ -1,22 +1,22 @@
-﻿using System.Collections.Generic;
-using Android.Content;
+﻿using Android.Content;
 using PolyNaviLib.BL;
 using PolyNaviLib.DAL;
+using System.Collections.Generic;
 
 namespace PolyNavi.Services
 {
     public class SettingsProvider : ISettingsProvider
-	{
+    {
         private readonly IDictionary<string, object> preferences;
 
-		public SettingsProvider(ISharedPreferences preferences)
-		{
-			this.preferences = preferences.All;
-		}
+        public SettingsProvider(ISharedPreferences preferences)
+        {
+            this.preferences = preferences.All;
+        }
 
-		public object this[string key]
-		{
-			get
+        public object this[string key]
+        {
+            get
             {
                 if (preferences.TryGetValue(key, out var value))
                 {
@@ -29,11 +29,11 @@ namespace PolyNavi.Services
                     else
                         throw new KeyNotFoundException();
                 }
-            }	
-			set
-			{
-			    if (preferences != null) preferences[key] = value;
-			}
-		}
-	}
+            }
+            set
+            {
+                if (preferences != null) preferences[key] = value;
+            }
+        }
+    }
 }

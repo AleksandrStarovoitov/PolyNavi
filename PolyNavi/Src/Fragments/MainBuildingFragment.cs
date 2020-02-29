@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Android.Content;
+﻿using Android.Content;
 using Android.OS;
 using Android.Runtime;
 using Android.Support.Design.Widget;
@@ -12,12 +9,15 @@ using Android.Widget;
 using Graph;
 using Java.Lang;
 using PolyNavi.Views;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using static Android.Widget.TextView;
 
 namespace PolyNavi.Fragments
 {
-	public class MainBuildingFragment : Android.Support.V4.App.Fragment, IOnEditorActionListener, AppBarLayout.IOnOffsetChangedListener, ITextWatcher
-	{
+    public class MainBuildingFragment : Android.Support.V4.App.Fragment, IOnEditorActionListener, AppBarLayout.IOnOffsetChangedListener, ITextWatcher
+    {
         private GraphNode mapGraph;
 
         private View view;
@@ -31,110 +31,110 @@ namespace PolyNavi.Fragments
 
         private static bool editTextFromIsFocused, editTextToIsFocused;
 
-		public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
-		{
-			mapGraph = MainApp.Instance.MainBuildingGraph.Value;
+        public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+        {
+            mapGraph = MainApp.Instance.MainBuildingGraph.Value;
 
-			view = inflater.Inflate(Resource.Layout.fragment_mainbuilding, container, false);
+            view = inflater.Inflate(Resource.Layout.fragment_mainbuilding, container, false);
 
-			fragments = new List<MainBuildingMapFragment>() { new MainBuildingMapFragment(Resource.Drawable.first_floor), new MainBuildingMapFragment(Resource.Drawable.second_floor), new MainBuildingMapFragment(Resource.Drawable.third_floor) };
+            fragments = new List<MainBuildingMapFragment>() { new MainBuildingMapFragment(Resource.Drawable.first_floor), new MainBuildingMapFragment(Resource.Drawable.second_floor), new MainBuildingMapFragment(Resource.Drawable.third_floor) };
 
-			fragmentTransaction = Activity.SupportFragmentManager.BeginTransaction();
-			fragmentTransaction.Add(Resource.Id.frame_mainbuilding, fragments[2], "MAP_MAINBUILDING_3");
-			fragmentTransaction.Add(Resource.Id.frame_mainbuilding, fragments[1], "MAP_MAINBUILDING_2");
-			fragmentTransaction.Detach(fragments[2]);
-			fragmentTransaction.Detach(fragments[1]);
-			fragmentTransaction.Add(Resource.Id.frame_mainbuilding, fragments[0], "MAP_MAINBUILDING_1");
-			fragmentTransaction.Commit();
+            fragmentTransaction = Activity.SupportFragmentManager.BeginTransaction();
+            fragmentTransaction.Add(Resource.Id.frame_mainbuilding, fragments[2], "MAP_MAINBUILDING_3");
+            fragmentTransaction.Add(Resource.Id.frame_mainbuilding, fragments[1], "MAP_MAINBUILDING_2");
+            fragmentTransaction.Detach(fragments[2]);
+            fragmentTransaction.Detach(fragments[1]);
+            fragmentTransaction.Add(Resource.Id.frame_mainbuilding, fragments[0], "MAP_MAINBUILDING_1");
+            fragmentTransaction.Commit();
 
-			var array = MainApp.Instance.RoomsDictionary.Select(x => x.Key).ToArray();
-			editTextInputFrom = view.FindViewById<AutoCompleteTextView>(Resource.Id.autoCompleteTextView_from);
-			editTextInputFrom.FocusChange += EditTextFromFocusChanged;
-			editTextInputFrom.Adapter = new ArrayAdapter(Activity.BaseContext, Android.Resource.Layout.SimpleDropDownItem1Line, array);
+            var array = MainApp.Instance.RoomsDictionary.Select(x => x.Key).ToArray();
+            editTextInputFrom = view.FindViewById<AutoCompleteTextView>(Resource.Id.autoCompleteTextView_from);
+            editTextInputFrom.FocusChange += EditTextFromFocusChanged;
+            editTextInputFrom.Adapter = new ArrayAdapter(Activity.BaseContext, Android.Resource.Layout.SimpleDropDownItem1Line, array);
             editTextInputFrom.AddTextChangedListener(this);
 
-			editTextInputTo = view.FindViewById<AutoCompleteTextView>(Resource.Id.autoCompleteTextView_to);
-			editTextInputTo.SetOnEditorActionListener(this);
-			editTextInputTo.FocusChange += EditTextToFocusChanged;
-			editTextInputTo.Adapter = new ArrayAdapter(Activity.BaseContext, Android.Resource.Layout.SimpleDropDownItem1Line, array);
+            editTextInputTo = view.FindViewById<AutoCompleteTextView>(Resource.Id.autoCompleteTextView_to);
+            editTextInputTo.SetOnEditorActionListener(this);
+            editTextInputTo.FocusChange += EditTextToFocusChanged;
+            editTextInputTo.Adapter = new ArrayAdapter(Activity.BaseContext, Android.Resource.Layout.SimpleDropDownItem1Line, array);
             editTextInputTo.AddTextChangedListener(this);
 
-			appBar = view.FindViewById<AppBarLayout>(Resource.Id.appbar_mainbuilding);
-			appBar.AddOnOffsetChangedListener(this);
+            appBar = view.FindViewById<AppBarLayout>(Resource.Id.appbar_mainbuilding);
+            appBar.AddOnOffsetChangedListener(this);
 
-			fab = view.FindViewById<FloatingActionButton>(Resource.Id.fab_mainbuilding);
-			fab.Click += Fab_Click;
+            fab = view.FindViewById<FloatingActionButton>(Resource.Id.fab_mainbuilding);
+            fab.Click += Fab_Click;
 
-		    var rl = view.FindViewById<RelativeLayout>(Resource.Id.relativelayout_floor_buttons_mainbuilding);
-			rl.BringToFront();
+            var rl = view.FindViewById<RelativeLayout>(Resource.Id.relativelayout_floor_buttons_mainbuilding);
+            rl.BringToFront();
 
-			buttonUp = view.FindViewById<FloatingActionButton>(Resource.Id.fab_up_mainbuilding);
-			buttonUp.Click += ButtonUp_Click;
-			buttonUp.Alpha = 0.7f;
+            buttonUp = view.FindViewById<FloatingActionButton>(Resource.Id.fab_up_mainbuilding);
+            buttonUp.Click += ButtonUp_Click;
+            buttonUp.Alpha = 0.7f;
 
-			buttonDown = view.FindViewById<FloatingActionButton>(Resource.Id.fab_down_mainbuilding);
-			buttonDown.Click += ButtonDown_Click;
-			buttonDown.Alpha = 0.7f;
-			buttonDown.Enabled = false;
+            buttonDown = view.FindViewById<FloatingActionButton>(Resource.Id.fab_down_mainbuilding);
+            buttonDown.Click += ButtonDown_Click;
+            buttonDown.Alpha = 0.7f;
+            buttonDown.Enabled = false;
 
-			return view;
-		}
+            return view;
+        }
 
-		private void ButtonUp_Click(object sender, EventArgs e)
-		{
-			ChangeFloor(currentFloor + 1);
-		}
+        private void ButtonUp_Click(object sender, EventArgs e)
+        {
+            ChangeFloor(currentFloor + 1);
+        }
 
-		private void ButtonDown_Click(object sender, EventArgs e)
-		{
-			ChangeFloor(currentFloor - 1);
-		}
+        private void ButtonDown_Click(object sender, EventArgs e)
+        {
+            ChangeFloor(currentFloor - 1);
+        }
 
-		/// <summary>
-		/// Индексация с единицы
-		/// </summary>
-		/// <param name="newFloor"></param>
-		private void ChangeFloor(int newFloor)
-		{
-			if (newFloor < 1 && newFloor > 3)
-			{
-				throw new ArgumentOutOfRangeException("newFloor", newFloor, "Не валидный номер этажа");
-			}
-			buttonDown.Enabled = true;
-			buttonUp.Enabled = true;
-			var currentFragment = (MainBuildingMapFragment)FragmentManager.FindFragmentByTag($"MAP_MAINBUILDING_{currentFloor}");
+        /// <summary>
+        /// Индексация с единицы
+        /// </summary>
+        /// <param name="newFloor"></param>
+        private void ChangeFloor(int newFloor)
+        {
+            if (newFloor < 1 && newFloor > 3)
+            {
+                throw new ArgumentOutOfRangeException("newFloor", newFloor, "Не валидный номер этажа");
+            }
+            buttonDown.Enabled = true;
+            buttonUp.Enabled = true;
+            var currentFragment = (MainBuildingMapFragment)FragmentManager.FindFragmentByTag($"MAP_MAINBUILDING_{currentFloor}");
             var currentView = currentFragment.MapView;
 
-			var newFragment = (MainBuildingMapFragment)FragmentManager.FindFragmentByTag($"MAP_MAINBUILDING_{newFloor}");
+            var newFragment = (MainBuildingMapFragment)FragmentManager.FindFragmentByTag($"MAP_MAINBUILDING_{newFloor}");
             var newView = newFragment.MapView;
 
             newView.PosX = currentView.PosX;
             newView.PosY = currentView.PosY;
 
-			FragmentManager.BeginTransaction().
-							Detach(currentFragment).
-							Attach(newFragment).
-							Commit();
-			currentFloor = newFloor;
-			if (currentFloor == 3)
-			{
-				buttonUp.Enabled = false;
-			}
-			else if (currentFloor == 1)
-			{
-				buttonDown.Enabled = false;
-			}
-		}
+            FragmentManager.BeginTransaction().
+                            Detach(currentFragment).
+                            Attach(newFragment).
+                            Commit();
+            currentFloor = newFloor;
+            if (currentFloor == 3)
+            {
+                buttonUp.Enabled = false;
+            }
+            else if (currentFloor == 1)
+            {
+                buttonDown.Enabled = false;
+            }
+        }
 
-		private void ClearAllRoutes()
-		{
-			foreach (var fragment in fragments)
-			{
-				fragment.MapView.SetRoute(null);
-				fragment.MapView.SetMarker(new Android.Graphics.Point(), MainBuildingView.Marker.None);
-			}
-		}
-		
+        private void ClearAllRoutes()
+        {
+            foreach (var fragment in fragments)
+            {
+                fragment.MapView.SetRoute(null);
+                fragment.MapView.SetMarker(new Android.Graphics.Point(), MainBuildingView.Marker.None);
+            }
+        }
+
         private void Fab_Click(object sender, EventArgs e)
         {
             DrawRoute();
@@ -213,60 +213,60 @@ namespace PolyNavi.Fragments
                 //fab.SetImageResource(Resource.Drawable.ic_done_black);
             }
         }
-		private void EditTextFromFocusChanged(object sender, View.FocusChangeEventArgs e)
-		{
-			editTextInputFrom.ShowDropDown();
-			if (e.HasFocus)
-			{
-				editTextFromIsFocused = false;
-			}
-			else
-			{
-				editTextFromIsFocused = true;
-			}
-		}
+        private void EditTextFromFocusChanged(object sender, View.FocusChangeEventArgs e)
+        {
+            editTextInputFrom.ShowDropDown();
+            if (e.HasFocus)
+            {
+                editTextFromIsFocused = false;
+            }
+            else
+            {
+                editTextFromIsFocused = true;
+            }
+        }
 
-		private void EditTextToFocusChanged(object sender, View.FocusChangeEventArgs e)
-		{
-			editTextInputTo.ShowDropDown();
-			if (e.HasFocus)
-			{
-				editTextToIsFocused = false;
-			}
-			else
-			{
-				editTextToIsFocused = true;
-			}
-		}
+        private void EditTextToFocusChanged(object sender, View.FocusChangeEventArgs e)
+        {
+            editTextInputTo.ShowDropDown();
+            if (e.HasFocus)
+            {
+                editTextToIsFocused = false;
+            }
+            else
+            {
+                editTextToIsFocused = true;
+            }
+        }
 
-		public static bool CheckFocus()
-		{
-			return (editTextFromIsFocused && editTextToIsFocused);
-		}
+        public static bool CheckFocus()
+        {
+            return (editTextFromIsFocused && editTextToIsFocused);
+        }
 
-		public bool OnEditorAction(TextView v, [GeneratedEnum] ImeAction actionId, KeyEvent e)
-		{
-			if (actionId == ImeAction.Go)
-			{
+        public bool OnEditorAction(TextView v, [GeneratedEnum] ImeAction actionId, KeyEvent e)
+        {
+            if (actionId == ImeAction.Go)
+            {
                 DrawRoute();
             }
-			return false;
-		}
+            return false;
+        }
 
-		public void OnOffsetChanged(AppBarLayout appBarLayout, int verticalOffset)
-		{
-			fullyExpanded = (verticalOffset == 0);
-			fullyCollapsed = (appBar.Height + verticalOffset == 0);
-			
-			if (fullyCollapsed)
-			{
-				fab.SetImageResource(Resource.Drawable.ic_directions_black);
-			}
-			else if (fullyExpanded)
-			{
-				fab.SetImageResource(Resource.Drawable.ic_done_black);
-			}
-		}
+        public void OnOffsetChanged(AppBarLayout appBarLayout, int verticalOffset)
+        {
+            fullyExpanded = (verticalOffset == 0);
+            fullyCollapsed = (appBar.Height + verticalOffset == 0);
+
+            if (fullyCollapsed)
+            {
+                fab.SetImageResource(Resource.Drawable.ic_directions_black);
+            }
+            else if (fullyExpanded)
+            {
+                fab.SetImageResource(Resource.Drawable.ic_done_black);
+            }
+        }
 
         public void AfterTextChanged(IEditable s)
         {

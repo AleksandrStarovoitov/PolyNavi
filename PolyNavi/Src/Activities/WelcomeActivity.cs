@@ -1,5 +1,4 @@
-﻿using System;
-using Android.Animation;
+﻿using Android.Animation;
 using Android.App;
 using Android.Content;
 using Android.Content.PM;
@@ -11,6 +10,7 @@ using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
 using PolyNavi.Adapters;
+using System;
 
 namespace PolyNavi.Activities
 {
@@ -113,7 +113,7 @@ namespace PolyNavi.Activities
 
 
         private class ViewPagerPageChangeListener : Java.Lang.Object, ViewPager.IOnPageChangeListener
-        {            
+        {
             public void OnPageScrollStateChanged(int state)
             {
 
@@ -123,7 +123,7 @@ namespace PolyNavi.Activities
             {
                 page = position;
                 UpdateIndicators(page);
-                
+
                 switch (position)
                 {
                     case 0:
@@ -143,7 +143,7 @@ namespace PolyNavi.Activities
 
             public new void Dispose()
             {
-             
+
             }
 
             public void OnPageScrolled(int position, float positionOffset, int positionOffsetPixels)
