@@ -15,7 +15,6 @@ using Mapsui.Geometries;
 using Nito.AsyncEx;
 
 using PolyNaviLib.BL;
-using Android.Content.PM;
 using PolyNavi.Services;
 
 namespace PolyNavi

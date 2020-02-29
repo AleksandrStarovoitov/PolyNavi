@@ -1,6 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <ListPreference
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" 
+                  xmlns:app="http://schemas.android.com/apk/res-auto">
+  <ListPreference
+        app:iconSpaceReserved="false"
         android:key="startactivity"
         android:title="@string/pref_startactivity_title"
         android:summary="@string/pref_startactivity_summary"
@@ -8,13 +10,15 @@
         android:entries="@array/pref_activity"
         android:entryValues="@array/pref_activity_values" 
         android:defaultValue="mainbuilding"/>
-  <PolyNavi.AutoCompleteTextViewPreference
+  <PolyNavi.Preferences.AutoCompleteTextViewPreference
         android:key="groupnumber"
+        app:iconSpaceReserved="false"
         android:title="@string/pref_groupnumber_title"
         android:summary="@string/pref_groupnumber_summary"
         android:dialogTitle="@string/pref_groupnumber_dialog_title"/>
     <ListPreference
         android:key="language"
+        app:iconSpaceReserved="false"
         android:title="@string/pref_language_title"
         android:summary="@string/pref_language_summary"
         android:entries="@array/pref_language"

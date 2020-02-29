@@ -169,15 +169,16 @@ namespace PolyNavi.Fragments
 
         private void ButtonLocation_Click(object sender, EventArgs e)
         {
-            if (IsLocationGranted())
+			if (IsLocationGranted())
             {
                 var lastLocation = locationManager.GetLastKnownLocation(LocationManager.GpsProvider);
 
                 if (LocationIsValid(lastLocation))
                 {
                     var currentLocation = new Point(lastLocation.Longitude, lastLocation.Latitude).FromLonLat();
-                    map.NavigateTo(currentLocation);
-                }
+
+					mapControl.Navigator.NavigateTo(currentLocation, map.Resolutions[0]);
+				}
             }
             else
             {
@@ -233,26 +234,31 @@ namespace PolyNavi.Fragments
 		private void InitializeMapControl()
 		{
 			mapControl = view.FindViewById<MapControl>(Resource.Id.mapControl);
-			mapControl.RotationLock = false;
+
 			map = mapControl.Map;
 			map.CRS = "EPSG:3857";
             Activity.RunOnUiThread(() =>
             {
                 map.Layers.Add(OpenStreetMap.CreateTileLayer());
-                routeLayer = new Layer();
+
+                mapControl.Navigator.NavigateTo(new BoundingBox(leftBottom.FromLonLat(), rightTop.FromLonLat()));
+				
+				map.Transformation = new MinimalTransformation();
+                
+                map.Limiter = new ViewportLimiter() 
+                {
+                    PanLimits = new BoundingBox(leftBottom.FromLonLat(), rightTop.FromLonLat()),
+					ZoomLimits = new MinMax(1, 12)
+			    };
+
+				routeLayer = new Layer();
                 map.Layers.Add(routeLayer);
-
-                var centerOfPolytech = new Point(30.371144, 60.003675).FromLonLat();
-                map.NavigateTo(centerOfPolytech);
-                map.NavigateTo(7);
-                map.Transformation = new MinimalTransformation();
-
-                map.PanLimits = new BoundingBox(leftBottom.FromLonLat(), rightTop.FromLonLat());
-                map.PanMode = PanMode.KeepCenterWithinExtents;
-
-                map.ZoomLimits = new MinMax(1, 7);
-
-                map.Widgets.Add(new Mapsui.Widgets.ScaleBar.ScaleBarWidget(map) { TextAlignment = Mapsui.Widgets.Alignment.Center, HorizontalAlignment = Mapsui.Widgets.HorizontalAlignment.Center, VerticalAlignment = Mapsui.Widgets.VerticalAlignment.Top });
+				map.Widgets.Add(new Mapsui.Widgets.ScaleBar.ScaleBarWidget(map)
+                {
+                    TextAlignment = Mapsui.Widgets.Alignment.Center, 
+                    HorizontalAlignment = Mapsui.Widgets.HorizontalAlignment.Center,
+                    VerticalAlignment = Mapsui.Widgets.VerticalAlignment.Top
+                });
             });
 		}
 
@@ -366,8 +372,7 @@ namespace PolyNavi.Fragments
 					map.Layers.Remove(routeLayer);
 					routeLayer = DrawRoute(route);
 					map.Layers.Add(routeLayer);
-					map.NavigateTo(new Point(s.Y, s.X).FromLonLat());
-					map.NavigateTo(4);
+					mapControl.Navigator.NavigateTo(new Point(s.Y, s.X).FromLonLat(), map.Resolutions[0]);
 					appBar.SetExpanded(false);
 				}
 				else
@@ -380,10 +385,6 @@ namespace PolyNavi.Fragments
 			{
 				fab.SetImageResource(Resource.Drawable.ic_done_black);
 				appBar.SetExpanded(true);
-
-				//fabLayoutParams.AnchorId = relativeLayout.Id;
-				//fab.LayoutParameters = fabLayoutParams;
-				//fab.SetImageResource(Resource.Drawable.ic_done_black);
 			}
 		}
 
@@ -400,7 +401,7 @@ namespace PolyNavi.Fragments
 		}
 
 		public void OnOffsetChanged(AppBarLayout appBarLayout, int verticalOffset)
-		{
+        {
 			fullyExpanded = (verticalOffset == 0);
 			fullyCollapsed = (appBar.Height + verticalOffset == 0);
 
