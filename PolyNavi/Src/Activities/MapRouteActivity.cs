@@ -9,6 +9,7 @@ using Android.Widget;
 using AndroidX.AppCompat.App;
 using AndroidX.Core.Content;
 using PolyNavi.Adapters;
+using PolyNavi.Fragments;
 using Toolbar = AndroidX.AppCompat.Widget.Toolbar;
 
 namespace PolyNavi.Activities
@@ -19,17 +20,23 @@ namespace PolyNavi.Activities
         ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.ScreenSize)]
     public class MapRouteActivity : AppCompatActivity
     {
-        private BuildingsAdapter buildingsAdapter;
-        private List<object> buildings;
+        private List<object> buildingNames;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             MainApp.ChangeLanguage(this);
+
             SetTheme(Resource.Style.MyAppTheme);
             base.OnCreate(savedInstanceState);
 
             SetContentView(Resource.Layout.activity_map_routing);
-            Window.ClearFlags(WindowManagerFlags.TranslucentStatus);
+
+            Setup();
+        }
+
+        private void Setup()
+        {
+            Window.ClearFlags(WindowManagerFlags.TranslucentStatus); //TODO Move?
             Window.SetStatusBarColor(new Color(ContextCompat.GetColor(this, Resource.Color.color_primary_dark)));
 
             var toolbar = FindViewById<Toolbar>(Resource.Id.toolbar_route);
@@ -38,26 +45,25 @@ namespace PolyNavi.Activities
 
             Title = GetString(Resource.String.title_route_activity);
 
-            buildings = new List<object>(MainApp.Instance.BuildingsDictionary.Keys);
-            buildings[0] = new MainBuildingTag()
+            buildingNames = new List<object>(MainApp.Instance.BuildingsDictionary.Keys);
+            buildingNames[0] = new MainBuildingTag()
             {
-                MainBuildingString = buildings[0].ToString()
+                MainBuildingString = buildingNames[0].ToString()
             };
 
-            var listView = FindViewById<ListView>(Resource.Id.listview_buildingslist);
+            var buildingsList = FindViewById<ListView>(Resource.Id.listview_buildingslist);
 
-            buildingsAdapter = new BuildingsAdapter(this, buildings);
-            listView.Adapter = buildingsAdapter;
-            listView.ItemClick += ListView_ItemClick;
+            var buildingsAdapter = new BuildingsAdapter(this, buildingNames);
+            buildingsList.Adapter = buildingsAdapter;
+            buildingsList.ItemClick += BuildingsList_ItemClick;
         }
 
-        private void ListView_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
+        private void BuildingsList_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {
-            var obj = buildings[e.Position];
-            var route = obj.ToString();
+            var selectedBuildingName = buildingNames[e.Position].ToString();
 
             var intent = new Intent();
-            intent.PutExtra("route", route);
+            intent.PutExtra(MapBuildingsFragment.MapActivityIntentResultName, selectedBuildingName);
 
             SetResult(Result.Ok, intent);
             Finish();

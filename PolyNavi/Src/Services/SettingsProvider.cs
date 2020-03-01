@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Android.Content;
 using PolyNaviLib.BL;
+using PolyNaviLib.Constants;
 using PolyNaviLib.DAL;
 
 namespace PolyNavi.Services
@@ -23,7 +24,7 @@ namespace PolyNavi.Services
                     return value;
                 }
 
-                if (key == "groupid") //TODO
+                if (key == PreferencesConstants.GroupIdPreferenceKey)
                     throw new GroupNumberException();
                 throw new KeyNotFoundException();
             }

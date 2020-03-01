@@ -11,6 +11,8 @@ using AndroidX.AppCompat.App;
 using AndroidX.Core.Content;
 using AndroidX.ViewPager.Widget;
 using PolyNavi.Adapters;
+using PolyNaviLib.BL;
+using PolyNaviLib.Constants;
 using Object = Java.Lang.Object;
 
 namespace PolyNavi.Activities
@@ -19,14 +21,12 @@ namespace PolyNavi.Activities
         ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.ScreenSize)]
     public class WelcomeActivity : AppCompatActivity
     {
-        private WelcomeSectionsPagerAdapter sectionsPagerAdapter;
         private static ViewPager viewPager;
         private static ImageButton nextButton;
-        private static Button skipButton, finishButton;
-        private ImageView firstIndicator, secondIndicator, thirdIndicator;
+        private static Button finishButton;
         private static ImageView[] indicators;
         private static int pageNumber;
-        private static int[] colorList;
+        private static int[] colorCodesList;
         private static ArgbEvaluator argbEvaluator;
         private static Color[] colors;
         private ISharedPreferencesEditor preferencesEditor;
@@ -41,15 +41,20 @@ namespace PolyNavi.Activities
 
             SetContentView(Resource.Layout.activity_welcome);
 
-            sectionsPagerAdapter = new WelcomeSectionsPagerAdapter(SupportFragmentManager);
+            Setup();
+        }
+
+        private void Setup()
+        {
+            var sectionsPagerAdapter = new WelcomeSectionsPagerAdapter(SupportFragmentManager);
 
             nextButton = FindViewById<ImageButton>(Resource.Id.button_welcome_next);
-            skipButton = FindViewById<Button>(Resource.Id.button_welcome_skip);
+            var skipButton = FindViewById<Button>(Resource.Id.button_welcome_skip);
             finishButton = FindViewById<Button>(Resource.Id.button_welcome_finish);
 
-            firstIndicator = FindViewById<ImageView>(Resource.Id.imageview_welcome_indicator_1);
-            secondIndicator = FindViewById<ImageView>(Resource.Id.imageview_welcome_indicator_2);
-            thirdIndicator = FindViewById<ImageView>(Resource.Id.imageview_welcome_indicator_3);
+            var firstIndicator = FindViewById<ImageView>(Resource.Id.imageview_welcome_indicator_1);
+            var secondIndicator = FindViewById<ImageView>(Resource.Id.imageview_welcome_indicator_2);
+            var thirdIndicator = FindViewById<ImageView>(Resource.Id.imageview_welcome_indicator_3);
 
             indicators = new[] { firstIndicator, secondIndicator, thirdIndicator };
 
@@ -62,7 +67,7 @@ namespace PolyNavi.Activities
             var color2 = ContextCompat.GetColor(this, Resource.Color.color_orange);
             var color3 = ContextCompat.GetColor(this, Resource.Color.color_green);
 
-            colorList = new[] { color1, color2, color3 };
+            colorCodesList = new[] { color1, color2, color3 };
             colors = new[] { new Color(color1), new Color(color2), new Color(3) };
 
             argbEvaluator = new ArgbEvaluator();
@@ -76,7 +81,7 @@ namespace PolyNavi.Activities
             preferencesEditor = MainApp.Instance.SharedPreferences.Edit();
         }
 
-        private void NextButtonClick(object sender, EventArgs e)
+        private static void NextButtonClick(object sender, EventArgs e)
         {
             pageNumber += 1;
             viewPager.CurrentItem = pageNumber;
@@ -94,9 +99,11 @@ namespace PolyNavi.Activities
 
         private void ProceedToAuthActivity()
         {
-            preferencesEditor.PutBoolean("welcome", true).Apply();
+            preferencesEditor.PutBoolean(PreferencesConstants.WelcomeCompletedPreferenceKey, true).Apply();
+
             var intent = new Intent(this, typeof(AuthorizationActivity));
             intent.SetFlags(ActivityFlags.ClearTop);
+
             StartActivity(intent);
             Finish();
         }
@@ -108,7 +115,6 @@ namespace PolyNavi.Activities
                 indicators[i].SetBackgroundResource(i == position ? Resource.Drawable.indicator_selected : Resource.Drawable.indicator_unselected);
             }
         }
-
 
         private class ViewPagerPageChangeListener : Object, ViewPager.IOnPageChangeListener
         {
@@ -122,32 +128,25 @@ namespace PolyNavi.Activities
                 pageNumber = position;
                 UpdateIndicators(pageNumber);
 
-                switch (position)
-                {
-                    case 0:
-                        viewPager.SetBackgroundColor(colors[0]);
-                        break;
-                    case 1:
-                        viewPager.SetBackgroundColor(colors[1]);
-                        break;
-                    case 2:
-                        viewPager.SetBackgroundColor(colors[2]);
-                        break;
-                }
+                viewPager.SetBackgroundColor(colors[position]);
 
                 nextButton.Visibility = position == 2 ? ViewStates.Gone : ViewStates.Visible;
                 finishButton.Visibility = position == 2 ? ViewStates.Visible : ViewStates.Gone;
             }
 
-            public new void Dispose()
+            public new void Dispose() //TODO ?
             {
 
             }
 
             public void OnPageScrolled(int position, float positionOffset, int positionOffsetPixels)
             {
-                var colorUpdate = (int)argbEvaluator.Evaluate(positionOffset, colorList[position], colorList[position == 2 ? position : position + 1]);
+                var colorUpdate = (int)argbEvaluator.Evaluate(positionOffset,
+                    colorCodesList[position],
+                    colorCodesList[position == 2 ? position : position + 1]);
+
                 var color = new Color(colorUpdate);
+
                 viewPager.SetBackgroundColor(color);
             }
         }

@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using PolyNaviLib.BL;
+using PolyNaviLib.Constants;
 using PolyNaviLib.DL;
 using PolyNaviLib.SL;
 
@@ -83,12 +84,12 @@ namespace PolyNaviLib.DAL
 
         private async Task<WeekRoot> LoadWeekRootFromWebAsync(DateTime weekDate)
         {
-            if (checker.Check() == false)
+            if (checker.IsConnected() == false)
             {
                 throw new NetworkException("No internet connection"); //TODO
             }
 
-            var groupId = settings["groupid"]; //TODO
+            var groupId = settings[PreferencesConstants.GroupIdPreferenceKey];
 
             var dateStr = weekDate.ToString("yyyy-M-d", new CultureInfo("ru-RU"));
             var resultJson = await HttpClientService.GetResponseAsync(client, scheduleLink + groupId + "&date=" + dateStr, new CancellationToken());
@@ -100,7 +101,7 @@ namespace PolyNaviLib.DAL
 
         private async Task RemoveExpiredWeeksAsync()
         {
-            await database.DeleteItemsAsync<WeekRoot>(w => w.Week.IsExpired(Convert.ToInt32(settings["groupid"]))); //TODO
+            await database.DeleteItemsAsync<WeekRoot>(w => w.Week.IsExpired(Convert.ToInt32(settings[PreferencesConstants.GroupIdPreferenceKey]))); //TODO
         }
     }
 }

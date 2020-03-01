@@ -18,6 +18,7 @@ using Java.Lang;
 using Newtonsoft.Json;
 using PolyNavi.Services;
 using PolyNaviLib.BL;
+using PolyNaviLib.Constants;
 using PolyNaviLib.SL;
 using Object = Java.Lang.Object;
 using Timer = System.Timers.Timer;
@@ -126,7 +127,7 @@ namespace PolyNavi.Preferences
                 if (groupsDictionary.TryGetValue(groupName, out var groupId))
                 {
                     autoCompleteTvPreference.SaveGroupName(groupName);
-                    MainApp.Instance.SharedPreferences.Edit().PutInt("groupid", groupId).Apply();
+                    MainApp.Instance.SharedPreferences.Edit().PutInt(PreferencesConstants.GroupIdPreferenceKey, groupId).Apply();
                 }
                 else
                 {
@@ -161,7 +162,7 @@ namespace PolyNavi.Preferences
                 searchTimer = new Timer(MillsToSearch);
                 searchTimer.Elapsed += delegate
                 {
-                    if (networkChecker.Check())
+                    if (networkChecker.IsConnected())
                     {
                         var client = new HttpClient();
                         Task.Run(async () =>

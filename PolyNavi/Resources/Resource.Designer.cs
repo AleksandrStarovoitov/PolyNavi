@@ -4717,67 +4717,67 @@ namespace PolyNavi
 			public const int textview_auth_poly = 2131362101;
 			
 			// aapt resource value: 0x7F0A0136
-			public const int textview_card_buildingnumber_row_lesson_schedule = 2131362102;
+			public const int textview_auth_skip = 2131362102;
 			
 			// aapt resource value: 0x7F0A0137
-			public const int textview_card_date_row_title_schedule = 2131362103;
+			public const int textview_card_buildingnumber_row_lesson_schedule = 2131362103;
 			
 			// aapt resource value: 0x7F0A0138
-			public const int textview_card_dayofweek_row_title_schedule = 2131362104;
+			public const int textview_card_date_row_title_schedule = 2131362104;
 			
 			// aapt resource value: 0x7F0A0139
-			public const int textview_card_endtime_row_lesson_schedule = 2131362105;
+			public const int textview_card_dayofweek_row_title_schedule = 2131362105;
 			
 			// aapt resource value: 0x7F0A013A
-			public const int textview_card_group_row_lesson_schedule = 2131362106;
+			public const int textview_card_endtime_row_lesson_schedule = 2131362106;
 			
 			// aapt resource value: 0x7F0A013B
-			public const int textview_card_room_row_lesson_schedule = 2131362107;
+			public const int textview_card_group_row_lesson_schedule = 2131362107;
 			
 			// aapt resource value: 0x7F0A013C
-			public const int textview_card_schedule_end = 2131362108;
+			public const int textview_card_room_row_lesson_schedule = 2131362108;
 			
 			// aapt resource value: 0x7F0A013D
-			public const int textview_card_starttime_row_lesson_schedule = 2131362109;
+			public const int textview_card_schedule_end = 2131362109;
 			
 			// aapt resource value: 0x7F0A013E
-			public const int textview_card_subject_row_lesson_schedule = 2131362110;
+			public const int textview_card_starttime_row_lesson_schedule = 2131362110;
 			
 			// aapt resource value: 0x7F0A013F
-			public const int textview_card_teacher_row_lesson_schedule = 2131362111;
+			public const int textview_card_subject_row_lesson_schedule = 2131362111;
 			
 			// aapt resource value: 0x7F0A0140
-			public const int textview_card_type_row_lesson_schedule = 2131362112;
+			public const int textview_card_teacher_row_lesson_schedule = 2131362112;
 			
 			// aapt resource value: 0x7F0A0141
-			public const int textview_contacts_kirill_link_about = 2131362113;
+			public const int textview_card_type_row_lesson_schedule = 2131362113;
 			
 			// aapt resource value: 0x7F0A0142
-			public const int textview_contacts_sasha_link_about = 2131362114;
+			public const int textview_contacts_kirill_link_about = 2131362114;
 			
 			// aapt resource value: 0x7F0A0143
-			public const int textview_contacts_title_about = 2131362115;
+			public const int textview_contacts_sasha_link_about = 2131362115;
 			
 			// aapt resource value: 0x7F0A0144
-			public const int textview_empty_schedule_error = 2131362116;
+			public const int textview_contacts_title_about = 2131362116;
 			
 			// aapt resource value: 0x7F0A0145
-			public const int textview_empty_schedule_error_title = 2131362117;
+			public const int textview_empty_schedule_error = 2131362117;
 			
 			// aapt resource value: 0x7F0A0146
-			public const int textview_error_summary = 2131362118;
+			public const int textview_empty_schedule_error_title = 2131362118;
 			
 			// aapt resource value: 0x7F0A0147
-			public const int textview_error_title = 2131362119;
+			public const int textview_error_summary = 2131362119;
 			
 			// aapt resource value: 0x7F0A0148
-			public const int textview_header_navi = 2131362120;
+			public const int textview_error_title = 2131362120;
 			
 			// aapt resource value: 0x7F0A0149
-			public const int textview_header_poly = 2131362121;
+			public const int textview_header_navi = 2131362121;
 			
 			// aapt resource value: 0x7F0A014A
-			public const int textview_later_auth = 2131362122;
+			public const int textview_header_poly = 2131362122;
 			
 			// aapt resource value: 0x7F0A014B
 			public const int textview_no_connection_tap = 2131362123;

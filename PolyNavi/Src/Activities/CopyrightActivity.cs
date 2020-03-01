@@ -19,15 +19,21 @@ namespace PolyNavi.Activities
         protected override void OnCreate(Bundle savedInstanceState)
         {
             MainApp.ChangeLanguage(this);
+
             SetTheme(Resource.Style.MyAppTheme);
             base.OnCreate(savedInstanceState);
 
             SetContentView(Resource.Layout.activity_copyright);
+
+            Setup();
+        }
+
+        private void Setup()
+        {
             Window.ClearFlags(WindowManagerFlags.TranslucentStatus);
             Window.SetStatusBarColor(new Color(ContextCompat.GetColor(this, Resource.Color.color_primary_dark)));
 
             var toolbar = FindViewById<Toolbar>(Resource.Id.toolbar_copyright);
-
             SetSupportActionBar(toolbar);
             SupportActionBar.SetDisplayHomeAsUpEnabled(true);
 

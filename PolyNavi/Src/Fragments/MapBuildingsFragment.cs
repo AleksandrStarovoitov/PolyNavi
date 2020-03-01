@@ -49,12 +49,7 @@ namespace PolyNavi.Fragments
 
 		private const int FromRequestCode = 1;
 		private const int ToRequestCode = 2;
-
-		private readonly string[] LocationPermissions =
-		{
-		  Manifest.Permission.AccessCoarseLocation,
-		  Manifest.Permission.AccessFineLocation
-		};
+        internal const string MapActivityIntentResultName = "route";
 
 		private const int FineLocationRequestId = 10;
 
@@ -346,10 +341,10 @@ namespace PolyNavi.Fragments
             switch (requestCode)
             {
                 case FromRequestCode:
-                    editTextInputFrom.Text = data.GetStringExtra("route");
+                    editTextInputFrom.Text = data.GetStringExtra(MapActivityIntentResultName);
                     break;
                 case ToRequestCode:
-                    editTextInputTo.Text = data.GetStringExtra("route");
+                    editTextInputTo.Text = data.GetStringExtra(MapActivityIntentResultName);
                     break;
                 default:
                     Toast.MakeText(Activity.BaseContext, "Error", ToastLength.Short).Show();
@@ -395,14 +390,18 @@ namespace PolyNavi.Fragments
 
 		private void EditTextInputFrom_Click(object sender, EventArgs e)
 		{
-			var searchActivity = new Intent(Activity, typeof(MapRouteActivity));
-			StartActivityForResult(searchActivity, FromRequestCode);
+			StartRouteActivity(FromRequestCode);
 		}
 
 		private void EditTextInputTo_Click(object sender, EventArgs e)
-		{
-			var searchActivity = new Intent(Activity, typeof(MapRouteActivity));
-			StartActivityForResult(searchActivity, ToRequestCode);
+        {
+            StartRouteActivity(ToRequestCode);
+		}
+
+        private void StartRouteActivity(int requestCode)
+        {
+            var searchActivity = new Intent(Activity, typeof(MapRouteActivity));
+            StartActivityForResult(searchActivity, requestCode);
 		}
 
 		public void OnOffsetChanged(AppBarLayout appBarLayout, int verticalOffset)

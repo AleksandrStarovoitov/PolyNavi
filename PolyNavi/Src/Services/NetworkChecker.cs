@@ -14,7 +14,7 @@ namespace PolyNavi.Services
             this.context = context;
         }
 
-        public bool Check()
+        public bool IsConnected()
         {
             var cm = (ConnectivityManager)context.GetSystemService(Context.ConnectivityService);
             var info = cm.ActiveNetworkInfo;

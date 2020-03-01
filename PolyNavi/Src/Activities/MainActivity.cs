@@ -11,6 +11,8 @@ using AndroidX.DrawerLayout.Widget;
 using Google.Android.Material.Navigation;
 using PolyNavi.Fragments;
 using PolyNavi.Views;
+using PolyNaviLib.BL;
+using PolyNaviLib.Constants;
 using static AndroidX.DrawerLayout.Widget.DrawerLayout;
 using Fragment = AndroidX.Fragment.App.Fragment;
 
@@ -25,27 +27,31 @@ namespace PolyNavi.Activities
         private DrawerLayout drawerLayout;
         private ActionBarDrawerToggle drawerToggle;
         private Type fragmentClass;
-        private Fragment fragment;
-        private Toolbar toolbar;
         private NavigationView navigationView;
         private string startActivity;
-        private int startMenuItem;
         private bool isTapped;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             MainApp.ChangeLanguage(this);
+
             SetTheme(Resource.Style.MyAppTheme);
             base.OnCreate(savedInstanceState);
 
-            startActivity = MainApp.Instance.SharedPreferences.GetString("startactivity", null);
             SetContentView(Resource.Layout.activity_main);
+            
+            Setup();
+            
+            InstantiateFragment();
+        }
 
+        private void Setup()
+        {
             drawerLayout = FindViewById<DrawerLayout>(Resource.Id.drawerlayout_main);
             drawerLayout.AddDrawerListener(this);
             drawerLayout.SetStatusBarBackground(Resource.Color.color_status_bar);
 
-            toolbar = FindViewById<Toolbar>(Resource.Id.toolbar_main);
+            var toolbar = FindViewById<Toolbar>(Resource.Id.toolbar_main);
 
             drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, Resource.String.navigation_drawer_open, Resource.String.navigation_drawer_close);
             drawerLayout.AddDrawerListener(drawerToggle);
@@ -57,11 +63,14 @@ namespace PolyNavi.Activities
             navigationView = FindViewById<NavigationView>(Resource.Id.navview_main);
             navigationView.NavigationItemSelected += NavViewItemSelected;
             navigationView.Alpha = 0.99f;
-            InstantiateFragment();
+
+            startActivity = MainApp.Instance.SharedPreferences.GetString(PreferencesConstants.StartActivityPreferenceKey, null);
         }
 
         private void InstantiateFragment()
         {
+            int startMenuItem;
+
             switch (startActivity)
             {
                 case "mainbuilding":
@@ -90,10 +99,10 @@ namespace PolyNavi.Activities
                     break;
             }
 
-            fragment = (Fragment)Activator.CreateInstance(fragmentClass);
+            var fragment = (Fragment)Activator.CreateInstance(fragmentClass);
             navigationView.Menu.GetItem(startMenuItem).SetChecked(true);
             Title = startMenuItem == 4 ?
-                navigationView.Menu.FindItem(Resource.Id.nav_about_menu).TitleFormatted.ToString() :
+                navigationView.Menu.FindItem(Resource.Id.nav_about_menu).TitleFormatted.ToString() : //TODO ?
                 navigationView.Menu.GetItem(startMenuItem).TitleFormatted.ToString();
             SupportFragmentManager.BeginTransaction().Replace(Resource.Id.contentframe_main, fragment).Commit();
         }
@@ -118,8 +127,8 @@ namespace PolyNavi.Activities
 
         public void OnDrawerSlide(View drawerView, float slideOffset)
         {
-            var imm = (InputMethodManager)GetSystemService(InputMethodService);
-            imm.HideSoftInputFromWindow(drawerView.WindowToken, 0);
+            var inputMethodManager = (InputMethodManager)GetSystemService(InputMethodService);
+            inputMethodManager.HideSoftInputFromWindow(drawerView.WindowToken, 0);
         }
 
         public void OnDrawerOpened(View drawerView)
@@ -145,9 +154,9 @@ namespace PolyNavi.Activities
 
         private void NavViewItemSelected(object sender, NavigationView.NavigationItemSelectedEventArgs e)
         {
-            var mItemId = e.MenuItem.ItemId;
+            var menuItemId = e.MenuItem.ItemId;
 
-            startActivity = mItemId switch
+            startActivity = menuItemId switch
             {
                 Resource.Id.nav_gz_menu => "mainbuilding",
                 Resource.Id.nav_buildings_menu => "buildings",
@@ -164,4 +173,3 @@ namespace PolyNavi.Activities
         }
     }
 }
-

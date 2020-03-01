@@ -151,7 +151,11 @@ namespace PolyNavi
             Instance = this;
             SharedPreferences = PreferenceManager.GetDefaultSharedPreferences(ApplicationContext);
             GraphSaverLoader = new SaverLoader(new AssetsProvider(ApplicationContext));
-            if (IsAppUpdated()) { }
+
+            if (IsAppUpdated()) //TODO
+            {
+
+            }
         }
 
         public override void OnCreate()
