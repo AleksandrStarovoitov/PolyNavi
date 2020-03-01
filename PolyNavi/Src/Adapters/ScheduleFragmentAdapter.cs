@@ -14,7 +14,7 @@ namespace PolyNavi.Adapters
 
         public override int Count { get; }
 
-        public ScheduleFragmentAdapter(FragmentManager fragmentManager, int numberOfTabs, DateTime date, int dayOfYear = -1) : base(fragmentManager)
+        public ScheduleFragmentAdapter(FragmentManager fragmentManager, int numberOfTabs, DateTime date, int dayOfYear = -1) : base(fragmentManager, BehaviorResumeOnlyCurrentFragment)
         {
             this.Count = numberOfTabs;
 

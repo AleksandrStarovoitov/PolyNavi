@@ -1,11 +1,12 @@
 ﻿using Android.App;
 using Android.OS;
 using Android.Widget;
+using AndroidX.AppCompat.App;
 using System;
 
 namespace PolyNavi.Fragments
 {
-    public class DateTimePickerFragment : DialogFragment, //TODO
+    public class DateTimePickerFragment : AppCompatDialogFragment,
                                   DatePickerDialog.IOnDateSetListener
     {
         public static readonly string DateTimePickerTag = "X:" + typeof(DateTimePickerFragment).Name.ToUpper();

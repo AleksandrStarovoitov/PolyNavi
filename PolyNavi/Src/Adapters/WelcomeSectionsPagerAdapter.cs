@@ -7,7 +7,7 @@ namespace PolyNavi.Adapters
     {
         public override int Count => 3;
 
-        public WelcomeSectionsPagerAdapter(FragmentManager fm) : base(fm)
+        public WelcomeSectionsPagerAdapter(FragmentManager fm) : base(fm, BehaviorResumeOnlyCurrentFragment)
         {
 
         }

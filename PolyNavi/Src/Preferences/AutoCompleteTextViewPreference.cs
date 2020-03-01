@@ -59,7 +59,7 @@ namespace PolyNavi.Preferences
             PersistString(name);
         }
 
-        protected override void OnSetInitialValue(bool restorePersistedValue, Java.Lang.Object defaultValue)
+        protected override void OnSetInitialValue(bool restorePersistedValue, Java.Lang.Object defaultValue) //TODO
         {
             GroupName = restorePersistedValue ? GetPersistedString(GroupName) : defaultValue.ToString();
         }

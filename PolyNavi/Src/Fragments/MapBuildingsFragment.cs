@@ -364,7 +364,7 @@ namespace PolyNavi.Fragments
 
 					var startPoint = MainApp.Instance.BuildingsDictionary[startName];
 					var finishPoint = MainApp.Instance.BuildingsDictionary[finishName];
-					var start = router.Resolve(itineroProfile, (float)startPoint.X, (float)startPoint.Y);
+					var start = router.Resolve(itineroProfile, (float)startPoint.X, (float)startPoint.Y); //TODO ResolveFailedException Probably too far...
 					var finish = router.Resolve(itineroProfile, (float)finishPoint.X, (float)finishPoint.Y);
 
 					var route = router.Calculate(itineroProfile, start, finish);
