@@ -167,6 +167,7 @@ namespace PolyNavi.Preferences
                             var resultJson = await HttpClientService.GetResponseAsync(client,
                                 GroupSearchLink +
                                 s.ToString(), new CancellationToken());
+                            //TODO Move to lib
                             var groups = JsonConvert.DeserializeObject<GroupRoot>(resultJson);
                             groupsDictionary = groups.Groups.ToDictionary(x => x.Name, x => x.Id);
                             array = groupsDictionary.Select(x => x.Key).ToArray();
