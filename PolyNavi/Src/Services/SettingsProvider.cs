@@ -1,7 +1,7 @@
-﻿using Android.Content;
+﻿using System.Collections.Generic;
+using Android.Content;
 using PolyNaviLib.BL;
 using PolyNaviLib.DAL;
-using System.Collections.Generic;
 
 namespace PolyNavi.Services
 {
@@ -22,13 +22,10 @@ namespace PolyNavi.Services
                 {
                     return value;
                 }
-                else
-                {
-                    if (key == "groupid") //TODO
-                        throw new GroupNumberException();
-                    else
-                        throw new KeyNotFoundException();
-                }
+
+                if (key == "groupid") //TODO
+                    throw new GroupNumberException();
+                throw new KeyNotFoundException();
             }
             set
             {

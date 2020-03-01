@@ -1,4 +1,5 @@
 ﻿using AndroidX.Fragment.App;
+using Java.Lang;
 using PolyNavi.Fragments;
 
 namespace PolyNavi.Adapters
@@ -17,13 +18,13 @@ namespace PolyNavi.Adapters
             return WelcomePlaceholderFragment.NewInstance(position + 1);
         }
 
-        public override Java.Lang.ICharSequence GetPageTitleFormatted(int position)
+        public override ICharSequence GetPageTitleFormatted(int position)
         {
             return position switch
             {
-                0 => new Java.Lang.String("SECTION 1"),
-                1 => new Java.Lang.String("SECTION 2"),
-                2 => new Java.Lang.String("SECTION 3"),
+                0 => new String("SECTION 1"),
+                1 => new String("SECTION 2"),
+                2 => new String("SECTION 3"),
                 _ => null
             };
         }

@@ -1,4 +1,7 @@
-﻿using Android.Content;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Android.Content;
 using Android.OS;
 using Android.Runtime;
 using Android.Text;
@@ -11,10 +14,8 @@ using Google.Android.Material.FloatingActionButton;
 using Graph;
 using Java.Lang;
 using PolyNavi.Views;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using static Android.Widget.TextView;
+using Point = Android.Graphics.Point;
 
 namespace PolyNavi.Fragments
 {
@@ -137,7 +138,7 @@ namespace PolyNavi.Fragments
             foreach (var fragment in fragments)
             {
                 fragment.MapView.SetRoute(null);
-                fragment.MapView.SetMarker(new Android.Graphics.Point(), MainBuildingView.Marker.None);
+                fragment.MapView.SetMarker(new Point(), MainBuildingView.Marker.None);
             }
         }
 
@@ -171,7 +172,7 @@ namespace PolyNavi.Fragments
                                                select new
                                                {
                                                    Floor = g.Key,
-                                                   Coordinates = from graphNode in g select new Android.Graphics.Point(graphNode.Point.X, graphNode.Point.Y),
+                                                   Coordinates = from graphNode in g select new Point(graphNode.Point.X, graphNode.Point.Y)
                                                };
                         ClearAllRoutes();
                         foreach (var coordinateGroup in coordinateGroups)
@@ -182,8 +183,8 @@ namespace PolyNavi.Fragments
 
                         var startFloor = route[0].FloorNumber;
                         var endFloor = route.Last().FloorNumber;
-                        fragments[startFloor - 1].MapView.SetMarker(new Android.Graphics.Point(route.First().Point.X, route.First().Point.Y), MainBuildingView.Marker.Start);
-                        fragments[endFloor - 1].MapView.SetMarker(new Android.Graphics.Point(route.Last().Point.X, route.Last().Point.Y), MainBuildingView.Marker.End);
+                        fragments[startFloor - 1].MapView.SetMarker(new Point(route.First().Point.X, route.First().Point.Y), MainBuildingView.Marker.Start);
+                        fragments[endFloor - 1].MapView.SetMarker(new Point(route.Last().Point.X, route.Last().Point.Y), MainBuildingView.Marker.End);
 
                         ChangeFloor(startFloor);
                     }

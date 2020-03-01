@@ -1,4 +1,5 @@
-﻿using Android.Animation;
+﻿using System;
+using Android.Animation;
 using Android.App;
 using Android.Content;
 using Android.Content.PM;
@@ -10,7 +11,7 @@ using AndroidX.AppCompat.App;
 using AndroidX.Core.Content;
 using AndroidX.ViewPager.Widget;
 using PolyNavi.Adapters;
-using System;
+using Object = Java.Lang.Object;
 
 namespace PolyNavi.Activities
 {
@@ -109,7 +110,7 @@ namespace PolyNavi.Activities
         }
 
 
-        private class ViewPagerPageChangeListener : Java.Lang.Object, ViewPager.IOnPageChangeListener
+        private class ViewPagerPageChangeListener : Object, ViewPager.IOnPageChangeListener
         {
             public void OnPageScrollStateChanged(int state)
             {

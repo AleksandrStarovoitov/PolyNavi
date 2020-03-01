@@ -1,4 +1,6 @@
-﻿using Android.Content;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Android.Content;
 using Android.Graphics;
 using Android.Graphics.Drawables;
 using Android.Util;
@@ -6,8 +8,6 @@ using Android.Views;
 using Android.Views.InputMethods;
 using AndroidX.Core.Content;
 using PolyNavi.Fragments;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace PolyNavi.Views
 {
@@ -17,10 +17,10 @@ namespace PolyNavi.Views
         {
             Start,
             End,
-            None,
+            None
         }
 
-        private readonly Paint routePaint = new Paint() { Color = Color.Blue, StrokeCap = Paint.Cap.Round, StrokeWidth = 7.0f, };
+        private readonly Paint routePaint = new Paint() { Color = Color.Blue, StrokeCap = Paint.Cap.Round, StrokeWidth = 7.0f };
         private readonly Paint startPointPaint = new Paint() { Color = Color.Green };
         private readonly Paint endPointPaint = new Paint() { Color = Color.Red };
 

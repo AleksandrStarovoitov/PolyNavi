@@ -1,18 +1,19 @@
-﻿using Android.App;
-using Android.Content;
-using Android.Content.Res;
-using Android.Runtime;
-using AndroidX.Preference;
-using Java.Util;
-using Mapsui.Geometries;
-using Nito.AsyncEx;
-using PolyNavi.Services;
-using PolyNaviLib.BL;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using Android.App;
+using Android.Content;
+using Android.Content.Res;
+using Android.Runtime;
+using AndroidX.Preference;
+using Graph;
+using Java.Util;
+using Nito.AsyncEx;
+using PolyNavi.Services;
+using PolyNaviLib.BL;
+using Point = Mapsui.Geometries.Point;
 
 namespace PolyNavi
 {
@@ -77,20 +78,20 @@ namespace PolyNavi
             return false;
         }
 
-        public Lazy<Graph.GraphNode> MainBuildingGraph { get; private set; } = new Lazy<Graph.GraphNode>(() =>
+        public Lazy<GraphNode> MainBuildingGraph { get; private set; } = new Lazy<GraphNode>(() =>
         {
             if (File.Exists(GetFileFullPath("main.graph")) && !Instance.IsAppUpdated())
             {
                 using var stream = File.OpenRead(GetFileFullPath("main.graph"));
 
                 FillRoomsDictionary();
-                return Graph.SaverLoader.Load(stream);
+                return SaverLoader.Load(stream);
             }
 
             var graph = Instance.GraphSaverLoader.LoadFromXmlDescriptor("main_graph.xml");
             using (var stream = File.Create(GetFileFullPath("main.graph")))
             {
-                Graph.SaverLoader.Save(stream, graph);
+                SaverLoader.Save(stream, graph);
             }
             FillRoomsDictionary();
             return graph;
@@ -100,11 +101,11 @@ namespace PolyNavi
         {
             using (var stream = File.OpenRead(GetFileFullPath("main.graph")))
             {
-                var graph = Graph.SaverLoader.Load(stream);
+                var graph = SaverLoader.Load(stream);
 
-                var ids = new List<Graph.GraphNode>();
+                var ids = new List<GraphNode>();
 
-                var bfsQueue = new Queue<Graph.GraphNode>();
+                var bfsQueue = new Queue<GraphNode>();
                 bfsQueue.Enqueue(graph);
 
                 while (bfsQueue.Count > 0)
@@ -143,13 +144,13 @@ namespace PolyNavi
 
         public ISharedPreferences SharedPreferences { get; private set; }
 
-        private Graph.SaverLoader GraphSaverLoader { get; set; }
+        private SaverLoader GraphSaverLoader { get; set; }
 
         public MainApp(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
         {
             Instance = this;
             SharedPreferences = PreferenceManager.GetDefaultSharedPreferences(ApplicationContext);
-            GraphSaverLoader = new Graph.SaverLoader(new AssetsProvider(ApplicationContext));
+            GraphSaverLoader = new SaverLoader(new AssetsProvider(ApplicationContext));
             if (IsAppUpdated()) { }
         }
 

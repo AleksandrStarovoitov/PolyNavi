@@ -8,7 +8,7 @@ namespace Graph
 {
     public class SaverLoader
     {
-        private IAssetsProvider assetProvider;
+        private readonly IAssetsProvider assetProvider;
 
         public SaverLoader(IAssetsProvider assetProvider)
         {

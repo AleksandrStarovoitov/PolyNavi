@@ -1,4 +1,10 @@
-﻿using Android.App;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+using Android;
+using Android.App;
 using Android.Content;
 using Android.Content.PM;
 using Android.Locations;
@@ -20,18 +26,18 @@ using Mapsui.Styles;
 using Mapsui.UI;
 using Mapsui.UI.Android;
 using Mapsui.Utilities;
+using Mapsui.Widgets;
+using Mapsui.Widgets.ScaleBar;
 using PolyNavi.Activities;
 using PolyNavi.Extensions;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
+using Context = Android.Content.Context;
+using Fragment = AndroidX.Fragment.App.Fragment;
+using Vehicle = Itinero.Osm.Vehicles.Vehicle;
 
 namespace PolyNavi.Fragments
 {
 	// TODO Кеширование RouterDB чтобы не загружать ее при каждой загрузке фрагмента
-	public class MapBuildingsFragment : AndroidX.Fragment.App.Fragment, AppBarLayout.IOnOffsetChangedListener, ILocationListener
+	public class MapBuildingsFragment : Fragment, AppBarLayout.IOnOffsetChangedListener, ILocationListener
 	{
 		private const string RouterDbName = "polytech_map.routerdb";
 		private const string MarkerAName = "ic_marker_a.png";
@@ -46,8 +52,8 @@ namespace PolyNavi.Fragments
 
 		private readonly string[] LocationPermissions =
 		{
-		  Android.Manifest.Permission.AccessCoarseLocation,
-		  Android.Manifest.Permission.AccessFineLocation
+		  Manifest.Permission.AccessCoarseLocation,
+		  Manifest.Permission.AccessFineLocation
 		};
 
 		private const int FineLocationRequestId = 10;
@@ -114,20 +120,20 @@ namespace PolyNavi.Fragments
 						else
 						{
                             //Permission is not granted. Request.
-                            RequestPermissions(new string[] { Android.Manifest.Permission.AccessFineLocation }, FineLocationRequestId);
+                            RequestPermissions(new string[] { Manifest.Permission.AccessFineLocation }, FineLocationRequestId);
 						}
 					});
 				})
 			};
 
-			Task.WhenAll(tasks).ContinueWith((t) => progress.Visibility = ViewStates.Invisible);
+			Task.WhenAll(tasks).ContinueWith(t => progress.Visibility = ViewStates.Invisible);
 
 			return view;
 		}
 
 		private bool IsLocationGranted()
 		{
-			return ContextCompat.CheckSelfPermission(Activity, Android.Manifest.Permission.AccessFineLocation) 
+			return ContextCompat.CheckSelfPermission(Activity, Manifest.Permission.AccessFineLocation) 
                    == Permission.Granted;
 		}
 
@@ -184,7 +190,7 @@ namespace PolyNavi.Fragments
 
 		private void SetupLocationManager()
 		{
-			locationManager = (LocationManager)Activity.ApplicationContext.GetSystemService(Android.Content.Context.LocationService);
+			locationManager = (LocationManager)Activity.ApplicationContext.GetSystemService(Context.LocationService);
 			locationManager.RequestLocationUpdates(LocationManager.GpsProvider, 2000, 2, this);
 			animatedLocation = new AnimatedPointsWithAutoUpdateLayer { Name = "Animated Points" };
 			map.Layers.Add(animatedLocation);
@@ -225,7 +231,7 @@ namespace PolyNavi.Fragments
 			}
 
 			router = new Router(routerDb);
-			itineroProfile = Itinero.Osm.Vehicles.Vehicle.Pedestrian.Shortest();
+			itineroProfile = Vehicle.Pedestrian.Shortest();
 		}
 
 		private void InitializeMapControl()
@@ -250,11 +256,11 @@ namespace PolyNavi.Fragments
 
 				routeLayer = new Layer();
 				map.Layers.Add(routeLayer);
-				map.Widgets.Add(new Mapsui.Widgets.ScaleBar.ScaleBarWidget(map)
+				map.Widgets.Add(new ScaleBarWidget(map)
 				{
-					TextAlignment = Mapsui.Widgets.Alignment.Center,
-					HorizontalAlignment = Mapsui.Widgets.HorizontalAlignment.Center,
-					VerticalAlignment = Mapsui.Widgets.VerticalAlignment.Top
+					TextAlignment = Alignment.Center,
+					HorizontalAlignment = HorizontalAlignment.Center,
+					VerticalAlignment = VerticalAlignment.Top
 				});
 			});
 		}
@@ -266,7 +272,7 @@ namespace PolyNavi.Fragments
 			{
 				Name = layerName,
 				DataSource = new MemoryProvider(GenerateLinesAndMarkers(route)),
-				Style = null,
+				Style = null
 			};
         }
 
@@ -291,11 +297,11 @@ namespace PolyNavi.Fragments
 							Color = Color.Blue,
 							PenStyle = PenStyle.Solid,
 							Width = 7,
-							PenStrokeCap = PenStrokeCap.Round,
+							PenStrokeCap = PenStrokeCap.Round
 						},
-						Opacity = 0.7f,
+						Opacity = 0.7f
 					}
-				},
+				}
 			};
 
 			var markerStartFeature = new Feature()
@@ -306,7 +312,7 @@ namespace PolyNavi.Fragments
 					new SymbolStyle()
 					{
 						BitmapId = GetBitmapIdForEmbeddedResource(MarkerAName),
-						SymbolScale = 0.5,
+						SymbolScale = 0.5
 					}
 				}
 			};
@@ -319,12 +325,12 @@ namespace PolyNavi.Fragments
 					new SymbolStyle()
 					{
 						BitmapId = GetBitmapIdForEmbeddedResource(MarkerBName),
-						SymbolScale = 0.5,
+						SymbolScale = 0.5
 					}
 				}
 			};
 
-			return new List<Feature> { lineFeature, markerStartFeature, markerFinishFeature, };
+			return new List<Feature> { lineFeature, markerStartFeature, markerFinishFeature };
 		}
 
 		private static int GetBitmapIdForEmbeddedResource(string resourceName)
@@ -444,7 +450,7 @@ namespace PolyNavi.Fragments
 				Style = new SymbolStyle()
 				{
 					BitmapId = GetBitmapIdForEmbeddedResource(MarkerLocationName),
-					SymbolScale = 0.5,
+					SymbolScale = 0.5
 				};
 			}
 

@@ -1,8 +1,8 @@
-﻿using Android.App;
+﻿using System;
+using Android.App;
 using Android.OS;
 using Android.Widget;
 using AndroidX.AppCompat.App;
-using System;
 
 namespace PolyNavi.Fragments
 {
@@ -27,7 +27,7 @@ namespace PolyNavi.Fragments
 
         public override Dialog OnCreateDialog(Bundle savedInstanceState)
         {
-            var currentDate = (DateTime)(lastDate ?? DateTime.Now);
+            var currentDate = lastDate ?? DateTime.Now;
             var dialog = new DatePickerDialog(Activity, this, currentDate.Year,
                                         currentDate.Month - 1, currentDate.Day);
             return dialog;

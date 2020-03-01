@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.Serialization;
 
 namespace PolyNaviLib.DAL
 {
@@ -9,7 +10,7 @@ namespace PolyNaviLib.DAL
         public NetworkException(string message) : base(message) { }
         public NetworkException(string message, Exception inner) : base(message, inner) { }
         protected NetworkException(
-          System.Runtime.Serialization.SerializationInfo info,
-          System.Runtime.Serialization.StreamingContext context) : base(info, context) { }
+          SerializationInfo info,
+          StreamingContext context) : base(info, context) { }
     }
 }

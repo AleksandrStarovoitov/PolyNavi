@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.Serialization;
 
 namespace PolyNaviLib.DAL
 {
@@ -9,8 +10,8 @@ namespace PolyNaviLib.DAL
         public GroupNumberException(string message) : base(message) { }
         public GroupNumberException(string message, Exception inner) : base(message, inner) { }
         protected GroupNumberException(
-          System.Runtime.Serialization.SerializationInfo info,
-          System.Runtime.Serialization.StreamingContext context) : base(info, context) { }
+          SerializationInfo info,
+          StreamingContext context) : base(info, context) { }
 
     }
 }

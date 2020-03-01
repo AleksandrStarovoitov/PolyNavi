@@ -1,4 +1,10 @@
-﻿using Android.App;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
+using Android.App;
 using Android.Content;
 using Android.Content.PM;
 using Android.OS;
@@ -13,12 +19,7 @@ using Newtonsoft.Json;
 using PolyNavi.Services;
 using PolyNaviLib.BL;
 using PolyNaviLib.SL;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Threading.Tasks;
-using System.Timers;
+using Timer = System.Timers.Timer;
 
 namespace PolyNavi.Activities
 {
@@ -139,7 +140,7 @@ namespace PolyNavi.Activities
                         {
                             var resultJson = await HttpClientService.GetResponseAsync(client,
                                 GroupSearchLink +
-                                s.ToString(), new System.Threading.CancellationToken());
+                                s.ToString(), new CancellationToken());
                             var groups = JsonConvert.DeserializeObject<GroupRoot>(resultJson);
                             groupsDictionary = groups.Groups.ToDictionary(x => x.Name, x => x.Id);
                             groupsDictionaryKeys = groupsDictionary.Select(x => x.Key).ToArray();

@@ -30,6 +30,4 @@ namespace Graph
         public bool IsStairs { get; set; } = false;
         public Point Point { get; set; } = new Point();
     }
-
-
 }

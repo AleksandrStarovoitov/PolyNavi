@@ -1,6 +1,6 @@
-﻿using AndroidX.Fragment.App;
+﻿using System;
+using AndroidX.Fragment.App;
 using PolyNavi.Fragments;
-using System;
 
 namespace PolyNavi.Adapters
 {
@@ -16,7 +16,7 @@ namespace PolyNavi.Adapters
 
         public ScheduleFragmentAdapter(FragmentManager fragmentManager, int numberOfTabs, DateTime date, int dayOfYear = -1) : base(fragmentManager, BehaviorResumeOnlyCurrentFragment)
         {
-            this.Count = numberOfTabs;
+            Count = numberOfTabs;
 
             thisWeekTab = new ScheduleWeekFragment(date, CurrentWeekTag, dayOfYear);
             nextWeekTab = new ScheduleWeekFragment(GetNextWeekDate(date), NextWeekTag, dayOfYear);

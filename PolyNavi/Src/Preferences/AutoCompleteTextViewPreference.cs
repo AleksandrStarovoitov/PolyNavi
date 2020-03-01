@@ -1,4 +1,10 @@
-﻿using Android.App;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
+using Android.App;
 using Android.Content;
 using Android.Content.Res;
 using Android.OS;
@@ -13,12 +19,8 @@ using Newtonsoft.Json;
 using PolyNavi.Services;
 using PolyNaviLib.BL;
 using PolyNaviLib.SL;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Threading;
-using System.Threading.Tasks;
+using Object = Java.Lang.Object;
+using Timer = System.Timers.Timer;
 
 namespace PolyNavi.Preferences
 {
@@ -48,7 +50,7 @@ namespace PolyNavi.Preferences
         {
         }
 
-        protected override Java.Lang.Object OnGetDefaultValue(TypedArray a, int index)
+        protected override Object OnGetDefaultValue(TypedArray a, int index)
         {
             return a.GetString(index);
         }
@@ -59,7 +61,7 @@ namespace PolyNavi.Preferences
             PersistString(name);
         }
 
-        protected override void OnSetInitialValue(bool restorePersistedValue, Java.Lang.Object defaultValue) //TODO
+        protected override void OnSetInitialValue(bool restorePersistedValue, Object defaultValue) //TODO
         {
             GroupName = restorePersistedValue ? GetPersistedString(GroupName) : defaultValue.ToString();
         }
@@ -74,7 +76,7 @@ namespace PolyNavi.Preferences
         private ArrayAdapter suggestAdapter;
         private NetworkChecker networkChecker;
         private Dictionary<string, int> groupsDictionary;
-        private System.Timers.Timer searchTimer;
+        private Timer searchTimer;
         private const int MillsToSearch = 700;
         private string[] array;
         private const string GroupSearchLink =
@@ -156,7 +158,7 @@ namespace PolyNavi.Preferences
             }
             else
             {
-                searchTimer = new System.Timers.Timer(MillsToSearch);
+                searchTimer = new Timer(MillsToSearch);
                 searchTimer.Elapsed += delegate
                 {
                     if (networkChecker.Check())

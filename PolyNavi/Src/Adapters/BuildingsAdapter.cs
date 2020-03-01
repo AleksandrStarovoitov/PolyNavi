@@ -1,7 +1,7 @@
-﻿using Android.Content;
+﻿using System.Collections.Generic;
+using Android.Content;
 using Android.Views;
 using Android.Widget;
-using System.Collections.Generic;
 
 namespace PolyNavi.Adapters
 {
@@ -31,7 +31,8 @@ namespace PolyNavi.Adapters
             {
                 return OtherBuildingsTypeTag;
             }
-            else if (GetItem(position) is MainBuildingTag)
+
+            if (GetItem(position) is MainBuildingTag)
             {
                 return MainBuildingTypeTag;
             }

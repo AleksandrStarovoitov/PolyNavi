@@ -1,5 +1,6 @@
-﻿using Android.Content;
+﻿using System.Collections.Generic;
 using Android.App;
+using Android.Content;
 using Android.Content.PM;
 using Android.Graphics;
 using Android.OS;
@@ -8,7 +9,7 @@ using Android.Widget;
 using AndroidX.AppCompat.App;
 using AndroidX.Core.Content;
 using PolyNavi.Adapters;
-using System.Collections.Generic;
+using Toolbar = AndroidX.AppCompat.Widget.Toolbar;
 
 namespace PolyNavi.Activities
 {
@@ -31,7 +32,7 @@ namespace PolyNavi.Activities
             Window.ClearFlags(WindowManagerFlags.TranslucentStatus);
             Window.SetStatusBarColor(new Color(ContextCompat.GetColor(this, Resource.Color.color_primary_dark)));
 
-            var toolbar = FindViewById<AndroidX.AppCompat.Widget.Toolbar>(Resource.Id.toolbar_route);
+            var toolbar = FindViewById<Toolbar>(Resource.Id.toolbar_route);
             SetSupportActionBar(toolbar);
             SupportActionBar.SetDisplayHomeAsUpEnabled(true);
 

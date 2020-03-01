@@ -1,16 +1,18 @@
-﻿using Android.App;
+﻿using System;
+using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Text.Method;
 using Android.Views;
 using Android.Widget;
 using PolyNavi.Activities;
-using System;
+using Fragment = AndroidX.Fragment.App.Fragment;
+using Uri = Android.Net.Uri;
 
 namespace PolyNavi.Fragments
 {
     [Activity(Label = "AboutFragment")]
-    public class AboutFragment : AndroidX.Fragment.App.Fragment
+    public class AboutFragment : Fragment
     {
         private View view;
 
@@ -47,13 +49,13 @@ namespace PolyNavi.Fragments
 
         private void FrameRate_Click(object sender, EventArgs e)
         {
-            var rateIntent = new Intent(Intent.ActionView, Android.Net.Uri.Parse(GetString(Resource.String.about_rate_link)));
+            var rateIntent = new Intent(Intent.ActionView, Uri.Parse(GetString(Resource.String.about_rate_link)));
             StartActivity(rateIntent);
         }
 
         private void FrameGithub_Click(object sender, EventArgs e)
         {
-            var githubIntent = new Intent(Intent.ActionView, Android.Net.Uri.Parse(GetString(Resource.String.about_github_link)));
+            var githubIntent = new Intent(Intent.ActionView, Uri.Parse(GetString(Resource.String.about_github_link)));
             StartActivity(githubIntent);
         }
 

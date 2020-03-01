@@ -1,6 +1,7 @@
-﻿using PolyNaviLib.DAL;
-using System;
+﻿using System;
 using System.Threading.Tasks;
+using Nito.AsyncEx;
+using PolyNaviLib.DAL;
 
 namespace PolyNaviLib.BL
 {
@@ -25,7 +26,7 @@ namespace PolyNaviLib.BL
             return manager.InitializeAsync(dbPath, checker, settings);
         }
 
-        private readonly Nito.AsyncEx.AsyncLock mutex = new Nito.AsyncEx.AsyncLock();
+        private readonly AsyncLock mutex = new AsyncLock();
 
         public async Task<WeekRoot> GetWeekRootAsync(DateTime weekDate, bool forceUpdate)
         {

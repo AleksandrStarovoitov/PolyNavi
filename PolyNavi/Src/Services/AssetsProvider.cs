@@ -1,9 +1,10 @@
-﻿using Android.Content;
-using System.IO;
+﻿using System.IO;
+using Android.Content;
+using Graph;
 
 namespace PolyNavi.Services
 {
-    public class AssetsProvider : Graph.IAssetsProvider
+    public class AssetsProvider : IAssetsProvider
     {
         private readonly Context context;
 

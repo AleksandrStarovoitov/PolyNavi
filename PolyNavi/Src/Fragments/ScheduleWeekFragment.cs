@@ -1,4 +1,8 @@
-﻿using Android.Content;
+﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Threading.Tasks;
+using Android.Content;
 using Android.OS;
 using Android.Views;
 using Android.Widget;
@@ -8,10 +12,6 @@ using AndroidX.SwipeRefreshLayout.Widget;
 using PolyNavi.Adapters;
 using PolyNaviLib.BL;
 using PolyNaviLib.DAL;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Threading.Tasks;
 using static AndroidX.SwipeRefreshLayout.Widget.SwipeRefreshLayout;
 
 namespace PolyNavi.Fragments

@@ -60,7 +60,7 @@ namespace Graph
             throw new GraphRoutingException($"Can't find route between {startName} and {finishName}");
         }
 
-        internal static GraphNode FindNode(GraphNode graph, Predicate<GraphNode> predicate)
+        private static GraphNode FindNode(GraphNode graph, Predicate<GraphNode> predicate)
         {
             var bfsQueue = new Queue<GraphNode>();
             var closed = new List<GraphNode>();
@@ -73,50 +73,40 @@ namespace Graph
                 {
                     return node;
                 }
-                else
+
+                foreach (var neighbour in node.Neighbours)
                 {
-                    foreach (var neighbour in node.Neighbours)
+                    if (!closed.Contains(neighbour))
                     {
-                        if (!closed.Contains(neighbour))
-                        {
-                            bfsQueue.Enqueue(neighbour);
-                        }
+                        bfsQueue.Enqueue(neighbour);
                     }
                 }
             }
             return null;
         }
 
-        internal static GraphNode FindNodeByName(GraphNode graph, string name)
+        private static GraphNode FindNodeByName(GraphNode graph, string name)
         {
-            return FindNode(graph, (node) =>
-            {
-                return node.RoomName == name;
-            });
+            return FindNode(graph, node => node.RoomName == name);
         }
 
         internal static GraphNode FindNodeById(GraphNode graph, int id)
         {
-            return FindNode(graph, (node) =>
-            {
-                return node.Id == id;
-            });
+            return FindNode(graph, node => node.Id == id);
         }
 
         internal static GraphNode FindNodeByIdAndFloorNumber(GraphNode graph, int id, int floorNumber)
         {
-            return FindNode(graph, (node) =>
-            {
-                return node.Id == id && node.FloorNumber == floorNumber;
-            });
+            return FindNode(graph, node => node.Id == id &&
+                                             node.FloorNumber == floorNumber);
         }
 
         internal static GraphNode FindNodeByIdFloorNumberAndFloorPartNumber(GraphNode graph, int id, int floorNumber, int floorPartNumber)
         {
-            return FindNode(graph, (node) =>
-            {
-                return node.Id == id && node.FloorNumber == floorNumber && node.FloorPartNumber == floorPartNumber;
-            });
+            return FindNode(graph, node => 
+                node.Id == id && 
+                node.FloorNumber == floorNumber &&
+                node.FloorPartNumber == floorPartNumber);
         }
     }
 }

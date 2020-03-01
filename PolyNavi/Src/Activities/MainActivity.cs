@@ -1,4 +1,6 @@
-﻿using Android.Content.PM;
+﻿using System;
+using Android.App;
+using Android.Content.PM;
 using Android.OS;
 using Android.Views;
 using Android.Views.InputMethods;
@@ -6,16 +8,15 @@ using AndroidX.AppCompat.App;
 using AndroidX.AppCompat.Widget;
 using AndroidX.Core.View;
 using AndroidX.DrawerLayout.Widget;
-using AndroidX.Fragment.App;
 using Google.Android.Material.Navigation;
 using PolyNavi.Fragments;
 using PolyNavi.Views;
-using System;
 using static AndroidX.DrawerLayout.Widget.DrawerLayout;
+using Fragment = AndroidX.Fragment.App.Fragment;
 
 namespace PolyNavi.Activities
 {
-    [Android.App.Activity(
+    [Activity(
         Label = "PolyNavi",
         ScreenOrientation = ScreenOrientation.Portrait,
         ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.ScreenSize)]
