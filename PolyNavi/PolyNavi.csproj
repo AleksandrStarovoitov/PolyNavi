@@ -77,7 +77,9 @@
     <Compile Include="Src\Activities\MainEmptyActivity.cs" />
     <Compile Include="Src\Activities\WelcomeActivity.cs" />
     <Compile Include="Src\Adapters\BuildingsAdapter.cs" />
+    <Compile Include="Src\Adapters\ScheduleCardRowAdapter.cs" />
     <Compile Include="Src\Adapters\WelcomeSectionsPagerAdapter.cs" />
+    <Compile Include="Src\Extensions\StringExtensions.cs" />
     <Compile Include="Src\Fragments\AboutFragment.cs" />
     <Compile Include="Src\Fragments\DateTimePickerFragment.cs" />
     <Compile Include="Src\Fragments\WelcomePlaceholderFragment.cs" />

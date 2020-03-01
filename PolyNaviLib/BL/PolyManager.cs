@@ -13,7 +13,7 @@ namespace PolyNaviLib.BL
     public class PolyManager
     {
         private Repository repository;
-        private static HttpClient client;
+        private static readonly HttpClient client;
 
         private const string GroupSearchLink =
             "http://m.spbstu.ru/p/proxy.php?csurl=http://ruz.spbstu.ru/api/v1/ruz/search/groups&q=";
@@ -22,11 +22,15 @@ namespace PolyNaviLib.BL
         {
         }
 
+        static PolyManager()
+        {
+            client = new HttpClient();
+        }
+
         private async Task<PolyManager> InitializeAsync(string dbPath, INetworkChecker checker,
             ISettingsProvider settings)
         {
             repository = await Repository.CreateAsync(dbPath, checker, settings);
-            client = new HttpClient(); //TODO
             return this;
         }
 

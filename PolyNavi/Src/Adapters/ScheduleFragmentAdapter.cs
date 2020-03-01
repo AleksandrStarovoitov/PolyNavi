@@ -9,12 +9,12 @@ namespace PolyNavi.Adapters
         private readonly ScheduleWeekFragment thisWeekTab;
         private readonly ScheduleWeekFragment nextWeekTab;
 
-        private const int CurrentWeekTag = 0;
-        private const int NextWeekTag = 1;
+        private const int CurrentWeekTag = 0, NextWeekTag = 1;
 
         public override int Count { get; }
 
-        public ScheduleFragmentAdapter(FragmentManager fragmentManager, int numberOfTabs, DateTime date, int dayOfYear = -1) : base(fragmentManager, BehaviorResumeOnlyCurrentFragment)
+        public ScheduleFragmentAdapter(FragmentManager fragmentManager, int numberOfTabs, DateTime date, int dayOfYear = -1)
+            : base(fragmentManager, BehaviorResumeOnlyCurrentFragment)
         {
             Count = numberOfTabs;
 

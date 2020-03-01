@@ -15,42 +15,33 @@ namespace PolyNavi.Adapters
     public class BuildingsAdapter : ArrayAdapter<object>
     {
         private readonly Context context;
-        private TextView buildingTextView;
-        private object item;
-        private int itemType;
         private const int MainBuildingTypeTag = 0, OtherBuildingsTypeTag = 1;
+        public override int ViewTypeCount => 2;
 
         public BuildingsAdapter(Context context, IList<object> buildings) : base(context, 0, buildings)
         {
             this.context = context;
         }
 
-        public override int GetItemViewType(int position)
-        {
-            if (GetItem(position) is string)
+        public override int GetItemViewType(int position) =>
+            GetItem(position) switch
             {
-                return OtherBuildingsTypeTag;
-            }
-
-            if (GetItem(position) is MainBuildingTag)
-            {
-                return MainBuildingTypeTag;
-            }
-            return -1;
-        }
-
-        public override int ViewTypeCount => 2;
+                string _ => OtherBuildingsTypeTag,
+                MainBuildingTag _ => MainBuildingTypeTag,
+                _ => -1 //TODO Exception?
+            };
 
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
-            item = GetItem(position);
-            itemType = GetItemViewType(position);
+            var item = GetItem(position);
+            var itemType = GetItemViewType(position);
+
             if (convertView == null)
             {
                 convertView = GetInflatedLayoutForType(itemType);
             }
 
-            buildingTextView = convertView.FindViewById<TextView>(Resource.Id.textview_route);
+            var buildingTextView = convertView.FindViewById<TextView>(Resource.Id.textview_route);
             buildingTextView.Text = item.ToString();
 
             return convertView;
@@ -58,15 +49,14 @@ namespace PolyNavi.Adapters
 
         private View GetInflatedLayoutForType(int layoutType)
         {
-            switch (layoutType)
+            var inflater = LayoutInflater.From(context);
+
+            return layoutType switch
             {
-                case MainBuildingTypeTag:
-                    return LayoutInflater.From(context).Inflate(Resource.Layout.layout_route_row_mainbuilding, null);
-                case OtherBuildingsTypeTag:
-                    return LayoutInflater.From(context).Inflate(Resource.Layout.layout_route_row_otherbuildings, null);
-                default:
-                    return LayoutInflater.From(context).Inflate(Resource.Layout.layout_route_row_mainbuilding, null);
-            }
+                MainBuildingTypeTag => inflater.Inflate(Resource.Layout.layout_route_row_mainbuilding, null),
+                OtherBuildingsTypeTag => inflater.Inflate(Resource.Layout.layout_route_row_otherbuildings, null),
+                _ => inflater.Inflate(Resource.Layout.layout_route_row_mainbuilding, null)
+            };
         }
     }
 }

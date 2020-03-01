@@ -122,7 +122,7 @@ namespace PolyNavi.Activities
         {
             ClearAuthTextViewAdapterAndError(s);
 
-            SetupTimer(s.ToString(), start, before, count);
+            SetupTimer(s, start, before, count);
         }
 
         private void ClearAuthTextViewAdapterAndError(ICharSequence s)
@@ -135,7 +135,7 @@ namespace PolyNavi.Activities
             }
         }
 
-        private void SetupTimer(string s, int start, int before, int count)
+        private void SetupTimer(ICharSequence s, int start, int before, int count)
         {
             if (searchTimer != null)
             {
@@ -150,7 +150,7 @@ namespace PolyNavi.Activities
                 {
                     if (networkChecker.IsConnected())
                     {
-                        UpdateSuggestedGroups(s, start, before, count);
+                        UpdateSuggestedGroups(s.ToString(), start, before, count);
                     }
                     else
                     {
