@@ -9,33 +9,32 @@ namespace PolyNavi.Fragments
     public class DateTimePickerFragment : AppCompatDialogFragment,
                                   DatePickerDialog.IOnDateSetListener
     {
-        public static readonly string DateTimePickerTag = "X:" + typeof(DateTimePickerFragment).Name.ToUpper();
+        public static readonly string DateTimePickerTag = nameof(DateTimePickerFragment).ToUpper(); //TODO typeof?
         private static DateTime? lastDate;
-
-        private Action<DateTime> dateSelectedHandler = delegate { };
+        private Action<DateTime> dateSelectedHandler;
 
         public static DateTimePickerFragment NewInstance(Action<DateTime> onDateSelected, DateTime? lastDate = null)
         {
-            var frag = new DateTimePickerFragment
+            var fragment = new DateTimePickerFragment
             {
                 dateSelectedHandler = onDateSelected
             };
             DateTimePickerFragment.lastDate = lastDate;
 
-            return frag;
+            return fragment;
         }
 
         public override Dialog OnCreateDialog(Bundle savedInstanceState)
         {
             var currentDate = lastDate ?? DateTime.Now;
             var dialog = new DatePickerDialog(Activity, this, currentDate.Year,
-                                        currentDate.Month - 1, currentDate.Day);
+                                        currentDate.Month - 1, currentDate.Day); //TODO -1 ?
             return dialog;
         }
 
         public void OnDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth)
         {
-            var selectedDate = new DateTime(year, monthOfYear + 1, dayOfMonth);
+            var selectedDate = new DateTime(year, monthOfYear + 1, dayOfMonth); //TODO +1 ?
             dateSelectedHandler(selectedDate);
         }
     }

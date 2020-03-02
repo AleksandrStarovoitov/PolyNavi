@@ -150,7 +150,7 @@ namespace PolyNavi.Activities
                 {
                     if (networkChecker.IsConnected())
                     {
-                        UpdateSuggestedGroups(s.ToString(), start, before, count);
+                        UpdateSuggestedGroups(s.ToString(), before, count);
                     }
                     else
                     {
@@ -165,7 +165,7 @@ namespace PolyNavi.Activities
             searchTimer.Start();
         }
 
-        private void UpdateSuggestedGroups(string s, int start, int before, int count)
+        private void UpdateSuggestedGroups(string s, int before, int count)
         {
             Task.Run(async () =>
             {

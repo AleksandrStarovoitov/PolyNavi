@@ -13,15 +13,13 @@ namespace PolyNavi.Fragments
     [Activity(Label = "ScheduleSwipeActivity")]
     public class ScheduleFragment : Fragment
     {
-        private View view;
         private TabLayout tabLayout;
         private ViewPager viewPager;
         private ScheduleFragmentAdapter adapter;
-        private DateTime? lastDate;
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            view = inflater.Inflate(Resource.Layout.fragment_schedule, container, false);
+            var view = inflater.Inflate(Resource.Layout.fragment_schedule, container, false);
 
             HasOptionsMenu = true;
 
@@ -55,15 +53,19 @@ namespace PolyNavi.Fragments
             switch (item.ItemId)
             {
                 case Resource.Id.menu_schedule_datetimepicker:
-                    var frag = DateTimePickerFragment.NewInstance(delegate (DateTime time)
+                    DateTime? lastDate = null; //TODO
+                    var frag = DateTimePickerFragment.NewInstance(time =>
                     {
                         viewPager.Adapter = null;
-                        adapter = new ScheduleFragmentAdapter(((AppCompatActivity)Activity).SupportFragmentManager, tabLayout.TabCount, time, time.DayOfYear);
+                        adapter = new ScheduleFragmentAdapter(((AppCompatActivity) Activity).SupportFragmentManager,
+                            tabLayout.TabCount, time, time.DayOfYear);
                         viewPager.Adapter = adapter;
-                        lastDate = time;
+                        lastDate = time; //TODO
                     }, lastDate);
+
                     frag.Show(Activity.SupportFragmentManager, DateTimePickerFragment.DateTimePickerTag); //TODO
                     return true;
+
                 default:
                     return base.OnOptionsItemSelected(item);
             }

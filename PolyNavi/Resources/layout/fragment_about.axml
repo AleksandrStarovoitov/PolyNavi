@@ -197,40 +197,5 @@
                 </LinearLayout>
             </LinearLayout>
         </FrameLayout>
-        <RelativeLayout
-            android:id="@+id/relativelayout_contacts_about"
-            android:minWidth="25px"
-            android:minHeight="25px"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/framelayout_copyright_about"
-            android:layout_margin="@dimen/margin_about_contacts_outer">
-            <TextView
-                android:id="@+id/textview_contacts_title_about"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:text="@string/about_contacts_title"
-                android:textColor="@color/color_black"
-                android:textSize="@dimen/textsize_about_contacts_title" />
-            <TextView
-                android:id="@+id/textview_contacts_sasha_link_about"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/about_contacts_sasha_link"
-                android:textColor="@color/color_black"
-                android:textSize="@dimen/textsize_about_contacts_entry"
-                android:layout_below="@+id/textview_contacts_title_about"
-                android:layout_marginTop="@dimen/margin_about_contacts_inner" />
-            <TextView
-                android:id="@+id/textview_contacts_kirill_link_about"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/about_contacts_kirill_link"
-                android:textColor="@color/color_black"
-                android:textSize="@dimen/textsize_about_contacts_entry"
-                android:layout_below="@+id/textview_contacts_sasha_link_about"
-                android:layout_marginTop="@dimen/margin_about_contacts_inner" />
-        </RelativeLayout>
     </RelativeLayout>
 </ScrollView>

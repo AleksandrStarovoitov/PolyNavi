@@ -2,7 +2,6 @@
 using Android.Content;
 using Android.Content.PM;
 using Android.OS;
-using PolyNaviLib.BL;
 using PolyNaviLib.Constants;
 
 namespace PolyNavi.Activities

@@ -9,7 +9,6 @@ namespace PolyNavi.Fragments
     {
         private const string ArgSectionNumber = "section_number";
 
-        private ImageView image;
         private readonly int[] backgroundDrawableIds =
         {
             Resource.Drawable.welcome_blueprint,
@@ -24,8 +23,10 @@ namespace PolyNavi.Fragments
         public static WelcomePlaceholderFragment NewInstance(int sectionNumber)
         {
             var fragment = new WelcomePlaceholderFragment();
+
             var args = new Bundle();
             args.PutInt(ArgSectionNumber, sectionNumber);
+
             fragment.Arguments = args;
             return fragment;
         }
@@ -64,7 +65,7 @@ namespace PolyNavi.Fragments
                 description.Text = descriptionText;
             }
 
-            image = rootView.FindViewById<ImageView>(Resource.Id.imageview_welcome_featureimage);
+            var image = rootView.FindViewById<ImageView>(Resource.Id.imageview_welcome_featureimage);
             image.SetBackgroundResource(backgroundDrawableIds[Arguments.GetInt(ArgSectionNumber) - 1]);
 
             return rootView;

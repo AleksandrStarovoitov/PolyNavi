@@ -9,22 +9,19 @@ namespace PolyNavi.Fragments
     {
         public override void OnDisplayPreferenceDialog(Preference preference)
         {
-            PreferenceDialogFragmentCompat dialogFragment = null;
             if (preference is AutoCompleteTextViewPreference)
             {
-                dialogFragment = AutoCompleteTextViewPreferenceDialogFragmentCompat
-                        .NewInstance(preference.Key);
+                var dialogFragment = AutoCompleteTextViewPreferenceDialogFragmentCompat
+                    .NewInstance(preference.Key);
+
+                dialogFragment.SetTargetFragment(this, 0);
+                dialogFragment.Show(FragmentManager,
+                    "android.support.v7.preference.PreferenceFragment.DIALOG"); //TODO AndroidX?
+
+                return;
             }
 
-            if (dialogFragment != null)
-            {
-                dialogFragment.SetTargetFragment(this, 0);
-                dialogFragment.Show(FragmentManager, "android.support.v7.preference.PreferenceFragment.DIALOG"); //TODO AndroidX?
-            }
-            else
-            {
-                base.OnDisplayPreferenceDialog(preference);
-            }
+            base.OnDisplayPreferenceDialog(preference);
         }
 
         public override void OnDestroy()

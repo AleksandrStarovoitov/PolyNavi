@@ -6,11 +6,6 @@ namespace PolyNavi.Extensions
 {
     public static class MapsUiExtensions
     {
-        public static Point ToLonLat(this Point point) //TODO Remove?
-        {
-            return SphericalMercator.ToLonLat(point.X, point.Y);
-        }
-
         public static Point FromLonLat(this Point point)
         {
             return SphericalMercator.FromLonLat(point.X, point.Y);

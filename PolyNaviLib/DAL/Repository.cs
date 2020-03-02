@@ -56,25 +56,25 @@ namespace PolyNaviLib.DAL
 
         public async Task<WeekRoot> GetWeekRootAsync(DateTime weekDate, bool forceUpdate)
         {
-            if (await database.IsEmptyAsync<WeekRoot>())
+            if (await database.IsEmptyAsync<WeekRoot>()) //TODO Delete? Check with Get and SingleOrDefault?
             {
                 var weekRoot = await LoadWeekRootFromWebAsync(weekDate);
                 await database.SaveItemAsync(weekRoot);
                 return weekRoot;
             }
 
-            var weekFromDb = (await database.GetItemsAsync<WeekRoot>()).SingleOrDefault(w => w.Week.DateEqual(weekDate));
+            var weekFromDb = (await database.GetItemsAsync<WeekRoot>()).SingleOrDefault(w => w.Week.IsWeekContainsDate(weekDate));
             if (weekFromDb == null)
             {
-                var newWeek = (await LoadWeekRootFromWebAsync(weekDate));
+                var newWeek = await LoadWeekRootFromWebAsync(weekDate);
                 await database.SaveItemAsync(newWeek);
                 return newWeek;
             }
 
             if (forceUpdate)
             {
-                var newWeek = (await LoadWeekRootFromWebAsync(weekDate));
-                await database.DeleteItemsAsync<WeekRoot>(w => w.Week.DateEqual(weekDate));
+                var newWeek = await LoadWeekRootFromWebAsync(weekDate);
+                await database.DeleteItemsAsync<WeekRoot>(w => w.Week.IsWeekContainsDate(weekDate));
                 await database.SaveItemAsync(newWeek);
                 return newWeek;
             }

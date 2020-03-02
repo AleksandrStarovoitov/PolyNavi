@@ -23,13 +23,9 @@
   <dimen name="margin_about_frame_outer">15dp</dimen>
   <dimen name="padding_about_frame_inner">5dp</dimen>
   <dimen name="margin_about_frame_image">15dp</dimen>
-  <dimen name="margin_about_contacts_outer">25dp</dimen>
-  <dimen name="margin_about_contacts_inner">5dp</dimen>
   
   <dimen name="textsize_about_frame_title">16sp</dimen>
   <dimen name="textsize_about_frame_summary">15sp</dimen>
-  <dimen name="textsize_about_contacts_title">21sp</dimen>
-  <dimen name="textsize_about_contacts_entry">18sp</dimen>
   
   <!--fragment_error-->
   <dimen name="size_error_image">140dp</dimen>

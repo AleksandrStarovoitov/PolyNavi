@@ -11,7 +11,6 @@ using AndroidX.AppCompat.App;
 using AndroidX.Core.Content;
 using AndroidX.ViewPager.Widget;
 using PolyNavi.Adapters;
-using PolyNaviLib.BL;
 using PolyNaviLib.Constants;
 using Object = Java.Lang.Object;
 

@@ -11,7 +11,6 @@ using AndroidX.DrawerLayout.Widget;
 using Google.Android.Material.Navigation;
 using PolyNavi.Fragments;
 using PolyNavi.Views;
-using PolyNaviLib.BL;
 using PolyNaviLib.Constants;
 using static AndroidX.DrawerLayout.Widget.DrawerLayout;
 using Fragment = AndroidX.Fragment.App.Fragment;
