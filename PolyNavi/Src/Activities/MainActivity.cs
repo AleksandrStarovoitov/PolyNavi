@@ -3,7 +3,6 @@ using Android.App;
 using Android.Content.PM;
 using Android.OS;
 using Android.Views;
-using Android.Views.InputMethods;
 using AndroidX.AppCompat.App;
 using AndroidX.AppCompat.Widget;
 using AndroidX.Core.View;
@@ -126,8 +125,7 @@ namespace PolyNavi.Activities
 
         public void OnDrawerSlide(View drawerView, float slideOffset)
         {
-            var inputMethodManager = (InputMethodManager)GetSystemService(InputMethodService);
-            inputMethodManager.HideSoftInputFromWindow(drawerView.WindowToken, 0);
+            Utils.Utils.HideKeyboard(drawerView, this);
         }
 
         public void OnDrawerOpened(View drawerView)

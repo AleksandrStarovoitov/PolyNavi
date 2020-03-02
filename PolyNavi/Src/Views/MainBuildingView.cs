@@ -5,7 +5,6 @@ using Android.Graphics;
 using Android.Graphics.Drawables;
 using Android.Util;
 using Android.Views;
-using Android.Views.InputMethods;
 using AndroidX.Core.Content;
 using PolyNavi.Fragments;
 
@@ -42,7 +41,6 @@ namespace PolyNavi.Views
         private const float ScaleFactor = 1.0f;
 
         private readonly DisplayMetrics displayMetrics;
-        private readonly InputMethodManager inputMethodManager;
 
         private const int BaseWidth = 3200, BaseHeight = 1800;
 
@@ -66,15 +64,13 @@ namespace PolyNavi.Views
             routePaint.StrokeWidth = routePaint.StrokeWidth * widthScale;
             
             plan.SetBounds(0, 0, imageWidth, imageHeight);
-
-            inputMethodManager = (InputMethodManager)context.GetSystemService(Context.InputMethodService);
         }
         
         public override bool OnTouchEvent(MotionEvent e)
         {
             if (!MainBuildingFragment.CheckFocus())
             {
-                inputMethodManager.HideSoftInputFromWindow(WindowToken, 0);
+                Utils.Utils.HideKeyboard(this, Context);
             }
 
             var action = e.Action & MotionEventActions.Mask;

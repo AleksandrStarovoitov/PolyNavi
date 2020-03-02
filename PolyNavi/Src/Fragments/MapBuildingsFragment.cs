@@ -43,19 +43,20 @@ namespace PolyNavi.Fragments
 		private const string MarkerAName = "ic_marker_a.png";
 		private const string MarkerBName = "ic_marker_b.png";
 		private const string MarkerLocationName = "ic_gps_fixed_black.png";
+        private const string MyLocation = "Мое местоположение"; //TODO
+        private const string MapCrs = "EPSG:3857";
+        private const string ItineroLayerName = "Itinero Route"; //TODO
+        private const string AnimatedPointsLayer = "Animated Points";
+		internal const string MapActivityIntentResultName = "route";
 
-		private readonly Point leftBottomMapPoint = new Point(30.356456, 59.994757);
+        private readonly Point leftBottomMapPoint = new Point(30.356456, 59.994757);
 		private readonly Point rightTopMapPoint = new Point(30.391848, 60.008916);
 
 		private const int FromRequestCode = 1;
 		private const int ToRequestCode = 2;
-        internal const string MapActivityIntentResultName = "route";
 
 		private const int FineLocationRequestId = 10;
-
-		private View view;
-
-		private RouterDb routerDb;
+		
 		private Router router;
 		private Profile itineroProfile;
 
@@ -65,21 +66,22 @@ namespace PolyNavi.Fragments
 
 		private EditText editTextInputFrom, editTextInputTo;
 		private AppBarLayout appBar;
-		private FloatingActionButton fab;
+		private FloatingActionButton drawRouteButton;
 		private FloatingActionButton buttonLocation;
 		private ImageButton buttonFromCurrentLocation;
         private LocationManager locationManager;
 		private AnimatedPointsWithAutoUpdateLayer animatedLocation;
+        private bool fullyExpanded, fullyCollapsed;
 
 		public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 		{
-			view = inflater.Inflate(Resource.Layout.fragment_map_buildings, container, false);
+			var view = inflater.Inflate(Resource.Layout.fragment_map_buildings, container, false);
 
 			appBar = view.FindViewById<AppBarLayout>(Resource.Id.appbar_map_buildings);
 			appBar.AddOnOffsetChangedListener(this);
 
-			fab = view.FindViewById<FloatingActionButton>(Resource.Id.fab_map_buildings);
-			fab.Click += Fab_Click;
+			drawRouteButton = view.FindViewById<FloatingActionButton>(Resource.Id.fab_map_buildings);
+			drawRouteButton.Click += DrawRouteButton_Click;
 
 			editTextInputFrom = view.FindViewById<EditText>(Resource.Id.edittext_input_from_map_builidngs);
 			editTextInputFrom.Click += EditTextInputFrom_Click;
@@ -96,6 +98,9 @@ namespace PolyNavi.Fragments
 			var progress = view.FindViewById<ProgressBar>(Resource.Id.progressbar_map_buildings);
 			progress.Visibility = ViewStates.Visible;
 
+            mapControl = view.FindViewById<MapControl>(Resource.Id.mapControl);
+
+			//TODO
 			var tasks = new List<Task>
 			{
 				Task.Run(InitializeRouting),
@@ -107,14 +112,12 @@ namespace PolyNavi.Fragments
 					{
 						buttonLocation.Alpha = 0.7f;
 
-						if (IsLocationGranted()) //TODO
+						if (IsLocationGranted())
 						{
-                            //Permission granted
-                            SetupLocationManager();
+							SetupLocationManager();
 						}
 						else
 						{
-                            //Permission is not granted. Request.
                             RequestPermissions(new string[] { Manifest.Permission.AccessFineLocation }, FineLocationRequestId);
 						}
 					});
@@ -125,44 +128,88 @@ namespace PolyNavi.Fragments
 
 			return view;
 		}
+		
+        private void InitializeRouting()
+        {
+            using (var ms = new MemoryStream())
+            {
+                using (var stream = Activity.BaseContext.Assets.Open(RouterDbName))
+                {
+                    stream.CopyTo(ms);
+                }
+
+                ms.Seek(0, SeekOrigin.Begin);
+                var routerDb = RouterDb.Deserialize(ms);
+
+                router = new Router(routerDb);
+			}
+
+            itineroProfile = Vehicle.Pedestrian.Shortest();
+        }
+
+        private void InitializeMapControl()
+        {
+            map = mapControl.Map;
+            map.CRS = MapCrs;
+            Activity.RunOnUiThread(() =>
+            {
+                map.Layers.Add(OpenStreetMap.CreateTileLayer());
+
+                mapControl.Navigator.NavigateTo(new BoundingBox(leftBottomMapPoint.FromLonLat(), rightTopMapPoint.FromLonLat()));
+
+                map.Transformation = new MinimalTransformation();
+
+                map.Limiter = new ViewportLimiter()
+                {
+                    PanLimits = new BoundingBox(leftBottomMapPoint.FromLonLat(), rightTopMapPoint.FromLonLat()), //TODO
+                    ZoomLimits = new MinMax(1, 12) //TODO
+                };
+
+                routeLayer = new Layer();
+                map.Layers.Add(routeLayer);
+                map.Widgets.Add(new ScaleBarWidget(map)
+                {
+                    TextAlignment = Alignment.Center,
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    VerticalAlignment = VerticalAlignment.Top
+                });
+            });
+        }
 
 		private bool IsLocationGranted()
 		{
 			return ContextCompat.CheckSelfPermission(Activity, Manifest.Permission.AccessFineLocation) 
                    == Permission.Granted;
 		}
+		
+        private void SetupLocationManager()
+        {
+            locationManager = (LocationManager)Activity.ApplicationContext.GetSystemService(Context.LocationService);
+            locationManager.RequestLocationUpdates(LocationManager.GpsProvider, 2000, 2, this);
 
-		private bool IsInBounds(Location location)
-		{
-			return leftBottomMapPoint.X < location.Longitude && leftBottomMapPoint.Y < location.Latitude
-				&& rightTopMapPoint.X > location.Longitude && rightTopMapPoint.Y > location.Latitude;
-		}
+            animatedLocation = new AnimatedPointsWithAutoUpdateLayer { Name = AnimatedPointsLayer };
+            map.Layers.Add(animatedLocation);
+        }
+		
+        private void ButtonFromCurrentLocation_Click(object sender, EventArgs e)
+        {
+            if (IsLocationGranted())
+            {
+                var lastLocation = locationManager.GetLastKnownLocation(LocationManager.GpsProvider);
 
-		private bool LocationIsValid(Location location)
-		{
-			var delta = SystemClock.ElapsedRealtime() - location?.ElapsedRealtimeNanos / 1000000;
+                if (IsValidLocation(lastLocation))
+                {
+                    var currentLocation = new Point(lastLocation.Latitude, lastLocation.Longitude);
 
-			return (location != null && delta < 5 * 1000 && IsInBounds(location));
-		}
-
-		private void ButtonFromCurrentLocation_Click(object sender, EventArgs e)
-		{
-			if (IsLocationGranted())
-			{
-				var lastLocation = locationManager.GetLastKnownLocation(LocationManager.GpsProvider);
-
-				if (LocationIsValid(lastLocation))
-				{
-					var currentLocation = new Point(lastLocation.Latitude, lastLocation.Longitude);
-					editTextInputFrom.Text = "Мое местоположение"; //TODO
-					MainApp.Instance.BuildingsDictionary["Мое местоположение"] = currentLocation; //TODO
-				}
-			}
-			else
-			{
-				Toast.MakeText(Activity.BaseContext, GetString(Resource.String.no_location_permission_buildings), ToastLength.Long).Show();
-			}
-		}
+                    editTextInputFrom.Text = MyLocation;
+                    MainApp.Instance.BuildingsDictionary[MyLocation] = currentLocation;
+                }
+            }
+            else
+            {
+                Toast.MakeText(Activity.BaseContext, GetString(Resource.String.no_location_permission_buildings), ToastLength.Long).Show();
+            }
+        }
 
 		private void ButtonLocation_Click(object sender, EventArgs e)
 		{
@@ -170,7 +217,7 @@ namespace PolyNavi.Fragments
 			{
 				var lastLocation = locationManager.GetLastKnownLocation(LocationManager.GpsProvider);
 
-				if (LocationIsValid(lastLocation))
+				if (IsValidLocation(lastLocation))
 				{
 					var currentLocation = new Point(lastLocation.Longitude, lastLocation.Latitude).FromLonLat();
 
@@ -183,13 +230,19 @@ namespace PolyNavi.Fragments
 			}
 		}
 
-		private void SetupLocationManager()
-		{
-			locationManager = (LocationManager)Activity.ApplicationContext.GetSystemService(Context.LocationService);
-			locationManager.RequestLocationUpdates(LocationManager.GpsProvider, 2000, 2, this);
-			animatedLocation = new AnimatedPointsWithAutoUpdateLayer { Name = "Animated Points" };
-			map.Layers.Add(animatedLocation);
-		}
+		private bool IsValidLocation(Location location)
+        {
+            var delta = SystemClock.ElapsedRealtime() - location?.ElapsedRealtimeNanos / 1000000;
+
+            return (location != null && delta < 5000 && IsInBounds(location));
+        }
+
+        private bool IsInBounds(Location location)
+        {
+            return leftBottomMapPoint.X < location.Longitude && leftBottomMapPoint.Y < location.Latitude
+                                                             && rightTopMapPoint.X > location.Longitude &&
+                                                             rightTopMapPoint.Y > location.Latitude;
+        }
 
 		public override void OnDetach()
 		{
@@ -212,60 +265,12 @@ namespace PolyNavi.Fragments
 					break;
 			}
 		}
-
-		private void InitializeRouting()
-		{
-			using (var ms = new MemoryStream())
-			{
-				using (var stream = Activity.BaseContext.Assets.Open(RouterDbName))
-				{
-					stream.CopyTo(ms);
-				}
-				ms.Seek(0, SeekOrigin.Begin);
-				routerDb = RouterDb.Deserialize(ms);
-			}
-
-			router = new Router(routerDb);
-			itineroProfile = Vehicle.Pedestrian.Shortest();
-		}
-
-		private void InitializeMapControl()
-		{
-			mapControl = view.FindViewById<MapControl>(Resource.Id.mapControl);
-
-			map = mapControl.Map;
-			map.CRS = "EPSG:3857"; //TODO
-			Activity.RunOnUiThread(() =>
-			{
-				map.Layers.Add(OpenStreetMap.CreateTileLayer());
-
-				mapControl.Navigator.NavigateTo(new BoundingBox(leftBottomMapPoint.FromLonLat(), rightTopMapPoint.FromLonLat()));
-
-				map.Transformation = new MinimalTransformation();
-
-				map.Limiter = new ViewportLimiter()
-				{
-					PanLimits = new BoundingBox(leftBottomMapPoint.FromLonLat(), rightTopMapPoint.FromLonLat()), //TODO
-					ZoomLimits = new MinMax(1, 12) //TODO
-				};
-
-				routeLayer = new Layer();
-				map.Layers.Add(routeLayer);
-				map.Widgets.Add(new ScaleBarWidget(map)
-				{
-					TextAlignment = Alignment.Center,
-					HorizontalAlignment = HorizontalAlignment.Center,
-					VerticalAlignment = VerticalAlignment.Top
-				});
-			});
-		}
-
-		private ILayer DrawRoute(Route route)
+		
+		private static ILayer DrawRoute(Route route)
         {
-            const string layerName = "Itinero Route"; //TODO
-            return new Layer(layerName)
+            return new Layer(ItineroLayerName)
 			{
-				Name = layerName,
+				Name = ItineroLayerName,
 				DataSource = new MemoryProvider(GenerateLinesAndMarkers(route)),
 				Style = null
 			};
@@ -352,41 +357,40 @@ namespace PolyNavi.Fragments
             }
         }
 
-		private bool fullyExpanded, fullyCollapsed;
-		private void Fab_Click(object sender, EventArgs args)
-		{
-			if (fullyExpanded)
-			{
-				if (!editTextInputFrom.Text.Equals("") && !editTextInputTo.Text.Equals(""))
-				{
-					var routeNames = new string[] { editTextInputFrom.Text, editTextInputTo.Text };
-					var startName = routeNames[0];
-					var finishName = routeNames[1];
+        private void DrawRouteButton_Click(object sender, EventArgs args)
+        {
+            if (editTextInputFrom.Text.Any() && editTextInputTo.Text.Any())
+            {
+                var routeNames = new string[] {editTextInputFrom.Text, editTextInputTo.Text};
+                var startName = routeNames[0];
+                var finishName = routeNames[1];
 
-					var startPoint = MainApp.Instance.BuildingsDictionary[startName];
-					var finishPoint = MainApp.Instance.BuildingsDictionary[finishName];
-					var start = router.Resolve(itineroProfile, (float)startPoint.X, (float)startPoint.Y); //TODO ResolveFailedException Probably too far...
-					var finish = router.Resolve(itineroProfile, (float)finishPoint.X, (float)finishPoint.Y);
+                var startPoint = MainApp.Instance.BuildingsDictionary[startName];
+                var finishPoint = MainApp.Instance.BuildingsDictionary[finishName];
+                var start = router.Resolve(itineroProfile, (float) startPoint.X,
+                    (float) startPoint.Y); //TODO ResolveFailedException Probably too far...
+                var finish = router.Resolve(itineroProfile, (float) finishPoint.X, (float) finishPoint.Y);
 
-					var route = router.Calculate(itineroProfile, start, finish);
+                var route = router.Calculate(itineroProfile, start, finish);
 
-					map.Layers.Remove(routeLayer);
-					routeLayer = DrawRoute(route);
-					map.Layers.Add(routeLayer);
-					mapControl.Navigator.NavigateTo(new Point(startPoint.Y, startPoint.X).FromLonLat(), map.Resolutions[0]);
-					appBar.SetExpanded(false);
-				}
-				else
-				{
-					Toast.MakeText(Activity.BaseContext, GetString(Resource.String.title_route_activity), ToastLength.Short).Show();
-				}
-			}
-			else if (fullyCollapsed)
-			{
-				fab.SetImageResource(Resource.Drawable.ic_done_black);
-				appBar.SetExpanded(true);
-			}
-		}
+                map.Layers.Remove(routeLayer);
+                routeLayer = DrawRoute(route);
+                map.Layers.Add(routeLayer);
+                mapControl.Navigator.NavigateTo(new Point(startPoint.Y, startPoint.X).FromLonLat(), map.Resolutions[0]);
+            }
+            else
+            {
+                Toast.MakeText(Activity.BaseContext, GetString(Resource.String.title_route_activity),
+                    ToastLength.Short).Show();
+            }
+			
+            ToggleAppBarAndChangeButtonIcon();
+        }
+
+        private void ToggleAppBarAndChangeButtonIcon()
+        {
+            appBar.SetExpanded(!fullyExpanded);
+        }
 
 		private void EditTextInputFrom_Click(object sender, EventArgs e)
 		{
@@ -411,11 +415,11 @@ namespace PolyNavi.Fragments
 
 			if (fullyCollapsed)
 			{
-				fab.SetImageResource(Resource.Drawable.ic_directions_black);
+				drawRouteButton.SetImageResource(Resource.Drawable.ic_directions_black);
 			}
 			else if (fullyExpanded)
 			{
-				fab.SetImageResource(Resource.Drawable.ic_done_black);
+				drawRouteButton.SetImageResource(Resource.Drawable.ic_done_black);
 			}
 		}
 
@@ -466,7 +470,7 @@ namespace PolyNavi.Fragments
 					var features = new List<IFeature>();
 					var feature = new Feature
 					{
-						Geometry = geometry,
+                        Geometry = geometry,
 						["ID"] = 0
 					};
 

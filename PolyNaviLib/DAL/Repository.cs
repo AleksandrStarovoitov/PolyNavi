@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 using PolyNaviLib.BL;
 using PolyNaviLib.Constants;
 using PolyNaviLib.DL;
+using PolyNaviLib.Exceptions;
 using PolyNaviLib.SL;
 
 namespace PolyNaviLib.DAL

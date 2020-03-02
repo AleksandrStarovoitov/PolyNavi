@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace PolyNaviLib.DAL
+namespace PolyNaviLib.Exceptions
 {
     [Serializable]
     public class NetworkException : Exception

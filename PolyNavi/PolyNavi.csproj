@@ -91,6 +91,7 @@
     <Compile Include="Src\Preferences\AutoCompleteTextViewPreference.cs" />
     <Compile Include="Src\Services\AssetsProvider.cs" />
     <Compile Include="Src\Services\SettingsProvider.cs" />
+    <Compile Include="Src\Utils\Utils.cs" />
     <Compile Include="Src\Views\MainBuildingView.cs" />
     <Compile Include="Src\Extensions\MapsUiExtensions.cs" />
     <Compile Include="Src\Services\NetworkChecker.cs" />
