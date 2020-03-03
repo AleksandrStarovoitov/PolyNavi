@@ -79,6 +79,7 @@
     <Compile Include="Src\Adapters\BuildingsAdapter.cs" />
     <Compile Include="Src\Adapters\ScheduleCardRowAdapter.cs" />
     <Compile Include="Src\Adapters\WelcomeSectionsPagerAdapter.cs" />
+    <Compile Include="Src\Extensions\AutoCompleteTextViewExtensions.cs" />
     <Compile Include="Src\Extensions\StringExtensions.cs" />
     <Compile Include="Src\Fragments\AboutFragment.cs" />
     <Compile Include="Src\Fragments\DateTimePickerFragment.cs" />

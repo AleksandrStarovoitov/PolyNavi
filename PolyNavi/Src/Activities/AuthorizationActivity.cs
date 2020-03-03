@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
@@ -13,8 +12,8 @@ using Android.Views.InputMethods;
 using Android.Widget;
 using AndroidX.AppCompat.App;
 using Java.Lang;
+using PolyNavi.Extensions;
 using PolyNavi.Services;
-using PolyNaviLib.BL;
 using PolyNaviLib.Constants;
 using Timer = System.Timers.Timer;
 
@@ -120,22 +119,12 @@ namespace PolyNavi.Activities
 
         public void OnTextChanged(ICharSequence s, int start, int before, int count)
         {
-            ClearAuthTextViewAdapterAndError(s);
+            autoCompleteTextViewAuth.Clear();
 
-            SetupTimer(s, start, before, count);
+            SetupTimer(s, before, count);
         }
-
-        private void ClearAuthTextViewAdapterAndError(ICharSequence s)
-        {
-            autoCompleteTextViewAuth.Adapter = null;
-            autoCompleteTextViewAuth.DismissDropDown();
-            if (autoCompleteTextViewAuth.Error != null && s.ToString().Length != 0)
-            {
-                autoCompleteTextViewAuth.Error = null;
-            }
-        }
-
-        private void SetupTimer(ICharSequence s, int start, int before, int count)
+        
+        private void SetupTimer(ICharSequence s, int before, int count)
         {
             if (searchTimer != null)
             {
@@ -146,11 +135,22 @@ namespace PolyNavi.Activities
             {
                 searchTimer = new Timer(MillsToSearch);
 
-                searchTimer.Elapsed += (sender, e) =>
+                searchTimer.Elapsed += delegate
                 {
                     if (networkChecker.IsConnected())
                     {
-                        UpdateSuggestedGroups(s.ToString(), before, count);
+                        Task.Run(async () =>
+                        {
+                            groupsDictionary = await Utils.Utils.GetSuggestedGroupsDictionary(s.ToString());
+
+                            if (s.Length() > 0 && before != count) //TODO Local method?
+                            {
+                                RunOnUiThread(() =>
+                                {
+                                    autoCompleteTextViewAuth.UpdateSuggestions(groupsDictionary, this);
+                                });
+                            }
+                        });
                     }
                     else
                     {
@@ -163,30 +163,6 @@ namespace PolyNavi.Activities
             }
 
             searchTimer.Start();
-        }
-
-        private void UpdateSuggestedGroups(string s, int before, int count)
-        {
-            Task.Run(async () =>
-            {
-                var groups = await PolyManager.GetSuggestedGroups(s);
-
-                groupsDictionary = groups.Groups.ToDictionary(x => x.Name, x => x.Id);
-                var groupsDictionaryKeys = groupsDictionary.Select(x => x.Key).ToArray();
-
-                RunOnUiThread(() =>
-                {
-                    var suggestAdapter = new ArrayAdapter(this, Android.Resource.Layout.SimpleDropDownItem1Line, groupsDictionaryKeys); //TODO field?
-
-                    autoCompleteTextViewAuth.Adapter = null;
-                    autoCompleteTextViewAuth.Adapter = suggestAdapter;
-
-                    if (s.Length > 0 && before != count) //TODO Local method?
-                    {
-                        autoCompleteTextViewAuth.ShowDropDown();
-                    }
-                });
-            });
         }
     }
 }

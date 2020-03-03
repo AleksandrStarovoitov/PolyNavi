@@ -27,8 +27,7 @@ namespace PolyNavi.Views
         //TODO Заменить на рисунки
         private Marker marker = Marker.None;
         private Point markerPoint;
-
-        public static bool drawerState = false;
+        
         private const int InvalidPointerId = -1;
 
         private readonly Drawable plan;
@@ -55,13 +54,13 @@ namespace PolyNavi.Views
 
             plan = ContextCompat.GetDrawable(Context, id);
             
-            imageWidth = (int)(displayMetrics.HeightPixels * 1.777778 * 0.85);
-            imageHeight = (int)(displayMetrics.HeightPixels * 0.85);
+            imageWidth = (int)(displayMetrics.HeightPixels * 1.777778 * 0.85); //TODO
+            imageHeight = (int)(displayMetrics.HeightPixels * 0.85); //TODO
 
             widthScale = (float)imageWidth / BaseWidth;
             heightScale = (float)imageHeight / BaseHeight;
 
-            routePaint.StrokeWidth = routePaint.StrokeWidth * widthScale;
+            routePaint.StrokeWidth *= widthScale;
             
             plan.SetBounds(0, 0, imageWidth, imageHeight);
         }
@@ -102,23 +101,25 @@ namespace PolyNavi.Views
                     var top = PosY;
                     var bottom = PosY + planScaleHeight;
 
-                    Log.Debug("PLAN", "Right: " + right);
-                    Log.Debug("PLAN", "Left: " + left);
-                    Log.Debug("PLAN", "Top: " + top);
-                    Log.Debug("PLAN", "Bottom: " + bottom + " // IntristicHeight: " + plan.IntrinsicHeight + " // ImageHeight: " + imageHeight);
+                    #if DEBUG
+                    LogCurrentCoordinates(right, left, top, bottom); //TODO
+                    #endif
 
                     if (right < displayMetrics.WidthPixels)
                     {
                         PosX -= deltaX;
                     }
+
                     if (left > 0)
                     {
                         PosX -= deltaX;
                     }
+
                     if (top > 0)
                     {
                         PosY -= deltaY;
                     }
+
                     if (bottom < imageHeight)
                     {
                         PosY -= deltaY;
@@ -136,7 +137,8 @@ namespace PolyNavi.Views
                     break;
 
                 case MotionEventActions.PointerUp:
-                    pointerIndex = (int)(e.Action & MotionEventActions.PointerIndexMask) >> (int)MotionEventActions.PointerIndexShift;
+                    pointerIndex = (int) (e.Action & MotionEventActions.PointerIndexMask) >> //TODO ?
+                                   (int) MotionEventActions.PointerIndexShift;
                     var pointerId = e.GetPointerId(pointerIndex);
                     if (pointerId == activePointerId)
                     {
@@ -145,9 +147,21 @@ namespace PolyNavi.Views
                         lastTouchY = e.GetY(newPointerIndex);
                         activePointerId = e.GetPointerId(newPointerIndex);
                     }
+
                     break;
             }
+
             return true;
+        }
+
+        private void LogCurrentCoordinates(in float right, in float left, in float top, in float bottom)
+        {
+            Log.Debug("PLAN", "Right: " + right);
+            Log.Debug("PLAN", "Left: " + left);
+            Log.Debug("PLAN", "Top: " + top);
+            Log.Debug("PLAN",
+                "Bottom: " + bottom + " // IntristicHeight: " + plan.IntrinsicHeight + " // ImageHeight: " +
+                imageHeight);
         }
 
         protected override void OnDraw(Canvas canvas)
@@ -169,7 +183,8 @@ namespace PolyNavi.Views
                     canvas.DrawCircle(markerPoint.X, markerPoint.Y, 10.0f * widthScale, startPointPaint);
                     break;
                 case Marker.End:
-                    canvas.DrawRect(markerPoint.X - 10.0f * widthScale, markerPoint.Y - 10.0f * heightScale, markerPoint.X + 10.0f * widthScale, markerPoint.Y + 10.0f * heightScale, endPointPaint);
+                    canvas.DrawRect(markerPoint.X - 10.0f * widthScale, markerPoint.Y - 10.0f * heightScale,
+                        markerPoint.X + 10.0f * widthScale, markerPoint.Y + 10.0f * heightScale, endPointPaint);
                     break;
                 case Marker.None:
                     break;
@@ -203,11 +218,12 @@ namespace PolyNavi.Views
             else
             {
                 var segmentsCount = points.Count - 1;
+
                 route = new float[segmentsCount * 4];
                 route[0] = points[0].X * widthScale;
                 route[1] = points[0].Y * heightScale;
-                int i;
-                int j;
+
+                int i, j;
                 for (i = 1, j = 2; i < points.Count - 1; ++i, j += 4)
                 {
                     route[j] = points[i].X * widthScale;
@@ -215,6 +231,7 @@ namespace PolyNavi.Views
                     route[j + 2] = points[i].X * widthScale;
                     route[j + 3] = points[i].Y * heightScale;
                 }
+
                 route[j] = points[i].X * widthScale;
                 route[j + 1] = points[i].Y * heightScale;
 

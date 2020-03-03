@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Threading;
 using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
@@ -15,11 +12,9 @@ using Android.Views;
 using Android.Widget;
 using AndroidX.Preference;
 using Java.Lang;
-using Newtonsoft.Json;
+using PolyNavi.Extensions;
 using PolyNavi.Services;
-using PolyNaviLib.BL;
 using PolyNaviLib.Constants;
-using PolyNaviLib.SL;
 using Object = Java.Lang.Object;
 using Timer = System.Timers.Timer;
 
@@ -30,8 +25,9 @@ namespace PolyNavi.Preferences
     {
         private const int ResourceId = Resource.Layout.preference_dialog_autocomplete;
         public string GroupName { get; private set; }
-        
-        protected AutoCompleteTextViewPreference(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
+
+        protected AutoCompleteTextViewPreference(IntPtr javaReference, JniHandleOwnership transfer) : base(
+            javaReference, transfer)
         {
         }
 
@@ -43,11 +39,13 @@ namespace PolyNavi.Preferences
         {
         }
 
-        public AutoCompleteTextViewPreference(Context context, IAttributeSet attrs, int defStyleAttr) : base(context, attrs, defStyleAttr)
+        public AutoCompleteTextViewPreference(Context context, IAttributeSet attrs, int defStyleAttr) : base(context,
+            attrs, defStyleAttr)
         {
         }
 
-        public AutoCompleteTextViewPreference(Context context, IAttributeSet attrs, int defStyleAttr, int defStyleRes) : base(context, attrs, defStyleAttr, defStyleRes)
+        public AutoCompleteTextViewPreference(Context context, IAttributeSet attrs, int defStyleAttr, int defStyleRes) :
+            base(context, attrs, defStyleAttr, defStyleRes)
         {
         }
 
@@ -67,21 +65,21 @@ namespace PolyNavi.Preferences
             GroupName = restorePersistedValue ? GetPersistedString(GroupName) : defaultValue.ToString();
         }
 
-        public override int DialogLayoutResource { get => ResourceId; set => base.DialogLayoutResource = value; }
+        public override int DialogLayoutResource
+        {
+            get => ResourceId;
+            set => base.DialogLayoutResource = value;
+        }
     }
 
 
     public class AutoCompleteTextViewPreferenceDialogFragmentCompat : PreferenceDialogFragmentCompat, ITextWatcher
     {
         private AutoCompleteTextView autoCompleteTextViewPref;
-        private ArrayAdapter suggestAdapter;
         private NetworkChecker networkChecker;
         private Dictionary<string, int> groupsDictionary;
         private Timer searchTimer;
         private const int MillsToSearch = 700;
-        private string[] array;
-        private const string GroupSearchLink =
-            "http://m.spbstu.ru/p/proxy.php?csurl=http://ruz.spbstu.ru/api/v1/ruz/search/groups&q=";
 
         public static AutoCompleteTextViewPreferenceDialogFragmentCompat NewInstance(string key)
         {
@@ -98,7 +96,8 @@ namespace PolyNavi.Preferences
             base.OnBindDialogView(view);
 
             networkChecker = new NetworkChecker(Activity.BaseContext);
-            autoCompleteTextViewPref = view.FindViewById<AutoCompleteTextView>(Resource.Id.autocompletetextview_group_pref);
+            autoCompleteTextViewPref =
+                view.FindViewById<AutoCompleteTextView>(Resource.Id.autocompletetextview_group_pref);
 
             autoCompleteTextViewPref.AddTextChangedListener(this);
 
@@ -122,16 +121,19 @@ namespace PolyNavi.Preferences
             var groupName = autoCompleteTextViewPref.Text;
 
             var preference = Preference;
-            if (preference is AutoCompleteTextViewPreference autoCompleteTvPreference && autoCompleteTvPreference.CallChangeListener(groupName)) //TODO
+            if (preference is AutoCompleteTextViewPreference autoCompleteTvPreference &&
+                autoCompleteTvPreference.CallChangeListener(groupName)) //TODO
             {
                 if (groupsDictionary.TryGetValue(groupName, out var groupId))
                 {
                     autoCompleteTvPreference.SaveGroupName(groupName);
-                    MainApp.Instance.SharedPreferences.Edit().PutInt(PreferencesConstants.GroupIdPreferenceKey, groupId).Apply();
+                    MainApp.Instance.SharedPreferences.Edit().PutInt(PreferencesConstants.GroupIdPreferenceKey, groupId)
+                        .Apply();
                 }
                 else
                 {
-                    Toast.MakeText(Activity.BaseContext, GetString(Resource.String.wrong_group), ToastLength.Short).Show();
+                    Toast.MakeText(Activity.BaseContext, GetString(Resource.String.wrong_group), ToastLength.Short)
+                        .Show();
                 }
             }
         }
@@ -146,13 +148,13 @@ namespace PolyNavi.Preferences
 
         public void OnTextChanged(ICharSequence s, int start, int before, int count)
         {
-            autoCompleteTextViewPref.Adapter = null;
-            autoCompleteTextViewPref.DismissDropDown();
-            if (autoCompleteTextViewPref.Error != null && s.ToString().Length != 0)
-            {
-                autoCompleteTextViewPref.Error = null;
-            }
+            autoCompleteTextViewPref.Clear();
 
+            SetupTimer(s, before, count);
+        }
+        
+        private void SetupTimer(ICharSequence s, int before, int count)
+        {
             if (searchTimer != null)
             {
                 searchTimer.Stop();
@@ -164,33 +166,23 @@ namespace PolyNavi.Preferences
                 {
                     if (networkChecker.IsConnected())
                     {
-                        var client = new HttpClient();
                         Task.Run(async () =>
                         {
-                            var resultJson = await HttpClientService.GetResponseAsync(client,
-                                GroupSearchLink +
-                                s.ToString(), new CancellationToken());
-                            //TODO Move to lib
-                            var groups = JsonConvert.DeserializeObject<GroupRoot>(resultJson);
-                            groupsDictionary = groups.Groups.ToDictionary(x => x.Name, x => x.Id);
-                            array = groupsDictionary.Select(x => x.Key).ToArray();
-                            Activity.RunOnUiThread(() =>
+                            groupsDictionary = await Utils.Utils.GetSuggestedGroupsDictionary(s.ToString());
+
+                            if (s.Length() > 0 && before != count) //TODO Local method?
                             {
-                                suggestAdapter = new ArrayAdapter(Activity.BaseContext,
-                                    Android.Resource.Layout.SimpleDropDownItem1Line,
-                                    array);
-                                autoCompleteTextViewPref.Adapter = null;
-                                autoCompleteTextViewPref.Adapter = suggestAdapter;
-                                if (s.Length() > 0 && before != count)
+                                Activity.RunOnUiThread(() =>
                                 {
-                                    autoCompleteTextViewPref.ShowDropDown();
-                                }
-                            });
+                                    autoCompleteTextViewPref.UpdateSuggestions(groupsDictionary, Activity);
+                                });
+                            }
                         });
                     }
                     else
                     {
-                        Toast.MakeText(Activity.BaseContext, GetString(Resource.String.no_connection_title), ToastLength.Short).Show();
+                        Toast.MakeText(Activity.BaseContext, GetString(Resource.String.no_connection_title),
+                            ToastLength.Short).Show();
                     }
 
                     searchTimer.Close();

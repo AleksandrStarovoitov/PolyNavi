@@ -145,8 +145,6 @@ namespace PolyNavi.Activities
                 InstantiateFragment();
                 isTapped = false;
             }
-
-            MainBuildingView.drawerState = false;
         }
 
         private void NavViewItemSelected(object sender, NavigationView.NavigationItemSelectedEventArgs e)

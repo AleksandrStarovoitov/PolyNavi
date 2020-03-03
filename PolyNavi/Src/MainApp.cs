@@ -24,6 +24,9 @@ namespace PolyNavi
     public class MainApp : Application
     {
         private const string DatabaseFilename = "schedule.sqlite";
+        private const string MainGraphFilename = "main.graph";
+        private const string MainGraphXmlFilename = "main_graph.xml";
+
         private string language;
 
         public static MainApp Instance { get; private set; }
@@ -78,63 +81,81 @@ namespace PolyNavi
             return false;
         }
 
-        public Lazy<GraphNode> MainBuildingGraph { get; private set; } = new Lazy<GraphNode>(() =>
+        public Lazy<GraphNode> MainBuildingGraph { get; } = new Lazy<GraphNode>(() =>
         {
-            if (File.Exists(GetFileFullPath("main.graph")) && !Instance.IsAppUpdated())
-            {
-                using var stream = File.OpenRead(GetFileFullPath("main.graph"));
+            GraphNode graphNode;
 
-                FillRoomsDictionary();
-                return SaverLoader.Load(stream);
+            if (File.Exists(GetFileFullPath(MainGraphFilename)) && !Instance.IsAppUpdated())
+            {
+                graphNode = LoadGraphFromFile();
+            }
+            else
+            {
+                graphNode = LoadGraphFromXml();
+
+                SaveGraphToFile(graphNode);
             }
 
-            var graph = Instance.GraphSaverLoader.LoadFromXmlDescriptor("main_graph.xml");
-            using (var stream = File.Create(GetFileFullPath("main.graph")))
-            {
-                SaverLoader.Save(stream, graph);
-            }
-            FillRoomsDictionary();
-            return graph;
+            FillRoomsDictionary(graphNode);
+
+            return graphNode;
         });
 
-        private static void FillRoomsDictionary()
+        private static GraphNode LoadGraphFromFile()
         {
-            using (var stream = File.OpenRead(GetFileFullPath("main.graph")))
+            using var stream = File.OpenRead(GetFileFullPath(MainGraphFilename));
+            
+            return SaverLoader.Load(stream);
+        }
+
+        private static GraphNode LoadGraphFromXml()
+        {
+            var graph = Instance.GraphSaverLoader.LoadFromXmlDescriptor(MainGraphXmlFilename);
+
+            return graph;
+        }
+
+        private static void SaveGraphToFile(GraphNode graphNode)
+        {
+            using var stream = File.Create(GetFileFullPath(MainGraphFilename));
+
+            SaverLoader.Save(stream, graphNode);
+        }
+
+        private static void FillRoomsDictionary(GraphNode graph)
+        {
+            var ids = new List<GraphNode>();
+
+            var bfsQueue = new Queue<GraphNode>();
+            bfsQueue.Enqueue(graph);
+
+            while (bfsQueue.Count > 0)
             {
-                var graph = SaverLoader.Load(stream);
+                var node = bfsQueue.Dequeue();
 
-                var ids = new List<GraphNode>();
-
-                var bfsQueue = new Queue<GraphNode>();
-                bfsQueue.Enqueue(graph);
-
-                while (bfsQueue.Count > 0)
+                foreach (var neighbour in node.Neighbours.Where(neighbour => !ids.Contains(neighbour)))
                 {
-                    var node = bfsQueue.Dequeue();
+                    ids.Add(neighbour);
+                    bfsQueue.Enqueue(neighbour);
+                    if (neighbour.RoomName.Equals("*Unknown*"))
+                        continue;
 
-                    foreach (var neighbour in node.Neighbours.Where(neighbour => !ids.Contains(neighbour)))
-                    {
-                        ids.Add(neighbour);
-                        bfsQueue.Enqueue(neighbour);
-                        if (neighbour.RoomName.Equals("*Unknown*")) 
-                            continue;
-
-                        var name = neighbour.RoomName.Replace("_а", " (а)").Replace("_М_1_1", " М 1 эт. 1")
-                            .Replace("_М_1_2", " М 1 эт. 2").Replace("_М_2_1", " М 2 эт. 1")
-                            .Replace("_М_2_2", " М 2 эт. 2").Replace("_Ж_1_1", " Ж 1 эт. 1")
-                            .Replace("_Ж_1_2", " Ж 1 эт. 2").Replace("_Ж_1_3", " Ж 1 эт. 3")
-                            .Replace("_Ж_2_1", " Ж 2 эт. 1").Replace("_Ж_2_2", " Ж 2 эт. 2")
-                            .Replace("_Ж_2_3", " Ж 2 эт. 3").Replace("Ректорат_", "Ректорат ")
-                            .Replace("101а", "101 (а)").Replace("170_б", "170 (б)");
-                        Instance.RoomsDictionary[name] = neighbour.RoomName;
-                    }
+                    var name = neighbour.RoomName.Replace("_а", " (а)").Replace("_М_1_1", " М 1 эт. 1") //TODO
+                        .Replace("_М_1_2", " М 1 эт. 2").Replace("_М_2_1", " М 2 эт. 1")
+                        .Replace("_М_2_2", " М 2 эт. 2").Replace("_Ж_1_1", " Ж 1 эт. 1")
+                        .Replace("_Ж_1_2", " Ж 1 эт. 2").Replace("_Ж_1_3", " Ж 1 эт. 3")
+                        .Replace("_Ж_2_1", " Ж 2 эт. 1").Replace("_Ж_2_2", " Ж 2 эт. 2")
+                        .Replace("_Ж_2_3", " Ж 2 эт. 3").Replace("Ректорат_", "Ректорат ")
+                        .Replace("101а", "101 (а)").Replace("170_б", "170 (б)");
+                    Instance.RoomsDictionary[name] = neighbour.RoomName;
                 }
             }
+
             var ordered = Instance.RoomsDictionary.OrderBy(x => x.Value, new DictionaryComp());
             Instance.RoomsDictionary = ordered.ToDictionary(x => x.Key, x => x.Value);
         }
 
-        public AsyncLazy<PolyManager> PolyManager { get; private set; } = new AsyncLazy<PolyManager>(async () =>
+        public AsyncLazy<PolyManager> PolyManager { get; } = new AsyncLazy<PolyManager>(async () =>
         {
             return await PolyNaviLib.BL.PolyManager.CreateAsync(
                 GetFileFullPath(DatabaseFilename),
@@ -142,9 +163,9 @@ namespace PolyNavi
                 new SettingsProvider(MainApp.Instance.SharedPreferences));
         });
 
-        public ISharedPreferences SharedPreferences { get; private set; }
+        public ISharedPreferences SharedPreferences { get; }
 
-        private SaverLoader GraphSaverLoader { get; set; }
+        private SaverLoader GraphSaverLoader { get; }
 
         public MainApp(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
         {
@@ -170,10 +191,7 @@ namespace PolyNavi
             return Path.Combine(dirPath, fileName);
         }
 
-        /// <summary>
-        /// Возвращает поток встроенного ресурса, с указанным относительным путём
-        /// </summary>
-        /// <param name="relativePath">Путь относительно папки PolyNavi.EmbeddedResources</param>
+        ///<param name="relativePath">Path relative to PolyNavi.EmbeddedResources</param>
         internal static Stream GetEmbeddedResourceStream(string relativePath) //TODO Move
         {
             var assembly = typeof(MainApp).GetTypeInfo().Assembly;

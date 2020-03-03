@@ -4,7 +4,6 @@ using PolyNaviLib.BL;
 
 namespace PolyNavi.Services
 {
-
     public class NetworkChecker : INetworkChecker
     {
         private readonly Context context;
