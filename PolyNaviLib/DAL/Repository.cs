@@ -15,8 +15,6 @@ namespace PolyNaviLib.DAL
 {
     public class Repository
     {
-        private const string scheduleLink = @"http://m.spbstu.ru/p/proxy.php?csurl=http://ruz.spbstu.ru/api/v1/ruz/scheduler/";
-
         private SQLiteDatabase database;
         private INetworkChecker checker;
         private ISettingsProvider settings;
@@ -26,7 +24,8 @@ namespace PolyNaviLib.DAL
         {
         }
 
-        private async Task<Repository> InitializeAsync(string dbPath, INetworkChecker checker, ISettingsProvider settings)
+        private async Task<Repository> InitializeAsync(string dbPath, INetworkChecker checker,
+            ISettingsProvider settings)
         {
             database = new SQLiteDatabase(dbPath);
 
@@ -46,54 +45,55 @@ namespace PolyNaviLib.DAL
             client = new HttpClient();
 
             await RemoveExpiredWeeksAsync();
+
             return this;
         }
 
-        public static Task<Repository> CreateAsync(string dbPath, INetworkChecker networkChecker, ISettingsProvider settings)
+        public static Task<Repository> CreateAsync(string dbPath, INetworkChecker networkChecker,
+            ISettingsProvider settings)
         {
             var repo = new Repository();
             return repo.InitializeAsync(dbPath, networkChecker, settings);
         }
 
-        public async Task<WeekRoot> GetWeekRootAsync(DateTime weekDate, bool forceUpdate)
+        public async Task<WeekRoot> GetSchedule(DateTime weekDate)
         {
-            if (await database.IsEmptyAsync<WeekRoot>()) //TODO Delete? Check with Get and SingleOrDefault?
-            {
-                var weekRoot = await LoadWeekRootFromWebAsync(weekDate);
-                await database.SaveItemAsync(weekRoot);
-                return weekRoot;
-            }
+            var weekRoots = await database.GetItemsAsync<WeekRoot>();
+            var weekRoot =  weekRoots.SingleOrDefault(w => w.Week.ContainsDate(weekDate));
 
-            var weekFromDb = (await database.GetItemsAsync<WeekRoot>()).SingleOrDefault(w => w.Week.IsWeekContainsDate(weekDate));
-            if (weekFromDb == null)
+            if (weekRoot == null)
             {
                 var newWeek = await LoadWeekRootFromWebAsync(weekDate);
                 await database.SaveItemAsync(newWeek);
                 return newWeek;
             }
 
-            if (forceUpdate)
-            {
-                var newWeek = await LoadWeekRootFromWebAsync(weekDate);
-                await database.DeleteItemsAsync<WeekRoot>(w => w.Week.IsWeekContainsDate(weekDate));
-                await database.SaveItemAsync(newWeek);
-                return newWeek;
-            }
+            return weekRoot;
+        }
 
-            return weekFromDb;
+        public async Task<WeekRoot> GetLatestSchedule(DateTime weekDate) //TODO "Get" with delete... Rename? 
+        {
+            var newWeek = await LoadWeekRootFromWebAsync(weekDate);
+
+            await database.DeleteItemsAsync<WeekRoot>(w => w.Week.ContainsDate(weekDate));
+            await database.SaveItemAsync(newWeek);
+
+            return newWeek;
         }
 
         private async Task<WeekRoot> LoadWeekRootFromWebAsync(DateTime weekDate)
         {
-            if (checker.IsConnected() == false)
+            if (!checker.IsConnected())
             {
                 throw new NetworkException("No internet connection"); //TODO
             }
 
+            var dateStr = weekDate.ToString("yyyy-M-d", new CultureInfo("ru-RU"));
             var groupId = settings[PreferencesConstants.GroupIdPreferenceKey];
 
-            var dateStr = weekDate.ToString("yyyy-M-d", new CultureInfo("ru-RU"));
-            var resultJson = await HttpClientService.GetResponseAsync(client, scheduleLink + groupId + "&date=" + dateStr, new CancellationToken());
+            var resultJson = await HttpClientService.GetResponseAsync(client,
+                ScheduleLinksConstants.ScheduleLink + groupId + "?&date=" + dateStr, new CancellationToken()); //TODO uri
+
             var weekRoot = JsonConvert.DeserializeObject<WeekRoot>(resultJson);
             weekRoot.LastUpdated = DateTime.Now;
 
@@ -102,7 +102,10 @@ namespace PolyNaviLib.DAL
 
         private async Task RemoveExpiredWeeksAsync()
         {
-            await database.DeleteItemsAsync<WeekRoot>(w => w.Week.IsExpired(Convert.ToInt32(settings[PreferencesConstants.GroupIdPreferenceKey]))); //TODO
+            var currentGroupId = Convert.ToInt32(settings[PreferencesConstants.GroupIdPreferenceKey]);
+
+            await database.DeleteItemsAsync<WeekRoot>(w =>
+                w.Week.IsExpired() || w.Group.Id != currentGroupId);
         }
     }
 }

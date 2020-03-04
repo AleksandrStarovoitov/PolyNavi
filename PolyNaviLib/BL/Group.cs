@@ -15,11 +15,6 @@ namespace PolyNaviLib.BL
         [OneToOne(CascadeOperations = CascadeOperation.All)]
         public Faculty Faculty { get; set; }
 
-        //[ManyToOne]
-        //public GroupRoot GroupRoot { get; set; }
-        //[ForeignKey(typeof(GroupRoot))]
-        //public int GroupRootId { get; set; }
-
         [OneToOne]
         public WeekRoot WeekRoot { get; set; }
         [ForeignKey(typeof(WeekRoot))]
@@ -39,7 +34,6 @@ namespace PolyNaviLib.BL
 
     public class GroupRoot : BusinessEntity
     {
-        //[OneToMany(CascadeOperations = CascadeOperation.All)]
         public List<Group> Groups { get; set; }
 
         public string DummyStringToWorkaroundSQliteNetBug { get; set; }

@@ -266,7 +266,7 @@ namespace PolyNavi.Fragments
 			}
 		}
 		
-		private static ILayer DrawRoute(Route route)
+		private static ILayer GetRouteLayer(Route route)
         {
             return new Layer(ItineroLayerName)
 			{
@@ -359,22 +359,32 @@ namespace PolyNavi.Fragments
 
         private void DrawRouteButton_Click(object sender, EventArgs args)
         {
+            if (fullyExpanded)
+            {
+                CheckInputAndDrawRoute();
+            }
+			
+            ToggleAppBarAndChangeButtonIcon();
+        }
+
+        private void CheckInputAndDrawRoute()
+        {
             if (editTextInputFrom.Text.Any() && editTextInputTo.Text.Any())
             {
-                var routeNames = new string[] {editTextInputFrom.Text, editTextInputTo.Text};
+                var routeNames = new string[] { editTextInputFrom.Text, editTextInputTo.Text };
                 var startName = routeNames[0];
                 var finishName = routeNames[1];
 
                 var startPoint = MainApp.Instance.BuildingsDictionary[startName];
                 var finishPoint = MainApp.Instance.BuildingsDictionary[finishName];
-                var start = router.Resolve(itineroProfile, (float) startPoint.X,
-                    (float) startPoint.Y); //TODO ResolveFailedException Probably too far...
-                var finish = router.Resolve(itineroProfile, (float) finishPoint.X, (float) finishPoint.Y);
+                var start = router.Resolve(itineroProfile, (float)startPoint.X,
+                    (float)startPoint.Y); //TODO ResolveFailedException Probably too far...
+                var finish = router.Resolve(itineroProfile, (float)finishPoint.X, (float)finishPoint.Y);
 
                 var route = router.Calculate(itineroProfile, start, finish);
 
                 map.Layers.Remove(routeLayer);
-                routeLayer = DrawRoute(route);
+                routeLayer = GetRouteLayer(route);
                 map.Layers.Add(routeLayer);
                 mapControl.Navigator.NavigateTo(new Point(startPoint.Y, startPoint.X).FromLonLat(), map.Resolutions[0]);
             }
@@ -383,9 +393,7 @@ namespace PolyNavi.Fragments
                 Toast.MakeText(Activity.BaseContext, GetString(Resource.String.title_route_activity),
                     ToastLength.Short).Show();
             }
-			
-            ToggleAppBarAndChangeButtonIcon();
-        }
+		}
 
         private void ToggleAppBarAndChangeButtonIcon()
         {

@@ -11,6 +11,7 @@ using AndroidX.Fragment.App;
 using AndroidX.RecyclerView.Widget;
 using AndroidX.SwipeRefreshLayout.Widget;
 using PolyNavi.Adapters;
+using PolyNavi.Extensions;
 using PolyNaviLib.BL;
 using PolyNaviLib.DAL;
 using PolyNaviLib.Exceptions;
@@ -22,7 +23,7 @@ namespace PolyNavi.Fragments
     {
         private SwipeRefreshLayout swipeRefreshLayout;
         private RecyclerView recyclerViewSchedule;
-        private ProgressBar progress;
+        private ProgressBar progressBar;
         private View view;
         private List<Day> days;
         private readonly DateTime weekDate;
@@ -41,13 +42,13 @@ namespace PolyNavi.Fragments
             view = inflater.Inflate(Resource.Layout.fragment_week_schedule, container, false);
             ShowScheduleLayout();
 
-            progress = view.FindViewById<ProgressBar>(Resource.Id.progressbar_week_schedule);
+            progressBar = view.FindViewById<ProgressBar>(Resource.Id.progressbar_week_schedule);
             swipeRefreshLayout = view.FindViewById<SwipeRefreshLayout>(Resource.Id.swipetorefresh_week_schedule);
             swipeRefreshLayout.SetOnRefreshListener(this);
 
             recyclerViewSchedule = view.FindViewById<RecyclerView>(Resource.Id.recyclerview_week_schedule);
 
-            LoadScheduleAndUpdateUiWithProgressBar(false); //TODO
+            LoadScheduleAndToggleProgressBar();
 
             return view;
         }
@@ -59,7 +60,12 @@ namespace PolyNavi.Fragments
                 ShowScheduleLayout();
             }
 
-            LoadScheduleAndUpdateUiWithProgressBar(true); //TODO
+            recyclerViewSchedule.SetAdapter(null);
+
+            progressBar.Show();
+            HideSwipeRefreshLayout();
+
+            Task.Run(ForceLoadLatestSchedule);
         }
 
         private void ShowScheduleLayout()
@@ -68,24 +74,30 @@ namespace PolyNavi.Fragments
                 Resource.Layout.layout_week_schedule);
         }
 
-        private void LoadScheduleAndUpdateUiWithProgressBar(bool forceUpdate) //TODO Remove bool
+        private void LoadScheduleAndToggleProgressBar()
         {
-            if (forceUpdate) //
-            {
-                recyclerViewSchedule.SetAdapter(null); //
-            } //
-
             ToggleProgressBarVisibility();
 
-            Task.Run(async () => await LoadSchedule(forceUpdate));
+            Task.Run(LoadCachedOrLatestSchedule);
         }
 
-        private async Task LoadSchedule(bool forceUpdate)
+        private async Task ForceLoadLatestSchedule()
         {
             var manager = await MainApp.Instance.PolyManager;
+            await LoadSchedule(async () => await manager.GetLatestSchedule(weekDate));
+        }
+
+        private async Task LoadCachedOrLatestSchedule()
+        {
+            var manager = await MainApp.Instance.PolyManager;
+            await LoadSchedule(async () => await manager.GetSchedule(weekDate));
+        }
+
+        private async Task LoadSchedule(Func<Task<WeekRoot>> getSchedule)
+        {
             try
             {
-                var weekRoot = await manager.GetWeekRootAsync(weekDate, forceUpdate: forceUpdate); //TODO Remove bool
+                var weekRoot = await getSchedule();
                 days = weekRoot.Days;
 
                 Activity.RunOnUiThread(() =>
@@ -112,6 +124,7 @@ namespace PolyNavi.Fragments
             }
         }
 
+
         private void ShowSchedule()
         {
             var adapter = new ScheduleCardFragmentAdapter(days);
@@ -123,7 +136,7 @@ namespace PolyNavi.Fragments
             var currentDayPosition = days.FindIndex(day =>
                 day.Date.DayOfYear == (dayOfYear == -1 ? DateTime.Now.DayOfYear : dayOfYear));
 
-            if (currentDayPosition != -1)
+            if (currentDayPosition != -1) //TODO -1
             {
                 recyclerViewSchedule.ScrollToPosition(currentDayPosition);
             }
@@ -181,16 +194,26 @@ namespace PolyNavi.Fragments
         {
             if (swipeRefreshLayout.Refreshing)
             {
-                progress.Visibility = ViewStates.Invisible;
-                swipeRefreshLayout.Visibility = ViewStates.Visible;
-                swipeRefreshLayout.Refreshing = false;
+                progressBar.Hide();
+                ShowSwipeRefreshLayout();
             }
             else
             {
-                swipeRefreshLayout.Refreshing = true;
-                swipeRefreshLayout.Visibility = ViewStates.Invisible;
-                progress.Visibility = ViewStates.Visible;
+                HideSwipeRefreshLayout();
+                progressBar.Show();
             }
+        }
+        
+        private void ShowSwipeRefreshLayout()
+        {
+            swipeRefreshLayout.Visibility = ViewStates.Visible;
+            swipeRefreshLayout.Refreshing = false;
+        }
+
+        private void HideSwipeRefreshLayout()
+        {
+            swipeRefreshLayout.Refreshing = true;
+            swipeRefreshLayout.Visibility = ViewStates.Invisible;
         }
 
         private void ChangeViewContentInContainer(int rootContainerId, int newLayoutId)

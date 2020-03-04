@@ -20,15 +20,15 @@ namespace PolyNaviLib.BL
 
         }
 
-        public bool IsWeekContainsDate(DateTime date)
+        public bool ContainsDate(DateTime date)
         {
             return date.Date >= Date_Start &&
                    date.Date <= Date_End;
         }
 
-        public bool IsExpired(int groupId)
+        public bool IsExpired()
         {
-            return WeekRoot.Group.Id != groupId || DateTime.Now.Date > Date_End.Date;
+            return DateTime.Now.Date > Date_End.Date;
         }
     }
 }

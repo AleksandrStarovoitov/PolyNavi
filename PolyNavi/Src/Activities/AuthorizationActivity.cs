@@ -137,7 +137,7 @@ namespace PolyNavi.Activities
 
                 searchTimer.Elapsed += delegate
                 {
-                    if (networkChecker.IsConnected())
+                    if (networkChecker.IsConnected()) //TODO Move to lib, catch ex
                     {
                         Task.Run(async () =>
                         {

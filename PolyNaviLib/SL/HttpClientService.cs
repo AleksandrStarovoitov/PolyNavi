@@ -11,14 +11,16 @@ namespace PolyNaviLib.SL
         {
             try
             {
-                var response = await client.GetAsync(uri, cts);
-                response.EnsureSuccessStatusCode();
+                using (var response = await client.GetAsync(uri, cts))
+                {
+                    response.EnsureSuccessStatusCode();
 
-                var responseBody = await response.Content.ReadAsStringAsync();
-                return responseBody;
+                    var responseBody = await response.Content.ReadAsStringAsync();
+                    return responseBody;
+                }
             }
             catch (HttpRequestException e)
-            {
+            { 
                 Console.WriteLine("Message :{0} ", e.Message); //TODO Log
                 return null; //TODO
             }
