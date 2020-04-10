@@ -84,20 +84,23 @@ namespace PolyNavi.Fragments
         private async Task ForceLoadLatestSchedule()
         {
             var manager = await MainApp.Instance.PolyManager;
-            await LoadSchedule(async () => await manager.GetLatestSchedule(weekDate));
+            var weekRoot = await manager.GetLatestSchedule(weekDate);
+
+            LoadSchedule(weekRoot);
         }
 
         private async Task LoadCachedOrLatestSchedule()
         {
             var manager = await MainApp.Instance.PolyManager;
-            await LoadSchedule(async () => await manager.GetSchedule(weekDate));
+            var weekRoot = await manager.GetSchedule(weekDate);
+
+            LoadSchedule(weekRoot);
         }
 
-        private async Task LoadSchedule(Func<Task<WeekRoot>> getSchedule)
+        private void LoadSchedule(WeekRoot weekRoot)
         {
             try
             {
-                var weekRoot = await getSchedule();
                 days = weekRoot.Days;
 
                 Activity.RunOnUiThread(() =>
