@@ -88,19 +88,19 @@ namespace PolyNavi.Activities
 
         private void SkipButtonClick(object sender, EventArgs e)
         {
-            ProceedToAuthActivity();
+            ProceedToUserTypeSelectActivity();
         }
 
         private void FinishButtonClick(object sender, EventArgs e)
         {
-            ProceedToAuthActivity();
+            ProceedToUserTypeSelectActivity();
         }
 
-        private void ProceedToAuthActivity()
+        private void ProceedToUserTypeSelectActivity()
         {
             preferencesEditor.PutBoolean(PreferencesConstants.WelcomeCompletedPreferenceKey, true).Apply();
 
-            var intent = new Intent(this, typeof(AuthorizationActivity));
+            var intent = new Intent(this, typeof(UserTypeSelectActivity));
             intent.SetFlags(ActivityFlags.ClearTop);
 
             StartActivity(intent);

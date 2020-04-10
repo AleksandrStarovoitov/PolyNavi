@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:minWidth="25px"
+    android:minHeight="25px"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/relativelayout_user_type_select"
+    android:fitsSystemWindows="true">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/textview_user_type_select_title">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:id="@+id/linearlayout_polynavi_user_type_select">
+            <TextView
+                android:id="@+id/textview_user_type_select_poly"
+                android:text="@string/poly"
+                android:textAppearance="@style/Poly"
+                android:fontFamily="@font/juliussansone_regular"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+            <TextView
+                android:id="@+id/textview_user_type_select_navi"
+                android:text="@string/navi"
+                android:textAppearance="@style/Navi"
+                android:fontFamily="@font/juliussansone_regular"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/textview_user_type_select_title"
+        android:text="@string/user_type_select_textview"
+        android:textSize="18sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true" />
+    <Button
+        android:id="@+id/button_student_user_type_select"
+        android:text="@string/user_type_select_button_student"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textview_user_type_select_title"
+        android:layout_marginTop="@dimen/margintopTB_auth_gobutton"
+        android:layout_marginLeft="@dimen/marginLR_auth_gobutton"
+        android:layout_marginRight="@dimen/marginLR_auth_gobutton"
+        android:layout_marginBottom="@dimen/margintopTB_auth_gobutton" />
+     <Button
+        android:id="@+id/button_teacher_user_type_select"
+        android:text="@string/user_type_select_button_teacher"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button_student_user_type_select"
+        android:layout_marginLeft="@dimen/marginLR_auth_gobutton"
+        android:layout_marginRight="@dimen/marginLR_auth_gobutton"
+        android:layout_marginBottom="@dimen/margintopTB_auth_gobutton" />
+</RelativeLayout>

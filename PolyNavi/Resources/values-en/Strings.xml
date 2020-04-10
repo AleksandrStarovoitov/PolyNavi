@@ -85,6 +85,10 @@
   <string name="error_tap">Tap to try again</string>
   <string name="error_summary">Details about error...Details about error...Details about error...Details about error...Details about error...Details about error...Details about error...Details about error...Details about error...Details about error...Details about error...Details about error...Details about error...Details about error...Details about error...Details about error...Details about error...Details about error...Details about error...Details about error...Details about error...Details about error...Details about error...Details about error...Details about error...Details about error...Details about error...Details about error...Details about error...Details about error...Details about error...Details about error...Details about error...</string>
 
+  <string name="user_type_select_textview">Choose your side</string>
+  <string name="user_type_select_button_student">I\'m a student</string>
+  <string name="user_type_select_button_teacher">I\'m a teacher</string>
+  
   <string name="welcome_header_first">Navigate inside main building...</string>
   <string name="welcome_header_second">...and on Polytechnic University campus</string>
   <string name="welcome_header_third">Arrive on time</string>

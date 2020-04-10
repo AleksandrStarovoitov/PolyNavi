@@ -75,6 +75,7 @@
     <Compile Include="Src\Activities\AuthorizationActivity.cs" />
     <Compile Include="Src\Activities\CopyrightActivity.cs" />
     <Compile Include="Src\Activities\MainEmptyActivity.cs" />
+    <Compile Include="Src\Activities\UserTypeSelectActivity.cs" />
     <Compile Include="Src\Activities\WelcomeActivity.cs" />
     <Compile Include="Src\Adapters\BuildingsAdapter.cs" />
     <Compile Include="Src\Adapters\ScheduleCardRowAdapter.cs" />
@@ -174,6 +175,9 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\fragment_error.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\activity_user_type_select.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\font\juliussansone_regular.ttf" />
