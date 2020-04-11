@@ -77,6 +77,7 @@
 
   <string name="pref_language_title">Application language</string>
   <string name="pref_language_summary">A reboot is required to apply changes</string>
+  <string name="pref_isteacher">I\'m a teacher</string>
   <string name="pref_groupnumber_title">Change group number</string>
   <string name="pref_groupnumber_summary">A reboot is required to apply changes</string>
   <string name="pref_groupnumber_dialog_title">Enter group number</string>

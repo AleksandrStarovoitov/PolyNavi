@@ -104,11 +104,13 @@ namespace PolyNavi.Activities
                 {
                     preferencesEditor.PutString(PreferencesConstants.GroupNumberPreferenceKey, autoCompleteTextViewAuth.Text).Apply();
                     preferencesEditor.PutInt(PreferencesConstants.GroupIdPreferenceKey, id).Apply();
+                    preferencesEditor.PutBoolean(PreferencesConstants.IsUserTeacherPreferenceKey, false);
                 }
                 else
                 {
                     preferencesEditor.PutString(PreferencesConstants.TeacherNamePreferenceKey, autoCompleteTextViewAuth.Text).Apply();
                     preferencesEditor.PutInt(PreferencesConstants.TeacherIdPreferenceKey, id).Apply();
+                    preferencesEditor.PutBoolean(PreferencesConstants.IsUserTeacherPreferenceKey, true);
                 }
 
                 ProceedToMainActivity();

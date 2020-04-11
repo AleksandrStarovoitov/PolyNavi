@@ -6999,8 +6999,8 @@ namespace PolyNavi
 			// aapt resource value: 0x7F100084
 			public const int poly = 2131755140;
 			
-			// aapt resource value: 0x7F100090
-			public const int preference_copied = 2131755152;
+			// aapt resource value: 0x7F100091
+			public const int preference_copied = 2131755153;
 			
 			// aapt resource value: 0x7F100085
 			public const int pref_buildings_activity = 2131755141;
@@ -7015,112 +7015,115 @@ namespace PolyNavi
 			public const int pref_groupnumber_title = 2131755144;
 			
 			// aapt resource value: 0x7F100089
-			public const int pref_language_summary = 2131755145;
+			public const int pref_isteacher = 2131755145;
 			
 			// aapt resource value: 0x7F10008A
-			public const int pref_language_title = 2131755146;
+			public const int pref_language_summary = 2131755146;
 			
 			// aapt resource value: 0x7F10008B
-			public const int pref_mainbuilding_activity = 2131755147;
+			public const int pref_language_title = 2131755147;
 			
 			// aapt resource value: 0x7F10008C
-			public const int pref_schedule_activity = 2131755148;
+			public const int pref_mainbuilding_activity = 2131755148;
 			
 			// aapt resource value: 0x7F10008D
-			public const int pref_startactivity_dialog_title = 2131755149;
+			public const int pref_schedule_activity = 2131755149;
 			
 			// aapt resource value: 0x7F10008E
-			public const int pref_startactivity_summary = 2131755150;
+			public const int pref_startactivity_dialog_title = 2131755150;
 			
 			// aapt resource value: 0x7F10008F
-			public const int pref_startactivity_title = 2131755151;
+			public const int pref_startactivity_summary = 2131755151;
 			
-			// aapt resource value: 0x7F100091
-			public const int room_schedule_row = 2131755153;
+			// aapt resource value: 0x7F100090
+			public const int pref_startactivity_title = 2131755152;
 			
 			// aapt resource value: 0x7F100092
-			public const int schedule_nav = 2131755154;
+			public const int room_schedule_row = 2131755154;
 			
 			// aapt resource value: 0x7F100093
-			public const int search_menu_title = 2131755155;
+			public const int schedule_nav = 2131755155;
 			
 			// aapt resource value: 0x7F100094
-			public const int settings_nav = 2131755156;
+			public const int search_menu_title = 2131755156;
 			
 			// aapt resource value: 0x7F100095
-			public const int starttime_schedule_row = 2131755157;
+			public const int settings_nav = 2131755157;
 			
 			// aapt resource value: 0x7F100096
-			public const int status_bar_notification_info_overflow = 2131755158;
+			public const int starttime_schedule_row = 2131755158;
 			
 			// aapt resource value: 0x7F100097
-			public const int subject_schedule_row = 2131755159;
+			public const int status_bar_notification_info_overflow = 2131755159;
 			
 			// aapt resource value: 0x7F100098
-			public const int summary_collapsed_preference_list = 2131755160;
+			public const int subject_schedule_row = 2131755160;
 			
 			// aapt resource value: 0x7F100099
-			public const int teacher_schedule_row = 2131755161;
+			public const int summary_collapsed_preference_list = 2131755161;
 			
 			// aapt resource value: 0x7F10009A
-			public const int title_copyright_activity = 2131755162;
+			public const int teacher_schedule_row = 2131755162;
 			
 			// aapt resource value: 0x7F10009B
-			public const int title_route_activity = 2131755163;
+			public const int title_copyright_activity = 2131755163;
 			
 			// aapt resource value: 0x7F10009C
-			public const int type_schedule_row = 2131755164;
+			public const int title_route_activity = 2131755164;
 			
 			// aapt resource value: 0x7F10009D
-			public const int updated = 2131755165;
+			public const int type_schedule_row = 2131755165;
 			
 			// aapt resource value: 0x7F10009E
-			public const int user_type_select_button_student = 2131755166;
+			public const int updated = 2131755166;
 			
 			// aapt resource value: 0x7F10009F
-			public const int user_type_select_button_teacher = 2131755167;
+			public const int user_type_select_button_student = 2131755167;
 			
 			// aapt resource value: 0x7F1000A0
-			public const int user_type_select_textview = 2131755168;
+			public const int user_type_select_button_teacher = 2131755168;
 			
 			// aapt resource value: 0x7F1000A1
-			public const int v7_preference_off = 2131755169;
+			public const int user_type_select_textview = 2131755169;
 			
 			// aapt resource value: 0x7F1000A2
-			public const int v7_preference_on = 2131755170;
+			public const int v7_preference_off = 2131755170;
 			
 			// aapt resource value: 0x7F1000A3
-			public const int welcome_description_first = 2131755171;
+			public const int v7_preference_on = 2131755171;
 			
 			// aapt resource value: 0x7F1000A4
-			public const int welcome_description_second = 2131755172;
+			public const int welcome_description_first = 2131755172;
 			
 			// aapt resource value: 0x7F1000A5
-			public const int welcome_description_third = 2131755173;
+			public const int welcome_description_second = 2131755173;
 			
 			// aapt resource value: 0x7F1000A6
-			public const int welcome_finish = 2131755174;
+			public const int welcome_description_third = 2131755174;
 			
 			// aapt resource value: 0x7F1000A7
-			public const int welcome_header_first = 2131755175;
+			public const int welcome_finish = 2131755175;
 			
 			// aapt resource value: 0x7F1000A8
-			public const int welcome_header_second = 2131755176;
+			public const int welcome_header_first = 2131755176;
 			
 			// aapt resource value: 0x7F1000A9
-			public const int welcome_header_third = 2131755177;
+			public const int welcome_header_second = 2131755177;
 			
 			// aapt resource value: 0x7F1000AA
-			public const int welcome_skip = 2131755178;
+			public const int welcome_header_third = 2131755178;
 			
 			// aapt resource value: 0x7F1000AB
-			public const int wrong_group = 2131755179;
+			public const int welcome_skip = 2131755179;
 			
 			// aapt resource value: 0x7F1000AC
-			public const int wrong_group_error = 2131755180;
+			public const int wrong_group = 2131755180;
 			
 			// aapt resource value: 0x7F1000AD
-			public const int wrong_room = 2131755181;
+			public const int wrong_group_error = 2131755181;
+			
+			// aapt resource value: 0x7F1000AE
+			public const int wrong_room = 2131755182;
 			
 			static String()
 			{
