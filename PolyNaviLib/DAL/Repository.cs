@@ -89,21 +89,20 @@ namespace PolyNaviLib.DAL
             }
 
             var dateStr = weekDate.ToString("yyyy-M-d", new CultureInfo("ru-RU"));
-            var isTeacher = settings[PreferencesConstants.IsUserTeacherPreferenceKey];
+            var isTeacher = settings[PreferenceConstants.IsUserTeacherPreferenceKey];
 
             string resultJson;
             if (isTeacher.Equals(true))
             {
-                var teacherId = settings[PreferencesConstants.TeacherIdPreferenceKey];
+                var teacherId = settings[PreferenceConstants.TeacherIdPreferenceKey];
                 resultJson = await HttpClientService.GetResponseAsync(client,
-                    ScheduleLinksConstants.TeacherScheduleLink + teacherId + "/scheduler" + "?&date=" + dateStr, new CancellationToken()); //TODO uri
-
+                    ScheduleLinkConstants.TeacherScheduleLink + teacherId + "/scheduler" + "?&date=" + dateStr, new CancellationToken()); //TODO uri
             }
             else
             {
-                var groupId = settings[PreferencesConstants.GroupIdPreferenceKey];
+                var groupId = settings[PreferenceConstants.GroupIdPreferenceKey];
                 resultJson = await HttpClientService.GetResponseAsync(client,
-                    ScheduleLinksConstants.ScheduleLink + groupId + "?&date=" + dateStr, new CancellationToken()); //TODO uri
+                    ScheduleLinkConstants.ScheduleLink + groupId + "?&date=" + dateStr, new CancellationToken()); //TODO uri
             }
 
             var weekRoot = JsonConvert.DeserializeObject<WeekRoot>(resultJson);
@@ -114,18 +113,18 @@ namespace PolyNaviLib.DAL
 
         private async Task RemoveExpiredWeeksAsync()
         {
-            var isTeacher = settings[PreferencesConstants.IsUserTeacherPreferenceKey];
+            var isTeacher = settings[PreferenceConstants.IsUserTeacherPreferenceKey];
 
             if (isTeacher.Equals(true))
             {
-                var currentTeacherId = Convert.ToInt32(settings[PreferencesConstants.TeacherIdPreferenceKey]);
+                var currentTeacherId = Convert.ToInt32(settings[PreferenceConstants.TeacherIdPreferenceKey]);
 
                 await database.DeleteItemsAsync<WeekRoot>(w =>
                     w.Week.IsExpired() || w.Days.Any(d => d.Lessons.Any(l => l.Teachers.Any(t => t.Id != currentTeacherId)))); //TODO
             }
             else
             {
-                var currentGroupId = Convert.ToInt32(settings[PreferencesConstants.GroupIdPreferenceKey]);
+                var currentGroupId = Convert.ToInt32(settings[PreferenceConstants.GroupIdPreferenceKey]);
 
                 await database.DeleteItemsAsync<WeekRoot>(w =>
                     w.Week.IsExpired() || w.Group.Id != currentGroupId);

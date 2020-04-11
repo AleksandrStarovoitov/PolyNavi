@@ -27,8 +27,8 @@ namespace PolyNavi.Activities
         {
             var preferences = MainApp.Instance.SharedPreferences;
 
-            var isAuthCompleted = preferences.GetBoolean(PreferencesConstants.AuthCompletedPreferenceKey, false);
-            var isWelcomeCompleted = preferences.GetBoolean(PreferencesConstants.WelcomeCompletedPreferenceKey, false);
+            var isAuthCompleted = preferences.GetBoolean(PreferenceConstants.AuthCompletedPreferenceKey, false);
+            var isWelcomeCompleted = preferences.GetBoolean(PreferenceConstants.WelcomeCompletedPreferenceKey, false);
 
             if (isAuthCompleted)
             {

@@ -24,7 +24,7 @@ namespace PolyNavi.Services
                     return value;
                 }
 
-                if (key == PreferencesConstants.GroupIdPreferenceKey)
+                if (key == PreferenceConstants.GroupIdPreferenceKey)
                     throw new GroupNumberException();
                 throw new KeyNotFoundException();
             }

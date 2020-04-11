@@ -1,6 +1,6 @@
 ﻿namespace PolyNaviLib.Constants
 {
-    public static class PreferencesConstants
+    public static class PreferenceConstants
     {
         public const string GroupNumberPreferenceKey = "groupnumber";
         public const string GroupIdPreferenceKey = "groupid";

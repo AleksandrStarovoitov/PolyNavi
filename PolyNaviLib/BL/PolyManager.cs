@@ -56,7 +56,7 @@ namespace PolyNaviLib.BL
 
         public static async Task<GroupRoot> GetSuggestedGroups(string groupName) //TODO Non static?
         {
-            var resultJson = await HttpClientService.GetResponseAsync(Client, ScheduleLinksConstants.GroupSearchLink + groupName, new CancellationToken());
+            var resultJson = await HttpClientService.GetResponseAsync(Client, ScheduleLinkConstants.GroupSearchLink + groupName, new CancellationToken());
             var groups = JsonConvert.DeserializeObject<GroupRoot>(resultJson);
 
             return groups;
@@ -64,7 +64,7 @@ namespace PolyNaviLib.BL
 
         public static async Task<TeachersRoot> GetSuggestedTeachers(string teacherName)
         {
-            var resultJson = await HttpClientService.GetResponseAsync(Client, ScheduleLinksConstants.TeacherSearchLink + teacherName, new CancellationToken());
+            var resultJson = await HttpClientService.GetResponseAsync(Client, ScheduleLinkConstants.TeacherSearchLink + teacherName, new CancellationToken());
             var teachers = JsonConvert.DeserializeObject<TeachersRoot>(resultJson);
 
             return teachers;

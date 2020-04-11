@@ -98,7 +98,7 @@ namespace PolyNavi.Activities
 
         private void ProceedToUserTypeSelectActivity()
         {
-            preferencesEditor.PutBoolean(PreferencesConstants.WelcomeCompletedPreferenceKey, true).Apply();
+            preferencesEditor.PutBoolean(PreferenceConstants.WelcomeCompletedPreferenceKey, true).Apply();
 
             var intent = new Intent(this, typeof(UserTypeSelectActivity));
             intent.SetFlags(ActivityFlags.ClearTop);

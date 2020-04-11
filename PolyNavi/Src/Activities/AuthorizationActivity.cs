@@ -102,15 +102,15 @@ namespace PolyNavi.Activities
             {
                 if (userType == UserType.Student)
                 {
-                    preferencesEditor.PutString(PreferencesConstants.GroupNumberPreferenceKey, autoCompleteTextViewAuth.Text).Apply();
-                    preferencesEditor.PutInt(PreferencesConstants.GroupIdPreferenceKey, id).Apply();
-                    preferencesEditor.PutBoolean(PreferencesConstants.IsUserTeacherPreferenceKey, false);
+                    preferencesEditor.PutString(PreferenceConstants.GroupNumberPreferenceKey, autoCompleteTextViewAuth.Text).Apply();
+                    preferencesEditor.PutInt(PreferenceConstants.GroupIdPreferenceKey, id).Apply();
+                    preferencesEditor.PutBoolean(PreferenceConstants.IsUserTeacherPreferenceKey, false);
                 }
                 else
                 {
-                    preferencesEditor.PutString(PreferencesConstants.TeacherNamePreferenceKey, autoCompleteTextViewAuth.Text).Apply();
-                    preferencesEditor.PutInt(PreferencesConstants.TeacherIdPreferenceKey, id).Apply();
-                    preferencesEditor.PutBoolean(PreferencesConstants.IsUserTeacherPreferenceKey, true);
+                    preferencesEditor.PutString(PreferenceConstants.TeacherNamePreferenceKey, autoCompleteTextViewAuth.Text).Apply();
+                    preferencesEditor.PutInt(PreferenceConstants.TeacherIdPreferenceKey, id).Apply();
+                    preferencesEditor.PutBoolean(PreferenceConstants.IsUserTeacherPreferenceKey, true);
                 }
 
                 ProceedToMainActivity();
@@ -128,7 +128,7 @@ namespace PolyNavi.Activities
 
         private void ProceedToMainActivity()
         {
-            preferencesEditor.PutBoolean(PreferencesConstants.AuthCompletedPreferenceKey, true).Apply();
+            preferencesEditor.PutBoolean(PreferenceConstants.AuthCompletedPreferenceKey, true).Apply();
 
             var mainIntent = new Intent(this, typeof(MainActivity));
             mainIntent.SetFlags(ActivityFlags.ClearTop);

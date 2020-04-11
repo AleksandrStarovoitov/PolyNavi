@@ -21,6 +21,12 @@
         android:title="@string/pref_groupnumber_title"
         android:summary="@string/pref_groupnumber_summary"
         android:dialogTitle="@string/pref_groupnumber_dialog_title"/>
+  <PolyNavi.Preferences.AutoCompleteTextViewPreference
+        android:key="teachername"
+        app:iconSpaceReserved="false"
+        android:title="@string/pref_teacher_name_title"
+        android:summary="@string/pref_groupnumber_summary"
+        android:dialogTitle="@string/pref_teacher_name_dialog_title"/>
   <ListPreference
       android:key="language"
       app:iconSpaceReserved="false"

@@ -72,7 +72,6 @@ namespace PolyNavi.Preferences
         }
     }
 
-
     public class AutoCompleteTextViewPreferenceDialogFragmentCompat : PreferenceDialogFragmentCompat, ITextWatcher
     {
         private AutoCompleteTextView autoCompleteTextViewPref;
@@ -127,7 +126,7 @@ namespace PolyNavi.Preferences
                 if (groupsDictionary.TryGetValue(groupName, out var groupId))
                 {
                     autoCompleteTvPreference.SaveGroupName(groupName);
-                    MainApp.Instance.SharedPreferences.Edit().PutInt(PreferencesConstants.GroupIdPreferenceKey, groupId)
+                    MainApp.Instance.SharedPreferences.Edit().PutInt(PreferenceConstants.GroupIdPreferenceKey, groupId)
                         .Apply();
                 }
                 else

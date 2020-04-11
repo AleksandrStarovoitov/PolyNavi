@@ -61,7 +61,7 @@ namespace PolyNavi.Activities
             navigationView.NavigationItemSelected += NavViewItemSelected;
             navigationView.Alpha = 0.99f;
 
-            startActivity = MainApp.Instance.SharedPreferences.GetString(PreferencesConstants.StartActivityPreferenceKey, null);
+            startActivity = MainApp.Instance.SharedPreferences.GetString(PreferenceConstants.StartActivityPreferenceKey, null);
         }
 
         private void InstantiateFragment()

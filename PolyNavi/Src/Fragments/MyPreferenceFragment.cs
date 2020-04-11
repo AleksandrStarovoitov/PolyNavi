@@ -2,11 +2,15 @@
 using Android.OS;
 using AndroidX.Preference;
 using PolyNavi.Preferences;
+using PolyNaviLib.Constants;
 
 namespace PolyNavi.Fragments
 {
     public class MyPreferenceFragment : PreferenceFragmentCompat, ISharedPreferencesOnSharedPreferenceChangeListener
     {
+        private Preference groupNumberPreference;
+        private Preference teacherNamePreference;
+
         public override void OnDisplayPreferenceDialog(Preference preference)
         {
             if (preference is AutoCompleteTextViewPreference)
@@ -32,13 +36,39 @@ namespace PolyNavi.Fragments
 
         public void OnSharedPreferenceChanged(ISharedPreferences sharedPreferences, string key)
         {
+            if (key.Equals(PreferenceConstants.IsUserTeacherPreferenceKey))
+            {
+                TogglePreferences();
+            }
         }
 
         public override void OnCreatePreferences(Bundle savedInstanceState, string rootKey)
         {
             AddPreferencesFromResource(Resource.Xml.preferences);
 
+            groupNumberPreference = FindPreference(PreferenceConstants.GroupNumberPreferenceKey);
+            teacherNamePreference = FindPreference(PreferenceConstants.TeacherNamePreferenceKey);
+
+            TogglePreferences();
+
             MainApp.Instance.SharedPreferences.RegisterOnSharedPreferenceChangeListener(this);
+        }
+
+        private void TogglePreferences()
+        {
+            var isTeacher = PreferenceManager.SharedPreferences.
+                GetBoolean(PreferenceConstants.IsUserTeacherPreferenceKey, false);
+
+            if (isTeacher)
+            {
+                PreferenceScreen.RemovePreference(groupNumberPreference);
+                PreferenceScreen.AddPreference(teacherNamePreference);
+            }
+            else
+            {
+                PreferenceScreen.RemovePreference(teacherNamePreference);
+                PreferenceScreen.AddPreference(groupNumberPreference);
+            }
         }
     }
 }
