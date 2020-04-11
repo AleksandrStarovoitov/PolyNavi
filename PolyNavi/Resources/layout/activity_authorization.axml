@@ -36,7 +36,6 @@
     </RelativeLayout>
     <TextView
         android:id="@+id/textview_auth_edittext_title"
-        android:text="@string/edittext_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/marginleft_auth_edittexttitle"
@@ -51,8 +50,7 @@
         android:layout_centerVertical="true"
         android:layout_marginRight="@dimen/marginlr_auth_edittext"
         android:inputType="text"
-        android:imeOptions="actionGo"
-        android:hint="@string/edittext_auth" />
+        android:imeOptions="actionGo" />
     <Button
         android:id="@+id/button_auth"
         android:text="@string/button_auth"
@@ -69,7 +67,6 @@
         android:layout_below="@+id/button_auth">
             <TextView
                 android:id="@+id/textview_auth_skip"
-                android:text="@string/group_later"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"

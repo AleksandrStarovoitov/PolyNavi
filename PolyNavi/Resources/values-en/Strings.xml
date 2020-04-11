@@ -66,11 +66,14 @@
   
   <string name="about_copyright_title">Copyright</string>
 
-  <string name="enter_group_number">Enter group number</string>
   <string name="edittext_title">Group number</string>
   <string name="edittext_auth">For example - 3530202/60201</string>
   <string name="button_auth">Let\'s go</string>
   <string name="group_later">I\'ll enter group number later</string>
+
+  <string name="auth_teacher_title">Your full name</string>
+  <string name="auth_teacher_hint">For example - Иванов Иван Иванович</string>
+  <string name="auth_teacher_later">I\'ll enter name later</string>
 
   <string name="pref_language_title">Application language</string>
   <string name="pref_language_summary">A reboot is required to apply changes</string>

@@ -23,5 +23,12 @@ namespace PolyNavi.Utils
 
             return groups.Groups.ToDictionary(x => x.Name, x => x.Id);
         }
+
+        internal static async Task<Dictionary<string, int>> GetSuggestedTeachersDictionary(string s)
+        {
+            var teachers = await PolyManager.GetSuggestedTeachers(s);
+
+            return teachers.Teachers.ToDictionary(t => t.Full_Name, t => t.Id);
+        }
     }
 }

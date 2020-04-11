@@ -14,6 +14,7 @@ using AndroidX.AppCompat.App;
 using Java.Lang;
 using PolyNavi.Extensions;
 using PolyNavi.Services;
+using PolyNaviLib.BL;
 using PolyNaviLib.Constants;
 using Timer = System.Timers.Timer;
 
@@ -27,11 +28,12 @@ namespace PolyNavi.Activities
     {
         private AutoCompleteTextView autoCompleteTextViewAuth;
         private NetworkChecker networkChecker;
-        private Dictionary<string, int> groupsDictionary;
+        private Dictionary<string, int> suggestionsAndIds;
         private Timer searchTimer;
         private ISharedPreferencesEditor preferencesEditor;
+        private UserType userType;
         private const int MillsToSearch = 700;
-        
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             MainApp.ChangeLanguage(this);
@@ -59,6 +61,22 @@ namespace PolyNavi.Activities
             skipAuthTextView.Click += SkipAuthTextView_Click;
 
             preferencesEditor = MainApp.Instance.SharedPreferences.Edit();
+            userType = (UserType)Intent.Extras.GetInt(UserTypeSelectActivity.UserTypeIntentExtraName);
+
+            var titleTextView = FindViewById<TextView>(Resource.Id.textview_auth_edittext_title);
+
+            if (userType == UserType.Student)
+            {
+                skipAuthTextView.Text = Resources.GetString(Resource.String.group_later);
+                titleTextView.Text = Resources.GetString(Resource.String.edittext_title);
+                autoCompleteTextViewAuth.Hint = Resources.GetString(Resource.String.edittext_auth);
+            }
+            else
+            {
+                skipAuthTextView.Text = Resources.GetString(Resource.String.auth_teacher_later);
+                titleTextView.Text = Resources.GetString(Resource.String.auth_teacher_title);
+                autoCompleteTextViewAuth.Hint = Resources.GetString(Resource.String.auth_teacher_hint);
+            }
         }
 
         private void ButtonAuth_Click(object sender, EventArgs e)
@@ -80,10 +98,18 @@ namespace PolyNavi.Activities
 
         private void CheckGroupNumberAndProceedToMainActivity()
         {
-            if (groupsDictionary.TryGetValue(autoCompleteTextViewAuth.Text, out var groupId))
+            if (suggestionsAndIds.TryGetValue(autoCompleteTextViewAuth.Text, out var id))
             {
-                preferencesEditor.PutString(PreferencesConstants.GroupNumberPreferenceKey, autoCompleteTextViewAuth.Text).Apply();
-                preferencesEditor.PutInt(PreferencesConstants.GroupIdPreferenceKey, groupId).Apply();
+                if (userType == UserType.Student)
+                {
+                    preferencesEditor.PutString(PreferencesConstants.GroupNumberPreferenceKey, autoCompleteTextViewAuth.Text).Apply();
+                    preferencesEditor.PutInt(PreferencesConstants.GroupIdPreferenceKey, id).Apply();
+                }
+                else
+                {
+                    preferencesEditor.PutString(PreferencesConstants.TeacherNamePreferenceKey, autoCompleteTextViewAuth.Text).Apply();
+                    preferencesEditor.PutInt(PreferencesConstants.TeacherIdPreferenceKey, id).Apply();
+                }
 
                 ProceedToMainActivity();
             }
@@ -141,13 +167,15 @@ namespace PolyNavi.Activities
                     {
                         Task.Run(async () =>
                         {
-                            groupsDictionary = await Utils.Utils.GetSuggestedGroupsDictionary(s.ToString());
+                            suggestionsAndIds = userType == UserType.Student 
+                            ? await Utils.Utils.GetSuggestedGroupsDictionary(s.ToString()) 
+                            : await Utils.Utils.GetSuggestedTeachersDictionary(s.ToString());
 
                             if (s.Length() > 0 && before != count) //TODO Local method?
                             {
                                 RunOnUiThread(() =>
                                 {
-                                    autoCompleteTextViewAuth.UpdateSuggestions(groupsDictionary, this);
+                                    autoCompleteTextViewAuth.UpdateSuggestions(suggestionsAndIds, this);
                                 });
                             }
                         });

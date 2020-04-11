@@ -61,5 +61,13 @@ namespace PolyNaviLib.BL
 
             return groups;
         }
+
+        public static async Task<TeachersRoot> GetSuggestedTeachers(string teacherName)
+        {
+            var resultJson = await HttpClientService.GetResponseAsync(Client, ScheduleLinksConstants.TeacherSearchLink + teacherName, new CancellationToken());
+            var teachers = JsonConvert.DeserializeObject<TeachersRoot>(resultJson);
+
+            return teachers;
+        }
     }
 }

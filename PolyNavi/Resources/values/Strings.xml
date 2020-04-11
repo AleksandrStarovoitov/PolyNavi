@@ -66,11 +66,14 @@
   <string name="about_github_link">https://github.com/darksasha5/PolyNavi</string>
   <string name="about_copyright_title">Копирайт</string>
 
-  <string name="enter_group_number">Укажите номер группы</string>
   <string name="edittext_title">Номер группы</string>
   <string name="edittext_auth">Например - 3530202/60201</string>
   <string name="button_auth">Поехали</string>
   <string name="group_later">Я укажу номер группы позже</string>
+
+  <string name="auth_teacher_title">Ваше ФИО</string>
+  <string name="auth_teacher_hint">Например - Иванов Иван Иванович</string>
+  <string name="auth_teacher_later">Я укажу ФИО позже</string>
 
   <string name="pref_language_title">Язык приложения</string>
   <string name="pref_language_summary">Для применения изменений необходима перезагрузка приложения</string>

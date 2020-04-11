@@ -5,6 +5,7 @@ using Android.Content;
 using Android.Content.PM;
 using Android.OS;
 using Android.Widget;
+using PolyNaviLib.BL;
 
 namespace PolyNavi.Activities
 {
@@ -14,6 +15,8 @@ namespace PolyNavi.Activities
         ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.ScreenSize)]
     public class UserTypeSelectActivity : Activity
     {
+        public const string UserTypeIntentExtraName = "user_type";
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             MainApp.ChangeLanguage(this);
@@ -37,13 +40,17 @@ namespace PolyNavi.Activities
 
         private void SelectStudentButton_Click(object sender, EventArgs e)
         {
-            var intent = new Intent(this, typeof(AuthorizationActivity)); //TODO
+            var intent = new Intent(this, typeof(AuthorizationActivity));
+            intent.PutExtra(UserTypeIntentExtraName, (int)UserType.Student);
+
             StartActivity(intent);
         }
 
         private void SelectTeacherButton_Click(object sender, EventArgs e)
         {
-            var intent = new Intent(this, typeof(AuthorizationActivity)); //TODO
+            var intent = new Intent(this, typeof(AuthorizationActivity));
+            intent.PutExtra(UserTypeIntentExtraName, (int)UserType.Teacher);
+
             StartActivity(intent);
         }
     }
