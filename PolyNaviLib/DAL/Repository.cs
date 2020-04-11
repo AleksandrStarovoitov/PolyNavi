@@ -59,7 +59,7 @@ namespace PolyNaviLib.DAL
         public async Task<WeekRoot> GetSchedule(DateTime weekDate)
         {
             var weekRoots = await database.GetItemsAsync<WeekRoot>();
-            var weekRoot =  weekRoots.SingleOrDefault(w => w.Week.ContainsDate(weekDate));
+            var weekRoot = weekRoots.SingleOrDefault(w => w.Week.ContainsDate(weekDate));
 
             if (weekRoot == null)
             {
@@ -89,10 +89,22 @@ namespace PolyNaviLib.DAL
             }
 
             var dateStr = weekDate.ToString("yyyy-M-d", new CultureInfo("ru-RU"));
-            var groupId = settings[PreferencesConstants.GroupIdPreferenceKey];
+            var isTeacher = settings[PreferencesConstants.IsUserTeacherPreferenceKey];
 
-            var resultJson = await HttpClientService.GetResponseAsync(client,
-                ScheduleLinksConstants.ScheduleLink + groupId + "?&date=" + dateStr, new CancellationToken()); //TODO uri
+            string resultJson;
+            if (isTeacher.Equals(true))
+            {
+                var teacherId = settings[PreferencesConstants.TeacherIdPreferenceKey];
+                resultJson = await HttpClientService.GetResponseAsync(client,
+                    ScheduleLinksConstants.TeacherScheduleLink + teacherId + "/scheduler" + "?&date=" + dateStr, new CancellationToken()); //TODO uri
+
+            }
+            else
+            {
+                var groupId = settings[PreferencesConstants.GroupIdPreferenceKey];
+                resultJson = await HttpClientService.GetResponseAsync(client,
+                    ScheduleLinksConstants.ScheduleLink + groupId + "?&date=" + dateStr, new CancellationToken()); //TODO uri
+            }
 
             var weekRoot = JsonConvert.DeserializeObject<WeekRoot>(resultJson);
             weekRoot.LastUpdated = DateTime.Now;
@@ -102,10 +114,22 @@ namespace PolyNaviLib.DAL
 
         private async Task RemoveExpiredWeeksAsync()
         {
-            var currentGroupId = Convert.ToInt32(settings[PreferencesConstants.GroupIdPreferenceKey]);
+            var isTeacher = settings[PreferencesConstants.IsUserTeacherPreferenceKey];
 
-            await database.DeleteItemsAsync<WeekRoot>(w =>
-                w.Week.IsExpired() || w.Group.Id != currentGroupId);
+            if (isTeacher.Equals(true))
+            {
+                var currentTeacherId = Convert.ToInt32(settings[PreferencesConstants.TeacherIdPreferenceKey]);
+
+                await database.DeleteItemsAsync<WeekRoot>(w =>
+                    w.Week.IsExpired() || w.Days.Any(d => d.Lessons.Any(l => l.Teachers.Any(t => t.Id != currentTeacherId)))); //TODO
+            }
+            else
+            {
+                var currentGroupId = Convert.ToInt32(settings[PreferencesConstants.GroupIdPreferenceKey]);
+
+                await database.DeleteItemsAsync<WeekRoot>(w =>
+                    w.Week.IsExpired() || w.Group.Id != currentGroupId);
+            }
         }
     }
 }

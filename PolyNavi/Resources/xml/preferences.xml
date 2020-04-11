@@ -12,6 +12,7 @@
         android:defaultValue="mainbuilding"/>
   <SwitchPreference
        android:key="isteacher"
+       app:iconSpaceReserved="false"
        android:title="@string/pref_isteacher"
        android:defaultValue="false" />
   <PolyNavi.Preferences.AutoCompleteTextViewPreference
