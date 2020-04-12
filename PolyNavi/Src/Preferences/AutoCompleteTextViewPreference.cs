@@ -24,7 +24,7 @@ namespace PolyNavi.Preferences
     public class AutoCompleteTextViewPreference : EditTextPreference
     {
         private const int ResourceId = Resource.Layout.preference_dialog_autocomplete;
-        public string GroupName { get; private set; }
+        public string Name { get; private set; }
 
         protected AutoCompleteTextViewPreference(IntPtr javaReference, JniHandleOwnership transfer) : base(
             javaReference, transfer)
@@ -54,15 +54,15 @@ namespace PolyNavi.Preferences
             return a.GetString(index);
         }
 
-        public void SaveGroupName(string name)
+        public void SaveName(string name)
         {
-            GroupName = name;
+            Name = name;
             PersistString(name);
         }
 
         protected override void OnSetInitialValue(bool restorePersistedValue, Object defaultValue) //TODO
         {
-            GroupName = restorePersistedValue ? GetPersistedString(GroupName) : defaultValue.ToString();
+            Name = restorePersistedValue ? GetPersistedString(Name) : defaultValue.ToString();
         }
 
         public override int DialogLayoutResource
@@ -76,8 +76,9 @@ namespace PolyNavi.Preferences
     {
         private AutoCompleteTextView autoCompleteTextViewPref;
         private NetworkChecker networkChecker;
-        private Dictionary<string, int> groupsDictionary;
+        private Dictionary<string, int> suggestionsAndIds;
         private Timer searchTimer;
+        private bool isTeacher;
         private const int MillsToSearch = 700;
 
         public static AutoCompleteTextViewPreferenceDialogFragmentCompat NewInstance(string key)
@@ -94,17 +95,17 @@ namespace PolyNavi.Preferences
         {
             base.OnBindDialogView(view);
 
+            isTeacher = Preference.SharedPreferences.GetBoolean(PreferenceConstants.IsUserTeacherPreferenceKey, false);
             networkChecker = new NetworkChecker(Activity.BaseContext);
             autoCompleteTextViewPref =
                 view.FindViewById<AutoCompleteTextView>(Resource.Id.autocompletetextview_group_pref);
-
             autoCompleteTextViewPref.AddTextChangedListener(this);
-
+            
             string groupName = null;
             var preference = Preference;
             if (preference is AutoCompleteTextViewPreference viewPreference)
             {
-                groupName = viewPreference.GroupName;
+                groupName = viewPreference.Name;
             }
 
             if (groupName != null)
@@ -117,22 +118,31 @@ namespace PolyNavi.Preferences
         {
             if (!positiveResult) return;
 
-            var groupName = autoCompleteTextViewPref.Text;
+            var name = autoCompleteTextViewPref.Text;
 
             var preference = Preference;
             if (preference is AutoCompleteTextViewPreference autoCompleteTvPreference &&
-                autoCompleteTvPreference.CallChangeListener(groupName)) //TODO
+                autoCompleteTvPreference.CallChangeListener(name)) //TODO
             {
-                if (groupsDictionary.TryGetValue(groupName, out var groupId))
+                if (suggestionsAndIds.TryGetValue(name, out var id))
                 {
-                    autoCompleteTvPreference.SaveGroupName(groupName);
-                    MainApp.Instance.SharedPreferences.Edit().PutInt(PreferenceConstants.GroupIdPreferenceKey, groupId)
-                        .Apply();
+                    if (isTeacher)
+                    {
+                        autoCompleteTvPreference.SaveName(name);
+                        MainApp.Instance.SharedPreferences.Edit().PutInt(PreferenceConstants.TeacherIdPreferenceKey, id)
+                            .Apply();
+                    } 
+                    else
+                    {
+                        autoCompleteTvPreference.SaveName(name);
+                        MainApp.Instance.SharedPreferences.Edit().PutInt(PreferenceConstants.GroupIdPreferenceKey, id)
+                            .Apply();
+                    }
                 }
                 else
                 {
                     Toast.MakeText(Activity.BaseContext, GetString(Resource.String.wrong_group), ToastLength.Short)
-                        .Show();
+                        .Show(); //TODO Wrong teacher
                 }
             }
         }
@@ -152,7 +162,7 @@ namespace PolyNavi.Preferences
             SetupTimer(s, before, count);
         }
         
-        private void SetupTimer(ICharSequence s, int before, int count)
+        private void SetupTimer(ICharSequence s, int before, int count) //TODO Duplicate code (auth) //TODO Move to lib, catch ex
         {
             if (searchTimer != null)
             {
@@ -163,17 +173,19 @@ namespace PolyNavi.Preferences
                 searchTimer = new Timer(MillsToSearch);
                 searchTimer.Elapsed += delegate
                 {
-                    if (networkChecker.IsConnected())   //TODO Move to lib, catch ex
+                    if (networkChecker.IsConnected())
                     {
                         Task.Run(async () =>
                         {
-                            groupsDictionary = await Utils.Utils.GetSuggestedGroupsDictionary(s.ToString());
+                            suggestionsAndIds = isTeacher
+                            ? await Utils.Utils.GetSuggestedTeachersDictionary(s.ToString())
+                            : await Utils.Utils.GetSuggestedGroupsDictionary(s.ToString());
 
                             if (s.Length() > 0 && before != count) //TODO Local method?
                             {
                                 Activity.RunOnUiThread(() =>
                                 {
-                                    autoCompleteTextViewPref.UpdateSuggestions(groupsDictionary, Activity);
+                                    autoCompleteTextViewPref.UpdateSuggestions(suggestionsAndIds, Activity);
                                 });
                             }
                         });

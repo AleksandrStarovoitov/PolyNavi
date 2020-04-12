@@ -117,7 +117,7 @@ namespace PolyNavi.Activities
             }
             else
             {
-                autoCompleteTextViewAuth.Error = GetString(Resource.String.wrong_group);
+                autoCompleteTextViewAuth.Error = GetString(Resource.String.wrong_group); //TODO Wrong teacher
             }
         }
 
@@ -152,7 +152,7 @@ namespace PolyNavi.Activities
             SetupTimer(s, before, count);
         }
         
-        private void SetupTimer(ICharSequence s, int before, int count)
+        private void SetupTimer(ICharSequence s, int before, int count) //TODO Move to lib, catch ex
         {
             if (searchTimer != null)
             {
@@ -165,7 +165,7 @@ namespace PolyNavi.Activities
 
                 searchTimer.Elapsed += delegate
                 {
-                    if (networkChecker.IsConnected()) //TODO Move to lib, catch ex
+                    if (networkChecker.IsConnected())
                     {
                         Task.Run(async () =>
                         {
