@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using Android.Content;
 using Android.Views;
 using Android.Widget;
 using AndroidX.RecyclerView.Widget;
@@ -11,6 +13,7 @@ namespace PolyNavi.Adapters
 {
     internal class ScheduleCardRowAdapter : RecyclerView.Adapter
     {
+        private readonly Context context;
         private readonly List<object> lessons;
         private View scheduleView;
         private ScheduleCardRowLessonViewHolder lessonViewHolder;
@@ -19,8 +22,9 @@ namespace PolyNavi.Adapters
         private const int TitleTag = 0, LessonTag = 1;
         public override int ItemCount => lessons.Count;
 
-        public ScheduleCardRowAdapter(List<object> lessons)
+        public ScheduleCardRowAdapter(Context context, List<object> lessons)
         {
+            this.context = context;
             this.lessons = lessons;
         }
 
@@ -74,6 +78,7 @@ namespace PolyNavi.Adapters
             var endTimeTextView = lessonViewHolder.endTimeTextView;
             var typeTextView = lessonViewHolder.typeTextView;
             var teacherTextView = lessonViewHolder.teacherTextView;
+            var lmsUrlTextView = lessonViewHolder.lmsUrlTextView;
             var groupTextView = lessonViewHolder.groupTextView;
 
             roomTextView.Text = "ауд. " + lesson.Auditories[0].Name;
@@ -84,7 +89,9 @@ namespace PolyNavi.Adapters
             typeTextView.Text = lesson.TypeObj.Name.Replace("Лабораторные", "Лаб.")
                                             .Replace("Курсовое проектирование", "Курс."); //TODO property in axml?
 
-            if (HasNoTeachers())
+            var noTeachers = lesson.Teachers == null || !lesson.Teachers.Any();
+
+            if (noTeachers)
             {
                 RemoveTeacherTextView(groupTextView);
             }
@@ -93,9 +100,31 @@ namespace PolyNavi.Adapters
                 CombineTeachers(teacherTextView, lesson);
             }
 
+            if (String.IsNullOrEmpty(lesson.Lms_Url))
+            {
+                if (noTeachers) //TODO
+                {
+                    RemoveLmsUrlTextView(null);
+                }
+                else
+                {
+                    RemoveLmsUrlTextView(groupTextView);
+                }
+            }
+            else
+            {
+                lmsUrlTextView.PaintFlags = Android.Graphics.PaintFlags.UnderlineText;
+                lmsUrlTextView.Click += delegate
+                {
+                    var lmsUrl = lesson.Lms_Url;
+                    var lmsUrlLink = new Intent(Intent.ActionView, Android.Net.Uri.Parse(lmsUrl));
+
+                    context.StartActivity(lmsUrlLink);
+                };
+            }
+
             groupTextView.Text = HasSubgroups() ? GetSubgroup() : GetFirstGroupName();
 
-            bool HasNoTeachers() => lesson.Teachers == null || !lesson.Teachers.Any();
             bool HasSubgroups() => lesson.Additional_Info.Any();
             string GetSubgroup() => lesson.Additional_Info;
             string GetFirstGroupName() => lesson.Groups.First().Name; //TODO Null check?
@@ -108,6 +137,18 @@ namespace PolyNavi.Adapters
             group.LayoutParameters = layoutParams;
 
             ((ViewGroup)scheduleView).RemoveView(lessonViewHolder.teacherTextView);
+        }
+
+        private void RemoveLmsUrlTextView(TextView group) //TODO Make for any view?
+        {
+            if (group != null)
+            {
+                var layoutParams = (RelativeLayout.LayoutParams)group.LayoutParameters;
+                layoutParams.AddRule(LayoutRules.Below, Resource.Id.textview_card_teacher_row_lesson_schedule);
+                group.LayoutParameters = layoutParams;
+            }
+
+            ((ViewGroup)scheduleView).RemoveView(lessonViewHolder.lmsUrlTextView);
         }
 
         private static void CombineTeachers(TextView teacherTextView, Lesson lesson)
@@ -138,6 +179,7 @@ namespace PolyNavi.Adapters
             internal readonly TextView endTimeTextView;
             internal readonly TextView typeTextView;
             internal readonly TextView teacherTextView;
+            internal readonly TextView lmsUrlTextView;
             internal readonly TextView groupTextView;
 
             internal ScheduleCardRowLessonViewHolder(View itemView) : base(itemView)
@@ -149,6 +191,7 @@ namespace PolyNavi.Adapters
                 endTimeTextView = itemView.FindViewById<TextView>(Resource.Id.textview_card_endtime_row_lesson_schedule);
                 typeTextView = itemView.FindViewById<TextView>(Resource.Id.textview_card_type_row_lesson_schedule);
                 teacherTextView = itemView.FindViewById<TextView>(Resource.Id.textview_card_teacher_row_lesson_schedule);
+                lmsUrlTextView = ItemView.FindViewById<TextView>(Resource.Id.textview_card_lms_url_row_lesson_schedule);
                 groupTextView = itemView.FindViewById<TextView>(Resource.Id.textview_card_group_row_lesson_schedule);
             }
         }

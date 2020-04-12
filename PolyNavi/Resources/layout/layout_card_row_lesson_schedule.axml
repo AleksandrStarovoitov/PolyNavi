@@ -64,7 +64,17 @@
         android:layout_alignLeft="@+id/textview_card_buildingnumber_row_lesson_schedule"
         android:layout_below="@+id/textview_card_buildingnumber_row_lesson_schedule"
         android:layout_marginTop="@dimen/margintop_card_row_lesson_schedule_inner"/>
-        <TextView
+    <TextView
+        android:text="@string/lms_url_schedule_row"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textview_card_lms_url_row_lesson_schedule"
+        android:textAppearance="@style/ScheduleRoom"
+        android:fontFamily="@font/roboto_light"
+        android:layout_alignLeft="@+id/textview_card_buildingnumber_row_lesson_schedule"
+        android:layout_below="@+id/textview_card_teacher_row_lesson_schedule"
+        android:layout_marginTop="@dimen/margintop_card_row_lesson_schedule_inner"/>
+    <TextView
         android:text="@string/group_schedule_row"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -72,11 +82,9 @@
         android:textAppearance="@style/ScheduleRoom"
         android:fontFamily="@font/roboto_light"
         android:layout_alignLeft="@+id/textview_card_buildingnumber_row_lesson_schedule"
-        android:layout_below="@+id/textview_card_teacher_row_lesson_schedule"
+        android:layout_below="@+id/textview_card_lms_url_row_lesson_schedule"
         android:layout_marginTop="@dimen/margintop_card_row_lesson_schedule_inner"
         android:layout_marginBottom="@dimen/marginbottom_card_row_lesson_schedule" />
-	
-	
 	<TextView
         android:text="@string/type_schedule_row"
         android:layout_width="wrap_content"

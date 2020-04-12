@@ -83,7 +83,7 @@ namespace PolyNavi.Adapters
             };
             lessons.AddRange(day.Lessons);
 
-            var adapter = new ScheduleCardRowAdapter(lessons);
+            var adapter = new ScheduleCardRowAdapter(context, lessons);
             scheduleRecyclerView.SetAdapter(adapter);
             scheduleRecyclerView.SetLayoutManager(new LinearLayoutManager(context));
         }

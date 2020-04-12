@@ -6,7 +6,6 @@ namespace PolyNaviLib.BL
     public class Teacher : BusinessEntity
     {
         public int Id { get; set; }
-        public int Oid { get; set; }
         public string Full_Name { get; set; }
         public string First_Name { get; set; }
         public string Middle_Name { get; set; }

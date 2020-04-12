@@ -13,6 +13,7 @@ namespace PolyNaviLib.BL
         public DateTime Time_Start { get; set; }
         public DateTime Time_End { get; set; }
         public int Parity { get; set; }
+        public string Lms_Url { get; set; }
 
         [OneToOne(CascadeOperations = CascadeOperation.All)]
         public TypeObj TypeObj { get; set; }
