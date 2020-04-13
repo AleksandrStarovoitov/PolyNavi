@@ -89,26 +89,25 @@ namespace PolyNavi.Adapters
             typeTextView.Text = lesson.TypeObj.Name.Replace("Лабораторные", "Лаб.")
                                             .Replace("Курсовое проектирование", "Курс."); //TODO property in axml?
 
-            var noTeachers = lesson.Teachers == null || !lesson.Teachers.Any();
+            var hasTeachers = lesson.Teachers != null && lesson.Teachers.Any();
 
-            if (noTeachers)
+            if (hasTeachers)
             {
-                RemoveTeacherTextView(groupTextView);
+                CombineTeachers(teacherTextView, lesson);
             }
             else
             {
-                CombineTeachers(teacherTextView, lesson);
+                AddRulesToView(groupTextView, new[] { (LayoutRules.Below, Resource.Id.textview_card_buildingnumber_row_lesson_schedule) });
+                RemoveView(teacherTextView);
             }
 
             if (String.IsNullOrEmpty(lesson.Lms_Url))
             {
-                if (noTeachers) //TODO
+                RemoveView(lmsUrlTextView);
+
+                if (hasTeachers)
                 {
-                    RemoveLmsUrlTextView(null);
-                }
-                else
-                {
-                    RemoveLmsUrlTextView(groupTextView);
+                    AddRulesToView(groupTextView, new[] { (LayoutRules.Below, Resource.Id.textview_card_teacher_row_lesson_schedule) });
                 }
             }
             else
@@ -130,28 +129,24 @@ namespace PolyNavi.Adapters
             string GetFirstGroupName() => lesson.Groups.First().Name; //TODO Null check?
         }
 
-        private void RemoveTeacherTextView(TextView group) //TODO Make for any view?
+        private void AddRulesToView(View view, (LayoutRules rule, int resourceId)[] rulesWithIds)
         {
-            var layoutParams = (RelativeLayout.LayoutParams)group.LayoutParameters;
-            layoutParams.AddRule(LayoutRules.Below, Resource.Id.textview_card_buildingnumber_row_lesson_schedule);
-            group.LayoutParameters = layoutParams;
+            var layoutParams = (RelativeLayout.LayoutParams)view.LayoutParameters;
 
-            ((ViewGroup)scheduleView).RemoveView(lessonViewHolder.teacherTextView);
-        }
-
-        private void RemoveLmsUrlTextView(TextView group) //TODO Make for any view?
-        {
-            if (group != null)
+            foreach (var ruleWithId in rulesWithIds)
             {
-                var layoutParams = (RelativeLayout.LayoutParams)group.LayoutParameters;
-                layoutParams.AddRule(LayoutRules.Below, Resource.Id.textview_card_teacher_row_lesson_schedule);
-                group.LayoutParameters = layoutParams;
+                layoutParams.AddRule(ruleWithId.rule, ruleWithId.resourceId);
             }
-
-            ((ViewGroup)scheduleView).RemoveView(lessonViewHolder.lmsUrlTextView);
+            
+            view.LayoutParameters = layoutParams;
         }
 
-        private static void CombineTeachers(TextView teacherTextView, Lesson lesson)
+        private void RemoveView(View view)
+        {
+            ((ViewGroup)scheduleView).RemoveView(view);
+        }
+
+        private static void CombineTeachers(TextView teacherTextView, Lesson lesson) //TODO Refactor
         {
             teacherTextView.Text = string.Join(", ", lesson.Teachers.Select(t => t.Full_Name).ToArray());
         }
