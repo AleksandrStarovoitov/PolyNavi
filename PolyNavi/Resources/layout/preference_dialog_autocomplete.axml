@@ -13,6 +13,5 @@
         android:inputType="text"
         android:imeOptions="actionGo"
         android:layout_weight="1"
-        android:layout_margin="@dimen/margin_pref_dialog_autocomplete_textview"
-        android:hint="@string/edittext_auth" />
+        android:layout_margin="@dimen/margin_pref_dialog_autocomplete_textview"/>
 </LinearLayout>

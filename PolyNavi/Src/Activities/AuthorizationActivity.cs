@@ -98,7 +98,7 @@ namespace PolyNavi.Activities
 
         private void CheckGroupNumberAndProceedToMainActivity()
         {
-            if (suggestionsAndIds.TryGetValue(autoCompleteTextViewAuth.Text, out var id))
+            if (suggestionsAndIds.TryGetValue(autoCompleteTextViewAuth.Text, out var id)) //TODO Null ex
             {
                 if (userType == UserType.Student)
                 {

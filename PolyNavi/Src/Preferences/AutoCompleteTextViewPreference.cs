@@ -99,18 +99,22 @@ namespace PolyNavi.Preferences
             networkChecker = new NetworkChecker(Activity.BaseContext);
             autoCompleteTextViewPref =
                 view.FindViewById<AutoCompleteTextView>(Resource.Id.autocompletetextview_group_pref);
-            autoCompleteTextViewPref.AddTextChangedListener(this);
             
-            string groupName = null;
+            autoCompleteTextViewPref.AddTextChangedListener(this);
+            autoCompleteTextViewPref.Hint = Resources.GetString(isTeacher 
+                ? Resource.String.auth_teacher_hint
+                : Resource.String.edittext_auth);            
+
+            string name = null;
             var preference = Preference;
             if (preference is AutoCompleteTextViewPreference viewPreference)
             {
-                groupName = viewPreference.Name;
+                name = viewPreference.Name;
             }
 
-            if (groupName != null)
+            if (name != null)
             {
-                autoCompleteTextViewPref.Text = groupName;
+                autoCompleteTextViewPref.Text = name;
             }
         }
 
