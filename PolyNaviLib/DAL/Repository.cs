@@ -29,6 +29,8 @@ namespace PolyNaviLib.DAL
         {
             database = new SQLiteDatabase(dbPath);
 
+            await CreateTablesAsync();
+
             this.checker = checker;
             this.settings = settings;
             client = new HttpClient();

@@ -14,6 +14,7 @@ using Java.Util;
 using Nito.AsyncEx;
 using PolyNavi.Services;
 using PolyNaviLib.BL;
+using PolyNaviLib.Constants;
 using Point = Mapsui.Geometries.Point;
 
 namespace PolyNavi
@@ -173,6 +174,7 @@ namespace PolyNavi
             Instance = this;
             SharedPreferences = PreferenceManager.GetDefaultSharedPreferences(ApplicationContext);
             GraphSaverLoader = new SaverLoader(new AssetsProvider(ApplicationContext));
+            SetDefaultPreferences();
 
             if (IsAppUpdated()) //TODO
             {
@@ -181,6 +183,16 @@ namespace PolyNavi
                     var manager = await PolyManager;
                     await manager.ReinitializeDatabaseAsync();
                 });
+            }
+        }
+
+        private void SetDefaultPreferences()
+        {
+            var containsIsTeacher = SharedPreferences.Contains(PreferenceConstants.IsUserTeacherPreferenceKey);
+
+            if (!containsIsTeacher)
+            {
+                SharedPreferences.Edit().PutBoolean(PreferenceConstants.IsUserTeacherPreferenceKey, false).Commit();
             }
         }
 
