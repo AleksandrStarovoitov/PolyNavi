@@ -11,10 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/toolbar"
-        android:background="?attr/colorPrimary"
-        android:elevation="@dimen/elevation_schedule_tablayout"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="@style/MyAppTheme" />
+        android:background="?attr/colorPrimary" />
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewpager_schedule"
         android:layout_width="match_parent"
