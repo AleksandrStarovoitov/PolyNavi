@@ -10,5 +10,6 @@
         public const string AuthCompletedPreferenceKey = "auth";
         public const string StartActivityPreferenceKey = "startactivity";
         public const string WelcomeCompletedPreferenceKey = "welcome";
+        public const string VersionPreferenceKey = "version";
     }
 }

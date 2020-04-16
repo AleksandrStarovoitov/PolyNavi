@@ -73,10 +73,15 @@ namespace PolyNavi
 
         private bool IsAppUpdated()
         {
-            var ver = GetVersionCode();
-            if (ver > SharedPreferences.GetInt("version", 0))
+            const int DefaultVersionPrefValue = -1;
+
+            var currentVersion = GetVersionCode();
+            var savedVersion = SharedPreferences
+                .GetInt(PreferenceConstants.VersionPreferenceKey, DefaultVersionPrefValue);
+
+            if (savedVersion == DefaultVersionPrefValue || currentVersion > savedVersion)
             {
-                SharedPreferences.Edit().PutInt("version", ver).Commit();
+                SharedPreferences.Edit().PutInt(PreferenceConstants.VersionPreferenceKey, currentVersion).Commit();
                 return true;
             }
 
