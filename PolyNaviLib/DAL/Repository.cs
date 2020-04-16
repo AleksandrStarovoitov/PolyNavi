@@ -29,6 +29,17 @@ namespace PolyNaviLib.DAL
         {
             database = new SQLiteDatabase(dbPath);
 
+            this.checker = checker;
+            this.settings = settings;
+            client = new HttpClient();
+
+            await RemoveExpiredWeeksAsync();
+
+            return this;
+        }
+
+        private async Task CreateTablesAsync()
+        {
             await database.CreateTableAsync<WeekRoot>();
             await database.CreateTableAsync<Week>();
             await database.CreateTableAsync<Day>();
@@ -39,14 +50,20 @@ namespace PolyNaviLib.DAL
             await database.CreateTableAsync<Teacher>();
             await database.CreateTableAsync<Auditory>();
             await database.CreateTableAsync<Building>();
+        }
 
-            this.checker = checker;
-            this.settings = settings;
-            client = new HttpClient();
-
-            await RemoveExpiredWeeksAsync();
-
-            return this;
+        private async Task DropTablesAsync()
+        {
+            await database.DropTableAsync<WeekRoot>();
+            await database.DropTableAsync<Week>();
+            await database.DropTableAsync<Day>();
+            await database.DropTableAsync<Lesson>();
+            await database.DropTableAsync<TypeObj>();
+            await database.DropTableAsync<Group>();
+            await database.DropTableAsync<Faculty>();
+            await database.DropTableAsync<Teacher>();
+            await database.DropTableAsync<Auditory>();
+            await database.DropTableAsync<Building>();
         }
 
         public static Task<Repository> CreateAsync(string dbPath, INetworkChecker networkChecker,
@@ -129,6 +146,12 @@ namespace PolyNaviLib.DAL
                 await database.DeleteItemsAsync<WeekRoot>(w =>
                     w.Week.IsExpired() || w.Group.Id != currentGroupId);
             }
+        }
+
+        public async Task ReinitializeDatabaseAsync()
+        {
+            await DropTablesAsync();
+            await CreateTablesAsync();
         }
     }
 }

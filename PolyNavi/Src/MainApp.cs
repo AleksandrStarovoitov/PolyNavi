@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
 using Android.Content.Res;
@@ -175,7 +176,11 @@ namespace PolyNavi
 
             if (IsAppUpdated()) //TODO
             {
-
+                Task.Run(async () => 
+                {
+                    var manager = await PolyManager;
+                    await manager.ReinitializeDatabaseAsync();
+                });
             }
         }
 

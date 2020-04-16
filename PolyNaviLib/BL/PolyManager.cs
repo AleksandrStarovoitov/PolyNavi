@@ -54,6 +54,11 @@ namespace PolyNaviLib.BL
             }
         }
 
+        public async Task ReinitializeDatabaseAsync()
+        {
+            await repository.ReinitializeDatabaseAsync();
+        }
+
         public static async Task<GroupRoot> GetSuggestedGroups(string groupName) //TODO Non static?
         {
             var resultJson = await HttpClientService.GetResponseAsync(Client, ScheduleLinkConstants.GroupSearchLink + groupName, new CancellationToken());
