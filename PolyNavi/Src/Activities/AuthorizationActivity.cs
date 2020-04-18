@@ -105,13 +105,11 @@ namespace PolyNavi.Activities
                 {
                     preferencesEditor.PutString(PreferenceConstants.GroupNumberPreferenceKey, autoCompleteTextViewAuth.Text).Apply();
                     preferencesEditor.PutInt(PreferenceConstants.GroupIdPreferenceKey, id).Apply();
-                    preferencesEditor.PutBoolean(PreferenceConstants.IsUserTeacherPreferenceKey, false);
                 }
                 else
                 {
                     preferencesEditor.PutString(PreferenceConstants.TeacherNamePreferenceKey, autoCompleteTextViewAuth.Text).Apply();
-                    preferencesEditor.PutInt(PreferenceConstants.TeacherIdPreferenceKey, id).Apply();
-                    preferencesEditor.PutBoolean(PreferenceConstants.IsUserTeacherPreferenceKey, true);
+                    preferencesEditor.PutInt(PreferenceConstants.TeacherIdPreferenceKey, id).Apply();                    
                 }
 
                 ProceedToMainActivity();
@@ -130,6 +128,7 @@ namespace PolyNavi.Activities
         private void ProceedToMainActivity()
         {
             preferencesEditor.PutBoolean(PreferenceConstants.AuthCompletedPreferenceKey, true).Apply();
+            preferencesEditor.PutBoolean(PreferenceConstants.IsUserTeacherPreferenceKey, userType == UserType.Teacher).Apply();
 
             var mainIntent = new Intent(this, typeof(MainActivity));
             mainIntent.SetFlags(ActivityFlags.ClearTop);
