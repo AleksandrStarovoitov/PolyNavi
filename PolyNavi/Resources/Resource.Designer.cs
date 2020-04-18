@@ -7137,6 +7137,9 @@ namespace PolyNavi
 			// aapt resource value: 0x7F1000B1
 			public const int wrong_room = 2131755185;
 			
+			// aapt resource value: 0x7F1000B2
+			public const int wrong_teacher = 2131755186;
+			
 			static String()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();

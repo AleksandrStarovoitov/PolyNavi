@@ -53,6 +53,7 @@ namespace PolyNavi.Activities
             autoCompleteTextViewAuth = FindViewById<AutoCompleteTextView>(Resource.Id.autocompletetextview_auth);
             autoCompleteTextViewAuth.SetOnEditorActionListener(this);
             autoCompleteTextViewAuth.AddTextChangedListener(this);
+            suggestionsAndIds = new Dictionary<string, int>();
 
             var buttonAuth = FindViewById<Button>(Resource.Id.button_auth);
             buttonAuth.Click += ButtonAuth_Click;
@@ -98,7 +99,7 @@ namespace PolyNavi.Activities
 
         private void CheckGroupNumberAndProceedToMainActivity()
         {
-            if (suggestionsAndIds.TryGetValue(autoCompleteTextViewAuth.Text, out var id)) //TODO Null ex
+            if (suggestionsAndIds.TryGetValue(autoCompleteTextViewAuth.Text, out var id))
             {
                 if (userType == UserType.Student)
                 {
@@ -117,7 +118,7 @@ namespace PolyNavi.Activities
             }
             else
             {
-                autoCompleteTextViewAuth.Error = GetString(Resource.String.wrong_group); //TODO Wrong teacher
+                autoCompleteTextViewAuth.Error = GetString(userType == UserType.Student ? Resource.String.wrong_group : Resource.String.wrong_teacher);
             }
         }
 

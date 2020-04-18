@@ -106,6 +106,7 @@
   <string name="welcome_skip">Пропустить</string>
 
   <string name="wrong_group">Неверный номер группы</string>
+  <string name="wrong_teacher">Неверные Ф. И. О.</string>
   <string name="wrong_room">Неверное название аудитории</string>
   <string name="wrong_group_error">Неверный номер группы! Укажите корректный в настройках приложения</string>
   <string name="choose_date">Выберите дату</string>

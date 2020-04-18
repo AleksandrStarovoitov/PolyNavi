@@ -74,7 +74,7 @@ namespace PolyNavi.Preferences
 
     public class AutoCompleteTextViewPreferenceDialogFragmentCompat : PreferenceDialogFragmentCompat, ITextWatcher
     {
-        private AutoCompleteTextView autoCompleteTextViewPref;
+        private AutoCompleteTextView autoCompleteTextView;
         private NetworkChecker networkChecker;
         private Dictionary<string, int> suggestionsAndIds;
         private Timer searchTimer;
@@ -97,56 +97,50 @@ namespace PolyNavi.Preferences
 
             isTeacher = Preference.SharedPreferences.GetBoolean(PreferenceConstants.IsUserTeacherPreferenceKey, false);
             networkChecker = new NetworkChecker(Activity.BaseContext);
-            autoCompleteTextViewPref =
+            suggestionsAndIds = new Dictionary<string, int>();
+            autoCompleteTextView =
                 view.FindViewById<AutoCompleteTextView>(Resource.Id.autocompletetextview_group_pref);
             
-            autoCompleteTextViewPref.AddTextChangedListener(this);
-            autoCompleteTextViewPref.Hint = Resources.GetString(isTeacher 
+            autoCompleteTextView.AddTextChangedListener(this);
+            autoCompleteTextView.Hint = Resources.GetString(isTeacher 
                 ? Resource.String.auth_teacher_hint
-                : Resource.String.edittext_auth);            
+                : Resource.String.edittext_auth);
 
-            string name = null;
-            var preference = Preference;
-            if (preference is AutoCompleteTextViewPreference viewPreference)
+            if (Preference is AutoCompleteTextViewPreference autoCompletePreference)
             {
-                name = viewPreference.Name;
-            }
-
-            if (name != null)
-            {
-                autoCompleteTextViewPref.Text = name;
-            }
+                autoCompleteTextView.Text = autoCompletePreference.Name;
+            }            
         }
 
         public override void OnDialogClosed(bool positiveResult)
         {
-            if (!positiveResult) return;
+            var preference = Preference as AutoCompleteTextViewPreference;
+            var name = autoCompleteTextView.Text;
 
-            var name = autoCompleteTextViewPref.Text;
-
-            var preference = Preference;
-            if (preference is AutoCompleteTextViewPreference autoCompleteTvPreference &&
-                autoCompleteTvPreference.CallChangeListener(name)) //TODO
+            if (!positiveResult || preference == null || name.Equals(preference.Name))
+            {
+                return;
+            }
+            
+            if (preference.CallChangeListener(name))
             {
                 if (suggestionsAndIds.TryGetValue(name, out var id))
                 {
-                    if (isTeacher)
-                    {
-                        autoCompleteTvPreference.SaveName(name);
-                        MainApp.Instance.SharedPreferences.Edit().PutInt(PreferenceConstants.TeacherIdPreferenceKey, id)
-                            .Apply();
-                    } 
-                    else
-                    {
-                        autoCompleteTvPreference.SaveName(name);
-                        MainApp.Instance.SharedPreferences.Edit().PutInt(PreferenceConstants.GroupIdPreferenceKey, id)
-                            .Apply();
-                    }
+                    preference.SaveName(name);
+
+                    MainApp.Instance.SharedPreferences
+                        .Edit()
+                        .PutInt(isTeacher
+                            ? PreferenceConstants.TeacherIdPreferenceKey 
+                            : PreferenceConstants.GroupIdPreferenceKey, id)
+                        .Apply();
                 }
                 else
                 {
-                    Toast.MakeText(Activity.BaseContext, GetString(Resource.String.wrong_group), ToastLength.Short)
-                        .Show(); //TODO Wrong teacher
+                    Toast.MakeText(Activity.BaseContext, GetString(isTeacher 
+                            ? Resource.String.wrong_teacher 
+                            : Resource.String.wrong_group), ToastLength.Short)
+                        .Show();
                 }
             }
         }
@@ -161,7 +155,7 @@ namespace PolyNavi.Preferences
 
         public void OnTextChanged(ICharSequence s, int start, int before, int count)
         {
-            autoCompleteTextViewPref.Clear();
+            autoCompleteTextView.Clear();
 
             SetupTimer(s, before, count);
         }
@@ -189,7 +183,7 @@ namespace PolyNavi.Preferences
                             {
                                 Activity.RunOnUiThread(() =>
                                 {
-                                    autoCompleteTextViewPref.UpdateSuggestions(suggestionsAndIds, Activity);
+                                    autoCompleteTextView.UpdateSuggestions(suggestionsAndIds, Activity);
                                 });
                             }
                         });
