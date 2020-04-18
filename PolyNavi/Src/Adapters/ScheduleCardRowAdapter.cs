@@ -89,6 +89,7 @@ namespace PolyNavi.Adapters
             typeTextView.Text = lesson.TypeObj.Name.Replace("Лабораторные", "Лаб.")
                                             .Replace("Курсовое проектирование", "Курс."); //TODO property in axml?
 
+            //TODO Refactor
             var hasTeachers = lesson.Teachers != null && lesson.Teachers.Any();
 
             if (hasTeachers)
@@ -120,6 +121,12 @@ namespace PolyNavi.Adapters
 
                     context.StartActivity(lmsUrlLink);
                 };
+
+                if (!hasTeachers)
+                {
+                    AddRulesToView(lmsUrlTextView, new[] { (LayoutRules.Below, Resource.Id.textview_card_buildingnumber_row_lesson_schedule) });
+                    AddRulesToView(groupTextView, new[] { (LayoutRules.Below, Resource.Id.textview_card_lms_url_row_lesson_schedule) });
+                }
             }
 
             groupTextView.Text = HasSubgroups() ? GetSubgroup() : GetFirstGroupName();
