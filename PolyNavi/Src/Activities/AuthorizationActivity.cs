@@ -31,7 +31,7 @@ namespace PolyNavi.Activities
         private Dictionary<string, int> suggestionsAndIds;
         private Timer searchTimer;
         private ISharedPreferencesEditor preferencesEditor;
-        private UserType userType;
+        private bool isTeacher;
         private const int MillsToSearch = 700;
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -62,21 +62,21 @@ namespace PolyNavi.Activities
             skipAuthTextView.Click += SkipAuthTextView_Click;
 
             preferencesEditor = MainApp.Instance.SharedPreferences.Edit();
-            userType = (UserType)Intent.Extras.GetInt(UserTypeSelectActivity.UserTypeIntentExtraName);
+            isTeacher = Intent.Extras.GetBoolean(UserTypeSelectActivity.IsTeacherIntentExtraName);
 
             var titleTextView = FindViewById<TextView>(Resource.Id.textview_auth_edittext_title);
 
-            if (userType == UserType.Student)
-            {
-                skipAuthTextView.Text = Resources.GetString(Resource.String.group_later);
-                titleTextView.Text = Resources.GetString(Resource.String.edittext_title);
-                autoCompleteTextViewAuth.Hint = Resources.GetString(Resource.String.edittext_auth);
-            }
-            else
+            if (isTeacher)
             {
                 skipAuthTextView.Text = Resources.GetString(Resource.String.auth_teacher_later);
                 titleTextView.Text = Resources.GetString(Resource.String.auth_teacher_title);
                 autoCompleteTextViewAuth.Hint = Resources.GetString(Resource.String.auth_teacher_hint);
+            }
+            else
+            {
+                skipAuthTextView.Text = Resources.GetString(Resource.String.group_later);
+                titleTextView.Text = Resources.GetString(Resource.String.edittext_title);
+                autoCompleteTextViewAuth.Hint = Resources.GetString(Resource.String.edittext_auth);
             }
         }
 
@@ -101,26 +101,26 @@ namespace PolyNavi.Activities
         {
             if (suggestionsAndIds.TryGetValue(autoCompleteTextViewAuth.Text, out var id))
             {
-                if (userType == UserType.Student)
-                {
-                    preferencesEditor.PutString(PreferenceConstants.GroupNumberPreferenceKey,
-                        autoCompleteTextViewAuth.Text).Apply();
-                    preferencesEditor.PutInt(PreferenceConstants.GroupIdPreferenceKey, id).Apply();
-                }
-                else
+                if (isTeacher)
                 {
                     preferencesEditor.PutString(PreferenceConstants.TeacherNamePreferenceKey,
                         autoCompleteTextViewAuth.Text).Apply();
                     preferencesEditor.PutInt(PreferenceConstants.TeacherIdPreferenceKey, id).Apply();
                 }
+                else
+                {
 
+                    preferencesEditor.PutString(PreferenceConstants.GroupNumberPreferenceKey,
+                        autoCompleteTextViewAuth.Text).Apply();
+                    preferencesEditor.PutInt(PreferenceConstants.GroupIdPreferenceKey, id).Apply();
+                }
                 ProceedToMainActivity();
             }
             else
             {
-                autoCompleteTextViewAuth.Error = GetString(userType == UserType.Student
-                    ? Resource.String.wrong_group
-                    : Resource.String.wrong_teacher);
+                autoCompleteTextViewAuth.Error = GetString(isTeacher
+                    ? Resource.String.wrong_teacher
+                    : Resource.String.wrong_group);
             }
         }
 
@@ -132,8 +132,7 @@ namespace PolyNavi.Activities
         private void ProceedToMainActivity()
         {
             preferencesEditor.PutBoolean(PreferenceConstants.AuthCompletedPreferenceKey, true).Apply();
-            preferencesEditor.PutBoolean(PreferenceConstants.IsUserTeacherPreferenceKey, userType == UserType.Teacher)
-                .Apply();
+            preferencesEditor.PutBoolean(PreferenceConstants.IsUserTeacherPreferenceKey, isTeacher).Apply();
 
             var mainIntent = new Intent(this, typeof(MainActivity));
             mainIntent.SetFlags(ActivityFlags.ClearTop);
@@ -174,9 +173,9 @@ namespace PolyNavi.Activities
                     {
                         Task.Run(async () =>
                         {
-                            suggestionsAndIds = userType == UserType.Student
-                                ? await Utils.Utils.GetSuggestedGroupsDictionary(s.ToString())
-                                : await Utils.Utils.GetSuggestedTeachersDictionary(s.ToString());
+                            suggestionsAndIds = isTeacher
+                                ? await Utils.Utils.GetSuggestedTeachersDictionary(s.ToString())
+                                : await Utils.Utils.GetSuggestedGroupsDictionary(s.ToString());
 
                             if (s.Length() > 0 && before != count) //TODO Local method?
                             {

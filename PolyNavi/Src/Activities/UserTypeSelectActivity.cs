@@ -14,7 +14,7 @@ namespace PolyNavi.Activities
         ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.ScreenSize)]
     public class UserTypeSelectActivity : Activity
     {
-        public const string UserTypeIntentExtraName = "user_type";
+        public const string IsTeacherIntentExtraName = "is_teacher";
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -40,7 +40,7 @@ namespace PolyNavi.Activities
         private void SelectStudentButton_Click(object sender, EventArgs e)
         {
             var intent = new Intent(this, typeof(AuthorizationActivity));
-            intent.PutExtra(UserTypeIntentExtraName, (int)UserType.Student);
+            intent.PutExtra(IsTeacherIntentExtraName, false);
 
             StartActivity(intent);
         }
@@ -48,7 +48,7 @@ namespace PolyNavi.Activities
         private void SelectTeacherButton_Click(object sender, EventArgs e)
         {
             var intent = new Intent(this, typeof(AuthorizationActivity));
-            intent.PutExtra(UserTypeIntentExtraName, (int)UserType.Teacher);
+            intent.PutExtra(IsTeacherIntentExtraName, true);
 
             StartActivity(intent);
         }
