@@ -36,9 +36,9 @@ namespace PolyNavi.Activities
             base.OnCreate(savedInstanceState);
 
             SetContentView(Resource.Layout.activity_main);
-            
+
             Setup();
-            
+
             InstantiateFragment();
         }
 
@@ -50,7 +50,8 @@ namespace PolyNavi.Activities
 
             var toolbar = FindViewById<Toolbar>(Resource.Id.toolbar_main);
 
-            drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, Resource.String.navigation_drawer_open, Resource.String.navigation_drawer_close);
+            drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
+                Resource.String.navigation_drawer_open, Resource.String.navigation_drawer_close);
             drawerLayout.AddDrawerListener(drawerToggle);
 
             SetSupportActionBar(toolbar);
@@ -61,7 +62,8 @@ namespace PolyNavi.Activities
             navigationView.NavigationItemSelected += NavViewItemSelected;
             navigationView.Alpha = 0.99f;
 
-            startActivity = MainApp.Instance.SharedPreferences.GetString(PreferenceConstants.StartActivityPreferenceKey, null);
+            startActivity =
+                MainApp.Instance.SharedPreferences.GetString(PreferenceConstants.StartActivityPreferenceKey, null);
         }
 
         private void InstantiateFragment()
@@ -98,9 +100,9 @@ namespace PolyNavi.Activities
 
             var fragment = (Fragment)Activator.CreateInstance(fragmentClass);
             navigationView.Menu.GetItem(startMenuItem).SetChecked(true);
-            Title = startMenuItem == 4 ?
-                navigationView.Menu.FindItem(Resource.Id.nav_about_menu).TitleFormatted.ToString() : //TODO ?
-                navigationView.Menu.GetItem(startMenuItem).TitleFormatted.ToString();
+            Title = startMenuItem == 4
+                ? navigationView.Menu.FindItem(Resource.Id.nav_about_menu).TitleFormatted.ToString() //TODO ?
+                : navigationView.Menu.GetItem(startMenuItem).TitleFormatted.ToString();
             SupportFragmentManager.BeginTransaction().Replace(Resource.Id.contentframe_main, fragment).Commit();
         }
 
@@ -129,18 +131,19 @@ namespace PolyNavi.Activities
 
         public void OnDrawerOpened(View drawerView)
         {
-
         }
 
         public void OnDrawerStateChanged(int newState)
         {
-
         }
 
         public void OnDrawerClosed(View drawerView)
         {
-            if (fragmentClass == null || !isTapped) return;
-            
+            if (fragmentClass == null || !isTapped)
+            {
+                return;
+            }
+
             InstantiateFragment();
             isTapped = false;
         }

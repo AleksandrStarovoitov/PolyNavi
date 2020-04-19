@@ -9,7 +9,7 @@ namespace PolyNavi.Fragments
     {
         public MainBuildingView MapView { get; private set; }
         private readonly int drawableId;
-        
+
         public MainBuildingMapFragment(int id)
         {
             drawableId = id;

@@ -7,7 +7,7 @@ using AndroidX.AppCompat.App;
 namespace PolyNavi.Fragments
 {
     public class DateTimePickerFragment : AppCompatDialogFragment,
-                                  DatePickerDialog.IOnDateSetListener
+        DatePickerDialog.IOnDateSetListener
     {
         public static readonly string DateTimePickerTag = nameof(DateTimePickerFragment).ToUpper(); //TODO typeof?
         private static DateTime? lastDate;
@@ -15,10 +15,7 @@ namespace PolyNavi.Fragments
 
         public static DateTimePickerFragment NewInstance(Action<DateTime> onDateSelected, DateTime? lastDate = null)
         {
-            var fragment = new DateTimePickerFragment
-            {
-                dateSelectedHandler = onDateSelected
-            };
+            var fragment = new DateTimePickerFragment { dateSelectedHandler = onDateSelected };
             DateTimePickerFragment.lastDate = lastDate;
 
             return fragment;
@@ -28,7 +25,7 @@ namespace PolyNavi.Fragments
         {
             var currentDate = lastDate ?? DateTime.Now;
             var dialog = new DatePickerDialog(Activity, this, currentDate.Year,
-                                        currentDate.Month - 1, currentDate.Day); //TODO -1 ?
+                currentDate.Month - 1, currentDate.Day); //TODO -1 ?
             return dialog;
         }
 

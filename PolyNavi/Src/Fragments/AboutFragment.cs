@@ -34,7 +34,7 @@ namespace PolyNavi.Fragments
         {
             var emailIntent = new Intent(Intent.ActionSend);
             emailIntent.SetType("message/rfc822");
-            emailIntent.PutExtra(Intent.ExtraEmail, new string[] { GetString(Resource.String.about_email_address) });
+            emailIntent.PutExtra(Intent.ExtraEmail, new[] { GetString(Resource.String.about_email_address) });
 
             StartActivity(Intent.CreateChooser(emailIntent, GetString(Resource.String.email_send_intent)));
         }

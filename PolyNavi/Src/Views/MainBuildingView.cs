@@ -19,15 +19,20 @@ namespace PolyNavi.Views
             None
         }
 
-        private readonly Paint routePaint = new Paint() { Color = Color.Blue, StrokeCap = Paint.Cap.Round, StrokeWidth = 7.0f };
+        private readonly Paint routePaint = new Paint() 
+        { 
+            Color = Color.Blue,
+            StrokeCap = Paint.Cap.Round,
+            StrokeWidth = 7.0f 
+        };
+
         private readonly Paint startPointPaint = new Paint() { Color = Color.Green };
         private readonly Paint endPointPaint = new Paint() { Color = Color.Red };
 
-        private float[] route;
-        //TODO Заменить на рисунки
-        private Marker marker = Marker.None;
+        private float[] route;        
+        private Marker marker = Marker.None; //TODO Заменить на рисунки
         private Point markerPoint;
-        
+
         private const int InvalidPointerId = -1;
 
         private readonly Drawable plan;
@@ -53,7 +58,7 @@ namespace PolyNavi.Views
             displayMetrics = Resources.DisplayMetrics;
 
             plan = ContextCompat.GetDrawable(Context, id);
-            
+
             imageWidth = (int)(displayMetrics.HeightPixels * 1.777778 * 0.85); //TODO
             imageHeight = (int)(displayMetrics.HeightPixels * 0.85); //TODO
 
@@ -61,10 +66,10 @@ namespace PolyNavi.Views
             heightScale = (float)imageHeight / BaseHeight;
 
             routePaint.StrokeWidth *= widthScale;
-            
+
             plan.SetBounds(0, 0, imageWidth, imageHeight);
         }
-        
+
         public override bool OnTouchEvent(MotionEvent e)
         {
             if (!MainBuildingFragment.CheckFocus())
@@ -101,9 +106,9 @@ namespace PolyNavi.Views
                     var top = PosY;
                     var bottom = PosY + planScaleHeight;
 
-                    #if DEBUG
+#if DEBUG
                     LogCurrentCoordinates(right, left, top, bottom); //TODO
-                    #endif
+#endif
 
                     if (right < displayMetrics.WidthPixels)
                     {
@@ -137,8 +142,8 @@ namespace PolyNavi.Views
                     break;
 
                 case MotionEventActions.PointerUp:
-                    pointerIndex = (int) (e.Action & MotionEventActions.PointerIndexMask) >> //TODO ?
-                                   (int) MotionEventActions.PointerIndexShift;
+                    pointerIndex = (int)(e.Action & MotionEventActions.PointerIndexMask) >> //TODO ?
+                                   (int)MotionEventActions.PointerIndexShift;
                     var pointerId = e.GetPointerId(pointerIndex);
                     if (pointerId == activePointerId)
                     {

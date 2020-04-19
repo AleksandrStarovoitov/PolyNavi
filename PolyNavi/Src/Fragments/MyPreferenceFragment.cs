@@ -56,8 +56,8 @@ namespace PolyNavi.Fragments
 
         private void TogglePreferences()
         {
-            var isTeacher = PreferenceManager.SharedPreferences.
-                GetBoolean(PreferenceConstants.IsUserTeacherPreferenceKey, false);
+            var isTeacher =
+                PreferenceManager.SharedPreferences.GetBoolean(PreferenceConstants.IsUserTeacherPreferenceKey, false);
 
             if (isTeacher)
             {

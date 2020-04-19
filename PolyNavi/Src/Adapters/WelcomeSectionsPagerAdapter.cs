@@ -10,7 +10,6 @@ namespace PolyNavi.Adapters
 
         public WelcomeSectionsPagerAdapter(FragmentManager fm) : base(fm, BehaviorResumeOnlyCurrentFragment)
         {
-
         }
 
         public override Fragment GetItem(int position)

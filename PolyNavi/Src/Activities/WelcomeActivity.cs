@@ -111,7 +111,9 @@ namespace PolyNavi.Activities
         {
             for (var i = 0; i < indicators.Length; i++)
             {
-                indicators[i].SetBackgroundResource(i == position ? Resource.Drawable.indicator_selected : Resource.Drawable.indicator_unselected);
+                indicators[i].SetBackgroundResource(i == position
+                    ? Resource.Drawable.indicator_selected
+                    : Resource.Drawable.indicator_unselected);
             }
         }
 
@@ -119,7 +121,6 @@ namespace PolyNavi.Activities
         {
             public void OnPageScrollStateChanged(int state)
             {
-
             }
 
             public void OnPageSelected(int position)
@@ -135,7 +136,6 @@ namespace PolyNavi.Activities
 
             public new void Dispose() //TODO ?
             {
-
             }
 
             public void OnPageScrolled(int position, float positionOffset, int positionOffsetPixels)

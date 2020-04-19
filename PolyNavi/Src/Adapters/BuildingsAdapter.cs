@@ -23,13 +23,15 @@ namespace PolyNavi.Adapters
             this.context = context;
         }
 
-        public override int GetItemViewType(int position) =>
-            GetItem(position) switch
+        public override int GetItemViewType(int position)
+        {
+            return GetItem(position) switch
             {
                 string _ => OtherBuildingsTypeTag,
                 MainBuildingTag _ => MainBuildingTypeTag,
                 _ => -1 //TODO Exception?
             };
+        }
 
         public override View GetView(int position, View convertView, ViewGroup parent)
         {

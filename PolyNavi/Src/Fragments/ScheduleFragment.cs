@@ -28,13 +28,14 @@ namespace PolyNavi.Fragments
             tabLayout.AddTab(tabLayout.NewTab().SetText(GetString(Resource.String.nextweek_tab)));
             tabLayout.SetForegroundGravity(TabLayout.GravityFill);
 
-            adapter = new ScheduleFragmentAdapter(((AppCompatActivity)Activity).SupportFragmentManager, tabLayout.TabCount, DateTime.Today);
+            adapter = new ScheduleFragmentAdapter(((AppCompatActivity)Activity).SupportFragmentManager,
+                tabLayout.TabCount, DateTime.Today);
 
             viewPager = view.FindViewById<ViewPager>(Resource.Id.viewpager_schedule);
             viewPager.Adapter = adapter;
             viewPager.AddOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
-            tabLayout.TabSelected += (sender, e) =>
+            tabLayout.TabSelected += (sender, e) => 
             {
                 viewPager.CurrentItem = e.Tab.Position;
             };
@@ -57,7 +58,7 @@ namespace PolyNavi.Fragments
                     var frag = DateTimePickerFragment.NewInstance(time =>
                     {
                         viewPager.Adapter = null;
-                        adapter = new ScheduleFragmentAdapter(((AppCompatActivity) Activity).SupportFragmentManager,
+                        adapter = new ScheduleFragmentAdapter(((AppCompatActivity)Activity).SupportFragmentManager,
                             tabLayout.TabCount, time, time.DayOfYear);
                         viewPager.Adapter = adapter;
                         lastDate = time; //TODO

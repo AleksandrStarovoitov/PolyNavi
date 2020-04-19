@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Timers;
 using Android.App;
 using Android.Content;
 using Android.Content.PM;
@@ -16,7 +17,6 @@ using PolyNavi.Extensions;
 using PolyNavi.Services;
 using PolyNaviLib.BL;
 using PolyNaviLib.Constants;
-using Timer = System.Timers.Timer;
 
 namespace PolyNavi.Activities
 {
@@ -103,20 +103,24 @@ namespace PolyNavi.Activities
             {
                 if (userType == UserType.Student)
                 {
-                    preferencesEditor.PutString(PreferenceConstants.GroupNumberPreferenceKey, autoCompleteTextViewAuth.Text).Apply();
+                    preferencesEditor.PutString(PreferenceConstants.GroupNumberPreferenceKey,
+                        autoCompleteTextViewAuth.Text).Apply();
                     preferencesEditor.PutInt(PreferenceConstants.GroupIdPreferenceKey, id).Apply();
                 }
                 else
                 {
-                    preferencesEditor.PutString(PreferenceConstants.TeacherNamePreferenceKey, autoCompleteTextViewAuth.Text).Apply();
-                    preferencesEditor.PutInt(PreferenceConstants.TeacherIdPreferenceKey, id).Apply();                    
+                    preferencesEditor.PutString(PreferenceConstants.TeacherNamePreferenceKey,
+                        autoCompleteTextViewAuth.Text).Apply();
+                    preferencesEditor.PutInt(PreferenceConstants.TeacherIdPreferenceKey, id).Apply();
                 }
 
                 ProceedToMainActivity();
             }
             else
             {
-                autoCompleteTextViewAuth.Error = GetString(userType == UserType.Student ? Resource.String.wrong_group : Resource.String.wrong_teacher);
+                autoCompleteTextViewAuth.Error = GetString(userType == UserType.Student
+                    ? Resource.String.wrong_group
+                    : Resource.String.wrong_teacher);
             }
         }
 
@@ -128,7 +132,8 @@ namespace PolyNavi.Activities
         private void ProceedToMainActivity()
         {
             preferencesEditor.PutBoolean(PreferenceConstants.AuthCompletedPreferenceKey, true).Apply();
-            preferencesEditor.PutBoolean(PreferenceConstants.IsUserTeacherPreferenceKey, userType == UserType.Teacher).Apply();
+            preferencesEditor.PutBoolean(PreferenceConstants.IsUserTeacherPreferenceKey, userType == UserType.Teacher)
+                .Apply();
 
             var mainIntent = new Intent(this, typeof(MainActivity));
             mainIntent.SetFlags(ActivityFlags.ClearTop);
@@ -151,7 +156,7 @@ namespace PolyNavi.Activities
 
             SetupTimer(s, before, count);
         }
-        
+
         private void SetupTimer(ICharSequence s, int before, int count) //TODO Move to lib, catch ex
         {
             if (searchTimer != null)
@@ -169,9 +174,9 @@ namespace PolyNavi.Activities
                     {
                         Task.Run(async () =>
                         {
-                            suggestionsAndIds = userType == UserType.Student 
-                            ? await Utils.Utils.GetSuggestedGroupsDictionary(s.ToString()) 
-                            : await Utils.Utils.GetSuggestedTeachersDictionary(s.ToString());
+                            suggestionsAndIds = userType == UserType.Student
+                                ? await Utils.Utils.GetSuggestedGroupsDictionary(s.ToString())
+                                : await Utils.Utils.GetSuggestedTeachersDictionary(s.ToString());
 
                             if (s.Length() > 0 && before != count) //TODO Local method?
                             {

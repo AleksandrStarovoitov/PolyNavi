@@ -77,10 +77,7 @@ namespace PolyNavi.Adapters
             scheduleRecyclerView.HasFixedSize = true;
 
             //TODO
-            var lessons = new List<object>()
-            {
-                new TitleTag() { Date = day.Date }
-            };
+            var lessons = new List<object>() { new TitleTag() { Date = day.Date } };
             lessons.AddRange(day.Lessons);
 
             var adapter = new ScheduleCardRowAdapter(context, lessons);
@@ -100,7 +97,7 @@ namespace PolyNavi.Adapters
             var date = lastUpdatedDate.ToString(CultureInfo.InvariantCulture);
             textView.Text = $"{updatedOnText} {date}";
         }
-        
+
         public override int GetItemViewType(int position)
         {
             return position == days.Count ? EndTag : CardTag;

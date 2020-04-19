@@ -25,12 +25,18 @@ namespace PolyNavi.Services
                 }
 
                 if (key == PreferenceConstants.GroupIdPreferenceKey)
+                {
                     throw new GroupNumberException();
+                }
+
                 throw new KeyNotFoundException();
             }
             set
             {
-                if (preferences != null) preferences[key] = value;
+                if (preferences != null)
+                {
+                    preferences[key] = value;
+                }
             }
         }
     }

@@ -46,10 +46,7 @@ namespace PolyNavi.Activities
             Title = GetString(Resource.String.title_route_activity);
 
             buildingNames = new List<object>(MainApp.Instance.BuildingsDictionary.Keys);
-            buildingNames[0] = new MainBuildingTag()
-            {
-                MainBuildingString = buildingNames[0].ToString()
-            };
+            buildingNames[0] = new MainBuildingTag() { MainBuildingString = buildingNames[0].ToString() };
 
             var buildingsList = FindViewById<ListView>(Resource.Id.listview_buildingslist);
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Timers;
 using Android.App;
 using Android.Content;
 using Android.Content.Res;
@@ -16,7 +17,6 @@ using PolyNavi.Extensions;
 using PolyNavi.Services;
 using PolyNaviLib.Constants;
 using Object = Java.Lang.Object;
-using Timer = System.Timers.Timer;
 
 namespace PolyNavi.Preferences
 {
@@ -100,16 +100,16 @@ namespace PolyNavi.Preferences
             suggestionsAndIds = new Dictionary<string, int>();
             autoCompleteTextView =
                 view.FindViewById<AutoCompleteTextView>(Resource.Id.autocompletetextview_group_pref);
-            
+
             autoCompleteTextView.AddTextChangedListener(this);
-            autoCompleteTextView.Hint = Resources.GetString(isTeacher 
+            autoCompleteTextView.Hint = Resources.GetString(isTeacher
                 ? Resource.String.auth_teacher_hint
                 : Resource.String.edittext_auth);
 
             if (Preference is AutoCompleteTextViewPreference autoCompletePreference)
             {
                 autoCompleteTextView.Text = autoCompletePreference.Name;
-            }            
+            }
         }
 
         public override void OnDialogClosed(bool positiveResult)
@@ -122,8 +122,11 @@ namespace PolyNavi.Preferences
                 return;
             }
 
-            if (!preference.CallChangeListener(name)) return;
-            
+            if (!preference.CallChangeListener(name))
+            {
+                return;
+            }
+
             if (suggestionsAndIds.TryGetValue(name, out var id))
             {
                 preference.SaveName(name);
@@ -131,14 +134,14 @@ namespace PolyNavi.Preferences
                 MainApp.Instance.SharedPreferences
                     .Edit()
                     .PutInt(isTeacher
-                        ? PreferenceConstants.TeacherIdPreferenceKey 
+                        ? PreferenceConstants.TeacherIdPreferenceKey
                         : PreferenceConstants.GroupIdPreferenceKey, id)
                     .Apply();
             }
             else
             {
-                Toast.MakeText(Activity.BaseContext, GetString(isTeacher 
-                        ? Resource.String.wrong_teacher 
+                Toast.MakeText(Activity.BaseContext, GetString(isTeacher
+                        ? Resource.String.wrong_teacher
                         : Resource.String.wrong_group), ToastLength.Short)
                     .Show();
             }
@@ -158,8 +161,9 @@ namespace PolyNavi.Preferences
 
             SetupTimer(s, before, count);
         }
-        
-        private void SetupTimer(ICharSequence s, int before, int count) //TODO Duplicate code (auth) //TODO Move to lib, catch ex
+
+        private void SetupTimer(ICharSequence s, int before, 
+            int count) //TODO Duplicate code (auth) //TODO Move to lib, catch ex
         {
             if (searchTimer != null)
             {
@@ -175,8 +179,8 @@ namespace PolyNavi.Preferences
                         Task.Run(async () =>
                         {
                             suggestionsAndIds = isTeacher
-                            ? await Utils.Utils.GetSuggestedTeachersDictionary(s.ToString())
-                            : await Utils.Utils.GetSuggestedGroupsDictionary(s.ToString());
+                                ? await Utils.Utils.GetSuggestedTeachersDictionary(s.ToString())
+                                : await Utils.Utils.GetSuggestedGroupsDictionary(s.ToString());
 
                             if (s.Length() > 0 && before != count) //TODO Local method?
                             {

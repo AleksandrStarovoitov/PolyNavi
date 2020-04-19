@@ -1,8 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using Android.Content;
+using Android.Graphics;
+using Android.Net;
 using Android.Views;
 using Android.Widget;
 using AndroidX.RecyclerView.Widget;
@@ -87,7 +88,7 @@ namespace PolyNavi.Adapters
             startTimeTextView.Text = lesson.Time_Start.ToString("HH:mm", cultureInfo);
             endTimeTextView.Text = lesson.Time_End.ToString("HH:mm", cultureInfo);
             typeTextView.Text = lesson.TypeObj.Name.Replace("Лабораторные", "Лаб.")
-                                            .Replace("Курсовое проектирование", "Курс."); //TODO property in axml?
+                .Replace("Курсовое проектирование", "Курс."); //TODO property in axml?
 
             //TODO Refactor
             var hasTeachers = lesson.Teachers != null && lesson.Teachers.Any();
@@ -98,34 +99,38 @@ namespace PolyNavi.Adapters
             }
             else
             {
-                AddRulesToView(groupTextView, new[] { (LayoutRules.Below, Resource.Id.textview_card_buildingnumber_row_lesson_schedule) });
+                AddRulesToView(groupTextView,
+                    new[] { (LayoutRules.Below, Resource.Id.textview_card_buildingnumber_row_lesson_schedule) });
                 RemoveView(teacherTextView);
             }
 
-            if (String.IsNullOrEmpty(lesson.Lms_Url))
+            if (string.IsNullOrEmpty(lesson.Lms_Url))
             {
                 RemoveView(lmsUrlTextView);
 
                 if (hasTeachers)
                 {
-                    AddRulesToView(groupTextView, new[] { (LayoutRules.Below, Resource.Id.textview_card_teacher_row_lesson_schedule) });
+                    AddRulesToView(groupTextView,
+                        new[] { (LayoutRules.Below, Resource.Id.textview_card_teacher_row_lesson_schedule) });
                 }
             }
             else
             {
-                lmsUrlTextView.PaintFlags = Android.Graphics.PaintFlags.UnderlineText;
+                lmsUrlTextView.PaintFlags = PaintFlags.UnderlineText;
                 lmsUrlTextView.Click += delegate
                 {
                     var lmsUrl = lesson.Lms_Url;
-                    var lmsUrlLink = new Intent(Intent.ActionView, Android.Net.Uri.Parse(lmsUrl));
+                    var lmsUrlLink = new Intent(Intent.ActionView, Uri.Parse(lmsUrl));
 
                     context.StartActivity(lmsUrlLink);
                 };
 
                 if (!hasTeachers)
                 {
-                    AddRulesToView(lmsUrlTextView, new[] { (LayoutRules.Below, Resource.Id.textview_card_buildingnumber_row_lesson_schedule) });
-                    AddRulesToView(groupTextView, new[] { (LayoutRules.Below, Resource.Id.textview_card_lms_url_row_lesson_schedule) });
+                    AddRulesToView(lmsUrlTextView,
+                        new[] { (LayoutRules.Below, Resource.Id.textview_card_buildingnumber_row_lesson_schedule) });
+                    AddRulesToView(groupTextView,
+                        new[] { (LayoutRules.Below, Resource.Id.textview_card_lms_url_row_lesson_schedule) });
                 }
             }
 
@@ -146,7 +151,7 @@ namespace PolyNavi.Adapters
             {
                 layoutParams.AddRule(rule, resourceId);
             }
-            
+
             view.LayoutParameters = layoutParams;
         }
 

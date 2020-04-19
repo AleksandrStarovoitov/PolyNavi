@@ -11,8 +11,8 @@ namespace PolyNavi.Fragments
 
         private readonly int[] backgroundDrawableIds =
         {
-            Resource.Drawable.welcome_blueprint,
-            Resource.Drawable.welcome_route, 
+            Resource.Drawable.welcome_blueprint, 
+            Resource.Drawable.welcome_route,
             Resource.Drawable.welcome_calendar
         };
 
@@ -60,6 +60,7 @@ namespace PolyNavi.Fragments
             {
                 header.Text = headerText;
             }
+
             if (descriptionText != null)
             {
                 description.Text = descriptionText;

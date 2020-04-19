@@ -18,7 +18,7 @@ namespace PolyNavi.Activities
             base.OnCreate(savedInstanceState);
 
             var intent = GetStartIntent();
-            
+
             StartActivity(intent);
             Finish();
         }
@@ -35,8 +35,8 @@ namespace PolyNavi.Activities
                 return new Intent(this, typeof(MainActivity));
             }
 
-            return isWelcomeCompleted 
-                ? new Intent(this, typeof(UserTypeSelectActivity)) 
+            return isWelcomeCompleted
+                ? new Intent(this, typeof(UserTypeSelectActivity))
                 : new Intent(this, typeof(WelcomeActivity));
         }
     }

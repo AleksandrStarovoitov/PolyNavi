@@ -19,7 +19,8 @@ using Point = Android.Graphics.Point;
 
 namespace PolyNavi.Fragments
 {
-    public class MainBuildingFragment : Fragment, IOnEditorActionListener, AppBarLayout.IOnOffsetChangedListener, ITextWatcher
+    public class MainBuildingFragment : Fragment, IOnEditorActionListener, AppBarLayout.IOnOffsetChangedListener,
+        ITextWatcher
     {
         private readonly GraphNode mapGraph = MainApp.Instance.MainBuildingGraph.Value;
         private View view;
@@ -27,6 +28,7 @@ namespace PolyNavi.Fragments
         private AppBarLayout appBar;
         private FloatingActionButton drawRouteButton;
         private FloatingActionButton upButton, downButton;
+
         private readonly List<MainBuildingMapFragment> fragments = new List<MainBuildingMapFragment>()
         {
             new MainBuildingMapFragment(Resource.Drawable.first_floor),
@@ -41,7 +43,7 @@ namespace PolyNavi.Fragments
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             view = inflater.Inflate(Resource.Layout.fragment_mainbuilding, container, false);
-            
+
             var fragmentTransaction = Activity.SupportFragmentManager.BeginTransaction();
             fragmentTransaction.Add(Resource.Id.frame_mainbuilding, fragments[2], "MAP_MAINBUILDING_3");
             fragmentTransaction.Add(Resource.Id.frame_mainbuilding, fragments[1], "MAP_MAINBUILDING_2");
@@ -53,13 +55,15 @@ namespace PolyNavi.Fragments
             var array = MainApp.Instance.RoomsDictionary.Select(x => x.Key).ToArray();
             editTextInputFrom = view.FindViewById<AutoCompleteTextView>(Resource.Id.autoCompleteTextView_from);
             editTextInputFrom.FocusChange += EditTextFromFocusChanged;
-            editTextInputFrom.Adapter = new ArrayAdapter(Activity.BaseContext, Android.Resource.Layout.SimpleDropDownItem1Line, array);
+            editTextInputFrom.Adapter = new ArrayAdapter(Activity.BaseContext,
+                Android.Resource.Layout.SimpleDropDownItem1Line, array);
             editTextInputFrom.AddTextChangedListener(this);
 
             editTextInputTo = view.FindViewById<AutoCompleteTextView>(Resource.Id.autoCompleteTextView_to);
             editTextInputTo.SetOnEditorActionListener(this);
             editTextInputTo.FocusChange += EditTextToFocusChanged;
-            editTextInputTo.Adapter = new ArrayAdapter(Activity.BaseContext, Android.Resource.Layout.SimpleDropDownItem1Line, array);
+            editTextInputTo.Adapter = new ArrayAdapter(Activity.BaseContext,
+                Android.Resource.Layout.SimpleDropDownItem1Line, array);
             editTextInputTo.AddTextChangedListener(this);
 
             appBar = view.FindViewById<AppBarLayout>(Resource.Id.appbar_mainbuilding);
@@ -68,7 +72,8 @@ namespace PolyNavi.Fragments
             drawRouteButton = view.FindViewById<FloatingActionButton>(Resource.Id.fab_mainbuilding);
             drawRouteButton.Click += DrawRouteButton_Click;
 
-            var changeFloorButtonsRelativeLayout = view.FindViewById<RelativeLayout>(Resource.Id.relativelayout_floor_buttons_mainbuilding);
+            var changeFloorButtonsRelativeLayout =
+                view.FindViewById<RelativeLayout>(Resource.Id.relativelayout_floor_buttons_mainbuilding);
             changeFloorButtonsRelativeLayout.BringToFront();
 
             upButton = view.FindViewById<FloatingActionButton>(Resource.Id.fab_up_mainbuilding);
@@ -93,9 +98,7 @@ namespace PolyNavi.Fragments
             ChangeFloor(currentFloor - 1);
         }
 
-        /// <summary>
-        /// Start index = 1
-        /// </summary>
+        /// <summary>Start index = 1</summary>
         /// <param name="newFloor"></param>
         private void ChangeFloor(int newFloor)
         {
@@ -106,19 +109,21 @@ namespace PolyNavi.Fragments
 
             downButton.Enabled = true;
             upButton.Enabled = true;
-            var currentFragment = (MainBuildingMapFragment)FragmentManager.FindFragmentByTag($"MAP_MAINBUILDING_{currentFloor}");
+            var currentFragment =
+                (MainBuildingMapFragment)FragmentManager.FindFragmentByTag($"MAP_MAINBUILDING_{currentFloor}");
             var currentView = currentFragment.MapView;
 
-            var newFragment = (MainBuildingMapFragment)FragmentManager.FindFragmentByTag($"MAP_MAINBUILDING_{newFloor}");
+            var newFragment =
+                (MainBuildingMapFragment)FragmentManager.FindFragmentByTag($"MAP_MAINBUILDING_{newFloor}");
             var newView = newFragment.MapView;
 
             newView.PosX = currentView.PosX;
             newView.PosY = currentView.PosY;
 
-            FragmentManager.BeginTransaction().
-                            Detach(currentFragment).
-                            Attach(newFragment).
-                            Commit();
+            FragmentManager.BeginTransaction()
+                .Detach(currentFragment)
+                .Attach(newFragment)
+                .Commit();
 
             currentFloor = newFloor;
             switch (currentFloor)
@@ -132,7 +137,7 @@ namespace PolyNavi.Fragments
                     break;
             }
         }
-        
+
         private void DrawRouteButton_Click(object sender, EventArgs e)
         {
             if (fullyExpanded)
@@ -152,7 +157,7 @@ namespace PolyNavi.Fragments
             Utils.Utils.HideKeyboard(View, Activity);
 
             ToggleAppBarAndChangeButtonIcon();
-            
+
             try
             {
                 if (editTextInputFrom.Text == editTextInputTo.Text && editTextInputFrom.Text.Any())
@@ -207,20 +212,23 @@ namespace PolyNavi.Fragments
 
             foreach (var coordinateGroup in coordinateGroups)
             {
-                var fragment = FragmentManager.FindFragmentByTag($"MAP_MAINBUILDING_{coordinateGroup.Floor.FloorNumber}") as MainBuildingMapFragment;
+                var fragment = FragmentManager
+                    .FindFragmentByTag($"MAP_MAINBUILDING_{coordinateGroup.Floor.FloorNumber}") as MainBuildingMapFragment;
                 fragment?.MapView.SetRoute(coordinateGroup.Coordinates.ToList());
             }
 
             var startFloor = route[0].FloorNumber;
             var endFloor = route.Last().FloorNumber;
-            fragments[startFloor - 1].MapView.SetMarker(new Point(route.First().Point.X, route.First().Point.Y), MainBuildingView.Marker.Start);
-            fragments[endFloor - 1].MapView.SetMarker(new Point(route.Last().Point.X, route.Last().Point.Y), MainBuildingView.Marker.End);
+            fragments[startFloor - 1].MapView.SetMarker(new Point(route.First().Point.X, route.First().Point.Y),
+                MainBuildingView.Marker.Start);
+            fragments[endFloor - 1].MapView.SetMarker(new Point(route.Last().Point.X, route.Last().Point.Y),
+                MainBuildingView.Marker.End);
 
             ChangeFloor(startFloor);
 
             //TODO Pan to start point
         }
-        
+
         private void ClearAllRoutes()
         {
             foreach (var fragment in fragments)
@@ -255,7 +263,7 @@ namespace PolyNavi.Fragments
             }
 
             return false;
-            
+
             bool IsGoButtonPressed() => actionId == ImeAction.Go;
         }
 

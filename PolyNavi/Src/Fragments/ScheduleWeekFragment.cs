@@ -206,7 +206,7 @@ namespace PolyNavi.Fragments
                 progressBar.Show();
             }
         }
-        
+
         private void ShowSwipeRefreshLayout()
         {
             swipeRefreshLayout.Visibility = ViewStates.Visible;
@@ -224,7 +224,7 @@ namespace PolyNavi.Fragments
             var viewGroup = view.FindViewById<ViewGroup>(rootContainerId);
 
             ClearViewGroup(viewGroup);
-            
+
             AddViewToViewGroup(viewGroup, newLayoutId);
         }
 
@@ -243,7 +243,7 @@ namespace PolyNavi.Fragments
 
         private View Inflate(int layoutId)
         {
-            return ((LayoutInflater) Activity.GetSystemService(Context.LayoutInflaterService)).Inflate(layoutId, null);
+            return ((LayoutInflater)Activity.GetSystemService(Context.LayoutInflaterService)).Inflate(layoutId, null);
         }
     }
 }
