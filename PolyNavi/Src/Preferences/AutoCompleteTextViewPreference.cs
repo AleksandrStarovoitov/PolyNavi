@@ -1,20 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Timers;
 using Android.App;
 using Android.Content;
 using Android.Content.Res;
 using Android.OS;
 using Android.Runtime;
-using Android.Text;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
 using AndroidX.Preference;
-using Java.Lang;
-using PolyNavi.Extensions;
-using PolyNavi.Services;
+using PolyNavi.Utils;
 using PolyNaviLib.Constants;
 using Object = Java.Lang.Object;
 
@@ -72,21 +66,23 @@ namespace PolyNavi.Preferences
         }
     }
 
-    public class AutoCompleteTextViewPreferenceDialogFragmentCompat : PreferenceDialogFragmentCompat, ITextWatcher
+    public class AutoCompleteTextViewPreferenceDialogFragmentCompat : PreferenceDialogFragmentCompat
     {
+        private const int BundleCapacity = 1;
         private AutoCompleteTextView autoCompleteTextView;
-        private NetworkChecker networkChecker;
-        private Dictionary<string, int> suggestionsAndIds;
-        private Timer searchTimer;
+        private TextChangeListener textChangeListener;
+
         private bool isTeacher;
-        private const int MillsToSearch = 700;
 
         public static AutoCompleteTextViewPreferenceDialogFragmentCompat NewInstance(string key)
         {
-            var fragment = new AutoCompleteTextViewPreferenceDialogFragmentCompat();
-            var b = new Bundle(1);
-            b.PutString("key", key);
-            fragment.Arguments = b;
+            var bundle = new Bundle(BundleCapacity);
+            bundle.PutString("key", key);
+
+            var fragment = new AutoCompleteTextViewPreferenceDialogFragmentCompat()
+            {
+                Arguments = bundle
+            };
 
             return fragment;
         }
@@ -96,15 +92,15 @@ namespace PolyNavi.Preferences
             base.OnBindDialogView(view);
 
             isTeacher = Preference.SharedPreferences.GetBoolean(PreferenceConstants.IsUserTeacherPreferenceKey, false);
-            networkChecker = new NetworkChecker(Activity.BaseContext);
-            suggestionsAndIds = new Dictionary<string, int>();
-            autoCompleteTextView =
-                view.FindViewById<AutoCompleteTextView>(Resource.Id.autocompletetextview_group_pref);
 
-            autoCompleteTextView.AddTextChangedListener(this);
+            autoCompleteTextView =
+                view.FindViewById<AutoCompleteTextView>(Resource.Id.autocompletetextview_group_pref);            
             autoCompleteTextView.Hint = Resources.GetString(isTeacher
                 ? Resource.String.auth_teacher_hint
                 : Resource.String.edittext_auth);
+
+            textChangeListener = new TextChangeListener(Activity, autoCompleteTextView);
+            autoCompleteTextView.AddTextChangedListener(textChangeListener);
 
             if (Preference is AutoCompleteTextViewPreference autoCompletePreference)
             {
@@ -127,7 +123,7 @@ namespace PolyNavi.Preferences
                 return;
             }
 
-            if (suggestionsAndIds.TryGetValue(name, out var id))
+            if (textChangeListener.SuggestionsAndIds.TryGetValue(name, out var id))
             {
                 preference.SaveName(name);
 
@@ -145,64 +141,6 @@ namespace PolyNavi.Preferences
                         : Resource.String.wrong_group), ToastLength.Short)
                     .Show();
             }
-        }
-
-        public void AfterTextChanged(IEditable s)
-        {
-        }
-
-        public void BeforeTextChanged(ICharSequence s, int start, int count, int after)
-        {
-        }
-
-        public void OnTextChanged(ICharSequence s, int start, int before, int count)
-        {
-            autoCompleteTextView.Clear();
-
-            SetupTimer(s, before, count);
-        }
-
-        private void SetupTimer(ICharSequence s, int before, 
-            int count) //TODO Duplicate code (auth) //TODO Move to lib, catch ex
-        {
-            if (searchTimer != null)
-            {
-                searchTimer.Stop();
-            }
-            else
-            {
-                searchTimer = new Timer(MillsToSearch);
-                searchTimer.Elapsed += delegate
-                {
-                    if (networkChecker.IsConnected())
-                    {
-                        Task.Run(async () =>
-                        {
-                            suggestionsAndIds = isTeacher
-                                ? await Utils.Utils.GetSuggestedTeachersDictionary(s.ToString())
-                                : await Utils.Utils.GetSuggestedGroupsDictionary(s.ToString());
-
-                            if (s.Length() > 0 && before != count) //TODO Local method?
-                            {
-                                Activity.RunOnUiThread(() =>
-                                {
-                                    autoCompleteTextView.UpdateSuggestions(suggestionsAndIds, Activity);
-                                });
-                            }
-                        });
-                    }
-                    else
-                    {
-                        Toast.MakeText(Activity.BaseContext, GetString(Resource.String.no_connection_title),
-                            ToastLength.Short).Show();
-                    }
-
-                    searchTimer.Close();
-                    searchTimer = null;
-                };
-            }
-
-            searchTimer.Start();
-        }
+        }        
     }
 }

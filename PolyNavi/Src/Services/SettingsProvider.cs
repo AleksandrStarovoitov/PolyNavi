@@ -29,7 +29,8 @@ namespace PolyNavi.Services
                     throw new GroupNumberException();
                 }
 
-                throw new KeyNotFoundException();
+                //throw new KeyNotFoundException();
+                return null; //TODO
             }
             set
             {

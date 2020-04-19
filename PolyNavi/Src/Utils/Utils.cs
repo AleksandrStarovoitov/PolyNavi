@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using Android.Content;
 using Android.Views;
 using Android.Views.InputMethods;
-using PolyNaviLib.BL;
 
 namespace PolyNavi.Utils
 {
@@ -17,16 +16,18 @@ namespace PolyNavi.Utils
             inputMethodManager.HideSoftInputFromWindow(view.WindowToken, 0);
         }
 
-        internal static async Task<Dictionary<string, int>> GetSuggestedGroupsDictionary(string s)
+        internal static async Task<Dictionary<string, int>> GetSuggestedGroupsDictionary(string s) //TODO
         {
-            var groups = await PolyManager.GetSuggestedGroups(s);
+            var manager = await MainApp.Instance.PolyManager; //TODO
+            var groups = await manager.GetSuggestedGroupsAsync(s);
 
             return groups.Groups.ToDictionary(x => x.Name, x => x.Id);
         }
 
-        internal static async Task<Dictionary<string, int>> GetSuggestedTeachersDictionary(string s)
+        internal static async Task<Dictionary<string, int>> GetSuggestedTeachersDictionary(string s) //TODO
         {
-            var teachers = await PolyManager.GetSuggestedTeachers(s);
+            var manager = await MainApp.Instance.PolyManager; //TODO
+            var teachers = await manager.GetSuggestedTeachersAsync(s);
 
             return teachers.Teachers.ToDictionary(t => t.Full_Name, t => t.Id);
         }

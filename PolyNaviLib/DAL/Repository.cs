@@ -35,8 +35,7 @@ namespace PolyNaviLib.DAL
             this.settings = settings;
             client = new HttpClient();
 
-            await RemoveExpiredWeeksAsync();
-
+            //TODO RemoveExpiredWeeks?
             return this;
         }
 
@@ -77,6 +76,8 @@ namespace PolyNaviLib.DAL
 
         public async Task<WeekRoot> GetSchedule(DateTime weekDate)
         {
+            await RemoveExpiredWeeksAsync(); //TODO !
+
             var weekRoots = await database.GetItemsAsync<WeekRoot>();
             var weekRoot = weekRoots.SingleOrDefault(w => w.Week.ContainsDate(weekDate));
 
@@ -92,6 +93,8 @@ namespace PolyNaviLib.DAL
 
         public async Task<WeekRoot> GetLatestSchedule(DateTime weekDate) //TODO "Get" with delete... Rename? 
         {
+            await RemoveExpiredWeeksAsync(); //TODO !
+
             var newWeek = await LoadWeekRootFromWebAsync(weekDate);
 
             await database.DeleteItemsAsync<WeekRoot>(w => w.Week.ContainsDate(weekDate));
@@ -135,7 +138,7 @@ namespace PolyNaviLib.DAL
         private async Task RemoveExpiredWeeksAsync()
         {
             var isTeacher = settings[PreferenceConstants.IsUserTeacherPreferenceKey];
-
+            
             if (isTeacher.Equals(true))
             {
                 var currentTeacherId = Convert.ToInt32(settings[PreferenceConstants.TeacherIdPreferenceKey]);
@@ -157,6 +160,34 @@ namespace PolyNaviLib.DAL
         {
             await DropTablesAsync();
             await CreateTablesAsync();
+        }
+
+        public async Task<GroupRoot> GetSuggestedGroupsAsync(string groupName) //TODO Non static?
+        {
+            if (!checker.IsConnected()) //Move to service
+            {
+                throw new NetworkException();
+            }
+
+            var resultJson = await HttpClientService.GetResponseAsync(client,
+                ScheduleLinkConstants.GroupSearchLink + groupName, new CancellationToken());
+            var groups = JsonConvert.DeserializeObject<GroupRoot>(resultJson);
+
+            return groups;
+        }
+
+        public async Task<TeachersRoot> GetSuggestedTeachersAsync(string teacherName)
+        {
+            if (!checker.IsConnected()) //Move to service
+            {
+                throw new NetworkException();
+            }
+
+            var resultJson = await HttpClientService.GetResponseAsync(client,
+                ScheduleLinkConstants.TeacherSearchLink + teacherName, new CancellationToken());
+            var teachers = JsonConvert.DeserializeObject<TeachersRoot>(resultJson);
+
+            return teachers;
         }
     }
 }

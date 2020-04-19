@@ -1,30 +1,15 @@
 ﻿using System;
-using System.Net.Http;
-using System.Threading;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 using Nito.AsyncEx;
-using PolyNaviLib.Constants;
 using PolyNaviLib.DAL;
-using PolyNaviLib.SL;
 
 namespace PolyNaviLib.BL
 {
     public class PolyManager
     {
         private Repository repository;
-        private static readonly HttpClient Client;
         private readonly AsyncLock mutex = new AsyncLock();
-
-        private PolyManager()
-        {
-        }
-
-        static PolyManager()
-        {
-            Client = new HttpClient();
-        }
-
+        
         private async Task<PolyManager> InitializeAsync(string dbPath, INetworkChecker checker,
             ISettingsProvider settings)
         {
@@ -59,22 +44,14 @@ namespace PolyNaviLib.BL
             await repository.ReinitializeDatabaseAsync();
         }
 
-        public static async Task<GroupRoot> GetSuggestedGroups(string groupName) //TODO Non static?
+        public Task<GroupRoot> GetSuggestedGroupsAsync(string groupName)
         {
-            var resultJson = await HttpClientService.GetResponseAsync(Client,
-                ScheduleLinkConstants.GroupSearchLink + groupName, new CancellationToken());
-            var groups = JsonConvert.DeserializeObject<GroupRoot>(resultJson);
-
-            return groups;
+            return repository.GetSuggestedGroupsAsync(groupName);
         }
 
-        public static async Task<TeachersRoot> GetSuggestedTeachers(string teacherName)
+        public Task<TeachersRoot> GetSuggestedTeachersAsync(string teacherName)
         {
-            var resultJson = await HttpClientService.GetResponseAsync(Client,
-                ScheduleLinkConstants.TeacherSearchLink + teacherName, new CancellationToken());
-            var teachers = JsonConvert.DeserializeObject<TeachersRoot>(resultJson);
-
-            return teachers;
+            return repository.GetSuggestedTeachersAsync(teacherName);
         }
     }
 }

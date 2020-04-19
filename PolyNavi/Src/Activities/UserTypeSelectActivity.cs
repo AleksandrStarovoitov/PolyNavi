@@ -4,7 +4,6 @@ using Android.Content;
 using Android.Content.PM;
 using Android.OS;
 using Android.Widget;
-using PolyNaviLib.BL;
 
 namespace PolyNavi.Activities
 {
