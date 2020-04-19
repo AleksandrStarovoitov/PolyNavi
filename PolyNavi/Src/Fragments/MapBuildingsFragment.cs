@@ -197,13 +197,12 @@ namespace PolyNavi.Fragments
             {
                 var lastLocation = locationManager.GetLastKnownLocation(LocationManager.GpsProvider);
 
-                if (IsValidLocation(lastLocation))
-                {
-                    var currentLocation = new Point(lastLocation.Latitude, lastLocation.Longitude);
+                if (!IsValidLocation(lastLocation)) return;
+                
+                var currentLocation = new Point(lastLocation.Latitude, lastLocation.Longitude);
 
-                    editTextInputFrom.Text = MyLocation;
-                    MainApp.Instance.BuildingsDictionary[MyLocation] = currentLocation;
-                }
+                editTextInputFrom.Text = MyLocation;
+                MainApp.Instance.BuildingsDictionary[MyLocation] = currentLocation;
             }
             else
             {
@@ -217,12 +216,11 @@ namespace PolyNavi.Fragments
 			{
 				var lastLocation = locationManager.GetLastKnownLocation(LocationManager.GpsProvider);
 
-				if (IsValidLocation(lastLocation))
-				{
-					var currentLocation = new Point(lastLocation.Longitude, lastLocation.Latitude).FromLonLat();
+				if (!IsValidLocation(lastLocation)) return;
+				
+				var currentLocation = new Point(lastLocation.Longitude, lastLocation.Latitude).FromLonLat();
 
-					mapControl.Navigator.NavigateTo(currentLocation, map.Resolutions[0]);
-				}
+				mapControl.Navigator.NavigateTo(currentLocation, map.Resolutions[0]);
 			}
 			else
 			{
@@ -234,7 +232,7 @@ namespace PolyNavi.Fragments
         {
             var delta = SystemClock.ElapsedRealtime() - location?.ElapsedRealtimeNanos / 1000000;
 
-            return (location != null && delta < 5000 && IsInBounds(location));
+            return location != null && delta < 5000 && IsInBounds(location);
         }
 
         private bool IsInBounds(Location location)

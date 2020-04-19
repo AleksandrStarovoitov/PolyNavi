@@ -73,13 +73,13 @@ namespace PolyNavi
 
         private bool IsAppUpdated()
         {
-            const int DefaultVersionPrefValue = -1;
+            const int defaultVersionPrefValue = -1;
 
             var currentVersion = GetVersionCode();
             var savedVersion = SharedPreferences
-                .GetInt(PreferenceConstants.VersionPreferenceKey, DefaultVersionPrefValue);
+                .GetInt(PreferenceConstants.VersionPreferenceKey, defaultVersionPrefValue);
 
-            if (savedVersion == DefaultVersionPrefValue || currentVersion > savedVersion)
+            if (savedVersion == defaultVersionPrefValue || currentVersion > savedVersion)
             {
                 SharedPreferences.Edit().PutInt(PreferenceConstants.VersionPreferenceKey, currentVersion).Commit();
                 return true;
@@ -224,12 +224,12 @@ namespace PolyNavi
         {
             public int Compare(string x, string y)
             {
-                if ((x[0] > '0' && x[0] < '9') && (y[0] > 'A' && y[0] < 'я')) //100, abc
+                if (x[0] > '0' && x[0] < '9' && y[0] > 'A' && y[0] < 'я') //100, abc
                 {
                     return 1;
                 }
 
-                if ((y[0] > '0' && y[0] < '9') && (x[0] > 'A' && x[0] < 'я')) //abc, 100
+                if (y[0] > '0' && y[0] < '9' && x[0] > 'A' && x[0] < 'я') //abc, 100
                 {
                     return -1;
                 }
@@ -241,16 +241,15 @@ namespace PolyNavi
 #pragma warning disable 618 // Disable "UpdateConfiguration" deprecate warning
         public static void ChangeLanguage(Context c)
         {
-            if (Instance.language != null)
-            {
-                var config = c.Resources.Configuration;
+            if (Instance.language == null) return;
+            
+            var config = c.Resources.Configuration;
 
-                var locale = new Locale(Instance.language);
-                Locale.Default = locale;
-                var conf = new Configuration(config);
-                conf.SetLocale(locale);
-                c.Resources.UpdateConfiguration(conf, c.Resources.DisplayMetrics);
-            }
+            var locale = new Locale(Instance.language);
+            Locale.Default = locale;
+            var conf = new Configuration(config);
+            conf.SetLocale(locale);
+            c.Resources.UpdateConfiguration(conf, c.Resources.DisplayMetrics);
         }
 #pragma warning restore 618
     }

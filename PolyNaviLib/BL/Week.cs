@@ -15,11 +15,6 @@ namespace PolyNaviLib.BL
         [ForeignKey(typeof(WeekRoot))]
         public int WeekRootID { get; set; }
 
-        public Week()
-        {
-
-        }
-
         public bool ContainsDate(DateTime date)
         {
             return date.Date >= Date_Start &&

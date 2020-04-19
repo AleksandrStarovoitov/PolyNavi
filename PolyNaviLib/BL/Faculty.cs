@@ -13,10 +13,5 @@ namespace PolyNaviLib.BL
 
         [ForeignKey(typeof(Group))]
         public int GroupID { get; set; }
-
-        public Faculty()
-        {
-
-        }
     }
 }

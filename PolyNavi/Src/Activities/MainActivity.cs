@@ -114,7 +114,7 @@ namespace PolyNavi.Activities
         {
             switch (item.ItemId)
             {
-                case (Android.Resource.Id.Home):
+                case Android.Resource.Id.Home:
                     drawerLayout.OpenDrawer(GravityCompat.Start);
                     return true;
                 default:
@@ -139,11 +139,10 @@ namespace PolyNavi.Activities
 
         public void OnDrawerClosed(View drawerView)
         {
-            if (fragmentClass != null && isTapped)
-            {
-                InstantiateFragment();
-                isTapped = false;
-            }
+            if (fragmentClass == null || !isTapped) return;
+            
+            InstantiateFragment();
+            isTapped = false;
         }
 
         private void NavViewItemSelected(object sender, NavigationView.NavigationItemSelectedEventArgs e)

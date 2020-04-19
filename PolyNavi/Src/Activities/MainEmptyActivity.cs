@@ -35,12 +35,9 @@ namespace PolyNavi.Activities
                 return new Intent(this, typeof(MainActivity));
             }
 
-            if (isWelcomeCompleted)
-            {
-                return new Intent(this, typeof(UserTypeSelectActivity));
-            }
-
-            return new Intent(this, typeof(WelcomeActivity));
+            return isWelcomeCompleted 
+                ? new Intent(this, typeof(UserTypeSelectActivity)) 
+                : new Intent(this, typeof(WelcomeActivity));
         }
     }
 }

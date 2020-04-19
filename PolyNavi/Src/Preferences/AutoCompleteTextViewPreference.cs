@@ -121,27 +121,26 @@ namespace PolyNavi.Preferences
             {
                 return;
             }
-            
-            if (preference.CallChangeListener(name))
-            {
-                if (suggestionsAndIds.TryGetValue(name, out var id))
-                {
-                    preference.SaveName(name);
 
-                    MainApp.Instance.SharedPreferences
-                        .Edit()
-                        .PutInt(isTeacher
-                            ? PreferenceConstants.TeacherIdPreferenceKey 
-                            : PreferenceConstants.GroupIdPreferenceKey, id)
-                        .Apply();
-                }
-                else
-                {
-                    Toast.MakeText(Activity.BaseContext, GetString(isTeacher 
-                            ? Resource.String.wrong_teacher 
-                            : Resource.String.wrong_group), ToastLength.Short)
-                        .Show();
-                }
+            if (!preference.CallChangeListener(name)) return;
+            
+            if (suggestionsAndIds.TryGetValue(name, out var id))
+            {
+                preference.SaveName(name);
+
+                MainApp.Instance.SharedPreferences
+                    .Edit()
+                    .PutInt(isTeacher
+                        ? PreferenceConstants.TeacherIdPreferenceKey 
+                        : PreferenceConstants.GroupIdPreferenceKey, id)
+                    .Apply();
+            }
+            else
+            {
+                Toast.MakeText(Activity.BaseContext, GetString(isTeacher 
+                        ? Resource.String.wrong_teacher 
+                        : Resource.String.wrong_group), ToastLength.Short)
+                    .Show();
             }
         }
 

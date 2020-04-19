@@ -129,20 +129,22 @@ namespace PolyNavi.Adapters
                 }
             }
 
-            groupTextView.Text = HasSubgroups() ? GetSubgroup() : GetFirstGroupName();
-
-            bool HasSubgroups() => lesson.Additional_Info.Any();
-            string GetSubgroup() => lesson.Additional_Info;
-            string GetFirstGroupName() => lesson.Groups.First().Name; //TODO Null check?
+            groupTextView.Text = HasSubgroups(lesson) ? GetSubgroup(lesson) : GetFirstGroupName(lesson);
         }
 
-        private void AddRulesToView(View view, (LayoutRules rule, int resourceId)[] rulesWithIds)
+        private static string GetFirstGroupName(Lesson lesson) => lesson.Groups.First().Name;
+
+        private static string GetSubgroup(Lesson lesson) => lesson.Additional_Info;
+
+        private static bool HasSubgroups(Lesson lesson) => lesson.Additional_Info.Any();
+
+        private static void AddRulesToView(View view, IEnumerable<(LayoutRules rule, int resourceId)> rulesWithIds)
         {
             var layoutParams = (RelativeLayout.LayoutParams)view.LayoutParameters;
 
-            foreach (var ruleWithId in rulesWithIds)
+            foreach (var (rule, resourceId) in rulesWithIds)
             {
-                layoutParams.AddRule(ruleWithId.rule, ruleWithId.resourceId);
+                layoutParams.AddRule(rule, resourceId);
             }
             
             view.LayoutParameters = layoutParams;

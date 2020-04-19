@@ -244,7 +244,7 @@ namespace PolyNavi.Fragments
 
         public static bool CheckFocus()
         {
-            return (editTextFromIsFocused && editTextToIsFocused);
+            return editTextFromIsFocused && editTextToIsFocused;
         }
 
         public bool OnEditorAction(TextView v, [GeneratedEnum] ImeAction actionId, KeyEvent e)
