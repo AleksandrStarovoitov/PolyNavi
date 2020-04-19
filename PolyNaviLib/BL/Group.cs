@@ -1,5 +1,5 @@
-﻿using SQLiteNetExtensions.Attributes;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using SQLiteNetExtensions.Attributes;
 
 namespace PolyNaviLib.BL
 {
@@ -17,19 +17,20 @@ namespace PolyNaviLib.BL
 
         [OneToOne]
         public WeekRoot WeekRoot { get; set; }
+
         [ForeignKey(typeof(WeekRoot))]
         public int WeekRootID { get; set; }
-
-        public Group()
-        {
-            Faculty = new Faculty();
-        }
-
+        
         [ManyToOne]
         public Lesson Lesson { get; set; }
 
         [ForeignKey(typeof(Lesson))]
         public int LessonID { get; set; }
+
+        public Group()
+        {
+            Faculty = new Faculty();
+        }
     }
 
     public class GroupRoot : BusinessEntity

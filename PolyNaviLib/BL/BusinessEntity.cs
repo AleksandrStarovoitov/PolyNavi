@@ -4,7 +4,8 @@ namespace PolyNaviLib.BL
 {
     public abstract class BusinessEntity : IBusinessEntity
     {
-        [PrimaryKey, AutoIncrement]
+        [PrimaryKey]
+        [AutoIncrement]
         public int IDD { get; set; } = 0;
     }
 }

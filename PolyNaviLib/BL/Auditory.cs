@@ -6,6 +6,7 @@ namespace PolyNaviLib.BL
     {
         public int Id { get; set; }
         public string Name { get; set; }
+
         [OneToOne(CascadeOperations = CascadeOperation.All)]
         public Building Building { get; set; }
 

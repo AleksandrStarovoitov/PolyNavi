@@ -115,13 +115,15 @@ namespace PolyNaviLib.DAL
             {
                 var teacherId = settings[PreferenceConstants.TeacherIdPreferenceKey];
                 resultJson = await HttpClientService.GetResponseAsync(client,
-                    ScheduleLinkConstants.TeacherScheduleLink + teacherId + "/scheduler" + "?&date=" + dateStr, new CancellationToken()); //TODO uri
+                    ScheduleLinkConstants.TeacherScheduleLink + teacherId + "/scheduler" + "?&date=" + dateStr,
+                    new CancellationToken()); //TODO uri
             }
             else
             {
                 var groupId = settings[PreferenceConstants.GroupIdPreferenceKey];
                 resultJson = await HttpClientService.GetResponseAsync(client,
-                    ScheduleLinkConstants.ScheduleLink + groupId + "?&date=" + dateStr, new CancellationToken()); //TODO uri
+                    ScheduleLinkConstants.ScheduleLink + groupId + "?&date=" + dateStr,
+                    new CancellationToken()); //TODO uri
             }
 
             var weekRoot = JsonConvert.DeserializeObject<WeekRoot>(resultJson);
@@ -139,7 +141,8 @@ namespace PolyNaviLib.DAL
                 var currentTeacherId = Convert.ToInt32(settings[PreferenceConstants.TeacherIdPreferenceKey]);
 
                 await database.DeleteItemsAsync<WeekRoot>(w =>
-                    w.Week.IsExpired() || w.Days.Any(d => d.Lessons.Any(l => l.Teachers.Any(t => t.Id != currentTeacherId)))); //TODO
+                    w.Week.IsExpired() ||
+                    w.Days.Any(d => d.Lessons.Any(l => l.Teachers.Any(t => t.Id != currentTeacherId)))); //TODO
             }
             else
             {

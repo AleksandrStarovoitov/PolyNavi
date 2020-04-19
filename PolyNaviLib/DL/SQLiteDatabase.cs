@@ -44,7 +44,8 @@ namespace PolyNaviLib.DL
             return await dbConnection.GetAllWithChildrenAsync<T>(recursive: true);
         }
 
-        public async Task<List<T>> GetOrderedItemsAsync<T, TKey>(Func<T, TKey> keySelector) where T : IBusinessEntity, new()
+        public async Task<List<T>> GetOrderedItemsAsync<T, TKey>(Func<T, TKey> keySelector)
+            where T : IBusinessEntity, new()
         {
             var list = await GetItemsAsync<T>();
             return list.OrderBy(keySelector).ToList();
@@ -59,9 +60,9 @@ namespace PolyNaviLib.DL
         {
             if (item.IDD == 0)
             {
-                await dbConnection.RunInTransactionAsync(conn =>
+                await dbConnection.RunInTransactionAsync(conn => 
                 {
-                    conn.InsertWithChildren(item, recursive: true);
+                    conn.InsertWithChildren(item, true);
                 });
             }
             else

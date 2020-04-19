@@ -1,5 +1,5 @@
-﻿using SQLiteNetExtensions.Attributes;
-using System;
+﻿using System;
+using SQLiteNetExtensions.Attributes;
 
 namespace PolyNaviLib.BL
 {
