@@ -1,5 +1,6 @@
 ﻿using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using Android.Content;
 using AndroidX.Preference;
 using Polynavi.Bll;
@@ -39,8 +40,9 @@ namespace PolyNavi.Src
         protected override INetworkChecker CreateNetworkChecker() =>
             new NetworkChecker(context);
 
-        protected override IScheduleRepository CreateScheduleRepository() =>
-            new ScheduleRepository(new SQLiteDatabase(MainApp.GetFileFullPath(MainApp.DatabaseFilename))); //TODO
+        protected override async Task<IScheduleRepository> CreateScheduleRepository() =>
+            await Polynavi.Dal.ScheduleRepository.CreateAsync(
+                new SQLiteDatabase(MainApp.GetFileFullPath(MainApp.DatabaseFilename))); //TODO
 
         protected override ISettingsProvider CreateSettingsProvider() => 
             new SettingsProvider(PreferenceManager.GetDefaultSharedPreferences(context));
