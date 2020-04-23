@@ -1,20 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
+﻿using System.Net;
 using System.Net.Http;
-using System.Runtime.CompilerServices;
-using System.Text;
-
-using Android.App;
 using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using AndroidX.Preference;
 using Polynavi.Bll;
-using Polynavi.Common;
 using Polynavi.Common.Repositories;
 using Polynavi.Common.Services;
 using Polynavi.Dal;
@@ -52,7 +40,7 @@ namespace PolyNavi.Src
             new NetworkChecker(context);
 
         protected override IScheduleRepository CreateScheduleRepository() =>
-            new ScheduleRepository(new SQLiteDatabase("")); //TODO
+            new ScheduleRepository(new SQLiteDatabase(MainApp.GetFileFullPath(MainApp.DatabaseFilename))); //TODO
 
         protected override ISettingsProvider CreateSettingsProvider() => 
             new SettingsProvider(PreferenceManager.GetDefaultSharedPreferences(context));

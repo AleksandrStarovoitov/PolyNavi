@@ -25,13 +25,13 @@ namespace PolyNavi
         Theme = "@style/MyAppTheme.Launcher")]
     public class MainApp : Application
     {
-        private const string DatabaseFilename = "schedule.sqlite";
+        internal const string DatabaseFilename = "schedule.sqlite"; //TODO Move
         private const string MainGraphFilename = "main.graph";
         private const string MainGraphXmlFilename = "main_graph.xml";
 
         private string language;
 
-        public static MainApp Instance { get; private set; }
+        public static MainApp Instance { get; private set; } //TODO Remove
 
         public Dictionary<string, Point> BuildingsDictionary { get; } = new Dictionary<string, Point>()
         {
@@ -209,7 +209,7 @@ namespace PolyNavi
             language = SharedPreferences.GetString("language", null);
         }
 
-        private static string GetFileFullPath(string fileName) //TODO Move
+        internal static string GetFileFullPath(string fileName) //TODO Move
         {
             var dirPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
             return Path.Combine(dirPath, fileName);
