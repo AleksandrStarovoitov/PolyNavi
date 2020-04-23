@@ -1,27 +1,24 @@
 ﻿using Polynavi.Common.Models;
 using Polynavi.Common.Repositories;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Polynavi.Dal
 {
     public class ScheduleRepository : IScheduleRepository
     {
-        private SQLiteDatabase database;
+        private readonly SQLiteDatabase database;
 
         public ScheduleRepository(SQLiteDatabase database)
         {
             this.database = database;
         }
 
-        public Task<WeekSchedule> GetGroupScheduleAsync(int groupId, DateTime date)
+        public async Task<WeekSchedule> GetScheduleAsync(DateTime date)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task<WeekSchedule> GetTeacherScheduleAsync(int techerId, DateTime date)
-        {
-            throw new NotImplementedException();
+            var weekRoots = await database.GetItemsAsync<WeekSchedule>();
+            return weekRoots.SingleOrDefault(w => w.Week.ContainsDate(date));
         }
 
         public Task RecreateDatabase()
@@ -32,6 +29,11 @@ namespace Polynavi.Dal
         public Task RemoveExpiredWeeks()
         {
             throw new NotImplementedException();
+        }
+
+        public async Task SaveScheduleAsync(WeekSchedule weekSchedule)
+        {
+            await database.SaveItemAsync(weekSchedule);
         }
     }
 }

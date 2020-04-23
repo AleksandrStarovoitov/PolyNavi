@@ -4,8 +4,8 @@ using System.Threading.Tasks;
 
 namespace Polynavi.Common.Services
 {
-    public interface IScheduleService
+    public interface IScheduleDownloader
     {
-        Task<WeekSchedule> GetScheduleAsync(DateTime date);
+        Task<WeekSchedule> GetScheduleFromWebAsync(DateTime date);
     }
 }
