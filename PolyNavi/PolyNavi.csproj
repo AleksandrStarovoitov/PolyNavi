@@ -80,6 +80,7 @@
     <Compile Include="Src\Adapters\BuildingsAdapter.cs" />
     <Compile Include="Src\Adapters\ScheduleCardRowAdapter.cs" />
     <Compile Include="Src\Adapters\WelcomeSectionsPagerAdapter.cs" />
+    <Compile Include="Src\AndroidDependencyContainer.cs" />
     <Compile Include="Src\Extensions\AutoCompleteTextViewExtensions.cs" />
     <Compile Include="Src\Extensions\ProgressBarExtensions.cs" />
     <Compile Include="Src\Extensions\StringExtensions.cs" />
@@ -203,6 +204,18 @@
     <ProjectReference Include="..\Graph\Graph.csproj">
       <Project>{846cca01-4e29-4c4f-8e58-a88b0e2925ef}</Project>
       <Name>Graph</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Polynavi.Bll\Polynavi.Bll.csproj">
+      <Project>{A36F8E6B-3E1E-4CBE-BC02-06D686A153ED}</Project>
+      <Name>Polynavi.Bll</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Polynavi.Common\Polynavi.Common.csproj">
+      <Project>{CA6EA28B-C54E-4CDF-931A-AB99DE56F93F}</Project>
+      <Name>Polynavi.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Polynavi.Dal\Polynavi.Dal.csproj">
+      <Project>{81831C19-A3D3-403E-8BAC-D805A3087EC2}</Project>
+      <Name>Polynavi.Dal</Name>
     </ProjectReference>
     <ProjectReference Include="..\PolyNaviLib\PolyNaviLib.csproj">
       <Project>{4d3820d0-a7d3-4fdb-93b0-217fbce25bec}</Project>

@@ -11,7 +11,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Polynavi.Bll\Polynavi.Bll.csproj" />
     <ProjectReference Include="..\Polynavi.Common\Polynavi.Common.csproj" />
   </ItemGroup>
 

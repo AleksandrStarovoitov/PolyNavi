@@ -1,6 +1,6 @@
 ﻿using Android.Content;
 using Android.Net;
-using PolyNaviLib.BL;
+using Polynavi.Common.Services;
 
 namespace PolyNavi.Services
 {

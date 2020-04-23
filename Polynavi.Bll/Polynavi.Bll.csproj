@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Polynavi.Common\Polynavi.Common.csproj" />
+    <ProjectReference Include="..\Polynavi.Dal\Polynavi.Dal.csproj" />
   </ItemGroup>
 
 </Project>
