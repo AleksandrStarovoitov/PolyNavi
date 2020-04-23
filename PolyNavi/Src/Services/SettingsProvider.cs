@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using Android.Content;
-using PolyNaviLib.BL;
+using Polynavi.Common.Services;
 using PolyNaviLib.Constants;
 using PolyNaviLib.DAL;
 

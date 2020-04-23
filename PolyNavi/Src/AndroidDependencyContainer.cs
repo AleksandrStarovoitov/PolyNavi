@@ -12,6 +12,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using AndroidX.Preference;
 using Polynavi.Bll;
 using Polynavi.Common;
 using Polynavi.Common.Repositories;
@@ -24,8 +25,9 @@ namespace PolyNavi.Src
 {
     internal sealed class AndroidDependencyContainer : BllDependencyContainer
     {
-        public static AndroidDependencyContainer Instance { get; private set; }
         private static Context context;
+
+        public static AndroidDependencyContainer Instance { get; private set; }
 
         public static void EnsureInitialized(Context c)
         {
@@ -46,19 +48,13 @@ namespace PolyNavi.Src
             return new HttpClient(httpHandler, true);
         }
 
-        protected override INetworkChecker CreateNetworkChecker()
-        {
-            return new NetworkChecker(context);
-        }
+        protected override INetworkChecker CreateNetworkChecker() =>
+            new NetworkChecker(context);
 
-        protected override IScheduleRepository CreateScheduleRepository()
-        {
-            return new ScheduleRepository(new SQLiteDatabase("")); //TODO
-        }
+        protected override IScheduleRepository CreateScheduleRepository() =>
+            new ScheduleRepository(new SQLiteDatabase("")); //TODO
 
-        protected override ISettingsProvider CreateSettingsProvider()
-        {
-            throw new NotImplementedException();
-        }
+        protected override ISettingsProvider CreateSettingsProvider() => 
+            new SettingsProvider(PreferenceManager.GetDefaultSharedPreferences(context));
     }
 }
