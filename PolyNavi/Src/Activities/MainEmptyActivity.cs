@@ -2,7 +2,7 @@
 using Android.Content;
 using Android.Content.PM;
 using Android.OS;
-using PolyNaviLib.Constants;
+using Polynavi.Common.Constants;
 
 namespace PolyNavi.Activities
 {

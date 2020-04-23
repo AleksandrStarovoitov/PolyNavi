@@ -1,8 +1,8 @@
 ﻿using Android.Content;
 using Android.OS;
 using AndroidX.Preference;
+using Polynavi.Common.Constants;
 using PolyNavi.Preferences;
-using PolyNaviLib.Constants;
 
 namespace PolyNavi.Fragments
 {

@@ -217,10 +217,6 @@
       <Project>{81831C19-A3D3-403E-8BAC-D805A3087EC2}</Project>
       <Name>Polynavi.Dal</Name>
     </ProjectReference>
-    <ProjectReference Include="..\PolyNaviLib\PolyNaviLib.csproj">
-      <Project>{4d3820d0-a7d3-4fdb-93b0-217fbce25bec}</Project>
-      <Name>PolyNaviLib</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\menu\menu_main.xml" />

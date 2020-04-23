@@ -5,9 +5,9 @@ using Android.Text;
 using Android.Widget;
 using AndroidX.AppCompat.App;
 using Java.Lang;
+using Polynavi.Common.Constants;
+using Polynavi.Common.Exceptions;
 using PolyNavi.Extensions;
-using PolyNaviLib.Constants;
-using PolyNaviLib.Exceptions;
 
 namespace PolyNavi.Utils
 {

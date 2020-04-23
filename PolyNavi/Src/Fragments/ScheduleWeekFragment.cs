@@ -10,11 +10,11 @@ using Android.Widget;
 using AndroidX.Fragment.App;
 using AndroidX.RecyclerView.Widget;
 using AndroidX.SwipeRefreshLayout.Widget;
+using Polynavi.Common.Exceptions;
+using Polynavi.Common.Models;
 using PolyNavi.Adapters;
 using PolyNavi.Extensions;
-using PolyNaviLib.BL;
-using PolyNaviLib.DAL;
-using PolyNaviLib.Exceptions;
+using PolyNavi.Src;
 using static AndroidX.SwipeRefreshLayout.Widget.SwipeRefreshLayout;
 
 namespace PolyNavi.Fragments
@@ -83,25 +83,25 @@ namespace PolyNavi.Fragments
 
         private async Task ForceLoadLatestSchedule()
         {
-            var manager = await MainApp.Instance.PolyManager;
-            var weekRoot = await manager.GetLatestSchedule(weekDate);
+            var scheduleService = AndroidDependencyContainer.Instance.ScheduleService;
+            var weekSchedule = await scheduleService.GetScheduleAsync(weekDate);
 
-            LoadSchedule(weekRoot);
+            LoadSchedule(weekSchedule);
         }
 
         private async Task LoadCachedOrLatestSchedule()
         {
-            var manager = await MainApp.Instance.PolyManager;
-            var weekRoot = await manager.GetSchedule(weekDate);
+            var scheduleService = AndroidDependencyContainer.Instance.ScheduleService;
+            var weekSchedule = await scheduleService.GetScheduleAsync(weekDate);
 
-            LoadSchedule(weekRoot);
+            LoadSchedule(weekSchedule);
         }
 
-        private void LoadSchedule(WeekRoot weekRoot)
+        private void LoadSchedule(WeekSchedule weekSchedule)
         {
             try
             {
-                days = weekRoot.Days;
+                days = weekSchedule.Days;
 
                 Activity.RunOnUiThread(() =>
                 {
@@ -113,7 +113,7 @@ namespace PolyNavi.Fragments
                     }
                     else
                     {
-                        ShowEmptyScheduleError(weekRoot);
+                        ShowEmptyScheduleError(weekSchedule);
                     }
                 });
             }
@@ -145,8 +145,13 @@ namespace PolyNavi.Fragments
             }
         }
 
-        private void ShowEmptyScheduleError(WeekRoot weekRoot) //TODO Remove weekRoot?
+        private void ShowEmptyScheduleError(WeekSchedule weekSchedule) //TODO Remove weekRoot?
         {
+            if (weekSchedule is null)
+            {
+                throw new ArgumentNullException(nameof(weekSchedule));
+            }
+
             ChangeViewContentInContainer(Resource.Id.relativelayout_week_schedule,
                 Resource.Layout.layout_empty_schedule_error);
 
@@ -162,7 +167,7 @@ namespace PolyNavi.Fragments
 
             var emptyScheduleErrorTextView = view.FindViewById<TextView>(Resource.Id.textview_empty_schedule_error);
             var wasUpdatedOn = GetString(Resource.String.updated) + " " +
-                               weekRoot.LastUpdated.ToString(CultureInfo.CurrentCulture);
+                               weekSchedule.LastUpdated.ToString(CultureInfo.CurrentCulture);
             emptyScheduleErrorTextView.Text = wasUpdatedOn;
 
             var swipeToRefreshLayout =

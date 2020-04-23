@@ -11,10 +11,9 @@ using Android.Runtime;
 using AndroidX.Preference;
 using Graph;
 using Java.Util;
-using Nito.AsyncEx;
+using Polynavi.Common.Constants;
 using PolyNavi.Services;
-using PolyNaviLib.BL;
-using PolyNaviLib.Constants;
+using PolyNavi.Src;
 using Point = Mapsui.Geometries.Point;
 
 namespace PolyNavi
@@ -164,14 +163,6 @@ namespace PolyNavi
             Instance.RoomsDictionary = ordered.ToDictionary(x => x.Key, x => x.Value);
         }
 
-        public AsyncLazy<PolyManager> PolyManager { get; } = new AsyncLazy<PolyManager>(async () =>
-        {
-            return await PolyNaviLib.BL.PolyManager.CreateAsync(
-                GetFileFullPath(DatabaseFilename),
-                new NetworkChecker(Instance),
-                new SettingsProvider(Instance.SharedPreferences));
-        });
-
         public ISharedPreferences SharedPreferences { get; }
 
         private SaverLoader GraphSaverLoader { get; }
@@ -179,17 +170,18 @@ namespace PolyNavi
         public MainApp(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
         {
             Instance = this;
+            AndroidDependencyContainer.EnsureInitialized(ApplicationContext);
             SharedPreferences = PreferenceManager.GetDefaultSharedPreferences(ApplicationContext);
             GraphSaverLoader = new SaverLoader(new AssetsProvider(ApplicationContext));
             SetDefaultPreferences();
 
             if (IsAppUpdated()) //TODO
             {
-                Task.Run(async () =>
-                {
-                    var manager = await PolyManager;
-                    await manager.ReinitializeDatabaseAsync();
-                });
+                //Task.Run(async () =>
+                //{
+                //    var manager = await PolyManager;
+                //    await manager.ReinitializeDatabaseAsync();
+                //});
             }
         }
 

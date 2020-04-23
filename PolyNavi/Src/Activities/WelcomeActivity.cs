@@ -10,8 +10,8 @@ using Android.Widget;
 using AndroidX.AppCompat.App;
 using AndroidX.Core.Content;
 using AndroidX.ViewPager.Widget;
+using Polynavi.Common.Constants;
 using PolyNavi.Adapters;
-using PolyNaviLib.Constants;
 using Object = Java.Lang.Object;
 
 namespace PolyNavi.Activities

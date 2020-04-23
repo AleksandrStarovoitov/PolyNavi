@@ -8,8 +8,8 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 using AndroidX.Preference;
+using Polynavi.Common.Constants;
 using PolyNavi.Utils;
-using PolyNaviLib.Constants;
 using Object = Java.Lang.Object;
 
 namespace PolyNavi.Preferences

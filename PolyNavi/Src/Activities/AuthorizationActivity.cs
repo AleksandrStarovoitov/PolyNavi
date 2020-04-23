@@ -8,8 +8,8 @@ using Android.Views;
 using Android.Views.InputMethods;
 using Android.Widget;
 using AndroidX.AppCompat.App;
+using Polynavi.Common.Constants;
 using PolyNavi.Utils;
-using PolyNaviLib.Constants;
 
 namespace PolyNavi.Activities
 {

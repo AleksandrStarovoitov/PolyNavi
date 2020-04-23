@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using Android.Content;
+using Polynavi.Common.Constants;
+using Polynavi.Common.Exceptions;
 using Polynavi.Common.Services;
-using PolyNaviLib.Constants;
-using PolyNaviLib.DAL;
 
 namespace PolyNavi.Services
 {

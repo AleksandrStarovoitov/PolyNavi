@@ -12,8 +12,8 @@ using Google.Android.Material.AppBar;
 using Google.Android.Material.FloatingActionButton;
 using Graph;
 using Java.Lang;
+using Polynavi.Common.Exceptions;
 using PolyNavi.Views;
-using PolyNaviLib.Exceptions;
 using static Android.Widget.TextView;
 using Point = Android.Graphics.Point;
 

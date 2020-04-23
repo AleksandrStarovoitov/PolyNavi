@@ -7,8 +7,8 @@ using Android.Net;
 using Android.Views;
 using Android.Widget;
 using AndroidX.RecyclerView.Widget;
+using Polynavi.Common.Models;
 using PolyNavi.Extensions;
-using PolyNaviLib.BL;
 
 namespace PolyNavi.Adapters
 {

@@ -13,7 +13,7 @@ namespace Polynavi.Bll
 
         protected override IScheduleService CreateScheduleService()
         {
-            return new ScheduleService(ScheduleRepository, ScheduleDownloader);
+            return new ScheduleService(ScheduleRepository.Result, ScheduleDownloader); //TODO Async
         }
     }
 }
