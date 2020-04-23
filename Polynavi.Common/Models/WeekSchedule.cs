@@ -4,7 +4,7 @@ using SQLiteNetExtensions.Attributes;
 
 namespace Polynavi.Common.Models
 {
-    public class WeekRoot : Entity
+    public class WeekSchedule : Entity
     {
         [OneToOne(CascadeOperations = CascadeOperation.All)]
         public Week Week { get; set; }
@@ -17,7 +17,7 @@ namespace Polynavi.Common.Models
         [OneToOne(CascadeOperations = CascadeOperation.All)]
         public Group Group { get; set; }
 
-        public WeekRoot()
+        public WeekSchedule()
         {
             Days = new List<Day>();
             Week = new Week();

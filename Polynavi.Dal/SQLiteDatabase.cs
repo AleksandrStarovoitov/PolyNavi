@@ -1,6 +1,7 @@
 ﻿namespace Polynavi.Dal
 {
-    internal class SQLiteDatabase
+    public class SQLiteDatabase
     {        
+
     }
 }

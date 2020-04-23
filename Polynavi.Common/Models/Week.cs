@@ -10,10 +10,10 @@ namespace Polynavi.Common.Models
         public bool Is_Odd { get; set; }
 
         [OneToOne]
-        public WeekRoot WeekRoot { get; set; }
+        public WeekSchedule WeekRoot { get; set; }
 
-        [ForeignKey(typeof(WeekRoot))]
-        public int WeekRootID { get; set; }
+        [ForeignKey(typeof(WeekSchedule))]
+        public int ScheduleId { get; set; }
 
         public bool ContainsDate(DateTime date)
         {

@@ -16,9 +16,9 @@ namespace Polynavi.Common.Models
         public Faculty Faculty { get; set; }
 
         [OneToOne]
-        public WeekRoot WeekRoot { get; set; }
+        public WeekSchedule WeekRoot { get; set; }
 
-        [ForeignKey(typeof(WeekRoot))]
+        [ForeignKey(typeof(WeekSchedule))]
         public int WeekRootID { get; set; }
 
         [ManyToOne]
