@@ -26,13 +26,13 @@ namespace PolyNavi.Fragments
         private ProgressBar progressBar;
         private View view;
         private List<Day> days;
-        private readonly DateTime weekDate;
+        private readonly DateTime date;
         private readonly int weekTag;
         private readonly int dayOfYear;
 
-        public ScheduleWeekFragment(DateTime weekDate, int weekTag, int dayOfYear)
+        public ScheduleWeekFragment(DateTime date, int weekTag, int dayOfYear)
         {
-            this.weekDate = weekDate;
+            this.date = date;
             this.weekTag = weekTag;
             this.dayOfYear = dayOfYear;
         }
@@ -78,21 +78,21 @@ namespace PolyNavi.Fragments
         {
             ToggleProgressBarVisibility();
 
-            Task.Run(LoadCachedOrLatestSchedule);
+            Task.Run(LoadSavedOrLatestSchedule);
         }
 
         private async Task ForceLoadLatestSchedule()
         {
             var scheduleService = AndroidDependencyContainer.Instance.ScheduleService;
-            var weekSchedule = await scheduleService.GetScheduleAsync(weekDate);
+            var weekSchedule = await scheduleService.GetLatestAsync(date);
 
             LoadSchedule(weekSchedule);
         }
 
-        private async Task LoadCachedOrLatestSchedule()
+        private async Task LoadSavedOrLatestSchedule()
         {
             var scheduleService = AndroidDependencyContainer.Instance.ScheduleService;
-            var weekSchedule = await scheduleService.GetScheduleAsync(weekDate);
+            var weekSchedule = await scheduleService.GetSavedOrLatestAsync(date);
 
             LoadSchedule(weekSchedule);
         }
@@ -212,19 +212,19 @@ namespace PolyNavi.Fragments
             }
         }
 
-        private void ShowSwipeRefreshLayout()
+        private void ShowSwipeRefreshLayout() //TODO Extension
         {
             swipeRefreshLayout.Visibility = ViewStates.Visible;
             swipeRefreshLayout.Refreshing = false;
         }
 
-        private void HideSwipeRefreshLayout()
+        private void HideSwipeRefreshLayout() //TODO Extension
         {
             swipeRefreshLayout.Refreshing = true;
             swipeRefreshLayout.Visibility = ViewStates.Invisible;
         }
-
-        private void ChangeViewContentInContainer(int rootContainerId, int newLayoutId)
+                
+        private void ChangeViewContentInContainer(int rootContainerId, int newLayoutId) //TODO Move
         {
             var viewGroup = view.FindViewById<ViewGroup>(rootContainerId);
 
@@ -233,12 +233,12 @@ namespace PolyNavi.Fragments
             AddViewToViewGroup(viewGroup, newLayoutId);
         }
 
-        private static void ClearViewGroup(ViewGroup viewGroup)
+        private static void ClearViewGroup(ViewGroup viewGroup) //TODO Move
         {
             viewGroup.RemoveAllViews();
         }
 
-        private void AddViewToViewGroup(ViewGroup viewGroup, int newLayoutId)
+        private void AddViewToViewGroup(ViewGroup viewGroup, int newLayoutId) //TODO Move
         {
             viewGroup.AddView(Inflate(newLayoutId),
                 0,
@@ -246,7 +246,7 @@ namespace PolyNavi.Fragments
                     ViewGroup.LayoutParams.MatchParent));
         }
 
-        private View Inflate(int layoutId)
+        private View Inflate(int layoutId) //TODO Move
         {
             return ((LayoutInflater)Activity.GetSystemService(Context.LayoutInflaterService)).Inflate(layoutId, null);
         }

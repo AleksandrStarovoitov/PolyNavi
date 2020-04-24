@@ -6,6 +6,7 @@ namespace Polynavi.Common.Services
 {
     public interface IScheduleService
     {
-        Task<WeekSchedule> GetScheduleAsync(DateTime date);
+        Task<WeekSchedule> GetLatestAsync(DateTime date);
+        Task<WeekSchedule> GetSavedOrLatestAsync(DateTime date);
     }
 }

@@ -6,10 +6,10 @@ namespace Polynavi.Common.Repositories
 {
     public interface IScheduleRepository
     {
-        Task RemoveExpiredWeeks();
-        Task RecreateDatabase();
-
+        Task DeleteWeekAsync(DateTime date);
         Task<WeekSchedule> GetScheduleAsync(DateTime date);
         Task SaveScheduleAsync(WeekSchedule weekSchedule);
+        Task RecreateDatabase();
+        Task RemoveExpiredWeeks();
     }
 }

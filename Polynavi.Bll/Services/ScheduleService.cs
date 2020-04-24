@@ -17,20 +17,31 @@ namespace Polynavi.Bll.Services
             this.scheduleDownloader = scheduleDownloader;
         }
 
-        public async Task<WeekSchedule> GetScheduleAsync(DateTime date)
+        public async Task<WeekSchedule> GetLatestAsync(DateTime date)
+        {
+            await scheduleRepository.DeleteWeekAsync(date);
+
+            return await DownloadAndSaveAsync(date);
+        }
+
+        public async Task<WeekSchedule> GetSavedOrLatestAsync(DateTime date)
         {
             var schedule = await scheduleRepository.GetScheduleAsync(date);
 
             if (schedule == null)
             {
-                var scheduleFromWeb = await scheduleDownloader.GetScheduleFromWebAsync(date);
-
-                await scheduleRepository.SaveScheduleAsync(scheduleFromWeb);
-
-                return scheduleFromWeb;
+                return await DownloadAndSaveAsync(date);
             }
 
             return schedule;
+        }
+
+        private async Task<WeekSchedule> DownloadAndSaveAsync(DateTime date)
+        {
+            var scheduleFromWeb = await scheduleDownloader.GetScheduleFromWebAsync(date);
+            await scheduleRepository.SaveScheduleAsync(scheduleFromWeb);
+
+            return scheduleFromWeb;
         }
     }
 }

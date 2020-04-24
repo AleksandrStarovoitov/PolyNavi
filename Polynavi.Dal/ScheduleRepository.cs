@@ -36,6 +36,11 @@ namespace Polynavi.Dal
             return this;
         }
 
+        public async Task DeleteWeekAsync(DateTime date)
+        {
+            await database.DeleteItemsAsync<WeekSchedule>(w => w.Week.ContainsDate(date));
+        }
+
         public async Task<WeekSchedule> GetScheduleAsync(DateTime date)
         {
             var weekRoots = await database.GetItemsAsync<WeekSchedule>();
