@@ -41,7 +41,7 @@ namespace PolyNavi.Src
             new NetworkChecker(context);
 
         protected override async Task<IScheduleRepository> CreateScheduleRepository() =>
-            await Polynavi.Dal.ScheduleRepository.CreateAsync(
+            await Polynavi.Dal.ScheduleRepository.CreateAsync(SettingsProvider, 
                 new SQLiteDatabase(MainApp.GetFileFullPath(MainApp.DatabaseFilename))); //TODO
 
         protected override ISettingsProvider CreateSettingsProvider() => 
