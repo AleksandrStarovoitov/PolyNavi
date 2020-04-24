@@ -16,21 +16,5 @@ namespace PolyNavi.Utils
             var inputMethodManager = (InputMethodManager)context.GetSystemService(Context.InputMethodService);
             inputMethodManager.HideSoftInputFromWindow(view.WindowToken, 0);
         }
-
-        internal static async Task<Dictionary<string, int>> GetSuggestedGroupsDictionary(string s) //TODO
-        {
-            var suggestionsService = AndroidDependencyContainer.Instance.SuggestionsService;
-            var groups = await suggestionsService.GetSuggestedGroupsAsync(s);
-
-            return groups.Groups.ToDictionary(x => x.Name, x => x.Id);
-        }
-
-        internal static async Task<Dictionary<string, int>> GetSuggestedTeachersDictionary(string s) //TODO
-        {
-            var suggestionsService = AndroidDependencyContainer.Instance.SuggestionsService;
-            var teachers = await suggestionsService.GetSuggestedTeachersAsync(s);
-
-            return teachers.Teachers.ToDictionary(t => t.Full_Name, t => t.Id);
-        }
     }
 }

@@ -3,6 +3,8 @@ using Polynavi.Common.Constants;
 using Polynavi.Common.Exceptions;
 using Polynavi.Common.Models;
 using Polynavi.Common.Services;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -19,7 +21,7 @@ namespace Polynavi.Bll.Services
             this.httpClientService = httpClientService;
         }
 
-        public async Task<GroupRoot> GetSuggestedGroupsAsync(string groupName) //TODO Non static?
+        public async Task<Dictionary<string, int>> GetSuggestedGroupsAsync(string groupName) //TODO Non static?
         {
             if (!networkChecker.IsConnected()) //TODO Move to httpclient service?
             {
@@ -28,11 +30,12 @@ namespace Polynavi.Bll.Services
 
             var requestUrl = ScheduleLinkConstants.GroupSearchLink + groupName;
             var resultJson = await httpClientService.GetResponseAsStringAsync(requestUrl, new CancellationToken());
+            var groups = JsonConvert.DeserializeObject<GroupRoot>(resultJson);
 
-            return JsonConvert.DeserializeObject<GroupRoot>(resultJson);
+            return groups.Groups.ToDictionary(x => x.Name, x => x.Id);
         }
 
-        public async Task<TeachersRoot> GetSuggestedTeachersAsync(string teacherName)
+        public async Task<Dictionary<string, int>> GetSuggestedTeachersAsync(string teacherName)
         {
             if (!networkChecker.IsConnected()) //TODO Move to httpclient service?
             {
@@ -40,10 +43,10 @@ namespace Polynavi.Bll.Services
             }
 
             var requestUrl = ScheduleLinkConstants.TeacherSearchLink + teacherName;
-
             var resultJson = await httpClientService.GetResponseAsStringAsync(requestUrl, new CancellationToken());
+            var teachers = JsonConvert.DeserializeObject<TeachersRoot>(resultJson);
 
-            return JsonConvert.DeserializeObject<TeachersRoot>(resultJson);
+            return teachers.Teachers.ToDictionary(t => t.Full_Name, t => t.Id);
         }
     }
 }

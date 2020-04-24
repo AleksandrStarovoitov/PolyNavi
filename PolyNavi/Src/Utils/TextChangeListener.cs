@@ -8,6 +8,7 @@ using Java.Lang;
 using Polynavi.Common.Constants;
 using Polynavi.Common.Exceptions;
 using PolyNavi.Extensions;
+using PolyNavi.Src;
 
 namespace PolyNavi.Utils
 {
@@ -66,9 +67,11 @@ namespace PolyNavi.Utils
                     searchTimer.Close();
                     searchTimer = null;
 
-                    SuggestionsAndIds = isTeacher
-                            ? await Utils.GetSuggestedTeachersDictionary(s.ToString())
-                            : await Utils.GetSuggestedGroupsDictionary(s.ToString());
+                    var suggestionsService = AndroidDependencyContainer.Instance.SuggestionsService;
+
+                    SuggestionsAndIds = isTeacher //TODO NULL
+                            ? await suggestionsService.GetSuggestedGroupsAsync(s.ToString())
+                            : await suggestionsService.GetSuggestedGroupsAsync(s.ToString());
 
                     activity.RunOnUiThread(() =>
                     {
