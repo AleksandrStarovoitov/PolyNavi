@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Android.Content;
 using Android.Views;
 using Android.Views.InputMethods;
+using PolyNavi.Src;
 
 namespace PolyNavi.Utils
 {
@@ -19,12 +19,18 @@ namespace PolyNavi.Utils
 
         internal static async Task<Dictionary<string, int>> GetSuggestedGroupsDictionary(string s) //TODO
         {
-            throw new NotImplementedException(); //TODO
+            var suggestionsService = AndroidDependencyContainer.Instance.SuggestionsService;
+            var groups = await suggestionsService.GetSuggestedGroupsAsync(s);
+
+            return groups.Groups.ToDictionary(x => x.Name, x => x.Id);
         }
 
         internal static async Task<Dictionary<string, int>> GetSuggestedTeachersDictionary(string s) //TODO
         {
-            throw new NotImplementedException(); //TODO
+            var suggestionsService = AndroidDependencyContainer.Instance.SuggestionsService;
+            var teachers = await suggestionsService.GetSuggestedTeachersAsync(s);
+
+            return teachers.Teachers.ToDictionary(t => t.Full_Name, t => t.Id);
         }
     }
 }

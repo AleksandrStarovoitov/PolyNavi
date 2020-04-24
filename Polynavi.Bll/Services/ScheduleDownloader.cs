@@ -15,13 +15,14 @@ namespace Polynavi.Bll.Services
     {
         private readonly INetworkChecker networkChecker;
         private readonly ISettingsProvider settingsProvider;
-        private readonly HttpClient httpClient;
+        private readonly IHttpClientService httpClientService;
 
-        public ScheduleDownloader(INetworkChecker networkChecker, ISettingsProvider settingsProvider)
+        public ScheduleDownloader(INetworkChecker networkChecker, ISettingsProvider settingsProvider,
+            IHttpClientService httpClientService)
         {
             this.networkChecker = networkChecker;
             this.settingsProvider = settingsProvider;
-            this.httpClient = new HttpClient();
+            this.httpClientService = httpClientService;
         }
 
         public async Task<WeekSchedule> GetScheduleFromWebAsync(DateTime date)
@@ -33,7 +34,7 @@ namespace Polynavi.Bll.Services
 
             var requestUrl = GetLink(date);
 
-            var result = await GetResponseAsync(requestUrl, new CancellationToken());
+            var result = await httpClientService.GetResponseAsStringAsync(requestUrl, new CancellationToken());
 
             var weekSchedule = JsonConvert.DeserializeObject<WeekSchedule>(result);
             weekSchedule.LastUpdated = DateTime.Now;
@@ -54,25 +55,6 @@ namespace Polynavi.Bll.Services
 
             var groupId = settingsProvider[PreferenceConstants.GroupIdPreferenceKey];
             return ScheduleLinkConstants.ScheduleLink + groupId + "?&date=" + dateStr;
-        }
-
-        private async Task<string> GetResponseAsync(string uri, CancellationToken cts)
-        {
-            try // Move try catch?
-            {
-                using (var response = await httpClient.GetAsync(uri, cts))
-                {
-                    response.EnsureSuccessStatusCode();
-
-                    var responseBody = await response.Content.ReadAsStringAsync();
-                    return responseBody;
-                }
-            }
-            catch (HttpRequestException)
-            {
-                //TODO Log, throw?
-                return null;
-            }
         }
     }
 }

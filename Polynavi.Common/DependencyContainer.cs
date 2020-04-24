@@ -10,35 +10,42 @@ namespace Polynavi.Common
     public abstract class DependencyContainer
     {
         private readonly Lazy<IScheduleService> scheduleService;
+        private readonly Lazy<ISuggestionsService> suggestionsService;
         private readonly Lazy<IScheduleDownloader> scheduleDownloader;
         private readonly AsyncLazy<IScheduleRepository> scheduleRepository;
         private readonly Lazy<INetworkChecker> networkChecker;
         private readonly Lazy<ISettingsProvider> settingsProvider;
+        private readonly Lazy<IHttpClientService> httpClientService;
         private readonly Lazy<HttpClient> httpClient;
 
         public IScheduleService ScheduleService => scheduleService.Value;
+        public ISuggestionsService SuggestionsService => suggestionsService.Value;
         public IScheduleDownloader ScheduleDownloader => scheduleDownloader.Value;
         public Task<IScheduleRepository> ScheduleRepository => scheduleRepository.Task;
         public INetworkChecker NetworkChecker => networkChecker.Value;
         public ISettingsProvider SettingsProvider => settingsProvider.Value;
+        public IHttpClientService HttpClientService => httpClientService.Value;
         public HttpClient HttpClient => httpClient.Value;
 
         protected DependencyContainer()
         {
             scheduleService = new Lazy<IScheduleService>(CreateScheduleService);
+            suggestionsService = new Lazy<ISuggestionsService>(CreateSuggestionsService);
             scheduleDownloader = new Lazy<IScheduleDownloader>(CreateScheduleDownloader);
             scheduleRepository = new AsyncLazy<IScheduleRepository>(CreateScheduleRepository);
             networkChecker = new Lazy<INetworkChecker>(CreateNetworkChecker);
             settingsProvider = new Lazy<ISettingsProvider>(CreateSettingsProvider);
+            httpClientService = new Lazy<IHttpClientService>(CreateHttpClientService);
             httpClient = new Lazy<HttpClient>(CreateHttpClient);
         }
 
         protected abstract IScheduleService CreateScheduleService();
+        protected abstract ISuggestionsService CreateSuggestionsService();
         protected abstract IScheduleDownloader CreateScheduleDownloader();
         protected abstract Task<IScheduleRepository> CreateScheduleRepository();
         protected abstract INetworkChecker CreateNetworkChecker();
         protected abstract ISettingsProvider CreateSettingsProvider();
-
-        protected virtual HttpClient CreateHttpClient() => new HttpClient();
+        protected abstract IHttpClientService CreateHttpClientService();
+        protected abstract HttpClient CreateHttpClient();
     }
 }
