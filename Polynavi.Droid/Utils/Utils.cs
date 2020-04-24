@@ -1,10 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Android.Content;
+﻿using Android.Content;
 using Android.Views;
 using Android.Views.InputMethods;
-using Polynavi.Droid.Src;
 
 namespace Polynavi.Droid.Utils
 {

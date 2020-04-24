@@ -10,7 +10,7 @@ using Polynavi.Dal;
 using Polynavi.Droid.Services;
 using Xamarin.Android.Net;
 
-namespace Polynavi.Droid.Src
+namespace Polynavi.Droid
 {
     internal sealed class AndroidDependencyContainer : BllDependencyContainer
     {

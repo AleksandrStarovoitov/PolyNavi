@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
 using Android.Content.Res;
@@ -13,7 +12,6 @@ using Graph;
 using Java.Util;
 using Polynavi.Common.Constants;
 using Polynavi.Droid.Services;
-using Polynavi.Droid.Src;
 using Point = Mapsui.Geometries.Point;
 
 namespace Polynavi.Droid

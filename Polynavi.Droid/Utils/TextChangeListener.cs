@@ -8,7 +8,6 @@ using Java.Lang;
 using Polynavi.Common.Constants;
 using Polynavi.Common.Exceptions;
 using Polynavi.Droid.Extensions;
-using Polynavi.Droid.Src;
 
 namespace Polynavi.Droid.Utils
 {

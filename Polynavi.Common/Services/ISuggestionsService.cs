@@ -1,5 +1,4 @@
-﻿using Polynavi.Common.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Polynavi.Common.Services

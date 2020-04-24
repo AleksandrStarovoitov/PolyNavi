@@ -14,7 +14,6 @@ using Polynavi.Common.Exceptions;
 using Polynavi.Common.Models;
 using Polynavi.Droid.Adapters;
 using Polynavi.Droid.Extensions;
-using Polynavi.Droid.Src;
 using static AndroidX.SwipeRefreshLayout.Widget.SwipeRefreshLayout;
 
 namespace Polynavi.Droid.Fragments
