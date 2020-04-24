@@ -41,10 +41,10 @@ namespace Polynavi.Droid
             new NetworkChecker(context);
 
         protected override async Task<IScheduleRepository> CreateScheduleRepository() =>
-            await Polynavi.Dal.ScheduleRepository.CreateAsync(SettingsProvider, 
+            await Polynavi.Dal.ScheduleRepository.CreateAsync(SettingsStorage, 
                 new SQLiteDatabase(MainApp.GetFileFullPath(MainApp.DatabaseFilename))); //TODO
 
-        protected override ISettingsProvider CreateSettingsProvider() => 
-            new SettingsProvider(PreferenceManager.GetDefaultSharedPreferences(context));
+        protected override ISettingsStorage CreateSettingsStorage() => 
+            new SharedPreferencesStorage(PreferenceManager.GetDefaultSharedPreferences(context));
     }
 }

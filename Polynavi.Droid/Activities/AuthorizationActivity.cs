@@ -9,6 +9,7 @@ using Android.Views.InputMethods;
 using Android.Widget;
 using AndroidX.AppCompat.App;
 using Polynavi.Common.Constants;
+using Polynavi.Common.Services;
 using Polynavi.Droid.Utils;
 
 namespace Polynavi.Droid.Activities
@@ -20,7 +21,7 @@ namespace Polynavi.Droid.Activities
     public class AuthorizationActivity : AppCompatActivity, TextView.IOnEditorActionListener
     {
         private AutoCompleteTextView autoCompleteTextView;
-        private ISharedPreferencesEditor preferencesEditor;
+        private ISettingsStorage settingsStorage;
         private bool isTeacher;
         private TextChangeListener textChangeListener;
 
@@ -50,7 +51,8 @@ namespace Polynavi.Droid.Activities
             var skipAuthTextView = FindViewById<TextView>(Resource.Id.textview_auth_skip);
             skipAuthTextView.Click += SkipAuthTextView_Click;
 
-            preferencesEditor = MainApp.Instance.SharedPreferences.Edit();
+            settingsStorage = AndroidDependencyContainer.Instance.SettingsStorage;
+
             isTeacher = Intent.Extras.GetBoolean(UserTypeSelectActivity.IsTeacherIntentExtraName);
 
             var titleTextView = FindViewById<TextView>(Resource.Id.textview_auth_edittext_title);
@@ -92,16 +94,15 @@ namespace Polynavi.Droid.Activities
             {
                 if (isTeacher)
                 {
-                    preferencesEditor.PutString(PreferenceConstants.TeacherNamePreferenceKey,
-                        autoCompleteTextView.Text).Apply();
-                    preferencesEditor.PutInt(PreferenceConstants.TeacherIdPreferenceKey, id).Apply();
+                    settingsStorage.PutString(PreferenceConstants.TeacherNamePreferenceKey,
+                        autoCompleteTextView.Text);
+                    settingsStorage.PutInt(PreferenceConstants.TeacherIdPreferenceKey, id);
                 }
                 else
                 {
-
-                    preferencesEditor.PutString(PreferenceConstants.GroupNumberPreferenceKey,
-                        autoCompleteTextView.Text).Apply();
-                    preferencesEditor.PutInt(PreferenceConstants.GroupIdPreferenceKey, id).Apply();
+                    settingsStorage.PutString(PreferenceConstants.GroupNumberPreferenceKey,
+                        autoCompleteTextView.Text);
+                    settingsStorage.PutInt(PreferenceConstants.GroupIdPreferenceKey, id);
                 }
                 ProceedToMainActivity();
             }
@@ -120,8 +121,8 @@ namespace Polynavi.Droid.Activities
 
         private void ProceedToMainActivity()
         {
-            preferencesEditor.PutBoolean(PreferenceConstants.AuthCompletedPreferenceKey, true).Apply();
-            preferencesEditor.PutBoolean(PreferenceConstants.IsUserTeacherPreferenceKey, isTeacher).Apply();
+            settingsStorage.PutBoolean(PreferenceConstants.AuthCompletedPreferenceKey, true);
+            settingsStorage.PutBoolean(PreferenceConstants.IsUserTeacherPreferenceKey, isTeacher);
 
             var mainIntent = new Intent(this, typeof(MainActivity));
             mainIntent.SetFlags(ActivityFlags.ClearTop);

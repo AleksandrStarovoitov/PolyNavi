@@ -161,7 +161,7 @@ namespace Polynavi.Droid
             Instance.RoomsDictionary = ordered.ToDictionary(x => x.Key, x => x.Value);
         }
 
-        public ISharedPreferences SharedPreferences { get; }
+        public ISharedPreferences SharedPreferences { get; } //TODO Remove
 
         private SaverLoader GraphSaverLoader { get; }
 

@@ -14,7 +14,7 @@ namespace Polynavi.Common
         private readonly Lazy<IScheduleDownloader> scheduleDownloader;
         private readonly AsyncLazy<IScheduleRepository> scheduleRepository;
         private readonly Lazy<INetworkChecker> networkChecker;
-        private readonly Lazy<ISettingsProvider> settingsProvider;
+        private readonly Lazy<ISettingsStorage> settingsStorage;
         private readonly Lazy<IHttpClientService> httpClientService;
         private readonly Lazy<HttpClient> httpClient;
 
@@ -23,7 +23,7 @@ namespace Polynavi.Common
         public IScheduleDownloader ScheduleDownloader => scheduleDownloader.Value;
         public Task<IScheduleRepository> ScheduleRepository => scheduleRepository.Task;
         public INetworkChecker NetworkChecker => networkChecker.Value;
-        public ISettingsProvider SettingsProvider => settingsProvider.Value;
+        public ISettingsStorage SettingsStorage => settingsStorage.Value;
         public IHttpClientService HttpClientService => httpClientService.Value;
         public HttpClient HttpClient => httpClient.Value;
 
@@ -34,7 +34,7 @@ namespace Polynavi.Common
             scheduleDownloader = new Lazy<IScheduleDownloader>(CreateScheduleDownloader);
             scheduleRepository = new AsyncLazy<IScheduleRepository>(CreateScheduleRepository);
             networkChecker = new Lazy<INetworkChecker>(CreateNetworkChecker);
-            settingsProvider = new Lazy<ISettingsProvider>(CreateSettingsProvider);
+            settingsStorage = new Lazy<ISettingsStorage>(CreateSettingsStorage);
             httpClientService = new Lazy<IHttpClientService>(CreateHttpClientService);
             httpClient = new Lazy<HttpClient>(CreateHttpClient);
         }
@@ -44,7 +44,7 @@ namespace Polynavi.Common
         protected abstract IScheduleDownloader CreateScheduleDownloader();
         protected abstract Task<IScheduleRepository> CreateScheduleRepository();
         protected abstract INetworkChecker CreateNetworkChecker();
-        protected abstract ISettingsProvider CreateSettingsProvider();
+        protected abstract ISettingsStorage CreateSettingsStorage();
         protected abstract IHttpClientService CreateHttpClientService();
         protected abstract HttpClient CreateHttpClient();
     }

@@ -94,7 +94,7 @@
     <Compile Include="Fragments\MainBuildingMapFragment.cs" />
     <Compile Include="Preferences\AutoCompleteTextViewPreference.cs" />
     <Compile Include="Services\AssetsProvider.cs" />
-    <Compile Include="Services\SettingsProvider.cs" />
+    <Compile Include="Services\SharedPreferencesStorage.cs" />
     <Compile Include="Utils\TextChangeListener.cs" />
     <Compile Include="Utils\Utils.cs" />
     <Compile Include="Views\MainBuildingView.cs" />

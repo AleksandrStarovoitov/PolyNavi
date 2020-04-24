@@ -25,7 +25,7 @@ namespace Polynavi.Droid.Activities
 
         private Intent GetStartIntent()
         {
-            var preferences = MainApp.Instance.SharedPreferences;
+            var preferences = AndroidDependencyContainer.Instance.SettingsStorage;
 
             var isAuthCompleted = preferences.GetBoolean(PreferenceConstants.AuthCompletedPreferenceKey, false);
             var isWelcomeCompleted = preferences.GetBoolean(PreferenceConstants.WelcomeCompletedPreferenceKey, false);

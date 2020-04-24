@@ -13,14 +13,14 @@ namespace Polynavi.Bll.Services
     public class ScheduleDownloader : IScheduleDownloader
     {
         private readonly INetworkChecker networkChecker;
-        private readonly ISettingsProvider settingsProvider;
+        private readonly ISettingsStorage settingsStorage;
         private readonly IHttpClientService httpClientService;
 
-        public ScheduleDownloader(INetworkChecker networkChecker, ISettingsProvider settingsProvider,
+        public ScheduleDownloader(INetworkChecker networkChecker, ISettingsStorage settingsStorage,
             IHttpClientService httpClientService)
         {
             this.networkChecker = networkChecker;
-            this.settingsProvider = settingsProvider;
+            this.settingsStorage = settingsStorage;
             this.httpClientService = httpClientService;
         }
 
@@ -43,16 +43,16 @@ namespace Polynavi.Bll.Services
 
         private string GetLink(DateTime date)
         {
-            var isTeacher = settingsProvider[PreferenceConstants.IsUserTeacherPreferenceKey];
+            var isTeacher = settingsStorage.GetBoolean(PreferenceConstants.IsUserTeacherPreferenceKey, false);
             var dateStr = date.ToString("yyyy-M-d", new CultureInfo("ru-RU"));
 
-            if (isTeacher.Equals(true)) //TODO GetBoolean
+            if (isTeacher)
             {
-                var teacherId = settingsProvider[PreferenceConstants.TeacherIdPreferenceKey];
+                var teacherId = settingsStorage.GetInt(PreferenceConstants.TeacherIdPreferenceKey, 0); //TODO Not found exception
                 return ScheduleLinkConstants.TeacherScheduleLink + teacherId + "/scheduler" + "?&date=" + dateStr;
             }
 
-            var groupId = settingsProvider[PreferenceConstants.GroupIdPreferenceKey];
+            var groupId = settingsStorage.GetInt(PreferenceConstants.GroupIdPreferenceKey, 0); //TODO Not found exception
             return ScheduleLinkConstants.ScheduleLink + groupId + "?&date=" + dateStr;
         }
     }

@@ -62,8 +62,8 @@ namespace Polynavi.Droid.Activities
             navigationView.NavigationItemSelected += NavViewItemSelected;
             navigationView.Alpha = 0.99f;
 
-            startActivity =
-                MainApp.Instance.SharedPreferences.GetString(PreferenceConstants.StartActivityPreferenceKey, null);
+            startActivity = AndroidDependencyContainer.Instance.SettingsStorage
+                .GetString(PreferenceConstants.StartActivityPreferenceKey, null);
         }
 
         private void InstantiateFragment()

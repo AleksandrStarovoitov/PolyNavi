@@ -31,7 +31,7 @@ namespace Polynavi.Droid.Fragments
         public override void OnDestroy()
         {
             base.OnDestroy();
-            MainApp.Instance.SharedPreferences.UnregisterOnSharedPreferenceChangeListener(this);
+            AndroidDependencyContainer.Instance.SettingsStorage.RemoveOnChangeListener(this);
         }
 
         public void OnSharedPreferenceChanged(ISharedPreferences sharedPreferences, string key)
@@ -51,13 +51,13 @@ namespace Polynavi.Droid.Fragments
 
             TogglePreferences();
 
-            MainApp.Instance.SharedPreferences.RegisterOnSharedPreferenceChangeListener(this);
+            AndroidDependencyContainer.Instance.SettingsStorage.AddOnChangeListener(this);
         }
 
         private void TogglePreferences()
         {
-            var isTeacher =
-                PreferenceManager.SharedPreferences.GetBoolean(PreferenceConstants.IsUserTeacherPreferenceKey, false);
+            var isTeacher = AndroidDependencyContainer.Instance.SettingsStorage
+                .GetBoolean(PreferenceConstants.IsUserTeacherPreferenceKey, false);
 
             if (isTeacher)
             {

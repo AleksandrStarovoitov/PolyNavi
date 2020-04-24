@@ -91,7 +91,8 @@ namespace Polynavi.Droid.Preferences
         {
             base.OnBindDialogView(view);
 
-            isTeacher = Preference.SharedPreferences.GetBoolean(PreferenceConstants.IsUserTeacherPreferenceKey, false);
+            isTeacher = AndroidDependencyContainer.Instance.SettingsStorage
+                .GetBoolean(PreferenceConstants.IsUserTeacherPreferenceKey, false);
 
             autoCompleteTextView =
                 view.FindViewById<AutoCompleteTextView>(Resource.Id.autocompletetextview_group_pref);            
@@ -127,12 +128,10 @@ namespace Polynavi.Droid.Preferences
             {
                 preference.SaveName(name);
 
-                MainApp.Instance.SharedPreferences
-                    .Edit()
+                AndroidDependencyContainer.Instance.SettingsStorage
                     .PutInt(isTeacher
                         ? PreferenceConstants.TeacherIdPreferenceKey
-                        : PreferenceConstants.GroupIdPreferenceKey, id)
-                    .Apply();
+                        : PreferenceConstants.GroupIdPreferenceKey, id);
             }
             else
             {

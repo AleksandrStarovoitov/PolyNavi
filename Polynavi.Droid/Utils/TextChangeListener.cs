@@ -21,12 +21,13 @@ namespace Polynavi.Droid.Utils
         private Timer searchTimer;
 
         public Dictionary<string, int> SuggestionsAndIds { get; private set; }
-
+        
         public TextChangeListener(Activity activity, AutoCompleteTextView autoCompleteTextView)
         {
             this.activity = activity;
             this.autoCompleteTextView = autoCompleteTextView;
-            isTeacher = MainApp.Instance.SharedPreferences.GetBoolean(PreferenceConstants.IsUserTeacherPreferenceKey, false);
+            isTeacher = AndroidDependencyContainer.Instance.SettingsStorage
+                .GetBoolean(PreferenceConstants.IsUserTeacherPreferenceKey, false);
         }
 
         public void AfterTextChanged(IEditable s)
