@@ -58,7 +58,7 @@ namespace Polynavi.Dal
 
         public async Task SaveItemAsync<T>(T item) where T : Entity, new()
         {
-            if (item.Db_Id == Guid.Empty)
+            if (item.Db_Id == 0)
             {
                 await dbConnection.RunInTransactionAsync(conn =>
                 {
