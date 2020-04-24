@@ -7,7 +7,6 @@ using Android.App;
 using Android.Content;
 using Android.Content.Res;
 using Android.Runtime;
-using AndroidX.Preference;
 using Graph;
 using Java.Util;
 using Polynavi.Common.Constants;
@@ -73,12 +72,14 @@ namespace Polynavi.Droid
             const int defaultVersionPrefValue = -1;
 
             var currentVersion = GetVersionCode();
-            var savedVersion = SharedPreferences
+            var savedVersion = AndroidDependencyContainer.Instance.SettingsStorage
                 .GetInt(PreferenceConstants.VersionPreferenceKey, defaultVersionPrefValue);
 
             if (savedVersion == defaultVersionPrefValue || currentVersion > savedVersion)
             {
-                SharedPreferences.Edit().PutInt(PreferenceConstants.VersionPreferenceKey, currentVersion).Commit();
+                AndroidDependencyContainer.Instance.SettingsStorage
+                    .PutInt(PreferenceConstants.VersionPreferenceKey, currentVersion);
+
                 return true;
             }
 
@@ -161,15 +162,12 @@ namespace Polynavi.Droid
             Instance.RoomsDictionary = ordered.ToDictionary(x => x.Key, x => x.Value);
         }
 
-        public ISharedPreferences SharedPreferences { get; } //TODO Remove
-
         private SaverLoader GraphSaverLoader { get; }
 
         public MainApp(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
         {
             Instance = this;
             AndroidDependencyContainer.EnsureInitialized(ApplicationContext);
-            SharedPreferences = PreferenceManager.GetDefaultSharedPreferences(ApplicationContext);
             GraphSaverLoader = new SaverLoader(new AssetsProvider(ApplicationContext));
             SetDefaultPreferences();
 
@@ -185,18 +183,20 @@ namespace Polynavi.Droid
 
         private void SetDefaultPreferences()
         {
-            var containsIsTeacher = SharedPreferences.Contains(PreferenceConstants.IsUserTeacherPreferenceKey);
+            var containsIsTeacher = AndroidDependencyContainer.Instance.SettingsStorage
+                .Contains(PreferenceConstants.IsUserTeacherPreferenceKey);
 
             if (!containsIsTeacher)
             {
-                SharedPreferences.Edit().PutBoolean(PreferenceConstants.IsUserTeacherPreferenceKey, false).Commit();
+                AndroidDependencyContainer.Instance.SettingsStorage
+                    .PutBoolean(PreferenceConstants.IsUserTeacherPreferenceKey, false);
             }
         }
 
         public override void OnCreate()
         {
             base.OnCreate();
-            language = SharedPreferences.GetString("language", null);
+            language = AndroidDependencyContainer.Instance.SettingsStorage.GetString("language", null);
         }
 
         internal static string GetFileFullPath(string fileName) //TODO Move

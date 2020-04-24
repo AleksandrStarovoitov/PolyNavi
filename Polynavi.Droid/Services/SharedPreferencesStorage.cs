@@ -59,6 +59,9 @@ namespace Polynavi.Droid.Services
             editor.Commit();
         }
 
+        public bool Contains(string key) =>
+            sharedPreferences.Contains(key);
+
         public void AddOnChangeListener(object listener)
         {
             sharedPreferences.RegisterOnSharedPreferenceChangeListener(listener 
