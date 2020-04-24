@@ -8,9 +8,9 @@ using Android.Views;
 using Android.Widget;
 using AndroidX.RecyclerView.Widget;
 using Polynavi.Common.Models;
-using PolyNavi.Extensions;
+using Polynavi.Droid.Extensions;
 
-namespace PolyNavi.Adapters
+namespace Polynavi.Droid.Adapters
 {
     internal class ScheduleCardRowAdapter : RecyclerView.Adapter
     {

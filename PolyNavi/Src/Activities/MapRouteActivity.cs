@@ -8,11 +8,11 @@ using Android.Views;
 using Android.Widget;
 using AndroidX.AppCompat.App;
 using AndroidX.Core.Content;
-using PolyNavi.Adapters;
-using PolyNavi.Fragments;
+using Polynavi.Droid.Adapters;
+using Polynavi.Droid.Fragments;
 using Toolbar = AndroidX.AppCompat.Widget.Toolbar;
 
-namespace PolyNavi.Activities
+namespace Polynavi.Droid.Activities
 {
     [Activity(
         Label = "PolyNavi",

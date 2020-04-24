@@ -2,9 +2,9 @@
 using Android.OS;
 using AndroidX.Preference;
 using Polynavi.Common.Constants;
-using PolyNavi.Preferences;
+using Polynavi.Droid.Preferences;
 
-namespace PolyNavi.Fragments
+namespace Polynavi.Droid.Fragments
 {
     public class MyPreferenceFragment : PreferenceFragmentCompat, ISharedPreferencesOnSharedPreferenceChangeListener
     {

@@ -4,9 +4,9 @@ using System.Threading.Tasks;
 using Android.Content;
 using Android.Views;
 using Android.Views.InputMethods;
-using PolyNavi.Src;
+using Polynavi.Droid.Src;
 
-namespace PolyNavi.Utils
+namespace Polynavi.Droid.Utils
 {
     internal static class Utils
     {

@@ -7,10 +7,10 @@ using AndroidX.AppCompat.App;
 using Java.Lang;
 using Polynavi.Common.Constants;
 using Polynavi.Common.Exceptions;
-using PolyNavi.Extensions;
-using PolyNavi.Src;
+using Polynavi.Droid.Extensions;
+using Polynavi.Droid.Src;
 
-namespace PolyNavi.Utils
+namespace Polynavi.Droid.Utils
 {
     //TODO Attributes?
     internal class TextChangeListener : AppCompatActivity, ITextWatcher

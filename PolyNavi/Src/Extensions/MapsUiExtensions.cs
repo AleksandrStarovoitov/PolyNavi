@@ -2,7 +2,7 @@
 using Mapsui.Geometries;
 using Mapsui.Projection;
 
-namespace PolyNavi.Extensions
+namespace Polynavi.Droid.Extensions
 {
     public static class MapsUiExtensions
     {

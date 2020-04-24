@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30002.166
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PolyNavi", "PolyNavi\PolyNavi.csproj", "{4A21FF10-A8EF-403D-BC99-3AD8F6052698}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Polynavi.Droid", "PolyNavi\Polynavi.Droid.csproj", "{4A21FF10-A8EF-403D-BC99-3AD8F6052698}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphMapper", "GraphMapper\GraphMapper.csproj", "{5E299A98-BC5C-41E0-8069-BEEAE5E03824}"
 EndProject

@@ -11,10 +11,10 @@ using AndroidX.AppCompat.App;
 using AndroidX.Core.Content;
 using AndroidX.ViewPager.Widget;
 using Polynavi.Common.Constants;
-using PolyNavi.Adapters;
+using Polynavi.Droid.Adapters;
 using Object = Java.Lang.Object;
 
-namespace PolyNavi.Activities
+namespace Polynavi.Droid.Activities
 {
     [Activity(Label = "WelcomeActivity", ScreenOrientation = ScreenOrientation.Portrait,
         ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.ScreenSize)]

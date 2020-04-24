@@ -9,9 +9,9 @@ using Android.Views.InputMethods;
 using Android.Widget;
 using AndroidX.AppCompat.App;
 using Polynavi.Common.Constants;
-using PolyNavi.Utils;
+using Polynavi.Droid.Utils;
 
-namespace PolyNavi.Activities
+namespace Polynavi.Droid.Activities
 {
     [Activity(
         Label = "PolyNavi",

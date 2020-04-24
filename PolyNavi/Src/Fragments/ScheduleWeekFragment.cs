@@ -12,12 +12,12 @@ using AndroidX.RecyclerView.Widget;
 using AndroidX.SwipeRefreshLayout.Widget;
 using Polynavi.Common.Exceptions;
 using Polynavi.Common.Models;
-using PolyNavi.Adapters;
-using PolyNavi.Extensions;
-using PolyNavi.Src;
+using Polynavi.Droid.Adapters;
+using Polynavi.Droid.Extensions;
+using Polynavi.Droid.Src;
 using static AndroidX.SwipeRefreshLayout.Widget.SwipeRefreshLayout;
 
-namespace PolyNavi.Fragments
+namespace Polynavi.Droid.Fragments
 {
     public class ScheduleWeekFragment : Fragment, IOnRefreshListener
     {

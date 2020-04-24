@@ -1,7 +1,7 @@
 ﻿using Android.Views;
 using Android.Widget;
 
-namespace PolyNavi.Extensions
+namespace Polynavi.Droid.Extensions
 {
     internal static class ProgressBarExtensions
     {

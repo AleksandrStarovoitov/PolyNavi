@@ -8,7 +8,7 @@ using AndroidX.AppCompat.App;
 using AndroidX.AppCompat.Widget;
 using AndroidX.Core.Content;
 
-namespace PolyNavi.Activities
+namespace Polynavi.Droid.Activities
 {
     [Activity(
         Label = "PolyNavi",

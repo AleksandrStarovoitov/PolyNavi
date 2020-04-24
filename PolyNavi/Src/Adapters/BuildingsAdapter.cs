@@ -3,7 +3,7 @@ using Android.Content;
 using Android.Views;
 using Android.Widget;
 
-namespace PolyNavi.Adapters
+namespace Polynavi.Droid.Adapters
 {
     public class MainBuildingTag
     {

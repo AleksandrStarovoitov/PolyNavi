@@ -12,11 +12,11 @@ using AndroidX.Preference;
 using Graph;
 using Java.Util;
 using Polynavi.Common.Constants;
-using PolyNavi.Services;
-using PolyNavi.Src;
+using Polynavi.Droid.Services;
+using Polynavi.Droid.Src;
 using Point = Mapsui.Geometries.Point;
 
-namespace PolyNavi
+namespace Polynavi.Droid
 {
     [Application(
         Label = "@string/app_name",
@@ -207,11 +207,11 @@ namespace PolyNavi
             return Path.Combine(dirPath, fileName);
         }
 
-        ///<param name="relativePath">Path relative to PolyNavi.EmbeddedResources</param>
+        ///<param name="relativePath">Path relative to Polynavi.Droid.EmbeddedResources</param>
         internal static Stream GetEmbeddedResourceStream(string relativePath) //TODO Move
         {
             var assembly = typeof(MainApp).GetTypeInfo().Assembly;
-            return assembly.GetManifestResourceStream($"PolyNavi.EmbeddedResources.{relativePath}");
+            return assembly.GetManifestResourceStream($"Polynavi.Droid.EmbeddedResources.{relativePath}");
         }
 
         private class DictionaryComp : IComparer<string>

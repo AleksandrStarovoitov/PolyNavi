@@ -5,7 +5,7 @@ using Android.Content.PM;
 using Android.OS;
 using Android.Widget;
 
-namespace PolyNavi.Activities
+namespace Polynavi.Droid.Activities
 {
     [Activity(
         Label = "PolyNavi",

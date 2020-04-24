@@ -6,9 +6,9 @@ using Android.Graphics.Drawables;
 using Android.Util;
 using Android.Views;
 using AndroidX.Core.Content;
-using PolyNavi.Fragments;
+using Polynavi.Droid.Fragments;
 
-namespace PolyNavi.Views
+namespace Polynavi.Droid.Views
 {
     public class MainBuildingView : View
     {

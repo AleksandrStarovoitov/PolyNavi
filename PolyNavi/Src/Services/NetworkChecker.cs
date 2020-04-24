@@ -2,7 +2,7 @@
 using Android.Net;
 using Polynavi.Common.Services;
 
-namespace PolyNavi.Services
+namespace Polynavi.Droid.Services
 {
     public class NetworkChecker : INetworkChecker
     {

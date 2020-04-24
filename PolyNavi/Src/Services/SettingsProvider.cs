@@ -4,7 +4,7 @@ using Polynavi.Common.Constants;
 using Polynavi.Common.Exceptions;
 using Polynavi.Common.Services;
 
-namespace PolyNavi.Services
+namespace Polynavi.Droid.Services
 {
     public class SettingsProvider : ISettingsProvider
     {

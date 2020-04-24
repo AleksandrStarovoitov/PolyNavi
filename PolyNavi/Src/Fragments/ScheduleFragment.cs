@@ -5,10 +5,10 @@ using Android.Views;
 using AndroidX.AppCompat.App;
 using AndroidX.ViewPager.Widget;
 using Google.Android.Material.Tabs;
-using PolyNavi.Adapters;
+using Polynavi.Droid.Adapters;
 using Fragment = AndroidX.Fragment.App.Fragment;
 
-namespace PolyNavi.Fragments
+namespace Polynavi.Droid.Fragments
 {
     [Activity(Label = "ScheduleSwipeActivity")]
     public class ScheduleFragment : Fragment

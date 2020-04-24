@@ -8,7 +8,7 @@ using Android.Widget;
 using AndroidX.RecyclerView.Widget;
 using Polynavi.Common.Models;
 
-namespace PolyNavi.Adapters
+namespace Polynavi.Droid.Adapters
 {
     internal class TitleTag
     {

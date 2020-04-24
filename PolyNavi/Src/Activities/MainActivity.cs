@@ -9,11 +9,11 @@ using AndroidX.Core.View;
 using AndroidX.DrawerLayout.Widget;
 using Google.Android.Material.Navigation;
 using Polynavi.Common.Constants;
-using PolyNavi.Fragments;
+using Polynavi.Droid.Fragments;
 using static AndroidX.DrawerLayout.Widget.DrawerLayout;
 using Fragment = AndroidX.Fragment.App.Fragment;
 
-namespace PolyNavi.Activities
+namespace Polynavi.Droid.Activities
 {
     [Activity(
         Label = "PolyNavi",

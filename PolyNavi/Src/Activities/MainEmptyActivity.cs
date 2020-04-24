@@ -4,7 +4,7 @@ using Android.Content.PM;
 using Android.OS;
 using Polynavi.Common.Constants;
 
-namespace PolyNavi.Activities
+namespace Polynavi.Droid.Activities
 {
     [Activity(
         Label = "PolyNavi",

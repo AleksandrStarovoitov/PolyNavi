@@ -9,10 +9,10 @@ using Android.Views;
 using Android.Widget;
 using AndroidX.Preference;
 using Polynavi.Common.Constants;
-using PolyNavi.Utils;
+using Polynavi.Droid.Utils;
 using Object = Java.Lang.Object;
 
-namespace PolyNavi.Preferences
+namespace Polynavi.Droid.Preferences
 {
     [Activity(Label = "AutoCompleteTextViewPreference")]
     public class AutoCompleteTextViewPreference : EditTextPreference

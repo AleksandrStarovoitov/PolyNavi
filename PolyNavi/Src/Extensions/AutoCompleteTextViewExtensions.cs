@@ -3,7 +3,7 @@ using System.Linq;
 using Android.App;
 using Android.Widget;
 
-namespace PolyNavi.Extensions
+namespace Polynavi.Droid.Extensions
 {
     internal static class AutoCompleteTextViewExtensions
     {

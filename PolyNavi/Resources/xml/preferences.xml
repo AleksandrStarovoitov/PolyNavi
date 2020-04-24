@@ -15,13 +15,13 @@
        app:iconSpaceReserved="false"
        android:title="@string/pref_isteacher"
        android:defaultValue="false" />
-  <PolyNavi.Preferences.AutoCompleteTextViewPreference
+  <Polynavi.Droid.Preferences.AutoCompleteTextViewPreference
         android:key="groupnumber"
         app:iconSpaceReserved="false"
         android:title="@string/pref_groupnumber_title"
         android:summary="@string/pref_groupnumber_summary"
         android:dialogTitle="@string/pref_groupnumber_dialog_title"/>
-  <PolyNavi.Preferences.AutoCompleteTextViewPreference
+  <Polynavi.Droid.Preferences.AutoCompleteTextViewPreference
         android:key="teachername"
         app:iconSpaceReserved="false"
         android:title="@string/pref_teacher_name_title"

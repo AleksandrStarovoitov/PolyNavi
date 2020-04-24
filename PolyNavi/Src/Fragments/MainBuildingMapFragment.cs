@@ -1,9 +1,9 @@
 ﻿using Android.OS;
 using Android.Views;
 using AndroidX.Fragment.App;
-using PolyNavi.Views;
+using Polynavi.Droid.Views;
 
-namespace PolyNavi.Fragments
+namespace Polynavi.Droid.Fragments
 {
     public class MainBuildingMapFragment : Fragment
     {

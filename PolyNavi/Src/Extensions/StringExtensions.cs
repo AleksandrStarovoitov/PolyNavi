@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace PolyNavi.Extensions
+namespace Polynavi.Droid.Extensions
 {
     internal static class StringExtensions
     {

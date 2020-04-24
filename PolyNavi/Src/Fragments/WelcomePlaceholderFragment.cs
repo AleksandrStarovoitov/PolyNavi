@@ -3,7 +3,7 @@ using Android.Views;
 using Android.Widget;
 using AndroidX.Fragment.App;
 
-namespace PolyNavi.Fragments
+namespace Polynavi.Droid.Fragments
 {
     public class WelcomePlaceholderFragment : Fragment
     {

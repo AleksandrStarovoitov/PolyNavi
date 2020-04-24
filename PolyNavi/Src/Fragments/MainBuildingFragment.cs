@@ -13,11 +13,11 @@ using Google.Android.Material.FloatingActionButton;
 using Graph;
 using Java.Lang;
 using Polynavi.Common.Exceptions;
-using PolyNavi.Views;
+using Polynavi.Droid.Views;
 using static Android.Widget.TextView;
 using Point = Android.Graphics.Point;
 
-namespace PolyNavi.Fragments
+namespace Polynavi.Droid.Fragments
 {
     public class MainBuildingFragment : Fragment, IOnEditorActionListener, AppBarLayout.IOnOffsetChangedListener,
         ITextWatcher

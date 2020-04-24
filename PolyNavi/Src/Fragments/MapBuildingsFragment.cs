@@ -28,13 +28,13 @@ using Mapsui.UI.Android;
 using Mapsui.Utilities;
 using Mapsui.Widgets;
 using Mapsui.Widgets.ScaleBar;
-using PolyNavi.Activities;
-using PolyNavi.Extensions;
+using Polynavi.Droid.Activities;
+using Polynavi.Droid.Extensions;
 using Context = Android.Content.Context;
 using Fragment = AndroidX.Fragment.App.Fragment;
 using Vehicle = Itinero.Osm.Vehicles.Vehicle;
 
-namespace PolyNavi.Fragments
+namespace Polynavi.Droid.Fragments
 {
     // TODO Кеширование RouterDB чтобы не загружать ее при каждой загрузке фрагмента
     public class MapBuildingsFragment : Fragment, AppBarLayout.IOnOffsetChangedListener, ILocationListener

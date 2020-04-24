@@ -4,11 +4,11 @@ using Android.Content;
 using Android.OS;
 using Android.Views;
 using Android.Widget;
-using PolyNavi.Activities;
+using Polynavi.Droid.Activities;
 using Fragment = AndroidX.Fragment.App.Fragment;
 using Uri = Android.Net.Uri;
 
-namespace PolyNavi.Fragments
+namespace Polynavi.Droid.Fragments
 {
     [Activity(Label = "AboutFragment")]
     public class AboutFragment : Fragment
