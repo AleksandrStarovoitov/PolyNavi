@@ -1,10 +1,10 @@
-[PolyNavi/Resources/drawable](PolyNavi/Resources/drawable):
+[Polynavi.Droid/Resources/drawable](Polynavi.Droid/Resources/drawable):
 
 * *baseline_empty_schedule.xml* made by [Freepik](http://www.freepik.com) from [Flaticon](https://www.flaticon.com/) is licensed by [Creative Commons BY 3.0](http://creativecommons.org/licenses/by/3.0/)
 
 ---
 
-[PolyNavi/Resources/drawable-\*](PolyNavi/Resources/):
+[Polynavi.Droid/Resources/drawable-\*](Polynavi.Droid/Resources/):
 
 
 * *first_floor.png* is made by Aleksandr Starovoitov and licensed under a [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-nc-sa/4.0/)
