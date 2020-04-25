@@ -51,12 +51,6 @@ namespace Polynavi.Droid
             language = AndroidDependencyContainer.Instance.AppInfoSettings.AppLanguage;
         }
 
-        private int GetVersionCode()
-        {
-            var packageInfo = PackageManager.GetPackageInfo(PackageName, 0);
-            return packageInfo.VersionCode;
-        }
-
         internal bool IsAppUpdated()
         {
             var currentVersionCode = PackageManager.GetPackageInfo(PackageName, 0).VersionCode;
