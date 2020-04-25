@@ -1,4 +1,5 @@
-﻿using Nito.AsyncEx;
+﻿using Graph;
+using Nito.AsyncEx;
 using Polynavi.Common.Repositories;
 using Polynavi.Common.Services;
 using System;
@@ -16,6 +17,8 @@ namespace Polynavi.Common
         private readonly Lazy<INetworkChecker> networkChecker;
         private readonly Lazy<ISettingsStorage> settingsStorage;
         private readonly Lazy<IHttpClientService> httpClientService;
+        private readonly Lazy<IAssetsProvider> assetsProvider;
+        private readonly Lazy<IGraphService> graphService;
         private readonly Lazy<HttpClient> httpClient;
 
         public IScheduleService ScheduleService => scheduleService.Value;
@@ -25,6 +28,8 @@ namespace Polynavi.Common
         public INetworkChecker NetworkChecker => networkChecker.Value;
         public ISettingsStorage SettingsStorage => settingsStorage.Value;
         public IHttpClientService HttpClientService => httpClientService.Value;
+        public IAssetsProvider AssetsProvider => assetsProvider.Value;
+        public IGraphService GraphService => graphService.Value;
         public HttpClient HttpClient => httpClient.Value;
 
         protected DependencyContainer()
@@ -36,6 +41,8 @@ namespace Polynavi.Common
             networkChecker = new Lazy<INetworkChecker>(CreateNetworkChecker);
             settingsStorage = new Lazy<ISettingsStorage>(CreateSettingsStorage);
             httpClientService = new Lazy<IHttpClientService>(CreateHttpClientService);
+            assetsProvider = new Lazy<IAssetsProvider>(CreateAssetsProvider);
+            graphService = new Lazy<IGraphService>(CreateGraphService);
             httpClient = new Lazy<HttpClient>(CreateHttpClient);
         }
 
@@ -46,6 +53,8 @@ namespace Polynavi.Common
         protected abstract INetworkChecker CreateNetworkChecker();
         protected abstract ISettingsStorage CreateSettingsStorage();
         protected abstract IHttpClientService CreateHttpClientService();
+        protected abstract IAssetsProvider CreateAssetsProvider();
+        protected abstract IGraphService CreateGraphService();
         protected abstract HttpClient CreateHttpClient();
     }
 }

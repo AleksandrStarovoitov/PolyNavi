@@ -15,12 +15,11 @@ using Graph;
 using Java.Lang;
 using Polynavi.Common.Exceptions;
 using Polynavi.Droid.Views;
-using static Android.Widget.TextView;
 using Point = Android.Graphics.Point;
 
 namespace Polynavi.Droid.Fragments
 {
-    public class MainBuildingFragment : Fragment, IOnEditorActionListener, AppBarLayout.IOnOffsetChangedListener,
+    public class MainBuildingFragment : Fragment, TextView.IOnEditorActionListener, AppBarLayout.IOnOffsetChangedListener,
         ITextWatcher
     {
         private static readonly GraphNode mainBuildingGraph = CreateGraph();
@@ -37,65 +36,6 @@ namespace Polynavi.Droid.Fragments
             new MainBuildingMapFragment(Resource.Drawable.second_floor),
             new MainBuildingMapFragment(Resource.Drawable.third_floor)
         };
-
-        private static GraphNode CreateGraph()
-        {
-            GraphNode graphNode;
-
-            var path = MainApp.GetFileFullPath(MainApp.MainGraphFilename);
-
-            if (File.Exists(path) && !MainApp.Instance.IsAppUpdated())
-            {
-                using var stream = File.OpenRead(path);
-
-                graphNode = SaverLoader.Load(stream);
-            }
-            else
-            {
-                graphNode = MainApp.Instance.GraphSaverLoader.LoadFromXmlDescriptor(MainApp.MainGraphXmlFilename);
-
-                MainApp.SaveGraphToFile(graphNode);
-            }
-
-            FillRoomsDictionary(graphNode);
-
-            return graphNode;
-        }
-
-        private static void FillRoomsDictionary(GraphNode graph)
-        {
-            var ids = new List<GraphNode>();
-            roomsDictionary = new Dictionary<string, string>();
-            var bfsQueue = new Queue<GraphNode>();
-            bfsQueue.Enqueue(graph);
-
-            while (bfsQueue.Count > 0)
-            {
-                var node = bfsQueue.Dequeue();
-
-                foreach (var neighbour in node.Neighbours.Where(neighbour => !ids.Contains(neighbour)))
-                {
-                    ids.Add(neighbour);
-                    bfsQueue.Enqueue(neighbour);
-                    if (neighbour.RoomName.Equals("*Unknown*"))
-                    {
-                        continue;
-                    }
-
-                    var name = neighbour.RoomName.Replace("_а", " (а)").Replace("_М_1_1", " М 1 эт. 1") //TODO
-                        .Replace("_М_1_2", " М 1 эт. 2").Replace("_М_2_1", " М 2 эт. 1")
-                        .Replace("_М_2_2", " М 2 эт. 2").Replace("_Ж_1_1", " Ж 1 эт. 1")
-                        .Replace("_Ж_1_2", " Ж 1 эт. 2").Replace("_Ж_1_3", " Ж 1 эт. 3")
-                        .Replace("_Ж_2_1", " Ж 2 эт. 1").Replace("_Ж_2_2", " Ж 2 эт. 2")
-                        .Replace("_Ж_2_3", " Ж 2 эт. 3").Replace("Ректорат_", "Ректорат ")
-                        .Replace("101а", "101 (а)").Replace("170_б", "170 (б)");
-                    roomsDictionary[name] = neighbour.RoomName;
-                }
-            }
-
-            var ordered = roomsDictionary.OrderBy(x => x.Value, new MainApp.DictionaryComp());
-            roomsDictionary = ordered.ToDictionary(x => x.Key, x => x.Value);
-        }
 
         private int currentFloor = 1;
         private bool fullyExpanded, fullyCollapsed;
@@ -209,6 +149,67 @@ namespace Polynavi.Droid.Fragments
             {
                 ToggleAppBarAndChangeButtonIcon();
             }
+        }
+        private static GraphNode CreateGraph()
+        {
+            var graphService = AndroidDependencyContainer.Instance.GraphService;
+
+            GraphNode graphNode;
+
+            var path = MainApp.GetFileFullPath(MainApp.MainGraphFilename);
+            
+            if (File.Exists(path) && !MainApp.Instance.IsAppUpdated())
+            {
+                using var stream = File.OpenRead(path);
+
+                graphNode = graphService.Load(stream);
+            }
+            else
+            {
+                graphNode = graphService.LoadFromXmlDescriptor(MainApp.MainGraphXmlFilename);
+
+                using var stream = File.Create(MainApp.GetFileFullPath(MainApp.MainGraphFilename));
+                graphService.Save(stream, graphNode);
+            }
+
+            FillRoomsDictionary(graphNode);
+
+            return graphNode;
+        }
+
+        private static void FillRoomsDictionary(GraphNode graph)
+        {
+            var ids = new List<GraphNode>();
+            roomsDictionary = new Dictionary<string, string>();
+            var bfsQueue = new Queue<GraphNode>();
+            bfsQueue.Enqueue(graph);
+
+            while (bfsQueue.Count > 0)
+            {
+                var node = bfsQueue.Dequeue();
+
+                foreach (var neighbour in node.Neighbours.Where(neighbour => !ids.Contains(neighbour)))
+                {
+                    ids.Add(neighbour);
+                    bfsQueue.Enqueue(neighbour);
+                    if (neighbour.RoomName.Equals("*Unknown*"))
+                    {
+                        continue;
+                    }
+
+                    var name = neighbour.RoomName.Replace("_а", " (а)").Replace("_М_1_1", " М 1 эт. 1") //TODO
+                        .Replace("_М_1_2", " М 1 эт. 2").Replace("_М_2_1", " М 2 эт. 1")
+                        .Replace("_М_2_2", " М 2 эт. 2").Replace("_Ж_1_1", " Ж 1 эт. 1")
+                        .Replace("_Ж_1_2", " Ж 1 эт. 2").Replace("_Ж_1_3", " Ж 1 эт. 3")
+                        .Replace("_Ж_2_1", " Ж 2 эт. 1").Replace("_Ж_2_2", " Ж 2 эт. 2")
+                        .Replace("_Ж_2_3", " Ж 2 эт. 3").Replace("Ректорат_", "Ректорат ")
+                        .Replace("101а", "101 (а)").Replace("170_б", "170 (б)");
+                    roomsDictionary[name] = neighbour.RoomName;
+                }
+            }
+
+            var ordered = roomsDictionary.OrderBy(x => x.Value, new MainApp.DictionaryComp());
+            roomsDictionary = ordered.ToDictionary(x => x.Key, x => x.Value);
         }
 
         private void CheckInputAndDrawRoute()

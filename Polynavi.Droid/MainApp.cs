@@ -1,17 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Reflection;
 using Android.App;
 using Android.Content;
 using Android.Content.Res;
 using Android.Runtime;
-using Graph;
 using Java.Util;
 using Polynavi.Common.Constants;
-using Polynavi.Droid.Services;
-using Point = Mapsui.Geometries.Point;
 
 namespace Polynavi.Droid
 {
@@ -26,13 +22,10 @@ namespace Polynavi.Droid
         internal const string MainGraphXmlFilename = "main_graph.xml"; //TODO Move
         private string language;
 
-        internal SaverLoader GraphSaverLoader { get; }
-
         public static MainApp Instance { get; private set; } //TODO Remove        
 
         public MainApp(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
         {
-            GraphSaverLoader = new SaverLoader(new AssetsProvider(ApplicationContext));
         }
 
         public override void OnCreate()
@@ -78,13 +71,6 @@ namespace Polynavi.Droid
             }
 
             return false;
-        }
-
-        internal static void SaveGraphToFile(GraphNode graphNode)
-        {
-            using var stream = File.Create(GetFileFullPath(MainGraphFilename));
-
-            SaverLoader.Save(stream, graphNode);
         }
 
         private void SetDefaultPreferences()

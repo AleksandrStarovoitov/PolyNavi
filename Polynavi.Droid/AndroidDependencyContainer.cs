@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Android.Content;
 using AndroidX.Preference;
+using Graph;
 using Polynavi.Bll;
 using Polynavi.Common.Repositories;
 using Polynavi.Common.Services;
@@ -41,10 +42,16 @@ namespace Polynavi.Droid
             new NetworkChecker(context);
 
         protected override async Task<IScheduleRepository> CreateScheduleRepository() =>
-            await Polynavi.Dal.ScheduleRepository.CreateAsync(SettingsStorage, 
+            await Dal.ScheduleRepository.CreateAsync(SettingsStorage, 
                 new SQLiteDatabase(MainApp.GetFileFullPath(MainApp.DatabaseFilename))); //TODO
 
         protected override ISettingsStorage CreateSettingsStorage() => 
             new SharedPreferencesStorage(PreferenceManager.GetDefaultSharedPreferences(context));
+
+        protected override IAssetsProvider CreateAssetsProvider() =>
+            new AssetsProvider(context);
+
+        protected override IGraphService CreateGraphService()
+            => new GraphService(AssetsProvider);
     }
 }

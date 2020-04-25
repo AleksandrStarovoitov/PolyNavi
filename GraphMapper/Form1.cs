@@ -199,7 +199,8 @@ namespace GraphMapper
                     {
                         using (var stream = File.Open(saveFileDialog1.FileName, FileMode.Create))
                         {
-                            Graph.SaverLoader.Save(stream, focusedNode);
+                            var graphService = new GraphService(null);
+                            graphService.Save(stream, focusedNode);
                         }
                     }
                     catch (Exception ex)
