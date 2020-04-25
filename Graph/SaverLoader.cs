@@ -8,11 +8,11 @@ namespace Graph
 {
     public class SaverLoader
     {
-        private readonly IAssetsProvider assetProvider;
+        private readonly IAssetsProvider assetsProvider;
 
-        public SaverLoader(IAssetsProvider assetProvider)
+        public SaverLoader(IAssetsProvider assetsProvider)
         {
-            this.assetProvider = assetProvider;
+            this.assetsProvider = assetsProvider;
         }
 
         public static void Save(Stream stream, GraphNode graph)
@@ -29,7 +29,7 @@ namespace Graph
 
         public GraphNode LoadFromXmlDescriptor(string assetName)
         {
-            using (var stream = assetProvider.Open(assetName))
+            using (var stream = assetsProvider.Open(assetName))
             {
                 return LoadFromXmlDescriptor(stream);
             }
@@ -50,7 +50,7 @@ namespace Graph
                 {
                     var name = floor.Attribute("name")?.Value;
 
-                    using (var graphStream = assetProvider.Open(name))
+                    using (var graphStream = assetsProvider.Open(name))
                     {
                         var floorGraph = Load(graphStream);
                         floorGraphes.Add(floorGraph);
@@ -59,7 +59,7 @@ namespace Graph
             }
 
             var allStairs = linker?.Elements("Stairs");
-            foreach (var stairs in allStairs) //
+            foreach (var stairs in allStairs) //TODO
             {
                 foreach (var item in stairs.Elements("Item"))
                 {

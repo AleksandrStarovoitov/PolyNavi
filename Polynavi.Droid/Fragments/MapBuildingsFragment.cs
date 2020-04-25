@@ -73,6 +73,36 @@ namespace Polynavi.Droid.Fragments
         private AnimatedPointsWithAutoUpdateLayer animatedLocation;
         private bool fullyExpanded, fullyCollapsed;
 
+        public static Dictionary<string, Point> BuildingsWithCoordinates { get; } = new Dictionary<string, Point>()
+        {
+            { "Главный учебный корпус", new Point(60.00718, 30.37281) },
+            { "Химический корпус", new Point(60.00648, 30.37630) },
+            { "Механический корпус", new Point(60.00768, 30.37628) },
+            { "Гидрокорпус-1", new Point(60.00565, 30.38176) },
+            { "Гидрокорпус-2", new Point(60.00670, 30.38266) },
+            { "НИК", new Point(60.005903, 30.379046) },
+            { "1-й учебный корпус", new Point(60.00885, 30.37270) },
+            { "2-й учебный корпус", new Point(60.00846, 30.37492) },
+            { "3-й учебный корпус", new Point(60.00711, 30.38149) },
+            { "4-й учебный корпус", new Point(60.00750, 30.37694) },
+            { "5-й учебный корпус", new Point(59.99984, 30.37438) },
+            { "6-й учебный корпус", new Point(60.00048, 30.36805) },
+            { "9-й учебный корпус", new Point(60.00081, 30.36619) },
+            { "10-й учебный корпус", new Point(60.00066, 30.36902) },
+            { "11-й учебный корпус", new Point(60.00900, 30.37744) },
+            { "15-й учебный корпус (ИМОП)", new Point(60.00689, 30.39065) },
+            { "16-й учебный корпус", new Point(60.00790, 30.39041) },
+            { "Спортивный комплекс", new Point(60.00295, 30.36801) },
+            { "Лабораторный корпус", new Point(60.00734, 30.37954) },
+            { "Гидробашня", new Point(60.00583, 30.37428) },
+            { "НОЦ РАН", new Point(60.00317, 30.37468) },
+            { "1-й профессорский корпус", new Point(60.00481, 30.37071) },
+            { "2-й профессорский корпус", new Point(60.00475, 30.37796) },
+            { "Дом ученых в Лесном", new Point(60.00448, 30.37908) },
+            { "Секретариат приемной комиссии", new Point(60.009405, 30.371689) },
+            { "ИПМЭиТ", new Point(59.994757, 30.356456) }
+        };
+
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             var view = inflater.Inflate(Resource.Layout.fragment_map_buildings, container, false);
@@ -207,7 +237,7 @@ namespace Polynavi.Droid.Fragments
                 var currentLocation = new Point(lastLocation.Latitude, lastLocation.Longitude);
 
                 editTextInputFrom.Text = MyLocation;
-                MainApp.Instance.BuildingsDictionary[MyLocation] = currentLocation;
+                BuildingsWithCoordinates[MyLocation] = currentLocation;
             }
             else
             {
@@ -387,8 +417,8 @@ namespace Polynavi.Droid.Fragments
                 var startName = routeNames[0];
                 var finishName = routeNames[1];
 
-                var startPoint = MainApp.Instance.BuildingsDictionary[startName];
-                var finishPoint = MainApp.Instance.BuildingsDictionary[finishName];
+                var startPoint = BuildingsWithCoordinates[startName];
+                var finishPoint = BuildingsWithCoordinates[finishName];
                 var start = router.Resolve(itineroProfile, (float)startPoint.X,
                     (float)startPoint.Y); //TODO ResolveFailedException Probably too far...
                 var finish = router.Resolve(itineroProfile, (float)finishPoint.X, (float)finishPoint.Y);

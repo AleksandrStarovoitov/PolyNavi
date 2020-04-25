@@ -24,42 +24,60 @@ namespace Polynavi.Droid
         internal const string DatabaseFilename = "schedule.sqlite"; //TODO Move
         private const string MainGraphFilename = "main.graph";
         private const string MainGraphXmlFilename = "main_graph.xml";
-
         private string language;
+
+        private SaverLoader GraphSaverLoader { get; }
 
         public static MainApp Instance { get; private set; } //TODO Remove
 
-        public Dictionary<string, Point> BuildingsDictionary { get; } = new Dictionary<string, Point>()
+        
+
+        public Lazy<GraphNode> MainBuildingGraph { get; } = new Lazy<GraphNode>(() =>
         {
-            { "Главный учебный корпус", new Point(60.00718, 30.37281) },
-            { "Химический корпус", new Point(60.00648, 30.37630) },
-            { "Механический корпус", new Point(60.00768, 30.37628) },
-            { "Гидрокорпус-1", new Point(60.00565, 30.38176) },
-            { "Гидрокорпус-2", new Point(60.00670, 30.38266) },
-            { "НИК", new Point(60.005903, 30.379046) },
-            { "1-й учебный корпус", new Point(60.00885, 30.37270) },
-            { "2-й учебный корпус", new Point(60.00846, 30.37492) },
-            { "3-й учебный корпус", new Point(60.00711, 30.38149) },
-            { "4-й учебный корпус", new Point(60.00750, 30.37694) },
-            { "5-й учебный корпус", new Point(59.99984, 30.37438) },
-            { "6-й учебный корпус", new Point(60.00048, 30.36805) },
-            { "9-й учебный корпус", new Point(60.00081, 30.36619) },
-            { "10-й учебный корпус", new Point(60.00066, 30.36902) },
-            { "11-й учебный корпус", new Point(60.00900, 30.37744) },
-            { "15-й учебный корпус (ИМОП)", new Point(60.00689, 30.39065) },
-            { "16-й учебный корпус", new Point(60.00790, 30.39041) },
-            { "Спортивный комплекс", new Point(60.00295, 30.36801) },
-            { "Лабораторный корпус", new Point(60.00734, 30.37954) },
-            { "Гидробашня", new Point(60.00583, 30.37428) },
-            { "НОЦ РАН", new Point(60.00317, 30.37468) },
-            { "1-й профессорский корпус", new Point(60.00481, 30.37071) },
-            { "2-й профессорский корпус", new Point(60.00475, 30.37796) },
-            { "Дом ученых в Лесном", new Point(60.00448, 30.37908) },
-            { "Секретариат приемной комиссии", new Point(60.009405, 30.371689) },
-            { "ИПМЭиТ", new Point(59.994757, 30.356456) }
-        };
+            GraphNode graphNode;
+
+            if (File.Exists(GetFileFullPath(MainGraphFilename)) && !Instance.IsAppUpdated())
+            {
+                graphNode = LoadGraphFromFile();
+            }
+            else
+            {
+                graphNode = LoadGraphFromXml();
+
+                SaveGraphToFile(graphNode);
+            }
+
+            FillRoomsDictionary(graphNode);
+
+            return graphNode;
+        });
 
         public Dictionary<string, string> RoomsDictionary { get; private set; } = new Dictionary<string, string>();
+
+        public MainApp(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
+        {
+            GraphSaverLoader = new SaverLoader(new AssetsProvider(ApplicationContext));
+        }
+
+        public override void OnCreate()
+        {
+            base.OnCreate();
+
+            Instance = this;
+            AndroidDependencyContainer.EnsureInitialized(ApplicationContext);
+            SetDefaultPreferences();
+
+            if (IsAppUpdated()) //TODO
+            {
+                //Task.Run(async () =>
+                //{
+                //    var manager = await PolyManager;
+                //    await manager.ReinitializeDatabaseAsync();
+                //});
+            }
+
+            language = AndroidDependencyContainer.Instance.SettingsStorage.GetString("language", null);
+        }
 
         private int GetVersionCode()
         {
@@ -86,25 +104,6 @@ namespace Polynavi.Droid
             return false;
         }
 
-        public Lazy<GraphNode> MainBuildingGraph { get; } = new Lazy<GraphNode>(() =>
-        {
-            GraphNode graphNode;
-
-            if (File.Exists(GetFileFullPath(MainGraphFilename)) && !Instance.IsAppUpdated())
-            {
-                graphNode = LoadGraphFromFile();
-            }
-            else
-            {
-                graphNode = LoadGraphFromXml();
-
-                SaveGraphToFile(graphNode);
-            }
-
-            FillRoomsDictionary(graphNode);
-
-            return graphNode;
-        });
 
         private static GraphNode LoadGraphFromFile()
         {
@@ -162,24 +161,6 @@ namespace Polynavi.Droid
             Instance.RoomsDictionary = ordered.ToDictionary(x => x.Key, x => x.Value);
         }
 
-        private SaverLoader GraphSaverLoader { get; }
-
-        public MainApp(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
-        {
-            Instance = this;
-            AndroidDependencyContainer.EnsureInitialized(ApplicationContext);
-            GraphSaverLoader = new SaverLoader(new AssetsProvider(ApplicationContext));
-            SetDefaultPreferences();
-
-            if (IsAppUpdated()) //TODO
-            {
-                //Task.Run(async () =>
-                //{
-                //    var manager = await PolyManager;
-                //    await manager.ReinitializeDatabaseAsync();
-                //});
-            }
-        }
 
         private void SetDefaultPreferences()
         {
@@ -191,12 +172,6 @@ namespace Polynavi.Droid
                 AndroidDependencyContainer.Instance.SettingsStorage
                     .PutBoolean(PreferenceConstants.IsUserTeacherPreferenceKey, false);
             }
-        }
-
-        public override void OnCreate()
-        {
-            base.OnCreate();
-            language = AndroidDependencyContainer.Instance.SettingsStorage.GetString("language", null);
         }
 
         internal static string GetFileFullPath(string fileName) //TODO Move
