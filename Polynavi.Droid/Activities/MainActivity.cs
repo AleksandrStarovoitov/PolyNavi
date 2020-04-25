@@ -8,7 +8,6 @@ using AndroidX.AppCompat.Widget;
 using AndroidX.Core.View;
 using AndroidX.DrawerLayout.Widget;
 using Google.Android.Material.Navigation;
-using Polynavi.Common.Constants;
 using Polynavi.Droid.Fragments;
 using static AndroidX.DrawerLayout.Widget.DrawerLayout;
 using Fragment = AndroidX.Fragment.App.Fragment;
@@ -62,8 +61,7 @@ namespace Polynavi.Droid.Activities
             navigationView.NavigationItemSelected += NavViewItemSelected;
             navigationView.Alpha = 0.99f;
 
-            startActivity = AndroidDependencyContainer.Instance.SettingsStorage
-                .GetString(PreferenceConstants.StartActivityPreferenceKey, null);
+            startActivity = AndroidDependencyContainer.Instance.AppInfoSettings.StartScreen;
         }
 
         private void InstantiateFragment()

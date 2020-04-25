@@ -2,7 +2,6 @@
 using Android.Content;
 using Android.Content.PM;
 using Android.OS;
-using Polynavi.Common.Constants;
 
 namespace Polynavi.Droid.Activities
 {
@@ -25,17 +24,14 @@ namespace Polynavi.Droid.Activities
 
         private Intent GetStartIntent()
         {
-            var preferences = AndroidDependencyContainer.Instance.SettingsStorage;
+            var firstLoginStatusSettings = AndroidDependencyContainer.Instance.LoginStateSettings;
 
-            var isAuthCompleted = preferences.GetBoolean(PreferenceConstants.AuthCompletedPreferenceKey, false);
-            var isWelcomeCompleted = preferences.GetBoolean(PreferenceConstants.WelcomeCompletedPreferenceKey, false);
-
-            if (isAuthCompleted)
+            if (firstLoginStatusSettings.IsAuthCompleted)
             {
                 return new Intent(this, typeof(MainActivity));
             }
 
-            return isWelcomeCompleted
+            return firstLoginStatusSettings.IsWelcomeCompleted
                 ? new Intent(this, typeof(UserTypeSelectActivity))
                 : new Intent(this, typeof(WelcomeActivity));
         }

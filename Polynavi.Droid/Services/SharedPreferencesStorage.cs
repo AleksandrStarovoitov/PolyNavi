@@ -3,7 +3,7 @@ using Polynavi.Common.Services;
 
 namespace Polynavi.Droid.Services
 {
-    public class SharedPreferencesStorage : ISettingsStorage
+    public class SharedPreferencesStorage : IKeyValueStorage
     {
         private readonly ISharedPreferences sharedPreferences;
 

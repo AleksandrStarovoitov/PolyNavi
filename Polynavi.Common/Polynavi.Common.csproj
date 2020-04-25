@@ -13,4 +13,8 @@
     <ProjectReference Include="..\Graph\Graph.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Enums\" />
+  </ItemGroup>
+
 </Project>

@@ -7,7 +7,7 @@ namespace Polynavi.Bll
     public abstract class BllDependencyContainer : DependencyContainer
     {
         protected override IScheduleDownloader CreateScheduleDownloader() =>
-            new ScheduleDownloader(NetworkChecker, SettingsStorage, HttpClientService);
+            new ScheduleDownloader(NetworkChecker, ScheduleSettings, HttpClientService);
 
         protected override IScheduleService CreateScheduleService() =>
             new ScheduleService(ScheduleRepository.Result, ScheduleDownloader); //TODO Async

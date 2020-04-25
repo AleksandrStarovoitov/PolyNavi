@@ -7,7 +7,7 @@ using Android.Content;
 using Android.Content.Res;
 using Android.Runtime;
 using Java.Util;
-using Polynavi.Common.Constants;
+using Polynavi.Common.Settings;
 
 namespace Polynavi.Droid
 {
@@ -21,6 +21,7 @@ namespace Polynavi.Droid
         internal const string MainGraphFilename = "main.graph"; //TODO Move
         internal const string MainGraphXmlFilename = "main_graph.xml"; //TODO Move
         private string language;
+        private IAppInfoSettings appInfoSettings;
 
         public static MainApp Instance { get; private set; } //TODO Remove        
 
@@ -33,7 +34,9 @@ namespace Polynavi.Droid
             base.OnCreate();
 
             Instance = this;
-            AndroidDependencyContainer.EnsureInitialized(ApplicationContext);
+            AndroidDependencyContainer.EnsureInitialized();
+            appInfoSettings = AndroidDependencyContainer.Instance.AppInfoSettings;
+
             SetDefaultPreferences();
 
             if (IsAppUpdated()) //TODO
@@ -45,7 +48,7 @@ namespace Polynavi.Droid
                 //});
             }
 
-            language = AndroidDependencyContainer.Instance.SettingsStorage.GetString("language", null);
+            language = AndroidDependencyContainer.Instance.AppInfoSettings.AppLanguage;
         }
 
         private int GetVersionCode()
@@ -56,16 +59,12 @@ namespace Polynavi.Droid
 
         internal bool IsAppUpdated()
         {
-            const int defaultVersionPrefValue = -1;
+            var currentVersionCode = PackageManager.GetPackageInfo(PackageName, 0).VersionCode;
+            var savedVersionCode = appInfoSettings.AppVersionCode;
 
-            var currentVersion = GetVersionCode();
-            var savedVersion = AndroidDependencyContainer.Instance.SettingsStorage
-                .GetInt(PreferenceConstants.VersionPreferenceKey, defaultVersionPrefValue);
-
-            if (savedVersion == defaultVersionPrefValue || currentVersion > savedVersion)
+            if (savedVersionCode == 0 || currentVersionCode > savedVersionCode)
             {
-                AndroidDependencyContainer.Instance.SettingsStorage
-                    .PutInt(PreferenceConstants.VersionPreferenceKey, currentVersion);
+                appInfoSettings.AppVersionCode = currentVersionCode;
 
                 return true;
             }
@@ -75,13 +74,11 @@ namespace Polynavi.Droid
 
         private void SetDefaultPreferences()
         {
-            var containsIsTeacher = AndroidDependencyContainer.Instance.SettingsStorage
-                .Contains(PreferenceConstants.IsUserTeacherPreferenceKey);
+            var scheduleSettings = AndroidDependencyContainer.Instance.ScheduleSettings;
 
-            if (!containsIsTeacher)
+            if (!scheduleSettings.ContainsIsTeacherKey)
             {
-                AndroidDependencyContainer.Instance.SettingsStorage
-                    .PutBoolean(PreferenceConstants.IsUserTeacherPreferenceKey, false);
+                scheduleSettings.IsUserTeacher = false;
             }
         }
 
@@ -119,7 +116,7 @@ namespace Polynavi.Droid
 #pragma warning disable 618 // Disable "UpdateConfiguration" deprecate warning
         public static void ChangeLanguage(Context c)
         {
-            if (Instance.language == null)
+            if (String.IsNullOrEmpty(Instance.language))
             {
                 return;
             }

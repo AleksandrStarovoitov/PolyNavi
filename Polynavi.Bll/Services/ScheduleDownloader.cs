@@ -3,6 +3,7 @@ using Polynavi.Common.Constants;
 using Polynavi.Common.Exceptions;
 using Polynavi.Common.Models;
 using Polynavi.Common.Services;
+using Polynavi.Common.Settings;
 using System;
 using System.Globalization;
 using System.Threading;
@@ -13,14 +14,14 @@ namespace Polynavi.Bll.Services
     public class ScheduleDownloader : IScheduleDownloader
     {
         private readonly INetworkChecker networkChecker;
-        private readonly ISettingsStorage settingsStorage;
+        private readonly IScheduleSettings scheduleSettings;
         private readonly IHttpClientService httpClientService;
 
-        public ScheduleDownloader(INetworkChecker networkChecker, ISettingsStorage settingsStorage,
+        public ScheduleDownloader(INetworkChecker networkChecker, IScheduleSettings scheduleSettings,
             IHttpClientService httpClientService)
         {
             this.networkChecker = networkChecker;
-            this.settingsStorage = settingsStorage;
+            this.scheduleSettings = scheduleSettings;
             this.httpClientService = httpClientService;
         }
 
@@ -43,17 +44,16 @@ namespace Polynavi.Bll.Services
 
         private string GetLink(DateTime date)
         {
-            var isTeacher = settingsStorage.GetBoolean(PreferenceConstants.IsUserTeacherPreferenceKey, false);
             var dateStr = date.ToString("yyyy-M-d", new CultureInfo("ru-RU"));
 
-            if (isTeacher)
+            if (scheduleSettings.IsUserTeacher)
             {
-                var teacherId = settingsStorage.GetInt(PreferenceConstants.TeacherIdPreferenceKey, 0); //TODO Not found exception
-                return ScheduleLinkConstants.TeacherScheduleLink + teacherId + "/scheduler" + "?&date=" + dateStr;
+                return ScheduleLinkConstants.TeacherScheduleLink + 
+                    scheduleSettings.TeacherId + "/scheduler" + "?&date=" + dateStr;
             }
-
-            var groupId = settingsStorage.GetInt(PreferenceConstants.GroupIdPreferenceKey, 0); //TODO Not found exception
-            return ScheduleLinkConstants.ScheduleLink + groupId + "?&date=" + dateStr;
+            
+            return ScheduleLinkConstants.ScheduleLink + 
+                scheduleSettings.GroupId + "?&date=" + dateStr;
         }
     }
 }

@@ -5,7 +5,6 @@ using Android.Text;
 using Android.Widget;
 using AndroidX.AppCompat.App;
 using Java.Lang;
-using Polynavi.Common.Constants;
 using Polynavi.Common.Exceptions;
 using Polynavi.Droid.Extensions;
 
@@ -26,8 +25,7 @@ namespace Polynavi.Droid.Utils
         {
             this.activity = activity;
             this.autoCompleteTextView = autoCompleteTextView;
-            isTeacher = AndroidDependencyContainer.Instance.SettingsStorage
-                .GetBoolean(PreferenceConstants.IsUserTeacherPreferenceKey, false);
+            isTeacher = AndroidDependencyContainer.Instance.ScheduleSettings.IsUserTeacher;
         }
 
         public void AfterTextChanged(IEditable s)

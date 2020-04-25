@@ -1,7 +1,8 @@
-﻿using Android.Content;
+﻿using Android.App;
+using Android.Content;
 using Android.OS;
 using AndroidX.Preference;
-using Polynavi.Common.Constants;
+using Polynavi.Bll.Settings;
 using Polynavi.Droid.Preferences;
 
 namespace Polynavi.Droid.Fragments
@@ -31,12 +32,14 @@ namespace Polynavi.Droid.Fragments
         public override void OnDestroy()
         {
             base.OnDestroy();
-            AndroidDependencyContainer.Instance.SettingsStorage.RemoveOnChangeListener(this);
+
+            PreferenceManager.GetDefaultSharedPreferences(Application.Context)
+                .UnregisterOnSharedPreferenceChangeListener(this); 
         }
 
         public void OnSharedPreferenceChanged(ISharedPreferences sharedPreferences, string key)
         {
-            if (key.Equals(PreferenceConstants.IsUserTeacherPreferenceKey))
+            if (key.Equals(SettingsStorage.IsUserTeacherKey))
             {
                 TogglePreferences();
             }
@@ -46,18 +49,18 @@ namespace Polynavi.Droid.Fragments
         {
             AddPreferencesFromResource(Resource.Xml.preferences);
 
-            groupNumberPreference = FindPreference(PreferenceConstants.GroupNumberPreferenceKey);
-            teacherNamePreference = FindPreference(PreferenceConstants.TeacherNamePreferenceKey);
+            groupNumberPreference = FindPreference(SettingsStorage.GroupNumberKey);
+            teacherNamePreference = FindPreference(SettingsStorage.TeacherNameKey);
 
             TogglePreferences();
 
-            AndroidDependencyContainer.Instance.SettingsStorage.AddOnChangeListener(this);
+            PreferenceManager.GetDefaultSharedPreferences(Application.Context)
+                .RegisterOnSharedPreferenceChangeListener(this);
         }
 
         private void TogglePreferences()
         {
-            var isTeacher = AndroidDependencyContainer.Instance.SettingsStorage
-                .GetBoolean(PreferenceConstants.IsUserTeacherPreferenceKey, false);
+            var isTeacher = AndroidDependencyContainer.Instance.ScheduleSettings.IsUserTeacher;
 
             if (isTeacher)
             {

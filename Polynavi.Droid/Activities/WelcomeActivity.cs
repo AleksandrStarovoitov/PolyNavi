@@ -10,8 +10,6 @@ using Android.Widget;
 using AndroidX.AppCompat.App;
 using AndroidX.Core.Content;
 using AndroidX.ViewPager.Widget;
-using Polynavi.Common.Constants;
-using Polynavi.Common.Services;
 using Polynavi.Droid.Adapters;
 using Object = Java.Lang.Object;
 
@@ -29,7 +27,6 @@ namespace Polynavi.Droid.Activities
         private static int[] colorCodesList;
         private static ArgbEvaluator argbEvaluator;
         private static Color[] colors;
-        private ISettingsStorage settingsStorage;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -77,8 +74,6 @@ namespace Polynavi.Droid.Activities
             nextButton.Click += NextButtonClick;
             skipButton.Click += SkipButtonClick;
             finishButton.Click += FinishButtonClick;
-
-            settingsStorage = AndroidDependencyContainer.Instance.SettingsStorage;
         }
 
         private static void NextButtonClick(object sender, EventArgs e)
@@ -99,7 +94,7 @@ namespace Polynavi.Droid.Activities
 
         private void ProceedToUserTypeSelectActivity()
         {
-            settingsStorage.PutBoolean(PreferenceConstants.WelcomeCompletedPreferenceKey, true);
+            AndroidDependencyContainer.Instance.LoginStateSettings.IsWelcomeCompleted = true;
 
             var intent = new Intent(this, typeof(UserTypeSelectActivity));
             intent.SetFlags(ActivityFlags.ClearTop);

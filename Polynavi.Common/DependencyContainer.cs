@@ -2,6 +2,7 @@
 using Nito.AsyncEx;
 using Polynavi.Common.Repositories;
 using Polynavi.Common.Services;
+using Polynavi.Common.Settings;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -15,7 +16,10 @@ namespace Polynavi.Common
         private readonly Lazy<IScheduleDownloader> scheduleDownloader;
         private readonly AsyncLazy<IScheduleRepository> scheduleRepository;
         private readonly Lazy<INetworkChecker> networkChecker;
-        private readonly Lazy<ISettingsStorage> settingsStorage;
+        private readonly Lazy<IKeyValueStorage> keyValueStorage;
+        private readonly Lazy<IScheduleSettings> scheduleSettings;
+        private readonly Lazy<ILoginStateSettings> loginStateSettings;
+        private readonly Lazy<IAppInfoSettings> appInfoSettings;
         private readonly Lazy<IHttpClientService> httpClientService;
         private readonly Lazy<IAssetsProvider> assetsProvider;
         private readonly Lazy<IGraphService> graphService;
@@ -26,7 +30,10 @@ namespace Polynavi.Common
         public IScheduleDownloader ScheduleDownloader => scheduleDownloader.Value;
         public Task<IScheduleRepository> ScheduleRepository => scheduleRepository.Task;
         public INetworkChecker NetworkChecker => networkChecker.Value;
-        public ISettingsStorage SettingsStorage => settingsStorage.Value;
+        public IKeyValueStorage KeyValueStorage => keyValueStorage.Value;
+        public IScheduleSettings ScheduleSettings => scheduleSettings.Value;
+        public ILoginStateSettings LoginStateSettings => loginStateSettings.Value;
+        public IAppInfoSettings AppInfoSettings => appInfoSettings.Value;
         public IHttpClientService HttpClientService => httpClientService.Value;
         public IAssetsProvider AssetsProvider => assetsProvider.Value;
         public IGraphService GraphService => graphService.Value;
@@ -39,7 +46,10 @@ namespace Polynavi.Common
             scheduleDownloader = new Lazy<IScheduleDownloader>(CreateScheduleDownloader);
             scheduleRepository = new AsyncLazy<IScheduleRepository>(CreateScheduleRepository);
             networkChecker = new Lazy<INetworkChecker>(CreateNetworkChecker);
-            settingsStorage = new Lazy<ISettingsStorage>(CreateSettingsStorage);
+            keyValueStorage = new Lazy<IKeyValueStorage>(CreateKeyValueStorage);
+            scheduleSettings = new Lazy<IScheduleSettings>(CreateScheduleSettings);
+            loginStateSettings = new Lazy<ILoginStateSettings>(CreateLoginStateSettings);
+            appInfoSettings = new Lazy<IAppInfoSettings>(CreateAppInfoSettings);
             httpClientService = new Lazy<IHttpClientService>(CreateHttpClientService);
             assetsProvider = new Lazy<IAssetsProvider>(CreateAssetsProvider);
             graphService = new Lazy<IGraphService>(CreateGraphService);
@@ -51,7 +61,10 @@ namespace Polynavi.Common
         protected abstract IScheduleDownloader CreateScheduleDownloader();
         protected abstract Task<IScheduleRepository> CreateScheduleRepository();
         protected abstract INetworkChecker CreateNetworkChecker();
-        protected abstract ISettingsStorage CreateSettingsStorage();
+        protected abstract IKeyValueStorage CreateKeyValueStorage();
+        protected abstract IScheduleSettings CreateScheduleSettings();
+        protected abstract ILoginStateSettings CreateLoginStateSettings();
+        protected abstract IAppInfoSettings CreateAppInfoSettings();
         protected abstract IHttpClientService CreateHttpClientService();
         protected abstract IAssetsProvider CreateAssetsProvider();
         protected abstract IGraphService CreateGraphService();

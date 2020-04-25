@@ -1,7 +1,6 @@
-﻿using Polynavi.Common.Constants;
-using Polynavi.Common.Models;
+﻿using Polynavi.Common.Models;
 using Polynavi.Common.Repositories;
-using Polynavi.Common.Services;
+using Polynavi.Common.Settings;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,18 +9,18 @@ namespace Polynavi.Dal
 {
     public class ScheduleRepository : IScheduleRepository
     {
-        private readonly ISettingsStorage settingsStorage;
+        private readonly IScheduleSettings scheduleSettings;
         private SQLiteDatabase database;
 
-        public ScheduleRepository(ISettingsStorage settingsStorage)
+        public ScheduleRepository(IScheduleSettings scheduleSettings)
         {
-            this.settingsStorage = settingsStorage;
+            this.scheduleSettings = scheduleSettings;
         }
 
-        public static Task<ScheduleRepository> CreateAsync(ISettingsStorage settingsStorage, 
+        public static Task<ScheduleRepository> CreateAsync(IScheduleSettings scheduleSettings, 
             SQLiteDatabase database)
         {
-            var repository = new ScheduleRepository(settingsStorage);
+            var repository = new ScheduleRepository(scheduleSettings);
 
             return repository.InitializeAsync(database);
         }
@@ -54,11 +53,9 @@ namespace Polynavi.Dal
 
         public async Task RemoveExpiredWeeks()
         {
-            var isTeacher = settingsStorage.GetBoolean(PreferenceConstants.IsUserTeacherPreferenceKey, false);
-
-            if (isTeacher)
+            if (scheduleSettings.IsUserTeacher)
             {
-                var currentTeacherId = settingsStorage.GetInt(PreferenceConstants.TeacherIdPreferenceKey, 0); //TODO Not found exception?
+                var currentTeacherId = scheduleSettings.TeacherId; //TODO Not found exception?
 
                 await database.DeleteItemsAsync<WeekSchedule>(w =>
                     w.Week.IsExpired() ||
@@ -66,7 +63,7 @@ namespace Polynavi.Dal
             }
             else
             {
-                var currentGroupId = settingsStorage.GetInt(PreferenceConstants.GroupIdPreferenceKey, 0); //TODO Not found exception?
+                var currentGroupId = scheduleSettings.GroupId; //TODO Not found exception?
 
                 await database.DeleteItemsAsync<WeekSchedule>(w =>
                     w.Week.IsExpired() || w.Group.Id != currentGroupId);

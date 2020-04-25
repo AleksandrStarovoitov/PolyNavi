@@ -8,7 +8,6 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 using AndroidX.Preference;
-using Polynavi.Common.Constants;
 using Polynavi.Droid.Utils;
 using Object = Java.Lang.Object;
 
@@ -91,8 +90,7 @@ namespace Polynavi.Droid.Preferences
         {
             base.OnBindDialogView(view);
 
-            isTeacher = AndroidDependencyContainer.Instance.SettingsStorage
-                .GetBoolean(PreferenceConstants.IsUserTeacherPreferenceKey, false);
+            isTeacher = AndroidDependencyContainer.Instance.ScheduleSettings.IsUserTeacher;
 
             autoCompleteTextView =
                 view.FindViewById<AutoCompleteTextView>(Resource.Id.autocompletetextview_group_pref);            
@@ -128,10 +126,14 @@ namespace Polynavi.Droid.Preferences
             {
                 preference.SaveName(name);
 
-                AndroidDependencyContainer.Instance.SettingsStorage
-                    .PutInt(isTeacher
-                        ? PreferenceConstants.TeacherIdPreferenceKey
-                        : PreferenceConstants.GroupIdPreferenceKey, id);
+                if (isTeacher)
+                {
+                    AndroidDependencyContainer.Instance.ScheduleSettings.TeacherId = id;
+                }
+                else
+                {
+                    AndroidDependencyContainer.Instance.ScheduleSettings.GroupId = id;
+                }
             }
             else
             {
