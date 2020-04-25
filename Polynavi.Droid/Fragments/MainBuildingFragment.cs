@@ -150,6 +150,7 @@ namespace Polynavi.Droid.Fragments
                 ToggleAppBarAndChangeButtonIcon();
             }
         }
+
         private static GraphNode CreateGraph()
         {
             var graphService = AndroidDependencyContainer.Instance.GraphService;
@@ -197,13 +198,11 @@ namespace Polynavi.Droid.Fragments
                         continue;
                     }
 
-                    var name = neighbour.RoomName.Replace("_а", " (а)").Replace("_М_1_1", " М 1 эт. 1") //TODO
-                        .Replace("_М_1_2", " М 1 эт. 2").Replace("_М_2_1", " М 2 эт. 1")
-                        .Replace("_М_2_2", " М 2 эт. 2").Replace("_Ж_1_1", " Ж 1 эт. 1")
-                        .Replace("_Ж_1_2", " Ж 1 эт. 2").Replace("_Ж_1_3", " Ж 1 эт. 3")
-                        .Replace("_Ж_2_1", " Ж 2 эт. 1").Replace("_Ж_2_2", " Ж 2 эт. 2")
-                        .Replace("_Ж_2_3", " Ж 2 эт. 3").Replace("Ректорат_", "Ректорат ")
-                        .Replace("101а", "101 (а)").Replace("170_б", "170 (б)");
+                    var name = neighbour.RoomName
+                        .Replace("1_1", "1 эт. 1").Replace("1_2", "1 эт. 2")
+                        .Replace("2_1", "2 эт. 1").Replace("2_2", "2 эт. 2")
+                        .Replace("1_3", "1 эт. 3").Replace("2_3", "2 эт. 3")
+                        .Replace("101а", "101 (а)").Replace("_", " ");
                     roomsDictionary[name] = neighbour.RoomName;
                 }
             }
