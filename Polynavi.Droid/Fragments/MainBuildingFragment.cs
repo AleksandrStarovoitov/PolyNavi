@@ -156,9 +156,9 @@ namespace Polynavi.Droid.Fragments
 
             GraphNode graphNode;
 
-            var path = MainApp.GetFileFullPath(MainApp.MainGraphFilename);
+            var path = Utils.Utils.GetFileFullPath(MainApp.MainGraphFilename);
             
-            if (File.Exists(path) && !MainApp.Instance.IsAppUpdated())
+            if (File.Exists(path) && !Utils.Utils.IsAppUpdated())
             {
                 using var stream = File.OpenRead(path);
 
@@ -168,7 +168,7 @@ namespace Polynavi.Droid.Fragments
             {
                 graphNode = graphService.LoadFromXmlDescriptor(MainApp.MainGraphXmlFilename);
 
-                using var stream = File.Create(MainApp.GetFileFullPath(MainApp.MainGraphFilename));
+                using var stream = File.Create(Utils.Utils.GetFileFullPath(MainApp.MainGraphFilename));
                 graphService.Save(stream, graphNode);
             }
 

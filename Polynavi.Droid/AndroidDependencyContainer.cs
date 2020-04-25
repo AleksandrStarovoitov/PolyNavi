@@ -51,7 +51,7 @@ namespace Polynavi.Droid
 
         protected override async Task<IScheduleRepository> CreateScheduleRepository() =>
             await Dal.ScheduleRepository.CreateAsync(ScheduleSettings, 
-                new SQLiteDatabase(MainApp.GetFileFullPath(MainApp.DatabaseFilename))); //TODO
+                new SQLiteDatabase(Utils.Utils.GetFileFullPath(MainApp.DatabaseFilename))); //TODO
 
         protected override IAssetsProvider CreateAssetsProvider() =>
             new AssetsProvider(Application.Context);

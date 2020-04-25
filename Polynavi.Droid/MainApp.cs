@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Reflection;
 using Android.App;
 using Android.Content;
 using Android.Content.Res;
 using Android.Runtime;
 using Java.Util;
-using Polynavi.Common.Settings;
 
 namespace Polynavi.Droid
 {
@@ -20,10 +17,6 @@ namespace Polynavi.Droid
         internal const string DatabaseFilename = "schedule.sqlite"; //TODO Move
         internal const string MainGraphFilename = "main.graph"; //TODO Move
         internal const string MainGraphXmlFilename = "main_graph.xml"; //TODO Move
-        private string language;
-        private IAppInfoSettings appInfoSettings;
-
-        public static MainApp Instance { get; private set; } //TODO Remove        
 
         public MainApp(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
         {
@@ -33,13 +26,11 @@ namespace Polynavi.Droid
         {
             base.OnCreate();
 
-            Instance = this;
             AndroidDependencyContainer.EnsureInitialized();
-            appInfoSettings = AndroidDependencyContainer.Instance.AppInfoSettings;
 
             SetDefaultPreferences();
 
-            if (IsAppUpdated()) //TODO
+            if (Utils.Utils.IsAppUpdated()) //TODO
             {
                 //Task.Run(async () =>
                 //{
@@ -47,24 +38,7 @@ namespace Polynavi.Droid
                 //    await manager.ReinitializeDatabaseAsync();
                 //});
             }
-
-            language = AndroidDependencyContainer.Instance.AppInfoSettings.AppLanguage;
-        }
-
-        internal bool IsAppUpdated()
-        {
-            var currentVersionCode = PackageManager.GetPackageInfo(PackageName, 0).VersionCode;
-            var savedVersionCode = appInfoSettings.AppVersionCode;
-
-            if (savedVersionCode == 0 || currentVersionCode > savedVersionCode)
-            {
-                appInfoSettings.AppVersionCode = currentVersionCode;
-
-                return true;
-            }
-
-            return false;
-        }
+        }        
 
         private void SetDefaultPreferences()
         {
@@ -74,19 +48,6 @@ namespace Polynavi.Droid
             {
                 scheduleSettings.IsUserTeacher = false;
             }
-        }
-
-        internal static string GetFileFullPath(string fileName) //TODO Move
-        {
-            var dirPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-            return Path.Combine(dirPath, fileName);
-        }
-
-        ///<param name="relativePath">Path relative to Polynavi.Droid.EmbeddedResources</param>
-        internal static Stream GetEmbeddedResourceStream(string relativePath) //TODO Move
-        {
-            var assembly = typeof(MainApp).GetTypeInfo().Assembly;
-            return assembly.GetManifestResourceStream($"Polynavi.Droid.EmbeddedResources.{relativePath}");
         }
 
         internal class DictionaryComp : IComparer<string>
@@ -110,14 +71,16 @@ namespace Polynavi.Droid
 #pragma warning disable 618 // Disable "UpdateConfiguration" deprecate warning
         public static void ChangeLanguage(Context c)
         {
-            if (String.IsNullOrEmpty(Instance.language))
+            var language = AndroidDependencyContainer.Instance.AppInfoSettings.AppLanguage;
+
+            if (String.IsNullOrEmpty(language))
             {
                 return;
             }
 
             var config = c.Resources.Configuration;
 
-            var locale = new Locale(Instance.language);
+            var locale = new Locale(language);
             Locale.Default = locale;
             var conf = new Configuration(config);
             conf.SetLocale(locale);

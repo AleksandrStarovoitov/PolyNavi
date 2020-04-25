@@ -374,7 +374,7 @@ namespace Polynavi.Droid.Fragments
 
         private static int GetBitmapIdForEmbeddedResource(string resourceName)
         {
-            var image = MainApp.GetEmbeddedResourceStream($"Images.{resourceName}");
+            var image = Utils.Utils.GetEmbeddedResourceStream($"Images.{resourceName}");
             return BitmapRegistry.Instance.Register(image);
         }
 
