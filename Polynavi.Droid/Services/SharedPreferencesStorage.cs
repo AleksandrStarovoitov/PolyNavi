@@ -12,66 +12,52 @@ namespace Polynavi.Droid.Services
             this.sharedPreferences = sharedPreferences;
         }
 
-        public bool GetBoolean(string key, bool defaultValue)
-            => sharedPreferences.GetBoolean(key, defaultValue);
+        public bool GetBoolean(string key, bool defaultValue) =>
+            sharedPreferences.GetBoolean(key, defaultValue);
 
-        public string GetString(string key, string defaultValue)
-            => sharedPreferences.GetString(key, defaultValue);
+        public string GetString(string key, string defaultValue) =>
+            sharedPreferences.GetString(key, defaultValue);
 
-        public int GetInt(string key, int defaultValue)
-            => sharedPreferences.GetInt(key, defaultValue);
+        public int GetInt(string key, int defaultValue) =>
+            sharedPreferences.GetInt(key, defaultValue);
 
-        public long GetLong(string key, long defaultValue)
-            => sharedPreferences.GetLong(key, defaultValue);
+        public long GetLong(string key, long defaultValue) =>
+            sharedPreferences.GetLong(key, defaultValue);
 
-        public void PutBoolean(string key, bool value)
-        {
-            var editor = sharedPreferences.Edit();
-            editor.PutBoolean(key, value);
-            editor.Commit();
-        }
+        public void PutBoolean(string key, bool value) =>
+            sharedPreferences.Edit()
+                .PutBoolean(key, value)
+                .Apply();
 
-        public void PutString(string key, string value)
-        {
-            var editor = sharedPreferences.Edit();
-            editor.PutString(key, value);
-            editor.Commit();
-        }
+        public void PutString(string key, string value) =>
+            sharedPreferences.Edit()
+                .PutString(key, value)
+                .Apply();
 
-        public void PutInt(string key, int value)
-        {
-            var editor = sharedPreferences.Edit();
-            editor.PutInt(key, value);
-            editor.Commit();
-        }
+        public void PutInt(string key, int value) =>
+            sharedPreferences.Edit()
+                .PutInt(key, value)
+                .Apply();
 
-        public void PutLong(string key, long value)
-        {
-            var editor = sharedPreferences.Edit();
-            editor.PutLong(key, value);
-            editor.Commit();
-        }
+        public void PutLong(string key, long value) =>
+            sharedPreferences.Edit()
+                .PutLong(key, value)
+                .Apply();
 
-        public void Remove(string key)
-        {
-            var editor = sharedPreferences.Edit();
-            editor.Remove(key);
-            editor.Commit();
-        }
+        public void Remove(string key) =>
+            sharedPreferences.Edit()
+                .Remove(key)
+                .Apply();
 
         public bool Contains(string key) =>
             sharedPreferences.Contains(key);
 
-        public void AddOnChangeListener(object listener)
-        {
+        public void AddOnChangeListener(object listener) =>
             sharedPreferences.RegisterOnSharedPreferenceChangeListener(listener 
                 as ISharedPreferencesOnSharedPreferenceChangeListener);
-        }
 
-        public void RemoveOnChangeListener(object listener)
-        {
+        public void RemoveOnChangeListener(object listener) =>
             sharedPreferences.UnregisterOnSharedPreferenceChangeListener(listener
                 as ISharedPreferencesOnSharedPreferenceChangeListener);
-        }
     }
 }
