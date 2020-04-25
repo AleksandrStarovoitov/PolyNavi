@@ -15,13 +15,13 @@ namespace Graph
             this.assetsProvider = assetsProvider;
         }
 
-        public static void Save(Stream stream, GraphNode graph)
+        public static void Save(Stream stream, GraphNode graph) //TODO Non static
         {
             var bf = new BinaryFormatter();
             bf.Serialize(stream, graph);
         }
 
-        public static GraphNode Load(Stream stream)
+        public static GraphNode Load(Stream stream) //TODO Non static
         {
             var bf = new BinaryFormatter();
             return (GraphNode)bf.Deserialize(stream);

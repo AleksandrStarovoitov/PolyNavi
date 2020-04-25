@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Android.OS;
 using Android.Runtime;
@@ -22,7 +23,8 @@ namespace Polynavi.Droid.Fragments
     public class MainBuildingFragment : Fragment, IOnEditorActionListener, AppBarLayout.IOnOffsetChangedListener,
         ITextWatcher
     {
-        private readonly GraphNode mapGraph = MainApp.Instance.MainBuildingGraph.Value;
+        private static readonly GraphNode mainBuildingGraph = CreateGraph();
+        private static Dictionary<string, string> roomsDictionary;
         private View view;
         private AutoCompleteTextView editTextInputFrom, editTextInputTo;
         private AppBarLayout appBar;
@@ -35,6 +37,65 @@ namespace Polynavi.Droid.Fragments
             new MainBuildingMapFragment(Resource.Drawable.second_floor),
             new MainBuildingMapFragment(Resource.Drawable.third_floor)
         };
+
+        private static GraphNode CreateGraph()
+        {
+            GraphNode graphNode;
+
+            var path = MainApp.GetFileFullPath(MainApp.MainGraphFilename);
+
+            if (File.Exists(path) && !MainApp.Instance.IsAppUpdated())
+            {
+                using var stream = File.OpenRead(path);
+
+                graphNode = SaverLoader.Load(stream);
+            }
+            else
+            {
+                graphNode = MainApp.Instance.GraphSaverLoader.LoadFromXmlDescriptor(MainApp.MainGraphXmlFilename);
+
+                MainApp.SaveGraphToFile(graphNode);
+            }
+
+            FillRoomsDictionary(graphNode);
+
+            return graphNode;
+        }
+
+        private static void FillRoomsDictionary(GraphNode graph)
+        {
+            var ids = new List<GraphNode>();
+            roomsDictionary = new Dictionary<string, string>();
+            var bfsQueue = new Queue<GraphNode>();
+            bfsQueue.Enqueue(graph);
+
+            while (bfsQueue.Count > 0)
+            {
+                var node = bfsQueue.Dequeue();
+
+                foreach (var neighbour in node.Neighbours.Where(neighbour => !ids.Contains(neighbour)))
+                {
+                    ids.Add(neighbour);
+                    bfsQueue.Enqueue(neighbour);
+                    if (neighbour.RoomName.Equals("*Unknown*"))
+                    {
+                        continue;
+                    }
+
+                    var name = neighbour.RoomName.Replace("_а", " (а)").Replace("_М_1_1", " М 1 эт. 1") //TODO
+                        .Replace("_М_1_2", " М 1 эт. 2").Replace("_М_2_1", " М 2 эт. 1")
+                        .Replace("_М_2_2", " М 2 эт. 2").Replace("_Ж_1_1", " Ж 1 эт. 1")
+                        .Replace("_Ж_1_2", " Ж 1 эт. 2").Replace("_Ж_1_3", " Ж 1 эт. 3")
+                        .Replace("_Ж_2_1", " Ж 2 эт. 1").Replace("_Ж_2_2", " Ж 2 эт. 2")
+                        .Replace("_Ж_2_3", " Ж 2 эт. 3").Replace("Ректорат_", "Ректорат ")
+                        .Replace("101а", "101 (а)").Replace("170_б", "170 (б)");
+                    roomsDictionary[name] = neighbour.RoomName;
+                }
+            }
+
+            var ordered = roomsDictionary.OrderBy(x => x.Value, new MainApp.DictionaryComp());
+            roomsDictionary = ordered.ToDictionary(x => x.Key, x => x.Value);
+        }
 
         private int currentFloor = 1;
         private bool fullyExpanded, fullyCollapsed;
@@ -52,7 +113,7 @@ namespace Polynavi.Droid.Fragments
             fragmentTransaction.Add(Resource.Id.frame_mainbuilding, fragments[0], "MAP_MAINBUILDING_1");
             fragmentTransaction.Commit();
 
-            var array = MainApp.Instance.RoomsDictionary.Select(x => x.Key).ToArray();
+            var array = roomsDictionary.Select(x => x.Key).ToArray();
             editTextInputFrom = view.FindViewById<AutoCompleteTextView>(Resource.Id.autoCompleteTextView_from);
             editTextInputFrom.FocusChange += EditTextFromFocusChanged;
             editTextInputFrom.Adapter = new ArrayAdapter(Activity.BaseContext,
@@ -165,8 +226,8 @@ namespace Polynavi.Droid.Fragments
                     throw new SameRoomsSelectedException();
                 }
 
-                startName = MainApp.Instance.RoomsDictionary[editTextInputFrom.Text];
-                finishName = MainApp.Instance.RoomsDictionary[editTextInputTo.Text];
+                startName = roomsDictionary[editTextInputFrom.Text];
+                finishName = roomsDictionary[editTextInputTo.Text];
 
                 CalculateAndDrawRoute(startName, finishName);
             }
@@ -199,7 +260,7 @@ namespace Polynavi.Droid.Fragments
 
         private void CalculateAndDrawRoute(string startName, string finishName)
         {
-            var route = Algorithms.CalculateRoute(mapGraph, startName, finishName);
+            var route = Algorithms.CalculateRoute(mainBuildingGraph, startName, finishName);
 
             var coordinateGroups = route.GroupBy(node => new { node.FloorNumber, node.FloorPartNumber })
                 .Select(g => new

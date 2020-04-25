@@ -22,37 +22,13 @@ namespace Polynavi.Droid
     public class MainApp : Application
     {
         internal const string DatabaseFilename = "schedule.sqlite"; //TODO Move
-        private const string MainGraphFilename = "main.graph";
-        private const string MainGraphXmlFilename = "main_graph.xml";
+        internal const string MainGraphFilename = "main.graph"; //TODO Move
+        internal const string MainGraphXmlFilename = "main_graph.xml"; //TODO Move
         private string language;
 
-        private SaverLoader GraphSaverLoader { get; }
+        internal SaverLoader GraphSaverLoader { get; }
 
-        public static MainApp Instance { get; private set; } //TODO Remove
-
-        
-
-        public Lazy<GraphNode> MainBuildingGraph { get; } = new Lazy<GraphNode>(() =>
-        {
-            GraphNode graphNode;
-
-            if (File.Exists(GetFileFullPath(MainGraphFilename)) && !Instance.IsAppUpdated())
-            {
-                graphNode = LoadGraphFromFile();
-            }
-            else
-            {
-                graphNode = LoadGraphFromXml();
-
-                SaveGraphToFile(graphNode);
-            }
-
-            FillRoomsDictionary(graphNode);
-
-            return graphNode;
-        });
-
-        public Dictionary<string, string> RoomsDictionary { get; private set; } = new Dictionary<string, string>();
+        public static MainApp Instance { get; private set; } //TODO Remove        
 
         public MainApp(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
         {
@@ -85,7 +61,7 @@ namespace Polynavi.Droid
             return packageInfo.VersionCode;
         }
 
-        private bool IsAppUpdated()
+        internal bool IsAppUpdated()
         {
             const int defaultVersionPrefValue = -1;
 
@@ -104,63 +80,12 @@ namespace Polynavi.Droid
             return false;
         }
 
-
-        private static GraphNode LoadGraphFromFile()
-        {
-            using var stream = File.OpenRead(GetFileFullPath(MainGraphFilename));
-
-            return SaverLoader.Load(stream);
-        }
-
-        private static GraphNode LoadGraphFromXml()
-        {
-            var graph = Instance.GraphSaverLoader.LoadFromXmlDescriptor(MainGraphXmlFilename);
-
-            return graph;
-        }
-
-        private static void SaveGraphToFile(GraphNode graphNode)
+        internal static void SaveGraphToFile(GraphNode graphNode)
         {
             using var stream = File.Create(GetFileFullPath(MainGraphFilename));
 
             SaverLoader.Save(stream, graphNode);
         }
-
-        private static void FillRoomsDictionary(GraphNode graph)
-        {
-            var ids = new List<GraphNode>();
-
-            var bfsQueue = new Queue<GraphNode>();
-            bfsQueue.Enqueue(graph);
-
-            while (bfsQueue.Count > 0)
-            {
-                var node = bfsQueue.Dequeue();
-
-                foreach (var neighbour in node.Neighbours.Where(neighbour => !ids.Contains(neighbour)))
-                {
-                    ids.Add(neighbour);
-                    bfsQueue.Enqueue(neighbour);
-                    if (neighbour.RoomName.Equals("*Unknown*"))
-                    {
-                        continue;
-                    }
-
-                    var name = neighbour.RoomName.Replace("_а", " (а)").Replace("_М_1_1", " М 1 эт. 1") //TODO
-                        .Replace("_М_1_2", " М 1 эт. 2").Replace("_М_2_1", " М 2 эт. 1")
-                        .Replace("_М_2_2", " М 2 эт. 2").Replace("_Ж_1_1", " Ж 1 эт. 1")
-                        .Replace("_Ж_1_2", " Ж 1 эт. 2").Replace("_Ж_1_3", " Ж 1 эт. 3")
-                        .Replace("_Ж_2_1", " Ж 2 эт. 1").Replace("_Ж_2_2", " Ж 2 эт. 2")
-                        .Replace("_Ж_2_3", " Ж 2 эт. 3").Replace("Ректорат_", "Ректорат ")
-                        .Replace("101а", "101 (а)").Replace("170_б", "170 (б)");
-                    Instance.RoomsDictionary[name] = neighbour.RoomName;
-                }
-            }
-
-            var ordered = Instance.RoomsDictionary.OrderBy(x => x.Value, new DictionaryComp());
-            Instance.RoomsDictionary = ordered.ToDictionary(x => x.Key, x => x.Value);
-        }
-
 
         private void SetDefaultPreferences()
         {
@@ -187,7 +112,7 @@ namespace Polynavi.Droid
             return assembly.GetManifestResourceStream($"Polynavi.Droid.EmbeddedResources.{relativePath}");
         }
 
-        private class DictionaryComp : IComparer<string>
+        internal class DictionaryComp : IComparer<string>
         {
             public int Compare(string x, string y)
             {
