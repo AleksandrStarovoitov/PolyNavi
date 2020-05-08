@@ -27,7 +27,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Polynavi.Droid", "Polynavi.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Polynavi.Bll.Tests", "Polynavi.Bll.Tests\Polynavi.Bll.Tests.csproj", "{266E6640-4FF7-4733-ADA2-26704B3F2EAE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Polynavi.Tests.Common", "Polynavi.Tests.Common\Polynavi.Tests.Common.csproj", "{50F4D43B-4638-4725-B2DF-01F853D05AA0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Polynavi.Tests.Common", "Polynavi.Tests.Common\Polynavi.Tests.Common.csproj", "{50F4D43B-4638-4725-B2DF-01F853D05AA0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Polynavi.UITests", "Polynavi.UITests\Polynavi.UITests.csproj", "{25ABA76A-8822-4712-9CEE-407B69B621A4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,6 +71,10 @@ Global
 		{50F4D43B-4638-4725-B2DF-01F853D05AA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{50F4D43B-4638-4725-B2DF-01F853D05AA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{50F4D43B-4638-4725-B2DF-01F853D05AA0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{25ABA76A-8822-4712-9CEE-407B69B621A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25ABA76A-8822-4712-9CEE-407B69B621A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25ABA76A-8822-4712-9CEE-407B69B621A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25ABA76A-8822-4712-9CEE-407B69B621A4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
