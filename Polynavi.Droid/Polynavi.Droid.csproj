@@ -128,65 +128,65 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Assets\AboutAssets.txt" />
-    <AndroidResource Include="Resources\layout\layout_navheader_main.axml">
+    <AndroidResource Include="Resources\layout\layout_navheader_main.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\fragment_mainbuilding.axml">
+    <AndroidResource Include="Resources\layout\fragment_mainbuilding.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\fragment_schedule.axml">
+    <AndroidResource Include="Resources\layout\fragment_schedule.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\fragment_week_schedule.axml">
+    <AndroidResource Include="Resources\layout\fragment_week_schedule.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\layout_card_schedule.axml">
+    <AndroidResource Include="Resources\layout\layout_card_schedule.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\layout_card_row_lesson_schedule.axml">
+    <AndroidResource Include="Resources\layout\layout_card_row_lesson_schedule.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\layout_card_row_title_schedule.axml">
+    <AndroidResource Include="Resources\layout\layout_card_row_title_schedule.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\fragment_map_buildings.axml">
+    <AndroidResource Include="Resources\layout\fragment_map_buildings.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\activity_map_routing.axml">
+    <AndroidResource Include="Resources\layout\activity_map_routing.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\layout_route_row_otherbuildings.axml">
+    <AndroidResource Include="Resources\layout\layout_route_row_otherbuildings.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\layout_route_row_mainbuilding.axml">
+    <AndroidResource Include="Resources\layout\layout_route_row_mainbuilding.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\layout_no_connection.axml">
+    <AndroidResource Include="Resources\layout\layout_no_connection.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\fragment_about.axml">
+    <AndroidResource Include="Resources\layout\fragment_about.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\activity_copyright.axml">
+    <AndroidResource Include="Resources\layout\activity_copyright.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\layout_week_schedule.axml">
+    <AndroidResource Include="Resources\layout\layout_week_schedule.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\activity_authorization.axml">
+    <AndroidResource Include="Resources\layout\activity_authorization.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\fragment_error.axml">
+    <AndroidResource Include="Resources\layout\fragment_error.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\activity_user_type_select.axml">
+    <AndroidResource Include="Resources\layout\activity_user_type_select.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\font\juliussansone_regular.ttf" />
     <AndroidResource Include="Resources\font\roboto_light.ttf" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\layout\activity_main.axml">
+    <AndroidResource Include="Resources\layout\activity_main.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\values\Strings.xml">
@@ -271,12 +271,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="EmbeddedResources\Images\ic_gps_fixed_black.png" />
-    <AndroidResource Include="Resources\layout\activity_welcome.axml">
+    <AndroidResource Include="Resources\layout\activity_welcome.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\drawable\indicator_selected.xml" />
     <AndroidResource Include="Resources\drawable\indicator_unselected.xml" />
-    <AndroidResource Include="Resources\layout\fragment_welcome_pager.axml">
+    <AndroidResource Include="Resources\layout\fragment_welcome_pager.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\drawable-hdpi\welcome_blueprint.png" />
@@ -287,10 +287,10 @@
     <AndroidResource Include="Resources\drawable-xhdpi\welcome_calendar.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\welcome_blueprint.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\welcome_calendar.png" />
-    <AndroidResource Include="Resources\layout\preference_dialog_autocomplete.axml">
+    <AndroidResource Include="Resources\layout\preference_dialog_autocomplete.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\layout_empty_schedule_error.axml">
+    <AndroidResource Include="Resources\layout\layout_empty_schedule_error.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\menu\menu_schedule.xml" />
@@ -501,7 +501,7 @@
     <AndroidResource Include="Resources\drawable-xxxhdpi\baseline_github_black.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\layout\layout_card_schedule_end.axml">
+    <AndroidResource Include="Resources\layout\layout_card_schedule_end.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
