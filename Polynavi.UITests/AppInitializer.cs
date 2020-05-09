@@ -4,7 +4,7 @@ namespace Polynavi.UITests
 {
     public static class AppInitializer
     {
-        private const string ApkPath = "com.starovoitov.polynavi.apk";
+        private const string ApkPath = "./../../../../Polynavi.Droid/bin/Release/com.starovoitov.polynavi.apk";
 
         public static IApp StartApp()
         {
