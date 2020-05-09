@@ -15,4 +15,10 @@
     <PackageReference Include="System.Security.Permissions" Version="4.7.0" />
     <PackageReference Include="Xamarin.UITest" Version="3.0.7" />
   </ItemGroup>
+
+  <ItemGroup>
+    <None Update="com.starovoitov.polynavi.apk">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>
