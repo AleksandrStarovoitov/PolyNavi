@@ -1,5 +1,6 @@
 ﻿using System;
 using Xamarin.UITest;
+using Xamarin.UITest.Configuration;
 
 namespace Polynavi.UITests
 {
@@ -37,6 +38,17 @@ namespace Polynavi.UITests
                     .Android
                     .ApkFile(ApkPath)
                     .StartApp();
+            }
+        }
+
+        public static void StartInstalledApp()
+        {
+            if (Platform == Platform.Android)
+            {
+                app = ConfigureApp
+                    .Android
+                    .InstalledApp("com.starovoitov.polynavi")
+                    .StartApp(AppDataMode.DoNotClear);
             }
         }
     }
