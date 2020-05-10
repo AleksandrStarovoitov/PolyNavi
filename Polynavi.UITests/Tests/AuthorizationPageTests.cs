@@ -30,5 +30,13 @@ namespace Polynavi.UITests.Tests
 
             new MainPage();
         }
+        
+        [Test]
+        public void Loads_Group_Number()
+        {
+            new AuthorizationPage()
+                .EnterText("3530202")
+                .EnsureSuggestionsLoaded();
+        }
     }
 }
