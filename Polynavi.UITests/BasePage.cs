@@ -14,7 +14,6 @@ namespace Polynavi.UITests
         protected BasePage()
         {
             AssertOnPage(TimeSpan.FromSeconds(30));
-            app.Screenshot("On " + this.GetType().Name);
         }
 
         /// <summary>
