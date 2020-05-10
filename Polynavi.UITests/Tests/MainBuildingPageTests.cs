@@ -28,9 +28,13 @@ namespace Polynavi.UITests.Tests
         }
 
         [Test]
-        public void Test()
+        public void Enters_Rooms_And_Hides_Layout()
         {
-            new MainBuildingPage();
+            new MainBuildingPage()
+                .EnterFromRoom("130")
+                .EnterToRoom("122")
+                .TapRouteButton()
+                .EnsureInputLayoutIsHidden();
         }
     }
 }
