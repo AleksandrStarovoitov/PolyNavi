@@ -46,11 +46,6 @@ namespace Polynavi.Dal
             return weekRoots.SingleOrDefault(w => w.Week.ContainsDate(date));
         }
 
-        public Task RecreateDatabase()
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task RemoveExpiredWeeks()
         {
             if (scheduleSettings.IsUserTeacher)
