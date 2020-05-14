@@ -19,10 +19,6 @@ namespace Polynavi.UITests.Tests
                 .TapDone();
 
             new UserSelectPage();
-            // app.Tap(x => x.Id("button_welcome_next"));
-            // app.Tap(x => x.Id("button_welcome_next"));
-            // app.Tap(x => x.Id("button_welcome_finish"));
-            // app.WaitForElement(x => x.Id("button_student_user_type_select"));
         }
 
         [Test]
@@ -32,8 +28,6 @@ namespace Polynavi.UITests.Tests
                 .TapSkip();
 
             new UserSelectPage();
-            // app.Tap(x => x.Id("button_welcome_skip"));
-            // app.WaitForElement(x => x.Id("button_student_user_type_select"));
         }
 
         [Test]
@@ -45,10 +39,6 @@ namespace Polynavi.UITests.Tests
                 .TapDone();
 
             new UserSelectPage();
-            // app.SwipeRightToLeft(swipeSpeed: 5000);
-            // app.SwipeRightToLeft(swipeSpeed: 5000);
-            // app.Tap(x => x.Id("button_welcome_finish"));
-            // app.WaitForElement(x => x.Id("button_student_user_type_select"));
         }
     }
 }
