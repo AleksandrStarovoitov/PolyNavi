@@ -1,9 +1,11 @@
 ﻿using Polynavi.Common.Services;
 using Polynavi.Common.Settings;
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Polynavi.Bll.Settings
 {
+    [ExcludeFromCodeCoverage]
     public sealed class SettingsStorage : IScheduleSettings, ILoginStateSettings, IAppInfoSettings
     {
         private const string GroupIdKey = "groupid";

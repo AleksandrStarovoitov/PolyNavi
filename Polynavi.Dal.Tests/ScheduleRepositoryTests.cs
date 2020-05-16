@@ -23,8 +23,8 @@ namespace Polynavi.Dal.Tests
 
         private void InitDatabase()
         {
-            database.DeleteItemsAsync<WeekSchedule>((s) => true).Wait();
             CreateTables().Wait();
+            database.DeleteItemsAsync<WeekSchedule>((s) => true).Wait();
         }
 
         private async Task CreateTables()
