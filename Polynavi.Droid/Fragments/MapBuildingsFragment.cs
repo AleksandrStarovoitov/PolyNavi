@@ -13,6 +13,8 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using AndroidX.Core.Content;
+using BruTile.MbTiles;
+using BruTile.Web;
 using Google.Android.Material.AppBar;
 using Google.Android.Material.FloatingActionButton;
 using Itinero;
@@ -30,6 +32,7 @@ using Mapsui.Widgets;
 using Mapsui.Widgets.ScaleBar;
 using Polynavi.Droid.Activities;
 using Polynavi.Droid.Extensions;
+using SQLite;
 using Context = Android.Content.Context;
 using Fragment = AndroidX.Fragment.App.Fragment;
 using Vehicle = Itinero.Osm.Vehicles.Vehicle;
@@ -184,7 +187,16 @@ namespace Polynavi.Droid.Fragments
             map.CRS = MapCrs;
             Activity.RunOnUiThread(() =>
             {
-                map.Layers.Add(OpenStreetMap.CreateTileLayer());
+                //TODO
+                string tilesName = "map.mbtiles";
+                string tilesPath = Utils.Utils.GetFileFullPath(tilesName);
+                                
+                CopyIfDoesNotExist(tilesPath);
+
+                var mbTilesTileSource = new MbTilesTileSource(new SQLiteConnectionString(tilesPath, true));
+                var mbTilesLayer = new TileLayer(mbTilesTileSource) { Name = "MbTileLayer" };
+
+                map.Layers.Add(mbTilesLayer);
 
                 mapControl.Navigator.NavigateTo(new BoundingBox(leftBottomMapPoint.FromLonLat(),
                     rightTopMapPoint.FromLonLat()));
@@ -206,6 +218,25 @@ namespace Polynavi.Droid.Fragments
                     VerticalAlignment = VerticalAlignment.Top
                 });
             });
+        }
+
+        private void CopyIfDoesNotExist(string tilesPath)
+        {
+            if (!File.Exists(tilesPath))
+            {
+                using (BinaryReader br = new BinaryReader(Application.Context.Assets.Open(tilesPath.Split('/')[^1])))
+                {
+                    using (BinaryWriter bw = new BinaryWriter(new FileStream(tilesPath, FileMode.Create)))
+                    {
+                        byte[] buffer = new byte[2048];
+                        int len = 0;
+                        while ((len = br.Read(buffer, 0, buffer.Length)) > 0)
+                        {
+                            bw.Write(buffer, 0, len);
+                        }
+                    }
+                }
+            }
         }
 
         private bool IsLocationGranted()
