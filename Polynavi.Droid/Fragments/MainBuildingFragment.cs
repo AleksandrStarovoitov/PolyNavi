@@ -45,13 +45,13 @@ namespace Polynavi.Droid.Fragments
         {
             view = inflater.Inflate(Resource.Layout.fragment_mainbuilding, container, false);
 
-            var fragmentTransaction = Activity.SupportFragmentManager.BeginTransaction();
-            fragmentTransaction.Add(Resource.Id.frame_mainbuilding, fragments[2], "MAP_MAINBUILDING_3");
-            fragmentTransaction.Add(Resource.Id.frame_mainbuilding, fragments[1], "MAP_MAINBUILDING_2");
-            fragmentTransaction.Detach(fragments[2]); //TODO ?
-            fragmentTransaction.Detach(fragments[1]);
-            fragmentTransaction.Add(Resource.Id.frame_mainbuilding, fragments[0], "MAP_MAINBUILDING_1");
-            fragmentTransaction.Commit();
+            var fragmentTransaction = Activity.SupportFragmentManager.BeginTransaction()
+                .Add(Resource.Id.frame_mainbuilding, fragments[2], "MAP_MAINBUILDING_3")
+                .Add(Resource.Id.frame_mainbuilding, fragments[1], "MAP_MAINBUILDING_2")
+                .Add(Resource.Id.frame_mainbuilding, fragments[0], "MAP_MAINBUILDING_1")
+                .Hide(fragments[2])
+                .Hide(fragments[1])
+                .Commit();
 
             var array = roomsDictionary.Select(x => x.Key).ToArray();
             editTextInputFrom = view.FindViewById<AutoCompleteTextView>(Resource.Id.autoCompleteTextView_from);
@@ -122,8 +122,8 @@ namespace Polynavi.Droid.Fragments
             newView.PosY = currentView.PosY;
 
             FragmentManager.BeginTransaction()
-                .Detach(currentFragment)
-                .Attach(newFragment)
+                .Hide(currentFragment)
+                .Show(newFragment)
                 .Commit();
 
             currentFloor = newFloor;
@@ -275,6 +275,7 @@ namespace Polynavi.Droid.Fragments
             {
                 var fragment = FragmentManager
                     .FindFragmentByTag($"MAP_MAINBUILDING_{coordinateGroup.Floor.FloorNumber}") as MainBuildingMapFragment;
+                
                 fragment?.MapView.SetRoute(coordinateGroup.Coordinates.ToList());
             }
 
