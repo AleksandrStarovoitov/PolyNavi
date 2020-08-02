@@ -108,7 +108,8 @@
   <string name="wrong_group">Неверный номер группы</string>
   <string name="wrong_teacher">Неверные Ф. И. О.</string>
   <string name="wrong_room">Неверное название аудитории</string>
-  <string name="wrong_group_error">Неверный номер группы! Укажите корректный в настройках приложения</string>
+  <string name="wrong_group_error">Не введен номер группы. Введите номер группы в настройках приложения</string>
+  <string name="wrong_teacher_error">Не введено имя. Введите Ф. И. О. в настройках приложения</string>
   <string name="choose_date">Выберите дату</string>
   <string name="email_send_intent">Отправить email с помощью</string>
 </resources>

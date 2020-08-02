@@ -32,6 +32,16 @@ namespace Polynavi.Bll.Services
                 throw new NetworkException("No internet connection"); //TODO Constants?
             }
 
+            if (scheduleSettings.IsUserTeacher && scheduleSettings.TeacherId == 0) 
+            {
+                throw new NoTeacherIdException();
+            }
+
+            if (!scheduleSettings.IsUserTeacher && scheduleSettings.GroupId == 0)
+            {
+                throw new NoGroupIdException();
+            }            
+
             var requestUrl = GetLink(date);
 
             var result = await httpClientService.GetResponseAsStringAsync(requestUrl, new CancellationToken());

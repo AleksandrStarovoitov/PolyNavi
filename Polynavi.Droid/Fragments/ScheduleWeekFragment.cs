@@ -83,47 +83,54 @@ namespace Polynavi.Droid.Fragments
         private async Task ForceLoadLatestSchedule()
         {
             var scheduleService = AndroidDependencyContainer.Instance.ScheduleService;
-            var weekSchedule = await scheduleService.GetLatestAsync(date);
-
-            LoadSchedule(weekSchedule);
+            await LoadSchedule(async (date) => await scheduleService.GetLatestAsync(date), date);
         }
 
         private async Task LoadSavedOrLatestSchedule()
         {
             var scheduleService = AndroidDependencyContainer.Instance.ScheduleService;
-            var weekSchedule = await scheduleService.GetSavedOrLatestAsync(date);
-
-            LoadSchedule(weekSchedule);
+            await LoadSchedule(async (date) => await scheduleService.GetSavedOrLatestAsync(date), date);
         }
 
-        private void LoadSchedule(WeekSchedule weekSchedule)
+        private async Task LoadSchedule(Func<DateTime, Task<WeekSchedule>> loadScheduleFunc, DateTime date)
         {
             try
             {
-                days = weekSchedule.Days;
+                var weekSchedule = await loadScheduleFunc(date);
 
-                Activity.RunOnUiThread(() =>
-                {
-                    ToggleProgressBarVisibility();
-
-                    if (days.Any())
-                    {
-                        ShowSchedule();
-                    }
-                    else
-                    {
-                        ShowEmptyScheduleError(weekSchedule);
-                    }
-                });
+                LoadSchedule(weekSchedule);
             }
             catch (NetworkException)
             {
                 Activity.RunOnUiThread(ShowNetworkError);
             }
-            catch (GroupNumberException)
+            catch (NoGroupIdException)
             {
-                Activity.RunOnUiThread(ShowGroupNumberError);
+                Activity.RunOnUiThread(() => ShowScheduleError(Resource.String.wrong_group_error));
             }
+            catch (NoTeacherIdException)
+            {
+                Activity.RunOnUiThread(() => ShowScheduleError(Resource.String.wrong_teacher_error));
+            }
+        }
+
+        private void LoadSchedule(WeekSchedule weekSchedule)
+        {
+            days = weekSchedule.Days;
+
+            Activity.RunOnUiThread(() =>
+            {
+                ToggleProgressBarVisibility();
+
+                if (days.Any())
+                {
+                    ShowSchedule();
+                }
+                else
+                {
+                    ShowEmptyScheduleError(weekSchedule);
+                }
+            });
         }
 
 
@@ -188,13 +195,13 @@ namespace Polynavi.Droid.Fragments
             FragmentManager.BeginTransaction().Detach(this).Attach(this).Commit();
         }
 
-        private void ShowGroupNumberError()
+        private void ShowScheduleError(int textId)
         {
             ChangeViewContentInContainer(Resource.Id.relativelayout_week_schedule,
                 Resource.Layout.layout_empty_schedule_error);
 
             var errorTextView = view.FindViewById<TextView>(Resource.Id.textview_empty_schedule_error_title);
-            errorTextView.Text = GetString(Resource.String.wrong_group_error);
+            errorTextView.Text = GetString(textId);
         }
 
         private void ToggleProgressBarVisibility()
