@@ -1,4 +1,5 @@
-﻿using Polynavi.Common.Models;
+﻿using Nito.AsyncEx;
+using Polynavi.Common.Models;
 using Polynavi.Common.Repositories;
 using Polynavi.Common.Services;
 using System;
@@ -10,6 +11,7 @@ namespace Polynavi.Bll.Services
     {
         private readonly IScheduleRepository scheduleRepository;
         private readonly IScheduleDownloader scheduleDownloader;
+        private readonly AsyncLock mutex = new AsyncLock();
 
         public ScheduleService(IScheduleRepository scheduleRepository, IScheduleDownloader scheduleDownloader)
         {
@@ -19,21 +21,27 @@ namespace Polynavi.Bll.Services
 
         public async Task<WeekSchedule> GetLatestAsync(DateTime date)
         {
-            await scheduleRepository.DeleteWeekAsync(date);
+            using (await mutex.LockAsync())
+            {
+                await scheduleRepository.DeleteWeekAsync(date);
 
-            return await DownloadAndSaveAsync(date);
+                return await DownloadAndSaveAsync(date);
+            }
         }
 
         public async Task<WeekSchedule> GetSavedOrLatestAsync(DateTime date)
         {
-            var schedule = await scheduleRepository.GetScheduleAsync(date);
-
-            if (schedule == null)
+            using (await mutex.LockAsync())
             {
-                return await DownloadAndSaveAsync(date);
-            }
+                var schedule = await scheduleRepository.GetScheduleAsync(date);
 
-            return schedule;
+                if (schedule == null)
+                {
+                    return await DownloadAndSaveAsync(date);
+                }
+
+                return schedule;
+            }
         }
 
         private async Task<WeekSchedule> DownloadAndSaveAsync(DateTime date)
