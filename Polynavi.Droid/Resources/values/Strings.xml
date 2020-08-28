@@ -64,7 +64,7 @@
   <string name="about_rate_link">https://play.google.com/store/apps/details?id=com.starovoitov.polynavi</string> 
   <string name="about_github_title">Открытое ПО</string>
   <string name="about_github_subtitle">Посмотреть исходный код</string>
-  <string name="about_github_link">https://github.com/darksasha5/PolyNavi</string>
+  <string name="about_github_link">https://github.com/AleksandrStarovoitov/PolyNavi</string>
   <string name="about_copyright_title">Копирайт</string>
 
   <string name="edittext_title">Номер группы</string>
