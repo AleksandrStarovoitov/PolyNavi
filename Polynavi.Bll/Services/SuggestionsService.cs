@@ -32,7 +32,7 @@ namespace Polynavi.Bll.Services
             var resultJson = await httpClientService.GetResponseAsStringAsync(requestUrl, new CancellationToken());
             var groups = JsonConvert.DeserializeObject<GroupRoot>(resultJson);
 
-            return groups.Groups.ToDictionary(x => x.Name, x => x.Id);
+            return groups.Groups != null ? groups.Groups.ToDictionary(x => x.Name, x => x.Id) : new Dictionary<string, int>();
         }
 
         public async Task<Dictionary<string, int>> GetSuggestedTeachersAsync(string teacherName)
