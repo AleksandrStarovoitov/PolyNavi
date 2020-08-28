@@ -7140,6 +7140,9 @@ namespace Polynavi.Droid
 			// aapt resource value: 0x7F1000B2
 			public const int wrong_teacher = 2131755186;
 			
+			// aapt resource value: 0x7F1000B3
+			public const int wrong_teacher_error = 2131755187;
+			
 			static String()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
