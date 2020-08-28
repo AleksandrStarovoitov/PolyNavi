@@ -80,7 +80,6 @@
   <string name="pref_language_summary">Для применения изменений необходима перезагрузка приложения</string>
   <string name="pref_isteacher">Я преподаватель</string>
   <string name="pref_groupnumber_title">Изменить номер группы</string>
-  <string name="pref_groupnumber_summary">Для применения изменений необходима перезагрузка приложения</string>
   <string name="pref_groupnumber_dialog_title">Введите номер группы</string>
   <string name="pref_teacher_name_dialog_title">Введите ФИО</string>
   <string name="pref_teacher_name_title">Изменить ФИО</string>
