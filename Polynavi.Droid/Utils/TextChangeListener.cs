@@ -67,7 +67,7 @@ namespace Polynavi.Droid.Utils
 
                     var suggestionsService = AndroidDependencyContainer.Instance.SuggestionsService;
 
-                    SuggestionsAndIds = isTeacher //TODO NULL
+                    SuggestionsAndIds = isTeacher
                             ? await suggestionsService.GetSuggestedGroupsAsync(s.ToString())
                             : await suggestionsService.GetSuggestedGroupsAsync(s.ToString());
 
