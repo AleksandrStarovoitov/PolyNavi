@@ -53,6 +53,7 @@ namespace Polynavi.Bll.Tests
             httpClientService.Setup(hs => hs.GetResponseAsStringAsync(It.IsAny<string>(),
                 It.IsAny<CancellationToken>()))
                     .ReturnsAsync(scheduleJson);
+            scheduleSettings.Setup(ss => ss.GroupId).Returns(1);
             
             var sut = new ScheduleDownloader(networkChecker.Object, scheduleSettings.Object,
                 httpClientService.Object);
