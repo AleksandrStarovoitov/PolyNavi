@@ -19,7 +19,11 @@ jobs:
         dotnet-version: 3.1.301
     - name: Restore dependencies
       run: dotnet restore
-    - name: Build
-      run: dotnet build --no-restore
+    - name: Build Android
+      run: |
+        cd PolyNavi
+        nuget restore
+        cd Polynavi.Android
+        msbuild Polynavi.Android.csproj /verbosity:normal /t:Rebuild /p:Configuration=Debug
     - name: Test
       run: dotnet test --no-build --verbosity normal --filter "FullyQualifiedName~Bll|FullyQualifiedName~Dal"
