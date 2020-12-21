@@ -21,9 +21,9 @@ jobs:
       run: dotnet restore
     - name: Build Android
       run: |
-        cd PolyNavi
+        cd ../PolyNavi/PolyNavi
         nuget restore
-        cd Polynavi.Android
+        cd Polynavi.Droid
         msbuild Polynavi.Android.csproj /verbosity:normal /t:Rebuild /p:Configuration=Debug
     - name: Test
       run: dotnet test --no-build --verbosity normal --filter "FullyQualifiedName~Bll|FullyQualifiedName~Dal"
