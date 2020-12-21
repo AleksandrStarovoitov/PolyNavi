@@ -9,19 +9,14 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: 3.1.301
-    - name: Restore dependencies
-      run: dotnet restore
-    - name: Build Android
+    - uses: actions/checkout@v1
+    - name: Android
       run: |
         nuget restore
-        msbuild Polynavi.Droid/Polynavi.Droid.csproj /verbosity:normal /t:Rebuild /p:Configuration=Debug
+        cd Polynavi.Droid
+        msbuild Polynavi.Droid.csproj /verbosity:normal /t:Rebuild /p:Configuration=Debug
     - name: Test
       run: dotnet test --no-build --verbosity normal --filter "FullyQualifiedName~Bll|FullyQualifiedName~Dal"
