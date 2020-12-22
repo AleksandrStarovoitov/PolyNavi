@@ -1,0 +1,44 @@
+name: Build and test
+
+on: pull_request
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.301
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v1.0.2
+    - name: Restore dependencies
+      run: nuget restore
+    - name: Build projects
+      run: |
+        msbuild Polynavi.Droid/Polynavi.Droid.csproj /verbosity:normal /t:Rebuild /p:Configuration=Debug
+        msbuild GraphMapper/GraphMapper.csproj /verbosity:normal /t:Rebuild /p:Configuration=Debug /p:BuildProjectReferences=false
+        dotnet build Polynavi.Bll.Tests --no-restore
+        dotnet build Polynavi.Dal.Tests --no-restore
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: Test binaries
+        path: '**\Polynavi.*.Tests\bin'
+        retention-days: 1  
+  test:
+    runs-on: windows-latest
+    needs: build
+
+    steps:
+    - name: Download artifacts
+      uses: actions/download-artifact@v2
+      with:
+        name: Test binaries
+        path: ./
+    - name: Test
+      run: |
+        dotnet vstest Polynavi.Bll.Tests\bin\Debug\netcoreapp3.1\Polynavi.Bll.Tests.dll
+        dotnet vstest Polynavi.Dal.Tests\bin\Debug\netcoreapp3.1\Polynavi.Dal.Tests.dll
