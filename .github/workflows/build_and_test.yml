@@ -70,4 +70,4 @@ jobs:
       uses: reactivecircus/android-emulator-runner@v2
       with:
         api-level: 29
-        script: dotnet vstest Polynavi.UITests/bin/Release/netcoreapp3.1/Polynavi.UITests.dll
+        script: dotnet vstest Polynavi.UITests/bin/Debug/netcoreapp3.1/Polynavi.UITests.dll
