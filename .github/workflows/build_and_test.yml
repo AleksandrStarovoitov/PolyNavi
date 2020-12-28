@@ -18,18 +18,39 @@ jobs:
       run: nuget restore
     - name: Build projects
       run: |
-        msbuild Polynavi.Droid/Polynavi.Droid.csproj /verbosity:normal /t:Rebuild /p:Configuration=Debug
+        msbuild Polynavi.Droid/Polynavi.Droid.csproj /verbosity:normal /t:PackageForAndroid /p:Configuration=Release /p:AndroidCreatePackagePerAbi=False
         msbuild GraphMapper/GraphMapper.csproj /verbosity:normal /t:Rebuild /p:Configuration=Debug /p:BuildProjectReferences=false
         dotnet build Polynavi.Bll.Tests --no-restore
         dotnet build Polynavi.Dal.Tests --no-restore
+        dotnet build Polynavi.UITests --no-restore
     - name: Upload artifacts
       uses: actions/upload-artifact@v2
       with:
         name: Test binaries
-        path: '**\Polynavi.*.Tests\bin'
+        path: '**\Polynavi.*Tests\bin'
         retention-days: 1  
-  test:
-    runs-on: windows-latest
+    - name: Upload apk
+      uses: actions/upload-artifact@v2
+      with:
+        name: APK
+        path: '**\*.apk'
+        retention-days: 1  
+#  test:
+#    runs-on: windows-latest
+#    needs: build
+#
+#    steps:
+#    - name: Download artifacts
+#      uses: actions/download-artifact@v2
+#      with:
+#        name: Test binaries
+#        path: ./
+#    - name: Test
+#      run: |
+#        dotnet vstest Polynavi.Bll.Tests\bin\Debug\netcoreapp3.1\Polynavi.Bll.Tests.dll
+#        dotnet vstest Polynavi.Dal.Tests\bin\Debug\netcoreapp3.1\Polynavi.Dal.Tests.dll
+  ui-tests:
+    runs-on: macos-latest
     needs: build
 
     steps:
@@ -38,7 +59,13 @@ jobs:
       with:
         name: Test binaries
         path: ./
-    - name: Test
-      run: |
-        dotnet vstest Polynavi.Bll.Tests\bin\Debug\netcoreapp3.1\Polynavi.Bll.Tests.dll
-        dotnet vstest Polynavi.Dal.Tests\bin\Debug\netcoreapp3.1\Polynavi.Dal.Tests.dll
+    - name: Download artifacts
+      uses: actions/download-artifact@v2
+      with:
+        name: APK
+        path: ./
+    - name: Run UI tests
+      uses: reactivecircus/android-emulator-runner@v2
+      with:
+        api-level: 29
+        script: dotnet vstest Polynavi.UITests/bin/Release/netcoreapp3.1/Polynavi.UITests.dll
