@@ -64,6 +64,8 @@ jobs:
       with:
         name: APK
         path: ./
+    - name: Display structure of downloaded files
+      run: ls -R
     - name: Run UI tests
       uses: reactivecircus/android-emulator-runner@v2
       with:
