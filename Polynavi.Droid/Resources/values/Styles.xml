@@ -50,11 +50,11 @@
     </style>
 
     <style name="Poly" parent="TextAppearance.AppCompat">
-        <item name="android:textSize">48sp</item>
+        <item name="android:textSize">30sp</item>
         <item name="android:textColor">@color/color_black</item>
     </style>
     <style name="Navi" parent="TextAppearance.AppCompat">
-        <item name="android:textSize">48sp</item>
+        <item name="android:textSize">30sp</item>
         <item name="android:textColor">@color/color_black_with_transparency</item>
     </style>
 
