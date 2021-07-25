@@ -187,10 +187,10 @@ namespace Polynavi.Droid.Fragments
                 Resource.Layout.layout_no_connection);
 
             var noConnectionLayout = view.FindViewById<RelativeLayout>(Resource.Id.layout_no_connection_clickable_zone);
-            noConnectionLayout.Click += (sender, args) => ReattachFragment();
+            noConnectionLayout.Click += ReattachFragment;
         }
 
-        private void ReattachFragment()
+        private void ReattachFragment(object sender, EventArgs args)
         {
             FragmentManager.BeginTransaction().Detach(this).Attach(this).Commit();
         }
