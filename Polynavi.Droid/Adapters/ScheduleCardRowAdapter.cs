@@ -15,15 +15,15 @@ namespace Polynavi.Droid.Adapters
     internal class ScheduleCardRowAdapter : RecyclerView.Adapter
     {
         private readonly Context context;
-        private readonly List<object> lessons;
+        private readonly List<Lesson> lessons;
         private View scheduleView;
         private ScheduleCardRowLessonViewHolder lessonViewHolder;
-        private ScheduleCardRowTitleViewHolder titleViewHolder;
+        //private ScheduleCardRowTitleViewHolder titleViewHolder;
         private readonly CultureInfo cultureInfo = new CultureInfo("ru-RU"); //TODO ?
         private const int TitleTag = 0, LessonTag = 1;
         public override int ItemCount => lessons.Count;
 
-        public ScheduleCardRowAdapter(Context context, List<object> lessons)
+        public ScheduleCardRowAdapter(Context context, List<Lesson> lessons)
         {
             this.context = context;
             this.lessons = lessons;
@@ -42,10 +42,11 @@ namespace Polynavi.Droid.Adapters
                     viewHolder = new ScheduleCardRowLessonViewHolder(scheduleView);
                     break;
 
-                case TitleTag:
-                    scheduleView = layoutInflater.Inflate(Resource.Layout.layout_card_row_title_schedule, parent, false);
-                    viewHolder = new ScheduleCardRowTitleViewHolder(scheduleView);
-                    break;
+                //case TitleTag:
+                //    scheduleView = layoutInflater.Inflate(Resource.Layout.layout_card_row_lesson_schedule, parent, false);
+                //    viewHolder = new ScheduleCardRowLessonViewHolder(scheduleView, true);
+                //    //viewHolder = new ScheduleCardRowTitleViewHolder(scheduleView);
+                //    break;
             }
 
             return viewHolder;
@@ -59,15 +60,29 @@ namespace Polynavi.Droid.Adapters
                     SetupLessonViewHolder(viewHolder, position);
                     break;
 
-                case TitleTag:
-                    SetupTitleViewHolder(viewHolder, position);
-                    break;
+                //case TitleTag:
+                //    SetupLessonViewHolder(viewHolder, position, true);
+                //    //SetupTitleViewHolder(viewHolder, position);
+                //    break;
             }
         }
 
         private void SetupLessonViewHolder(RecyclerView.ViewHolder viewHolder, int position)
         {
             lessonViewHolder = viewHolder as ScheduleCardRowLessonViewHolder;
+
+            if (position != 0)
+            {
+                var date1 = lessonViewHolder.date1;
+                var date2 = lessonViewHolder.date2;
+                lessonViewHolder.linear.RemoveView(date1);
+                lessonViewHolder.linear.RemoveView(date2);
+                //lessonViewHolder.linear.LayoutParameters.Height = lessonViewHolder.relative.LayoutParameters;
+                //lessonViewHolder.date1.Text = "123";
+                //RemoveView(date1);
+                //RemoveView(date2);
+                //return;
+            }
 
             //TODO Null check
             var lesson = (Lesson)lessons[position];
@@ -157,7 +172,7 @@ namespace Polynavi.Droid.Adapters
 
         private void RemoveView(View view)
         {
-            ((ViewGroup)scheduleView).RemoveView(view);
+            ((ViewGroup)scheduleView).RemoveViewInLayout(view);
         }
 
         private static void CombineTeachers(TextView teacherTextView, Lesson lesson) //TODO Refactor
@@ -165,19 +180,19 @@ namespace Polynavi.Droid.Adapters
             teacherTextView.Text = string.Join(", ", lesson.Teachers.Select(t => t.Full_Name).ToArray());
         }
 
-        private void SetupTitleViewHolder(RecyclerView.ViewHolder viewHolder, int position)
-        {
-            titleViewHolder = viewHolder as ScheduleCardRowTitleViewHolder;
+        //private void SetupTitleViewHolder(RecyclerView.ViewHolder viewHolder, int position)
+        //{
+        //    titleViewHolder = viewHolder as ScheduleCardRowTitleViewHolder;
 
-            //TODO Null check
-            var title = (TitleTag)lessons[position];
-            var dateTextView = titleViewHolder.dateTextView;
-            var dayOfWeekTextView = titleViewHolder.dayOfWeekTextView;
+        //    //TODO Null check
+        //    var title = (TitleTag)lessons[position];
+        //    var dateTextView = titleViewHolder.dateTextView;
+        //    var dayOfWeekTextView = titleViewHolder.dayOfWeekTextView;
 
-            dateTextView.Text = title.Date.ToString("M", cultureInfo);
-            var date = title.Date.ToString("dddd", cultureInfo);
-            dayOfWeekTextView.Text = date.FirstCharToUpper();
-        }
+        //    dateTextView.Text = title.Date.ToString("M", cultureInfo);
+        //    var date = title.Date.ToString("dddd", cultureInfo);
+        //    dayOfWeekTextView.Text = date.FirstCharToUpper();
+        //}
 
         private class ScheduleCardRowLessonViewHolder : RecyclerView.ViewHolder
         {
@@ -190,6 +205,12 @@ namespace Polynavi.Droid.Adapters
             internal readonly TextView teacherTextView;
             internal readonly TextView lmsUrlTextView;
             internal readonly TextView groupTextView;
+            internal readonly TextView date1;
+            internal readonly TextView date2;
+            internal readonly LinearLayout linear;
+            internal readonly RelativeLayout relative;
+
+            //internal readonly bool showDate;
 
             internal ScheduleCardRowLessonViewHolder(View itemView) : base(itemView)
             {
@@ -200,29 +221,33 @@ namespace Polynavi.Droid.Adapters
                 endTimeTextView = itemView.FindViewById<TextView>(Resource.Id.textview_card_endtime_row_lesson_schedule);
                 typeTextView = itemView.FindViewById<TextView>(Resource.Id.textview_card_type_row_lesson_schedule);
                 teacherTextView = itemView.FindViewById<TextView>(Resource.Id.textview_card_teacher_row_lesson_schedule);
-                lmsUrlTextView = ItemView.FindViewById<TextView>(Resource.Id.textview_card_lms_url_row_lesson_schedule);
+                lmsUrlTextView = itemView.FindViewById<TextView>(Resource.Id.textview_card_lms_url_row_lesson_schedule);
                 groupTextView = itemView.FindViewById<TextView>(Resource.Id.textview_card_group_row_lesson_schedule);
+                linear = itemView.FindViewById<LinearLayout>(Resource.Id.linear123);
+                relative = itemView.FindViewById<RelativeLayout>(Resource.Id.relativelayout_row_schedule);
+                date1 = itemView.FindViewById<TextView>(Resource.Id.textview_card_dayofweek_row_title_schedule12);
+                date2 = itemView.FindViewById<TextView>(Resource.Id.textview_card_dayofweek_row_title_schedule123);
             }
         }
 
-        private class ScheduleCardRowTitleViewHolder : RecyclerView.ViewHolder
-        {
-            internal readonly TextView dateTextView;
-            internal readonly TextView dayOfWeekTextView;
+        //private class ScheduleCardRowTitleViewHolder : RecyclerView.ViewHolder
+        //{
+        //    internal readonly TextView dateTextView;
+        //    internal readonly TextView dayOfWeekTextView;
 
-            internal ScheduleCardRowTitleViewHolder(View itemView) : base(itemView)
-            {
-                dateTextView = itemView.FindViewById<TextView>(Resource.Id.textview_card_date_row_title_schedule);
-                dayOfWeekTextView = itemView.FindViewById<TextView>(Resource.Id.textview_card_dayofweek_row_title_schedule);
-            }
-        }
+        //    internal ScheduleCardRowTitleViewHolder(View itemView) : base(itemView)
+        //    {
+        //        //dateTextView = itemView.FindViewById<TextView>(Resource.Id.textview_card_date_row_title_schedule);
+        //        //dayOfWeekTextView = itemView.FindViewById<TextView>(Resource.Id.textview_card_dayofweek_row_title_schedule);
+        //    }
+        //}
 
         public override int GetItemViewType(int position)
         {
             return lessons[position] switch
             {
                 Lesson _ => LessonTag,
-                TitleTag _ => TitleTag,
+                //TitleTag _ => TitleTag,
                 _ => -1
             };
         }

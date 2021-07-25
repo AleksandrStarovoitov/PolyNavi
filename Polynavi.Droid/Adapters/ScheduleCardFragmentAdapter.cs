@@ -77,10 +77,10 @@ namespace Polynavi.Droid.Adapters
             scheduleRecyclerView.HasFixedSize = true;
 
             //TODO
-            var lessons = new List<object>() { new TitleTag() { Date = day.Date } };
-            lessons.AddRange(day.Lessons);
+            //var lessons = new List<object>() { new TitleTag() { Date = day.Date } };
+            //lessons.AddRange(day.Lessons);
 
-            var adapter = new ScheduleCardRowAdapter(context, lessons);
+            var adapter = new ScheduleCardRowAdapter(context, day.Lessons);
             scheduleRecyclerView.SetAdapter(adapter);
             scheduleRecyclerView.SetLayoutManager(new LinearLayoutManager(context));
         }
