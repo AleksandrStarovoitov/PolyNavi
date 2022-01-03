@@ -6,7 +6,7 @@
   <color name="color_primary">#9BE773</color>
   <color name="color_accent">#5cc828</color>
 
-  <color name="color_toolbar_text">#002b09</color>
+  <color name="color_toolbar_text">#000000</color>
   <color name="color_black">#000000</color>
   <color name="color_black_alpha_60">#99000000</color>
   <color name="color_black_alpha_80">#CC000000</color>

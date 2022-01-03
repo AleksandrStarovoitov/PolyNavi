@@ -19,7 +19,6 @@ namespace Polynavi.Droid.Adapters
         private View scheduleView;
         private ScheduleCardRowLessonViewHolder lessonViewHolder;
         private readonly CultureInfo cultureInfo = new CultureInfo("ru-RU"); //TODO ?
-        private const int LessonTag = 1;
         public override int ItemCount => lessons.Count;
 
         public ScheduleCardRowAdapter(Context context, List<Lesson> lessons)
@@ -32,27 +31,14 @@ namespace Polynavi.Droid.Adapters
         {
             var context = parent.Context;
             var layoutInflater = LayoutInflater.From(context);
-            RecyclerView.ViewHolder viewHolder = null;
+            scheduleView = layoutInflater.Inflate(Resource.Layout.layout_card_row_lesson_schedule, parent, false);
 
-            switch (viewType)
-            {
-                case LessonTag:
-                    scheduleView = layoutInflater.Inflate(Resource.Layout.layout_card_row_lesson_schedule, parent, false);
-                    viewHolder = new ScheduleCardRowLessonViewHolder(scheduleView);
-                    break;
-            }
-
-            return viewHolder;
+            return new ScheduleCardRowLessonViewHolder(scheduleView);
         }
 
         public override void OnBindViewHolder(RecyclerView.ViewHolder viewHolder, int position)
         {
-            switch (viewHolder.ItemViewType) //TODO Switch by type?
-            {
-                case LessonTag:
-                    SetupLessonViewHolder(viewHolder, position);
-                    break;
-            }
+            SetupLessonViewHolder(viewHolder, position);
         }
 
         private void SetupLessonViewHolder(RecyclerView.ViewHolder viewHolder, int position)
@@ -197,15 +183,6 @@ namespace Polynavi.Droid.Adapters
                 dayOfWeekTextView = itemView.FindViewById<TextView>(Resource.Id.textview_card_date_row_title_schedule);
                 dateTextView = itemView.FindViewById<TextView>(Resource.Id.textview_card_dayofweek_row_title_schedule);
             }
-        }
-
-        public override int GetItemViewType(int position)
-        {
-            return lessons[position] switch
-            {
-                Lesson _ => LessonTag,
-                _ => -1
-            };
         }
     }
 }
