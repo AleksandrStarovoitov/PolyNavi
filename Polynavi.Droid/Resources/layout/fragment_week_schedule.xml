@@ -5,7 +5,7 @@
     android:layout_alignParentLeft="true"
     android:layout_alignParentTop="true"
     android:layout_marginTop="@dimen/margintop_week_schedule_layout"
-    android:background="#F1F1F1"
+    android:background="@color/white_background"
     android:layout_width="fill_parent"
     android:minWidth="25px"
     android:minHeight="25px" />

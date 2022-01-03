@@ -69,9 +69,6 @@
   <dimen name="margin_card_row_lesson_schedule_outer">10dp</dimen>
   <dimen name="marginlr_card_row_lesson_schedule_outer">10dp</dimen>
   
-  <!--layout_card_row_title_schedule-->
-  <dimen name="marginleft_card_row_title_schedule">10dp</dimen>
-  
   <!--layout_card_schedule-->
   <dimen name="marginlr_card_schedule">12dp</dimen>
   <dimen name="margintop_card_schedule">10dp</dimen>

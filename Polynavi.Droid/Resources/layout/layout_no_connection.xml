@@ -22,7 +22,7 @@
         android:id="@+id/textview_no_connection_title"
         android:gravity="center_horizontal"
         android:layout_gravity="center_horizontal"
-        android:layout_below="@+id/imageview_no_connection"
+        android:layout_below="@id/imageview_no_connection"
         android:layout_marginTop="@dimen/margintop_no_connection_text"
         android:layout_marginRight="@dimen/marginright_no_connection_text"
         android:layout_marginLeft="@dimen/marginleft_no_connection_text"
@@ -36,8 +36,8 @@
         android:layout_below="@+id/textview_no_connection_title"
         android:layout_centerHorizontal="true">
         <TextView
-            android:text="@string/no_connection_tap"
-            android:textAppearance="@style/ScheduleTitleDate"
+            android:text="@string/no_connection_tap"            
+            android:textAppearance="@style/TitleLight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/textview_no_connection_tap"
@@ -47,7 +47,7 @@
             android:src="@drawable/baseline_refresh"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/imageview_no_connection"
+            android:id="@+id/imageview_no_connection_update"
             android:layout_marginTop="@dimen/margintop_no_connection_update_image" />
     </LinearLayout>
 </RelativeLayout>

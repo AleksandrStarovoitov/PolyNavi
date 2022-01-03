@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:orientation="horizontal"
     android:id="@+id/relativelayout_route_row_mainbuilng">
     <ImageView
         android:src="@drawable/ic_gz"
@@ -14,7 +15,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textview_route"
-        android:textAppearance="@style/ScheduleTitleDate"
+		android:textAppearance="@style/TitleRegular"
         android:layout_gravity="center_vertical"
         android:layout_marginTop="@dimen/margin_route_row_mainbuilding_text"
         android:layout_marginRight="@dimen/margin_route_row_mainbuilding_text"

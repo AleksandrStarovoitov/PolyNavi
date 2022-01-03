@@ -55,45 +55,73 @@
   </style>
   <style name="Navi" parent="TextAppearance.AppCompat">
       <item name="android:textSize">30sp</item>
-      <item name="android:textColor">@color/color_black_with_transparency</item>
+      <item name="android:textColor">@color/color_black_alpha_60</item>
   </style>
   <style name="ShapeAppearanceOverlay.Nav" parent="">
     <item name="cornerFamily">rounded</item>
     <item name="cornerSize">8dp</item>
   </style>
 
-  <style name="ScheduleEndTime" parent="TextAppearance.AppCompat">
-      <item name="android:textSize">16sp</item>
-      <item name="android:textColor">@color/color_black_with_transparency</item>
+
+  <style name="ScheduleTime" parent="TextAppearance.AppCompat">
+    <item name="android:textSize">16sp</item>
+    <item name="android:textColor">@color/color_black</item>
+    <item name="android:fontFamily">@font/sourcecodepro_regular</item>
   </style>
-  <style name="ScheduleStartTime" parent="TextAppearance.AppCompat">
-      <item name="android:textSize">16sp</item>
-      <item name="android:textColor">@color/color_black</item>
+  <style name="ScheduleStartTime" parent="ScheduleTime">
   </style>
-  <style name="ScheduleSubject" parent="TextAppearance.AppCompat">
-      <item name="android:textSize">16sp</item>
-      <item name="android:textColor">@color/color_black</item>
+  <style name="ScheduleEndTime" parent="ScheduleTime">
+  </style>  
+  
+  <style name="ScheduleTextRegular" parent="TextAppearance.AppCompat">
+    <item name="android:textSize">16sp</item>
+    <item name="android:textColor">@color/color_black</item>
+    <item name="android:fontFamily">"@font/roboto_regular</item>
   </style>
-  <style name="ScheduleBuilding" parent="TextAppearance.AppCompat">
-      <item name="android:textSize">15sp</item>
-      <item name="android:textColor">@color/color_black_with_transparency</item>
+  <style name="ScheduleTextLight" parent="TextAppearance.AppCompat">
+    <item name="android:textSize">14sp</item>
+    <item name="android:textColor">@color/color_black</item>
+    <item name="android:fontFamily">"@font/roboto_light</item>
+      <item name="android:alpha">90</item>
   </style>
-  <style name="ScheduleRoom" parent="TextAppearance.AppCompat">
-      <item name="android:textSize">15sp</item>
-      <item name="android:textColor">@color/color_black_with_transparency</item>
+  <style name="ScheduleTextThin" parent="TextAppearance.AppCompat">
+    <item name="android:textSize">12sp</item>
+    <item name="android:textColor">@color/color_black</item>
+    <item name="android:fontFamily">"@font/roboto_thin</item>
   </style>
-  <style name="ScheduleTitleDate" parent="TextAppearance.AppCompat">
-      <item name="android:textSize">21sp</item>
-      <item name="android:textColor">@color/color_title_schedule_text</item>
+    <style name="ScheduleTextThinAlpha60" parent="ScheduleTextThin">
+        <item name="android:textColor">@color/color_black_alpha_60</item>
+    </style>
+    <style name="ScheduleTextLightAlpha80" parent="ScheduleTextLight">
+        <item name="android:textColor">@color/color_black_alpha_80</item>
+    </style>
+
+
+    <style name="ScheduleDate" parent="TextAppearance.AppCompat">
+    <item name="android:textSize">16sp</item>
+    <item name="android:textColor">@color/color_title_schedule_text</item>
+    <item name="android:fontFamily">"@font/roboto_thin</item>
   </style>
   <style name="ScheduleTitleDayOfWeek" parent="TextAppearance.AppCompat">
-      <item name="android:textSize">27sp</item>
-      <item name="android:textColor">@color/color_title_schedule_text_dayofweek</item>
+    <item name="android:textSize">20sp</item>
+    <item name="android:textColor">@color/color_title_schedule_text_dayofweek</item>
+    <item name="android:fontFamily">"@font/roboto_light</item>
   </style>
 
   <style name="NoConnectionTitle" parent="TextAppearance.AppCompat">
     <item name="android:textSize">32sp</item>
     <item name="android:textColor">@color/color_black</item>
   </style>
+
+    <style name="TitleLight" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">21sp</item>
+        <item name="android:textColor">@color/color_title_schedule_text</item>
+        <item name="android:fontFamily">"@font/roboto_light</item>
+    </style>
+	<style name="TitleRegular" parent="TextAppearance.AppCompat">
+		<item name="android:textSize">21sp</item>
+		<item name="android:textColor">@color/color_title_schedule_text</item>
+		<item name="android:fontFamily">"@font/roboto_regular</item>
+	</style>
   
 </resources>

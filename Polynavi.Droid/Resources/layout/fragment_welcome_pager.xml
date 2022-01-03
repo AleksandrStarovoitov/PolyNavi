@@ -49,8 +49,7 @@
             android:layout_marginTop="@dimen/marginBT_welcome_pager_layour_text">
             <TextView
                 android:id="@+id/textview_welcome_description"
-                style="@style/ScheduleTitleDate"
-                android:fontFamily="@font/roboto_light"
+                android:textAppearance="@style/TitleLight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/textsize_welcome_pager_description"

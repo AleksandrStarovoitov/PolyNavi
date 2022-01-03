@@ -45,7 +45,7 @@ namespace Polynavi.Droid.Activities
         {
             drawerLayout = FindViewById<DrawerLayout>(Resource.Id.drawerlayout_main);
             drawerLayout.AddDrawerListener(this);
-            drawerLayout.SetStatusBarBackground(Resource.Color.color_status_bar);
+            drawerLayout.SetStatusBarBackground(Resource.Color.color_primary);
 
             var toolbar = FindViewById<Toolbar>(Resource.Id.toolbar_main);
 

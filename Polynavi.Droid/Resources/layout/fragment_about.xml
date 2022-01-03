@@ -78,7 +78,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/about_email_address"
-                        android:textColor="@color/color_black_with_transparency"
+                        android:textColor="@color/color_black_alpha_60"
                         android:textSize="@dimen/textsize_about_frame_summary" />
                 </LinearLayout>
             </LinearLayout>
@@ -118,7 +118,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/about_rate_subtitle"
-                        android:textColor="@color/color_black_with_transparency"
+                        android:textColor="@color/color_black_alpha_60"
                         android:textSize="@dimen/textsize_about_frame_summary" />
                 </LinearLayout>
             </LinearLayout>
@@ -158,7 +158,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/about_github_subtitle"
-                        android:textColor="@color/color_black_with_transparency"
+                        android:textColor="@color/color_black_alpha_60"
                         android:textSize="@dimen/textsize_about_frame_summary" />
                 </LinearLayout>
             </LinearLayout>
