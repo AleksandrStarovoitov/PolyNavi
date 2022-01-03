@@ -756,4 +756,5 @@ DAMAGES.
 -----------------------------------------------------------------------------
 								Fonts 
 Font made by Luciano Vergara - Julius Sans One is licensed by OFL
+Font made by Paul D. Hunt - Source Code Pro is licensed by OFL
 -----------------------------------------------------------------------------
