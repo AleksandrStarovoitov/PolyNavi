@@ -37,12 +37,20 @@
             android:layout_marginTop="@dimen/margintop_main_navview"
             android:fitsSystemWindows="true"
             android:id="@+id/navview_main"
-            android:layout_width="@dimen/width_nav_drawer"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="start"
             app:menu="@menu/menu_main"
             app:headerLayout="@layout/layout_navheader_main"
-            app:itemIconTint="@color/drawer_icon_colors"
-            app:itemTextColor="@color/drawer_colors" />
+            app:itemIconTint="@color/color_black"
+            app:itemShapeAppearanceOverlay="@style/ShapeAppearanceOverlay.Nav"
+            app:itemShapeFillColor="@color/navigation_item_background_color"
+            app:itemHorizontalPadding="22dp"
+            app:itemIconPadding="18dp"
+            app:itemShapeInsetBottom="4dp"
+            app:itemShapeInsetEnd="8dp"
+            app:itemShapeInsetStart="8dp"
+            app:itemShapeInsetTop="4dp"
+            app:itemTextColor="@color/color_black" />
     </androidx.drawerlayout.widget.DrawerLayout>
 </LinearLayout>

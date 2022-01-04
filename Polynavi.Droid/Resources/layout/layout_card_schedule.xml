@@ -4,8 +4,8 @@
     android:id="@+id/cardview_schedule"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    card_view:cardBackgroundColor="@color/color_card_Background"
-    card_view:cardCornerRadius="2dp"
+    card_view:cardBackgroundColor="@color/white_background"
+    card_view:cardCornerRadius="14dp"
     card_view:cardElevation="2dp"
     card_view:cardMaxElevation="2dp"
     card_view:cardUseCompatPadding="true"
@@ -14,10 +14,16 @@
     android:layout_marginRight="@dimen/marginlr_card_schedule"
     android:layout_marginBottom="@dimen/marginbottom_card_schedule"
     android:layout_marginTop="@dimen/margintop_card_schedule">
-    <androidx.recyclerview.widget.RecyclerView
-        android:minWidth="25px"
-        android:minHeight="25px"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/recyclerview_card_schedule" />
+        android:background="@color/white_background"
+        android:paddingBottom="10dp">
+        <androidx.recyclerview.widget.RecyclerView
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/recyclerview_card_schedule" />        
+    </RelativeLayout>
 </androidx.cardview.widget.CardView>

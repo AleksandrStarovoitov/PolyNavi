@@ -14,8 +14,6 @@
   <string name="date_title_schedule_row">Date</string>
   <string name="dayofweek_title_schedule_row">Day of week</string>
   <string name="room_schedule_row">Room</string>
-  <string name="starttime_schedule_row">Start time</string>
-  <string name="endtime_schedule_row">End time</string>
   <string name="subject_schedule_row">Subject name</string>
   <string name="building_schedule_row">Building</string>
   <string name="type_schedule_row">Type of lesson</string>

@@ -10,7 +10,7 @@
 			android:layout_height="wrap_content"
 			android:layout_margin="15dp"
 			android:gravity="center_horizontal"
-		    android:textAppearance="@style/ScheduleTitleDate"
+			android:textAppearance="@style/TitleLight"
 		    android:maxLines="1"
 	        app:autoSizeTextType="uniform"/>
 </RelativeLayout>

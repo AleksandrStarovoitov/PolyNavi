@@ -35,8 +35,8 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:layout_margin="15dp"
-				android:gravity="center_horizontal"
-				android:textAppearance="@style/ScheduleTitleDate"		
+				android:gravity="center_horizontal"			
+                android:textAppearance="@style/TitleLight"
 				android:layout_alignParentBottom="true"
 		        app:autoSizeTextType="uniform"
 		        android:maxLines="1"/>
