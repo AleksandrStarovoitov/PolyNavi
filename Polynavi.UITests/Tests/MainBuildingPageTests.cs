@@ -4,16 +4,16 @@ using Xamarin.UITest;
 
 namespace Polynavi.UITests.Tests
 {
-    public class MainBuildingPageTests : InstalledAppTestFixture
+    public class MainBuildingPageTests : BaseTestFixture
     {
         public MainBuildingPageTests(Platform platform) : base(platform)
         {
         }
 
-        [OneTimeSetUp]
-        public override void OneTimeSetUp()
+        [SetUp]
+        public override void BeforeEachTest()
         {
-            base.OneTimeSetUp();
+            base.BeforeEachTest();
             
             new WelcomePage()
                 .TapSkip();
